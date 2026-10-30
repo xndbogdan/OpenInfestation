@@ -1,0 +1,13 @@
+[package]
+name = "inf-viewer"
+version = "0.1.0"
+edition = "2021"
+license.workspace = true
+repository.workspace = true
+description = "Infestation raw-asset diagnostic workbench"
+
+[dependencies]
+inf-formats = { path = "../inf-formats" }
+clap = { version = "4", features = ["derive"] }
+sdl2 = "0.38"
+png = "0.17"

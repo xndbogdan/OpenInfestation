@@ -1,0 +1,1912 @@
+{
+  "scope": "Original 42DF40 update, 410F10 distance, RNG and inline water arithmetic.\n\nH12/H14 resident pointers and height returns are explicit fixture inputs;\n450A30 and489D90 are segmented service boundaries. Birth-side mutations are\nsupplied returns, not implementations of those lower services. No code is\npatched and no hooks are installed. Default compares; --write regenerates LF.\n",
+  "retail_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "guards": [
+    {
+      "address": 4382528,
+      "length": 681,
+      "sha256": "82f358e98b30028e0065602e820656ec9d4f862329d4fbf4178cce884422fa92"
+    },
+    {
+      "address": 4263696,
+      "length": 62,
+      "sha256": "736074ea23d2d629c938b291d6993f977d14a8d33879508dfc63884fbec98dc4"
+    }
+  ],
+  "cases": [
+    {
+      "name": "ordinary",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "exact_initial_period",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 122880,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 120,
+        "rng": 305419896,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "far_equal",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          22072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 120,
+        "rng": 305419896,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "far_wrap_signed",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          55840,
+          32768,
+          11729
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 120,
+        "rng": 305419896,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "bypass_far",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          0,
+          0,
+          0
+        ],
+        "flags": 33554434,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "unsigned_delta",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 2147483647,
+        "delta": 4294967295,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 2151677950,
+        "rng": 305419896,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "elapsed_wrap",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 4294967295,
+        "delta": 2048,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 305419896,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "multi",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 369664,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 241,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 241,
+          "rng": 3185728930
+        },
+        {
+          "phase": "height",
+          "xz": [
+            23257,
+            44883
+          ],
+          "elapsed": 121,
+          "rng": 2497899996
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            23257,
+            0,
+            44883
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 121,
+          "rng": 2497899996
+        },
+        {
+          "phase": "height",
+          "xz": [
+            23269,
+            44167
+          ],
+          "elapsed": 1,
+          "rng": 2610345382
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            23269,
+            0,
+            44167
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 2610345382
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 2610345382,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "zero_radius",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 0,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [],
+      "normal_return": false,
+      "idiv_trap": true,
+      "output": {
+        "elapsed": 121,
+        "rng": 3073801867,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "height_stop",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0,
+        "stop": "height"
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": false,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "trail_stop",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0,
+        "stop": "trail"
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": false,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "negative_period",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 65535,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0,
+        "stop": "trail"
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 122,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 122,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": false,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 122,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "large_radius_overflow",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 32768,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0,
+        "stop": "trail"
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            8938,
+            28655
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            8938,
+            0,
+            28655
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": false,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "mutation",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 512000,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0,
+        "mutation": {
+          "position": [
+            65535,
+            32768,
+            1
+          ],
+          "radius": 1,
+          "kind": 0,
+          "period": 200,
+          "rng": 17
+        }
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 380,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 380,
+          "rng": 3185728930
+        },
+        {
+          "phase": "height",
+          "xz": [
+            142,
+            65233
+          ],
+          "elapsed": 180,
+          "rng": 3264019811
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            142,
+            0,
+            65233
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 180,
+          "rng": 3264019811
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 180,
+        "rng": 3264019811,
+        "position": [
+          65535,
+          32768,
+          1
+        ]
+      }
+    },
+    {
+      "name": "kind_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 0,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 6,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "kind_1",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 1,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 5,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "kind_2",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 2,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 8,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "kind_3",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -10,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-100_0_9_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -100,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-100_0_9_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -100,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            65529,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_100_0_9_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 100,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            100,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_100_0_9_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 100,
+        "plane": 0,
+        "shift": 9,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            100,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-32768_2147483647_9_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -32768,
+        "plane": 2147483647,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            65535,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-32768_2147483647_9_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -32768,
+        "plane": 2147483647,
+        "shift": 9,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            21798,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_32767_2147483648_8_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 32767,
+        "plane": 2147483648,
+        "shift": 8,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            32767,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_32767_2147483648_8_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 32767,
+        "plane": 2147483648,
+        "shift": 8,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            32767,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-1_256000_9_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -1,
+        "plane": 256000,
+        "shift": 9,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            500,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_-1_256000_9_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": -1,
+        "plane": 256000,
+        "shift": 9,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            489,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_0_16776960_8_0",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 0,
+        "plane": 16776960,
+        "shift": 8,
+        "world_flags": 0
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    },
+    {
+      "name": "water_0_16776960_8_64",
+      "input": {
+        "position": [
+          23072,
+          0,
+          44497
+        ],
+        "camera": [
+          23072,
+          0,
+          44497
+        ],
+        "flags": 2,
+        "elapsed": 0,
+        "delta": 123904,
+        "radius": 500,
+        "period": 120,
+        "kind": 3,
+        "distance_squared": 1000000,
+        "rng": 305419896,
+        "height": 0,
+        "plane": 16776960,
+        "shift": 8,
+        "world_flags": 64
+      },
+      "events": [
+        {
+          "phase": "height",
+          "xz": [
+            22670,
+            44387
+          ],
+          "elapsed": 1,
+          "rng": 3185728930
+        },
+        {
+          "phase": "trail",
+          "kind": 11,
+          "position": [
+            22670,
+            0,
+            44387
+          ],
+          "velocity": [
+            0,
+            100,
+            0
+          ],
+          "flags": 2048,
+          "elapsed": 1,
+          "rng": 3185728930
+        }
+      ],
+      "normal_return": true,
+      "idiv_trap": false,
+      "output": {
+        "elapsed": 1,
+        "rng": 3185728930,
+        "position": [
+          23072,
+          0,
+          44497
+        ]
+      }
+    }
+  ]
+}

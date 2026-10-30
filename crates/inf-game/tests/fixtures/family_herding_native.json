@@ -1,0 +1,2376 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original Herding change 00427A70, update 00427AA0 and group scan 00427E70.\n\nPublisher 00427390, kind-8 clone 00402730, target deletion and RNG 0048F060\nexecute unchanged; only allocator/free returns are supplied. The G+48 actor\nlist, actor fields and existing targets are supplied inputs; the self actor\nis always the first list node. Default compares; --write regenerates LF."
+  },
+  "guards": [
+    {
+      "address": 4356720,
+      "size": 46,
+      "sha256": "34ca12882033aad3023833be9d38b106a4f7a8c058db8fe368d785ffc3919fe0"
+    },
+    {
+      "address": 4356768,
+      "size": 147,
+      "sha256": "c2570f7d9a97f3bfa699381c86e8232bd42519dbd81db5f3ed0026511effd3ed"
+    },
+    {
+      "address": 4357744,
+      "size": 462,
+      "sha256": "24ccb980a16be19e05fc71abb26dd86c9632184c519932b234d2b9f3719bbe11"
+    },
+    {
+      "address": 4354960,
+      "size": 251,
+      "sha256": "e2d14d5e36b6f3d018f83349da10a511400926c1607eea728e3419c4ee5e1b29"
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "mode": "change",
+        "entering": false,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": {
+          "kind": 8,
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ]
+        },
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "exit"
+      },
+      "events": [],
+      "output": {
+        "timer": 100,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ],
+          "kind": 8
+        },
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "empty-herd"
+      },
+      "events": [],
+      "output": {
+        "timer": 100,
+        "word228": 5444060,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": {
+          "kind": 8,
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ]
+        },
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "clone"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 100,
+        "word228": 5444060,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            7,
+            8,
+            9
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ],
+          "kind": 8
+        },
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": {
+          "kind": 8,
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ]
+        },
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "null"
+        ],
+        "name": "clone-null"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "null"
+        }
+      ],
+      "output": {
+        "timer": 100,
+        "word228": 5444060,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": null,
+        "herd": {
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ],
+          "kind": 8
+        },
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 1000,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "decay"
+      },
+      "events": [],
+      "output": {
+        "timer": 900,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 1000,
+        "status": 2147483647,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "decay-high-status"
+      },
+      "events": [],
+      "output": {
+        "timer": 900,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 1000,
+        "status": 2,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "low-status"
+      },
+      "events": [],
+      "output": {
+        "timer": 438608,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3735928559,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "expired"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": -2147483648,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "negative-timer"
+      },
+      "events": [],
+      "output": {
+        "timer": 2147921256,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": -1,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 1000,
+        "status": 1,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "negative-delta"
+      },
+      "events": [],
+      "output": {
+        "timer": 438608,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "publish"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 16,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "publish-object-current"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 16
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "publish-null-current"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        },
+        {
+          "kind": "fault",
+          "eip": 4356874
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": null,
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": {
+          "kind": 8,
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ]
+        },
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "publish-existing-herd"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 5,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "null"
+        ],
+        "name": "publish-null-allocation"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "null"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1500,
+              900,
+              1000
+            ],
+            "velocity": [
+              200,
+              65436,
+              50
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1300,
+              1000,
+              700
+            ],
+            "velocity": [
+              0,
+              0,
+              65000
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "velocity"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1333,
+            934,
+            738
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1333,
+            934,
+            738
+          ],
+          "kind": 8
+        },
+        "herd_score": 428
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1300,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1300,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "mean-too-small"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 500,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1450,
+              1000,
+              1000
+            ],
+            "velocity": [
+              400,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1450,
+              1000,
+              1000
+            ],
+            "velocity": [
+              400,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "mean-too-far"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 2,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 34,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 160,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 7,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "filtered"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 500,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "outside-radius"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [],
+        "herd": {
+          "kind": 8,
+          "handle": 5,
+          "focus": [
+            7,
+            8,
+            9
+          ]
+        },
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "clear-existing-herd"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "herd"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 0
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 7,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "self-excluded"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1600,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1600,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 600
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              200,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              201,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              999,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "signed-mean"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            600,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            600,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            100,
+            1000,
+            65500
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              65400,
+              1000,
+              300
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              65400,
+              1000,
+              300
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "wrapped-offset"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": 0,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "zero-radius"
+      },
+      "events": [],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4609,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "herd": null,
+        "herd_score": 7
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "timer": 100,
+        "status": 3,
+        "flags22e": 4608,
+        "word228": 0,
+        "radius": -1000,
+        "actor": {
+          "classification": 1,
+          "resource": 35,
+          "flags": 32,
+          "position": [
+            1000,
+            1000,
+            1000
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "members": [
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "classification": 1,
+            "resource": 35,
+            "flags": 32,
+            "position": [
+              1600,
+              1000,
+              1000
+            ],
+            "velocity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "herd": null,
+        "herd_score": 7,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "name": "negative-radius"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "timer": 437708,
+        "word228": 0,
+        "flags22e": 4608,
+        "rng": 3073801867,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd": {
+          "handle": 1985229328,
+          "focus": [
+            1400,
+            1000,
+            1000
+          ],
+          "kind": 8
+        },
+        "herd_score": 400
+      }
+    }
+  ]
+}

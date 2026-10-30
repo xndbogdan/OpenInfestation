@@ -1,0 +1,6692 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original descriptor/target bodies, RNG and integer square root. Only allocator/free and450A30 terrain sample returns supplied. Native pointer identities projected to handle/kind/focus; no scene acceptance."
+  },
+  "guards": [
+    {
+      "address": 4445728,
+      "size": 261,
+      "sha256": "62a1e5bc6ab0163362b14b47a0a93c5ecab383beff9e9fac261b945b073ab406"
+    },
+    {
+      "address": 4444896,
+      "size": 823,
+      "sha256": "e7fcf187f702e7ece97519b7b28fd393cdb2fc0a9a613715a2c2685d96009ee6"
+    },
+    {
+      "address": 4447120,
+      "size": 623,
+      "sha256": "b42274044c32e1d87b1c921073ab90229496525c104574d7c0663cd0afaf8185"
+    },
+    {
+      "address": 4453536,
+      "size": 235,
+      "sha256": "43160a167a172eab748263043f733137355d7ccc8f2665994eda294f69ebdb60"
+    },
+    {
+      "address": 4453776,
+      "size": 358,
+      "sha256": "990e205234c2e771ac37e5054383afbc928fc2cc3470ec81472da408ee99633e"
+    },
+    {
+      "address": 4454144,
+      "size": 86,
+      "sha256": "fd89e0c0b983c340fdae45d2729c337866d31350568f6a3e3e4289825347539e"
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2038624,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 99,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 158245525,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2038624,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 99,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 158245525,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 99,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 1621583466,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2465056,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 123,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 1904901194,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2465056,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 123,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 1904901194,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 123,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3234068179,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2660768,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 75,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2706557152,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2660768,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 75,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2706557152,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 500,
+          "0x228": 5444164,
+          "0x230": 75,
+          "0x234": 512,
+          "0x260": 501,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 9098753,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 2147483648,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2562912,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 628,
+          "0x228": 5444164,
+          "0x230": 131,
+          "0x234": 512,
+          "0x260": 629,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2305729173,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 2147483648,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2562912,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 628,
+          "0x228": 5444164,
+          "0x230": 131,
+          "0x234": 512,
+          "0x260": 629,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2305729173,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 2147483648,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 628,
+          "0x228": 5444164,
+          "0x230": 131,
+          "0x234": 512,
+          "0x260": 629,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3769067114,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2149040,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 683,
+          "0x228": 5444164,
+          "0x230": 122,
+          "0x234": 512,
+          "0x260": 684,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 610499949,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2149040,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 683,
+          "0x228": 5444164,
+          "0x230": 122,
+          "0x234": 512,
+          "0x260": 684,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 610499949,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 683,
+          "0x228": 5444164,
+          "0x230": 122,
+          "0x234": 512,
+          "0x260": 684,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3185728930,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_change",
+        "delta": 100,
+        "entering": false,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 123
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388708,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 149,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388708,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 149,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 150,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 150,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 200,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 200,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 201,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 201,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 4294967295,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388708,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 4294967295,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 50,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 50,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 0,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 0,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          0,
+          64536,
+          0
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 10,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 110,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 0,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          0,
+          2000,
+          0
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 65536,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 65436,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 3,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 4294967295,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 2147483647,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 2147483646,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 131071,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 1,
+        "global_threshold": 4294966796,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 129,
+        "global_threshold": 12345,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388708,
+          "0x208": 0,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 1,
+        "rng": 305419896,
+        "global_flags": 129,
+        "global_threshold": 12345,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "set_route",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1200,
+          25,
+          1400
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "terrain",
+          "xz": [
+            1200,
+            1400
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1072,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 1638400,
+          "0x194": 1638400,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 100,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "set_route",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1200,
+          65000,
+          1400
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": -992,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "terrain",
+          "xz": [
+            1200,
+            1400
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1599,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 7471104,
+          "0x194": 7471104,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 456,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "set_route",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1200,
+          3000,
+          1400
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 96,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "terrain",
+          "xz": [
+            1200,
+            1400
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 2049,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 32768000,
+          "0x194": 32768000,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 2000,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "set_route",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1200,
+          1000,
+          1400
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 1984,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "terrain",
+          "xz": [
+            1200,
+            1400
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 447,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 1638400,
+          "0x194": 1638400,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 100,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "set_route",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1200,
+          1000,
+          1400
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": -992,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "terrain",
+          "xz": [
+            1200,
+            1400
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 447,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 32636928,
+          "0x194": 32636928,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 1992,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 5444080,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_change",
+        "delta": 100,
+        "entering": false,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "route_change",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 24
+        },
+        {
+          "kind": "terrain",
+          "xz": [
+            1010,
+            1030
+          ]
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 37,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 16711680,
+          "0x194": 16711680,
+          "0x208": 200,
+          "0x228": 5444080,
+          "0x230": 0,
+          "0x234": 1020,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          999,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1395888,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 579078116,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1429,
+            60536,
+            2232
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1000,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1395888,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 579078116,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            571,
+            60536,
+            65304
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          500,
+          501,
+          502
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1395888,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 579078116,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1518,
+            60536,
+            1565
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          33768,
+          33768,
+          33768
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1395888,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 579078116,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            32561,
+            60536,
+            29350
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          999,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1789552,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3404878581,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            4761,
+            60536,
+            7622
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1000,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1789552,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3404878581,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            62775,
+            60536,
+            59914
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          500,
+          501,
+          502
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1789552,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3404878581,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1721,
+            60536,
+            1892
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          33768,
+          33768,
+          33768
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1789552,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3404878581,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            19235,
+            60536,
+            7791
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          999,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1002208,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2048244947,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            6290,
+            60536,
+            5034
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1000,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1002208,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2048244947,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            61246,
+            60536,
+            62502
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          500,
+          501,
+          502
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1002208,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2048244947,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1815,
+            60536,
+            1735
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          33768,
+          33768,
+          33768
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1002208,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2048244947,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            13119,
+            60536,
+            18141
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          999,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1777760,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2497899996,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            2292,
+            60536,
+            5892
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1000,
+          1000,
+          1000
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1777760,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2497899996,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            65244,
+            60536,
+            61644
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          500,
+          501,
+          502
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1777760,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2497899996,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1571,
+            60536,
+            1787
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          33768,
+          33768,
+          33768
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1777760,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2497899996,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            29110,
+            60536,
+            14711
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 3073801867,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "evade",
+        "delta": 4294967295,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1001,
+          "0x190": 20000,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 400,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000304,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 110,
+          "0x234": 100,
+          "0x260": 400,
+          "0x264": 4294966879
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 158245525,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 50,
+          "0x264": 300
+        }
+      },
+      "events": [
+        {
+          "kind": "free",
+          "current": true
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 2629280,
+          "0x18c": 2142448,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750,
+          "0x260": 50,
+          "0x264": 360
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 529553928,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5911,
+            1020,
+            11398
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 400,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000624,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 10,
+          "0x234": 100,
+          "0x260": 400,
+          "0x264": 4294966851
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 1904901194,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 50,
+          "0x264": 300
+        }
+      },
+      "events": [
+        {
+          "kind": "free",
+          "current": true
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 2533520,
+          "0x18c": 2198496,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750,
+          "0x260": 50,
+          "0x264": 388
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 137318697,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8813,
+            1020,
+            8940
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 400,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 82,
+          "0x234": 100,
+          "0x260": 400,
+          "0x264": 388
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2706557152,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 50,
+          "0x264": 300
+        }
+      },
+      "events": [
+        {
+          "kind": "free",
+          "current": true
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 2934624,
+          "0x18c": 2500048,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750,
+          "0x260": 50,
+          "0x264": 300
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 1780285124,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5574,
+            1020,
+            9931
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": false,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 400,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1750432,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 99,
+          "0x234": 100,
+          "0x260": 400,
+          "0x264": 476
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 610499949,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 50,
+          "0x264": 300
+        }
+      },
+      "events": [
+        {
+          "kind": "free",
+          "current": true
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 2629856,
+          "0x18c": 2609824,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750,
+          "0x260": 50,
+          "0x264": 300
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 531909409,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8755,
+            1020,
+            10551
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 1,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 500,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": true,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 1000,
+          "0x264": 0
+        }
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 1,
+          "0x18c": 900,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 375,
+          "0x260": 1000,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 305419896,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 8,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          32768,
+          0,
+          32768
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": false,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 0,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 2649040,
+          "0x18c": 900,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 600,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750,
+          "0x260": 0,
+          "0x264": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 610499949,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            3931,
+            1200,
+            4038
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "attack_update",
+        "delta": 100,
+        "entering": true,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "source_focus": [
+          1010,
+          1020,
+          1030
+        ],
+        "preferred_focus": [
+          1011,
+          1021,
+          1031
+        ],
+        "current_focus": [
+          1100,
+          1200,
+          1300
+        ],
+        "source": true,
+        "preferred": true,
+        "current": true,
+        "secondary": false,
+        "source_handle": 7,
+        "preferred_handle": 8,
+        "current_handle": 9,
+        "source_score": 10,
+        "preferred_score": 11,
+        "size": 100,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "byte250": 0,
+        "terrain_height": 0,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "route_distance": 0,
+        "words": {
+          "0x14c": 10000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 512,
+          "0x260": 1000,
+          "0x264": 0
+        }
+      },
+      "events": [
+        {
+          "kind": "free",
+          "current": true
+        },
+        {
+          "kind": "allocate",
+          "size": 20
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2609824,
+          "0x190": 8388608,
+          "0x194": 8388608,
+          "0x208": 200,
+          "0x228": 0,
+          "0x230": 99,
+          "0x234": 375,
+          "0x260": 1000,
+          "0x264": 476
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "byte238": 3,
+        "rng": 2497899996,
+        "global_flags": 0,
+        "global_threshold": 0,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    }
+  ]
+}

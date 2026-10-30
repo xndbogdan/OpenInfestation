@@ -1,0 +1,1115 @@
+{
+ "source": "zone-life.js draws() over Infest03 and Infest04 (Helniazine, leaf 16): each draw 0042D7D0 of selector 74's zone with its timer +13C, and the one particle it births (00489A90, ECX 2, flags 0).",
+ "draws": [
+  {
+   "recording": "Infest03",
+   "at": "33D1EF:183A",
+   "timer": 176332,
+   "point": [
+    33813,
+    64626,
+    22929
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "33E917:19AC",
+   "timer": 178285,
+   "point": [
+    33739,
+    64626,
+    23003
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "340194:4D5",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "341A93:5C6",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "342FD0:1018",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "3445EF:5C4",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "345D98:5A3",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "347523:129",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "348C06:EE9",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest03",
+   "at": "34A3AD:5A2",
+   "timer": 180238,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "82DA2E:186E",
+   "timer": 999338172,
+   "point": [
+    33814,
+    64626,
+    22928
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "82E51E:457",
+   "timer": 999340125,
+   "point": [
+    33739,
+    64626,
+    23003
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "82F08B:1304",
+   "timer": 999342078,
+   "point": [
+    33662,
+    64626,
+    23080
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "830332:4D9",
+   "timer": 999344031,
+   "point": [
+    33586,
+    64626,
+    23156
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "830EF0:1B2F",
+   "timer": 999345984,
+   "point": [
+    33512,
+    64626,
+    23230
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "831A25:36D",
+   "timer": 999347937,
+   "point": [
+    33455,
+    64626,
+    23296
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "832500:18D2",
+   "timer": 999349890,
+   "point": [
+    33502,
+    64621,
+    23343
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8332E4:184F",
+   "timer": 999351843,
+   "point": [
+    33559,
+    64626,
+    23401
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "833DEB:2D5",
+   "timer": 999353796,
+   "point": [
+    33625,
+    64626,
+    23466
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8348A5:1E3F",
+   "timer": 999355749,
+   "point": [
+    33698,
+    64626,
+    23539
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "835391:1DA6",
+   "timer": 999357702,
+   "point": [
+    33774,
+    64626,
+    23615
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "835E8D:14C7",
+   "timer": 999359655,
+   "point": [
+    33851,
+    64626,
+    23692
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "836999:2107",
+   "timer": 999361608,
+   "point": [
+    33926,
+    64626,
+    23767
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "837586:1C74",
+   "timer": 999363561,
+   "point": [
+    33997,
+    64622,
+    23838
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8380DA:2722",
+   "timer": 999365514,
+   "point": [
+    34061,
+    64626,
+    23902
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "838FDE:1B8E",
+   "timer": 999367467,
+   "point": [
+    34116,
+    64626,
+    23958
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "839C63:220",
+   "timer": 999369420,
+   "point": [
+    34165,
+    64626,
+    23991
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83AB5A:26F6",
+   "timer": 999371373,
+   "point": [
+    34235,
+    64626,
+    23921
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83B836:1399",
+   "timer": 999373326,
+   "point": [
+    34310,
+    64626,
+    23846
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83C802:1D6D",
+   "timer": 999375279,
+   "point": [
+    34387,
+    64626,
+    23769
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83D5A2:335",
+   "timer": 999377232,
+   "point": [
+    34464,
+    64626,
+    23692
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83E552:1108",
+   "timer": 999379185,
+   "point": [
+    34536,
+    64626,
+    23620
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "83F4E3:17B2",
+   "timer": 999381138,
+   "point": [
+    34567,
+    64626,
+    23560
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8404EF:1E77",
+   "timer": 999383091,
+   "point": [
+    34518,
+    64626,
+    23511
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84177A:1FB1",
+   "timer": 999385044,
+   "point": [
+    34458,
+    64626,
+    23451
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8426A4:733",
+   "timer": 999386997,
+   "point": [
+    34391,
+    64626,
+    23383
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "843687:2636",
+   "timer": 999388950,
+   "point": [
+    34317,
+    64626,
+    23310
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "844698:24B9",
+   "timer": 999390903,
+   "point": [
+    34241,
+    64626,
+    23234
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84571A:174E",
+   "timer": 999392856,
+   "point": [
+    34164,
+    64626,
+    23157
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "846685:976",
+   "timer": 999394809,
+   "point": [
+    34089,
+    64626,
+    23082
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "847746:1587",
+   "timer": 999396762,
+   "point": [
+    34019,
+    64626,
+    23012
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8486FA:1AE1",
+   "timer": 999398715,
+   "point": [
+    33957,
+    64626,
+    22949
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8496F6:766",
+   "timer": 999400668,
+   "point": [
+    33903,
+    64626,
+    22896
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84A824:1C06",
+   "timer": 999402621,
+   "point": [
+    33853,
+    64626,
+    22889
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84B891:4BF",
+   "timer": 999404574,
+   "point": [
+    33781,
+    64626,
+    22961
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84C7E7:2785",
+   "timer": 999406527,
+   "point": [
+    33706,
+    64626,
+    23036
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84D90E:15FA",
+   "timer": 999408480,
+   "point": [
+    33629,
+    64626,
+    23114
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84E81C:486",
+   "timer": 999410433,
+   "point": [
+    33553,
+    64626,
+    23189
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "84F7F6:6C2",
+   "timer": 999412386,
+   "point": [
+    33481,
+    64626,
+    23261
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8506D3:1E6E",
+   "timer": 999414339,
+   "point": [
+    33474,
+    64623,
+    23316
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "851718:2721",
+   "timer": 999416292,
+   "point": [
+    33526,
+    64624,
+    23367
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "852720:215E",
+   "timer": 999418245,
+   "point": [
+    33588,
+    64626,
+    23429
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "853760:153",
+   "timer": 999420198,
+   "point": [
+    33657,
+    64626,
+    23498
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8546AC:178",
+   "timer": 999422151,
+   "point": [
+    33731,
+    64626,
+    23572
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8554ED:1C1A",
+   "timer": 999424104,
+   "point": [
+    33807,
+    64626,
+    23649
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8563C5:12F5",
+   "timer": 999426057,
+   "point": [
+    33885,
+    64626,
+    23726
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8574CF:2160",
+   "timer": 999428010,
+   "point": [
+    33958,
+    64626,
+    23799
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "858369:11B2",
+   "timer": 999429963,
+   "point": [
+    34027,
+    64623,
+    23868
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "859828:1310",
+   "timer": 999431916,
+   "point": [
+    34088,
+    64626,
+    23929
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "85A75F:1AB7",
+   "timer": 999433869,
+   "point": [
+    34138,
+    64626,
+    23979
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "85B86D:451",
+   "timer": 999435822,
+   "point": [
+    34196,
+    64626,
+    23960
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "85C987:BBB",
+   "timer": 999437775,
+   "point": [
+    34268,
+    64626,
+    23888
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "85DB72:1C61",
+   "timer": 999439728,
+   "point": [
+    34344,
+    64626,
+    23812
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "85ED9A:A9E",
+   "timer": 999441681,
+   "point": [
+    34421,
+    64626,
+    23735
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8602CB:2314",
+   "timer": 999443634,
+   "point": [
+    34496,
+    64626,
+    23660
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86137E:CA4",
+   "timer": 999445587,
+   "point": [
+    34567,
+    64626,
+    23589
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8624C7:2379",
+   "timer": 999447540,
+   "point": [
+    34546,
+    64626,
+    23539
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "863659:24D2",
+   "timer": 999449493,
+   "point": [
+    34493,
+    64626,
+    23485
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8648AB:24F",
+   "timer": 999451446,
+   "point": [
+    34429,
+    64626,
+    23422
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "865B51:2A8F",
+   "timer": 999453399,
+   "point": [
+    34358,
+    64626,
+    23351
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "866F26:E46",
+   "timer": 999455352,
+   "point": [
+    34283,
+    64626,
+    23276
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86808A:2175",
+   "timer": 999457305,
+   "point": [
+    34207,
+    64626,
+    23200
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8693E2:1172",
+   "timer": 999459258,
+   "point": [
+    34130,
+    64626,
+    23123
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86A48A:25C",
+   "timer": 999461211,
+   "point": [
+    34058,
+    64626,
+    23051
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86B995:B85",
+   "timer": 999463164,
+   "point": [
+    33990,
+    64626,
+    22983
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86C9C0:1803",
+   "timer": 999465117,
+   "point": [
+    33932,
+    64626,
+    22925
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86DBE7:C61",
+   "timer": 999467070,
+   "point": [
+    33884,
+    64626,
+    22877
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "86F1F6:1252",
+   "timer": 999469023,
+   "point": [
+    33821,
+    64626,
+    22920
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "870526:9A9",
+   "timer": 999470976,
+   "point": [
+    33748,
+    64626,
+    22994
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8718B8:9F7",
+   "timer": 999472929,
+   "point": [
+    33672,
+    64626,
+    23070
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "872BD3:2C6",
+   "timer": 999474882,
+   "point": [
+    33595,
+    64626,
+    23147
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "873902:775",
+   "timer": 999476835,
+   "point": [
+    33520,
+    64626,
+    23222
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "874752:2643",
+   "timer": 999478788,
+   "point": [
+    33451,
+    64626,
+    23291
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "875236:1FC6",
+   "timer": 999480741,
+   "point": [
+    33496,
+    64621,
+    23337
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "875DC8:398",
+   "timer": 999482694,
+   "point": [
+    33552,
+    64626,
+    23393
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87695B:2576",
+   "timer": 999484647,
+   "point": [
+    33617,
+    64626,
+    23459
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "877562:1C9E",
+   "timer": 999486600,
+   "point": [
+    33689,
+    64626,
+    23531
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "877F60:1203",
+   "timer": 999488553,
+   "point": [
+    33765,
+    64626,
+    23606
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "878816:427",
+   "timer": 999490506,
+   "point": [
+    33842,
+    64626,
+    23683
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8792B7:22EA",
+   "timer": 999492459,
+   "point": [
+    33918,
+    64626,
+    23759
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "879BEC:187E",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87A4DF:6AD",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87AC95:D8B",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87B1DD:D83",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87B8A1:133E",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87BF18:45A",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87C594:1533",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87CC57:212",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87D1F4:EA1",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87D767:1F6F",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87DD0C:22BB",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87E3FE:6AD",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87EA71:2989",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87F066:450",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87F722:D83",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "87FE8E:2606",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "88049F:1B0B",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "880BD3:1F77",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "8811B3:6A5",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "881817:EA1",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  },
+  {
+   "recording": "Infest04",
+   "at": "881E75:ED0",
+   "timer": 999494412,
+   "point": [
+    33989,
+    64623,
+    23830
+   ]
+  }
+ ]
+}

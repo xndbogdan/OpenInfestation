@@ -1,0 +1,917 @@
+#version 460
+// The modern raster's water (Vulkan without path tracing,
+// docs/rt-plans/modern-raster.md). Retail's water strips are not drawn into
+// the frame, which keeps the bed under them: they are drawn again as retail
+// laid them (the surface image, the water's own colour) and the bed shows
+// through the water as the tracer's does, bent by the ripples, closing over
+// the deep into the water's colour by the world's clarity, its sunlit
+// shallows taking the ripples' caustics; a thin foam line laps at the
+// shore, and the rain rings and flecks it. Over that the water mirrors the
+// world: each water pixel (the mask) sends its
+// view's reflection off a flat surface across the frame's own depth, and
+// where it meets something takes its colour, in by the tracer's Fresnel
+// term (the world's least share mirrored at a look straight down, all of
+// it at the horizon's grazing look). The ray crosses the frame through the
+// depth pyramid (vk_mirror_levels.glsl), as hierarchical-depth tracing
+// does: a cell whose surfaces all lie behind it, or all well in front of it
+// as it goes on away, it takes whole in one step, so it finds the pixel
+// where it first passes behind a surface (the pyramid's one-pixel holes
+// closed). A ray that meets nothing takes the painted sky (no depth:
+// retail draws the backdrop before it clears the depth) where it points, or
+// where it leaves the frame; one that leaves over land fades out. The
+// water's surface is the tracer's (pt_water.glsl): the game's swell and its
+// ripples bend the view, fading out at the shore, and the sun glints on
+// them where nothing the frame shows stands in its way. Retail's splashes
+// ring it and foam where they fell, and the blasts in it erupt, churn it
+// and glow under it (pt_splash.glsl, the tracer's splash buffer); the
+// vehicles' lamps glint on it and their light enters it and scatters back
+// in its colour, as the tracer's, where a march toward each meets nothing
+// short of its craft, and the lamps under it glow in it. What lies on the
+// surface fogs as retail fogged its strips.
+//
+// While the rain wets the ground, retail's ground (the ground image, drawn
+// again over the world's depth) takes the wet look (wet_ground): darker, a
+// faint sheen, and the tracer's puddles in its hollows mirroring the world
+// by the same march; the bed under the water is as dark. Everything else
+// passes through.
+//
+// With the eye under the water (the remastered camera; the world drawn as
+// the same eye above the water has it, the surface's strips kept, not
+// drawn) the pass runs on every pixel. What lies nearer than the surface is
+// seen through the murk over its distance (as the world draw's own
+// underwater fog lays it, the light's way through the water in place of
+// the view's depth: the port's own underwater look, not the world's
+// clarity, which hid the craft and the surface at the player's dive depths);
+// a pixel with nothing drawn is the murk.
+// The surface is seen from below, rippled and rained on as from above:
+// inside Snell's window the view bends out through it (index 1.333) and
+// takes what lies above, the ray crossing the frame's whole depth to it
+// (the depth's pyramid keeps the water's pixels under the water), or the
+// sky along it (the frame's own where it points, else the modern sky's
+// gradient, else the painted sky's colour); outside the window it reflects
+// whole, and within it by the tracer's Fresnel term from below, the
+// reflected ray finding the bed and what lies under the water through the
+// murk along its way, or the murk alone. The murk over the eye's own path
+// to the surface lies over it all.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 0) uniform sampler2D colour_image;
+layout(set = 0, binding = 1) uniform sampler2D depth_image;
+// The water's reciprocal view depth, times RHW_SCALE, its fog's visibility
+// (retail's, 1: none), and in alpha that the water is what the frame shows
+// there.
+layout(set = 0, binding = 2, rgba16f) uniform readonly image2D mask_image;
+layout(set = 0, binding = 3, rgba8) uniform writeonly image2D result;
+layout(set = 0, binding = 4, std430) readonly buffer Pyramid {
+    vec2 pyramid[];
+};
+
+// The world's frame block (the raster's, as the tracer's) and the clouds'
+// shadow map.
+#define FRAME_BINDING 5
+#include "pt_frame.glsl"
+#define SKY_SHADOW_BINDING 6
+#include "pt_sky.glsl"
+#include "pt_water.glsl"
+// Retail's splashes and the blasts' eruptions, as the tracer's
+// (vk_device/raster_sky.rs writes them as trace.rs does), each pixel taking
+// only those that can reach its workgroup's water (cull_splashes), in the
+// buffer's order: a splash it skips adds nothing to the pixels it skips.
+// The eruptions it walks in the buffer; retail's rings, made once for the
+// workgroup, in shared memory (their positions, then their radius, width,
+// strength and foam's radius).
+#define SPLASH_BINDING 12
+#define FOR_EACH_SPLASH(i) for (int i = next_splash(-1); i >= 0; i = next_splash(i))
+#define FOR_EACH_RING(i) \
+    for (int i = 0; frame.splash_count >= 0.5 && i < int(tile_ring_count); i++)
+#define RING_AT(i) \
+    Ring(tile_ring_at[i].xyz, tile_ring_shape[i].x, tile_ring_shape[i].y, tile_ring_shape[i].z, \
+         tile_ring_shape[i].w)
+// trace.rs's SPLASHES: a bit each.
+const int SPLASH_WORDS = 4;
+const int SPLASH_LIMIT = SPLASH_WORDS * 32;
+shared uint tile_splashes[SPLASH_WORDS];
+shared uint tile_kept[SPLASH_WORDS];
+shared uint tile_ring_count;
+shared vec4 tile_ring_at[SPLASH_LIMIT];
+shared vec4 tile_ring_shape[SPLASH_LIMIT];
+// The workgroup's water's eye-relative X and Z extent, as ordered keys.
+shared uint tile_bounds[4];
+
+// The first splash the workgroup keeps after number `after`, or -1 (none
+// without splashes, where cull_splashes keeps nothing).
+int next_splash(int after) {
+    if (frame.splash_count < 0.5) {
+        return -1;
+    }
+    int from = after + 1;
+    for (int word = from >> 5; word < SPLASH_WORDS; word++) {
+        uint bits = tile_splashes[word];
+        if (word == from >> 5) {
+            bits &= ~0u << uint(from & 31);
+        }
+        if (bits != 0u) {
+            return word * 32 + findLSB(bits);
+        }
+    }
+    return -1;
+}
+#include "pt_splash.glsl"
+// Retail's water strips, as it laid them, where the mask has water.
+layout(set = 0, binding = 7) uniform sampler2D surface_image;
+// Retail's ground where the rain wets it (`camera.wet`): the colour its
+// fog took, and in alpha how much of the ground shows through it (0: no
+// ground), below zero for the far ring's colored quads (vk_ground.frag).
+layout(set = 0, binding = 8, rgba16f) uniform readonly image2D ground_image;
+// The ground's grid (the tracer's, scene_terrain.rs): each point's normal
+// and height (X-major), and a bit for each of its cells, set where its two
+// triangles share the diagonal from the cell's first corner to its last.
+layout(set = 0, binding = 9, std430) readonly buffer GroundPoints {
+    vec4 ground_points[];
+};
+layout(set = 0, binding = 10, std430) readonly buffer GroundSplits {
+    uint ground_splits[];
+};
+// The modern sky's cube (pt_sky_clouds.comp's), made while puddles stand
+// under it: what they mirror above the frame.
+layout(set = 0, binding = 11) uniform samplerCube sky_cube;
+#define GROUND_Y(at) ground_points[at].w
+#include "pt_ground.glsl"
+#include "pt_sun.glsl"
+
+// The world's camera: its axes (Y up), its projection onto native pixels,
+// the near plane of the TL depth (1 - near / z), the Fresnel term's least
+// share and gain, the colour the water's strips fog into, whether the rain
+// wets the ground (1: the ground image holds it; 2: and the sky's cube is
+// made; below zero, the same with the water left as the frame holds it, for
+// the frame's later pass), with the eye under the water (w 1) the murk's
+// colour, the native size and the size the world was drawn at in the
+// frame's top left, its draws' offset this frame in those pixels, and how
+// far from the eye the murk starts and is whole.
+layout(push_constant) uniform Camera {
+    vec3 right;
+    float near;
+    vec3 up;
+    float least;
+    vec3 forward;
+    float gain;
+    vec3 fog;
+    float wet;
+    vec4 murk;
+    vec2 focal;
+    vec2 centre;
+    vec2 native;
+    vec2 world;
+    vec2 offset;
+    vec2 murk_fade;
+} camera;
+
+#include "vk_mirror_levels.glsl"
+
+// mirror.rs's RHW_SCALE.
+const float RHW_SCALE = 4096.0;
+// The most steps a ray takes across the pyramid, and its most levels.
+const int STEPS = 96;
+const int LEVELS = 16;
+// How far behind a surface the ray may pass and still meet it: a share of
+// the surface's distance (thinner things it passes behind).
+const float THICKNESS = 0.05;
+// How far down the bed shows through (the tracer's UNDERWATER_REACH).
+const float UNDERWATER_REACH = 4096.0;
+
+ivec2 world_size;
+int top;
+int offsets[LEVELS];
+
+// A frame position (pixel x covers x to x + 1) from native pixels, and
+// back: the raster draws native x at frame pixel (x + 0.5) world / native,
+// plus the offset.
+vec2 to_frame(vec2 native) {
+    return (native + 0.5) * camera.world / camera.native + camera.offset;
+}
+
+vec2 to_native(vec2 frame) {
+    return (frame - camera.offset) * camera.native / camera.world - 0.5;
+}
+
+float view_z(float depth) {
+    return camera.near / max(1.0 - depth, 1.0e-7);
+}
+
+// Where an eye-relative point lies in the frame, with its TL depth.
+vec3 project(vec3 point) {
+    float z = dot(point, camera.forward);
+    vec2 native = camera.centre
+        + camera.focal * vec2(dot(point, camera.right), -dot(point, camera.up)) / z;
+    return vec3(to_frame(native), 1.0 - camera.near / z);
+}
+
+// A cell's nearest and farthest surfaces.
+vec2 span(int level, ivec2 cell) {
+    ivec2 cells = level_size(world_size, level);
+    return pyramid[offsets[level] + cell.y * cells.x + cell.x];
+}
+
+bool on_frame(vec2 at) {
+    return all(greaterThanEqual(at, vec2(0.0))) && all(lessThan(at, vec2(world_size)));
+}
+
+// The march from eye-relative `point` (at frame position `start`) along
+// `direction`, at most `length` units: whether it meets a surface, and
+// where in the frame it met it or last was.
+bool march_within(vec3 point, vec2 start, vec3 direction, float length, out vec3 at) {
+    // The ray across the frame, its TL depth changing evenly along it:
+    // from the point to far off, or to just before the near plane when it
+    // comes back towards the eye.
+    float z0 = dot(point, camera.forward);
+    float closing = dot(direction, camera.forward);
+    float reach = min(closing < 0.0 ? (z0 - 2.0 * camera.near) / -closing : 1.0e5, length);
+    vec3 from = vec3(start, 1.0 - camera.near / z0);
+    vec3 to = project(point + direction * max(reach, 0.0));
+    vec3 across = to - from;
+    float pixel_t = 1.0 / max(max(abs(across.x), abs(across.y)), 1.0e-4);
+    // Away from zero, so a cell's far edge is never behind the ray.
+    vec2 heading = vec2(across.x >= 0.0 ? 1.0 : -1.0, across.y >= 0.0 ? 1.0 : -1.0);
+    vec2 steps = across.xy + heading * 1.0e-6;
+
+    int level = 0;
+    // Out of its own pixel first.
+    float t = pixel_t;
+    at = from;
+    for (int i = 0; i < STEPS && t < 1.0; i++) {
+        at = from + across * t;
+        if (!on_frame(at.xy)) {
+            return false;
+        }
+        float size = float(1 << level);
+        // A point on a cell's edge lies in the cell it goes into: a steep
+        // ray crossing the edge across it moves too little that way for
+        // its position to show it.
+        vec2 cell = floor((at.xy + heading * 0.002) / size);
+        vec2 surfaces = span(level, ivec2(cell));
+        float surface = surfaces.x;
+        // Where the ray leaves the cell, and where it reaches its nearest
+        // depth.
+        vec2 edge = (cell + step(0.0, steps)) * size;
+        vec2 leaves = (edge - from.xy) / steps;
+        float t_cell = min(leaves.x, leaves.y);
+        float t_depth = across.z > 0.0 ? (surface - from.z) / across.z : 1.0e30;
+        if (at.z < surface) {
+            if (t_depth <= t_cell) {
+                // It passes behind something in the cell: look closer, or
+                // in a pixel, it meets it there (never the sky's).
+                t = max(t, t_depth);
+                if (level == 0) {
+                    at = from + across * t;
+                    return surface < 1.0;
+                }
+                level--;
+            } else {
+                t = t_cell;
+                level = min(level + 1, top);
+            }
+        } else if (across.z >= 0.0 && surfaces.y > 0.0
+                   && view_z(at.z) > view_z(surfaces.y) * (1.0 + THICKNESS)) {
+            // Behind all of the cell's surfaces, too far to meet any, and
+            // going on away: past the whole cell (the far hills a ray into
+            // the distance passes behind).
+            t = t_cell;
+            level = min(level + 1, top);
+        } else if (level > 0) {
+            level--;
+        } else {
+            float scene_z = view_z(surface);
+            float ray_z = view_z(at.z);
+            float next_z = view_z(from.z + across.z * min(t + pixel_t, 1.0));
+            if (ray_z - scene_z < max(THICKNESS * scene_z, 2.0 * abs(next_z - ray_z))) {
+                return true;
+            }
+            // Behind something thin: on past it.
+            t = t_cell;
+        }
+    }
+    return false;
+}
+
+// The same, with no end short of the frame's.
+bool march(vec3 point, vec2 start, vec3 direction, out vec3 at) {
+    return march_within(point, start, direction, 1.0e30, at);
+}
+
+// How far short of a lamp the march toward it stops: about the length of
+// the craft it sits on (its lamps sit at its nose and its tail), which
+// never stands in its own beam's way but hides where the beam leaves it
+// from the screen.
+const float LAMP_CRAFT = 256.0;
+
+// Whether a lamp `distance` along `toward` from the water at eye-relative
+// `point` (frame position `start`) lights it, the tracer's shadow ray
+// (lamp_visibility) across the frame's depth: where the march toward it
+// meets nothing short of its craft.
+bool lamp_seen(vec3 point, vec2 start, vec3 toward, float distance) {
+    vec3 blocked;
+    return distance <= LAMP_CRAFT
+        || !march_within(point, start, toward, distance - LAMP_CRAFT, blocked);
+}
+
+// How much of what lies `t` along the light's way through the water shows
+// through the murk (mirror.rs's Murk::shows).
+float murk_shows(float t) {
+    return 1.0 - clamp((t - camera.murk_fade.x) / max(camera.murk_fade.y - camera.murk_fade.x, 1.0),
+                       0.0, 1.0);
+}
+
+// The eye-relative point the ray through frame position `at` reaches at TL
+// depth `depth`.
+vec3 frame_point(vec2 at, float depth) {
+    vec2 ray = (to_native(at) - camera.centre) / camera.focal;
+    return (camera.right * ray.x - camera.up * ray.y + camera.forward) * view_z(depth);
+}
+
+// The eye-relative point of the surface the frame shows at frame position
+// `at` (where a march met it: not the ray's own point there).
+vec3 surface_point(vec2 at) {
+    return frame_point(at, texelFetch(depth_image, ivec2(at), 0).r);
+}
+
+// How much of what a ray met at frame position `at` shows: it fades where it
+// would come from past the frame's edges.
+float within_frame(vec2 at) {
+    vec2 margin = min(at, vec2(world_size) - at) / (0.06 * vec2(world_size));
+    return clamp(min(margin.x, margin.y), 0.0, 1.0);
+}
+
+// The sky along `direction`, seen from under the water out through its
+// surface: the frame's own sky where it points, else the modern sky's
+// gradient as vk_sky.comp lays it, else the painted sky's colour.
+vec3 sky_along(vec3 direction) {
+    vec3 away = project(direction * 1.0e6);
+    if (dot(direction, camera.forward) > 0.0 && on_frame(away.xy)
+        && texelFetch(depth_image, ivec2(away.xy), 0).r >= 1.0) {
+        return texelFetch(colour_image, ivec2(away.xy), 0).rgb;
+    }
+    if (frame.sky_modern > 0.5) {
+        return to_srgb(tonemap(to_linear(sky_gradient(direction, frame.sky_disc))));
+    }
+    return frame.sky;
+}
+
+// Where the ray from eye-relative `point` (frame position `start`) along
+// `direction` leaves the frame, on the line march takes across it (its end,
+// where that comes first).
+vec2 frame_exit(vec3 point, vec2 start, vec3 direction) {
+    float z0 = dot(point, camera.forward);
+    float closing = dot(direction, camera.forward);
+    float reach = closing < 0.0 ? (z0 - 2.0 * camera.near) / -closing : 1.0e5;
+    vec2 across = project(point + direction * max(reach, 0.0)).xy - start;
+    vec2 heading = vec2(across.x >= 0.0 ? 1.0 : -1.0, across.y >= 0.0 ? 1.0 : -1.0);
+    vec2 edge = (step(0.0, across) * vec2(world_size) - start) / (across + heading * 1.0e-6);
+    return start + across * clamp(min(edge.x, edge.y), 0.0, 1.0);
+}
+
+// What a puddle at eye-relative `point` (frame position `start`) mirrors
+// along `mirrored`, and how much of it shows: as the water's in main, but
+// where the ray leaves the frame with the sky there, the sky along it as the
+// tracer's puddles take it (the modern sky's cube, laid through the tonemap
+// as the raster's sky is, with `camera.wet` 2; else the painted sky's
+// colour). The water's colour where its ray leaves, where the march's last
+// step took it past the frame's edge, draws lines across a puddle, whose
+// rays all leave (steps across the pyramid's coarse cells overshoot), and
+// stretches the frame's top row over it.
+vec3 puddle_view(vec3 point, vec2 start, vec3 mirrored, out float shown) {
+    vec3 at;
+    if (march(point, start, mirrored, at)) {
+        vec2 margin = min(at.xy, vec2(world_size) - at.xy) / (0.06 * vec2(world_size));
+        shown = clamp(min(margin.x, margin.y), 0.0, 1.0);
+        return texelFetch(colour_image, ivec2(at.xy), 0).rgb;
+    }
+    vec3 away = project(mirrored * 1.0e6);
+    if (dot(mirrored, camera.forward) > 0.0 && on_frame(away.xy)
+        && texelFetch(depth_image, ivec2(away.xy), 0).r >= 1.0) {
+        shown = 1.0;
+        return texelFetch(colour_image, ivec2(away.xy), 0).rgb;
+    }
+    ivec2 last = ivec2(clamp(frame_exit(point, start, mirrored), vec2(0.0),
+                             vec2(world_size) - 1.0));
+    shown = texelFetch(depth_image, last, 0).r >= 1.0 ? 1.0 : 0.0;
+    return abs(camera.wet) > 1.5
+        ? to_srgb(tonemap(to_linear(textureLod(sky_cube, mirrored, 0.0).rgb)))
+        : frame.sky;
+}
+
+// How much nearer than the ground its own rays start, as a share of its
+// distance: twice the depth pyramid's (vk_mirror_depth.comp's NEARER), so
+// that they leave the ground they start on rather than meet it.
+const float GROUND_LIFT = 0.02;
+
+// The ground's normal at world X/Z as the tracer shades it: its triangle's
+// corners' normals blended across it, each cell of the grid split on the
+// diagonal its triangles share.
+vec3 ground_normal(vec2 world) {
+    int points = int(frame.ground_points);
+    vec2 grid_at = mod(world, 65536.0) / frame.ground_spacing;
+    ivec2 corner = clamp(ivec2(floor(grid_at)), ivec2(0), ivec2(points - 2));
+    vec2 t = clamp(grid_at - vec2(corner), 0.0, 1.0);
+    int cell = corner.x * (points - 1) + corner.y;
+    bool rising = ((ground_splits[cell >> 5] >> (cell & 31)) & 1u) != 0u;
+    int at = corner.x * points + corner.y;
+    vec3 n00 = ground_points[at].xyz;
+    vec3 n10 = ground_points[at + points].xyz;
+    vec3 n01 = ground_points[at + 1].xyz;
+    vec3 n11 = ground_points[at + points + 1].xyz;
+    vec3 normal;
+    if (rising) {
+        normal = t.x >= t.y ? n00 * (1.0 - t.x) + n10 * (t.x - t.y) + n11 * t.y
+                            : n00 * (1.0 - t.y) + n01 * (t.y - t.x) + n11 * t.x;
+    } else {
+        normal = t.x + t.y <= 1.0 ? n00 * (1.0 - t.x - t.y) + n10 * t.x + n01 * t.y
+                                  : n10 * (1.0 - t.y) + n01 * (1.0 - t.x) + n11 * (t.x + t.y - 1.0);
+    }
+    return normalize(normal);
+}
+
+// The rain on retail's ground at `pixel`, where the frame shows `colour` and
+// the ground image `ground` (the colour its fog took, how much of the ground
+// shows through it), as the tracer's wet ground: darker as it soaks (in
+// retail's tones, as tuned), a broad, faint sheen where the sun catches it
+// (WET_GROUND_ROUGHNESS), and the puddles standing in its hollows above the
+// water's plane, rippled by the rain's rings, mirroring the world across the
+// frame by water's Fresnel (WATER_F0) over the dark wet bed and glinting,
+// the ground under them darker and their banks too. The tracer's carve (the
+// detail patch round the eye) is its own ground's: retail's ground here
+// lies as drawn, as the tracer's does beyond the patch. Retail's far ring
+// (its colored quads, alpha below zero in the ground image) draws cells four
+// times the grid's, off its surface on slopes (the grid's hollows on a
+// drawn cliff): not the ground the tracer shades there, it only darkens.
+// Its light is retail's, unfogged and fogged again as retail fogged it.
+vec3 wet_ground(ivec2 pixel, vec3 colour, vec4 ground) {
+    vec2 start = vec2(pixel) + 0.5;
+    vec3 point = frame_point(start, texelFetch(depth_image, pixel, 0).r);
+    vec3 view = normalize(point);
+    float shows = abs(ground.a);
+    vec3 haze = ground.rgb * (1.0 - shows);
+    vec3 own = clamp((colour - haze) / shows, 0.0, 1.0);
+    bool on_grid = ground.a > 0.0 && frame.ground_points > 1.5;
+    vec3 normal = on_grid ? ground_normal(frame.eye.xz + point.xz) : vec3(0.0, 1.0, 0.0);
+    vec3 lifted = point * (1.0 - GROUND_LIFT);
+
+    float puddle = on_grid ? puddle_at(point, normal) : 0.0;
+    float puddle_water = 0.0;
+    float puddle_mirror = 0.0;
+    float puddle_edge = 0.0;
+    float puddle_sunk = 0.0;
+    vec3 puddle_normal = normal;
+    if (puddle > 0.0) {
+        float lake_edge;
+        float shore = puddle_shore(point, lake_edge);
+        float lake_least = max(frame.water_reflect, 0.02);
+        puddle_sunk = 1.0 - shore;
+        // Round its shore the ground slopes down into the hollow.
+        puddle_water = smoothstep(0.45, 0.7, puddle);
+        if (puddle_water < 1.0) {
+            vec3 e = vec3(24.0, 0.0, 0.0);
+            vec2 slope = vec2(puddle_at(point + e.xyy, normal) - puddle_at(point - e.xyy, normal),
+                              puddle_at(point + e.yyx, normal) - puddle_at(point - e.yyx, normal));
+            normal = normalize(normal + vec3(slope.x, 0.0, slope.y) * (20.0 / 48.0)
+                               * (1.0 - puddle_water) * puddle_sunk);
+        }
+        vec3 still = normalize(mix(normal, vec3(0.0, 1.0, 0.0), puddle_water));
+        still = normalize(mix(still, normalize(rained(still, point)), puddle_water));
+        puddle_normal = normalize(waked(still, point));
+        float facing = clamp(dot(-view, puddle_normal), 0.0, 1.0);
+        float fresnel = pow(1.0 - facing, 5.0);
+        float water = WATER_F0 + (1.0 - WATER_F0) * fresnel;
+        float lake = (lake_least + (1.0 - lake_least) * fresnel) * lake_edge;
+        puddle_mirror = min(puddle_water * mix(water, lake, shore)
+                                * max(frame.reflect_gain, 1.0),
+                            0.95);
+        puddle_edge = puddle_water * mix(1.0, lake_edge, shore);
+    }
+
+    // The sun on the wet ground and on the puddles' ripples (worked out
+    // below), where nothing the frame shows stands in its way, under the
+    // clouds' shadow.
+    float wet = frame.wet_ground;
+    float pooled = puddle_water * puddle_sunk;
+    vec3 sheen = on_grid
+        ? wet * (1.0 - pooled) * sun_light()
+            * sun_specular(normal, view, frame.sun_direction, WET_GROUND_ROUGHNESS,
+                           vec3(WATER_F0))
+        : vec3(0.0);
+    vec3 half_way = normalize(frame.sun_direction - view);
+    float glint = puddle_edge > 0.0
+        ? pow(max(dot(puddle_normal, half_way), 0.0), 600.0) * 4.0 * puddle_edge
+        : 0.0;
+    glint = glint > 0.001 ? glint : 0.0;
+    float fleck = puddle_edge > 0.0 ? rain_flecks(point) * puddle_edge : 0.0;
+    vec3 flecks = fleck > 0.0
+        ? min((frame.ambient * 2.0 + frame.sun_color * 0.5) * frame.precip_color, vec3(1.0))
+            * (0.7 * fleck)
+        : vec3(0.0);
+
+    // Darker as the rain soaks it, the more under a puddle and at its bank.
+    float bank = smoothstep(0.0, 0.3, puddle) * (1.0 - smoothstep(0.35, 0.8, puddle));
+    float darker = (1.0 - RAIN_DARKEN * wet) * (1.0 - 0.2 * puddle * puddle_sunk)
+        * (1.0 - 0.125 * bank * puddle_sunk);
+    vec3 light = to_linear(own * darker);
+    if (puddle_mirror > 0.0) {
+        float shown;
+        // Never down into the ground, as the water's.
+        vec3 mirrored = reflect(view, puddle_normal);
+        mirrored.y = max(mirrored.y, 0.01);
+        vec3 found = puddle_view(lifted, start, normalize(mirrored), shown);
+        float mirror = puddle_mirror * shown;
+        light = light * (1.0 - mirror) + to_linear(found) * mirror;
+    }
+    // Lit as much as the clouds let the sun, or shadowed: the march toward
+    // the sun runs only where the two differ in the 8-bit frame (it rounds
+    // to the nearest step), and they rise together.
+    bool catches = glint > 0.0 || max(sheen.r, max(sheen.g, sheen.b)) > 0.0;
+    float sun = frame.sun_direction.y > 0.0 && catches ? cloud_light(point) : 0.0;
+    vec3 shaded = haze + to_srgb(light + to_linear(flecks)) * shows;
+    vec3 sunlit = light + sheen * sun + to_linear(frame.sun_color * glint * sun + flecks);
+    vec3 lit = haze + to_srgb(sunlit) * shows;
+    vec3 steps = round(clamp(lit, 0.0, 1.0) * 255.0) - round(clamp(shaded, 0.0, 1.0) * 255.0);
+    if (any(notEqual(steps, vec3(0.0)))) {
+        vec3 blocked;
+        return march(lifted, start, frame.sun_direction, blocked) ? shaded : lit;
+    }
+    return shaded;
+}
+
+// The view from under the water at `pixel`, where the frame shows `colour`
+// and the mask `water`.
+vec3 from_below(ivec2 pixel, vec3 colour, vec4 water) {
+    vec2 start = vec2(pixel) + 0.5;
+    vec3 murk = camera.murk.rgb;
+    if (water.a < 0.5 || water.r <= 0.0) {
+        float depth = texelFetch(depth_image, pixel, 0).r;
+        return depth >= 1.0 ? murk
+                            : mix(murk, colour, murk_shows(length(frame_point(start, depth))));
+    }
+    vec2 ray = (to_native(start) - camera.centre) / camera.focal;
+    vec3 along = camera.right * ray.x - camera.up * ray.y + camera.forward;
+    vec3 point = along * (RHW_SCALE / water.r);
+    vec3 view = normalize(along);
+    float reach = length(point);
+    // The surface the eye above it sees, from its other side, facing the
+    // eye (a trough below the eye's height, near the waterline, from its
+    // top), its splashes and all.
+    float foam;
+    vec3 normal = -splashed(rippled(vec3(0.0, 1.0, 0.0), point), point, foam);
+    if (dot(normal, view) > 0.0) {
+        normal = -normal;
+    }
+    vec3 bent = refract(view, normal, 1.333);
+    bool inside = dot(bent, bent) < 0.5;
+    float facing = clamp(dot(normal, -view), 0.0, 1.0);
+    float fresnel = inside ? 1.0
+                           : min((camera.least + (1.0 - camera.least) * pow(1.0 - facing, 5.0))
+                                     * camera.gain, 1.0);
+
+    // What lies above, out through Snell's window: never what lies under
+    // the surface, which the ray across the frame may pass behind.
+    vec3 at;
+    vec3 above = vec3(0.0);
+    if (!inside) {
+        above = sky_along(bent);
+        if (march(point, start, bent, at) && surface_point(at.xy).y >= point.y) {
+            above = mix(above, texelFetch(colour_image, ivec2(at.xy), 0).rgb, within_frame(at.xy));
+        }
+    }
+
+    // What lies under the water, mirrored, through the murk along the way.
+    vec3 mirrored = reflect(view, normal);
+    mirrored.y = min(mirrored.y, -0.01);
+    mirrored = normalize(mirrored);
+    vec3 below = murk;
+    if (march(point, start, mirrored, at)) {
+        vec3 met = surface_point(at.xy);
+        if (met.y <= point.y) {
+            vec3 seen = mix(murk, texelFetch(colour_image, ivec2(at.xy), 0).rgb,
+                            murk_shows(reach + length(met - point)));
+            below = mix(murk, seen, within_frame(at.xy));
+        }
+    }
+    return mix(mix(murk, above, murk_shows(reach)), below, fresnel);
+}
+
+// A float as a key that orders as the float does.
+uint order_key(float value) {
+    uint bits = floatBitsToUint(value);
+    return (bits & 0x80000000u) != 0u ? ~bits : bits | 0x80000000u;
+}
+
+float from_key(uint key) {
+    return uintBitsToFloat((key & 0x80000000u) != 0u ? key & 0x7fffffffu : ~key);
+}
+
+// The splashes that can reach the workgroup's water pixels: the eruptions
+// all (their glow under the surface reaches past their rings), and each of
+// retail's whose ring and foam (splashed's reach, its width twice past its
+// radius) come within a unit of the box round the water's points, made
+// once into the workgroup's rings. Every invocation calls it, before any
+// returns: it holds barriers.
+void cull_splashes(ivec2 pixel, bool inside) {
+    if (frame.splash_count < 0.5) {
+        return;
+    }
+    uint index = gl_LocalInvocationIndex;
+    if (index < uint(SPLASH_WORDS)) {
+        tile_splashes[index] = 0u;
+        tile_kept[index] = 0u;
+        tile_bounds[index] = index < 2u ? 0xffffffffu : 0u;
+    }
+    memoryBarrierShared();
+    barrier();
+    vec4 water = inside ? imageLoad(mask_image, pixel) : vec4(0.0);
+    if (water.a >= 0.5 && water.r > 0.0) {
+        vec2 ray = (to_native(vec2(pixel) + 0.5) - camera.centre) / camera.focal;
+        vec3 point = (camera.right * ray.x - camera.up * ray.y + camera.forward)
+            * (RHW_SCALE / water.r);
+        atomicMin(tile_bounds[0], order_key(point.x));
+        atomicMin(tile_bounds[1], order_key(point.z));
+        atomicMax(tile_bounds[2], order_key(point.x));
+        atomicMax(tile_bounds[3], order_key(point.z));
+    }
+    memoryBarrierShared();
+    barrier();
+    int count = min(int(frame.splash_count), SPLASH_LIMIT);
+    if (tile_bounds[0] <= tile_bounds[2]) {
+        vec2 least = vec2(from_key(tile_bounds[0]), from_key(tile_bounds[1]));
+        vec2 most = vec2(from_key(tile_bounds[2]), from_key(tile_bounds[3]));
+        for (int i = int(index); i < count; i += 64) {
+            Splash splash = splashes[i];
+            if (splash.kind > 0.5) {
+                atomicOr(tile_splashes[i >> 5], 1u << uint(i & 31));
+                continue;
+            }
+            Ring ring = ring_of(splash);
+            vec2 offset = splash.position.xz - clamp(splash.position.xz, least, most);
+            if (length(offset) <= ring.radius + 2.0 * ring.width + 1.0) {
+                atomicOr(tile_kept[i >> 5], 1u << uint(i & 31));
+            }
+        }
+    }
+    memoryBarrierShared();
+    barrier();
+    // The kept rings packed in the buffer's order.
+    for (int i = int(index); i < count; i += 64) {
+        uint bit = 1u << uint(i & 31);
+        if ((tile_kept[i >> 5] & bit) == 0u) {
+            continue;
+        }
+        int slot = bitCount(tile_kept[i >> 5] & (bit - 1u));
+        for (int word = 0; word < (i >> 5); word++) {
+            slot += bitCount(tile_kept[word]);
+        }
+        Ring ring = ring_of(splashes[i]);
+        tile_ring_at[slot] = vec4(ring.position, 0.0);
+        tile_ring_shape[slot] = vec4(ring.radius, ring.width, ring.strength, ring.patch_radius);
+    }
+    if (index == 0u) {
+        tile_ring_count = uint(bitCount(tile_kept[0]) + bitCount(tile_kept[1])
+                               + bitCount(tile_kept[2]) + bitCount(tile_kept[3]));
+    }
+    memoryBarrierShared();
+    barrier();
+}
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    bool inside = all(lessThan(pixel, imageSize(result)));
+    cull_splashes(pixel, inside);
+    if (!inside) {
+        return;
+    }
+    vec4 colour = texelFetch(colour_image, pixel, 0);
+    vec4 water = imageLoad(mask_image, pixel);
+    bool under = camera.murk.a > 0.5;
+    bool on_water = water.a >= 0.5 && water.r > 0.0;
+    vec4 ground = abs(camera.wet) > 0.5 && !on_water ? imageLoad(ground_image, pixel) : vec4(0.0);
+    if (!under && (on_water ? camera.wet < 0.0 : ground.a == 0.0)) {
+        imageStore(result, pixel, colour);
+        return;
+    }
+    world_size = ivec2(camera.world);
+    top = 0;
+    offsets[0] = 0;
+    while (top + 1 < LEVELS && any(greaterThan(level_size(world_size, top), ivec2(1)))) {
+        top++;
+        offsets[top] = level_offset(world_size, top);
+    }
+    if (under) {
+        imageStore(result, pixel,
+                   vec4(clamp(from_below(pixel, colour.rgb, water), 0.0, 1.0), colour.a));
+        return;
+    }
+    if (!on_water) {
+        imageStore(result, pixel,
+                   vec4(clamp(wet_ground(pixel, colour.rgb, ground), 0.0, 1.0), colour.a));
+        return;
+    }
+
+    // The water's point, from the eye, and retail's fog over its strips:
+    // how much of what lies on it shows, and the fog's own share.
+    vec2 start = vec2(pixel) + 0.5;
+    vec2 ray = (to_native(start) - camera.centre) / camera.focal;
+    vec3 along = camera.right * ray.x - camera.up * ray.y + camera.forward;
+    vec3 point = along * (RHW_SCALE / water.r);
+    vec3 view = normalize(along);
+    float seen_through = clamp(water.g, 0.0, 1.0);
+    vec3 haze = camera.fog.rgb * (1.0 - seen_through);
+    vec3 body = texelFetch(surface_image, pixel, 0).rgb;
+    // Lighter where a blast churned it: retail's colour under the fog.
+    vec3 own = clamp((body - haze) / max(seen_through, 1.0e-3), 0.0, 1.0);
+    body += (churned(own, point) - own) * seen_through;
+    vec2 world = frame.eye.xz + point.xz;
+    // How deep the water is there: the water writes no depth, so the frame
+    // shows its bed behind it. At the shore it adds nothing at its edge (no
+    // ripples, no reflection, no glint), as the tracer's water, its edge
+    // wandering as the tracer's does.
+    float bed = texelFetch(depth_image, pixel, 0).r;
+    vec3 floor_point = along * view_z(bed);
+    float depth = bed >= 1.0 ? 1.0e6 : point.y - floor_point.y;
+    float shore = depth + shore_wander(world);
+    float edge = frame.shore_fade > 0.0 ? smoothstep(0.0, frame.shore_fade, shore) : 1.0;
+    vec3 up = vec3(0.0, 1.0, 0.0);
+    float foam;
+    vec3 normal = normalize(mix(up, splashed(rippled(up, point), point, foam), edge));
+
+    // What lies below: the bed where the bent view meets it (its depth
+    // there along that pixel's view), or this pixel's own bed where that
+    // falls outside the water; deep, the water's own colour.
+    vec3 bent = refract(view, normal, 1.0 / 1.333);
+    vec3 seen = colour.rgb;
+    float t = bed >= 1.0 ? 1.0e6 : length(floor_point - point);
+    vec3 bottom = floor_point;
+    if (bed < 1.0 && bent.y < 0.0) {
+        vec3 aim = project(point + bent * (depth / max(-bent.y, 0.05)));
+        ivec2 there = ivec2(floor(aim.xy));
+        if (on_frame(aim.xy) && imageLoad(mask_image, there).a >= 0.5) {
+            float there_bed = texelFetch(depth_image, there, 0).r;
+            if (there_bed < 1.0) {
+                vec2 there_ray = (to_native(vec2(there) + 0.5) - camera.centre) / camera.focal;
+                vec3 there_along = camera.right * there_ray.x - camera.up * there_ray.y
+                    + camera.forward;
+                vec3 found_bed = there_along * view_z(there_bed);
+                // Only what lies past the surface: a model nearer than it,
+                // standing in the water there, is not under it.
+                if (dot(found_bed, camera.forward) > dot(point, camera.forward)) {
+                    bottom = found_bed;
+                    seen = texelFetch(colour_image, there, 0).rgb;
+                    t = length(bottom - point);
+                }
+            }
+        }
+    }
+    float clear = t < UNDERWATER_REACH ? water_clear(t) : 0.0;
+    float down = point.y - bottom.y;
+    if (frame.wet_ground > 0.0) {
+        // The bed is as dark as the rain makes the bank, as the tracer's:
+        // no seam along the waterline.
+        seen = haze + (seen - haze) * (1.0 - RAIN_DARKEN * frame.wet_ground);
+    }
+    if (clear > 0.05 && frame.sun_direction.y > 0.0 && down > 1.0) {
+        // The sunlit bed takes the ripples' caustics, as much as the sun
+        // lights it, where the sun reaches the water above it (its beam's
+        // way in): on the bed's own light, not the fog over it.
+        vec3 beam = refract(-frame.sun_direction, up, 1.0 / 1.333);
+        vec3 entry = bottom - beam * (down / max(-beam.y, 0.2));
+        entry.y = point.y;
+        float sun = dot(frame.sun_color, vec3(0.3, 0.6, 0.1)) * frame.sun_direction.y;
+        float share = sun / max(sun + dot(frame.ambient, vec3(0.3, 0.6, 0.1)), 1.0e-3);
+        vec3 entered = project(entry);
+        vec3 blocked;
+        if (!march(entry, entered.xy, frame.sun_direction, blocked)) {
+            float focus = mix(1.0, caustic(bottom, down), share * cloud_light(bottom));
+            seen = haze + (seen - haze) * focus;
+        }
+    }
+    colour.rgb = mix(body, seen, clear);
+    // The lamps under the water glow in it along the bent view, and the
+    // blasts under it glow through it, screened in so that it brightens
+    // without passing full light, as the tracer's; through the fog.
+    vec3 beneath = point - view * 0.5;
+    float reach = min(t, UNDERWATER_REACH);
+    vec3 lamps_under = lamps_in_water(beneath, bent, reach);
+    colour.rgb += lamps_under * seen_through;
+    bool lamplit = any(greaterThan(lamps_under, vec3(0.0)));
+    vec3 glow = under_glow(beneath, bent, reach, body);
+    if (any(greaterThan(glow, vec3(0.0)))) {
+        vec3 lit = (colour.rgb - haze) / max(seen_through, 1.0e-3);
+        lit = 1.0 - (1.0 - min(lit, 1.0)) * (1.0 - glow);
+        colour.rgb = haze + lit * seen_through;
+    }
+
+    // The mirrored view off the ripples, never down into the water.
+    vec3 mirrored = reflect(view, normal);
+    mirrored.y = max(mirrored.y, 0.01);
+    mirrored = normalize(mirrored);
+    float facing = clamp(dot(normal, -view), 0.0, 1.0);
+    float fresnel = min((camera.least + (1.0 - camera.least) * pow(1.0 - facing, 5.0))
+                        * edge * camera.gain, 1.0);
+
+    vec3 at;
+    bool met = march(point, start, mirrored, at);
+    vec3 found = vec3(0.0);
+    float shown = 0.0;
+    vec2 seen_at = at.xy;
+    if (met) {
+        found = texelFetch(colour_image, ivec2(at.xy), 0).rgb;
+        // Fading where the reflection would come from past the frame's
+        // edges.
+        vec2 margin = min(seen_at, vec2(world_size) - seen_at) / (0.06 * vec2(world_size));
+        shown = clamp(min(margin.x, margin.y), 0.0, 1.0);
+    } else {
+        // Nothing in the way: the sky it points at, where the frame shows
+        // it, or the sky where it leaves the frame (the backdrop changes
+        // little along a side).
+        vec3 away = project(mirrored * 1.0e6);
+        ivec2 last = ivec2(clamp(seen_at, vec2(0.0), vec2(world_size) - 1.0));
+        if (dot(mirrored, camera.forward) > 0.0 && on_frame(away.xy)
+            && texelFetch(depth_image, ivec2(away.xy), 0).r >= 1.0) {
+            found = texelFetch(colour_image, ivec2(away.xy), 0).rgb;
+            shown = 1.0;
+        } else if (texelFetch(depth_image, last, 0).r >= 1.0) {
+            found = texelFetch(colour_image, last, 0).rgb;
+            float margin = min(seen_at.x, float(world_size.x) - seen_at.x)
+                / (0.06 * float(world_size.x));
+            shown = clamp(margin, 0.0, 1.0);
+        }
+    }
+    colour.rgb = mix(colour.rgb, found, fresnel * shown);
+
+    // The foam line lapping at the shore and the splashes' foam, the drops
+    // striking the water, and the sun's glint on the ripples as the
+    // tracer's water takes it; the sun lights them where nothing the frame
+    // shows stands in its way, under the clouds' shadow; all through the
+    // fog.
+    float cover = foam_cover(point, max(frame.splash_foam * foam, lap_line(point, shore)));
+    vec3 half_way = normalize(frame.sun_direction - view);
+    float glint = pow(max(dot(normal, half_way), 0.0), 600.0) * 4.0 * (1.0 - cover) * edge;
+    float sunlit = 0.0;
+    if ((glint > 0.001 || cover > 0.0) && frame.sun_direction.y > 0.0) {
+        vec3 blocked;
+        if (!march(point, start, frame.sun_direction, blocked)) {
+            sunlit = cloud_light(point);
+        }
+    }
+    float fleck = rain_flecks(point) * edge;
+    if (fleck > 0.0) {
+        colour.rgb += min((frame.ambient * 2.0 + frame.sun_color * 0.5) * frame.precip_color,
+                          vec3(1.0)) * (0.7 * fleck * seen_through);
+    }
+    colour.rgb += frame.sun_color * glint * sunlit * seen_through;
+    // The vehicles' lamps, as the tracer's:
+    // their white glint on the ripples, and their light entering the water
+    // and scattering back in its own colour (murky water glows near its
+    // surface; clear water lets it down to the bed).
+    vec3 hue = body / max(max(body.r, max(body.g, body.b)), 1.0e-3);
+    vec3 lamps_on_foam = vec3(0.0);
+    if (frame.lamp_count > 0.5) {
+        float roughness = max(frame.lamp_water_gloss, 0.02);
+        float a2 = roughness * roughness * roughness * roughness;
+        float shine = camera.least
+            + (1.0 - camera.least) * pow(1.0 - max(dot(-view, normal), 0.0), 5.0);
+        float deep = 1.0 - exp(-min(t < UNDERWATER_REACH ? down : 1.0e6, UNDERWATER_REACH)
+                               / frame.water_clarity);
+        for (int i = 0; i < int(frame.lamp_count); i++) {
+            vec3 toward;
+            float distance;
+            vec3 beam = lamp_beam(frame.lamps[i], point, toward, distance);
+            if (beam == vec3(0.0) || toward.y <= 0.0 || !lamp_seen(point, start, toward, distance)) {
+                continue;
+            }
+            float nh = max(dot(normal, normalize(toward - view)), 0.0);
+            float d = nh * nh * (a2 - 1.0) + 1.0;
+            float lobe = a2 / (3.14159265 * d * d);
+            float entering = (toward.y + frame.lamp_wrap) / (1.0 + frame.lamp_wrap);
+            float enters = 1.0 - (camera.least + (1.0 - camera.least) * pow(1.0 - toward.y, 5.0));
+            colour.rgb += beam
+                * (min(lobe * shine * 0.25, 4.0)
+                   + hue * (entering * enters * frame.lamp_water_scatter * deep))
+                * ((1.0 - cover) * edge * seen_through);
+            lamps_on_foam += beam * entering;
+            lamplit = true;
+        }
+    }
+    if (cover > 0.0) {
+        // Foam lies on the water as a white surface, a little of the
+        // water's colour in it, lit as the ground is: the sun at its angle,
+        // shadowed, under the clouds, the sky's light and the lamps.
+        vec3 light = frame.ambient + frame.sun_color * frame.sun_direction.y * sunlit
+            + lamps_on_foam;
+        vec3 white = 0.85 * mix(vec3(1.0), hue, FOAM_TINT);
+        colour.rgb = mix(colour.rgb, haze + white * light * seen_through, cover);
+    }
+    // Where the lamps light it, its light past full rolls off as the
+    // tracer's composite lays it (its tonemap), not clipped.
+    if (lamplit) {
+        colour.rgb = to_srgb(tonemap(to_linear(colour.rgb)));
+    }
+    imageStore(result, pixel, vec4(clamp(colour.rgb, 0.0, 1.0), colour.a));
+}

@@ -1,0 +1,23 @@
+# Rust build artifacts
+/target/
+
+# Scratch output (probe captures, logs, test scratch)
+/.tmp/
+
+# Private original game data: only the setup note is tracked.
+/retail/*
+!/retail/README.md
+
+# Generated inf-extract output
+/extracted/
+
+# Local runtime data when running from the repository root
+/settings.json
+/logs/
+/Remastered.pak
+*.pak
+*.ogg
+*.wav
+
+# Upscaler SDK libraries are fetched locally, never committed
+*.dll

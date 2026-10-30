@@ -1,0 +1,24 @@
+#version 460
+// SMAA's last pass (smaa.glsl): each pixel blended with its neighbours by
+// the weights of the edges it lies on.
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 0) uniform sampler2D color_image;
+layout(set = 0, binding = 4) uniform sampler2D weights_image;
+layout(set = 0, binding = 7, rgba16f) uniform writeonly image2D color_out;
+
+#include "smaa.glsl"
+
+void main() {
+    ivec2 pixel;
+    vec2 texcoord;
+    if (!smaa_pixel(pixel, texcoord)) {
+        return;
+    }
+    vec4 offset;
+    SMAANeighborhoodBlendingVS(texcoord, offset);
+    vec4 color = SMAANeighborhoodBlendingPS(texcoord, offset, color_image, weights_image);
+    imageStore(color_out, pixel, vec4(color.rgb, 1.0));
+}

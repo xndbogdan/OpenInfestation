@@ -1,0 +1,2321 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original selector 29 bodies with the real fuse 004555B0 and H12 height 00450A30; shared commands, base initializer, payload copy, state change, first player, player command, shared capture, disposal, child factory, burst and detonation recorded."
+ },
+ "guards": [
+  {
+   "address": 4557888,
+   "size": 64,
+   "sha256": "1fb0c709f3a348e56ff7de4f3d435e9a6cb3e83e33e59ceb204063783008123c"
+  },
+  {
+   "address": 4557952,
+   "size": 24,
+   "sha256": "1e63ff54ccfbd3dbcb8470d9da54fbfce4b99808a2d3963c97e470f9dbf1b401"
+  },
+  {
+   "address": 4557984,
+   "size": 32,
+   "sha256": "1ee952f2e651e789e044f8eb6adcb9f36d62539c9d126b99d3234973217542f8"
+  },
+  {
+   "address": 4558016,
+   "size": 86,
+   "sha256": "1d3b462471b6098bfa2284152f52f6a52d58b43a1cec0673bfa65c5a808b5423"
+  },
+  {
+   "address": 4554768,
+   "size": 96,
+   "sha256": "84503aa3e5bc66dafeafebd8458e16e1a81ccc3b366a4d9a081fe59110ca607b"
+  },
+  {
+   "address": 4558688,
+   "size": 20,
+   "sha256": "78b291d7c79734b8e7b78b84b68c184517b68b69328fc6028dca7c9da84c77e9"
+  },
+  {
+   "address": 4558240,
+   "size": 32,
+   "sha256": "69012918f542dedafe50a28edc1616866cc56693660f5f9c9a8d959a738b540b"
+  },
+  {
+   "address": 4558112,
+   "size": 116,
+   "sha256": "6c709bdca618678919df5f0af90767007e9feb7ba676e6e3e3b60934f080dcab"
+  },
+  {
+   "address": 4543920,
+   "size": 84,
+   "sha256": "f49afa6bfc280157483dc781276cac04e3be614f8bc076b25642fa6d1e7ac542"
+  },
+  {
+   "address": 4693456,
+   "size": 54,
+   "sha256": "dee12316def66289bae29f43eab774027876f6d3c0ea626cfe4f3123a325a8a5"
+  }
+ ],
+ "coverage": {
+  "cases": 49
+ },
+ "cases": [
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     "payload"
+    ],
+    "payload": [
+     4660
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 0,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     3,
+     "payload"
+    ],
+    "payload": [
+     4660
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 3,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     13,
+     "payload"
+    ],
+    "payload": [
+     4660
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 13,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     15,
+     "payload"
+    ],
+    "payload": [
+     4660
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 15,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "payload": [
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 0,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "payload": [
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 1,
+    "word13c": 0,
+    "dword14c": 1,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "payload": [
+     3000
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 3000,
+    "word13c": 0,
+    "dword14c": 3000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "payload": [
+     305419896
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 22136,
+    "word13c": 0,
+    "dword14c": 305419896,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "payload": [
+     4294967295
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 65535,
+    "word13c": 0,
+    "dword14c": 4294967295,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "payload": [
+     85
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     2147483647,
+     "payload"
+    ],
+    "payload": [
+     85
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     2147483648,
+     "payload"
+    ],
+    "payload": [
+     85
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 2147483648,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     4294967295,
+     "payload"
+    ],
+    "payload": [
+     85
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "self": true,
+     "code": 4294967295,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "al": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "init",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     8738,
+     "payload"
+    ],
+    "terrain": {
+     "cell": 0,
+     "height_shift": 5,
+     "spacing_mask": 127
+    }
+   },
+   "events": [
+    {
+     "kind": "base_init",
+     "self": true,
+     "arg": 8738
+    },
+    {
+     "kind": "copy",
+     "self": true,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     0,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "init",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     8738,
+     "payload"
+    ],
+    "terrain": {
+     "cell": 10,
+     "height_shift": 5,
+     "spacing_mask": 127
+    }
+   },
+   "events": [
+    {
+     "kind": "base_init",
+     "self": true,
+     "arg": 8738
+    },
+    {
+     "kind": "copy",
+     "self": true,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     320,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "init",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     65000,
+     32768,
+     300
+    ],
+    "network": 0,
+    "args": [
+     8738,
+     "payload"
+    ],
+    "terrain": {
+     "cell": 240,
+     "height_shift": 4,
+     "spacing_mask": 255
+    }
+   },
+   "events": [
+    {
+     "kind": "base_init",
+     "self": true,
+     "arg": 8738
+    },
+    {
+     "kind": "copy",
+     "self": true,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     65000,
+     65280,
+     300
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "init",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     128,
+     1,
+     128
+    ],
+    "network": 0,
+    "args": [
+     8738,
+     "payload"
+    ],
+    "terrain": {
+     "cell": 127,
+     "height_shift": 5,
+     "spacing_mask": 255
+    }
+   },
+   "events": [
+    {
+     "kind": "base_init",
+     "self": true,
+     "arg": 8738
+    },
+    {
+     "kind": "copy",
+     "self": true,
+     "payload": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     128,
+     4064,
+     128
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     33333
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     33333
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 1968,
+    "word13c": 32,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 32,
+    "word13c": 5,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     33333
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 37,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 33,
+    "word13c": 5,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     33333
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 1,
+    "word13c": 37,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     33333
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 32,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 1,
+    "word13c": 65535,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     1024
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 65535,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     4294967295
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 65535,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 2,
+    "word13a": 100,
+    "word13c": 7,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     2048
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 2,
+    "word13a": 98,
+    "word13c": 9,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "byte138": 1,
+    "word13a": 5,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     1023
+    ]
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 5,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "capture",
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     1,
+     131073,
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "command",
+     "player": true,
+     "args": [
+      26,
+      0
+     ]
+    },
+    {
+     "kind": "capture",
+     "self": true,
+     "args": [
+      1,
+      131073,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 9029,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 131073,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "capture",
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     131073,
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "command",
+     "player": true,
+     "args": [
+      25,
+      0
+     ]
+    },
+    {
+     "kind": "capture",
+     "self": true,
+     "args": [
+      0,
+      131073,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "capture",
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     2,
+     196611,
+     7
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "command",
+     "player": true,
+     "args": [
+      26,
+      0
+     ]
+    },
+    {
+     "kind": "capture",
+     "self": true,
+     "args": [
+      2,
+      196611,
+      7
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 9029,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 196611,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "capture",
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     256,
+     262148,
+     1
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "command",
+     "player": true,
+     "args": [
+      25,
+      0
+     ]
+    },
+    {
+     "kind": "capture",
+     "self": true,
+     "args": [
+      256,
+      262148,
+      1
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 1,
+    "word13a": 17,
+    "word13c": 0,
+    "dword14c": 74565,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     77,
+     9,
+     153
+    ],
+    "sender": null
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 164,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     77,
+     9,
+     153
+    ],
+    "sender": null
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     77,
+     10,
+     153
+    ],
+    "sender": null
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 1,
+    "args": [
+     0,
+     77,
+     10,
+     153
+    ],
+    "sender": null
+   },
+   "events": [
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 3
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 4
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 1,
+    "word13a": 0,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 2
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 1,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 2
+    }
+   },
+   "events": [
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65673,
+     "state": 3
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 164,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     10,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 3
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0,
+     77,
+     5,
+     153
+    ],
+    "sender": null
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     "sender",
+     77,
+     11,
+     153
+    ],
+    "sender": {
+     "handle": 65672,
+     "state": 3
+    }
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 1,
+    "args": [
+     0,
+     77,
+     8,
+     153
+    ],
+    "sender": null
+   },
+   "events": [],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "death",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      65668,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "death",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 4294901761,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "state",
+     "self": true,
+     "args": [
+      0,
+      4294901761,
+      0
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "b0",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 54,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "network": 0,
+    "args": [
+     4369,
+     8738
+    ]
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      67108918,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      1000,
+      600,
+      2000,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "detonate",
+     "self": true,
+     "args": [
+      4369,
+      8738
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1000,
+     600,
+     2000
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "b0",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 55,
+    "position": [
+     65535,
+     0,
+     32768
+    ],
+    "network": 0,
+    "args": [
+     4369,
+     8738
+    ]
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      67108919,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      65535,
+      0,
+      32768,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "detonate",
+     "self": true,
+     "args": [
+      4369,
+      8738
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     65535,
+     0,
+     32768
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "b0",
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "handle": 65668,
+    "flags": 36,
+    "dword148": 0,
+    "position": [
+     1,
+     2,
+     3
+    ],
+    "network": 0,
+    "args": [
+     4369,
+     8738
+    ]
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      67108864,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      1,
+      2,
+      3,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "detonate",
+     "self": true,
+     "args": [
+      4369,
+      8738
+     ]
+    }
+   ],
+   "output": {
+    "byte138": 0,
+    "word13a": 2000,
+    "word13c": 0,
+    "dword14c": 2000,
+    "dword88": 65672,
+    "position": [
+     1,
+     2,
+     3
+    ]
+   }
+  }
+ ]
+}

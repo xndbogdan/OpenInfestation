@@ -1,0 +1,1006 @@
+{
+  "scope": "Original434C10 force phase with actual transforms,4269D0/426A50 and asin.\n\nStop before shared47B1E0 physics; physics and the later trail owner are excluded.\nNo code patches or hooks. Default compares; --write regenerates LF receipts.\n",
+  "retail_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "guards": [
+    {
+      "address": 4410384,
+      "length": 698,
+      "sha256": "c55822baa8cb5d5ed18b7b9ce6127bdbbcc50d8bb593454d5f723f5f0b205fd6"
+    },
+    {
+      "address": 4352464,
+      "length": 123,
+      "sha256": "4a16e63a225eb449c33199a2acedf80d3f40a32d9c8f9154cf9e7e8dd202f487"
+    },
+    {
+      "address": 4352592,
+      "length": 138,
+      "sha256": "3a5792c9214e707280c5f52fef357f31373c3401b35c69b1bf5df758edc406ad"
+    }
+  ],
+  "cases": [
+    {
+      "name": "ordinary",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          27,
+          54,
+          311
+        ],
+        "angular": [
+          384,
+          4294967200,
+          224
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "alternate",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 1,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          27,
+          54,
+          311
+        ],
+        "angular": [
+          512,
+          4294967200,
+          224
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "zero",
+      "input": {
+        "delta": 0,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          4294967096,
+          300
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          0,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "tiny",
+      "input": {
+        "delta": 31,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          4294967096,
+          300
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          31,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "overflow",
+      "input": {
+        "delta": 4294967295,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          16415,
+          8232,
+          50
+        ],
+        "angular": [
+          131,
+          4294967029,
+          302
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          4294967295,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "zero_controls",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          27,
+          54,
+          311
+        ],
+        "angular": [
+          4294966964,
+          16,
+          300
+        ],
+        "alternate": 0,
+        "controls": [
+          0,
+          0,
+          0
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "reverse",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          -65535,
+          32768,
+          -5000
+        ],
+        "velocity": [
+          65535,
+          32768,
+          32767
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          0,
+          35087,
+          37119
+        ],
+        "angular": [
+          4294944748,
+          2876,
+          4294964528
+        ],
+        "alternate": 0,
+        "controls": [
+          4294901761,
+          32768,
+          4294962296
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "large_controls",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          2147483647,
+          2147483648,
+          2147483647
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          27,
+          54,
+          311
+        ],
+        "angular": [
+          0,
+          0,
+          300
+        ],
+        "alternate": 0,
+        "controls": [
+          2147483647,
+          2147483648,
+          2147483647
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "zero_size",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 0,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          4294967096,
+          300
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": null
+      },
+      "trap": 4352484
+    },
+    {
+      "name": "max_size",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 65535,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          27,
+          63526,
+          32822
+        ],
+        "angular": [
+          10036,
+          4294967200,
+          224
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "up_0",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          1048576000,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1056964608,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          35,
+          172,
+          326
+        ],
+        "angular": [
+          384,
+          4294966987,
+          4294966486
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "up_bf800000",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          1048576000,
+          0,
+          0,
+          3212836864,
+          0,
+          0,
+          1056964608,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          35,
+          209,
+          331
+        ],
+        "angular": [
+          384,
+          4294965042,
+          4294962405
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "up_7fc00000",
+      "input": {
+        "delta": 65536,
+        "controls": [
+          500,
+          -300,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          100,
+          -200,
+          300
+        ],
+        "size": 512,
+        "alternate": 0,
+        "basis": [
+          0,
+          1065353216,
+          1048576000,
+          0,
+          0,
+          2143289344,
+          0,
+          0,
+          1056964608,
+          1065353216
+        ]
+      },
+      "output": {
+        "velocity": [
+          35,
+          0,
+          326
+        ],
+        "angular": [
+          384,
+          0,
+          4294962408
+        ],
+        "alternate": 0,
+        "controls": [
+          500,
+          4294966996,
+          1000
+        ],
+        "physics_args": [
+          65536,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "rotated_1",
+      "input": {
+        "delta": 1,
+        "controls": [
+          -2000,
+          4000,
+          250
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          65535,
+          4294967041,
+          200
+        ],
+        "size": 512,
+        "alternate": 1,
+        "basis": [
+          17,
+          0,
+          0,
+          1065353216,
+          1056964608,
+          1056964608,
+          1056964608,
+          3212836864,
+          0,
+          0
+        ]
+      },
+      "output": {
+        "velocity": [
+          60,
+          30,
+          80
+        ],
+        "angular": [
+          81905,
+          16370,
+          16570
+        ],
+        "alternate": 0,
+        "controls": [
+          4294965296,
+          4000,
+          250
+        ],
+        "physics_args": [
+          1,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "rotated_32768",
+      "input": {
+        "delta": 32768,
+        "controls": [
+          -2000,
+          4000,
+          250
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          65535,
+          4294967041,
+          200
+        ],
+        "size": 512,
+        "alternate": 1,
+        "basis": [
+          17,
+          0,
+          0,
+          1065353216,
+          1056964608,
+          1056964608,
+          1056964608,
+          3212836864,
+          0,
+          0
+        ]
+      },
+      "output": {
+        "velocity": [
+          65465,
+          30,
+          77
+        ],
+        "angular": [
+          79824,
+          15568,
+          13392
+        ],
+        "alternate": 0,
+        "controls": [
+          4294965296,
+          4000,
+          250
+        ],
+        "physics_args": [
+          32768,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "rotated_1234567",
+      "input": {
+        "delta": 1234567,
+        "controls": [
+          -2000,
+          4000,
+          250
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          65535,
+          4294967041,
+          200
+        ],
+        "size": 512,
+        "alternate": 1,
+        "basis": [
+          17,
+          0,
+          0,
+          1065353216,
+          1056964608,
+          1056964608,
+          1056964608,
+          3212836864,
+          0,
+          0
+        ]
+      },
+      "output": {
+        "velocity": [
+          1300,
+          63576,
+          63510
+        ],
+        "angular": [
+          140839,
+          28206,
+          26030
+        ],
+        "alternate": 0,
+        "controls": [
+          4294965296,
+          4000,
+          250
+        ],
+        "physics_args": [
+          1234567,
+          25
+        ]
+      },
+      "trap": null
+    },
+    {
+      "name": "rotated_2147483648",
+      "input": {
+        "delta": 2147483648,
+        "controls": [
+          -2000,
+          4000,
+          250
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "angular": [
+          65535,
+          4294967041,
+          200
+        ],
+        "size": 512,
+        "alternate": 1,
+        "basis": [
+          17,
+          0,
+          0,
+          1065353216,
+          1056964608,
+          1056964608,
+          1056964608,
+          3212836864,
+          0,
+          0
+        ]
+      },
+      "output": {
+        "velocity": [
+          59452,
+          10270,
+          2128
+        ],
+        "angular": [
+          81905,
+          16370,
+          16570
+        ],
+        "alternate": 0,
+        "controls": [
+          4294965296,
+          4000,
+          250
+        ],
+        "physics_args": [
+          2147483648,
+          25
+        ]
+      },
+      "trap": null
+    }
+  ]
+}

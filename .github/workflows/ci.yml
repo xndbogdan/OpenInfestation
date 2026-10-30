@@ -1,0 +1,78 @@
+name: CI
+
+# Manual only, as OpenV2K's: the free plan's Actions minutes aren't enough to
+# run on every push, so changes are validated locally before they land.
+on:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  # MSYS2's GCC 15 defaults to C23, where SDL2's bundled sources fail to compile
+  # (bool/false keywords). Local MinGW-Builds GCC 13 defaults to C17.
+  CFLAGS: -std=gnu17
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: false
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-make
+
+      - name: Put MinGW-w64 on PATH
+        shell: pwsh
+        run: Add-Content $env:GITHUB_PATH "${{ runner.temp }}\msys64\mingw64\bin"
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-gnu
+
+      - name: Select the GNU toolchain
+        shell: pwsh
+        run: |
+          rustup default stable-x86_64-pc-windows-gnu
+          rustc -vV
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: RE progress numbers are current
+        shell: pwsh
+        run: ./scripts/progress.ps1 -Check
+
+      - name: Build
+        run: cargo build --release --workspace
+
+      # Most tests read a retail installation (retail/), which CI never has, so
+      # CI only compiles them. Run them locally with the game in retail/.
+      - name: Compile tests
+        run: cargo test --release --workspace --no-run
+
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SDL2 build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends cmake \
+            libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev \
+            libxss-dev libxinerama-dev libxkbcommon-dev libwayland-dev \
+            wayland-protocols libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev \
+            libasound2-dev libpulse-dev libdbus-1-dev libudev-dev
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --release -p inf-game --features sdl2/bundled,sdl2/static-link
+
+      - name: Check every crate and target
+        run: cargo check --workspace --all-targets

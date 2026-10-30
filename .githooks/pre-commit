@@ -1,0 +1,13 @@
+#!/bin/sh
+# Regenerate RE-progress numbers and include them in this commit.
+# Enable once per clone: git config core.hooksPath .githooks
+if command -v pwsh >/dev/null 2>&1; then ps=pwsh; else ps=powershell.exe; fi
+changed=$("$ps" -NoProfile -ExecutionPolicy Bypass -File scripts/progress.ps1) || {
+    echo "pre-commit: scripts/progress.ps1 failed" >&2
+    exit 1
+}
+# PowerShell ends lines with CRLF on Windows; drop the CR before git add.
+changed=$(printf '%s\n' "$changed" | tr -d '\r')
+for file in $changed; do
+    git add -- "$file"
+done

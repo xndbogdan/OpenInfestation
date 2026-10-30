@@ -1,0 +1,1395 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original 00424AAF..00424B4A (the fire gate of the family update 00424830) from supplied entry registers, locals and actor fields; 0048D340 and 0048D5A0 are recorded boundaries; no hooks, no patched code."
+  },
+  "guard": {
+    "address": 4344495,
+    "size": 160,
+    "sha256": "3f3c8da4184fe047835dd2e5298ca08cd3b75709560e07ecae51376db4c87b62"
+  },
+  "cases": [
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": false,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 2499,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 2499,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 2500,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 2147483648,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 2147483648,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 4294967295,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 0,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 128,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 2,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 4,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 1,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 4294967295,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 5999999
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 6000000
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 4294967295
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 0,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          0,
+          0,
+          0
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          0,
+          0,
+          1
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          0,
+          0,
+          65535
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          999,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          1000,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          64536,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          64537,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          549,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          550,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          64986,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": null
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          64987,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          32768,
+          0,
+          32767
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          32767,
+          32768,
+          32767
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 1,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "scattered",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 65535,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000
+      },
+      "output": {
+        "fire": "scattered",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          -300,
+          20,
+          950
+        ],
+        "delta": 125000,
+        "flag": 1
+      }
+    },
+    {
+      "input": {
+        "behavior": true,
+        "selected": 1,
+        "entries": [
+          {
+            "count": 0,
+            "timer": 0,
+            "pressure": 0
+          },
+          {
+            "count": 3,
+            "timer": 0,
+            "pressure": 65536
+          }
+        ],
+        "status": 3,
+        "radius": 2500,
+        "timer_17a": 0,
+        "byte_22c": 1,
+        "distance": 1000,
+        "local": [
+          100,
+          20,
+          500
+        ],
+        "world": [
+          32767,
+          32768,
+          1
+        ],
+        "delta": 7
+      },
+      "output": {
+        "fire": "predictive",
+        "actor": true,
+        "target": true,
+        "distance": 1000,
+        "world": [
+          32767,
+          -32768,
+          1
+        ],
+        "delta": 7,
+        "flag": 1
+      }
+    }
+  ]
+}

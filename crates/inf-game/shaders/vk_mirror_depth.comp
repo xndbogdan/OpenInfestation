@@ -1,0 +1,73 @@
+#version 460
+// One level of the mirror's depth pyramid (vk_mirror_levels.glsl). Level
+// 0: the frame's depth less the water, so a reflected ray never meets its
+// own water; with the eye under the water (`under`) the frame's whole
+// depth, since the view out through the surface must meet what lies above
+// it, whose depth the water's pixels hold (its strips write none). A pixel
+// lying behind both its neighbours across it (left and right, above and
+// below, or either diagonal) takes the farther of them, and every surface
+// is brought a little nearer, so that a reflected ray never slips through
+// the hairline gaps and steps between retail's terrain strips; a thin
+// thing nearer than its neighbours stays. Each level after:
+// the nearest and farthest of its 2 by 2 cells below, those past the edge
+// left out.
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 1) uniform sampler2D depth_image;
+layout(set = 0, binding = 2, rgba16f) uniform readonly image2D mask_image;
+layout(set = 0, binding = 4, std430) buffer Pyramid {
+    vec2 pyramid[];
+};
+
+layout(push_constant) uniform Build {
+    ivec2 size;
+    int level;
+    int under;
+} build;
+
+#include "vk_mirror_levels.glsl"
+
+// How much nearer a surface is brought, as a share of its distance.
+const float NEARER = 0.01;
+
+float depth_at(ivec2 pixel) {
+    pixel = clamp(pixel, ivec2(0), build.size - 1);
+    return build.under == 0 && imageLoad(mask_image, pixel).a > 0.5
+        ? 1.0
+        : texelFetch(depth_image, pixel, 0).r;
+}
+
+void main() {
+    ivec2 cell = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 cells = level_size(build.size, build.level);
+    if (any(greaterThanEqual(cell, cells))) {
+        return;
+    }
+    vec2 span = vec2(1.0, 0.0);
+    if (build.level == 0) {
+        float nearest = depth_at(cell);
+        const ivec2 across[4] = ivec2[4](ivec2(1, 0), ivec2(0, 1), ivec2(1, 1), ivec2(1, -1));
+        for (int i = 0; i < 4; i++) {
+            nearest = min(nearest, max(depth_at(cell + across[i]), depth_at(cell - across[i])));
+        }
+        // The TL depth 1 - near / z of a point NEARER of its distance
+        // nearer (none for the sky's).
+        if (nearest < 1.0) {
+            nearest -= NEARER * (1.0 - nearest) / (1.0 - NEARER);
+            span = vec2(nearest);
+        }
+    } else {
+        ivec2 below = level_size(build.size, build.level - 1);
+        int from = level_offset(build.size, build.level - 1);
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 2; x++) {
+                ivec2 at = min(cell * 2 + ivec2(x, y), below - 1);
+                vec2 under = pyramid[from + at.y * below.x + at.x];
+                span = vec2(min(span.x, under.x), max(span.y, under.y));
+            }
+        }
+    }
+    pyramid[level_offset(build.size, build.level) + cell.y * cells.x + cell.x] = span;
+}

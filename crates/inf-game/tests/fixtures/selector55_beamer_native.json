@@ -1,0 +1,2740 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original 00473D70 with an empty actor list and its filter 00473EE0 over supplied objects; +5C is 00404610 or 00401300."
+ },
+ "guards": [
+  {
+   "address": 4668784,
+   "size": 366,
+   "sha256": "e824cc5ea89fd5ec14b281cda4206180f41be0b96e106b0c75080c7be83e0793"
+  },
+  {
+   "address": 4669152,
+   "size": 142,
+   "sha256": "5f85f2b2a2af58da1e382f27d59de0e04320c51dfa6acb0f721b3b4b7ab133bc"
+  }
+ ],
+ "null_handle": 2147418112,
+ "coverage": {
+  "updates": 121,
+  "scores": 60
+ },
+ "updates": [
+  {
+   "input": {
+    "charge": 0,
+    "delta": 0
+   },
+   "output": {
+    "charge": 0,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 0,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 4,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 599,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 73,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 4797,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 0,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 0
+   },
+   "output": {
+    "charge": 1,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 1,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 5,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 600,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 74,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 4798,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 1,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 0
+   },
+   "output": {
+    "charge": 20480,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 20480,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 20484,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 21079,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 20553,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 20480,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24575,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24575,
+    "receiver_13c": 3621246935,
+    "distance_140": 3621246935
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24575,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24576,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24577,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32767,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32768,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 0
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 1023
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 1024
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 125000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 16000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 1000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 2147483647
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 4294967295
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 65535,
+    "delta": 2000000000
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 3365,
+    "delta": 976892710
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 61612,
+    "delta": 994080502
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 47095,
+    "delta": 2881984162
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 64633,
+    "delta": 419947812
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 32197,
+    "delta": 2900020239
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 63169,
+    "delta": 926122561
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 56296,
+    "delta": 609013387
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 46947,
+    "delta": 4162242087
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 48999,
+    "delta": 3674353706
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 31395,
+    "delta": 1692947502
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 44290,
+    "delta": 1362167414
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 24954,
+    "delta": 4014067257
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 44807,
+    "delta": 1656781970
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 14416,
+    "delta": 3712237750
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 20235,
+    "delta": 2290089092
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 19255,
+    "delta": 107623646
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 46655,
+    "delta": 3537285957
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 55979,
+    "delta": 3829543757
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 48715,
+    "delta": 2016254172
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 6555,
+    "delta": 3825635360
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 42342,
+    "delta": 2028680892
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 29240,
+    "delta": 3714848996
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 44688,
+    "delta": 4284487376
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 43133,
+    "delta": 3849178631
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 60033,
+    "delta": 2624875571
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 2860,
+    "delta": 919272857
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 59673,
+    "delta": 1124718986
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 39300,
+    "delta": 4009559432
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 16793,
+    "delta": 1386173724
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 19173,
+    "delta": 858664302
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 4552,
+    "delta": 2935127671
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 57202,
+    "delta": 587668919
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 39457,
+    "delta": 2841710871
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 13765,
+    "delta": 931456776
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 7088,
+    "delta": 1221588441
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 19155,
+    "delta": 2674509211
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 11100,
+    "delta": 977553474
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 37804,
+    "delta": 1600635014
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 56819,
+    "delta": 1275859385
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  },
+  {
+   "input": {
+    "charge": 17584,
+    "delta": 3902206996
+   },
+   "output": {
+    "charge": 24576,
+    "receiver_13c": 2147418112,
+    "distance_140": 0
+   }
+  }
+ ],
+ "scores": [
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 50
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 50,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 50
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 50,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 50
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 50,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 50
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 50,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 100
+   },
+   "output": {
+    "score": 4294967195,
+    "receiver_13c": 2147418112,
+    "distance_140": 100,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 100
+   },
+   "output": {
+    "score": 4294967195,
+    "receiver_13c": 2147418112,
+    "distance_140": 100,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 150
+   },
+   "output": {
+    "score": 4294967145,
+    "receiver_13c": 2147418112,
+    "distance_140": 100,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 100,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 150
+   },
+   "output": {
+    "score": 4294967145,
+    "receiver_13c": 2147418112,
+    "distance_140": 100,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 0
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 0
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": false,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 100
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 100,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": false,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 100
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 0
+   },
+   "output": {
+    "score": 4294967295,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 262143
+   },
+   "output": {
+    "score": 4294705152,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 262144
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 262145
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 100
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 100
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 262144,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 19,
+    "squared": 100
+   },
+   "output": {
+    "score": 4294967195,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 0,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 0
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 616566,
+    "view": false,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 381024
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 381024,
+    "flags_2c": 268435967,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 87148,
+    "range": 610594,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 256541
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 87148,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 240096,
+    "range": 213938,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 899946
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 240096,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 347059,
+    "range": 696068,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 381845
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 347059,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 712054,
+    "range": 539269,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 970150
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 712054,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 821861,
+    "range": 495667,
+    "view": false,
+    "resource": 36,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 395371
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 821861,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 27650,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 578489
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 230310,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 581007
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 79321,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 712803
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 448433,
+    "range": 288899,
+    "view": false,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 633431
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 448433,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 15660,
+    "range": 75601,
+    "view": false,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 771563
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 15660,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 626276,
+    "range": 635570,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 696435
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 626276,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 147962,
+    "range": 371232,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 562515
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 147962,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 796930,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 396627
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 339148,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 560364
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 560364,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 113841,
+    "view": false,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 1042136
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 1042136,
+    "flags_2c": 268435967,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 71820,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 27065
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 945133,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 101888
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 6956,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 927835
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 927835,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 467211,
+    "range": 291187,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 614996
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 467211,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 365983,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 572914
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 609795,
+    "range": 954936,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 441436
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 609795,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 832897,
+    "range": 13742,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 378665
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 832897,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 484170,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 240956
+   },
+   "output": {
+    "score": 4294726339,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 806761,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 639096
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 639096,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 996420,
+    "range": 966274,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 492783
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 996420,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 543179,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 273492
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 311776,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 231493
+   },
+   "output": {
+    "score": 4294735802,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 823405,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 288883
+   },
+   "output": {
+    "score": 4294678412,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 335299,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 333684
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 333684,
+    "flags_2c": 268435967,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 620486,
+    "range": 72912,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 378846
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 620486,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 35734,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 483551
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 1033221,
+    "range": 979636,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 856667
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 1033221,
+    "flags_2c": 511,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 511,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 584238,
+    "range": 287936,
+    "view": true,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 288895
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 288895,
+    "flags_2c": 268435967,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 825418,
+    "range": 849905,
+    "view": false,
+    "resource": 37,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 953730
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 825418,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 169850,
+    "view": true,
+    "resource": 36,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 18,
+    "squared": 830869
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 69449,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 497800
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 290967,
+    "range": 111113,
+    "view": true,
+    "resource": 38,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 327124
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 290967,
+    "flags_2c": 64,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 268435520,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 748671,
+    "view": true,
+    "resource": 18,
+    "candidate_6c": 8,
+    "handle": 805634049,
+    "team": 2,
+    "squared": 102995
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 2147418112,
+    "distance_140": 0,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  },
+  {
+   "input": {
+    "flags": 64,
+    "dirty": 0,
+    "beamer_6c": 7,
+    "receiver": 2147418112,
+    "distance": 0,
+    "range": 708233,
+    "view": false,
+    "resource": 37,
+    "candidate_6c": 7,
+    "handle": 805634049,
+    "team": 1,
+    "squared": 617440
+   },
+   "output": {
+    "score": 0,
+    "receiver_13c": 805634049,
+    "distance_140": 617440,
+    "flags_2c": 268435520,
+    "dirty_38": 0
+   }
+  }
+ ]
+}

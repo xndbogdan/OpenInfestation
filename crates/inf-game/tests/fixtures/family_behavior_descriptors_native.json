@@ -1,0 +1,7056 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "profiles": [
+    {
+      "name": "family-mode0",
+      "table": 5441344,
+      "count": 3,
+      "wrapper_vtable": 5377540,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5532272,
+          "vtable_address": 5376700,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": 4454912
+        },
+        {
+          "index": 1,
+          "object_address": 5532280,
+          "vtable_address": 5376720,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": 4454912
+        },
+        {
+          "index": 2,
+          "object_address": 5532260,
+          "vtable_address": 5376880,
+          "score_address": 4349424,
+          "change_address": 4349440,
+          "update_address": 4349472,
+          "duration_address": 4454912
+        }
+      ]
+    },
+    {
+      "name": "family-mode1",
+      "table": 5441356,
+      "count": 8,
+      "wrapper_vtable": 5377540,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5532272,
+          "vtable_address": 5376700,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": 4454912
+        },
+        {
+          "index": 1,
+          "object_address": 5532280,
+          "vtable_address": 5376720,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": 4454912
+        },
+        {
+          "index": 2,
+          "object_address": 5532256,
+          "vtable_address": 5376740,
+          "score_address": 4455104,
+          "change_address": 4455168,
+          "update_address": 4411696,
+          "duration_address": 4454912
+        },
+        {
+          "index": 3,
+          "object_address": 5532276,
+          "vtable_address": 5376760,
+          "score_address": 4455200,
+          "change_address": 4411728,
+          "update_address": 4411760,
+          "duration_address": 4454912
+        },
+        {
+          "index": 4,
+          "object_address": 5532268,
+          "vtable_address": 5376780,
+          "score_address": 4455264,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": 4455488
+        },
+        {
+          "index": 5,
+          "object_address": 5532288,
+          "vtable_address": 5376800,
+          "score_address": 4349360,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": 4455392
+        },
+        {
+          "index": 6,
+          "object_address": 5532232,
+          "vtable_address": 5376820,
+          "score_address": 4411824,
+          "change_address": 4455424,
+          "update_address": 4455456,
+          "duration_address": 4455488
+        },
+        {
+          "index": 7,
+          "object_address": 5532284,
+          "vtable_address": 5376840,
+          "score_address": 4454976,
+          "change_address": 4455040,
+          "update_address": 4455072,
+          "duration_address": 4454912
+        }
+      ]
+    },
+    {
+      "name": "family-mode2",
+      "table": 5441388,
+      "count": 9,
+      "wrapper_vtable": 5377540,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5532272,
+          "vtable_address": 5376700,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": 4454912
+        },
+        {
+          "index": 1,
+          "object_address": 5532280,
+          "vtable_address": 5376720,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": 4454912
+        },
+        {
+          "index": 2,
+          "object_address": 5532256,
+          "vtable_address": 5376740,
+          "score_address": 4455104,
+          "change_address": 4455168,
+          "update_address": 4411696,
+          "duration_address": 4454912
+        },
+        {
+          "index": 3,
+          "object_address": 5532276,
+          "vtable_address": 5376760,
+          "score_address": 4455200,
+          "change_address": 4411728,
+          "update_address": 4411760,
+          "duration_address": 4454912
+        },
+        {
+          "index": 4,
+          "object_address": 5532268,
+          "vtable_address": 5376780,
+          "score_address": 4455264,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": 4455488
+        },
+        {
+          "index": 5,
+          "object_address": 5532288,
+          "vtable_address": 5376800,
+          "score_address": 4349360,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": 4455392
+        },
+        {
+          "index": 6,
+          "object_address": 5532232,
+          "vtable_address": 5376820,
+          "score_address": 4411824,
+          "change_address": 4455424,
+          "update_address": 4455456,
+          "duration_address": 4455488
+        },
+        {
+          "index": 7,
+          "object_address": 5532284,
+          "vtable_address": 5376840,
+          "score_address": 4454976,
+          "change_address": 4455040,
+          "update_address": 4455072,
+          "duration_address": 4454912
+        },
+        {
+          "index": 8,
+          "object_address": 5532252,
+          "vtable_address": 5376860,
+          "score_address": 4349232,
+          "change_address": 4349296,
+          "update_address": 4349328,
+          "duration_address": 4454912
+        }
+      ]
+    },
+    {
+      "name": "selector12-absent",
+      "table": 5480600,
+      "count": 8,
+      "wrapper_vtable": 5403052,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5565648,
+          "vtable_address": 5402568,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": null
+        },
+        {
+          "index": 1,
+          "object_address": 5565656,
+          "vtable_address": 5402584,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": null
+        },
+        {
+          "index": 2,
+          "object_address": 5565632,
+          "vtable_address": 5402600,
+          "score_address": 4624688,
+          "change_address": 4624752,
+          "update_address": 4411760,
+          "duration_address": null
+        },
+        {
+          "index": 3,
+          "object_address": 5565652,
+          "vtable_address": 5402616,
+          "score_address": 4455200,
+          "change_address": 4624880,
+          "update_address": 4624912,
+          "duration_address": null
+        },
+        {
+          "index": 4,
+          "object_address": 5565664,
+          "vtable_address": 5402632,
+          "score_address": 4624784,
+          "change_address": 4624848,
+          "update_address": 4349328,
+          "duration_address": null
+        },
+        {
+          "index": 5,
+          "object_address": 5565644,
+          "vtable_address": 5402648,
+          "score_address": 4624944,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": null
+        },
+        {
+          "index": 6,
+          "object_address": 5565660,
+          "vtable_address": 5402664,
+          "score_address": 4625008,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": null
+        },
+        {
+          "index": 7,
+          "object_address": 5565640,
+          "vtable_address": 5402680,
+          "score_address": 4625072,
+          "change_address": 4625136,
+          "update_address": 4625168,
+          "duration_address": null
+        }
+      ]
+    },
+    {
+      "name": "selector12-present",
+      "table": 5480632,
+      "count": 9,
+      "wrapper_vtable": 5403052,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5565648,
+          "vtable_address": 5402568,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": null
+        },
+        {
+          "index": 1,
+          "object_address": 5565656,
+          "vtable_address": 5402584,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": null
+        },
+        {
+          "index": 2,
+          "object_address": 5565632,
+          "vtable_address": 5402600,
+          "score_address": 4624688,
+          "change_address": 4624752,
+          "update_address": 4411760,
+          "duration_address": null
+        },
+        {
+          "index": 3,
+          "object_address": 5565652,
+          "vtable_address": 5402616,
+          "score_address": 4455200,
+          "change_address": 4624880,
+          "update_address": 4624912,
+          "duration_address": null
+        },
+        {
+          "index": 4,
+          "object_address": 5565636,
+          "vtable_address": 5402696,
+          "score_address": 4625200,
+          "change_address": 4455168,
+          "update_address": 4411696,
+          "duration_address": null
+        },
+        {
+          "index": 5,
+          "object_address": 5565664,
+          "vtable_address": 5402632,
+          "score_address": 4624784,
+          "change_address": 4624848,
+          "update_address": 4349328,
+          "duration_address": null
+        },
+        {
+          "index": 6,
+          "object_address": 5565644,
+          "vtable_address": 5402648,
+          "score_address": 4624944,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": null
+        },
+        {
+          "index": 7,
+          "object_address": 5565660,
+          "vtable_address": 5402664,
+          "score_address": 4625008,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": null
+        },
+        {
+          "index": 8,
+          "object_address": 5565640,
+          "vtable_address": 5402680,
+          "score_address": 4625072,
+          "change_address": 4625136,
+          "update_address": 4625168,
+          "duration_address": null
+        }
+      ]
+    },
+    {
+      "name": "selector35",
+      "table": 5455160,
+      "count": 12,
+      "wrapper_vtable": 5384312,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5535300,
+          "vtable_address": 5383756,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": 4454912
+        },
+        {
+          "index": 1,
+          "object_address": 5535312,
+          "vtable_address": 5383776,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": 4454912
+        },
+        {
+          "index": 2,
+          "object_address": 5535284,
+          "vtable_address": 5383796,
+          "score_address": 4455104,
+          "change_address": 4455168,
+          "update_address": 4411696,
+          "duration_address": 4454912
+        },
+        {
+          "index": 3,
+          "object_address": 5535308,
+          "vtable_address": 5383816,
+          "score_address": 4455200,
+          "change_address": 4411728,
+          "update_address": 4411760,
+          "duration_address": 4454912
+        },
+        {
+          "index": 4,
+          "object_address": 5535296,
+          "vtable_address": 5383836,
+          "score_address": 4455264,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": 4455488
+        },
+        {
+          "index": 5,
+          "object_address": 5535324,
+          "vtable_address": 5383856,
+          "score_address": 4349360,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": 4455392
+        },
+        {
+          "index": 6,
+          "object_address": 5535272,
+          "vtable_address": 5383876,
+          "score_address": 4411824,
+          "change_address": 4455424,
+          "update_address": 4455456,
+          "duration_address": 4455488
+        },
+        {
+          "index": 7,
+          "object_address": 5535280,
+          "vtable_address": 5383896,
+          "score_address": 4455520,
+          "change_address": 4455584,
+          "update_address": 4455616,
+          "duration_address": 4454912
+        },
+        {
+          "index": 8,
+          "object_address": 5535320,
+          "vtable_address": 5383916,
+          "score_address": 4454976,
+          "change_address": 4455040,
+          "update_address": 4455072,
+          "duration_address": 4454912
+        },
+        {
+          "index": 9,
+          "object_address": 5535292,
+          "vtable_address": 5383936,
+          "score_address": 4455648,
+          "change_address": 4411936,
+          "update_address": 4455712,
+          "duration_address": 4454912
+        },
+        {
+          "index": 10,
+          "object_address": 5535304,
+          "vtable_address": 5383956,
+          "score_address": 4455744,
+          "change_address": 4455808,
+          "update_address": 4455840,
+          "duration_address": 4454912
+        },
+        {
+          "index": 11,
+          "object_address": 5535316,
+          "vtable_address": 5383976,
+          "score_address": 4455872,
+          "change_address": 4455936,
+          "update_address": 4455968,
+          "duration_address": 4454912
+        }
+      ]
+    },
+    {
+      "name": "selector34",
+      "table": 5450232,
+      "count": 8,
+      "wrapper_vtable": 5382112,
+      "descriptors": [
+        {
+          "index": 0,
+          "object_address": 5532472,
+          "vtable_address": 5381644,
+          "score_address": 4625264,
+          "change_address": 4625280,
+          "update_address": 4625312,
+          "duration_address": 4454912
+        },
+        {
+          "index": 1,
+          "object_address": 5532480,
+          "vtable_address": 5381664,
+          "score_address": 4625264,
+          "change_address": 4456000,
+          "update_address": 4411968,
+          "duration_address": 4454912
+        },
+        {
+          "index": 2,
+          "object_address": 5532460,
+          "vtable_address": 5381684,
+          "score_address": 4455104,
+          "change_address": 4455168,
+          "update_address": 4411696,
+          "duration_address": 4454912
+        },
+        {
+          "index": 3,
+          "object_address": 5532476,
+          "vtable_address": 5381704,
+          "score_address": 4455200,
+          "change_address": 4411728,
+          "update_address": 4411760,
+          "duration_address": 4454912
+        },
+        {
+          "index": 4,
+          "object_address": 5532468,
+          "vtable_address": 5381724,
+          "score_address": 4455264,
+          "change_address": 4455328,
+          "update_address": 4455360,
+          "duration_address": 4455488
+        },
+        {
+          "index": 5,
+          "object_address": 5532484,
+          "vtable_address": 5381744,
+          "score_address": 4349360,
+          "change_address": 4411792,
+          "update_address": 4204240,
+          "duration_address": 4455392
+        },
+        {
+          "index": 6,
+          "object_address": 5532456,
+          "vtable_address": 5381764,
+          "score_address": 4411824,
+          "change_address": 4455424,
+          "update_address": 4455456,
+          "duration_address": 4455488
+        },
+        {
+          "index": 7,
+          "object_address": 5532464,
+          "vtable_address": 5381784,
+          "score_address": 4411872,
+          "change_address": 4411936,
+          "update_address": 4455712,
+          "duration_address": 4454912
+        }
+      ]
+    }
+  ],
+  "durations": [
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode0",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode0",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode0",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode0",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode0",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 1500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 1500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 2024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 2024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 2548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 2548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode1",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 1500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 1500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 2024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 2024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 2548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 2548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "family-mode2",
+      "index": 8,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-absent",
+      "index": 2147483647,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 8,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 1964316065,
+      "result": 4000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 4051309985,
+      "result": 4000032,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 2024805793,
+      "result": 5048544,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 4111799713,
+      "result": 5048576,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 2085295521,
+      "result": 6097088,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector12-present",
+      "index": 2147483647,
+      "rng": 4172289441,
+      "result": 6097120,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 1500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 1500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 2024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 2024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 2548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 2548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 8,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 9,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 10,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector35",
+      "index": 11,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": -2147483648,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": -1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 0,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 1,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 2,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 3,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 4,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 1964316065,
+      "result": 1500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 4051309985,
+      "result": 1500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 2024805793,
+      "result": 2024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 4111799713,
+      "result": 2024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 2085295521,
+      "result": 2548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 5,
+      "rng": 4172289441,
+      "result": 2548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 1964316065,
+      "result": 500000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 4051309985,
+      "result": 500016,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 2024805793,
+      "result": 1024272,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 4111799713,
+      "result": 1024288,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 2085295521,
+      "result": 1548544,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 6,
+      "rng": 4172289441,
+      "result": 1548560,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 1964316065,
+      "result": 3000000,
+      "events": [
+        {
+          "value": 0,
+          "rng": 0
+        }
+      ],
+      "final_rng": 0
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 4051309985,
+      "result": 3000064,
+      "events": [
+        {
+          "value": 1,
+          "rng": 65536
+        }
+      ],
+      "final_rng": 65536
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 2024805793,
+      "result": 5097088,
+      "events": [
+        {
+          "value": 32767,
+          "rng": 2147418112
+        }
+      ],
+      "final_rng": 2147418112
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 4111799713,
+      "result": 5097152,
+      "events": [
+        {
+          "value": 32768,
+          "rng": 2147483648
+        }
+      ],
+      "final_rng": 2147483648
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 2085295521,
+      "result": 7194176,
+      "events": [
+        {
+          "value": 65534,
+          "rng": 4294836224
+        }
+      ],
+      "final_rng": 4294836224
+    },
+    {
+      "profile": "selector34",
+      "index": 7,
+      "rng": 4172289441,
+      "result": 7194240,
+      "events": [
+        {
+          "value": 65535,
+          "rng": 4294901760
+        }
+      ],
+      "final_rng": 4294901760
+    }
+  ],
+  "entry_prefixes": [
+    {
+      "profile": "family-mode0",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          3,
+          5441344,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode0",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 0,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 0
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          3,
+          5441344,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode0",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 4294967295,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 4294967295
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          3,
+          5441344,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode1",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          8,
+          5441356,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode1",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 0,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 0
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          8,
+          5441356,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode1",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 4294967295,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 4294967295
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          8,
+          5441356,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode2",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          9,
+          5441388,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode2",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 0,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 0
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          9,
+          5441388,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "family-mode2",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 4294967295,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 4294967295
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5377540,
+          9,
+          5441388,
+          7487488
+        ],
+        "periodic": [
+          5377556,
+          3,
+          5441456,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-absent",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          8,
+          5480600,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-absent",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 0,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          8,
+          5480600,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-absent",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 4294967295,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          8,
+          5480600,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-present",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          9,
+          5480632,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-present",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 0,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 0
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          9,
+          5480632,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector12-present",
+      "microseconds": 40000,
+      "timer": 0,
+      "helper": 4294967295,
+      "events": [
+        {
+          "kind": "helper",
+          "count": 4294967295
+        }
+      ],
+      "boundary": {
+        "descriptor": [
+          5403052,
+          9,
+          5480632,
+          7487488
+        ],
+        "periodic": [
+          5403048,
+          5,
+          5480672,
+          7487488
+        ],
+        "microseconds": 40000,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 1,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 1,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 9,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 9,
+        "timer": 1,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 10,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 10,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 11,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 11,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 1,
+      "timer": 4294967295,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 1,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 2147483647,
+      "timer": 2147483648,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 2147483647,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 4294967295,
+      "timer": 1,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 4294967295,
+        "timer": 2,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector35",
+      "microseconds": 4294967294,
+      "timer": 4294967295,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5384312,
+          12,
+          5455160,
+          7487488
+        ],
+        "periodic": [
+          5384308,
+          3,
+          5455232,
+          7487488
+        ],
+        "microseconds": 4294967294,
+        "timer": 1,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 1,
+      "timer": 0,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 1,
+        "timer": 0,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 9,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 9,
+        "timer": 1,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 10,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 10,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 11,
+      "timer": 10,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 11,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 1,
+      "timer": 4294967295,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 1,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 2147483647,
+      "timer": 2147483648,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 2147483647,
+        "timer": 0,
+        "target": 305419896
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 4294967295,
+      "timer": 1,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 4294967295,
+        "timer": 2,
+        "target": 2271560481
+      }
+    },
+    {
+      "profile": "selector34",
+      "microseconds": 4294967294,
+      "timer": 4294967295,
+      "helper": null,
+      "events": [],
+      "boundary": {
+        "descriptor": [
+          5382112,
+          8,
+          5450232,
+          7487488
+        ],
+        "periodic": [
+          5382108,
+          3,
+          5450272,
+          7487488
+        ],
+        "microseconds": 4294967294,
+        "timer": 1,
+        "target": 2271560481
+      }
+    }
+  ]
+}

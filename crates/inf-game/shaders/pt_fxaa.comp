@@ -1,0 +1,113 @@
+#version 460
+// FXAA over the world's colour, traced or the raster's, before the HUD (the
+// raster's later draws stay sharp): edges found by luma contrast, then
+// blended along them, after Timothy Lottes' FXAA 3.11 quality preset.
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 1, rgba16f) uniform readonly image2D color_image;
+layout(set = 0, binding = 4, rgba16f) uniform writeonly image2D color_out;
+
+const float EDGE_THRESHOLD = 0.125;
+const float EDGE_THRESHOLD_MIN = 0.0312;
+const float SUBPIXEL = 0.75;
+const int SEARCH_STEPS = 10;
+
+ivec2 size;
+
+vec3 fetch(ivec2 pixel) {
+    return imageLoad(color_image, clamp(pixel, ivec2(0), size - 1)).rgb;
+}
+
+float luma(vec3 color) {
+    return dot(color, vec3(0.299, 0.587, 0.114));
+}
+
+// Bilinear between texels along a fractional position, for the edge walk.
+vec3 sample_at(vec2 position) {
+    vec2 base = floor(position - 0.5);
+    vec2 f = position - 0.5 - base;
+    ivec2 b = ivec2(base);
+    return mix(mix(fetch(b), fetch(b + ivec2(1, 0)), f.x),
+               mix(fetch(b + ivec2(0, 1)), fetch(b + ivec2(1, 1)), f.x), f.y);
+}
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    size = imageSize(color_image);
+    if (pixel.x >= size.x || pixel.y >= size.y) {
+        return;
+    }
+    vec3 centre = fetch(pixel);
+    float m = luma(centre);
+    float n = luma(fetch(pixel + ivec2(0, -1)));
+    float s = luma(fetch(pixel + ivec2(0, 1)));
+    float w = luma(fetch(pixel + ivec2(-1, 0)));
+    float e = luma(fetch(pixel + ivec2(1, 0)));
+    float highest = max(m, max(max(n, s), max(w, e)));
+    float lowest = min(m, min(min(n, s), min(w, e)));
+    float range = highest - lowest;
+    if (range < max(EDGE_THRESHOLD_MIN, highest * EDGE_THRESHOLD)) {
+        imageStore(color_out, pixel, vec4(centre, 1.0));
+        return;
+    }
+    float nw = luma(fetch(pixel + ivec2(-1, -1)));
+    float ne = luma(fetch(pixel + ivec2(1, -1)));
+    float sw = luma(fetch(pixel + ivec2(-1, 1)));
+    float se = luma(fetch(pixel + ivec2(1, 1)));
+
+    // How far the centre stands out of its neighbourhood: the subpixel blend.
+    float average = (2.0 * (n + s + w + e) + nw + ne + sw + se) / 12.0;
+    float subpixel = clamp(abs(average - m) / range, 0.0, 1.0);
+    subpixel = smoothstep(0.0, 1.0, subpixel);
+    subpixel = subpixel * subpixel * SUBPIXEL;
+
+    // The edge's direction, and which side of the centre it lies on.
+    float horizontal = abs(nw + sw - 2.0 * w) + 2.0 * abs(n + s - 2.0 * m) + abs(ne + se - 2.0 * e);
+    float vertical = abs(nw + ne - 2.0 * n) + 2.0 * abs(w + e - 2.0 * m) + abs(sw + se - 2.0 * s);
+    bool is_horizontal = horizontal >= vertical;
+    float positive = is_horizontal ? s : e;
+    float negative = is_horizontal ? n : w;
+    float positive_gradient = abs(positive - m);
+    float negative_gradient = abs(negative - m);
+    bool towards_positive = positive_gradient >= negative_gradient;
+    float gradient = max(positive_gradient, negative_gradient);
+    float edge_luma = 0.5 * (m + (towards_positive ? positive : negative));
+    vec2 step_across = is_horizontal ? vec2(0.0, 1.0) : vec2(1.0, 0.0);
+    vec2 step_along = is_horizontal ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec2 edge = vec2(pixel) + 0.5 + step_across * (towards_positive ? 0.5 : -0.5);
+
+    // Walk both ways along the edge until its luma leaves the edge's.
+    float threshold = gradient * 0.25;
+    vec2 forward = edge + step_along;
+    vec2 backward = edge - step_along;
+    float forward_delta = luma(sample_at(forward)) - edge_luma;
+    float backward_delta = luma(sample_at(backward)) - edge_luma;
+    bool forward_done = abs(forward_delta) >= threshold;
+    bool backward_done = abs(backward_delta) >= threshold;
+    for (int i = 0; i < SEARCH_STEPS && !(forward_done && backward_done); i++) {
+        float stride = i < 4 ? 1.0 : 2.0;
+        if (!forward_done) {
+            forward += step_along * stride;
+            forward_delta = luma(sample_at(forward)) - edge_luma;
+            forward_done = abs(forward_delta) >= threshold;
+        }
+        if (!backward_done) {
+            backward -= step_along * stride;
+            backward_delta = luma(sample_at(backward)) - edge_luma;
+            backward_done = abs(backward_delta) >= threshold;
+        }
+    }
+    float to_forward = dot(forward - (vec2(pixel) + 0.5), step_along);
+    float to_backward = dot((vec2(pixel) + 0.5) - backward, step_along);
+    bool nearer_forward = to_forward < to_backward;
+    float nearest = min(to_forward, to_backward);
+    float length_along = to_forward + to_backward;
+    // Only blend towards the end whose luma moves the way the centre does.
+    bool centre_below = m - edge_luma < 0.0;
+    bool end_below = (nearer_forward ? forward_delta : backward_delta) < 0.0;
+    float edge_offset = centre_below != end_below ? 0.5 - nearest / length_along : 0.0;
+    float offset = max(edge_offset, subpixel);
+    vec2 position = vec2(pixel) + 0.5 + step_across * (towards_positive ? offset : -offset);
+    imageStore(color_out, pixel, vec4(sample_at(position), 1.0));
+}

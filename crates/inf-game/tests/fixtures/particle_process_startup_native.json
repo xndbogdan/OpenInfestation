@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "execution": "static_original_bytes",
+  "body_execution_count": 0,
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "text_sha256": "403045b1d532f4dc9204801635a83356126bc5b9cd84d2cf771b834c671cb2a2",
+  "pe_profile": {
+    "machine": 332,
+    "optional_magic": 267,
+    "image_base": 4194304,
+    "image_size": 2600960,
+    "section_count": 6,
+    "header_guard": {
+      "file_offset": 232,
+      "bytes_count": 488,
+      "sha256": "10031f2fe3d057eca09c7ae5cb9766191c38447a1a8dd46a0a9982fb567ffe85"
+    },
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_address": 4198400,
+        "rva": 4096,
+        "virtual_size": 1168501,
+        "raw_size": 1171456,
+        "file_offset": 4096
+      },
+      {
+        "name": ".rdata",
+        "virtual_address": 5369856,
+        "rva": 1175552,
+        "virtual_size": 57392,
+        "raw_size": 61440,
+        "file_offset": 1175552
+      },
+      {
+        "name": ".data",
+        "virtual_address": 5431296,
+        "rva": 1236992,
+        "virtual_size": 1256504,
+        "raw_size": 102400,
+        "file_offset": 1236992
+      },
+      {
+        "name": ".idata",
+        "virtual_address": 6688768,
+        "rva": 2494464,
+        "virtual_size": 4164,
+        "raw_size": 8192,
+        "file_offset": 1339392
+      },
+      {
+        "name": ".rsrc",
+        "virtual_address": 6696960,
+        "rva": 2502656,
+        "virtual_size": 9768,
+        "raw_size": 12288,
+        "file_offset": 1347584
+      },
+      {
+        "name": ".reloc",
+        "virtual_address": 6709248,
+        "rva": 2514944,
+        "virtual_size": 82228,
+        "raw_size": 86016,
+        "file_offset": 1359872
+      }
+    ]
+  },
+  "scope": "initial loader DWORD custody and fifteen bounded original source guards only",
+  "exclusions": [
+    "no native instruction/body/constructor execution",
+    "no global immutability or exhaustive247-reference proof",
+    "no arbitrary computed pointer aliases or DF1 bulk-copy admission",
+    "no complete network/CRT/game startup acceptance",
+    "no virtual-zero mapping added to file-backed authored-data API",
+    "no production particle birth registry-null source migration"
+  ],
+  "field_count": 2,
+  "fields": [
+    {
+      "name": "process_null_handle",
+      "address": 5564564,
+      "width": 4,
+      "section": ".data",
+      "section_address": 5431296,
+      "section_relative": 133268,
+      "section_relative_end": 133272,
+      "raw_size": 102400,
+      "virtual_size": 1256504,
+      "raw_backing_end": 5533696,
+      "virtual_end": 6687800,
+      "provenance": "loader_virtual_zero_tail",
+      "initial_value": 0,
+      "overlapping_relocations": []
+    },
+    {
+      "name": "network_flag",
+      "address": 5633096,
+      "width": 4,
+      "section": ".data",
+      "section_address": 5431296,
+      "section_relative": 201800,
+      "section_relative_end": 201804,
+      "raw_size": 102400,
+      "virtual_size": 1256504,
+      "raw_backing_end": 5533696,
+      "virtual_end": 6687800,
+      "provenance": "loader_virtual_zero_tail",
+      "initial_value": 0,
+      "overlapping_relocations": []
+    }
+  ],
+  "relocation_directory": {
+    "address": 6709248,
+    "rva": 2514944,
+    "file_offset": 1359872,
+    "bytes_count": 73836,
+    "sha256": "4f57621480944f5f4da2d781a1a024cdd73b8e27edd781e8083ab76a471fa593",
+    "parsed_bytes": 73836,
+    "block_count": 323,
+    "entry_type_counts": {
+      "0": 179,
+      "3": 35447
+    },
+    "supported_types": [
+      {
+        "kind": 0,
+        "name": "ABSOLUTE",
+        "write_width": 0
+      },
+      {
+        "kind": 3,
+        "name": "HIGHLOW",
+        "write_width": 4
+      }
+    ]
+  },
+  "code_guard_count": 15,
+  "code_guard_bytes": 446,
+  "code_guards": [
+    {
+      "name": "network-reset-prefix",
+      "start": 4798032,
+      "end": 4798057,
+      "bytes_count": 25,
+      "file_offset": 603728,
+      "sha256": "a8f21f8d1b9ec15b1ee70ab6987a62da2d4f23e9f4568f24488b58de7539ff2d",
+      "policy": "0049365E zeroes ESI;00493663 stores DWORD0 at0055F448 before conditional external cleanup"
+    },
+    {
+      "name": "network-init-calls-reset",
+      "start": 4800400,
+      "end": 4800415,
+      "bytes_count": 15,
+      "file_offset": 606096,
+      "sha256": "d9a8a93bbf1ce88d87dfc285d739e8c3dd766333d04ad7252652caa221e370f6",
+      "policy": "00493F9A calls00493650; bounded network-acquisition prefix, not complete startup"
+    },
+    {
+      "name": "network-publish-one",
+      "start": 4797589,
+      "end": 4797599,
+      "bytes_count": 10,
+      "file_offset": 603285,
+      "sha256": "b0ea70035064824b343b08606adf3647373ff0f22da1d8e503f9ae3d74fc32d9",
+      "policy": "00493495 writes DWORD1 at0055F448; initial0 is not a permanent consumer constant"
+    },
+    {
+      "name": "settings-copy-leaf",
+      "start": 4602512,
+      "end": 4602534,
+      "bytes_count": 22,
+      "file_offset": 408208,
+      "sha256": "d4e20b03e3fb4d908f06945f16744ff6883a8bf7ab219284a1f9f7bcb2829bde",
+      "policy": "complete leaf copies34DWORDs00538CD0 to0054E8A8 under clear-DF ABI"
+    },
+    {
+      "name": "settings-restore-copy-prefix",
+      "start": 4603003,
+      "end": 4603042,
+      "bytes_count": 39,
+      "file_offset": 408699,
+      "sha256": "3bfa44af085b10611f7000c88edcce498670b759b4af11847cd35647d344d24e",
+      "policy": "bounded forward restore and two retained-field stores remain above0054E894"
+    },
+    {
+      "name": "registry-config-window",
+      "start": 4596624,
+      "end": 4596667,
+      "bytes_count": 43,
+      "file_offset": 402320,
+      "sha256": "b6d13e6106998a66d0e5f27f2f60c4ac6350ab34b2b5c67bf4b19655a5fa0c80",
+      "policy": "00462393 supplies destination0054E888 to00495940; direct config writes0054E88C/890"
+    },
+    {
+      "name": "allocator-pointer-leaf",
+      "start": 4806976,
+      "end": 4807013,
+      "bytes_count": 37,
+      "file_offset": 612672,
+      "sha256": "6d4d2fa7277300a40090fff122e16731083b1a683382345e5dc7aa07d7439958",
+      "policy": "complete leaf writes only destinationDWORD at00495947/956; allocation lower body is unowned"
+    },
+    {
+      "name": "null-value-fallback0",
+      "start": 4471184,
+      "end": 4471202,
+      "bytes_count": 18,
+      "file_offset": 276880,
+      "sha256": "c2dc3fd4d589ac716258550f571de0db287a14f2b8466d5dd30267f84de49b00",
+      "policy": "0044399B reads DWORD[0054E894] before payload+10 value store"
+    },
+    {
+      "name": "null-value-fallback1",
+      "start": 4471246,
+      "end": 4471267,
+      "bytes_count": 21,
+      "file_offset": 276942,
+      "sha256": "d69988784c788c07f5c338e01552d7126b327ca83b9e3c960f4fef9bd9f51f13",
+      "policy": "004439D9 dereferences NULL address before retained-array value store"
+    },
+    {
+      "name": "null-value-fallback2",
+      "start": 4471324,
+      "end": 4471345,
+      "bytes_count": 21,
+      "file_offset": 277020,
+      "sha256": "0555692d94b2f87d995a199c9ed80e3389c7ef4f05ef764ce1855087140f526e",
+      "policy": "00443A27 dereferences NULL address before retained-array value store"
+    },
+    {
+      "name": "null-value-fallback3",
+      "start": 4471402,
+      "end": 4471423,
+      "bytes_count": 21,
+      "file_offset": 277098,
+      "sha256": "4d3dab4c01668aec23531b529224a93622611c3a86acb9cb06d507f93de692ce",
+      "policy": "00443A75 dereferences NULL address before retained-array value store"
+    },
+    {
+      "name": "null-value-to-actor16c",
+      "start": 4678912,
+      "end": 4678925,
+      "bytes_count": 13,
+      "file_offset": 484608,
+      "sha256": "2f85b382ad1e700046073075e92ff20e14ccaf8d46b0a18d88bb90423fbd990e",
+      "policy": "00476505 reads DWORD[0054E894] then stores VALUE at actor+16C"
+    },
+    {
+      "name": "session-owner-getter",
+      "start": 4428208,
+      "end": 4428214,
+      "bytes_count": 6,
+      "file_offset": 233904,
+      "sha256": "1214fde4371880e5b9ef3d887378d1907f5d0d34a321544615a7840419c65700",
+      "policy": "complete getter returns session pointer00546F2C; no separate BSS phase value"
+    },
+    {
+      "name": "allocator-network-phase-prefix",
+      "start": 4607696,
+      "end": 4607724,
+      "bytes_count": 28,
+      "file_offset": 413392,
+      "sha256": "21c620558b7ea77cdd535de316db11f0b79620aea4cdeca955c95555a5a43b20",
+      "policy": "nonzero0055F448 skips phase; offline calls004391B0 then reads actual session+64C"
+    },
+    {
+      "name": "resolver-cache-leaf",
+      "start": 4596112,
+      "end": 4596239,
+      "bytes_count": 127,
+      "file_offset": 401808,
+      "sha256": "2b2aca8473232d0d8f7ca4c7d9f080a1cbadddda0c26b210f4a397e37cbcc207",
+      "policy": "complete resolver leaf writes cache0054E880/884; neither overlaps processNULL"
+    }
+  ],
+  "source_guard_count": 1,
+  "source_guards": [
+    {
+      "name": "settings-source",
+      "address": 5475536,
+      "end": 5475672,
+      "file_offset": 1281232,
+      "bytes_count": 136,
+      "sha256": "6d9d09b985793c0f448c2036f95f1280fe642c2db4032ed35f05f468765e4122"
+    }
+  ],
+  "bounded_storage_intervals": {
+    "settings_copy": {
+      "start": 5564584,
+      "end": 5564720,
+      "requires": "clearDF"
+    },
+    "registry_pointer_write": {
+      "start": 5564552,
+      "end": 5564556
+    },
+    "registry_config_writes": [
+      {
+        "start": 5564556,
+        "end": 5564560
+      },
+      {
+        "start": 5564560,
+        "end": 5564564
+      }
+    ],
+    "resolver_cache_writes": [
+      {
+        "start": 5564544,
+        "end": 5564548
+      },
+      {
+        "start": 5564548,
+        "end": 5564552
+      }
+    ]
+  },
+  "expected_portable": {
+    "network_flag": 0,
+    "process_null_handle": 0,
+    "phase": null
+  },
+  "phase_provenance": "phaseNone is deliberately unattached; native offline allocator reads actual SessionState+64C through004391B0, not a BSS phase field"
+}

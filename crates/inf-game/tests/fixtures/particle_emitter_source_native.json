@@ -1,0 +1,57 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "cases": [],
+  "guards": [
+    {
+      "name": "callback",
+      "address": 4418848,
+      "length": 177,
+      "sha256": "e0749e336e84e1f0abe1501d7264217c6acd4ae4b58265d134a14a7fe075cf82"
+    },
+    {
+      "name": "factory",
+      "address": 4614736,
+      "length": 212,
+      "sha256": "1f477a8df74538dad269aaccba292392e0f0654126a116cf627a53c8e663e12f"
+    },
+    {
+      "name": "update",
+      "address": 4614960,
+      "length": 389,
+      "sha256": "baf75dea17b1145ede61391090a2be6951dee70197fa7080859bd800fb95c6ec"
+    },
+    {
+      "name": "draw",
+      "address": 4615488,
+      "length": 3,
+      "sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99"
+    },
+    {
+      "name": "collision",
+      "address": 4204320,
+      "length": 5,
+      "sha256": "cc0e3cb106eb0fdec984d44a563d98c3da80700bbb8d2be4e66ebd54a9919626"
+    },
+    {
+      "name": "vtable",
+      "address": 5402496,
+      "length": 32,
+      "sha256": "5b2b6bb8622e535c6da931ab4f6851cbcab3c7914a875b01ae94c1c866c1f1e0"
+    }
+  ],
+  "loader_vector": {
+    "address": 5565624,
+    "width": 6,
+    "section": 5431296,
+    "raw_size": 102400,
+    "virtual_size": 1256504,
+    "initial": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

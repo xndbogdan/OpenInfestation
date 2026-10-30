@@ -1,0 +1,7540 @@
+{
+ "provenance": {
+  "source": "Infest03.run and Infest04.run, the ECM Unit (selector 73) on Helniazine",
+  "script": "runtime_re/scripts/ttd-js/ecm-receipts.js updates(12) and glows(100)",
+  "updates": "each update 00450450: the delta, the process NULL 0054E894 and the unit's flags +2C, position +32..+36, velocity +8E..+92, position copy +138..+13C, rest +140 and holder +144 at the call and where it returned",
+  "glows": "each glow 0042DAE0: its phase +148 and the world's delta 0055F0E0 at entry, the unit's position, and the light it asked of 0045B1A0 at 0042DBD1 (X in ECX, Z in EDX, the packed colour in EAX, the radius pushed) with the phase after the add"
+ },
+ "updates": [
+  {
+   "recording": "Infest03",
+   "at": "28AD34:17EB",
+   "index": 0,
+   "delta": 36000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64320,
+     30622
+    ],
+    "velocity": [
+     0,
+     0,
+     0
+    ],
+    "position_138": [
+     113,
+     0,
+     448
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64318,
+     30622
+    ],
+    "velocity": [
+     0,
+     65501,
+     0
+    ],
+    "position_138": [
+     47977,
+     64320,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2937F9:23D3",
+   "index": 1,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64318,
+     30622
+    ],
+    "velocity": [
+     0,
+     65501,
+     0
+    ],
+    "position_138": [
+     47977,
+     64320,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     65388,
+     0
+    ],
+    "position_138": [
+     47977,
+     64318,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "294FED:196B",
+   "index": 2,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     65388,
+     0
+    ],
+    "position_138": [
+     47977,
+     64318,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64272,
+     30622
+    ],
+    "velocity": [
+     0,
+     65302,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "29679F:79",
+   "index": 3,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     117,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64296,
+     30622
+    ],
+    "velocity": [
+     0,
+     65504,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "297E35:2032",
+   "index": 4,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     16,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64287,
+     30622
+    ],
+    "velocity": [
+     0,
+     65430,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 125000,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "299497:1BD0",
+   "index": 5,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     53,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 125000,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64290,
+     30622
+    ],
+    "velocity": [
+     0,
+     65455,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "29AAE4:10D1",
+   "index": 6,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     40,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65445,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "29CA15:597",
+   "index": 7,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     45,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65449,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "29E525:22F7",
+   "index": 8,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     43,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65447,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A021B:1237",
+   "index": 9,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A1CB7:34",
+   "index": 10,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A39AD:1F5E",
+   "index": 11,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A598F:4A7",
+   "index": 12,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A7404:C2A",
+   "index": 13,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2A8CC8:23F1",
+   "index": 14,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2AA681:3DE",
+   "index": 15,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2ABFE4:2D3",
+   "index": 16,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2AD9F4:2138",
+   "index": 17,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2AF483:941",
+   "index": 18,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2B0F0A:BE4",
+   "index": 19,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2B284D:900",
+   "index": 20,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2B4581:23B4",
+   "index": 21,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2B6020:1071",
+   "index": 22,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2B9274:18D1",
+   "index": 23,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2BAF3F:BC8",
+   "index": 24,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2BCBF2:2645",
+   "index": 25,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2BE738:FE8",
+   "index": 26,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C0190:6DF",
+   "index": 27,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C1C4E:104C",
+   "index": 28,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C36B3:1AF",
+   "index": 29,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C50E1:F04",
+   "index": 30,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C6A95:1390",
+   "index": 31,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C84C1:250D",
+   "index": 32,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2C9FF5:2225",
+   "index": 33,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2CBB7E:17F0",
+   "index": 34,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2CD729:11F9",
+   "index": 35,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2CF18C:25E",
+   "index": 36,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D0A27:1754",
+   "index": 37,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D229C:2078",
+   "index": 38,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D3B0D:1393",
+   "index": 39,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D535A:1C72",
+   "index": 40,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D6B93:31D",
+   "index": 41,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D83FB:148",
+   "index": 42,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2D9C2F:D2C",
+   "index": 43,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2DB534:2B7",
+   "index": 44,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2DD072:1421",
+   "index": 45,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2E04C9:2499",
+   "index": 46,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2E55F6:6DE",
+   "index": 47,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2E9FE1:D89",
+   "index": 48,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2EDADC:8A1",
+   "index": 49,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2F0F67:1BF0",
+   "index": 50,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2F415F:393",
+   "index": 51,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2F739E:1F81",
+   "index": 52,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2F9E89:1CC2",
+   "index": 53,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2FCA2B:784",
+   "index": 54,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "2FF4E0:12B4",
+   "index": 55,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "302023:188D",
+   "index": 56,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "30474F:BB",
+   "index": 57,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "306A26:2669",
+   "index": 58,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3085AA:27B2",
+   "index": 59,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "309F5A:B1F",
+   "index": 60,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "30BA6E:1FAE",
+   "index": 61,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "30D7E1:1FC4",
+   "index": 62,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "30F6D7:13FB",
+   "index": 63,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3113A4:1BE",
+   "index": 64,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "312DD9:7C5",
+   "index": 65,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3145B0:1FA3",
+   "index": 66,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "315D81:581",
+   "index": 67,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "317527:EE4",
+   "index": 68,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "318CB0:2BF",
+   "index": 69,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "31ABFA:1403",
+   "index": 70,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "31C44A:26A6",
+   "index": 71,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "31DC5A:1CC",
+   "index": 72,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "31F53E:2313",
+   "index": 73,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "321509:907",
+   "index": 74,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "323089:2031",
+   "index": 75,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "324C1D:170",
+   "index": 76,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "326CB0:1DAA",
+   "index": 77,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3287A8:180C",
+   "index": 78,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "32A48A:C84",
+   "index": 79,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "32BF6F:16E6",
+   "index": 80,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "32DB9D:1044",
+   "index": 81,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "32F6AF:2599",
+   "index": 82,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "331089:1E6",
+   "index": 83,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "332A8A:236C",
+   "index": 84,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3344D5:1593",
+   "index": 85,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "3363E4:160A",
+   "index": 86,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "338051:9A2",
+   "index": 87,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "339E85:490",
+   "index": 88,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "33B961:540",
+   "index": 89,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "33D179:1EB2",
+   "index": 90,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "33E898:440",
+   "index": 91,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest03",
+   "at": "340113:20F6",
+   "index": 92,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "68909C:12E9",
+   "index": 0,
+   "delta": 9000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64320,
+     30622
+    ],
+    "velocity": [
+     0,
+     0,
+     0
+    ],
+    "position_138": [
+     60153,
+     0,
+     16000
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64319,
+     30622
+    ],
+    "velocity": [
+     0,
+     65528,
+     0
+    ],
+    "position_138": [
+     47977,
+     64320,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "68FE60:2374",
+   "index": 1,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64319,
+     30622
+    ],
+    "velocity": [
+     0,
+     65528,
+     0
+    ],
+    "position_138": [
+     47977,
+     64320,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64304,
+     30622
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     47977,
+     64319,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "690B14:940",
+   "index": 2,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64304,
+     30622
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     47977,
+     64319,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217397095,
+    "position": [
+     47977,
+     64278,
+     30622
+    ],
+    "velocity": [
+     0,
+     65322,
+     0
+    ],
+    "position_138": [
+     47977,
+     64304,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "691773:A96",
+   "index": 3,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     107,
+     0
+    ],
+    "position_138": [
+     47977,
+     64304,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64295,
+     30622
+    ],
+    "velocity": [
+     0,
+     65496,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "6922E8:12A8",
+   "index": 4,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     20,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64287,
+     30622
+    ],
+    "velocity": [
+     0,
+     65434,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 125000,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "692F32:4BB",
+   "index": 5,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     51,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 125000,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64290,
+     30622
+    ],
+    "velocity": [
+     0,
+     65453,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "693A08:1832",
+   "index": 6,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     41,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65446,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "694B4E:63C",
+   "index": 7,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     45,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65449,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "695B28:1840",
+   "index": 8,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     43,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65447,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "696DFF:4DC",
+   "index": 9,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "697BFE:205",
+   "index": 10,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "698933:1029",
+   "index": 11,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "699989:BD",
+   "index": 12,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "69A77A:1018",
+   "index": 13,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "69B4FC:204",
+   "index": 14,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "69C50C:233D",
+   "index": 15,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "746B93:1BFF",
+   "index": 220,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "74736D:19E1",
+   "index": 221,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1217921383,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "747E3E:1870",
+   "index": 222,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "74898E:9E3",
+   "index": 223,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "749188:4F6",
+   "index": 224,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64300,
+     30622
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1251475815,
+    "position": [
+     47977,
+     64289,
+     30622
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     47977,
+     64300,
+     30622
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "784CAF:168",
+   "index": 307,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1251475815,
+    "position": [
+     47875,
+     64299,
+     30567
+    ],
+    "velocity": [
+     8,
+     42,
+     0
+    ],
+    "position_138": [
+     47875,
+     64299,
+     30567
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1251475815,
+    "position": [
+     47875,
+     64288,
+     30567
+    ],
+    "velocity": [
+     0,
+     65446,
+     0
+    ],
+    "position_138": [
+     47875,
+     64299,
+     30567
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7857C7:1F51",
+   "index": 308,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1251475815,
+    "position": [
+     47875,
+     64299,
+     30567
+    ],
+    "velocity": [
+     8,
+     42,
+     0
+    ],
+    "position_138": [
+     47875,
+     64299,
+     30567
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1251475815,
+    "position": [
+     47875,
+     64288,
+     30567
+    ],
+    "velocity": [
+     0,
+     65446,
+     0
+    ],
+    "position_138": [
+     47875,
+     64299,
+     30567
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7A539F:CB9",
+   "index": 309,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1255670119,
+    "position": [
+     48134,
+     64320,
+     33981
+    ],
+    "velocity": [
+     0,
+     0,
+     0
+    ],
+    "position_138": [
+     47875,
+     64299,
+     30567
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1255670119,
+    "position": [
+     48134,
+     64305,
+     33981
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     48134,
+     64320,
+     33981
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7A5BB3:16CC",
+   "index": 310,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1255670119,
+    "position": [
+     48134,
+     64307,
+     33981
+    ],
+    "velocity": [
+     19,
+     0,
+     65501
+    ],
+    "position_138": [
+     48134,
+     64320,
+     33981
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1255670119,
+    "position": [
+     48134,
+     64292,
+     33977
+    ],
+    "velocity": [
+     0,
+     65414,
+     65510
+    ],
+    "position_138": [
+     48134,
+     64307,
+     33981
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7A6427:131",
+   "index": 311,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1255670119,
+    "position": [
+     48135,
+     64306,
+     33975
+    ],
+    "velocity": [
+     20,
+     57,
+     65510
+    ],
+    "position_138": [
+     48134,
+     64307,
+     33981
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1255670119,
+    "position": [
+     48135,
+     64296,
+     33975
+    ],
+    "velocity": [
+     0,
+     65458,
+     0
+    ],
+    "position_138": [
+     48135,
+     64306,
+     33975
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7B2245:1988",
+   "index": 333,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1255670119,
+    "position": [
+     48139,
+     64302,
+     33968
+    ],
+    "velocity": [
+     0,
+     44,
+     0
+    ],
+    "position_138": [
+     48139,
+     64302,
+     33968
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1255670119,
+    "position": [
+     48139,
+     64291,
+     33968
+    ],
+    "velocity": [
+     0,
+     65448,
+     0
+    ],
+    "position_138": [
+     48139,
+     64302,
+     33968
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7C0E26:10E9",
+   "index": 334,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1255670119,
+    "position": [
+     48037,
+     64320,
+     34563
+    ],
+    "velocity": [
+     0,
+     0,
+     0
+    ],
+    "position_138": [
+     48139,
+     64302,
+     33968
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1255670119,
+    "position": [
+     48037,
+     64305,
+     34563
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     48037,
+     64320,
+     34563
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7C1A8C:16BA",
+   "index": 335,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64305,
+     34563
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     48037,
+     64320,
+     34563
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64279,
+     34563
+    ],
+    "velocity": [
+     0,
+     65322,
+     0
+    ],
+    "position_138": [
+     48037,
+     64305,
+     34563
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7C2B61:215C",
+   "index": 336,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64299,
+     34564
+    ],
+    "velocity": [
+     0,
+     104,
+     24
+    ],
+    "position_138": [
+     48037,
+     64305,
+     34563
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64293,
+     34564
+    ],
+    "velocity": [
+     0,
+     65494,
+     0
+    ],
+    "position_138": [
+     48037,
+     64299,
+     34564
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  },
+  {
+   "recording": "Infest04",
+   "at": "7C39B9:16BA",
+   "index": 337,
+   "delta": 125000,
+   "null": 0,
+   "entry": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64299,
+     34564
+    ],
+    "velocity": [
+     0,
+     18,
+     4
+    ],
+    "position_138": [
+     48037,
+     64299,
+     34564
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   },
+   "exit": {
+    "flags": 1222115687,
+    "position": [
+     48037,
+     64284,
+     34564
+    ],
+    "velocity": [
+     0,
+     65414,
+     0
+    ],
+    "position_138": [
+     48037,
+     64299,
+     34564
+    ],
+    "rest_140": 0,
+    "holder_144": 0
+   }
+  }
+ ],
+ "glows": [
+  {
+   "at": "28AFF5:24EC",
+   "phase": 58458112,
+   "world_delta": 36000,
+   "position": [
+    47977,
+    64318,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15998955,
+    "phase": 58494112
+   }
+  },
+  {
+   "at": "293892:2380",
+   "phase": 58494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15343606,
+    "phase": 58619112
+   }
+  },
+  {
+   "at": "2950A1:105C",
+   "phase": 58619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14883330,
+    "phase": 58744112
+   }
+  },
+  {
+   "at": "29683C:14D2",
+   "phase": 58744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14684685,
+    "phase": 58869112
+   }
+  },
+  {
+   "at": "297EC1:14F6",
+   "phase": 58869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14747415,
+    "phase": 58994112
+   }
+  },
+  {
+   "at": "299532:14D2",
+   "phase": 58994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15137565,
+    "phase": 59119112
+   }
+  },
+  {
+   "at": "29AB78:14F6",
+   "phase": 59119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15724575,
+    "phase": 59244112
+   }
+  },
+  {
+   "at": "29CAB4:1C26",
+   "phase": 59244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16508701,
+    "phase": 59369112
+   }
+  },
+  {
+   "at": "29E5AE:1866",
+   "phase": 59369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 516375,
+    "phase": 59494112
+   }
+  },
+  {
+   "at": "2A02C1:2EC",
+   "phase": 59494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1237005,
+    "phase": 59619112
+   }
+  },
+  {
+   "at": "2A1D49:1B72",
+   "phase": 59619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1762050,
+    "phase": 59744112
+   }
+  },
+  {
+   "at": "2A3A57:1FB5",
+   "phase": 59744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2091766,
+    "phase": 59869112
+   }
+  },
+  {
+   "at": "2A59F3:954",
+   "phase": 59869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2094316,
+    "phase": 59994112
+   }
+  },
+  {
+   "at": "2A7477:1822",
+   "phase": 59994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1769700,
+    "phase": 60119112
+   }
+  },
+  {
+   "at": "2A8D43:EDE",
+   "phase": 60119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1248224,
+    "phase": 60244112
+   }
+  },
+  {
+   "at": "2AA704:317",
+   "phase": 60244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 595424,
+    "phase": 60369112
+   }
+  },
+  {
+   "at": "2AC055:2000",
+   "phase": 60369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16588005,
+    "phase": 60494112
+   }
+  },
+  {
+   "at": "2ADA82:221",
+   "phase": 60494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15802350,
+    "phase": 60619112
+   }
+  },
+  {
+   "at": "2AF4F3:A51",
+   "phase": 60619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15212281,
+    "phase": 60744112
+   }
+  },
+  {
+   "at": "2B0F7E:1069",
+   "phase": 60744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14817284,
+    "phase": 60869112
+   }
+  },
+  {
+   "at": "2B28BC:2001",
+   "phase": 60869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14683920,
+    "phase": 60994112
+   }
+  },
+  {
+   "at": "2B4608:156F",
+   "phase": 60994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14812185,
+    "phase": 61119112
+   }
+  },
+  {
+   "at": "2B609B:49D",
+   "phase": 61119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15267870,
+    "phase": 61244112
+   }
+  },
+  {
+   "at": "2B92F4:1D23",
+   "phase": 61244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15920415,
+    "phase": 61369112
+   }
+  },
+  {
+   "at": "2BAFB8:1CFF",
+   "phase": 61369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16639260,
+    "phase": 61494112
+   }
+  },
+  {
+   "at": "2BCC71:1D23",
+   "phase": 61494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 647189,
+    "phase": 61619112
+   }
+  },
+  {
+   "at": "2BE7B0:1D23",
+   "phase": 61619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1368075,
+    "phase": 61744112
+   }
+  },
+  {
+   "at": "2C0206:137B",
+   "phase": 61744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1828095,
+    "phase": 61869112
+   }
+  },
+  {
+   "at": "2C1CC0:1002",
+   "phase": 61869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2092276,
+    "phase": 61994112
+   }
+  },
+  {
+   "at": "2C372A:1D6F",
+   "phase": 61994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2094825,
+    "phase": 62119112
+   }
+  },
+  {
+   "at": "2C5158:1D6F",
+   "phase": 62119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1704675,
+    "phase": 62244112
+   }
+  },
+  {
+   "at": "2C6B0F:1D4B",
+   "phase": 62244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1117920,
+    "phase": 62369112
+   }
+  },
+  {
+   "at": "2C8531:4E9",
+   "phase": 62369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 399329,
+    "phase": 62494112
+   }
+  },
+  {
+   "at": "2CA09C:18D5",
+   "phase": 62494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16391655,
+    "phase": 62619112
+   }
+  },
+  {
+   "at": "2CBBF9:172D",
+   "phase": 62619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15671280,
+    "phase": 62744112
+   }
+  },
+  {
+   "at": "2CD7A0:1D6F",
+   "phase": 62744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15080955,
+    "phase": 62869112
+   }
+  },
+  {
+   "at": "2CF1FB:189B",
+   "phase": 62869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14751495,
+    "phase": 62994112
+   }
+  },
+  {
+   "at": "2D0AA0:248",
+   "phase": 62994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14683410,
+    "phase": 63119112
+   }
+  },
+  {
+   "at": "2D2301:1D6F",
+   "phase": 63119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14876954,
+    "phase": 63244112
+   }
+  },
+  {
+   "at": "2D3B80:1D4B",
+   "phase": 63244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15398431,
+    "phase": 63369112
+   }
+  },
+  {
+   "at": "2D53CA:1D6F",
+   "phase": 63369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16050975,
+    "phase": 63494112
+   }
+  },
+  {
+   "at": "2D6C10:1D6F",
+   "phase": 63494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 58395,
+    "phase": 63619112
+   }
+  },
+  {
+   "at": "2D8464:1D4B",
+   "phase": 63619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 843795,
+    "phase": 63744112
+   }
+  },
+  {
+   "at": "2D9CB0:4E9",
+   "phase": 63744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1499144,
+    "phase": 63869112
+   }
+  },
+  {
+   "at": "2DB5A2:4E9",
+   "phase": 63869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1959421,
+    "phase": 63994112
+   }
+  },
+  {
+   "at": "2DD10C:B22",
+   "phase": 63994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2092785,
+    "phase": 64119112
+   }
+  },
+  {
+   "at": "2E059D:A53",
+   "phase": 64119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2030056,
+    "phase": 64244112
+   }
+  },
+  {
+   "at": "2E5745:1FBD",
+   "phase": 64244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1574369,
+    "phase": 64369112
+   }
+  },
+  {
+   "at": "2EA100:2D2",
+   "phase": 64369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 987360,
+    "phase": 64494112
+   }
+  },
+  {
+   "at": "2EDBB9:DA7",
+   "phase": 64494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 268770,
+    "phase": 64619112
+   }
+  },
+  {
+   "at": "2F1022:EF2",
+   "phase": 64619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16260841,
+    "phase": 64744112
+   }
+  },
+  {
+   "at": "2F4233:2632",
+   "phase": 64744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15540210,
+    "phase": 64869112
+   }
+  },
+  {
+   "at": "2F745F:2257",
+   "phase": 64869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15015166,
+    "phase": 64994112
+   }
+  },
+  {
+   "at": "2F9F56:21CC",
+   "phase": 64994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14685450,
+    "phase": 65119112
+   }
+  },
+  {
+   "at": "2FCAE2:1B1C",
+   "phase": 65119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14682644,
+    "phase": 65244112
+   }
+  },
+  {
+   "at": "2FF5D4:197A",
+   "phase": 65244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15007516,
+    "phase": 65369112
+   }
+  },
+  {
+   "at": "3020ED:192E",
+   "phase": 65369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15528735,
+    "phase": 65494112
+   }
+  },
+  {
+   "at": "3047FB:261E",
+   "phase": 65494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16247071,
+    "phase": 65619112
+   }
+  },
+  {
+   "at": "306AAE:75C",
+   "phase": 65619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 254489,
+    "phase": 65744112
+   }
+  },
+  {
+   "at": "308645:1451",
+   "phase": 65744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 974865,
+    "phase": 65869112
+   }
+  },
+  {
+   "at": "309FD4:19D8",
+   "phase": 65869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1630470,
+    "phase": 65994112
+   }
+  },
+  {
+   "at": "30BAF8:C23",
+   "phase": 65994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2025466,
+    "phase": 66119112
+   }
+  },
+  {
+   "at": "30D869:87F",
+   "phase": 66119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2093295,
+    "phase": 66244112
+   }
+  },
+  {
+   "at": "30F9A4:B69",
+   "phase": 66244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1965286,
+    "phase": 66369112
+   }
+  },
+  {
+   "at": "311424:1D25",
+   "phase": 66369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1443809,
+    "phase": 66494112
+   }
+  },
+  {
+   "at": "312E4B:19B8",
+   "phase": 66494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 856800,
+    "phase": 66619112
+   }
+  },
+  {
+   "at": "31462F:92E",
+   "phase": 66619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 72419,
+    "phase": 66744112
+   }
+  },
+  {
+   "at": "315DF9:A9B",
+   "phase": 66744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16064490,
+    "phase": 66869112
+   }
+  },
+  {
+   "at": "31759D:41",
+   "phase": 66869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15409141,
+    "phase": 66994112
+   }
+  },
+  {
+   "at": "318D2F:25AB",
+   "phase": 66994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14883584,
+    "phase": 67119112
+   }
+  },
+  {
+   "at": "31AC6D:1D86",
+   "phase": 67119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14684940,
+    "phase": 67244112
+   }
+  },
+  {
+   "at": "31C4D9:124A",
+   "phase": 67244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14747670,
+    "phase": 67369112
+   }
+  },
+  {
+   "at": "31DCC5:88F",
+   "phase": 67369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15137821,
+    "phase": 67494112
+   }
+  },
+  {
+   "at": "31F5AE:599",
+   "phase": 67494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15659295,
+    "phase": 67619112
+   }
+  },
+  {
+   "at": "32158D:E40",
+   "phase": 67619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16377630,
+    "phase": 67744112
+   }
+  },
+  {
+   "at": "32310B:993",
+   "phase": 67744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 385304,
+    "phase": 67869112
+   }
+  },
+  {
+   "at": "324C93:140F",
+   "phase": 67869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1105935,
+    "phase": 67994112
+   }
+  },
+  {
+   "at": "326D30:A14",
+   "phase": 67994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1696259,
+    "phase": 68119112
+   }
+  },
+  {
+   "at": "32881C:BE0",
+   "phase": 68119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2025975,
+    "phase": 68244112
+   }
+  },
+  {
+   "at": "32A4F1:1064",
+   "phase": 68244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2094061,
+    "phase": 68369112
+   }
+  },
+  {
+   "at": "32BFCF:17FF",
+   "phase": 68369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1900260,
+    "phase": 68494112
+   }
+  },
+  {
+   "at": "32DC1B:F41",
+   "phase": 68494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1313504,
+    "phase": 68619112
+   }
+  },
+  {
+   "at": "32F70D:F94",
+   "phase": 68619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 660704,
+    "phase": 68744112
+   }
+  },
+  {
+   "at": "331101:482",
+   "phase": 68744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16653540,
+    "phase": 68869112
+   }
+  },
+  {
+   "at": "332AE8:E3C",
+   "phase": 68869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15933421,
+    "phase": 68994112
+   }
+  },
+  {
+   "at": "334545:ECC",
+   "phase": 68994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15277815,
+    "phase": 69119112
+   }
+  },
+  {
+   "at": "33645C:1337",
+   "phase": 69119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14817539,
+    "phase": 69244112
+   }
+  },
+  {
+   "at": "3380E2:B03",
+   "phase": 69244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14684175,
+    "phase": 69369112
+   }
+  },
+  {
+   "at": "339EF2:10F3",
+   "phase": 69369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 14746904,
+    "phase": 69494112
+   }
+  },
+  {
+   "at": "33B9C2:12CF",
+   "phase": 69494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15202590,
+    "phase": 69619112
+   }
+  },
+  {
+   "at": "33D1CC:FF2",
+   "phase": 69619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 15855135,
+    "phase": 69744112
+   }
+  },
+  {
+   "at": "33E8F4:15BC",
+   "phase": 69744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 16573981,
+    "phase": 69869112
+   }
+  },
+  {
+   "at": "340170:3D5",
+   "phase": 69869112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 581910,
+    "phase": 69994112
+   }
+  },
+  {
+   "at": "341A70:4C3",
+   "phase": 69994112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1302540,
+    "phase": 70119112
+   }
+  },
+  {
+   "at": "342FAD:10D1",
+   "phase": 70119112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1827584,
+    "phase": 70244112
+   }
+  },
+  {
+   "at": "3445B0:4C3",
+   "phase": 70244112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2092021,
+    "phase": 70369112
+   }
+  },
+  {
+   "at": "345D74:49F",
+   "phase": 70369112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 2094570,
+    "phase": 70494112
+   }
+  },
+  {
+   "at": "3474F0:29",
+   "phase": 70494112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1704419,
+    "phase": 70619112
+   }
+  },
+  {
+   "at": "348BE2:4C3",
+   "phase": 70619112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 1183200,
+    "phase": 70744112
+   }
+  },
+  {
+   "at": "34A389:49F",
+   "phase": 70744112,
+   "world_delta": 125000,
+   "position": [
+    47977,
+    64300,
+    30622
+   ],
+   "light": {
+    "x": 4294949737,
+    "z": 30622,
+    "radius": 1024,
+    "rgb": 530145,
+    "phase": 70869112
+   }
+  }
+ ]
+}

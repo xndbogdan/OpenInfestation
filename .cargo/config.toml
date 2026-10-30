@@ -1,0 +1,9 @@
+[env]
+# Bundled SDL uses an older minimum; CMake 4 removed that compatibility floor.
+# Set the supported external policy baseline without editing third-party sources.
+CMAKE_POLICY_VERSION_MINIMUM = "3.5"
+
+[target.x86_64-pc-windows-gnu]
+# Keep MinGW's CRT and SDL2 search paths while using Rust's bundled LLD.
+# Cargo resolves this path from the repository root.
+linker = "scripts/windows-gnu-gcc.cmd"

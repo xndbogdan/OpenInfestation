@@ -1,0 +1,1773 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original 0046E230 with an empty hold and actor list, 0046E200, 0046E450 and 0046E4A0 over supplied objects."
+ },
+ "guards": [
+  {
+   "address": 4645424,
+   "size": 536,
+   "sha256": "e41aa6c59e7d7452da30a5c7c6050ec7f5408d5f8b7b5d926ca2d9aba44e9ed1"
+  },
+  {
+   "address": 4645376,
+   "size": 33,
+   "sha256": "de2267d66d357641e4b7a1e3516edd11c8001fa1b169dce3c5dbd80886e21b8a"
+  },
+  {
+   "address": 4645968,
+   "size": 39,
+   "sha256": "2c9ec0a5985f67a149846af8f3f7d2ecee74ba84763daf5769a1f7d451f69d3c"
+  },
+  {
+   "address": 4646048,
+   "size": 66,
+   "sha256": "4f33c3a81c8056ef009d5b2f31e254a703735ee31346558f29291f7a5cefbbb7"
+  }
+ ],
+ "handles": {
+  "null": 2147418112,
+  "own": 537067521,
+  "other": 537133058
+ },
+ "coverage": {
+  "updates": 50,
+  "queries": 10,
+  "scores": 18,
+  "messages": 3
+ },
+ "updates": [
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 125000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1375216,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3073801867,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 125001,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 1,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1375216,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3073801867,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": -5,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 4294967291,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1000000,
+    "armed": 1,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 875000,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 125000,
+    "armed": 1,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1375216,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3073801867,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 125001,
+    "armed": 1,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 0,
+    "armed": 1,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1375216,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3073801867,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": -1,
+    "armed": 1,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1375216,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3073801867,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 1,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 15624,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 15625,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 15626,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 1,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 65535,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 49910,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1000000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "team": 3,
+    "kind": 0,
+    "holding": 1,
+    "delta": 125000,
+    "rng": 305419896,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 875000,
+    "scan": 0,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 305419896,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 706561,
+    "armed": 0,
+    "charge": 21344,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2533179,
+    "rng": 541962484,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 706561,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 541962484,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1570031,
+    "armed": 0,
+    "charge": 1726,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2293312,
+    "rng": 1293046147,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1570031,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1293046147,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": -126664,
+    "armed": 1,
+    "charge": 42354,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2026449,
+    "rng": 1006401853,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1317392,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 2600088940,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1490023,
+    "armed": 0,
+    "charge": 43344,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 3927289,
+    "rng": 280801040,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1490023,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 280801040,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1810895,
+    "scan": 881421,
+    "armed": 1,
+    "charge": 7405,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 3937513,
+    "rng": 908207746,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1168560,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1380869325,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 739399,
+    "armed": 1,
+    "charge": 24890,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2884614,
+    "rng": 4230410961,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1414112,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3392413040,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1745634,
+    "armed": 0,
+    "charge": 4808,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 105399,
+    "rng": 1326977412,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1745634,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1326977412,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 565989,
+    "armed": 1,
+    "charge": 18219,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 1407167,
+    "rng": 3262600929,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1284416,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 2329937984,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 736670,
+    "armed": 0,
+    "charge": 53622,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 283789,
+    "rng": 540795056,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 736670,
+    "armed": 0,
+    "charge": 18149,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 540795056,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 75165,
+    "armed": 0,
+    "charge": 6601,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 476550,
+    "rng": 1978979400,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 75165,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1978979400,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": -113086,
+    "scan": 1666619,
+    "armed": 0,
+    "charge": 4791,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 3865975,
+    "rng": 772681533,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 4294854210,
+    "scan": 1666619,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 772681533,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 778197,
+    "scan": 491797,
+    "armed": 1,
+    "charge": 32188,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2283487,
+    "rng": 2915131540,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1024072,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 197204087,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 913911,
+    "armed": 0,
+    "charge": 53729,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2957925,
+    "rng": 148586381,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 913911,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 148586381,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 786125,
+    "scan": 1324182,
+    "armed": 1,
+    "charge": 40158,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 1302001,
+    "rng": 3300711986,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 22181,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3300711986,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 300044,
+    "scan": 1259429,
+    "armed": 0,
+    "charge": 32350,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2618558,
+    "rng": 3992813643,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1406160,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3327319138,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1637009,
+    "armed": 0,
+    "charge": 37459,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2631203,
+    "rng": 3226184023,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1637009,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3226184023,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": -172183,
+    "armed": 0,
+    "charge": 13980,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 1851835,
+    "rng": 3851939151,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 4294795113,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3851939151,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 483195,
+    "armed": 1,
+    "charge": 56402,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2963343,
+    "rng": 2516590970,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1241744,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1980405861,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 438047,
+    "scan": 1995643,
+    "armed": 1,
+    "charge": 45983,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 5965,
+    "rng": 1697562071,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 432082,
+    "scan": 1989678,
+    "armed": 1,
+    "charge": 45238,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1697562071,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 884547,
+    "scan": 925671,
+    "armed": 0,
+    "charge": 26213,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 1356516,
+    "rng": 676043531,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1299184,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 2450915362,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1915549,
+    "armed": 1,
+    "charge": 5655,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2937611,
+    "rng": 1841442387,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1385960,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 3161824714,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 603252,
+    "armed": 0,
+    "charge": 36903,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 3807202,
+    "rng": 2469017286,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 603252,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 2469017286,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1320647,
+    "armed": 0,
+    "charge": 11931,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 1940858,
+    "rng": 2677703655,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1320647,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 2677703655,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 415308,
+    "armed": 0,
+    "charge": 45439,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 1162417,
+    "rng": 1607924119,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 415308,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1607924119,
+    "task_source": 537067521
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 905716,
+    "armed": 0,
+    "charge": 45401,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 2533764,
+    "rng": 194978220,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 905716,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 194978220,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 275908,
+    "armed": 0,
+    "charge": 43624,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2852181,
+    "rng": 631721875,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 275908,
+    "armed": 0,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 631721875,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1881674,
+    "scan": 616352,
+    "armed": 0,
+    "charge": 32696,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 3473996,
+    "rng": 2192579576,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1130536,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1069356555,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1971597,
+    "scan": 885468,
+    "armed": 1,
+    "charge": 8851,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 3056847,
+    "rng": 4113150402,
+    "task_source": 537133058
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1141568,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1159786253,
+    "task_source": 537133058
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 1483764,
+    "scan": 554037,
+    "armed": 1,
+    "charge": 39885,
+    "team": 18,
+    "kind": 0,
+    "holding": 1,
+    "delta": 541034,
+    "rng": 4217214285,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 942730,
+    "scan": 13003,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 4217214285,
+    "task_source": 2147418112
+   }
+  },
+  {
+   "input": {
+    "radius": 768,
+    "arming": 0,
+    "scan": 1181421,
+    "armed": 1,
+    "charge": 33634,
+    "team": 18,
+    "kind": 0,
+    "holding": 0,
+    "delta": 2360736,
+    "rng": 88496351,
+    "task_source": 537067521
+   },
+   "output": {
+    "arming": 0,
+    "scan": 1195632,
+    "armed": 1,
+    "charge": 0,
+    "kind": 0,
+    "holding": 0,
+    "slot_handle": 2147418112,
+    "rng": 1602631526,
+    "task_source": 537067521
+   }
+  }
+ ],
+ "queries": [
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 1,
+     "charge": 4660,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 1,
+     "charge": 4660,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 1
+   },
+   "output": 4660
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 1,
+     "charge": 4660,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 2
+   },
+   "output": 1
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 1,
+     "charge": 4660,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 3
+   },
+   "output": 3
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 1,
+     "charge": 4660,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 65537
+   },
+   "output": 1
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 0,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 0,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 1
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 0,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 2
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 0,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 3
+   },
+   "output": 3
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 1000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 0,
+     "team": 18,
+     "kind": 0,
+     "holding": 0,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "query": 65537
+   },
+   "output": 1
+  }
+ ],
+ "scores": [
+  {
+   "input": {
+    "view": true,
+    "team": 18,
+    "squared": 0
+   },
+   "output": 4294967295
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 18,
+    "squared": 100
+   },
+   "output": 4294967195
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 18,
+    "squared": 4294967295
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 17,
+    "squared": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 17,
+    "squared": 100
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 17,
+    "squared": 4294967295
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 0,
+    "squared": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 0,
+    "squared": 100
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": true,
+    "team": 0,
+    "squared": 4294967295
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 18,
+    "squared": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 18,
+    "squared": 100
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 18,
+    "squared": 4294967295
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 17,
+    "squared": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 17,
+    "squared": 100
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 17,
+    "squared": 4294967295
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 0,
+    "squared": 0
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 0,
+    "squared": 100
+   },
+   "output": 0
+  },
+  {
+   "input": {
+    "view": false,
+    "team": 0,
+    "squared": 4294967295
+   },
+   "output": 0
+  }
+ ],
+ "messages": [
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 0,
+     "scan": 0,
+     "armed": 1,
+     "charge": 77,
+     "team": 18,
+     "kind": 5,
+     "holding": 1,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "code": 0
+   },
+   "output": {
+    "result": 0,
+    "state": {
+     "arming": 0,
+     "scan": 0,
+     "armed": 1,
+     "charge": 77,
+     "kind": 5,
+     "holding": 1,
+     "slot_handle": 2147418112
+    }
+   }
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 0,
+     "scan": 0,
+     "armed": 1,
+     "charge": 77,
+     "team": 18,
+     "kind": 5,
+     "holding": 1,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "code": 1
+   },
+   "output": {
+    "result": 0,
+    "state": {
+     "arming": 5000000,
+     "scan": 0,
+     "armed": 0,
+     "charge": 77,
+     "kind": 0,
+     "holding": 0,
+     "slot_handle": 2147418112
+    }
+   }
+  },
+  {
+   "input": {
+    "unit": {
+     "radius": 768,
+     "arming": 0,
+     "scan": 0,
+     "armed": 1,
+     "charge": 77,
+     "team": 18,
+     "kind": 5,
+     "holding": 1,
+     "delta": 125000,
+     "rng": 305419896,
+     "task_source": 537067521
+    },
+    "code": 2
+   },
+   "output": {
+    "result": 0,
+    "state": {
+     "arming": 0,
+     "scan": 0,
+     "armed": 1,
+     "charge": 77,
+     "kind": 5,
+     "holding": 1,
+     "slot_handle": 2147418112
+    }
+   }
+  }
+ ]
+}

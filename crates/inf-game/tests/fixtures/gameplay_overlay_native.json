@@ -1,0 +1,4256 @@
+{
+  "schema_version": 1,
+  "retail_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "scope": "Unmodified 441003..44120F segment with real 4A4240 text measurement. Synthetic font/string/material/style and fixed viewport getter returns. Renderer +84 and raw text 4A3B20 are supplied boundaries, including explicit failure prefixes. No whole gameplay draw, font rasterization, or scene acceptance is claimed.",
+  "source_guards": [
+    {
+      "address": 4460547,
+      "length": 524,
+      "sha256": "0b5751d0ea85585c41cb6c2fbc2b07892e36213b9c309588f9ba22ec700c2753"
+    },
+    {
+      "address": 4866624,
+      "length": 71,
+      "sha256": "3648151b8dc5fa4145c14a852e6b252196ff9822e13d49cd1f282019d35b75f7"
+    },
+    {
+      "address": 4428464,
+      "length": 39,
+      "sha256": "56cb85013ab5259cb463434eefe276e4a43eb4e4f3ea05a4e9ed9a041e80a0d6"
+    }
+  ],
+  "cases": [
+    {
+      "name": "world_0",
+      "input": {
+        "world": 0,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [],
+      "viewport_reads": [],
+      "stopped": null
+    },
+    {
+      "name": "world_1",
+      "input": {
+        "world": 1,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [],
+      "viewport_reads": [],
+      "stopped": null
+    },
+    {
+      "name": "world_21",
+      "input": {
+        "world": 21,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [],
+      "viewport_reads": [],
+      "stopped": null
+    },
+    {
+      "name": "world_22",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "world_23",
+      "input": {
+        "world": 23,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [],
+      "viewport_reads": [],
+      "stopped": null
+    },
+    {
+      "name": "world_4294967295",
+      "input": {
+        "world": 4294967295,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [],
+      "viewport_reads": [],
+      "stopped": null
+    },
+    {
+      "name": "size_320_240",
+      "input": {
+        "world": 22,
+        "width": 320,
+        "height": 240,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              320,
+              0
+            ],
+            [
+              320,
+              30
+            ],
+            [
+              0,
+              30
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              210
+            ],
+            [
+              320,
+              210
+            ],
+            [
+              320,
+              240
+            ],
+            [
+              0,
+              240
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            154,
+            225
+          ],
+          "width": 320,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_512_384",
+      "input": {
+        "world": 22,
+        "width": 512,
+        "height": 384,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              512,
+              0
+            ],
+            [
+              512,
+              48
+            ],
+            [
+              0,
+              48
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              336
+            ],
+            [
+              512,
+              336
+            ],
+            [
+              512,
+              384
+            ],
+            [
+              0,
+              384
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            250,
+            360
+          ],
+          "width": 512,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_640_480",
+      "input": {
+        "world": 22,
+        "width": 640,
+        "height": 480,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              640,
+              0
+            ],
+            [
+              640,
+              60
+            ],
+            [
+              0,
+              60
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              420
+            ],
+            [
+              640,
+              420
+            ],
+            [
+              640,
+              480
+            ],
+            [
+              0,
+              480
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            314,
+            450
+          ],
+          "width": 640,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_800_600",
+      "input": {
+        "world": 22,
+        "width": 800,
+        "height": 600,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              800,
+              0
+            ],
+            [
+              800,
+              75
+            ],
+            [
+              0,
+              75
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              525
+            ],
+            [
+              800,
+              525
+            ],
+            [
+              800,
+              600
+            ],
+            [
+              0,
+              600
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            394,
+            562
+          ],
+          "width": 800,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_1024_768",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_1023_767",
+      "input": {
+        "world": 22,
+        "width": 1023,
+        "height": 767,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1023,
+              0
+            ],
+            [
+              1023,
+              95
+            ],
+            [
+              0,
+              95
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              671
+            ],
+            [
+              1023,
+              671
+            ],
+            [
+              1023,
+              767
+            ],
+            [
+              0,
+              767
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            719
+          ],
+          "width": 1023,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_7_7",
+      "input": {
+        "world": 22,
+        "width": 7,
+        "height": 7,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              6
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              0,
+              7
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            -2,
+            6
+          ],
+          "width": 7,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_0_0",
+      "input": {
+        "world": 22,
+        "width": 0,
+        "height": 0,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            -5,
+            0
+          ],
+          "width": 0,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_-9_-17",
+      "input": {
+        "world": 22,
+        "width": -9,
+        "height": -17,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              -9,
+              0
+            ],
+            [
+              -9,
+              -2
+            ],
+            [
+              0,
+              -2
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              -14
+            ],
+            [
+              -9,
+              -14
+            ],
+            [
+              -9,
+              -17
+            ],
+            [
+              0,
+              -17
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            -10,
+            -15
+          ],
+          "width": -9,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_65535_65535",
+      "input": {
+        "world": 22,
+        "width": 65535,
+        "height": 65535,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              8191
+            ],
+            [
+              0,
+              8191
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              -8193
+            ],
+            [
+              -1,
+              -8193
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            32762,
+            61439
+          ],
+          "width": 65535,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_2147483647_2147483647",
+      "input": {
+        "world": 22,
+        "width": 2147483647,
+        "height": 2147483647,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              -1
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            1073741818,
+            134217727
+          ],
+          "width": 2147483647,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "size_-2147483648_-2147483648",
+      "input": {
+        "world": 22,
+        "width": -2147483648,
+        "height": -2147483648,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            1073741818,
+            -134217728
+          ],
+          "width": -2147483648,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_0",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 0,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_1999",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 1999,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_2000",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 2000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_2001",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 2001,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_2002",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 2002,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_3999",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 3999,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 999
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_-1",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": -1,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_-2001",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": -2001,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_2147483647",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 2147483647,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1073740823
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "age_-2147483648",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": -2147483648,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "measure_32767_0_1",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 32767,
+        "spacing": 0,
+        "divisor": 1,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            513,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "measure_-32768_0_1",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": -32768,
+        "spacing": 0,
+        "divisor": 1,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            512,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "measure_300_7_100",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 300,
+        "spacing": 7,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            509,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "measure_300_-7_-100",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 300,
+        "spacing": -7,
+        "divisor": -100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            514,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    },
+    {
+      "name": "measure_1_0_0",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 1,
+        "spacing": 0,
+        "divisor": 0,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "division"
+    },
+    {
+      "name": "fail_material",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "material"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        }
+      ],
+      "viewport_reads": [],
+      "stopped": "material"
+    },
+    {
+      "name": "fail_quad1",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "quad1"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width"
+      ],
+      "stopped": "quad1"
+    },
+    {
+      "name": "fail_quad2",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "quad2"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "quad2"
+    },
+    {
+      "name": "fail_font",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "font"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "font"
+    },
+    {
+      "name": "fail_style",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "style"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "style"
+    },
+    {
+      "name": "fail_string",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "string"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "string"
+    },
+    {
+      "name": "fail_text",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 2774143540,
+        "style": 2153106585,
+        "fail": "text"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 2774143540
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            506,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": "text"
+    },
+    {
+      "name": "early_age_still_resolves_caption",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 0,
+        "text": "AA",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": "string"
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height"
+      ],
+      "stopped": "string"
+    },
+    {
+      "name": "empty_caption",
+      "input": {
+        "world": 22,
+        "width": 1024,
+        "height": 768,
+        "screen_age": 4000,
+        "text": "",
+        "advance": 600,
+        "spacing": -100,
+        "divisor": 100,
+        "material": 0,
+        "style": 2153106585,
+        "fail": null
+      },
+      "events": [
+        {
+          "kind": "material",
+          "argument": 32
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              0
+            ],
+            [
+              1024,
+              0
+            ],
+            [
+              1024,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "quad",
+          "corners": [
+            [
+              0,
+              672
+            ],
+            [
+              1024,
+              672
+            ],
+            [
+              1024,
+              768
+            ],
+            [
+              0,
+              768
+            ]
+          ],
+          "depths": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "descriptor": 0,
+          "color": 0
+        },
+        {
+          "kind": "font",
+          "argument": 0
+        },
+        {
+          "kind": "style",
+          "argument": 0
+        },
+        {
+          "kind": "string",
+          "argument": 223
+        },
+        {
+          "kind": "text",
+          "position": [
+            512,
+            720
+          ],
+          "width": 1024,
+          "color": 2153106585,
+          "callback": 4431328,
+          "flags": 2,
+          "age": 1000
+        }
+      ],
+      "viewport_reads": [
+        "height",
+        "height",
+        "width",
+        "width",
+        "height",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width",
+        "height",
+        "width"
+      ],
+      "stopped": null
+    }
+  ],
+  "clock_cases": [
+    {
+      "age": 0,
+      "elapsed": 999,
+      "result": 0
+    },
+    {
+      "age": 0,
+      "elapsed": 1000,
+      "result": 1
+    },
+    {
+      "age": 0,
+      "elapsed": -999,
+      "result": 0
+    },
+    {
+      "age": 0,
+      "elapsed": -1000,
+      "result": 4294967295
+    },
+    {
+      "age": 123,
+      "elapsed": 3000999,
+      "result": 3123
+    },
+    {
+      "age": 123,
+      "elapsed": -3000999,
+      "result": 4294964419
+    },
+    {
+      "age": 2147483647,
+      "elapsed": 2000,
+      "result": 2147483649
+    },
+    {
+      "age": 2147483648,
+      "elapsed": -2000,
+      "result": 2147483646
+    },
+    {
+      "age": 0,
+      "elapsed": 2147483647,
+      "result": 2147483
+    },
+    {
+      "age": 0,
+      "elapsed": -2147483648,
+      "result": 4292819813
+    }
+  ]
+}

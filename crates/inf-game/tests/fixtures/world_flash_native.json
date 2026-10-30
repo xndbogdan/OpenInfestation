@@ -1,0 +1,999 @@
+{
+  "provenance": {
+    "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original487D70 and4881B8..488326; camera/sort return segments supplied.\nDraw uses original4A42B0 with explicitly authored arena bytes, not an allocator stub.\n"
+  },
+  "trigger": [
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          7680
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          7681
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera"
+      ],
+      "sequence": 7,
+      "color": 3735928559,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          65535
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera"
+      ],
+      "sequence": 7,
+      "color": 3735928559,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          32768,
+          32768,
+          32768
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 65535,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera"
+      ],
+      "sequence": 7,
+      "color": 3735928559,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 0,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 2147483648,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 15,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 15,
+          "sequence": 4
+        }
+      ],
+      "sequence": 4,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 65536,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 65536,
+          "sequence": 4
+        }
+      ],
+      "sequence": 4,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559,
+        "null_position": true
+      },
+      "events": [
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559,
+        "stop_style": true
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 3735928559,
+      "stopped": true
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 15,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559,
+        "stop_style": true
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 15,
+          "sequence": 4
+        }
+      ],
+      "sequence": 4,
+      "color": 3735928559,
+      "stopped": true
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559,
+        "camera_after": [
+          100,
+          200,
+          300
+        ],
+        "position_after": [
+          100,
+          200,
+          4140
+        ]
+      },
+      "events": [
+        "camera",
+        {
+          "style_argument": 14,
+          "sequence": 1
+        }
+      ],
+      "sequence": 1,
+      "color": 2151686160,
+      "stopped": false
+    },
+    {
+      "input": {
+        "radius": 3840,
+        "style": 0,
+        "style_word": 2151686160,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "camera_position": [
+          0,
+          0,
+          0
+        ],
+        "sequence": 7,
+        "color": 3735928559,
+        "basis": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1051372203,
+          3208642560,
+          1058642330
+        ]
+      },
+      "events": [
+        "camera"
+      ],
+      "sequence": 7,
+      "color": 3735928559,
+      "stopped": false
+    }
+  ],
+  "draw": [
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 2,
+      "sort": 0,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 0,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 0,
+      "sort": null,
+      "payload": null
+    },
+    {
+      "input": {
+        "sequence": 8,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 0,
+      "sort": 0,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 4,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 5,
+      "sort": 0,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": true,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 2,
+      "sort": 1107306498,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 1,
+        "sorting": true,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 2,
+      "sort": 3221225472,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 255,
+        "flags": 0,
+        "sorting": true,
+        "viewport": [
+          640,
+          480
+        ],
+        "carry": 165
+      },
+      "sequence": 2,
+      "sort": 3221225472,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        128,
+        2,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        224,
+        1,
+        64,
+        0,
+        0,
+        0,
+        165,
+        165,
+        165,
+        165,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        165,
+        165,
+        165,
+        165
+      ]
+    },
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          4294967295,
+          65536
+        ],
+        "carry": 0
+      },
+      "sequence": 2,
+      "sort": 0,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        255,
+        255,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        255,
+        255,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "input": {
+        "sequence": 1,
+        "color": 1144201745,
+        "selector": 0,
+        "flags": 0,
+        "sorting": false,
+        "viewport": [
+          1024,
+          768
+        ],
+        "carry": 90
+      },
+      "sequence": 2,
+      "sort": 0,
+      "payload": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        0,
+        4,
+        0,
+        3,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        64,
+        0,
+        0,
+        0,
+        90,
+        90,
+        90,
+        90,
+        null,
+        null,
+        null,
+        null,
+        17,
+        34,
+        51,
+        68,
+        90,
+        90,
+        90,
+        90
+      ]
+    }
+  ]
+}

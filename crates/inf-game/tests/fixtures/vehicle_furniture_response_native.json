@@ -1,0 +1,10 @@
+{
+  "source": "Infest02.run, .tmp/infestation-ttd/20261009-025507-730-furnresp2-i02: every 0047BFD0 on the player vehicle (vtable 00520860)",
+  "cases": [
+    {"contact":[1,1053662440,3186023703,3211307729,41],"kind":35,"cell":[13824,65504,37376],"position":[13914,26,37234],"mass":200,"velocity":[64572,5,397],"flags":1243113783,"after":{"position":[13930,22,37197],"velocity":[64910,65446,65167]},"damage":{"strength":877,"channel":1},"furniture":[13824,37376]},
+    {"contact":[1,3178998810,3180789980,3212759412,20],"kind":35,"cell":[13568,65504,37376],"position":[13590,29,37199],"mass":200,"velocity":[65059,17,204],"flags":1243113783,"after":{"position":[13589,28,37180],"velocity":[65047,3,7]},"damage":{"strength":205,"channel":1},"furniture":[13568,37376]},
+    {"contact":[1,3194914653,3178881829,3212343212,3],"kind":35,"cell":[13568,65504,37376],"position":[13557,30,37185],"mass":200,"velocity":[65262,18,43],"flags":1243113783,"after":{"position":[13557,30,37183],"velocity":[65262,18,43]},"damage":null,"furniture":null},
+    {"contact":[1,3197120781,3179136760,3212124208,5],"kind":35,"cell":[13568,65504,37376],"position":[13548,30,37187],"mass":200,"velocity":[65458,3,40],"flags":1243113783,"after":{"position":[13547,30,37183],"velocity":[65453,2,21]},"damage":null,"furniture":null},
+    {"contact":[1,3196896440,3179073282,3212157030,5],"kind":35,"cell":[13568,65504,37376],"position":[13547,30,37183],"mass":200,"velocity":[0,65532,0],"flags":1243113783,"after":{"position":[13546,30,37179],"velocity":[0,65532,65535]},"damage":null,"furniture":null}
+  ]
+}

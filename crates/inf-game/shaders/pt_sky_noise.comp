@@ -1,0 +1,106 @@
+#version 450
+// The clouds' noise, made once (pt_sky.glsl reads it): tiling 3D noise
+// whose every voxel repeats with the volume. The shape noise (pass 0) holds
+// Perlin-Worley in red, the clouds' billows, and inverted Worley at 4, 8
+// and 16 cells in green to alpha; the detail noise (pass 1) inverted
+// Worley at 2, 4 and 8 cells in red to blue, for their edges.
+layout(local_size_x = 4, local_size_y = 4, local_size_z = 4) in;
+
+layout(set = 0, binding = 0, rgba8) uniform writeonly image3D shape_out;
+layout(set = 0, binding = 1, rgba8) uniform writeonly image3D detail_out;
+layout(push_constant) uniform Pass {
+    uint which;
+} pass;
+
+uint hash(uint x) {
+    x ^= x >> 16;
+    x *= 0x7feb352du;
+    x ^= x >> 15;
+    x *= 0x846ca68bu;
+    x ^= x >> 16;
+    return x;
+}
+
+// A lattice point's random vector, 0 to 1, by its cell wrapped to `period`.
+vec3 random3(ivec3 cell, int period, uint seed) {
+    ivec3 wrapped = ((cell % period) + period) % period;
+    uint h = hash(uint(wrapped.x) + hash(uint(wrapped.y) + hash(uint(wrapped.z) + seed)));
+    return vec3(h & 0x3ffu, (h >> 10) & 0x3ffu, (h >> 20) & 0x3ffu) / 1023.0;
+}
+
+// Inverted Worley noise at `p` (in cells, wrapping every `period` cells):
+// 1 at the feature points, falling to 0 a cell away.
+float worley(vec3 p, int period, uint seed) {
+    ivec3 base = ivec3(floor(p));
+    float nearest = 1.0e9;
+    for (int z = -1; z <= 1; z++) {
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                ivec3 cell = base + ivec3(x, y, z);
+                vec3 point = vec3(cell) + random3(cell, period, seed);
+                vec3 d = point - p;
+                nearest = min(nearest, dot(d, d));
+            }
+        }
+    }
+    return 1.0 - clamp(sqrt(nearest), 0.0, 1.0);
+}
+
+// Tiling gradient noise at `p` (in cells, wrapping every `period`), about
+// -1 to 1.
+float perlin(vec3 p, int period, uint seed) {
+    ivec3 cell = ivec3(floor(p));
+    vec3 f = p - vec3(cell);
+    vec3 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+    float corners[8];
+    for (int k = 0; k < 8; k++) {
+        ivec3 offset = ivec3(k & 1, (k >> 1) & 1, (k >> 2) & 1);
+        vec3 gradient = normalize(random3(cell + offset, period, seed) * 2.0 - 1.0 + 1.0e-4);
+        corners[k] = dot(gradient, f - vec3(offset));
+    }
+    float x0 = mix(corners[0], corners[1], u.x);
+    float x1 = mix(corners[2], corners[3], u.x);
+    float x2 = mix(corners[4], corners[5], u.x);
+    float x3 = mix(corners[6], corners[7], u.x);
+    return mix(mix(x0, x1, u.y), mix(x2, x3, u.y), u.z);
+}
+
+// Three octaves of Worley from `cells` cells across the volume.
+float worley_fbm(vec3 at, int cells, uint seed) {
+    return worley(at * float(cells), cells, seed) * 0.625
+        + worley(at * float(cells * 2), cells * 2, seed + 1u) * 0.25
+        + worley(at * float(cells * 4), cells * 4, seed + 2u) * 0.125;
+}
+
+float remap(float value, float low, float high, float to_low, float to_high) {
+    return to_low + (clamp(value, low, high) - low) / max(high - low, 1.0e-5) * (to_high - to_low);
+}
+
+void main() {
+    ivec3 voxel = ivec3(gl_GlobalInvocationID);
+    int side = pass.which == 0u ? imageSize(shape_out).x : imageSize(detail_out).x;
+    if (any(greaterThanEqual(voxel, ivec3(side)))) {
+        return;
+    }
+    // The voxel's place in the volume, 0 to 1.
+    vec3 at = (vec3(voxel) + 0.5) / float(side);
+    if (pass.which == 0u) {
+        float billows = 0.0;
+        float amplitude = 1.0;
+        float sum = 0.0;
+        for (int octave = 0; octave < 4; octave++) {
+            int cells = 4 << octave;
+            billows += amplitude * perlin(at * float(cells), cells, 7u + uint(octave));
+            sum += amplitude;
+            amplitude *= 0.5;
+        }
+        billows = billows / sum * 0.5 + 0.5;
+        float cellular = worley_fbm(at, 4, 11u);
+        float perlin_worley = remap(billows, cellular - 1.0, 1.0, 0.0, 1.0);
+        imageStore(shape_out, voxel, vec4(perlin_worley, worley_fbm(at, 4, 21u),
+                                          worley_fbm(at, 8, 31u), worley_fbm(at, 16, 41u)));
+    } else {
+        imageStore(detail_out, voxel, vec4(worley_fbm(at, 2, 51u), worley_fbm(at, 4, 61u),
+                                           worley_fbm(at, 8, 71u), 1.0));
+    }
+}

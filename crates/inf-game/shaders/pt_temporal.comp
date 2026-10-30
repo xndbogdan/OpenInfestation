@@ -1,0 +1,657 @@
+#version 460
+// The bounce light's history: each pixel finds where its point was in the
+// last traced frame (through that frame's view and the world's 16-bit
+// wrap), takes the last frame's mean there where the surface is still the
+// same one (its distance and normal agree), and adds this frame's sample.
+// Moving models and newly seen surfaces start again. The sun's visibility
+// (the bounce sample's alpha) keeps a shorter history of its own, held
+// within what this frame's neighbourhood sees, so a moving shadow leaves
+// no trail. The path pass traces one pixel of each two by two a frame
+// (path_offset, unless Ray Reconstruction takes every pixel); the others
+// take the traced samples round them on the same surface. A surface just
+// come into view (no history, pt_history.glsl) starts from the traced
+// samples of five by five of the lattice round it on its surface, not one
+// (NRD's history fix): its first frames are as quiet as a few frames'
+// history, at the cost of reads where history was lost alone. Where this
+// frame's traced samples round a pixel all lie below its history's mean (or
+// all above) for longer than its light's own samples would by chance, the
+// light has changed (a lamp, a blast, the clouds' shadow) and the history
+// gives way to its last few frames, so no light lags a second behind it
+// (the anti-lag, as NRD's; lag_test). The chance is the history's own: how
+// often its samples lay above its mean, rarely for a small light met by
+// few rays, so the frames between its hits are what it gives and not the
+// light going out.
+//
+// A metal's (or a wet coat's) glossy bounce keeps a history of its own
+// beside the diffuse one (the path pass takes one lobe or the other at each
+// traced pixel, glossy_hit says which): each lobe's history takes only its
+// own samples, and the filter's last pass weighs the two by metalness as the
+// path pass's pick did. The glossy light moves with what it reflects, not
+// with the surface, so its history is found where its reflected image lay
+// (NRD's virtual motion): the point the lobe's light seems to come from,
+// behind the surface along the view by the glossy ray's length (all of it
+// for a mirror, less as roughness spreads the lobe, pt_glossy.glsl), with a
+// moving mirror's own motion as a mirror shows it. Its history holds as many
+// frames as the view to that image takes to turn across the lobe's width:
+// all of them while the camera keeps still, few on a sharp lobe while it
+// moves, so a reflection follows the view instead of smearing behind it.
+// Beside it runs the reach the history's light came from: where that lay
+// at another depth than this frame's (a reflection's trailing edge, whose
+// rays now meet what lies past it), the eye's move parts the two images and
+// the history shortens as for the view's turn (NRD's hit-distance check);
+// with the eye still too, it shortens to the short history's frames where
+// what the metal mirrors moved along its rays (a model passing it). Where
+// the reflected image's place held no glossy history (a mirror's edge, a
+// curved hull) it follows the surface's own motion, and only with no
+// history at all does it start from the wider lattice's samples, no wider
+// than the lobe's footprint, so a sharp reflection stays sharp.
+// The glossy lobe's history is a dispatch of its own (this source built
+// with GLOSSY_PASS), after the diffuse one, over the pixels with a glossy
+// lobe: the diffuse pass keeps its registers, and its speed, everywhere.
+// It marks in the sign of the diffuse history's alpha whether a pixel's
+// glossy history holds frames (pt_glossy.glsl's flag), so the filter and
+// the next frame touch the glossy images only there.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+
+layout(set = 0, binding = 1, rgba16f) uniform readonly image2D bounce;
+layout(set = 0, binding = 2, rgba16f) uniform readonly image2D geometry;
+// The mean bounce light, and in alpha how many frames it holds.
+layout(set = 0, binding = 3, rgba16f) uniform readonly image2D previous_history;
+layout(set = 0, binding = 4, rgba16f) uniform readonly image2D previous_geometry;
+#ifdef GLOSSY_PASS
+// Read back to mark the pixels whose glossy history holds frames.
+layout(set = 0, binding = 5, rgba16f) uniform image2D history;
+#else
+layout(set = 0, binding = 5, rgba16f) uniform writeonly image2D history;
+#endif
+// The sun's mean visibility, and in green how many frames it holds.
+layout(set = 0, binding = 6, rg16f) uniform readonly image2D previous_shadows;
+layout(set = 0, binding = 7, rg16f) uniform writeonly image2D shadows;
+// The direct light, whose alpha is how much bounce light a pixel takes.
+layout(set = 0, binding = 8, rgba16f) uniform readonly image2D direct;
+// Each primary hit's own motion (where its model's point was in the last
+// frame, less where it is), and its face and material (the trace's).
+layout(set = 0, binding = 9, rgba16f) uniform readonly image2D object_motion;
+layout(set = 0, binding = 10, rgba16f) uniform readonly image2D path_surface;
+// The anti-lag's record (lag_test): the share of the samples the history
+// took that lay above its mean, and the evidence of the run of frames whose
+// samples all lay on one side, the last frame's and this frame's.
+layout(set = 0, binding = 11, rg16f) uniform readonly image2D previous_lag_record;
+layout(set = 0, binding = 12, rg16f) uniform writeonly image2D lag_record;
+// Where the path pass's bounce at a traced pixel was glossy, its ray's
+// length (0 where it cast none), else -1; its light is in `bounce`.
+layout(set = 0, binding = 13, r16f) uniform readonly image2D glossy_hit;
+// The glossy bounce light's mean, and in alpha how many frames it holds (0
+// where a pixel has no glossy lobe), the last frame's and this frame's.
+layout(set = 0, binding = 14, rgba16f) uniform readonly image2D previous_glossy;
+layout(set = 0, binding = 15, rgba16f) uniform writeonly image2D glossy;
+// The filter's second glossy layer, whose alpha the temporal pass leaves
+// each glossy pixel's lobe footprint in (pixels, pt_glossy.glsl) for the
+// filter's first pass to read.
+layout(set = 0, binding = 16, rgba16f) uniform writeonly image2D glossy_footprint;
+// Beside the glossy history, written only where a pixel has a glossy lobe:
+// its short history, and how far the light it holds lies along its rays
+// (the mean of the glossy rays' lengths, as its light's), the last frame's
+// and this frame's.
+layout(set = 0, binding = 17, rg16f) uniform readonly image2D previous_glossy_track;
+layout(set = 0, binding = 18, rg16f) uniform writeonly image2D glossy_track;
+
+#define HISTORY_GEOMETRY previous_geometry
+#define HISTORY_MOTION object_motion
+#include "pt_history.glsl"
+#include "pt_glossy.glsl"
+
+// The most frames a mean holds: past it, each new frame still counts one
+// part in this many, so changing light comes through.
+const float MOST_FRAMES = 32.0;
+const float SHADOW_FRAMES = 12.0;
+// Under an upscaler, whose own history follows: two long histories stacked
+// smear.
+const float MOST_UPSCALED_FRAMES = 12.0;
+// How few frames a history holds where its light changed (the glossy short
+// history's frames), and the anti-lag's evidence (lag_test) where the
+// diffuse history begins to give way and where it holds FAST_FRAMES alone:
+// the run of samples a chance of one in a hundred under the history's
+// light (ln 100), and of one in three thousand.
+const float FAST_FRAMES = 4.0;
+const float LAG_START = 4.6;
+const float LAG_FULL = 8.0;
+// The glossy lobe's anti-lag: how far apart its short and long means may
+// lie before the long one gives way, in standard errors of their
+// difference.
+const float LAG_ERRORS = 3.0;
+// How far the path pass's glossy rays reach (pt_trace.comp's BOUNCE_REACH).
+const float GLOSSY_REACH = 8192.0;
+// The wide gather's falloff (gather's), about ten pixels across.
+const float WIDE_FALLOFF = 0.25;
+// How far the glossy history's reach may part from this frame's, as a
+// share of the further, before the history begins to shorten, and by how
+// far it holds the short history's frames alone (the share counted as far
+// as the lobe's light lies along its rays, dominant_share).
+const float REACH_KEPT = 0.15;
+const float REACH_GONE = 0.5;
+
+float luminance(vec3 c) {
+    return dot(c, vec3(0.2126, 0.7152, 0.0722));
+}
+
+// Whether the path pass's bounce at traced pixel `tap` was glossy.
+bool glossy_at(ivec2 tap) {
+    return imageLoad(glossy_hit, tap).r >= 0.0;
+}
+
+#ifdef GLOSSY_PASS
+// The spread of one lobe's bounce light samples this frame round `pixel`
+// on its surface (`here`): the traced pixel of its two by two and the four
+// beside it on the lattice, where they lie on the same surface and took
+// that lobe.
+float spatial_spread(ivec2 pixel, vec4 here, ivec2 size, bool glossy) {
+    bool every = frame.guides > 0.5;
+    int stride = every ? 1 : 2;
+    ivec2 offset = path_offset();
+    ivec2 base = every ? pixel : (((pixel - offset) >> 1) << 1) + offset;
+    const ivec2 taps[5] = ivec2[5](ivec2(0, 0), ivec2(1, 0), ivec2(-1, 0), ivec2(0, 1),
+                                   ivec2(0, -1));
+    float sum = 0.0;
+    float squares = 0.0;
+    float count = 0.0;
+    for (int i = 0; i < 5; i++) {
+        ivec2 tap = base + stride * taps[i];
+        if (any(lessThan(tap, ivec2(0))) || any(greaterThanEqual(tap, size))) {
+            continue;
+        }
+        vec4 there = imageLoad(geometry, tap);
+        if (there.w <= 0.0 || abs(there.w - here.w) > 0.03 * here.w + 2.0
+            || dot(there.xyz, here.xyz) < 0.9 || glossy_at(tap) != glossy) {
+            continue;
+        }
+        float l = luminance(imageLoad(bounce, tap).rgb);
+        sum += l;
+        squares += l * l;
+        count += 1.0;
+    }
+    if (count < 2.0) {
+        return 1.0e9;
+    }
+    float mean = sum / count;
+    return sqrt(max(squares / count - mean * mean, 0.0));
+}
+#else
+// The traced diffuse samples of the lattice round this workgroup's eight by
+// eight pixels (four or five lattice steps across, and two round them), read
+// once for the group for the anti-lag: each one's geometry, and the
+// luminance of its light where it takes bounce light (else -1). The temporal
+// passes run only on the lattice (Ray Reconstruction, which traces every
+// pixel, runs none of them). Packed (its normal at 8 bits a component, its
+// distance and light at 16), as reading the tile is the test's cost.
+const int TILE = 9;
+shared uint tile_normal[TILE * TILE];
+shared uint tile_distance_light[TILE * TILE];
+
+// The lattice step of the tile's first sample.
+ivec2 tile_corner() {
+    return ((ivec2(gl_WorkGroupID.xy) * 8 - path_offset()) >> 1) - 2;
+}
+
+// By every invocation of the group, before any returns.
+void load_tile(ivec2 size) {
+    ivec2 corner = tile_corner();
+    ivec2 offset = path_offset();
+    for (int i = int(gl_LocalInvocationIndex); i < TILE * TILE; i += 64) {
+        ivec2 tap = (corner + ivec2(i % TILE, i / TILE)) * 2 + offset;
+        vec4 there = vec4(0.0);
+        float light = -1.0;
+        if (all(greaterThanEqual(tap, ivec2(0))) && all(lessThan(tap, size))) {
+            there = imageLoad(geometry, tap);
+            if (there.w > 0.0 && imageLoad(direct, tap).a > 0.0 && !glossy_at(tap)) {
+                light = luminance(imageLoad(bounce, tap).rgb);
+            }
+        }
+        tile_normal[i] = packSnorm4x8(vec4(there.xyz, 0.0));
+        tile_distance_light[i] = packHalf2x16(vec2(there.w, light));
+    }
+    barrier();
+}
+
+// The ring of the five by five round a pixel's three by three of the
+// lattice, which lag_test reads after it.
+const ivec2 RING[16] = ivec2[16](ivec2(-2, -2), ivec2(-1, -2), ivec2(0, -2), ivec2(1, -2),
+                                 ivec2(2, -2), ivec2(-2, -1), ivec2(2, -1), ivec2(-2, 0),
+                                 ivec2(2, 0), ivec2(-2, 1), ivec2(2, 1), ivec2(-2, 2),
+                                 ivec2(-1, 2), ivec2(0, 2), ivec2(1, 2), ivec2(2, 2));
+
+// The anti-lag at `pixel` (`here`), whose history's light has luminance
+// `mean` and whose record is `last` (lag_record's), by this frame's traced
+// diffuse samples round it on its surface (five by five of the lattice, the
+// tile's). Under the history's light a sample lies above its mean as often
+// as the record's share says (small for a sparse light, whose rare hits
+// lift the mean; about half for even light), so a frame whose samples all
+// lie below it (or all above) has a chance under it of the product of those
+// shares, and a run of such frames the product of theirs: its log, the
+// run's evidence, grows each frame the run goes on (below positive, above
+// negative). Past LAG_START the long history gives way, by LAG_FULL to
+// FAST_FRAMES. A test by this frame's spread round the pixel (five samples)
+// instead read the frames between a small light's rare hits as the light
+// going out (none of the five met it, so they agreed), and a small light
+// met only by bounce rays settled at 71% of what it gives.
+struct Lag {
+    float cut;
+    // This frame's share of the samples above the mean (-1 with none on
+    // the surface), and the run's evidence kept, cleared once it cut fully.
+    float share;
+    float evidence;
+};
+
+Lag lag_test(ivec2 pixel, vec4 here, float mean, vec2 last) {
+    ivec2 at = ((pixel - path_offset()) >> 1) - tile_corner();
+    float apart = 0.05 * mean + 1.0e-3;
+    float above = 0.0;
+    float below = 0.0;
+    float count = 0.0;
+    // The share above the mean, from the three by three (all of it, so a
+    // stop does not lean it); the ring only while every sample so far lies
+    // on one side, as a mixed frame ends the run whatever the rest show.
+    float share_above = 0.0;
+    float share_count = 0.0;
+    for (int t = 0; t < 25; t++) {
+        if (t == 9) {
+            share_above = above;
+            share_count = count;
+        }
+        if (t >= 9 && above > 0.0 && below > 0.0) {
+            break;
+        }
+        ivec2 o = t < 9 ? ivec2(t % 3 - 1, t / 3 - 1) : RING[t - 9];
+        int k = (at.y + o.y) * TILE + at.x + o.x;
+        vec2 distance_light = unpackHalf2x16(tile_distance_light[k]);
+        float light = distance_light.y;
+        if (light < 0.0 || abs(distance_light.x - here.w) > 0.03 * here.w + 2.0
+            || dot(unpackSnorm4x8(tile_normal[k]).xyz, here.xyz) < 0.9) {
+            continue;
+        }
+        above += float(light > mean + apart);
+        below += float(light < mean - apart);
+        count += 1.0;
+    }
+    float share = clamp(last.x, 1.0 / 64.0, 63.0 / 64.0);
+    float evidence = last.y;
+    if (above == 0.0 && below > 0.0) {
+        evidence = max(evidence, 0.0) - below * log(1.0 - share);
+    } else if (below == 0.0 && above > 0.0) {
+        evidence = min(evidence, 0.0) + above * log(share);
+    } else if (count > 0.0) {
+        evidence = 0.0;
+    }
+    Lag lag;
+    lag.cut = clamp((abs(evidence) - LAG_START) / (LAG_FULL - LAG_START), 0.0, 1.0);
+    lag.share = share_count > 0.0 ? share_above / share_count : -1.0;
+    lag.evidence = lag.cut >= 1.0 ? 0.0 : evidence;
+    return lag;
+}
+
+// The record a history of `frames` keeps after `lag`: its share of samples
+// above its mean taken as its light's mean takes them, its run's evidence
+// (none for a history just begun, which has no mean to stand against).
+vec2 kept_record(Lag lag, vec2 last, float frames, bool begun) {
+    float share = lag.share >= 0.0 ? mix(last.x, lag.share, 1.0 / frames) : last.x;
+    return vec2(share, begun ? lag.evidence : 0.0);
+}
+#endif
+
+// This frame's samples of one lobe round `pixel` on its surface (`here`),
+// summed by weight: the four traced pixels of the lattice round it,
+// bilinearly (each at least a little, so one off the surface does not leave
+// the pixel without), or with `wide` the traced samples of five by five of
+// the lattice round it, the nearer the more (by e^(-falloff d^2), d in
+// lattice steps; the diffuse's WIDE_FALLOFF); where they lie on its surface,
+// take bounce light at all and took that lobe. For the glossy one, also
+// its rays' lengths by weight and light, where they cast one: how far off
+// the light the reflection shows lies (a ray that met only the dark tells
+// nothing of where the reflection's light is).
+struct Gathered {
+    vec3 light;
+    float weight;
+    float reach;
+    float reach_weight;
+};
+
+Gathered gather(ivec2 pixel, vec4 here, ivec2 size, bool glossy, bool wide, float falloff) {
+    Gathered sum;
+    sum.light = vec3(0.0);
+    sum.weight = 0.0;
+    sum.reach = 0.0;
+    sum.reach_weight = 0.0;
+    ivec2 offset = path_offset();
+    ivec2 q = pixel - offset;
+    ivec2 base = (q >> 1) << 1;
+    vec2 f = vec2(q - base) * 0.5;
+    int taps = wide ? 25 : 4;
+    for (int i = 0; i < taps; i++) {
+        ivec2 tap;
+        float w;
+        if (wide) {
+            tap = base + offset + 2 * ivec2(i % 5 - 2, i / 5 - 2);
+            vec2 apart = vec2(tap - pixel) * 0.5;
+            w = exp(-falloff * dot(apart, apart));
+        } else {
+            ivec2 corner = ivec2(i & 1, i >> 1);
+            tap = base + offset + 2 * corner;
+            vec2 share = mix(1.0 - f, f, vec2(corner));
+            w = max(share.x * share.y, 0.05);
+        }
+        if (any(lessThan(tap, ivec2(0))) || any(greaterThanEqual(tap, size))) {
+            continue;
+        }
+        vec4 there = imageLoad(geometry, tap);
+        if (there.w <= 0.0 || abs(there.w - here.w) > 0.03 * here.w + 2.0
+            || dot(there.xyz, here.xyz) < 0.9 || imageLoad(direct, tap).a <= 0.0) {
+            continue;
+        }
+        float reach = imageLoad(glossy_hit, tap).r;
+        if ((reach >= 0.0) != glossy) {
+            continue;
+        }
+        vec3 light = imageLoad(bounce, tap).rgb;
+        sum.light += light * w;
+        sum.weight += w;
+        if (glossy && reach > 0.0) {
+            float lit = w * (luminance(light) + 1.0e-4);
+            sum.reach += reach * lit;
+            sum.reach_weight += lit;
+        }
+    }
+    return sum;
+}
+
+#ifdef GLOSSY_PASS
+// The wide gather's falloff for a glossy lobe whose reflection spreads
+// `footprint` pixels: no wider than the lobe's footprint, so a sharp
+// reflection starts as sharp as it is (and no wider than the diffuse's).
+float glossy_falloff(float footprint) {
+    return max(WIDE_FALLOFF, 2.0 / max(footprint * footprint, 1.0));
+}
+
+// The last frame's glossy history over the taps of `last` that held one
+// (the flag): its mean, its short history and its reach, and the share of
+// the taps' weight that held one.
+float glossy_held(History last, out vec4 previous, out float fast_mean, out float reach) {
+    previous = vec4(0.0);
+    fast_mean = 0.0;
+    reach = 0.0;
+    float held = 0.0;
+    for (int i = 0; i < 4; i++) {
+        float w = last.weights[i];
+        ivec2 tap = last.base + ivec2(i & 1, i >> 1);
+        if (w <= 0.0 || imageLoad(previous_history, tap).a >= 0.0) {
+            continue;
+        }
+        previous += imageLoad(previous_glossy, tap) * w;
+        vec2 track = imageLoad(previous_glossy_track, tap).rg;
+        fast_mean += track.r * w;
+        reach += track.g * w;
+        held += w;
+    }
+    if (held > 0.01) {
+        previous /= held;
+        fast_mean /= held;
+        reach /= held;
+    }
+    return held;
+}
+
+// The glossy lobe's history at `pixel` (`here`: its geometry), for a lit
+// primary hit with glossy material `material` (the trace's): stored, and
+// whether it holds any frames.
+bool glossy_history(ivec2 pixel, vec4 here, ivec2 size, vec4 material) {
+    float rough = abs(material.w);
+    float focal = frame.focal.x * frame.target.x / frame.native.x;
+    Gathered now = gather(pixel, here, size, true, false, WIDE_FALLOFF);
+    bool from_wide = now.weight <= 0.0;
+    if (from_wide) {
+        // How far the reflection lies unknown, the furthest the rays reach.
+        now = gather(pixel, here, size, true, true,
+                     glossy_falloff(lobe_footprint(rough, here.w, GLOSSY_REACH, focal)));
+    }
+    // The reflected image: behind the surface along the view, by the share
+    // of the glossy rays' length its lobe's light seems to come from. A
+    // mirror moving by `motion` (where its point was, less where it is) moves
+    // the image of a still point by twice its motion along its normal.
+    vec3 direction = pixel_direction(vec2(pixel));
+    vec3 motion = imageLoad(object_motion, pixel).xyz;
+    vec3 normal = here.xyz;
+    bool known = now.reach_weight > 0.0;
+    float share = known ? dominant_share(rough) : 0.0;
+    float reach = known ? now.reach / now.reach_weight : 0.0;
+    vec3 carried = mix(motion, 2.0 * dot(motion, normal) * normal, share);
+    History last;
+    last.base = ivec2(0);
+    last.weights = vec4(0.0);
+    last.total = 0.0;
+    vec3 relative = vec3(0.0);
+    float parallax = 0.0;
+    if (frame.history_valid > 0.5) {
+        relative = from_previous_eye(direction * (here.w + reach * share), carried);
+        // The last frame's view saw the image through this surface where its
+        // ray toward it crossed the surface as it lay then.
+        vec3 toward = normalize(relative);
+        float across = dot(toward, normal);
+        vec3 surface = from_previous_eye(direction * here.w, motion);
+        if (across < -1.0e-3) {
+            last = history_at(relative, dot(surface, normal) / across, normal, size);
+        }
+        parallax = acos(clamp(dot(direction, toward), -1.0, 1.0));
+    }
+    vec4 previous;
+    float previous_fast_mean;
+    float previous_reach;
+    // Only where the last frame had a glossy lobe (its flag): elsewhere
+    // nothing wrote the glossy history.
+    bool followed = glossy_held(last, previous, previous_fast_mean, previous_reach) > 0.01;
+    if (!followed) {
+        // None where the reflected image lay (a mirror's edge, a curved
+        // hull): where the surface itself lay, as the diffuse follows it,
+        // held to the view's turn as the image's would be (most, below).
+        followed = glossy_held(history_taps(pixel, here, size), previous, previous_fast_mean,
+                               previous_reach) > 0.01;
+    }
+    // How far the history's reach parts from this frame's, as a share.
+    float reach_moved = 0.0;
+    if (followed) {
+        // The history's own image lay as far off as its rays reached then:
+        // where that differs from this frame's (the trailing edge of a
+        // reflection that moved on, whose rays now meet what lies past it),
+        // the eye's move sees the two images apart, and the history holds a
+        // reflection turned that far from this one.
+        if (known && previous_reach > 0.0) {
+            vec3 held = from_previous_eye(direction * (here.w + previous_reach * share), carried);
+            parallax = max(parallax, acos(clamp(dot(normalize(relative), normalize(held)), -1.0,
+                                                1.0)));
+            // With the eye still too: where this frame's rays meet their
+            // light at another depth, what it mirrors moved along them (a
+            // model passing a still metal), and the history holds another
+            // image. Where they bring less than half the history's light,
+            // they say so only once the short history agrees (a lone miss
+            // of a sparse hit says nothing).
+            float now_lit = now.weight > 0.0 ? luminance(now.light / now.weight) : 0.0;
+            float held_lit = luminance(previous.rgb);
+            float short_lit =
+                mix(previous_fast_mean, now_lit, 1.0 / min(previous.a + 1.0, FAST_FRAMES));
+            bool told = now_lit >= 0.5 * held_lit || short_lit < 0.5 * held_lit;
+            reach_moved = told ? share * abs(reach - previous_reach) / max(reach, previous_reach)
+                               : 0.0;
+        }
+    } else if (!from_wide) {
+        // No history: start from the wider lattice's samples, as the
+        // diffuse does, no wider than the lobe's footprint.
+        Gathered wide =
+            gather(pixel, here, size, true, true,
+                   glossy_falloff(lobe_footprint(rough, here.w, known ? reach : GLOSSY_REACH, focal)));
+        if (wide.weight > 0.0) {
+            now = wide;
+            known = now.reach_weight > 0.0;
+            reach = known ? now.reach / now.reach_weight : 0.0;
+        }
+    }
+    float most = frame.upscaling > 0.5 ? MOST_UPSCALED_FRAMES : MOST_FRAMES;
+    most = clamp(lobe_width(rough) / max(parallax, 1.0e-6), 1.0, most);
+    most = mix(most, min(most, FAST_FRAMES), smoothstep(REACH_KEPT, REACH_GONE, reach_moved));
+    // The filter's reach: where no glossy ray near says how far the
+    // reflection lies, as far as the rays reach.
+    imageStore(glossy_footprint, pixel,
+               vec4(0.0, 0.0, 0.0,
+                    max(lobe_footprint(rough, here.w, known ? reach : GLOSSY_REACH, focal),
+                        1.0 / 64.0)));
+    if (now.weight <= 0.0) {
+        // Nothing traced near took the glossy lobe: its histories stand.
+        imageStore(glossy, pixel, vec4(previous.rgb, min(previous.a, most)));
+        imageStore(glossy_track, pixel, vec4(previous_fast_mean, previous_reach, 0.0, 0.0));
+        return min(previous.a, most) > 0.0;
+    }
+    vec3 sample_light = now.light / now.weight;
+    float frames = min(previous.a + 1.0, most);
+    // The anti-lag, as the diffuse's.
+    float fast_frames = min(previous.a + 1.0, FAST_FRAMES);
+    float fast_mean = mix(previous_fast_mean, luminance(sample_light), 1.0 / fast_frames);
+    float floor_apart = 0.05 * fast_mean + 1.0e-3;
+    if (previous.a > 0.0 && abs(luminance(previous.rgb) - fast_mean) > floor_apart) {
+        float spread = spatial_spread(pixel, here, size, true);
+        float error = spread * sqrt(1.0 / fast_frames + 1.0 / max(previous.a, 1.0));
+        float apart = abs(luminance(previous.rgb) - fast_mean) / (LAG_ERRORS * error + floor_apart);
+        frames = min(frames, mix(most, fast_frames, clamp(apart - 1.0, 0.0, 1.0)));
+    }
+    imageStore(glossy, pixel, vec4(mix(previous.rgb, sample_light, 1.0 / frames), frames));
+    // The history's reach as its light's: each frame's weighed by its light,
+    // so frames whose rays met only the dark (a reflection's flank) leave
+    // it where the light it holds came from.
+    float then_light = previous_reach > 0.0 ? luminance(previous.rgb) * (1.0 - 1.0 / frames) : 0.0;
+    float now_light = known ? (luminance(sample_light) + 1.0e-4) / frames : 0.0;
+    float held_reach = then_light + now_light > 0.0
+        ? (then_light * previous_reach + now_light * reach) / (then_light + now_light)
+        : previous_reach;
+    imageStore(glossy_track, pixel, vec4(fast_mean, held_reach, 0.0, 0.0));
+    return true;
+}
+
+// The glossy pass: each lit primary hit with a glossy lobe, after the
+// diffuse pass.
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 size = ivec2(frame.target);
+    if (pixel.x >= size.x || pixel.y >= size.y) {
+        return;
+    }
+    // The material first: most pixels leave on its one read (the trace
+    // writes it at every lit hit, so a stale one is only where the pixel is
+    // not lit, which the direct light's alpha then says).
+    vec4 material = imageLoad(path_surface, pixel);
+    if (material.z <= 0.0) {
+        return;
+    }
+    vec4 here = imageLoad(geometry, pixel);
+    if (here.w <= 0.0 || imageLoad(direct, pixel).a <= 0.0
+        || !glossy_history(pixel, here, size, material)) {
+        return;
+    }
+    vec4 diffuse = imageLoad(history, pixel);
+    imageStore(history, pixel, vec4(diffuse.rgb, flagged(diffuse.a, true)));
+}
+#else
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 size = ivec2(frame.target);
+    bool inside = pixel.x < size.x && pixel.y < size.y;
+    vec4 here = inside ? imageLoad(geometry, pixel) : vec4(0.0);
+    // The pixel's own reads before the tile's, which every invocation of
+    // the group shares (so they overlap the wait for it).
+    vec4 sampled = vec4(0.0);
+    vec3 sample_light = vec3(0.0);
+    bool fresh = true;
+    vec4 previous = vec4(0.0);
+    vec2 previous_record = vec2(0.0);
+    vec2 previous_shadow = vec2(0.0);
+    if (here.w > 0.0) {
+        sampled = imageLoad(bounce, pixel);
+        sample_light = sampled.rgb;
+        // Where it was in the last frame.
+        History last = history_taps(pixel, here, size);
+        bool followed = last.total > 0.01;
+        if (frame.guides < 0.5 && !followed) {
+            // No history: the traced samples of the lattice round it, five by
+            // five.
+            Gathered wide = gather(pixel, here, size, false, true, WIDE_FALLOFF);
+            fresh = wide.weight > 0.0;
+            sample_light = fresh ? wide.light / wide.weight : vec3(0.0);
+        } else if (frame.guides < 0.5
+                   && (any(notEqual((pixel - path_offset()) & 1, ivec2(0))) || glossy_at(pixel))) {
+            // Untraced this frame, or its bounce took the glossy lobe: the four
+            // traced pixels of the lattice round it.
+            Gathered four = gather(pixel, here, size, false, false, WIDE_FALLOFF);
+            fresh = four.weight > 0.0;
+            sample_light = fresh ? four.light / four.weight : vec3(0.0);
+        }
+        if (followed) {
+            // The last frame's means there (a moving model's own motion with
+            // it, so it keeps its history).
+            for (int i = 0; i < 4; i++) {
+                float w = last.weights[i];
+                if (w <= 0.0) {
+                    continue;
+                }
+                ivec2 tap = last.base + ivec2(i & 1, i >> 1);
+                vec4 then = imageLoad(previous_history, tap);
+                then.a = unflagged(then.a);
+                previous += then * w;
+                previous_record += imageLoad(previous_lag_record, tap).rg * w;
+                previous_shadow += imageLoad(previous_shadows, tap).rg * w;
+            }
+            previous /= last.total;
+            previous_record /= last.total;
+            previous_shadow /= last.total;
+        }
+    }
+    load_tile(size);
+    if (!inside) {
+        return;
+    }
+    if (here.w <= 0.0) {
+        imageStore(history, pixel, vec4(0.0));
+        imageStore(lag_record, pixel, vec4(0.0));
+        imageStore(shadows, pixel, vec4(1.0, 0.0, 0.0, 0.0));
+        return;
+    }
+    float most = frame.upscaling > 0.5 ? MOST_UPSCALED_FRAMES : MOST_FRAMES;
+    if (fresh) {
+        float frames = min(previous.a + 1.0, most);
+        Lag lag = lag_test(pixel, here, luminance(previous.rgb), previous_record);
+        if (previous.a > 0.0) {
+            frames = min(frames, mix(most, min(previous.a + 1.0, FAST_FRAMES), lag.cut));
+        }
+        imageStore(history, pixel, vec4(mix(previous.rgb, sample_light, 1.0 / frames), frames));
+        imageStore(lag_record, pixel,
+                   vec4(kept_record(lag, previous_record, frames, previous.a > 0.0), 0.0, 0.0));
+    } else {
+        // Nothing traced near on its surface: its histories stand.
+        imageStore(history, pixel, vec4(previous.rgb, min(previous.a, most)));
+        imageStore(lag_record, pixel, vec4(previous_record, 0.0, 0.0));
+    }
+    float lowest = sampled.a;
+    float highest = sampled.a;
+    for (int y = -1; y <= 1; y++) {
+        for (int x = -1; x <= 1; x++) {
+            float seen = imageLoad(bounce, clamp(pixel + ivec2(x, y), ivec2(0), size - 1)).a;
+            lowest = min(lowest, seen);
+            highest = max(highest, seen);
+        }
+    }
+    float kept = clamp(previous_shadow.r, lowest, highest);
+    float shadow_frames = min(previous_shadow.g + 1.0, SHADOW_FRAMES);
+    imageStore(shadows, pixel,
+               vec4(mix(kept, sampled.a, 1.0 / shadow_frames), shadow_frames, 0.0, 0.0));
+}
+#endif

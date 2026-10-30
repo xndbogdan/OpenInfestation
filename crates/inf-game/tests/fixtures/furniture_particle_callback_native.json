@@ -1,0 +1,294 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "cases": [
+    {
+      "input": {
+        "selector": 0,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "burst",
+        "count": 16,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "radius": 20,
+        "central": 1,
+        "debris": [
+          1,
+          1
+        ],
+        "speed": 8,
+        "flags": 0
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 0,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "burst",
+        "count": 16,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "radius": 20,
+        "central": 1,
+        "debris": [
+          1,
+          1
+        ],
+        "speed": 8,
+        "flags": 0
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "selector": 1,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "emitter",
+        "selector": 10,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 1,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "emitter",
+        "selector": 10,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "selector": 2,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "emitter",
+        "selector": 13,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 2,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "emitter",
+        "selector": 13,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "selector": 3,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "central",
+        "selector": 3,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 3,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "central",
+        "selector": 3,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "selector": 5,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "central",
+        "selector": 5,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 5,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "central",
+        "selector": 5,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "selector": 4294967295,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": false
+      },
+      "call": {
+        "kind": "central",
+        "selector": 4294967295,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "selector": 4294967295,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "stop": true
+      },
+      "call": {
+        "kind": "central",
+        "selector": 4294967295,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "flags": 0,
+        "same_position": true
+      },
+      "normal_return": false
+    }
+  ],
+  "boundary": "unmodified wrapper stopped at actual lower entry; successful suffix separately supplied lower return"
+}

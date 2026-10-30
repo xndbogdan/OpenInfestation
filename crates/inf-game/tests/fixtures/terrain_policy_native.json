@@ -1,0 +1,1463 @@
+{
+  "schema": 1,
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "scope": "Original policy leaves with supplied resource/preparation boundaries; no setting or first-load value inferred from capture.",
+  "startup_pair": [
+    256,
+    255
+  ],
+  "temporary_fine_direct_calls": [
+    4233783,
+    4235059,
+    4419878,
+    4420631,
+    4441304,
+    4441818,
+    4679256
+  ],
+  "absolute_temporary_fine_references": [],
+  "guards": [
+    [
+      4522688,
+      "a1dced5500568bf18b0085c075128b15d8ed550050b9d8ed5500ff1285c0740a8b4804f6c520740233f68bc65e83e800741948752ac705f072530080000000c705f47253007f000000eb14c705f072530000010000c705f4725300ff000000a13cee55008b0085c0750e8b1538ee550050b938ee5500ff126a008bc8e85f030000c39090909090909090"
+    ],
+    [
+      4522832,
+      "c705f072530080000000c705f47253007f000000c3"
+    ],
+    [
+      4522864,
+      "a1dced55008b0085c075128b15d8ed550050b9d8ed5500ff1285c0740c8b4804f6c520740433c0eb08e8123701008b407083e8007418487529c705f072530080000000c705f47253007f000000c3c705f072530000010000c705f4725300ff000000c3"
+    ],
+    [
+      4459296,
+      "e88b2f02008b507033c93bd60f95c1e88cf70000"
+    ],
+    [
+      4237703,
+      "33c9e832590400"
+    ],
+    [
+      4775285,
+      "f64704807416c705f872530004000000c705bc83540009000000eb14c705f872530005000000c705bc835400080000008b4704f6c420740733c9e80c25fcff"
+    ]
+  ],
+  "cases": [
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            128,
+            127
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "configure",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [
+        {
+          "kind": "h12",
+          "pair": [
+            256,
+            255
+          ]
+        },
+        {
+          "kind": "prepare",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "temporary",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            128,
+            127
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 128,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 0,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 0,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 1,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        128,
+        127
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 1,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 2,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 2,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": null
+      },
+      "events": [
+        {
+          "kind": "h14",
+          "pair": [
+            256,
+            255
+          ]
+        }
+      ],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 32
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    },
+    {
+      "input": {
+        "mode": "restore",
+        "spacing": 256,
+        "detail": 4294967295,
+        "flags": 8224
+      },
+      "events": [],
+      "pair": [
+        256,
+        255
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+#version 460
+// One pass of the bounce light's edge-aware filter (an a-trous wavelet: a
+// 5x5 B3 spline kernel whose taps spread by `step`). A neighbour counts
+// only while it lies on the pixel's surface: its normal agrees and it sits
+// on the pixel's plane. The passes run at steps 1, 2 and 4 between the
+// layers named by the push constants. The first two also filter the sun's
+// visibility (the first the temporal pass's), in the layers' alpha, which
+// the last keeps: a shadow's edge softens by several pixels, as the sun's
+// wide disc (2.25 degrees) wants of one ray a pixel, and no more. A
+// neighbour also counts less the further its light lies from the pixel's,
+// against the spread of the light round the pixel (SVGF's luminance stop),
+// so the light's own edges keep their shape.
+//
+// A metal's (or a wet coat's) glossy bounce light, in its own layers,
+// takes the first two passes with stops of its own: a neighbour counts only
+// while it has a glossy lobe and lies within the lobe's footprint (how far
+// the reflection of what the rays met spreads, pt_glossy.glsl: a reflection
+// stays as sharp as its lobe), its normal may part from the pixel's by no
+// more than the lobe is wide (and no more than the diffuse's), and the
+// luminance stop against the glossy light's own spread. The last pass
+// weighs the two lobes by metalness, as the path pass picked between them,
+// into the diffuse's layer the resolve reads. The glossy passes are
+// dispatches of their own (this source built with GLOSSY_PASS), each after
+// the diffuse pass at its step, over the pixels the flag in the diffuse
+// layers' alpha marks (pt_glossy.glsl): the diffuse passes keep their
+// registers, and their speed, everywhere.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+
+// 0: this frame's history, 1 and 2: the passes' ping-pong layers.
+layout(set = 0, binding = 1, rgba16f) uniform image2D layers[3];
+layout(set = 0, binding = 2, rgba16f) uniform readonly image2D geometry;
+layout(set = 0, binding = 3, rg16f) uniform readonly image2D shadows;
+// The glossy bounce light's layers, as the diffuse's (alpha: in the history
+// the frames it holds, in the pair the lobe's footprint in pixels, which the
+// temporal pass leaves in the second for the first pass), written only where
+// a pixel has a glossy lobe (the flag in the diffuse layers' alpha,
+// pt_glossy.glsl), and each lit primary hit's face and material (the
+// trace's: its metalness and roughness).
+layout(set = 0, binding = 4, rgba16f) uniform image2D glossy_layers[3];
+layout(set = 0, binding = 5, rgba16f) uniform readonly image2D path_surface;
+
+layout(push_constant) uniform Pass {
+    int step;
+    int source;
+    int destination;
+    // 1 for the last pass, which weighs the lobes together.
+    int last;
+} pass;
+
+#include "pt_glossy.glsl"
+
+const float KERNEL[3] = float[](3.0 / 8.0, 1.0 / 4.0, 1.0 / 16.0);
+// The widest step that still filters the sun's visibility.
+const int SHADOW_STEP = 2;
+// How many spreads of the light round the pixel a neighbour's may differ by
+// before it counts for little (SVGF's 4).
+const float LIGHT_STOP = 4.0;
+// The diffuse's normal stop, the power of the normals' cosine: the glossy
+// one is never looser.
+const float NORMAL_POWER = 32.0;
+
+float luminance(vec3 light) {
+    return dot(light, vec3(0.2126, 0.7152, 0.0722));
+}
+
+
+#ifdef GLOSSY_PASS
+// The glossy pass at this step: each pixel the flag marks, from the glossy
+// layer the diffuse pass's source names to its destination.
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 size = ivec2(frame.target);
+    if (pixel.x >= size.x || pixel.y >= size.y || imageLoad(layers[pass.source], pixel).a >= 0.0) {
+        return;
+    }
+    vec4 here = imageLoad(geometry, pixel);
+    vec4 glossy_centre = imageLoad(glossy_layers[pass.source], pixel);
+    float glossy_lit = luminance(glossy_centre.rgb);
+    // The footprint the temporal pass left for the first pass, else the
+    // layer's alpha.
+    float footprint = pass.source == 0 ? imageLoad(glossy_layers[2], pixel).a : glossy_centre.a;
+    // Half weight where the normals part by the lobe's half-width.
+    float width = min(lobe_width(abs(imageLoad(path_surface, pixel).w)), 1.5);
+    float glossy_power = max(NORMAL_POWER, log(0.5) / log(cos(width)));
+    // The glossy light's spread round it, where its neighbours have a lobe.
+    float glossy_mean = 0.0;
+    float glossy_squares = 0.0;
+    float glossy_count = 0.0;
+    for (int y = -1; y <= 1; y++) {
+        for (int x = -1; x <= 1; x++) {
+            ivec2 tap = clamp(pixel + ivec2(x, y) * pass.step, ivec2(0), size - 1);
+            if (imageLoad(layers[pass.source], tap).a < 0.0) {
+                float g = luminance(imageLoad(glossy_layers[pass.source], tap).rgb);
+                glossy_mean += g;
+                glossy_squares += g * g;
+                glossy_count += 1.0;
+            }
+        }
+    }
+    glossy_mean /= glossy_count;
+    float glossy_spread = glossy_squares / glossy_count - glossy_mean * glossy_mean;
+    float glossy_stop = LIGHT_STOP * sqrt(max(glossy_spread, 0.0)) + 1.0e-3;
+    vec3 point = pixel_direction(vec2(pixel)) * here.w;
+    // How far off the plane a neighbour may sit, as the diffuse's.
+    float tolerance = 2.0 + 0.004 * here.w * float(pass.step);
+    vec3 glossy_sum = vec3(0.0);
+    float glossy_weight = 0.0;
+    for (int y = -2; y <= 2; y++) {
+        for (int x = -2; x <= 2; x++) {
+            ivec2 tap = pixel + ivec2(x, y) * pass.step;
+            if (any(lessThan(tap, ivec2(0))) || any(greaterThanEqual(tap, size))
+                || imageLoad(layers[pass.source], tap).a >= 0.0) {
+                continue;
+            }
+            vec4 there = imageLoad(geometry, tap);
+            vec3 other = pixel_direction(vec2(tap)) * there.w;
+            float plane = abs(dot(other - point, here.xyz));
+            vec3 near = imageLoad(glossy_layers[pass.source], tap).rgb;
+            // The luminance stop and the footprint's Gaussian in one
+            // exponential.
+            float glossy_w = KERNEL[abs(x)] * KERNEL[abs(y)] * exp(-plane / tolerance)
+                * pow(max(dot(here.xyz, there.xyz), 0.0), glossy_power)
+                * exp(-abs(luminance(near) - glossy_lit) / glossy_stop
+                      - 0.5 * float(x * x + y * y) * float(pass.step * pass.step)
+                          / (footprint * footprint));
+            glossy_sum += near * glossy_w;
+            glossy_weight += glossy_w;
+        }
+    }
+    imageStore(glossy_layers[pass.destination], pixel,
+               vec4(glossy_sum / max(glossy_weight, 1.0e-6), footprint));
+}
+#else
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 size = ivec2(frame.target);
+    if (pixel.x >= size.x || pixel.y >= size.y) {
+        return;
+    }
+    vec4 here = imageLoad(geometry, pixel);
+    vec4 centre = imageLoad(layers[pass.source], pixel);
+    // The sun's visibility: the temporal pass's for the first pass, else
+    // the layer's alpha, filtered by the passes before the widest.
+    bool first = pass.source == 0;
+    bool shadowed = pass.step <= SHADOW_STEP;
+    float visible = first ? imageLoad(shadows, pixel).r : unflagged(centre.a);
+    if (here.w <= 0.0) {
+        imageStore(layers[pass.destination], pixel, vec4(centre.rgb, visible));
+        return;
+    }
+    // Whether it has a glossy lobe: the flag in the layer's alpha, which
+    // the passes carry on.
+    bool glossy = centre.a < 0.0;
+    vec3 point = pixel_direction(vec2(pixel)) * here.w;
+    // The spread of the light round the pixel at this step.
+    float lit = luminance(centre.rgb);
+    float mean = 0.0;
+    float squares = 0.0;
+    for (int y = -1; y <= 1; y++) {
+        for (int x = -1; x <= 1; x++) {
+            float l = luminance(imageLoad(layers[pass.source],
+                                          clamp(pixel + ivec2(x, y) * pass.step, ivec2(0),
+                                                size - 1)).rgb);
+            mean += l;
+            squares += l * l;
+        }
+    }
+    mean /= 9.0;
+    float spread = sqrt(max(squares / 9.0 - mean * mean, 0.0));
+    float light_stop = LIGHT_STOP * spread + 1.0e-3;
+    // How far off the plane a neighbour may sit: a few units, more far away
+    // and for wider steps.
+    float tolerance = 2.0 + 0.004 * here.w * float(pass.step);
+    vec3 sum = vec3(0.0);
+    float weight = 0.0;
+    float seen = 0.0;
+    float shadow_weight = 0.0;
+    for (int y = -2; y <= 2; y++) {
+        for (int x = -2; x <= 2; x++) {
+            ivec2 tap = pixel + ivec2(x, y) * pass.step;
+            if (any(lessThan(tap, ivec2(0))) || any(greaterThanEqual(tap, size))) {
+                continue;
+            }
+            vec4 there = imageLoad(geometry, tap);
+            if (there.w <= 0.0) {
+                continue;
+            }
+            vec3 other = pixel_direction(vec2(tap)) * there.w;
+            float plane = abs(dot(other - point, here.xyz));
+            float w = KERNEL[abs(x)] * KERNEL[abs(y)]
+                * pow(max(dot(here.xyz, there.xyz), 0.0), 32.0)
+                * exp(-plane / tolerance);
+            vec4 layer = imageLoad(layers[pass.source], tap);
+            float shadow_w = w;
+            w *= exp(-abs(luminance(layer.rgb) - lit) / light_stop);
+            sum += layer.rgb * w;
+            if (shadowed) {
+                seen += (first ? imageLoad(shadows, tap).r : unflagged(layer.a)) * shadow_w;
+                shadow_weight += shadow_w;
+            }
+            weight += w;
+        }
+    }
+    float filtered = shadowed ? seen / max(shadow_weight, 1.0e-6) : visible;
+    vec3 diffuse = sum / max(weight, 1.0e-6);
+    if (pass.last == 0) {
+        imageStore(layers[pass.destination], pixel, vec4(diffuse, flagged(filtered, glossy)));
+        return;
+    }
+    if (glossy) {
+        // The lobes together, as the path pass picked between them: the
+        // glossy one as often as the surface is metallic.
+        diffuse = mix(diffuse, imageLoad(glossy_layers[pass.source], pixel).rgb,
+                      imageLoad(path_surface, pixel).z);
+    }
+    imageStore(layers[pass.destination], pixel, vec4(diffuse, filtered));
+}
+#endif

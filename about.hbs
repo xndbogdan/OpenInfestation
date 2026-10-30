@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OpenInfestation third-party licenses</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+  pre { white-space: pre-wrap; background: #f4f4f4; padding: 1rem; }
+  li.crate { margin-bottom: 0.25rem; }
+</style>
+</head>
+<body>
+<h1>Third-party licenses</h1>
+<p>OpenInfestation is built with the following open-source components. The Windows
+executable statically links SDL2 (zlib license) through the <code>sdl2-sys</code>
+crate. The Vulkan renderer embeds SMAA by Jorge Jimenez et al. (MIT license),
+from <a href="https://github.com/iryoku/smaa">github.com/iryoku/smaa</a>.
+The optional upscaler libraries (AMD FidelityFX FSR, Intel XeSS, NVIDIA DLSS)
+are not part of this package.</p>
+<h2>Overview</h2>
+<ul>
+{{#each overview}}
+  <li><a href="#{{id}}">{{name}}</a> ({{count}})</li>
+{{/each}}
+</ul>
+<h2>License texts</h2>
+{{#each licenses}}
+<section id="{{id}}">
+  <h3>{{name}}</h3>
+  <p>Used by:</p>
+  <ul>
+  {{#each used_by}}
+    <li class="crate"><a href="{{#if crate.repository}}{{crate.repository}}{{else}}https://crates.io/crates/{{crate.name}}{{/if}}">{{crate.name}} {{crate.version}}</a></li>
+  {{/each}}
+  </ul>
+  <pre>{{text}}</pre>
+</section>
+{{/each}}
+</body>
+</html>

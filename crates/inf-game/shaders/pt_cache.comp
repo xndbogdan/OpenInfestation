@@ -1,0 +1,49 @@
+#version 460
+// The radiance cache's resolve (pt_cache.glsl), once a frame after the path
+// pass: each cell a path reached blends this frame's mean sample into its
+// light, over at most CACHE_FRAMES frames, and starts its sums again; a
+// cell no path has reached for CACHE_AGE frames empties its slot.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 256) in;
+
+#define CACHE_BINDING 0
+// The cells alone: their keys, lookups and samples belong to the paths.
+#define CACHE_CELLS_ONLY
+#include "pt_cache.glsl"
+
+void main() {
+    uint slot = gl_GlobalInvocationID.x;
+    if (slot >= CACHE_SIZE || cache[slot].key == 0u) {
+        return;
+    }
+    uint count = cache[slot].count;
+    uint frames = cache[slot].state & 0xffu;
+    uint age = cache[slot].state >> 8;
+    if (count == 0u) {
+        age += 1u;
+        if (age > CACHE_AGE) {
+            cache[slot].key = 0u;
+            cache[slot].state = 0u;
+            cache[slot].r = 0.0;
+            cache[slot].g = 0.0;
+            cache[slot].b = 0.0;
+            return;
+        }
+        cache[slot].state = frames | (age << 8);
+        return;
+    }
+    vec3 mean = vec3(cache[slot].sum_r, cache[slot].sum_g, cache[slot].sum_b)
+        / (CACHE_SCALE * float(count));
+    frames = min(frames + 1u, CACHE_FRAMES);
+    vec3 light = mix(vec3(cache[slot].r, cache[slot].g, cache[slot].b), mean, 1.0 / float(frames));
+    cache[slot].r = light.r;
+    cache[slot].g = light.g;
+    cache[slot].b = light.b;
+    cache[slot].count = 0u;
+    cache[slot].sum_r = 0u;
+    cache[slot].sum_g = 0u;
+    cache[slot].sum_b = 0u;
+    cache[slot].state = frames;
+}

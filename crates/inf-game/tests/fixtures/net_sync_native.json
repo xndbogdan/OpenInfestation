@@ -1,0 +1,7161 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "null": 2147418112,
+  "cases": [
+    {
+      "kind": "family_out",
+      "fields": [
+        3,
+        5
+      ],
+      "room": 1,
+      "result": 1,
+      "out": "53cccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        3,
+        5
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        3,
+        5
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        3,
+        5
+      ],
+      "room": 9,
+      "result": 1,
+      "out": "53cccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        15,
+        15
+      ],
+      "room": 1,
+      "result": 1,
+      "out": "ffcccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        15,
+        15
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        15,
+        15
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        15,
+        15
+      ],
+      "room": 9,
+      "result": 1,
+      "out": "ffcccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        18,
+        52
+      ],
+      "room": 1,
+      "result": 1,
+      "out": "52cccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        18,
+        52
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        18,
+        52
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        18,
+        52
+      ],
+      "room": 9,
+      "result": 1,
+      "out": "52cccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        -1,
+        7
+      ],
+      "room": 1,
+      "result": 1,
+      "out": "ffcccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        -1,
+        7
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        -1,
+        7
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        -1,
+        7
+      ],
+      "room": 9,
+      "result": 1,
+      "out": "ffcccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 1,
+      "result": 1,
+      "out": "00cccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccc"
+    },
+    {
+      "kind": "family_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 9,
+      "result": 1,
+      "out": "00cccccc"
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        15,
+        3
+      ],
+      "byte": 53,
+      "result": 1,
+      "after": [
+        63,
+        3
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        63,
+        3
+      ],
+      "byte": 53,
+      "result": 1,
+      "after": [
+        63,
+        3
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        31,
+        0
+      ],
+      "byte": 5,
+      "result": 1,
+      "after": [
+        15,
+        0
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        95,
+        9
+      ],
+      "byte": 0,
+      "result": 1,
+      "after": [
+        15,
+        0
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        63,
+        64
+      ],
+      "byte": 53,
+      "result": 1,
+      "after": [
+        63,
+        3
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        127,
+        -2
+      ],
+      "byte": 156,
+      "result": 1,
+      "after": [
+        159,
+        9
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        15,
+        0
+      ],
+      "byte": 255,
+      "result": 1,
+      "after": [
+        255,
+        15
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        255,
+        255
+      ],
+      "byte": 240,
+      "result": 1,
+      "after": [
+        255,
+        15
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        -5,
+        2
+      ],
+      "byte": 33,
+      "result": 1,
+      "after": [
+        47,
+        2
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        241,
+        187
+      ],
+      "byte": 235,
+      "result": 1,
+      "after": [
+        239,
+        14
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        218,
+        168
+      ],
+      "byte": 50,
+      "result": 1,
+      "after": [
+        63,
+        3
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        105,
+        233
+      ],
+      "byte": 111,
+      "result": 1,
+      "after": [
+        111,
+        6
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        110,
+        80
+      ],
+      "byte": 143,
+      "result": 1,
+      "after": [
+        143,
+        8
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        61,
+        61
+      ],
+      "byte": 244,
+      "result": 1,
+      "after": [
+        255,
+        15
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        102,
+        225
+      ],
+      "byte": 149,
+      "result": 1,
+      "after": [
+        159,
+        9
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        43,
+        40
+      ],
+      "byte": 185,
+      "result": 1,
+      "after": [
+        191,
+        11
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        7,
+        105
+      ],
+      "byte": 241,
+      "result": 1,
+      "after": [
+        255,
+        15
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        201,
+        59
+      ],
+      "byte": 235,
+      "result": 1,
+      "after": [
+        239,
+        14
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        100,
+        53
+      ],
+      "byte": 1,
+      "result": 1,
+      "after": [
+        15,
+        0
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        89,
+        101
+      ],
+      "byte": 4,
+      "result": 1,
+      "after": [
+        15,
+        0
+      ]
+    },
+    {
+      "kind": "family_in",
+      "fields": [
+        119,
+        250
+      ],
+      "byte": 127,
+      "result": 1,
+      "after": [
+        127,
+        7
+      ]
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4660,
+        22137,
+        39612
+      ],
+      "word_144": 0,
+      "word_146": 0,
+      "room": 6,
+      "result": 6,
+      "out": "34127856bc9acccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4660,
+        22137,
+        39612
+      ],
+      "word_144": 0,
+      "word_146": 0,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4660,
+        22137,
+        39612
+      ],
+      "word_144": 0,
+      "word_146": 0,
+      "room": 100,
+      "result": 6,
+      "out": "34127856bc9acccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4661,
+        22136,
+        0
+      ],
+      "word_144": 1,
+      "word_146": 32768,
+      "room": 6,
+      "result": 6,
+      "out": "351279560000cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4661,
+        22136,
+        0
+      ],
+      "word_144": 1,
+      "word_146": 32768,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        4661,
+        22136,
+        0
+      ],
+      "word_144": 1,
+      "word_146": 32768,
+      "room": 100,
+      "result": 6,
+      "out": "351279560000cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        65535,
+        65535,
+        65535
+      ],
+      "word_144": 65535,
+      "word_146": 65535,
+      "room": 6,
+      "result": 6,
+      "out": "ffffffffffffcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        65535,
+        65535,
+        65535
+      ],
+      "word_144": 65535,
+      "word_146": 65535,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        65535,
+        65535,
+        65535
+      ],
+      "word_144": 65535,
+      "word_146": 65535,
+      "room": 100,
+      "result": 6,
+      "out": "ffffffffffffcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        2,
+        4,
+        6
+      ],
+      "word_144": 256,
+      "word_146": 32767,
+      "room": 6,
+      "result": 6,
+      "out": "020104000600cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        2,
+        4,
+        6
+      ],
+      "word_144": 256,
+      "word_146": 32767,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        2,
+        4,
+        6
+      ],
+      "word_144": 256,
+      "word_146": 32767,
+      "room": 100,
+      "result": 6,
+      "out": "020104000600cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        33800,
+        1720,
+        19991
+      ],
+      "word_144": 1,
+      "word_146": 15235,
+      "room": 6,
+      "result": 6,
+      "out": "0984b806174ecccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        33800,
+        1720,
+        19991
+      ],
+      "word_144": 1,
+      "word_146": 15235,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        33800,
+        1720,
+        19991
+      ],
+      "word_144": 1,
+      "word_146": 15235,
+      "room": 100,
+      "result": 6,
+      "out": "0984b806174ecccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        19933,
+        23221,
+        45125
+      ],
+      "word_144": 0,
+      "word_146": 37690,
+      "room": 6,
+      "result": 6,
+      "out": "dc4db55a45b0cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        19933,
+        23221,
+        45125
+      ],
+      "word_144": 0,
+      "word_146": 37690,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        19933,
+        23221,
+        45125
+      ],
+      "word_144": 0,
+      "word_146": 37690,
+      "room": 100,
+      "result": 6,
+      "out": "dc4db55a45b0cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        1473,
+        35442,
+        54651
+      ],
+      "word_144": 0,
+      "word_146": 58375,
+      "room": 6,
+      "result": 6,
+      "out": "c005738a7bd5cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        1473,
+        35442,
+        54651
+      ],
+      "word_144": 0,
+      "word_146": 58375,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        1473,
+        35442,
+        54651
+      ],
+      "word_144": 0,
+      "word_146": 58375,
+      "room": 100,
+      "result": 6,
+      "out": "c005738a7bd5cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        50110,
+        13118,
+        58276
+      ],
+      "word_144": 1,
+      "word_146": 21203,
+      "room": 6,
+      "result": 6,
+      "out": "bfc33e33a4e3cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        50110,
+        13118,
+        58276
+      ],
+      "word_144": 1,
+      "word_146": 21203,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        50110,
+        13118,
+        58276
+      ],
+      "word_144": 1,
+      "word_146": 21203,
+      "room": 100,
+      "result": 6,
+      "out": "bfc33e33a4e3cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        29957,
+        11909,
+        21793
+      ],
+      "word_144": 0,
+      "word_146": 10903,
+      "room": 6,
+      "result": 6,
+      "out": "0475842e2155cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        29957,
+        11909,
+        21793
+      ],
+      "word_144": 0,
+      "word_146": 10903,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        29957,
+        11909,
+        21793
+      ],
+      "word_144": 0,
+      "word_146": 10903,
+      "room": 100,
+      "result": 6,
+      "out": "0475842e2155cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        24236,
+        8066,
+        56119
+      ],
+      "word_144": 48300,
+      "word_146": 5909,
+      "room": 6,
+      "result": 6,
+      "out": "acfe821f37dbcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        24236,
+        8066,
+        56119
+      ],
+      "word_144": 48300,
+      "word_146": 5909,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        24236,
+        8066,
+        56119
+      ],
+      "word_144": 48300,
+      "word_146": 5909,
+      "room": 100,
+      "result": 6,
+      "out": "acfe821f37dbcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        25285,
+        46247,
+        28102
+      ],
+      "word_144": 0,
+      "word_146": 23907,
+      "room": 6,
+      "result": 6,
+      "out": "c462a6b4c66dcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        25285,
+        46247,
+        28102
+      ],
+      "word_144": 0,
+      "word_146": 23907,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        25285,
+        46247,
+        28102
+      ],
+      "word_144": 0,
+      "word_146": 23907,
+      "room": 100,
+      "result": 6,
+      "out": "c462a6b4c66dcccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        9644,
+        49406,
+        1065
+      ],
+      "word_144": 1,
+      "word_146": 10549,
+      "room": 6,
+      "result": 6,
+      "out": "ad25fec02904cccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        9644,
+        49406,
+        1065
+      ],
+      "word_144": 1,
+      "word_146": 10549,
+      "room": 5,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "shot_out",
+      "words": [
+        9644,
+        49406,
+        1065
+      ],
+      "word_144": 1,
+      "word_146": 10549,
+      "room": 100,
+      "result": 6,
+      "out": "ad25fec02904cccc"
+    },
+    {
+      "kind": "shot_in",
+      "payload": "010203040506",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        513,
+        1027,
+        1541
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "010203040506",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        513,
+        1027,
+        1541
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "010001000000",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        1,
+        1,
+        0
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "010001000000",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        1,
+        1,
+        0
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "fefffeff0707",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        65534,
+        65534,
+        1799
+      ],
+      "word_144": 0,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "fefffeff0707",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        65534,
+        65534,
+        1799
+      ],
+      "word_144": 0,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "1e24081bcbba",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        9246,
+        6920,
+        47819
+      ],
+      "word_144": 0,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "1e24081bcbba",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        9246,
+        6920,
+        47819
+      ],
+      "word_144": 0,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "1d7be61ff69c",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        31517,
+        8166,
+        40182
+      ],
+      "word_144": 1,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "1d7be61ff69c",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        31517,
+        8166,
+        40182
+      ],
+      "word_144": 1,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "883e5ed460ff",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        16008,
+        54366,
+        65376
+      ],
+      "word_144": 0,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "883e5ed460ff",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        16008,
+        54366,
+        65376
+      ],
+      "word_144": 0,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "4e785c1a0796",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        30798,
+        6748,
+        38407
+      ],
+      "word_144": 0,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "4e785c1a0796",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        30798,
+        6748,
+        38407
+      ],
+      "word_144": 0,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "e39e1438020b",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        40675,
+        14356,
+        2818
+      ],
+      "word_144": 1,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "e39e1438020b",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        40675,
+        14356,
+        2818
+      ],
+      "word_144": 1,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "e48522f11f0d",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        34276,
+        61730,
+        3359
+      ],
+      "word_144": 0,
+      "word_146": 4660
+    },
+    {
+      "kind": "shot_in",
+      "payload": "e48522f11f0d",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        34276,
+        61730,
+        3359
+      ],
+      "word_144": 0,
+      "word_146": 0
+    },
+    {
+      "kind": "shot_in",
+      "payload": "f0fa1d4335f1",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        64240,
+        17181,
+        61749
+      ],
+      "word_144": 0,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "f0fa1d4335f1",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        64240,
+        17181,
+        61749
+      ],
+      "word_144": 0,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "4786f988271b",
+      "word_146_in": 4660,
+      "result": 6,
+      "words": [
+        34375,
+        35065,
+        6951
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "shot_in",
+      "payload": "4786f988271b",
+      "word_146_in": 0,
+      "result": 6,
+      "words": [
+        34375,
+        35065,
+        6951
+      ],
+      "word_144": 1,
+      "word_146": 65535
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 3192343333,
+        "dword_1fc": 1365727627,
+        "byte_208": 128,
+        "word_20e": 28230,
+        "dword_210": 2281338618,
+        "dword_220": 3332559518,
+        "dword_238": 3641143999,
+        "dword_244": 489316172,
+        "word_58c": 20645
+      },
+      "hold": [],
+      "room": 100,
+      "result": 10,
+      "out": "7156f4a5254bfa768b59cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 2221342955,
+        "dword_1fc": 3269256791,
+        "byte_208": 128,
+        "word_20e": 21607,
+        "dword_210": 2676732970,
+        "dword_220": 3141105573,
+        "dword_238": 2279667758,
+        "dword_244": 4264356358,
+        "word_58c": 21912
+      },
+      "hold": [],
+      "room": 10,
+      "result": 10,
+      "out": "55877a97eb002ab457e6cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 1647231913,
+        "dword_1fc": 3020499833,
+        "byte_208": 1,
+        "word_20e": 45780,
+        "dword_210": 2967785238,
+        "dword_220": 1078496328,
+        "dword_238": 1349260514,
+        "dword_244": 3444001830,
+        "word_58c": 33955
+      },
+      "hold": [],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 2632664725,
+        "dword_1fc": 1130845378,
+        "byte_208": 128,
+        "word_20e": 9462,
+        "dword_210": 912429105,
+        "dword_220": 3562709211,
+        "dword_238": 3192708543,
+        "dword_244": 940993552,
+        "word_58c": 56349
+      },
+      "hold": [],
+      "room": 14,
+      "result": 10,
+      "out": "70d60daa95463190c254cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 2622113751,
+        "dword_1fc": 2125364877,
+        "byte_208": 128,
+        "word_20e": 39454,
+        "dword_210": 3862949786,
+        "dword_220": 1597056914,
+        "dword_238": 1136985395,
+        "dword_244": 1704363698,
+        "word_58c": 53706
+      },
+      "hold": [],
+      "room": 13,
+      "result": 10,
+      "out": "73ae7912d7479aef8d7ecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 1841862176,
+        "dword_1fc": 1726638979,
+        "byte_208": 0,
+        "word_20e": 47030,
+        "dword_210": 1803671427,
+        "dword_220": 2566119741,
+        "dword_238": 353086779,
+        "dword_244": 2399065478,
+        "word_58c": 26483
+      },
+      "hold": [],
+      "room": 18,
+      "result": 10,
+      "out": "6f36133e209683d7836bcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 1369182776,
+        "dword_1fc": 427371872,
+        "byte_208": 128,
+        "word_20e": 27863,
+        "dword_210": 3460103056,
+        "dword_220": 2808456465,
+        "dword_238": 2615473281,
+        "dword_244": 3145058360,
+        "word_58c": 7451
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 100,
+      "result": 10,
+      "out": "30b7515a381290fb602dcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 1882412787,
+        "dword_1fc": 4231149534,
+        "byte_208": 128,
+        "word_20e": 9700,
+        "dword_210": 449934591,
+        "dword_220": 1047147815,
+        "dword_238": 1042340648,
+        "dword_244": 3565142715,
+        "word_58c": 33369
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 10,
+      "result": 10,
+      "out": "11942bfcf356ff74de37cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 142840896,
+        "dword_1ec": 2064492625,
+        "dword_1fc": 2574301856,
+        "byte_208": 0,
+        "word_20e": 15482,
+        "dword_210": 1593098132,
+        "dword_220": 2359425718,
+        "dword_238": 1878718893,
+        "dword_244": 219033751,
+        "word_58c": 60667
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 3942637721,
+        "dword_1fc": 380617154,
+        "byte_208": 1,
+        "word_20e": 12294,
+        "dword_210": 1660295364,
+        "dword_220": 2252083051,
+        "dword_238": 3436841364,
+        "dword_244": 3889184499,
+        "word_58c": 64067
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 14,
+      "result": 10,
+      "out": "1336f6c099e0c418c2c1cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 1247226813,
+        "dword_1fc": 675509060,
+        "byte_208": 128,
+        "word_20e": 47367,
+        "dword_210": 1730204836,
+        "dword_220": 2951481340,
+        "dword_238": 1439447668,
+        "dword_244": 1058650564,
+        "word_58c": 58427
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 13,
+      "result": 10,
+      "out": "11b79c9bbd2ba4d44473cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 2518546491,
+        "dword_1fc": 4074296645,
+        "byte_208": 1,
+        "word_20e": 58865,
+        "dword_210": 1495173467,
+        "dword_220": 3577614113,
+        "dword_238": 1723597782,
+        "dword_244": 1092956559,
+        "word_58c": 44299
+      },
+      "hold": [
+        2147418112
+      ],
+      "room": 18,
+      "result": 10,
+      "out": "55b1f2e03bf85b8945d5cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 2220474948,
+        "dword_1fc": 1410668797,
+        "byte_208": 1,
+        "word_20e": 13274,
+        "dword_210": 1733072599,
+        "dword_220": 1885754876,
+        "dword_238": 2463071506,
+        "dword_244": 3336296776,
+        "word_58c": 3350
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 100,
+      "result": 14,
+      "out": "5f6a5f6544c2d796fd1811010000cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 1579905183,
+        "dword_1fc": 360548721,
+        "byte_208": 128,
+        "word_20e": 13508,
+        "dword_210": 3997613213,
+        "dword_220": 1504999115,
+        "dword_238": 512345381,
+        "dword_244": 385528484,
+        "word_58c": 50123
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 10,
+      "result": -1,
+      "out": "33b46c479f709dbc7189cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 2479667311,
+        "dword_1fc": 470280521,
+        "byte_208": 1,
+        "word_20e": 15866,
+        "dword_210": 1749174729,
+        "dword_220": 3689958031,
+        "dword_238": 2018213684,
+        "dword_244": 3720213864,
+        "word_58c": 54889
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2120610633,
+        "dword_1ec": 1048730417,
+        "dword_1fc": 3684473283,
+        "byte_208": 0,
+        "word_20e": 42073,
+        "dword_210": 2021442535,
+        "dword_220": 174059467,
+        "dword_238": 1831836532,
+        "dword_244": 3295590014,
+        "word_58c": 24915
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 14,
+      "result": 14,
+      "out": "0939fcfe315be7c3c39911010000cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 3641967821,
+        "dword_1fc": 1034608556,
+        "byte_208": 128,
+        "word_20e": 43525,
+        "dword_210": 828113537,
+        "dword_220": 996961945,
+        "dword_238": 3292459460,
+        "dword_244": 3312292566,
+        "word_58c": 26413
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 13,
+      "result": -1,
+      "out": "13d5e9c6cd048102acdfcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 4250158482,
+        "dword_1fc": 313824404,
+        "byte_208": 0,
+        "word_20e": 64711,
+        "dword_210": 3228628541,
+        "dword_220": 3319379572,
+        "dword_238": 3327628511,
+        "dword_244": 172960870,
+        "word_58c": 9736
+      },
+      "hold": [
+        273,
+        2147418112
+      ],
+      "room": 18,
+      "result": 14,
+      "out": "6587679b92453df6949411010000cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 1067422423,
+        "dword_1fc": 61423937,
+        "byte_208": 128,
+        "word_20e": 1749,
+        "dword_210": 1974208638,
+        "dword_220": 2547453441,
+        "dword_238": 473431175,
+        "dword_244": 473382539,
+        "word_58c": 35376
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 100,
+      "result": 10,
+      "out": "7205e873d7927e084141cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 272584773,
+        "dword_1fc": 1006664164,
+        "byte_208": 0,
+        "word_20e": 20223,
+        "dword_210": 3379828144,
+        "dword_220": 2850217328,
+        "dword_238": 3761006965,
+        "dword_244": 1667715538,
+        "word_58c": 52683
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 10,
+      "result": 10,
+      "out": "22bf1d754550b015e479cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 2352101723,
+        "dword_1fc": 2046708928,
+        "byte_208": 128,
+        "word_20e": 32999,
+        "dword_210": 1366115647,
+        "dword_220": 1574137633,
+        "dword_238": 1097580936,
+        "dword_244": 2118382921,
+        "word_58c": 31578
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 4290032980,
+        "dword_1ec": 3754940190,
+        "dword_1fc": 3607207400,
+        "byte_208": 128,
+        "word_20e": 41619,
+        "dword_210": 1466154815,
+        "dword_220": 3785407499,
+        "dword_238": 2368617147,
+        "dword_244": 3711969406,
+        "word_58c": 24382
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 14,
+      "result": 10,
+      "out": "74e3c00b1ed73fbfe89dcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 1148934476,
+        "dword_1ec": 1398500375,
+        "dword_1fc": 2938040283,
+        "byte_208": 128,
+        "word_20e": 26736,
+        "dword_210": 3790181820,
+        "dword_220": 4082191993,
+        "dword_238": 1085563561,
+        "dword_244": 391807215,
+        "word_58c": 26111
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 13,
+      "result": 10,
+      "out": "3cf0e714176cbc95dbefcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 3551545587,
+        "dword_1fc": 3090988445,
+        "byte_208": 0,
+        "word_20e": 37363,
+        "dword_210": 287673779,
+        "dword_220": 2701719945,
+        "dword_238": 1138234657,
+        "dword_244": 1954146149,
+        "word_58c": 34626
+      },
+      "hold": [
+        273,
+        546,
+        819
+      ],
+      "room": 18,
+      "result": 10,
+      "out": "2f23988ff348b38d9dbdcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 2563884850,
+        "dword_1fc": 2443911831,
+        "byte_208": 128,
+        "word_20e": 38319,
+        "dword_210": 2127065506,
+        "dword_220": 2540453198,
+        "dword_238": 1917886585,
+        "dword_244": 2306951992,
+        "word_58c": 65273
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 100,
+      "result": 18,
+      "out": "3f9fd4c332c7a27197221101000022020000cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 171096351,
+        "dword_1ec": 2860774580,
+        "dword_1fc": 2387673288,
+        "byte_208": 1,
+        "word_20e": 55016,
+        "dword_210": 2155894441,
+        "dword_220": 378685839,
+        "dword_238": 2594927354,
+        "dword_244": 3379847145,
+        "word_58c": 65259
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 10,
+      "result": -1,
+      "out": "5fb89824b4f4a956c800cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 156646411,
+        "dword_1fc": 3764973219,
+        "byte_208": 128,
+        "word_20e": 23605,
+        "dword_210": 2937974283,
+        "dword_220": 2503940886,
+        "dword_238": 1672886042,
+        "dword_244": 2480014230,
+        "word_58c": 48787
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 2607424519,
+        "dword_1fc": 606809921,
+        "byte_208": 128,
+        "word_20e": 57775,
+        "dword_210": 1592525477,
+        "dword_220": 277210229,
+        "dword_238": 789598490,
+        "dword_244": 1332200924,
+        "word_58c": 61894
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 14,
+      "result": -1,
+      "out": "556f475e0724a502412fcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 886157817,
+        "dword_1fc": 982403917,
+        "byte_208": 1,
+        "word_20e": 13020,
+        "dword_210": 3268435162,
+        "dword_220": 3385714264,
+        "dword_238": 492074722,
+        "dword_244": 1536860631,
+        "word_58c": 7340
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 13,
+      "result": -1,
+      "out": "5fcc65def9b1da5c4d4bcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 528575998,
+        "dword_1fc": 3629018723,
+        "byte_208": 128,
+        "word_20e": 24989,
+        "dword_210": 3407466446,
+        "dword_220": 1877570008,
+        "dword_238": 273260154,
+        "dword_244": 1867894447,
+        "word_58c": 62323
+      },
+      "hold": [
+        273,
+        546,
+        2147418112,
+        1092
+      ],
+      "room": 18,
+      "result": 18,
+      "out": "533d1d97fe6dcecf636e1101000022020000cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 824253971,
+        "dword_1fc": 1001025094,
+        "byte_208": 0,
+        "word_20e": 7262,
+        "dword_210": 318472632,
+        "dword_220": 2204973713,
+        "dword_238": 1076032074,
+        "dword_244": 800108193,
+        "word_58c": 44106
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 100,
+      "result": 10,
+      "out": "43aea9d3131eb881466ecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 1844271677,
+        "dword_1fc": 1994529044,
+        "byte_208": 128,
+        "word_20e": 19894,
+        "dword_210": 603737636,
+        "dword_220": 1023924199,
+        "dword_238": 550112557,
+        "dword_244": 3380568439,
+        "word_58c": 16606
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 10,
+      "result": 10,
+      "out": "30e67e7d3d5a244e1419cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 3763468369,
+        "dword_1fc": 2185444489,
+        "byte_208": 1,
+        "word_20e": 9774,
+        "dword_210": 782600500,
+        "dword_220": 1266925849,
+        "dword_238": 798668135,
+        "dword_244": 2420351577,
+        "word_58c": 9081
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 9,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 517485039,
+        "dword_1fc": 4016643578,
+        "byte_208": 128,
+        "word_20e": 22549,
+        "dword_210": 3820253893,
+        "dword_220": 778551907,
+        "dword_238": 3159679970,
+        "dword_244": 1592392817,
+        "word_58c": 46200
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 14,
+      "result": 10,
+      "out": "5285c79fef31c572fa1dcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 287453830,
+        "dword_1fc": 2440117616,
+        "byte_208": 1,
+        "word_20e": 62893,
+        "dword_210": 4023581320,
+        "dword_220": 2728586728,
+        "dword_238": 1015496200,
+        "dword_244": 3835805032,
+        "word_58c": 40932
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 13,
+      "result": 10,
+      "out": "134dde2e863288fa703dcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_out",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 3004958974,
+        "dword_1fc": 3793285832,
+        "byte_208": 1,
+        "word_20e": 28202,
+        "dword_210": 3298265558,
+        "dword_220": 480387406,
+        "dword_238": 2382405818,
+        "dword_244": 3624624421,
+        "word_58c": 16894
+      },
+      "hold": [
+        2147418112,
+        5,
+        2147418112
+      ],
+      "room": 18,
+      "result": 10,
+      "out": "5fea1422fe08d689c8f2cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 1422576157,
+        "dword_1fc": 2872732300,
+        "byte_208": 1,
+        "word_20e": 18753,
+        "dword_210": 3985419890,
+        "dword_220": 469733424,
+        "dword_238": 3350562332,
+        "dword_244": 1562265282,
+        "word_58c": 57554
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "e3f4859d90af3da9e8b800700000017000000270000003700000",
+      "length": 10,
+      "result": 10,
+      "after": {
+        "mode_1e8": 3,
+        "dword_1ec": 4294946704,
+        "dword_1fc": 4294949096,
+        "byte_208": 0,
+        "word_20e": 4,
+        "dword_210": 4294945085,
+        "dword_220": 4294563920,
+        "dword_238": 3,
+        "dword_244": 4294563920,
+        "word_58c": 15
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 571211816,
+        "dword_1fc": 1173386614,
+        "byte_208": 0,
+        "word_20e": 26727,
+        "dword_210": 126356067,
+        "dword_220": 1974157508,
+        "dword_238": 1748657214,
+        "dword_244": 1170361272,
+        "word_58c": 46068
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "85c43c2e4a2657f15df000700000017000000270000003700000",
+      "length": 9,
+      "result": 9,
+      "after": {
+        "mode_1e8": 31,
+        "dword_1ec": 571211816,
+        "dword_1fc": 1173386614,
+        "byte_208": 0,
+        "word_20e": 26727,
+        "dword_210": 126356067,
+        "dword_220": 1974157508,
+        "dword_238": 1748657214,
+        "dword_244": 1170361272,
+        "word_58c": 46068
+      },
+      "hold_after": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 2226455399,
+        "dword_1fc": 2979038988,
+        "byte_208": 128,
+        "word_20e": 47770,
+        "dword_210": 653371804,
+        "dword_220": 3561249607,
+        "dword_238": 745727369,
+        "dword_244": 2661755078,
+        "word_58c": 7552
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "1d6321b59d572b67084f00700000017000000270000003700000",
+      "length": 14,
+      "result": 14,
+      "after": {
+        "mode_1e8": 13,
+        "dword_1ec": 22429,
+        "dword_1fc": 20232,
+        "byte_208": 1,
+        "word_20e": 3,
+        "dword_210": 26411,
+        "dword_220": 4294660624,
+        "dword_238": 0,
+        "dword_244": 4294660624,
+        "word_58c": 6
+      },
+      "hold_after": [
+        28672,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 1154894719,
+        "dword_1fc": 3384291141,
+        "byte_208": 128,
+        "word_20e": 44582,
+        "dword_210": 2067147607,
+        "dword_220": 3185971549,
+        "dword_238": 4100819451,
+        "dword_244": 3458831659,
+        "word_58c": 11111
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "1c37434c7d14352b2fc500700000017000000270000003700000",
+      "length": 18,
+      "result": 18,
+      "after": {
+        "mode_1e8": 12,
+        "dword_1ec": 5245,
+        "dword_1fc": 4294952239,
+        "byte_208": 1,
+        "word_20e": 7,
+        "dword_210": 11061,
+        "dword_220": 312368,
+        "dword_238": 0,
+        "dword_244": 312368,
+        "word_58c": 3
+      },
+      "hold_after": [
+        28672,
+        28673,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 256738280,
+        "dword_1fc": 1993533556,
+        "byte_208": 1,
+        "word_20e": 57986,
+        "dword_210": 306970280,
+        "dword_220": 3115571346,
+        "dword_238": 4151239850,
+        "dword_244": 1545923749,
+        "word_58c": 56971
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "41c53c393ca8591b3b7300700000017000000270000003700000",
+      "length": 22,
+      "result": 22,
+      "after": {
+        "mode_1e8": 1,
+        "dword_1ec": 4294944828,
+        "dword_1fc": 29499,
+        "byte_208": 0,
+        "word_20e": 5,
+        "dword_210": 7001,
+        "dword_220": 234432,
+        "dword_238": 2,
+        "dword_244": 234432,
+        "word_58c": 12
+      },
+      "hold_after": [
+        28672,
+        28673,
+        28674,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 2284420369,
+        "dword_1fc": 383123182,
+        "byte_208": 0,
+        "word_20e": 47804,
+        "dword_210": 2348723816,
+        "dword_220": 2153330277,
+        "dword_238": 614066836,
+        "dword_244": 2137741291,
+        "word_58c": 18631
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "beee1b69a0d07c70066400700000017000000270000003700000",
+      "length": 26,
+      "result": 26,
+      "after": {
+        "mode_1e8": 14,
+        "dword_1ec": 4294955168,
+        "dword_1fc": 25606,
+        "byte_208": 1,
+        "word_20e": 14,
+        "dword_210": 28796,
+        "dword_220": 430512,
+        "dword_238": 1,
+        "dword_244": 430512,
+        "word_58c": 14
+      },
+      "hold_after": [
+        28672,
+        28673,
+        28674,
+        28675
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 0,
+        "dword_1ec": 626735871,
+        "dword_1fc": 1269348476,
+        "byte_208": 1,
+        "word_20e": 47085,
+        "dword_210": 1534369889,
+        "dword_220": 2423603058,
+        "dword_238": 3293803960,
+        "dword_244": 1814636614,
+        "word_58c": 28822
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "7164cd908d5133cb759a00700000017000000270000003700000",
+      "length": 11,
+      "result": 11,
+      "after": {
+        "mode_1e8": 1,
+        "dword_1ec": 20877,
+        "dword_1fc": 4294941301,
+        "byte_208": 1,
+        "word_20e": 4,
+        "dword_210": 4294953779,
+        "dword_220": 4294511824,
+        "dword_238": 3,
+        "dword_244": 4294511824,
+        "word_58c": 6
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 1447446739,
+        "dword_1fc": 2134064329,
+        "byte_208": 0,
+        "word_20e": 27329,
+        "dword_210": 1398661242,
+        "dword_220": 2999485459,
+        "dword_238": 175135508,
+        "dword_244": 3547171912,
+        "word_58c": 49876
+      },
+      "hold": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "payload": "160bbda9d7a988e338ee00700000017000000270000003700000",
+      "length": 0,
+      "result": 0,
+      "after": {
+        "mode_1e8": 3,
+        "dword_1ec": 1447446739,
+        "dword_1fc": 2134064329,
+        "byte_208": 0,
+        "word_20e": 27329,
+        "dword_210": 1398661242,
+        "dword_220": 2999485459,
+        "dword_238": 175135508,
+        "dword_244": 3547171912,
+        "word_58c": 49876
+      },
+      "hold_after": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 1837550837,
+        "dword_1fc": 1825554945,
+        "byte_208": 0,
+        "word_20e": 24598,
+        "dword_210": 3112223981,
+        "dword_220": 1136208334,
+        "dword_238": 698827096,
+        "dword_244": 227412243,
+        "word_58c": 43972
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "4fc27224b4881796033b00700000017000000270000003700000",
+      "length": 10,
+      "result": 10,
+      "after": {
+        "mode_1e8": 15,
+        "dword_1ec": 4294936756,
+        "dword_1fc": 15107,
+        "byte_208": 0,
+        "word_20e": 2,
+        "dword_210": 4294940183,
+        "dword_220": 149280,
+        "dword_238": 2,
+        "dword_244": 149280,
+        "word_58c": 12
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 2,
+        "dword_1ec": 1256957630,
+        "dword_1fc": 1154801116,
+        "byte_208": 1,
+        "word_20e": 7616,
+        "dword_210": 1151128902,
+        "dword_220": 1679099499,
+        "dword_238": 3659350633,
+        "dword_244": 1026496407,
+        "word_58c": 5067
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "fff374713d57b2fd9edc00700000017000000270000003700000",
+      "length": 9,
+      "result": 9,
+      "after": {
+        "mode_1e8": 2,
+        "dword_1ec": 1256957630,
+        "dword_1fc": 1154801116,
+        "byte_208": 1,
+        "word_20e": 7616,
+        "dword_210": 1151128902,
+        "dword_220": 1679099499,
+        "dword_238": 3659350633,
+        "dword_244": 1026496407,
+        "word_58c": 5067
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 676976313,
+        "dword_1ec": 2649452033,
+        "dword_1fc": 2033879776,
+        "byte_208": 0,
+        "word_20e": 1571,
+        "dword_210": 1358701841,
+        "dword_220": 1851020130,
+        "dword_238": 1080566178,
+        "dword_244": 2735019527,
+        "word_58c": 39436
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "34988f802c56e88736ae00700000017000000270000003700000",
+      "length": 14,
+      "result": 14,
+      "after": {
+        "mode_1e8": 4,
+        "dword_1ec": 22060,
+        "dword_1fc": 4294946358,
+        "byte_208": 1,
+        "word_20e": 8,
+        "dword_210": 4294936552,
+        "dword_220": 4294445296,
+        "dword_238": 1,
+        "dword_244": 4294445296,
+        "word_58c": 9
+      },
+      "hold_after": [
+        28672,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 198025228,
+        "dword_1fc": 2350411146,
+        "byte_208": 1,
+        "word_20e": 6305,
+        "dword_210": 2892565775,
+        "dword_220": 1472973328,
+        "dword_238": 233492150,
+        "dword_244": 1873293038,
+        "word_58c": 34020
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "fe9c25330b6e190b0cca00700000017000000270000003700000",
+      "length": 18,
+      "result": 18,
+      "after": {
+        "mode_1e8": 14,
+        "dword_1ec": 28171,
+        "dword_1fc": 4294953484,
+        "byte_208": 1,
+        "word_20e": 12,
+        "dword_210": 2841,
+        "dword_220": 209488,
+        "dword_238": 3,
+        "dword_244": 209488,
+        "word_58c": 9
+      },
+      "hold_after": [
+        28672,
+        28673,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 968546180,
+        "dword_1fc": 3777430347,
+        "byte_208": 1,
+        "word_20e": 6013,
+        "dword_210": 285316530,
+        "dword_220": 304091023,
+        "dword_238": 2703034161,
+        "dword_244": 741736825,
+        "word_58c": 53751
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "c8eda06d9b64c7f41a3400700000017000000270000003700000",
+      "length": 22,
+      "result": 22,
+      "after": {
+        "mode_1e8": 8,
+        "dword_1ec": 25755,
+        "dword_1fc": 13338,
+        "byte_208": 0,
+        "word_20e": 13,
+        "dword_210": 4294964423,
+        "dword_220": 449024,
+        "dword_238": 2,
+        "dword_244": 449024,
+        "word_58c": 14
+      },
+      "hold_after": [
+        28672,
+        28673,
+        28674
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 2102577972,
+        "dword_1fc": 3131944162,
+        "byte_208": 128,
+        "word_20e": 19545,
+        "dword_210": 2946956976,
+        "dword_220": 669697355,
+        "dword_238": 763946389,
+        "dword_244": 1118853933,
+        "word_58c": 28298
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "eaa28d93e01f20dd93f600700000017000000270000003700000",
+      "length": 11,
+      "result": 11,
+      "after": {
+        "mode_1e8": 10,
+        "dword_1ec": 8160,
+        "dword_1fc": 4294964883,
+        "byte_208": 0,
+        "word_20e": 2,
+        "dword_210": 4294958368,
+        "dword_220": 4294523088,
+        "dword_238": 3,
+        "dword_244": 4294523088,
+        "word_58c": 10
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 806627552,
+        "dword_1fc": 3412150349,
+        "byte_208": 0,
+        "word_20e": 5573,
+        "dword_210": 596896033,
+        "dword_220": 2262778961,
+        "dword_238": 717301086,
+        "dword_244": 2338027254,
+        "word_58c": 55256
+      },
+      "hold": [
+        2147418112,
+        2147418112,
+        2147418112
+      ],
+      "payload": "1e4674079fade9f1e54900700000017000000270000003700000",
+      "length": 0,
+      "result": 0,
+      "after": {
+        "mode_1e8": 3,
+        "dword_1ec": 806627552,
+        "dword_1fc": 3412150349,
+        "byte_208": 0,
+        "word_20e": 5573,
+        "dword_210": 596896033,
+        "dword_220": 2262778961,
+        "dword_238": 717301086,
+        "dword_244": 2338027254,
+        "word_58c": 55256
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 3786967181,
+        "dword_1fc": 877894855,
+        "byte_208": 128,
+        "word_20e": 35715,
+        "dword_210": 3913973244,
+        "dword_220": 1287734692,
+        "dword_238": 1205634867,
+        "dword_244": 1967398226,
+        "word_58c": 38146
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "8061f1e880cc150d757800700000017000000270000003700000",
+      "length": 10,
+      "result": 10,
+      "after": {
+        "mode_1e8": 0,
+        "dword_1ec": 4294954112,
+        "dword_1fc": 30837,
+        "byte_208": 0,
+        "word_20e": 1,
+        "dword_210": 3349,
+        "dword_220": 4294872848,
+        "dword_238": 0,
+        "dword_244": 4294872848,
+        "word_58c": 6
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 4199576155,
+        "dword_1fc": 300309722,
+        "byte_208": 128,
+        "word_20e": 19683,
+        "dword_210": 4236881240,
+        "dword_220": 2108978586,
+        "dword_238": 3561946480,
+        "dword_244": 2447956803,
+        "word_58c": 25838
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "733378e7cb75d20cda2000700000017000000270000003700000",
+      "length": 9,
+      "result": 9,
+      "after": {
+        "mode_1e8": 31,
+        "dword_1ec": 4199576155,
+        "dword_1fc": 300309722,
+        "byte_208": 128,
+        "word_20e": 19683,
+        "dword_210": 4236881240,
+        "dword_220": 2108978586,
+        "dword_238": 3561946480,
+        "dword_244": 2447956803,
+        "word_58c": 25838
+      },
+      "hold_after": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 1014024013,
+        "dword_1fc": 481400696,
+        "byte_208": 0,
+        "word_20e": 41467,
+        "dword_210": 377321735,
+        "dword_220": 3277922470,
+        "dword_238": 3168826612,
+        "dword_244": 2563729946,
+        "word_58c": 41832
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "9c2d097ec61bb96179c900700000017000000270000003700000",
+      "length": 14,
+      "result": 14,
+      "after": {
+        "mode_1e8": 12,
+        "dword_1ec": 7110,
+        "dword_1fc": 4294953337,
+        "byte_208": 1,
+        "word_20e": 13,
+        "dword_210": 25017,
+        "dword_220": 516240,
+        "dword_238": 0,
+        "dword_244": 516240,
+        "word_58c": 2
+      },
+      "hold_after": [
+        28672,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 3218491718,
+        "dword_1fc": 2047299401,
+        "byte_208": 0,
+        "word_20e": 21215,
+        "dword_210": 486337798,
+        "dword_220": 746943810,
+        "dword_238": 4197034387,
+        "dword_244": 1418988671,
+        "word_58c": 30694
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "2d11c18a2e58a1fa318700700000017000000270000003700000",
+      "length": 18,
+      "result": 18,
+      "after": {
+        "mode_1e8": 13,
+        "dword_1ec": 22574,
+        "dword_1fc": 4294936369,
+        "byte_208": 0,
+        "word_20e": 1,
+        "dword_210": 4294965921,
+        "dword_220": 4294487056,
+        "dword_238": 1,
+        "dword_244": 4294487056,
+        "word_58c": 1
+      },
+      "hold_after": [
+        28672,
+        28673,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 31,
+        "dword_1ec": 2295372436,
+        "dword_1fc": 641674224,
+        "byte_208": 128,
+        "word_20e": 40907,
+        "dword_210": 1942234074,
+        "dword_220": 1123268628,
+        "dword_238": 3243487166,
+        "dword_244": 362331029,
+        "word_58c": 20820
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "7735f382133fb9bac12b00700000017000000270000003700000",
+      "length": 22,
+      "result": 22,
+      "after": {
+        "mode_1e8": 7,
+        "dword_1ec": 16147,
+        "dword_1fc": 11201,
+        "byte_208": 1,
+        "word_20e": 5,
+        "dword_210": 4294949561,
+        "dword_220": 4294455088,
+        "dword_238": 3,
+        "dword_244": 4294455088,
+        "word_58c": 3
+      },
+      "hold_after": [
+        28672,
+        28673,
+        28674,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 3,
+        "dword_1ec": 2773804766,
+        "dword_1fc": 3278824908,
+        "byte_208": 128,
+        "word_20e": 2118,
+        "dword_210": 3794642885,
+        "dword_220": 3415860297,
+        "dword_238": 1752155762,
+        "dword_244": 3288673855,
+        "word_58c": 63626
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "9ece78c189bc65c5842500700000017000000270000003700000",
+      "length": 26,
+      "result": 26,
+      "after": {
+        "mode_1e8": 14,
+        "dword_1ec": 4294950025,
+        "dword_1fc": 9604,
+        "byte_208": 1,
+        "word_20e": 14,
+        "dword_210": 4294952293,
+        "dword_220": 4294711168,
+        "dword_238": 0,
+        "dword_244": 4294711168,
+        "word_58c": 12
+      },
+      "hold_after": [
+        28672,
+        28673,
+        28674,
+        28675,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 1,
+        "dword_1ec": 169333442,
+        "dword_1fc": 2957204596,
+        "byte_208": 1,
+        "word_20e": 20825,
+        "dword_210": 1495922653,
+        "dword_220": 354119956,
+        "dword_238": 927398499,
+        "dword_244": 2944112651,
+        "word_58c": 7651
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "80936046c27013a9093b00700000017000000270000003700000",
+      "length": 11,
+      "result": 11,
+      "after": {
+        "mode_1e8": 0,
+        "dword_1ec": 28866,
+        "dword_1fc": 15113,
+        "byte_208": 0,
+        "word_20e": 3,
+        "dword_210": 4294945043,
+        "dword_220": 288256,
+        "dword_238": 0,
+        "dword_244": 288256,
+        "word_58c": 9
+      },
+      "hold_after": [
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112,
+        2147418112
+      ]
+    },
+    {
+      "kind": "vehicle_in",
+      "fields": {
+        "mode_1e8": 5,
+        "dword_1ec": 3183712446,
+        "dword_1fc": 1339059628,
+        "byte_208": 0,
+        "word_20e": 56236,
+        "dword_210": 4212758808,
+        "dword_220": 3027469111,
+        "dword_238": 3673139690,
+        "dword_244": 73886531,
+        "word_58c": 43452
+      },
+      "hold": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "payload": "e2413ceccc6cd79b331a00700000017000000270000003700000",
+      "length": 0,
+      "result": 0,
+      "after": {
+        "mode_1e8": 5,
+        "dword_1ec": 3183712446,
+        "dword_1fc": 1339059628,
+        "byte_208": 0,
+        "word_20e": 56236,
+        "dword_210": 4212758808,
+        "dword_220": 3027469111,
+        "dword_238": 3673139690,
+        "dword_244": 73886531,
+        "word_58c": 43452
+      },
+      "hold_after": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "kind": "holds",
+      "hold": [
+        1,
+        2,
+        3
+      ],
+      "handle": 2,
+      "result": 1
+    },
+    {
+      "kind": "holds",
+      "hold": [
+        1,
+        2,
+        3
+      ],
+      "handle": 4,
+      "result": 0
+    },
+    {
+      "kind": "holds",
+      "hold": [],
+      "handle": 0,
+      "result": 0
+    },
+    {
+      "kind": "holds",
+      "hold": [
+        2147418112
+      ],
+      "handle": 2147418112,
+      "result": 1
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "00000000cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        0,
+        0
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "00000000cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        4660,
+        22136
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "34127856cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        4660,
+        22136
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        4660,
+        22136
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        4660,
+        22136
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        4660,
+        22136
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "34127856cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        65535,
+        65535
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "ffffffffcccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        65535,
+        65535
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        65535,
+        65535
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        65535,
+        65535
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        65535,
+        65535
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "ffffffffcccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        305419896,
+        2596069104
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "7856f0decccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        305419896,
+        2596069104
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        305419896,
+        2596069104
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        305419896,
+        2596069104
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        305419896,
+        2596069104
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "7856f0decccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        32768,
+        4294934528
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "00800080cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        32768,
+        4294934528
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        32768,
+        4294934528
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        32768,
+        4294934528
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        32768,
+        4294934528
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "00800080cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3141492571,
+        2247571676
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "5b5fdc38cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3141492571,
+        2247571676
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3141492571,
+        2247571676
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3141492571,
+        2247571676
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3141492571,
+        2247571676
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "5b5fdc38cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3908590003,
+        3363206078
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "b359be73cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3908590003,
+        3363206078
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3908590003,
+        3363206078
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3908590003,
+        3363206078
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3908590003,
+        3363206078
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "b359be73cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        17332050,
+        504883283
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "527753e8cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        17332050,
+        504883283
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        17332050,
+        504883283
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        17332050,
+        504883283
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        17332050,
+        504883283
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "527753e8cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3576152236,
+        2400986175
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "acc03f24cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3576152236,
+        2400986175
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3576152236,
+        2400986175
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3576152236,
+        2400986175
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3576152236,
+        2400986175
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "acc03f24cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3349548342,
+        2610587733
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "360d5568cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3349548342,
+        2610587733
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3349548342,
+        2610587733
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3349548342,
+        2610587733
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        3349548342,
+        2610587733
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "360d5568cccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        791849472,
+        2762882106
+      ],
+      "room": 4,
+      "result": 4,
+      "out": "00aa3a3ccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        791849472,
+        2762882106
+      ],
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        791849472,
+        2762882106
+      ],
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        791849472,
+        2762882106
+      ],
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccc"
+    },
+    {
+      "kind": "turret_out",
+      "fields": [
+        791849472,
+        2762882106
+      ],
+      "room": 100,
+      "result": 4,
+      "out": "00aa3a3ccccccccc"
+    },
+    {
+      "kind": "turret_in",
+      "packed": 0,
+      "result": 4,
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 305419896,
+      "result": 4,
+      "after": [
+        22136,
+        4660
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 4294901761,
+      "result": 4,
+      "after": [
+        1,
+        4294967295
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 2147516415,
+      "result": 4,
+      "after": [
+        32767,
+        4294934528
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 2147450880,
+      "result": 4,
+      "after": [
+        32768,
+        32767
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 884331311,
+      "result": 4,
+      "after": [
+        54063,
+        13493
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 139210176,
+      "result": 4,
+      "after": [
+        11712,
+        2124
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 3728871194,
+      "result": 4,
+      "after": [
+        3866,
+        4294958658
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 3894441975,
+      "result": 4,
+      "after": [
+        30711,
+        4294961184
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 147516976,
+      "result": 4,
+      "after": [
+        60976,
+        2250
+      ]
+    },
+    {
+      "kind": "turret_in",
+      "packed": 158153815,
+      "result": 4,
+      "after": [
+        15447,
+        2413
+      ]
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "396182cf422d",
+      "room": 0,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "158b313b8ac0",
+      "room": 3,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "e6566127194f",
+      "room": 4,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "22938dc6cbd8",
+      "room": 9,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "4fa2c73d1c07",
+      "room": 10,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "fcf2fd950e24",
+      "room": 100,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418112,
+      "offset": "bfbe71f32acf",
+      "room": -1,
+      "result": 0,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "7a03729b9320",
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "f091a3bb0c79",
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "de00805313bc",
+      "room": 4,
+      "result": -1,
+      "out": "02000100cccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "3b9666db9ff1",
+      "room": 9,
+      "result": -1,
+      "out": "02000100cccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "1e8e79f39369",
+      "room": 10,
+      "result": 10,
+      "out": "020001001e8e79f39369cccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "cd4097a1ee2c",
+      "room": 100,
+      "result": 10,
+      "out": "02000100cd4097a1ee2ccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 65538,
+      "offset": "ab3be1640842",
+      "room": -1,
+      "result": 10,
+      "out": "02000100ab3be1640842cccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "6dc4b423443b",
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "4d3f16064b88",
+      "room": 3,
+      "result": -1,
+      "out": "cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "1f9b1a223051",
+      "room": 4,
+      "result": -1,
+      "out": "0100ff7fcccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "3c4db65e45f3",
+      "room": 9,
+      "result": -1,
+      "out": "0100ff7fcccccccccccccccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "fadc4b1447c3",
+      "room": 10,
+      "result": 10,
+      "out": "0100ff7ffadc4b1447c3cccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "55f0fadcb67b",
+      "room": 100,
+      "result": 10,
+      "out": "0100ff7f55f0fadcb67bcccc"
+    },
+    {
+      "kind": "charge_out",
+      "handle": 2147418113,
+      "offset": "df4ceee2217b",
+      "room": -1,
+      "result": 10,
+      "out": "0100ff7fdf4ceee2217bcccc"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "d0327355d201aca67739",
+      "before": "1667329ad963",
+      "length": 10,
+      "result": 10,
+      "handle": 1433613008,
+      "offset": "d201aca67739"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "7caa8522b63d5528bd19",
+      "before": "dd17329f840f",
+      "length": 10,
+      "result": 10,
+      "handle": 579185276,
+      "offset": "b63d5528bd19"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "ba708ccf553236263a90",
+      "before": "84ba6bb245eb",
+      "length": 10,
+      "result": 10,
+      "handle": 3482087610,
+      "offset": "553236263a90"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "37d92c9822c7ecf872e2",
+      "before": "226c537e98ff",
+      "length": 0,
+      "result": 0,
+      "handle": 2147418112,
+      "offset": "226c537e98ff"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "9446d497b7845ff95c71",
+      "before": "833f1dd6e96e",
+      "length": 0,
+      "result": 0,
+      "handle": 2147418112,
+      "offset": "833f1dd6e96e"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "289b243e995ad993833d",
+      "before": "002929192112",
+      "length": 0,
+      "result": 0,
+      "handle": 2147418112,
+      "offset": "002929192112"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "571dd2def0c0fca271c3",
+      "before": "23764281e493",
+      "length": 4,
+      "result": 10,
+      "handle": 3738312023,
+      "offset": "f0c0fca271c3"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "520239df74b2b992303a",
+      "before": "f9842de4ef00",
+      "length": 4,
+      "result": 10,
+      "handle": 3745055314,
+      "offset": "74b2b992303a"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "d99023c644e9ba2511f2",
+      "before": "81c8fb72cf9d",
+      "length": 4,
+      "result": 10,
+      "handle": 3324219609,
+      "offset": "44e9ba2511f2"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "9c3196f89b8fe7d6e595",
+      "before": "4e0c55cbc903",
+      "length": 12,
+      "result": 10,
+      "handle": 4170592668,
+      "offset": "9b8fe7d6e595"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "87b58713280b4aa2960c",
+      "before": "df0cfc5baf8b",
+      "length": 12,
+      "result": 10,
+      "handle": 327660935,
+      "offset": "280b4aa2960c"
+    },
+    {
+      "kind": "charge_in",
+      "payload": "a848ccf38ceedbb27069",
+      "before": "b319fa94bd24",
+      "length": 12,
+      "result": 10,
+      "handle": 4090251432,
+      "offset": "8ceedbb27069"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 1,
+      "result": -1,
+      "out": "0fcccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 2,
+      "result": -1,
+      "out": "0faccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 3,
+      "result": -1,
+      "out": "0faccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 4,
+      "result": -1,
+      "out": "0fac0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 5,
+      "result": -1,
+      "out": "0fac0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 7,
+      "result": -1,
+      "out": "0fac01002713cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 9,
+      "result": -1,
+      "out": "0fac01002713cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 11,
+      "result": 10,
+      "out": "0fac0100271304000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 100,
+      "result": 10,
+      "out": "0fac0100271304000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 1,
+        "word_180": 4903,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f7cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f7aecccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f7aecccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 4,
+      "result": -1,
+      "out": "f7ae571fcccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 5,
+      "result": -1,
+      "out": "f7ae571fcccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 7,
+      "result": -1,
+      "out": "f7ae571fda6ecccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 9,
+      "result": -1,
+      "out": "f7ae571fda6ecccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 11,
+      "result": 10,
+      "out": "f7ae571fda6e04000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 100,
+      "result": 10,
+      "out": "f7ae571fda6e04000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 151,
+        "word_140": 15,
+        "word_160": 134,
+        "word_17e": 8023,
+        "word_180": 28378,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 1,
+      "result": -1,
+      "out": "fbcccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 2,
+      "result": -1,
+      "out": "fb89cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 3,
+      "result": -1,
+      "out": "fb89cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 4,
+      "result": -1,
+      "out": "fb890100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 5,
+      "result": -1,
+      "out": "fb890100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 7,
+      "result": -1,
+      "out": "fb890100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 9,
+      "result": 8,
+      "out": "fb8901006cda74b1cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 11,
+      "result": 8,
+      "out": "fb8901006cda74b1cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": 100,
+      "result": 8,
+      "out": "fb8901006cda74b1cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 171,
+        "word_140": 111,
+        "word_160": 1,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2977225324
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f3cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f3f9cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f3f9cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 4,
+      "result": -1,
+      "out": "f3f90100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 5,
+      "result": -1,
+      "out": "f3f90100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 7,
+      "result": -1,
+      "out": "f3f901000500cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 9,
+      "result": -1,
+      "out": "f3f9010005000900cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 11,
+      "result": -1,
+      "out": "f3f9010005000900cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": 100,
+      "result": 12,
+      "out": "f3f9010005000900d864813bcccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 179,
+        "word_140": 15,
+        "word_160": 121,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 9,
+        "handle_188": 998335704
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f3cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f3cecccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f3cecccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 4,
+      "result": -1,
+      "out": "f3ce161ccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 5,
+      "result": -1,
+      "out": "f3ce161ccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 7,
+      "result": -1,
+      "out": "f3ce161c4811cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 9,
+      "result": -1,
+      "out": "f3ce161c4811cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 11,
+      "result": 10,
+      "out": "f3ce161c48114cdcacc5cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": 100,
+      "result": 10,
+      "out": "f3ce161c48114cdcacc5cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 7190,
+        "word_180": 0,
+        "word_182": 4424,
+        "handle_188": 3316440140
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f3cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f349cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f349cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 4,
+      "result": -1,
+      "out": "f3499595cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 5,
+      "result": -1,
+      "out": "f3499595cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 7,
+      "result": 6,
+      "out": "f34995950900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 9,
+      "result": 6,
+      "out": "f34995950900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 11,
+      "result": 6,
+      "out": "f34995950900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 100,
+      "result": 6,
+      "out": "f34995950900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 38293,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f0cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f0c4cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f0c4cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 4,
+      "result": -1,
+      "out": "f0c40900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 5,
+      "result": -1,
+      "out": "f0c40900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 7,
+      "result": -1,
+      "out": "f0c40900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 9,
+      "result": 8,
+      "out": "f0c40900e10487ebcccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 11,
+      "result": 8,
+      "out": "f0c40900e10487ebcccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": 100,
+      "result": 8,
+      "out": "f0c40900e10487ebcccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3951494369
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 1,
+      "result": -1,
+      "out": "ffcccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 2,
+      "result": -1,
+      "out": "ff97cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 3,
+      "result": -1,
+      "out": "ff97cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 4,
+      "result": -1,
+      "out": "ff97cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 5,
+      "result": -1,
+      "out": "ff97cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 7,
+      "result": 6,
+      "out": "ff97505f32e5cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 9,
+      "result": 6,
+      "out": "ff97505f32e5cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 11,
+      "result": 6,
+      "out": "ff97505f32e5cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": 100,
+      "result": 6,
+      "out": "ff97505f32e5cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3845283664
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 1,
+      "result": -1,
+      "out": "23cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 2,
+      "result": -1,
+      "out": "23afcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 3,
+      "result": -1,
+      "out": "23afcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 4,
+      "result": -1,
+      "out": "23af0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 5,
+      "result": -1,
+      "out": "23af0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 7,
+      "result": -1,
+      "out": "23af0100bf5bcccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 9,
+      "result": -1,
+      "out": "23af0100bf5bcccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 11,
+      "result": 10,
+      "out": "23af0100bf5b04000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 100,
+      "result": 10,
+      "out": "23af0100bf5b04000300cccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 23487,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 1,
+      "result": -1,
+      "out": "ffcccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 2,
+      "result": -1,
+      "out": "ffcfcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 3,
+      "result": -1,
+      "out": "ffcfcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 4,
+      "result": -1,
+      "out": "ffcf2756cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 5,
+      "result": -1,
+      "out": "ffcf2756cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 7,
+      "result": -1,
+      "out": "ffcf27560900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 9,
+      "result": -1,
+      "out": "ffcf27560900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 11,
+      "result": 10,
+      "out": "ffcf2756090062e3b7cecccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": 100,
+      "result": 10,
+      "out": "ffcf2756090062e3b7cecccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 7,
+        "word_17e": 22055,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 3468157794
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 1,
+      "result": -1,
+      "out": "b6cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 2,
+      "result": -1,
+      "out": "b664cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 3,
+      "result": -1,
+      "out": "b664cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 4,
+      "result": -1,
+      "out": "b6641f45cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 5,
+      "result": -1,
+      "out": "b6641f45cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 7,
+      "result": 6,
+      "out": "b6641f450900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 9,
+      "result": 6,
+      "out": "b6641f450900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 11,
+      "result": 6,
+      "out": "b6641f450900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 100,
+      "result": 6,
+      "out": "b6641f450900cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 182,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 0,
+        "word_180": 17695,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 1,
+      "result": -1,
+      "out": "30cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 2,
+      "result": -1,
+      "out": "30d7cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 3,
+      "result": -1,
+      "out": "30d7cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 4,
+      "result": -1,
+      "out": "30d7c0e0cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 5,
+      "result": -1,
+      "out": "30d7c0e0cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 7,
+      "result": -1,
+      "out": "30d7c0e0cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 9,
+      "result": 8,
+      "out": "30d7c0e0b9411790cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 11,
+      "result": 8,
+      "out": "30d7c0e0b9411790cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": 100,
+      "result": 8,
+      "out": "30d7c0e0b9411790cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 3,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 57536,
+        "handle_188": 2417443257
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 1,
+      "result": -1,
+      "out": "2acccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 2,
+      "result": -1,
+      "out": "2a6fcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 3,
+      "result": -1,
+      "out": "2a6fcccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 4,
+      "result": -1,
+      "out": "2a6f0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 5,
+      "result": -1,
+      "out": "2a6f0100cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 7,
+      "result": -1,
+      "out": "2a6f0100c912cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 9,
+      "result": 8,
+      "out": "2a6f0100c9120900cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 11,
+      "result": 8,
+      "out": "2a6f0100c9120900cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 100,
+      "result": 8,
+      "out": "2a6f0100c9120900cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 10,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 4809,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 1,
+      "result": -1,
+      "out": "f3cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 2,
+      "result": -1,
+      "out": "f373cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 3,
+      "result": -1,
+      "out": "f373cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 4,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 5,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 7,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 9,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 11,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": 100,
+      "result": 4,
+      "out": "f3730900cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 211,
+        "word_140": 15,
+        "word_160": 99,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 1,
+      "result": -1,
+      "out": "20cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 2,
+      "result": -1,
+      "out": "20a7cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 3,
+      "result": -1,
+      "out": "20a7cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 4,
+      "result": -1,
+      "out": "20a70500cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 5,
+      "result": -1,
+      "out": "20a70500cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 7,
+      "result": -1,
+      "out": "20a70500cccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 9,
+      "result": 8,
+      "out": "20a7050004000300cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 11,
+      "result": 8,
+      "out": "20a7050004000300cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 100,
+      "result": 8,
+      "out": "20a7050004000300cccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 0,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 1,
+      "result": -1,
+      "out": "20cccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 2,
+      "result": -1,
+      "out": "2086cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 3,
+      "result": -1,
+      "out": "2086cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 4,
+      "result": -1,
+      "out": "2086cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 5,
+      "result": -1,
+      "out": "2086cccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 7,
+      "result": 6,
+      "out": "208604000300cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 9,
+      "result": 6,
+      "out": "208604000300cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 11,
+      "result": 6,
+      "out": "208604000300cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": 100,
+      "result": 6,
+      "out": "208604000300cccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_out",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "room": -1,
+      "result": -1,
+      "out": "cccccccccccccccccccccccccccccccc"
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 0,
+        "word_160": 48,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 54611555
+      },
+      "payload": "330044ef79864aff77ae080f",
+      "result": 2,
+      "after": {
+        "word_13c": 63,
+        "word_140": 3,
+        "word_160": 0,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 0,
+        "word_160": 6,
+        "word_17e": 65535,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "payload": "ab08d9899951ac03d684382e",
+      "result": 4,
+      "after": {
+        "word_13c": 175,
+        "word_140": 10,
+        "word_160": 0,
+        "word_17e": 35289,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 2,
+        "word_160": 1,
+        "word_17e": 65535,
+        "word_180": 61495,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "9110d22dcc1e2b1fc8762d47",
+      "result": 2,
+      "after": {
+        "word_13c": 159,
+        "word_140": 9,
+        "word_160": 0,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 241,
+        "word_160": 62,
+        "word_17e": 1,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 453335269
+      },
+      "payload": "58188519f10b0575dc9653e3",
+      "result": 2,
+      "after": {
+        "word_13c": 95,
+        "word_140": 5,
+        "word_160": 0,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 0,
+        "word_160": 0,
+        "word_17e": 25496,
+        "word_180": 36504,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "payload": "1320c6cacf6e3278d56acc45",
+      "result": 4,
+      "after": {
+        "word_13c": 31,
+        "word_140": 1,
+        "word_160": 0,
+        "word_17e": 0,
+        "word_180": 51910,
+        "word_182": 9,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 20232,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "payload": "ca40822f0789e42f79681a3f",
+      "result": 4,
+      "after": {
+        "word_13c": 207,
+        "word_140": 12,
+        "word_160": 0,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 12162,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 4,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 901485177
+      },
+      "payload": "d880733826eef92afb9929f2",
+      "result": 6,
+      "after": {
+        "word_13c": 223,
+        "word_140": 13,
+        "word_160": 0,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 3995482227
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 0,
+        "word_160": 1,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 1676618267
+      },
+      "payload": "62ffbd31fe8ab05190e6fa14",
+      "result": 10,
+      "after": {
+        "word_13c": 111,
+        "word_140": 6,
+        "word_160": 7,
+        "word_17e": 65535,
+        "word_180": 12733,
+        "word_182": 35582,
+        "handle_188": 3868217776
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 0,
+        "word_160": 0,
+        "word_17e": 65535,
+        "word_180": 1296,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "162e3113b4d9486a17967a79",
+      "result": 6,
+      "after": {
+        "word_13c": 31,
+        "word_140": 1,
+        "word_160": 6,
+        "word_17e": 4913,
+        "word_180": 55732,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "5ec9173a5a48dcc80e9a79d8",
+      "result": 10,
+      "after": {
+        "word_13c": 95,
+        "word_140": 5,
+        "word_160": 1,
+        "word_17e": 14871,
+        "word_180": 0,
+        "word_182": 18522,
+        "handle_188": 2584660188
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 178,
+        "word_160": 67,
+        "word_17e": 65535,
+        "word_180": 52155,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "4020c0d00d38495d37865a5b",
+      "result": 4,
+      "after": {
+        "word_13c": 79,
+        "word_140": 4,
+        "word_160": 0,
+        "word_17e": 0,
+        "word_180": 53440,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 106,
+        "word_140": 114,
+        "word_160": 1,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 196612
+      },
+      "payload": "9f3ed28ef155c27ff8d48044",
+      "result": 4,
+      "after": {
+        "word_13c": 159,
+        "word_140": 9,
+        "word_160": 6,
+        "word_17e": 65535,
+        "word_180": 36562,
+        "word_182": 9,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 125,
+        "word_140": 184,
+        "word_160": 6,
+        "word_17e": 19156,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "payload": "bb3c9c64e980ea3d781f1367",
+      "result": 4,
+      "after": {
+        "word_13c": 191,
+        "word_140": 11,
+        "word_160": 4,
+        "word_17e": 65535,
+        "word_180": 25756,
+        "word_182": 0,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 1,
+        "word_17e": 0,
+        "word_180": 5,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "6a4a525caf219dd14fa298f3",
+      "result": 6,
+      "after": {
+        "word_13c": 111,
+        "word_140": 6,
+        "word_160": 2,
+        "word_17e": 23634,
+        "word_180": 0,
+        "word_182": 8623,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 12,
+        "word_140": 164,
+        "word_160": 0,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 19409,
+        "handle_188": 3814316526
+      },
+      "payload": "75ecd867e6670f904b0c0ddd",
+      "result": 12,
+      "after": {
+        "word_13c": 127,
+        "word_140": 7,
+        "word_160": 4,
+        "word_17e": 26584,
+        "word_180": 26598,
+        "word_182": 36879,
+        "handle_188": 3708619851
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 2,
+        "word_160": 4,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "payload": "d7f9a8d1b126a537e9cbba55",
+      "result": 10,
+      "after": {
+        "word_13c": 223,
+        "word_140": 13,
+        "word_160": 1,
+        "word_17e": 65535,
+        "word_180": 53672,
+        "word_182": 9905,
+        "handle_188": 3421058981
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 26,
+        "word_140": 2,
+        "word_160": 7,
+        "word_17e": 1,
+        "word_180": 27158,
+        "word_182": 58011,
+        "handle_188": 196612
+      },
+      "payload": "771eeb99ff4c877c6c88a01a",
+      "result": 2,
+      "after": {
+        "word_13c": 127,
+        "word_140": 7,
+        "word_160": 6,
+        "word_17e": 65535,
+        "word_180": 0,
+        "word_182": 58011,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 0,
+        "word_160": 4,
+        "word_17e": 21616,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 196612
+      },
+      "payload": "91c62a24a1848b280767cf8a",
+      "result": 8,
+      "after": {
+        "word_13c": 159,
+        "word_140": 9,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 9258,
+        "handle_188": 680232097
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 2,
+        "word_160": 1,
+        "word_17e": 16288,
+        "word_180": 5,
+        "word_182": 8677,
+        "handle_188": 910151015
+      },
+      "payload": "532851009353e2c3cbe25111",
+      "result": 6,
+      "after": {
+        "word_13c": 95,
+        "word_140": 5,
+        "word_160": 0,
+        "word_17e": 81,
+        "word_180": 21395,
+        "word_182": 8677,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 239,
+        "word_160": 4,
+        "word_17e": 65535,
+        "word_180": 5,
+        "word_182": 64513,
+        "handle_188": 2147418112
+      },
+      "payload": "5207e11c1ef915c2d65f695c",
+      "result": 2,
+      "after": {
+        "word_13c": 95,
+        "word_140": 5,
+        "word_160": 7,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 64513,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 1820,
+        "word_180": 51283,
+        "word_182": 9,
+        "handle_188": 2147418112
+      },
+      "payload": "804dbdda8553fdeddc0c240c",
+      "result": 6,
+      "after": {
+        "word_13c": 143,
+        "word_140": 8,
+        "word_160": 5,
+        "word_17e": 55997,
+        "word_180": 0,
+        "word_182": 21381,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 15,
+        "word_140": 2,
+        "word_160": 6,
+        "word_17e": 1,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 2147418112
+      },
+      "payload": "bf7d7bc070cbfc3326f26d1c",
+      "result": 6,
+      "after": {
+        "word_13c": 191,
+        "word_140": 11,
+        "word_160": 5,
+        "word_17e": 65535,
+        "word_180": 49275,
+        "word_182": 52080,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 3,
+        "word_140": 15,
+        "word_160": 194,
+        "word_17e": 0,
+        "word_180": 20603,
+        "word_182": 0,
+        "handle_188": 3915370290
+      },
+      "payload": "334da46a7c9bf46a159385e6",
+      "result": 6,
+      "after": {
+        "word_13c": 63,
+        "word_140": 3,
+        "word_160": 5,
+        "word_17e": 27300,
+        "word_180": 0,
+        "word_182": 39804,
+        "handle_188": 2147418112
+      }
+    },
+    {
+      "kind": "factory_in",
+      "fields": {
+        "word_13c": 0,
+        "word_140": 15,
+        "word_160": 6,
+        "word_17e": 0,
+        "word_180": 0,
+        "word_182": 0,
+        "handle_188": 4202850112
+      },
+      "payload": "72edf38091b973275de2a45c",
+      "result": 12,
+      "after": {
+        "word_13c": 127,
+        "word_140": 7,
+        "word_160": 5,
+        "word_17e": 33011,
+        "word_180": 47505,
+        "word_182": 10099,
+        "handle_188": 1554309725
+      }
+    }
+  ],
+  "boundary": "original sync slots, natively, over supplied objects"
+}

@@ -1,0 +1,133 @@
+#version 460
+// The mist along each column of its grid, from the eye outwards: the light
+// it scatters towards the eye and how much of what lies behind it still
+// shows, written at the far end of each slice. A slice's own light is taken
+// as it leaves the slice, so a thick slice gives no more than its light.
+// With the eye under the water (the remastered camera) the column is the
+// water's instead (water_column).
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+
+// The cells' light (times the density) and density, per thousand units.
+layout(set = 0, binding = 1, rgba16f) uniform readonly image2D cells;
+// The light so far, and how much still shows.
+layout(set = 0, binding = 2, rgba16f) uniform writeonly image2D integrated;
+
+// With the eye under the water (the remastered camera): the sun's light
+// the column's cells scatter (pt_fog_inject.comp's water_sun), each
+// channel dimmed by the water on its way to the eye, in linear light,
+// which the composite adds to what the resolve laid (pt_resolve.comp);
+// nothing hidden. The headlamps glow in it as they glow in the water
+// below an eye above it, their glow, tuned as it adds over the dark in
+// retail's tones, going over the water's light in linear light.
+void water_column(ivec2 column, vec3 direction, float stretch) {
+    vec3 sigma = water_extinction();
+    vec3 albedo = water_albedo();
+    float clarity = max(frame.water_clarity, 1.0);
+    vec3 sun = vec3(0.0);
+    vec3 lamps = vec3(0.0);
+    float before = frame.near;
+    for (int slice = 0; slice < int(frame.volume.z); slice++) {
+        ivec2 texel = ivec2(column.x, column.y + slice * int(frame.volume.y));
+        vec4 cell = imageLoad(cells, texel);
+        float after = slice_depth(float(slice + 1), frame.volume_far);
+        sun += albedo * cell.rgb
+            * (exp(-sigma * (1000.0 * before * stretch)) - exp(-sigma * (1000.0 * after * stretch)));
+        if (frame.lamp_count > 0.5) {
+            vec3 point = direction * (0.5 * (before + after) / dot(direction, frame.forward));
+            vec3 absorbed = vec3(0.0);
+            for (int i = 0; i < int(frame.lamp_count); i++) {
+                vec3 toward;
+                float distance;
+                vec3 beam = glowing_beam(frame.lamps[i], point, toward, distance);
+                if (frame.eye.y + frame.lamps[i].position.y < frame.water_level) {
+                    absorbed += beam * exp(-distance / clarity);
+                }
+            }
+            float length = (after - before) * stretch;
+            lamps += absorbed * frame.lamp_water_hue * frame.lamp_water_glow
+                * exp(-sqrt(dot(point, point)) / clarity) * (1.0 - exp(-1000.0 / clarity * length));
+        }
+        imageStore(integrated, texel, vec4(sun + to_linear(lamps), 1.0));
+        before = after;
+    }
+}
+
+void main() {
+    ivec2 column = ivec2(gl_GlobalInvocationID.xy);
+    ivec3 size = ivec3(frame.volume);
+    if (column.x >= size.x || column.y >= size.y) {
+        return;
+    }
+    vec2 at = (vec2(column) + 0.5) / frame.volume.xy;
+    vec3 direction = native_direction(at * frame.native - 0.5);
+    // Thousands of units along the ray for each unit of depth.
+    float stretch = 0.001 / dot(direction, frame.forward);
+    if (frame.eye_under > 0.5) {
+        water_column(column, direction, stretch);
+        return;
+    }
+    vec3 scattered = vec3(0.0);
+    float shows = 1.0;
+    float before = frame.near;
+    for (int slice = 0; slice < size.z; slice++) {
+        ivec2 texel = ivec2(column.x, column.y + slice * size.y);
+        vec4 cell = imageLoad(cells, texel);
+        float after = slice_depth(float(slice + 1), frame.volume_far);
+        float length = (after - before) * stretch;
+        float through = exp(-cell.a * length);
+        scattered += shows * (cell.a > 1.0e-6 ? cell.rgb / cell.a * (1.0 - through)
+                                                : cell.rgb * length);
+        // The headlamps' beams glow in the air:
+        // drawn fresh each frame, with no history to smear behind a turn,
+        // through the world's mist or, where it is thin, a least air of
+        // their own that leaves what lies behind showing.
+        if (frame.lamp_count > 0.5) {
+            vec3 point = direction * (0.5 * (before + after) / dot(direction, frame.forward));
+            vec3 beams = vec3(0.0);
+            vec3 absorbed = vec3(0.0);
+            float clarity = max(frame.water_clarity, 1.0);
+            bool water = frame.water_reach > 0.0 && frame.water_glow <= 0.0;
+            bool under = water && frame.eye.y + point.y < frame.water_level;
+            // A lamp under the water lights the water itself (up to a
+            // point), absorbed by its clarity on the way from the lamp; one above it lights the air, and the
+            // water's surface glows with what enters it (water_color).
+            for (int i = 0; i < int(frame.lamp_count); i++) {
+                vec3 toward;
+                float distance;
+                vec3 beam = glowing_beam(frame.lamps[i], point, toward, distance);
+                if (water && frame.eye.y + frame.lamps[i].position.y < frame.water_level) {
+                    absorbed += under ? beam * exp(-distance / clarity) : vec3(0.0);
+                } else if (!under) {
+                    // Scattered as the mist scatters the sun, mostly onward:
+                    // from behind the lamps (the chase camera) the beam
+                    // glows faintly, looking into them the most (2026-10-29: the
+                    // glow in the air was a little too strong).
+                    beams += beam * forward_scatter(dot(toward, direction), frame.mist_anisotropy);
+                }
+            }
+            if (under) {
+                // Scattered in the water's own colour, absorbed again on the
+                // way back to the eye over the view's stretch under the water.
+                float along = sqrt(dot(point, point));
+                float below = frame.eye.y < frame.water_level
+                    ? along
+                    : along - (frame.eye.y - frame.water_level) / max(-direction.y, 1.0e-3);
+                float thick_water = 1000.0 / clarity;
+                scattered += shows * absorbed * frame.lamp_water_hue * frame.lamp_water_glow
+                    * exp(-max(below, 0.0) / clarity) * (1.0 - exp(-thick_water * length));
+            } else {
+                float thick = max(cell.a, frame.lamp_air_floor);
+                scattered += shows * beams * frame.lamp_air * (1.0 - exp(-thick * length));
+            }
+        }
+        shows *= through;
+        imageStore(integrated, texel, vec4(scattered, shows));
+        before = after;
+    }
+}

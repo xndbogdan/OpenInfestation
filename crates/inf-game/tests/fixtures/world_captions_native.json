@@ -1,0 +1,1506 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "cases": [
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 12345678,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 12.3",
+          "x": 267,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 999,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 0.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 1000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 0.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 99999,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 0.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 100000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 0.1",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 4000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 4.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 4293467296,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: -1.-5",
+          "x": 263,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 4294966297,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 0.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 2147483647,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 2147.4",
+          "x": 260,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 2147483648,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: -2147.-4",
+          "x": 253,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 1,
+        "countdown": 5000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 1,
+        "stage": 0,
+        "countdown": 5000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 1,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 5000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 1,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 5000000,
+        "hoops": 3,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Warp power hoops: 3",
+          "x": 253,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 65534,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Warp power hoops: -2",
+          "x": 249,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 32767,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Warp power hoops: 32767",
+          "x": 239,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 32768,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Warp power hoops: -32768",
+          "x": 235,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 0,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "S000: 3",
+          "x": 295,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 1023,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "S3FF: 3",
+          "x": 295,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 1024,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 3",
+          "x": 288,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 32768,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 3",
+          "x": 288,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 65535,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 3",
+          "x": 288,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 281,
+        "string_count": 280,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 3",
+          "x": 288,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 3,
+        "hoops_text": 281,
+        "string_count": 281,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Warp power hoops: 3",
+          "x": 253,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 5000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 275,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 5.0",
+          "x": 281,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 5000000,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 276,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 5.0",
+          "x": 270,
+          "y": 48
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 100",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 5,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 6,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 2147483647,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 2147483647",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 107374183,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 214748365,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 0,
+        "shown": 1,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 100",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 274,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 100",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 100,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 100",
+          "x": 10,
+          "y": 40
+        },
+        {
+          "text": "Countdown: 7.2",
+          "x": 270,
+          "y": 48
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 249,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          3840,
+          2160
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": 1870,
+          "y": 216
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 1849,
+          "y": 302
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          641,
+          479
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": 271,
+          "y": 47
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 250,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          1,
+          1
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": -49,
+          "y": 0
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": -70,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          4096,
+          32768
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": -11968,
+          "y": 48
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 8512,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          480
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          1,
+          98303
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": 16697,
+          "y": 48
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 16694,
+          "y": 67
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          2147483647,
+          2147483647
+        ],
+        "bonus": 0,
+        "clock": 0,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 7250000,
+        "hoops": 12,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 7.2",
+          "x": 1073741774,
+          "y": 214748364
+        },
+        {
+          "text": "Warp power hoops: 12",
+          "x": 1073741753,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          200
+        ],
+        "bonus": 572748341,
+        "clock": 659934898,
+        "shown": 0,
+        "attract": 0,
+        "stage": 1,
+        "countdown": 2220279417,
+        "hoops": 24502,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 258952269",
+          "x": 10,
+          "y": 40
+        },
+        {
+          "text": "Warp power hoops: 24502",
+          "x": 79,
+          "y": 28
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          1024,
+          2160
+        ],
+        "bonus": 0,
+        "clock": 3719153083,
+        "shown": 1,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 805863520,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          1024,
+          1080
+        ],
+        "bonus": 2566367726,
+        "clock": 2992835160,
+        "shown": 0,
+        "attract": 0,
+        "stage": 1,
+        "countdown": 21695228,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          480
+        ],
+        "bonus": 3895974192,
+        "clock": 2971502342,
+        "shown": 0,
+        "attract": 0,
+        "stage": 1,
+        "countdown": 28888152,
+        "hoops": 0,
+        "hoops_text": 63669,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 300502200",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          640,
+          240
+        ],
+        "bonus": 0,
+        "clock": 8752173,
+        "shown": 0,
+        "attract": 0,
+        "stage": 0,
+        "countdown": 58036191,
+        "hoops": 15,
+        "hoops_text": 60473,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Countdown: 58.0",
+          "x": 267,
+          "y": 24
+        },
+        {
+          "text": "(null): 15",
+          "x": 284,
+          "y": 33
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          240
+        ],
+        "bonus": 0,
+        "clock": 2038669419,
+        "shown": 1,
+        "attract": 1,
+        "stage": 1,
+        "countdown": 49721688,
+        "hoops": 13,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          1920,
+          1080
+        ],
+        "bonus": 0,
+        "clock": 272971202,
+        "shown": 0,
+        "attract": 1,
+        "stage": 0,
+        "countdown": 0,
+        "hoops": 18,
+        "hoops_text": 28205,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "(null): 18",
+          "x": 924,
+          "y": 151
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          480
+        ],
+        "bonus": 2197330275,
+        "clock": 3977155201,
+        "shown": 0,
+        "attract": 1,
+        "stage": 1,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 43156,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          200
+        ],
+        "bonus": 1679865787,
+        "clock": 4149545616,
+        "shown": 1,
+        "attract": 1,
+        "stage": 1,
+        "countdown": 1574528431,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 293332091",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          3840,
+          2160
+        ],
+        "bonus": 0,
+        "clock": 3273367394,
+        "shown": 0,
+        "attract": 1,
+        "stage": 0,
+        "countdown": 2840003203,
+        "hoops": 0,
+        "hoops_text": 281,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    },
+    {
+      "input": {
+        "surface": [
+          800,
+          480
+        ],
+        "bonus": 1513596726,
+        "clock": 1065912223,
+        "shown": 0,
+        "attract": 1,
+        "stage": 1,
+        "countdown": 0,
+        "hoops": 0,
+        "hoops_text": 36049,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": [
+        {
+          "text": "Bonus Time: 1670188746",
+          "x": 10,
+          "y": 40
+        }
+      ]
+    },
+    {
+      "input": {
+        "surface": [
+          320,
+          480
+        ],
+        "bonus": 0,
+        "clock": 398118635,
+        "shown": 1,
+        "attract": 0,
+        "stage": 1,
+        "countdown": 932782405,
+        "hoops": 1772,
+        "hoops_text": 49602,
+        "string_count": 1023,
+        "width": [
+          7,
+          1
+        ]
+      },
+      "texts": []
+    }
+  ],
+  "boundary": "original 0044121E..00441456 with 0048E290, 00440E20, 00405540 and sprintf native; 004A3AB0 and 004A4240 record, 00488AA0 answers"
+}

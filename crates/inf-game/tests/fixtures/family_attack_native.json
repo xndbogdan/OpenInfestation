@@ -1,0 +1,1548 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "entry": "00429B00",
+  "cases": [
+    {
+      "input": {
+        "entering": false,
+        "sound_unknown": true
+      },
+      "error": null,
+      "events": [],
+      "target": null,
+      "timer": 77,
+      "policy": 99,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 305419896
+    },
+    {
+      "input": {},
+      "error": null,
+      "events": [],
+      "target": null,
+      "timer": 77,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 13,
+      "helper": null,
+      "rng": 305419896
+    },
+    {
+      "input": {
+        "old_target": true,
+        "sound": 5
+      },
+      "error": null,
+      "events": [
+        [
+          "sound",
+          5
+        ]
+      ],
+      "target": "A",
+      "timer": 77,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 13,
+      "helper": null,
+      "rng": 305419896
+    },
+    {
+      "input": {
+        "sound_unknown": true
+      },
+      "error": "sound_field",
+      "events": [],
+      "target": null,
+      "timer": 77,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 13,
+      "helper": null,
+      "rng": 305419896
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": null,
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": null,
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": null,
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": null,
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "actor",
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "actor",
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": null,
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": null,
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": null,
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": null,
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "object",
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "object",
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "object",
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": null,
+        "B": "object",
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "object",
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "object",
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "object",
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "object",
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": "actor",
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "object",
+        "B": "actor",
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "object"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 2,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "score_a": 2,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "score_a": 1,
+        "score_b": 1,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "score_a": 4294967295,
+        "score_b": 2147483648,
+        "sound": 7
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "B",
+          4294967291
+        ]
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        4294967294
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "B",
+          2147483648
+        ]
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        3221225472
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "B",
+          2147483647
+        ]
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        1073741823
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "A",
+          99
+        ]
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        0
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          123,
+          99
+        ]
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        0
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "A",
+          99
+        ],
+        "sound": 7,
+        "failure": "random",
+        "old_target": true
+      },
+      "error": "random",
+      "events": [
+        [
+          "random"
+        ]
+      ],
+      "target": "A",
+      "timer": 2000000,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": [
+        "A",
+        99
+      ],
+      "rng": 305419896
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "A",
+          99
+        ],
+        "sound": 7,
+        "failure": "allocate",
+        "old_target": true
+      },
+      "error": "allocate",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": [
+        "A",
+        99
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "A",
+          99
+        ],
+        "sound": 7,
+        "failure": "sound",
+        "old_target": true
+      },
+      "error": "sound",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          7
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        0
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "allocation_null": true,
+        "old_target": true
+      },
+      "error": "clone",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": null,
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "stale": true
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "A",
+          99
+        ],
+        "helper_unknown": 0
+      },
+      "error": "helper0",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        null,
+        99
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "helper": [
+          "B",
+          99
+        ],
+        "helper_unknown": 4
+      },
+      "error": "helper4",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": [
+        "B",
+        null
+      ],
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "sound_unknown": true
+      },
+      "error": "sound_field",
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "sound": 32768
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "sound": 65535
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "size": 65535,
+        "sound": 32767,
+        "sound_flags": 32768
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ],
+        [
+          "sound",
+          32767
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 131420,
+      "enabled": 1,
+      "flags": 32768,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "released": "A",
+        "score_a": 1,
+        "score_b": 2
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "B",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 66285,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "released": "B",
+        "score_a": 2,
+        "score_b": 1
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "released": "A",
+        "score_a": 3,
+        "score_b": 2
+      },
+      "error": "released",
+      "events": [
+        [
+          "random"
+        ]
+      ],
+      "target": null,
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "released": "B",
+        "score_a": 1,
+        "score_b": 1
+      },
+      "error": null,
+      "events": [
+        [
+          "random"
+        ],
+        [
+          "allocate",
+          "actor"
+        ]
+      ],
+      "target": "A",
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 850,
+      "enabled": 1,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "A": "actor",
+        "B": "actor",
+        "released": "A",
+        "score_a": 1,
+        "score_b": 1
+      },
+      "error": "released",
+      "events": [
+        [
+          "random"
+        ]
+      ],
+      "target": null,
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    },
+    {
+      "input": {
+        "B": "actor",
+        "released": "B"
+      },
+      "error": "released",
+      "events": [
+        [
+          "random"
+        ]
+      ],
+      "target": null,
+      "timer": 2750432,
+      "policy": 5444164,
+      "range": 88,
+      "enabled": 7,
+      "flags": 12,
+      "helper": null,
+      "rng": 3073801867
+    }
+  ]
+}

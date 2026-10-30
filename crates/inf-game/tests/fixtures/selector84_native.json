@@ -1,0 +1,6775 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original selector 84 bodies with the real placement lookup 0047F7B0 and the partners' real +5C; handle resolution, shared finish and shared teardown recorded."
+ },
+ "guards": [
+  {
+   "address": 4440256,
+   "size": 36,
+   "sha256": "500066e4d5f6e2ef4be81cfa5425aa614141c0a4383e5b91904bc6d9b4bd40e7"
+  },
+  {
+   "address": 4440304,
+   "size": 26,
+   "sha256": "6a52a123b6c56a85cb00eadeeb8f06554eeb7fa9e9bf761c42a237d7e3a2cde6"
+  },
+  {
+   "address": 4440336,
+   "size": 62,
+   "sha256": "1bcfc3bf07b6000c7dbea48cfd432269fd67f79ccc8ca3f38236de44504eab33"
+  },
+  {
+   "address": 4440400,
+   "size": 168,
+   "sha256": "9b59a7b909727b5546b8f9060c71bea1557d3c74cb77caea65a3d5c5754c0ed2"
+  },
+  {
+   "address": 4440576,
+   "size": 92,
+   "sha256": "3acc94c5889896fc805ab2c16335c05a5b04bb17e703a9e52ea613886a47f838"
+  },
+  {
+   "address": 4440672,
+   "size": 48,
+   "sha256": "3f361772ea50a45415ed382a128b1b9fd66eab9004bc66d1c2f5511b95247a92"
+  }
+ ],
+ "coverage": {
+  "cases": 160
+ },
+ "cases": [
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 32767
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 65535,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131071,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131072,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 131073,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196607,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 196609,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262143,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 262144,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 305419896,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483647,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2147483648,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 65535
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967295,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_finish",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     4,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     4294967295,
+     0
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_finish",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     0,
+     0
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "team": 1,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     7
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_finish",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     8
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "team": 0,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 255,
+    "dirty": 0,
+    "counts": [
+     5,
+     4294967295
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_finish",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 0,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 255,
+    "dirty": 0,
+    "counts": [
+     5,
+     0
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "team": 19,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     1,
+     1
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_finish",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 19,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     1,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 2501,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 5,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     15
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 5,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 5,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     16
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 6,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 4294967280,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     4096
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 240,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 7,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     4294967295
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 268435462,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 5,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 12648430,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 12648430,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 18,
+      "dirty": 2
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 5,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 12648430,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 12648430,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 2
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 10,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 195948557,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 195948557,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 6
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 10,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 195948557,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 195948557,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 1,
+      "dirty": 6
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 1,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 1,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 0,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 16435934,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 16435934,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 3
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 0,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 16435934,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 16435934,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 1,
+      "dirty": 3
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 11,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 11,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 2147483653,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 2147483653,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 18,
+    "link": 65541,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "after_load",
+    "team": 1,
+    "link": 65541,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [
+     {
+      "placement": 4,
+      "handle": 12648430,
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "placement": 9,
+      "handle": 195948557,
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "placement": 4,
+      "handle": 14613198,
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "placement": 65535,
+      "handle": 16435934,
+      "team": 5,
+      "dirty": 1
+     }
+    ],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 2147418112,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 2147418112,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "actors": [
+     {
+      "team": 1,
+      "dirty": 0
+     },
+     {
+      "team": 18,
+      "dirty": 4
+     },
+     {
+      "team": 3,
+      "dirty": 0
+     },
+     {
+      "team": 5,
+      "dirty": 1
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 2,
+    "counts": [
+     2,
+     3
+    ],
+    "table": 5383304,
+    "linked_team": 1,
+    "linked_dirty": 2
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 2,
+    "counts": [
+     2,
+     3
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 2,
+    "counts": [
+     4,
+     1
+    ],
+    "table": 5383304,
+    "linked_team": 18,
+    "linked_dirty": 2
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 2,
+    "counts": [
+     4,
+     1
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 0,
+    "dirty": 2,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 18,
+    "linked_dirty": 2
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 0,
+    "dirty": 2,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 4,
+    "link": 4660,
+    "clock": 1,
+    "flags": 1,
+    "dirty": 2,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 4,
+    "linked_dirty": 2
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 4660,
+     "found": false
+    }
+   ],
+   "output": {
+    "team": 4,
+    "link": 4660,
+    "clock": 1,
+    "flags": 1,
+    "dirty": 2,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 0,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 0,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 1,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 1,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 0,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 0,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 1,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": true,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 1,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 0,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 1,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 1
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268468224,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 1,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 18
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 18,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435456,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": {
+     "team": 7,
+     "dirty": 0,
+     "handle": 4660
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304,
+    "linked_team": 7,
+    "linked_dirty": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": {
+     "answers": false,
+     "team": 4
+    },
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [],
+   "output": {
+    "team": 3,
+    "link": 4660,
+    "clock": 196608,
+    "flags": 268435457,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "contact",
+    "team": 18,
+    "link": 22136,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     0
+    ],
+    "partner": {
+     "answers": true,
+     "team": 1
+    },
+    "linked": {
+     "team": 18,
+     "dirty": 2,
+     "handle": 22136
+    },
+    "actors": [],
+    "null": 2147418112,
+    "args": [
+     "partner"
+    ]
+   },
+   "events": [
+    {
+     "kind": "resolve",
+     "handle": 22136,
+     "found": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 22136,
+    "clock": 1,
+    "flags": 32768,
+    "dirty": 2,
+    "counts": [
+     4294967295,
+     1
+    ],
+    "table": 5383304,
+    "linked_team": 1,
+    "linked_dirty": 2
+   }
+  },
+  {
+   "input": {
+    "mode": "teardown",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_teardown",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     2,
+     2
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "teardown",
+    "team": 1,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     2
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_teardown",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 1,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     3,
+     1
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "teardown",
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     0
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_teardown",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 18,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     4294967295,
+     0
+    ],
+    "table": 5383304
+   }
+  },
+  {
+   "input": {
+    "mode": "teardown",
+    "team": 0,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     0
+    ],
+    "partner": null,
+    "linked": null,
+    "actors": [],
+    "null": 2147418112,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "shared_teardown",
+     "self": true
+    }
+   ],
+   "output": {
+    "team": 0,
+    "link": 4294967295,
+    "clock": 0,
+    "flags": 32768,
+    "dirty": 0,
+    "counts": [
+     0,
+     4294967295
+    ],
+    "table": 5383304
+   }
+  }
+ ]
+}

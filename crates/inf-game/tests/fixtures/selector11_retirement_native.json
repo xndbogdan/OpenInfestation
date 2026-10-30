@@ -1,0 +1,1240 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "original_entry": "00402250",
+  "executable_block": [
+    232,
+    3,
+    9,
+    0,
+    0,
+    0,
+    244,
+    1,
+    200,
+    0
+  ],
+  "cases": [
+    {
+      "name": "ordered",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          65535,
+          32768,
+          19
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "alternate",
+      "rng": 324508639,
+      "flags": 2147516420,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "events": [
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 2147516420,
+        "position": [
+          65535,
+          32768,
+          19
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "first_mutates_position",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_first_radius": {
+        "position": [
+          17,
+          65535,
+          20
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            17,
+            65535,
+            20
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              17,
+              65535,
+              20
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            17,
+            65535,
+            20
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            17,
+            65535,
+            20
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            17,
+            65535,
+            20
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          17,
+          65535,
+          20
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "first_sets_alternate",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_first_radius": {
+        "flags": 2147516420
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 2147516420,
+        "position": [
+          65535,
+          32768,
+          19
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "burst_sets_alternate",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_burst": {
+        "flags": 2147516420,
+        "position": [
+          1,
+          2,
+          3
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 2147516420,
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 2147516420,
+        "position": [
+          1,
+          2,
+          3
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "burst_clears_alternate",
+      "rng": 324508639,
+      "flags": 2147516420,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_burst": {
+        "flags": 32772,
+        "position": [
+          1,
+          2,
+          3
+        ]
+      },
+      "events": [
+        {
+          "flags": 2147516420,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          1,
+          2,
+          3
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "scatter_mutates_placement",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_scatter": {
+        "index": 255
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 255,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -1,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          65535,
+          32768,
+          19
+        ],
+        "index": 255,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "second_mutates_scatter_input",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "after_second_radius": {
+        "position": [
+          500,
+          600,
+          700
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            500,
+            600,
+            700
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            500,
+            600,
+            700
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          500,
+          600,
+          700
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": false
+    },
+    {
+      "name": "failure_first_radius",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "fail": "first_radius",
+      "after_first_radius": {
+        "position": [
+          91,
+          92,
+          93
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          91,
+          92,
+          93
+        ],
+        "index": 129,
+        "word_1b2": 123
+      },
+      "failed": true
+    },
+    {
+      "name": "failure_burst",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "fail": "burst",
+      "after_burst": {
+        "position": [
+          91,
+          92,
+          93
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          91,
+          92,
+          93
+        ],
+        "index": 129,
+        "word_1b2": 123
+      },
+      "failed": true
+    },
+    {
+      "name": "failure_second_radius",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "fail": "second_radius",
+      "after_second_radius": {
+        "position": [
+          91,
+          92,
+          93
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          91,
+          92,
+          93
+        ],
+        "index": 129,
+        "word_1b2": 123
+      },
+      "failed": true
+    },
+    {
+      "name": "failure_scatter",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "fail": "scatter",
+      "after_scatter": {
+        "position": [
+          91,
+          92,
+          93
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          91,
+          92,
+          93
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": true
+    },
+    {
+      "name": "failure_placement",
+      "rng": 324508639,
+      "flags": 32772,
+      "position": [
+        65535,
+        32768,
+        19
+      ],
+      "index": 129,
+      "word_1b2": 123,
+      "source": 305419896,
+      "fail": "placement",
+      "after_placement": {
+        "position": [
+          91,
+          92,
+          93
+        ]
+      },
+      "events": [
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "first_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "burst",
+          "burst": {
+            "debris_count": 16,
+            "position": [
+              65535,
+              32768,
+              19
+            ],
+            "placement_radius": 20,
+            "central_type": 1,
+            "debris_types": [
+              1,
+              1
+            ],
+            "speed": 8,
+            "flags": 0
+          }
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 123,
+          "kind": "second_radius",
+          "source": 305419896,
+          "replicate": true
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "scatter",
+          "argument": 2
+        },
+        {
+          "flags": 32772,
+          "position": [
+            65535,
+            32768,
+            19
+          ],
+          "index": 129,
+          "word_1b2": 2000,
+          "kind": "placement",
+          "placement_index": -127,
+          "force": 0
+        }
+      ],
+      "final_state": {
+        "flags": 32772,
+        "position": [
+          91,
+          92,
+          93
+        ],
+        "index": 129,
+        "word_1b2": 2000
+      },
+      "failed": true
+    }
+  ]
+}

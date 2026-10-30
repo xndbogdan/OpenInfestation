@@ -1,0 +1,869 @@
+# Manual per-function status overrides for scripts/progress.ps1.
+# status: implemented | approximated | documented | not-needed
+# not-needed removes a game function from the progress denominator.
+address,status,note
+0x004A47C0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4AF0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4B00,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4B20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4B90,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4C60,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A4E70,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5090,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A51E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5C40,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5CB0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5E50,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5FD0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5FE0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A5FF0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6050,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6130,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6340,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6560,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A65B0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A65E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6750,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6860,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6A90,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6CD0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6D30,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6D70,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6F10,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A6FD0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A71B0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7380,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A73B0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A73D0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A74D0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A75D0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7700,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7950,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7BC0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7C30,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7C70,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7EA0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A7FF0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8250,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A84E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8560,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A85A0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8850,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8960,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8A70,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8CC0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A8F80,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9010,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9180,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9320,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9450,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9580,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A97E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9AC0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9C00,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9D40,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004A9FB0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA2A0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA350,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA4C0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA5F0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA720,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AA980,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AAAC0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AAC00,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AAE70,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AAF20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB090,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB1C0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB2F0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB550,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB690,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AB7D0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ABA40,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ABB80,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ABCB0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ABE40,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC080,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC1D0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC310,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC4B0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC710,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC880,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AC9E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ACC50,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ACEA0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD020,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD190,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD370,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD5E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD740,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AD890,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ADA50,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ADBC0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ADD20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004ADEF0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AE060,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AE1C0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AE380,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AE500,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AE670,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AEA50,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AF0C0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AF360,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AF770,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AF950,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AF9F0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AFC00,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004AFE90,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B0190,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B0430,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B0730,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B0AE0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B1110,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B1660,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B1D20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B2760,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B2FD0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B3380,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B39B0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B3FA0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B4660,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B51E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B5A60,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B5B20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B5D90,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B6030,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B63F0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B6750,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B6B10,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B6F20,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B75F0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B7BB0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B8330,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B8FA0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B9910,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004B9D30,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004BA400,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004BAA60,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004BB1E0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x004BBFB0,not-needed,dead: retail's software renderer, never selected (004EB4B0 always builds Direct3D)
+0x00404AA0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00404AE0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040EFF0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F000,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F020,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F030,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F050,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F060,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F080,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F090,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F0B0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F0C0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F0E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F0F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F110,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F120,not-needed,compiler glue: a static constructor or destructor thunk
+0x0040F140,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0040F150,not-needed,compiler glue: a static constructor or destructor thunk
+0x004151E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423380,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423390,not-needed,compiler glue: a static constructor or destructor thunk
+0x004233A0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004233B0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004233E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004233F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423400,not-needed,compiler glue: an atexit registration of a static destructor
+0x00423410,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423430,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423440,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423450,not-needed,compiler glue: an atexit registration of a static destructor
+0x00423460,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423480,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423490,not-needed,compiler glue: a static constructor or destructor thunk
+0x004234A0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004234B0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004234D0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004234E0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004234F0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00423500,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423520,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423530,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423540,not-needed,compiler glue: an atexit registration of a static destructor
+0x00423550,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423570,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423580,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423590,not-needed,compiler glue: an atexit registration of a static destructor
+0x004235A0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004235C0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004235D0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004235E0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004235F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423610,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423620,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423630,not-needed,compiler glue: an atexit registration of a static destructor
+0x00423640,not-needed,compiler glue: a static constructor or destructor thunk
+0x00423680,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00423690,not-needed,compiler glue: a static constructor or destructor thunk
+0x004236A0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004236B0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433870,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433880,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433890,not-needed,compiler glue: an atexit registration of a static destructor
+0x004338A0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004338E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004338F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433900,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433910,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433930,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433940,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433950,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433960,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433980,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433990,not-needed,compiler glue: a static constructor or destructor thunk
+0x004339A0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004339B0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004339D0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004339E0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004339F0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433A00,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433A20,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433A30,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433A40,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433A50,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433A70,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433A80,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433A90,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433AA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433AD0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00433AE0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00433AF0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00433B00,not-needed,compiler glue: a static constructor or destructor thunk
+0x00435390,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004354E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00435620,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00435630,not-needed,compiler glue: a static constructor or destructor thunk
+0x00435640,not-needed,compiler glue: an atexit registration of a static destructor
+0x00435650,not-needed,compiler glue: a static constructor or destructor thunk
+0x004381C0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00439620,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00439750,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CC80,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CC90,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CCA0,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CCB0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CCD0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CCE0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CCF0,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CD00,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CD20,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CD30,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CD40,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CD50,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CD70,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CD80,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CD90,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CDA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CDC0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CDD0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CDE0,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CDF0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CE10,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CE20,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CE30,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CE40,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CE70,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CE80,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CE90,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CEA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CEC0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CED0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CEE0,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CEF0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CF10,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CF20,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CF30,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CF40,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CF60,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CF70,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CF80,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CF90,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CFB0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043CFC0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043CFD0,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043CFE0,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043D000,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0043D010,not-needed,compiler glue: a static constructor or destructor thunk
+0x0043D020,not-needed,compiler glue: an atexit registration of a static destructor
+0x0043D030,not-needed,compiler glue: a static constructor or destructor thunk
+0x0044FCE0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0044FD20,not-needed,compiler glue: an atexit registration of a static destructor
+0x0044FD90,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0044FDA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00450670,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004521E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0045B460,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00460000,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00460040,not-needed,compiler glue: an atexit registration of a static destructor
+0x00463A80,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466D70,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466D80,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466D90,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466DA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466DC0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466DD0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466DE0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466DF0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466E10,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466E20,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466E30,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466E40,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466E60,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466E70,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466E80,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466E90,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466EB0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466EC0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466ED0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466EE0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466F00,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466F10,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466F20,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466F30,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466F50,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466F60,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466F70,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466F80,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466FC0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00466FD0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00466FE0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00466FF0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00467010,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00467020,not-needed,compiler glue: a static constructor or destructor thunk
+0x00467030,not-needed,compiler glue: an atexit registration of a static destructor
+0x00467040,not-needed,compiler glue: a static constructor or destructor thunk
+0x0046D3D0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0046F9A0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474010,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474020,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474030,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474040,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474100,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474110,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474120,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474130,not-needed,compiler glue: a static constructor or destructor thunk
+0x004741F0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474200,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474210,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474220,not-needed,compiler glue: a static constructor or destructor thunk
+0x004742F0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474300,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474310,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474320,not-needed,compiler glue: a static constructor or destructor thunk
+0x004743E0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004743F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474400,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474410,not-needed,compiler glue: a static constructor or destructor thunk
+0x004744D0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004744E0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004744F0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474500,not-needed,compiler glue: a static constructor or destructor thunk
+0x004745C0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004745D0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004745E0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004745F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004746C0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004746D0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004746E0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004746F0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004747B0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004747C0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004747D0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004747E0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004748A0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004748B0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004748C0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004748D0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474990,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004749A0,not-needed,compiler glue: a static constructor or destructor thunk
+0x004749B0,not-needed,compiler glue: an atexit registration of a static destructor
+0x004749C0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474AA0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474AB0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474AC0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474AD0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474B90,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474BA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474BB0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474BC0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474C80,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474C90,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474CA0,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474CB0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474D70,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474D80,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474D90,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474DA0,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474E60,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00474E70,not-needed,compiler glue: a static constructor or destructor thunk
+0x00474E80,not-needed,compiler glue: an atexit registration of a static destructor
+0x00474E90,not-needed,compiler glue: a static constructor or destructor thunk
+0x004755D0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x0048C6B0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x00490020,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004F7EA0,not-needed,compiler glue: a C++ static initializer thunk (0052E000 table)
+0x004F7EB0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F7EF0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8510,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8670,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8B30,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8BE0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8C50,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F8CE0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x005093D0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x005094B0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050A770,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050B640,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050B6D0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050B900,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050BCD0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050D080,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050D1D0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050DED0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050E0B0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050E630,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050E700,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050EC60,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x0050EC90,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device and its texture pages)
+0x004F4060,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F4D20,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F4F70,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F5820,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x00510040,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004A4940,not-needed,dead: no retail analog descriptor has a timer period (INPUT_RUNTIME.md)
+0x004A4990,not-needed,dead: no retail analog descriptor has a timer period (INPUT_RUNTIME.md)
+0x004EFE00,not-needed,dead: no retail analog descriptor has a timer period (INPUT_RUNTIME.md)
+0x004A47D0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004A4870,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004A4920,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F1160,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F4820,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F5080,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F50D0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F51D0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F5170,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F51B0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F51F0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F53F0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F5410,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F5730,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F0F30,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x00439DA0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050F060,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050F950,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FD90,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FE30,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FED0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FF10,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FF50,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FF90,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x0050FFD0,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F4840,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F4880,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F4900,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F5290,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F5300,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F53B0,not-needed,replaced: the port's SDL platform (the mouse and the button device, which no screen binds, so neither gets an adapter or has an effect)
+0x004F8D80,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004F9260,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004F97F0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004F9CE0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FA280,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FA770,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FAD10,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FB210,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FCD40,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FD1F0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FD7A0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FDC40,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FE1A0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FE660,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FEC20,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004FF0D0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00500B90,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005010F0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005016E0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00501C50,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00502260,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005027C0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00502DC0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00503330,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00503950,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00503E90,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00504470,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005049C0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00504FC0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00505490,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005059F0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00505EE0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00506490,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00506990,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00506F20,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00507430,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x005079C0,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00507E90,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00508410,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00508900,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x004F8C10,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00508E90,not-needed,replaced: the port's SDL/OpenGL platform (texture upload kernels for surfaces the port never creates: 16-bit and other depths, palettized pages and the colour-key family; its 32-bit alpha pages use the 8 ported kernels)
+0x00439990,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x00401010,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004027C0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004027D0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00404850,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00404860,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00405150,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00405160,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00405760,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00405770,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0040D640,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0040D650,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0040EFA0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0040EFB0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004128A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004128B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00415630,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00415640,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00425E40,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00425E50,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0042A950,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0042A960,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0042E230,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0042E240,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00431EB0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00431EC0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00435810,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00435820,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00437B30,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00437B40,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00438E20,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00439510,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00439520,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004399D0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004399E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043B6B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043B6C0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C050,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C060,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C2E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C2F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C7D0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0043C7E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00440C40,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00440C50,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00448090,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004480A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0044B570,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0044B580,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0044FDB0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0044FDC0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004503E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004503F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00450650,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00450660,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00453E50,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00453E60,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004541A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004541B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045AE70,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045AE80,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045B140,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045B150,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045C120,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0045C130,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004600B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004600C0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00461CD0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004660E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004660F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00469430,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00469440,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00480440,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00480450,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00481070,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00481080,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004852E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004852F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004864E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004864F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00488010,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048B150,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048B160,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048C870,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048C880,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048E910,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048E920,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048F5B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048F5C0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048FA40,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0048FA50,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004932E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004932F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00494380,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00494390,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004955F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00495600,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A38A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A38B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A3A90,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A3AA0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A4290,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A42A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A4850,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004A4860,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004AE840,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004AE850,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EDD90,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EDDA0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EE140,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EE150,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EFCF0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004EFD00,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F1180,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F1190,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F3D60,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F3D70,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F4920,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F4930,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F4960,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F4970,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F50B0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F50C0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F53D0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F53E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F5770,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F5780,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F6090,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F60A0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x004F8C20,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050ECB0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050ECC0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050ED70,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050ED80,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050EE10,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050EE20,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050EE60,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050EE70,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F320,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F330,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F3D0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F3E0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F470,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F480,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F580,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F590,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F870,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F880,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050F9F0,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x0050FA00,not-needed,glue: an FGDK module's acquire or release thunk (one module record to 0048EE20/0048EEC0, from a dependency table or the boot and exit code); the port's owners construct each module's state
+0x00429430,not-needed,glue: a jump thunk (its whole body is jmp 00428750)
+0x00438330,not-needed,glue: a jump thunk (its whole body is jmp 004946B0)
+0x00439190,not-needed,glue: a jump thunk (its whole body is jmp 00494430)
+0x004391A0,not-needed,glue: a jump thunk (its whole body is jmp 00494480)
+0x00439220,not-needed,glue: a jump thunk (its whole body is jmp 004F4F60)
+0x00439500,not-needed,glue: a jump thunk (its whole body is jmp 00439530)
+0x00440980,not-needed,glue: a jump thunk (its whole body is jmp 00438080)
+0x00445B80,not-needed,glue: a jump thunk (its whole body is jmp 00445B90)
+0x0044B890,not-needed,glue: a jump thunk (its whole body is jmp 0044B8C0)
+0x0044B8A0,not-needed,glue: a jump thunk (its whole body is jmp 0044C130)
+0x0044B8B0,not-needed,glue: a jump thunk (its whole body is jmp 0044C6A0)
+0x00461CB0,not-needed,glue: a jump thunk (its whole body is jmp 004623F0)
+0x004746B0,not-needed,glue: a jump thunk (its whole body is jmp 004EFBD0)
+0x00487170,not-needed,glue: a jump thunk (its whole body is jmp 00487180)
+0x00487FF0,not-needed,glue: a jump thunk (its whole body is jmp 00439DA0)
+0x0048B0D0,not-needed,glue: a jump thunk (its whole body is jmp 00465050)
+0x004922F0,not-needed,glue: a jump thunk (its whole body is jmp 004959B0)
+0x004924F0,not-needed,glue: a jump thunk (its whole body is jmp 00493790)
+0x004F1070,not-needed,glue: a jump thunk (its whole body is jmp 004F51B0)
+0x004F11A0,not-needed,glue: a jump thunk (its whole body is jmp 0050FF90)
+0x004F11B0,not-needed,glue: a jump thunk (its whole body is jmp 0050FF50)
+0x004F8500,not-needed,glue: a jump thunk (its whole body is jmp 004F8510)
+0x004F57B0,not-needed,glue: an import thunk (jmp through the import address table to a system DLL)
+0x0050F930,not-needed,glue: an import thunk (jmp through the import address table to a system DLL)
+0x005116E8,not-needed,glue: an import thunk (jmp through the import address table to a system DLL)
+0x00413CE0,not-needed,compiler glue: a scalar deleting destructor (calls 00413D00, then frees the object when flag 1 is set)
+0x004233C0,not-needed,compiler glue: an implicit destructor (only restores the base vtable 00520AA8)
+0x00425D10,not-needed,compiler glue: a scalar deleting destructor with its destructor inlined (restores vtable 00520AA8, frees on flag 1)
+0x00428730,not-needed,compiler glue: a scalar deleting destructor (calls 00428750, then frees the object when flag 1 is set)
+0x00429410,not-needed,compiler glue: a scalar deleting destructor (calls 00429430, then frees the object when flag 1 is set)
+0x00429E50,not-needed,compiler glue: a scalar deleting destructor (calls 00429E70, then frees the object when flag 1 is set)
+0x004338C0,not-needed,compiler glue: a scalar deleting destructor (calls 00433AB0, then frees the object when flag 1 is set)
+0x00433AB0,not-needed,compiler glue: an implicit destructor (only restores the base vtable 00521DF8)
+0x00435110,not-needed,compiler glue: a scalar deleting destructor with its destructor inlined (restores vtable 00521DF8, frees on flag 1)
+0x00438060,not-needed,compiler glue: a scalar deleting destructor (calls 00438080, then frees the object when flag 1 is set)
+0x00438310,not-needed,compiler glue: a scalar deleting destructor (calls 00438330, then frees the object when flag 1 is set)
+0x004387B0,not-needed,compiler glue: a scalar deleting destructor (calls 004387D0, then frees the object when flag 1 is set)
+0x0043CE50,not-needed,compiler glue: an implicit destructor (only restores the base vtable 00522638)
+0x0043FA20,not-needed,compiler glue: a scalar deleting destructor with its destructor inlined (restores vtable 00522638, frees on flag 1)
+0x00440960,not-needed,compiler glue: a scalar deleting destructor (calls 00440980, then frees the object when flag 1 is set)
+0x00443340,not-needed,compiler glue: a scalar deleting destructor (calls 00443360, then frees the object when flag 1 is set)
+0x00445AC0,not-needed,compiler glue: a scalar deleting destructor (calls 00445B90, then frees the object when flag 1 is set)
+0x0045F650,not-needed,compiler glue: a scalar deleting destructor (calls 0045FC50, then frees the object when flag 1 is set)
+0x00467050,not-needed,compiler glue: an implicit destructor (only restores the base vtable 00526FB8)
+0x00469110,not-needed,compiler glue: a scalar deleting destructor with its destructor inlined (restores vtable 00526FB8, frees on flag 1)
+0x00469FC0,not-needed,compiler glue: a scalar deleting destructor (calls 00469FE0, then frees the object when flag 1 is set)
+0x004A5C20,not-needed,compiler glue: a scalar deleting destructor (calls 004BC9A0, then frees the object when flag 1 is set)
+0x004EE230,not-needed,compiler glue: a scalar deleting destructor with its destructor inlined (restores vtable 00529228, frees on flag 1)
+0x004EE250,not-needed,compiler glue: an implicit destructor (only restores the base vtable 00529228)
+0x004EE360,not-needed,compiler glue: a scalar deleting destructor (calls 004EE380, then frees the object when flag 1 is set)
+0x004EEB60,not-needed,compiler glue: a scalar deleting destructor (calls 004EEB80, then frees the object when flag 1 is set)
+0x004EECC0,not-needed,compiler glue: a scalar deleting destructor (calls 004EECE0, then frees the object when flag 1 is set)
+0x004EEDE0,not-needed,compiler glue: a scalar deleting destructor (calls 004EEE00, then frees the object when flag 1 is set)
+0x00509D90,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x00508FA0,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050E770,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050A6A0,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050E5B0,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050B200,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x0050B4A0,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x0050B4F0,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x0050D100,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x00495630,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x00495730,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004AE860,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004A4380,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004BC9A0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004F8450,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004F8A50,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x0050DCF0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x00510630,not-needed,glue: an import thunk (jmp through the import address table to a system DLL)
+0x0050F1F0,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050EE30,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050F050,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050F140,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x004F8C30,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x004F8CB0,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004F4940,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x00510550,not-needed,replaced: the port's SDL audio (DirectSound calls and their error objects)
+0x00510570,not-needed,replaced: the port's SDL audio (DirectSound calls and their error objects)
+0x004F5810,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F7E70,not-needed,replaced: the port's SDL/OpenGL platform (the DirectDraw/Direct3D screen device: its renderer object, lifetime, surface locks and error objects)
+0x004F3D80,not-needed,replaced: the port's Rust runtime (FGDK wrappers of the C runtime's file and heap calls)
+0x00495970,not-needed,replaced: the port's Rust runtime (FGDK wrappers of the C runtime's file and heap calls)
+0x0050F550,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050FA10,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x00401380,not-needed,dead: the default +44 (run +24); actor +44 runs only from the player's update (0046A260) on its vehicle (00416170) or a held actor, and 0046AE90 holds only classes whose +88 accepts (00405750, 00444AB0, 0040F880, 00457750), none of which binds it
+0x0040D7B0,not-needed,compiler glue: an implicit copy constructor (a memberwise copy of a 40-byte basis; the port's values are Copy)
+0x00447EF0,not-needed,compiler glue: an implicit copy constructor (a memberwise copy of a 0xE0-byte record; the port's values are Copy)
+0x004151F0,not-needed,dead: a CRT initializer of a global basis (00546A10..00546A37) that no code reads
+0x004381D0,not-needed,dead: a CRT initializer of a global basis (00546E98..00546EBF) that no code reads
+0x004521F0,not-needed,dead: a CRT initializer of a global basis (005483D0..005483F7) that no code reads (00452570 only writes it)
+0x00438F70,not-needed,replaced: the port's typed errors and crash log (retail's status error screen for an unhandled longjmp code)
+0x004390A0,not-needed,replaced: the port's typed errors and crash log (retail's error message box for a longjmp code)
+0x004923B0,not-needed,replaced: the port's typed errors and crash log (an error object's text for the status error screen)
+0x00438340,not-needed,replaced: the port's SDL/OpenGL platform (display recovery after a lost device: frees the session's display objects)
+0x004F11C0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F11D0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F11E0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F11F0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1220,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1230,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1240,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1250,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1270,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F12A0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F12B0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F12E0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1300,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1320,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1380,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F13F0,not-needed,dead: an operator of auxiliary register opcode 36 (table 00544C80), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F3650,not-needed,dead: the auxiliary consumer's unknown-opcode trap; every retail model's stream parses with known opcodes (tests/model_auxiliary_corpus.rs)
+0x004F1CA0,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1510,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1A20,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F2260,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1B60,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x004F1920,not-needed,dead: a cylinder contact policy (callback +04, auxiliary opcode 90), which no retail model carries (tests/model_auxiliary_corpus.rs: every stream's opcodes are 05, 07, 18, 2F, 30, 89, 8C, 8D, 8E, 8F and 95)
+0x0044B560,not-needed,dead: a module's initialise (table 00524F40, record 00536FC8) that sets byte 00548370, which no code reads
+0x00495610,not-needed,replaced: the port's SDL/OpenGL platform (DirectDraw device enumeration, display mode and surface format checks)
+0x004222F0,not-needed,compiler glue: the empty static destructor (RET) that 00421DC0 registers with atexit (00511D89) when it first initializes its static 00546A08
+0x0042A7C0,not-needed,compiler glue: an exception-unwinding helper that deletes the object its frame owns; only the unwind funclets 0051C538..0051D5E4 call it, when an error's longjmp leaves that frame (the port's typed errors and Drop replace them)
+0x00428A40,not-needed,dead: the default +E4 escort change; only the Flying Escort descriptor's change 00435220 calls +E4, and only selectors 34 and 35 install it (records 00521E98 and 00522700, at 00433B14 and 0043CFA4), both binding 00428AB0
+0x0042E1F0,not-needed,dead: selector 22/65's +4C (table 0052187C) is a bare LEA/RET that cannot take the three arguments every +4C call pushes (callee-cleaned visual births at 00401C3A..0048CA54, each on its own class); none runs on a fading child or splash
+0x00434B20,not-needed,dead: selector 34's +44 (table 00521EAC); actor +44 runs only from the player's update (0046A260) on its vehicle or a held actor, and selector 34's +88 (00402720) refuses the hold
+0x00435830,not-needed,dead: the furniture query wrapper's +04 (table 005220B8, used by 00435D50 and 0043A7E0 for auxiliary queries), reached only by auxiliary opcode 97's custom vertex (004EC670), which no retail model carries (tests/model_auxiliary_corpus.rs)
+0x004357B0,not-needed,replaced: Rust ownership (the furniture module's clean-up, which only frees the nodes of list 00546E1C; the port's owners drop them)
+0x00438DA0,not-needed,replaced: the port's SDL/OpenGL platform and Rust ownership (the session module's clean-up at exit: closes the display through 00495730 and deletes the session objects 00546F28 and 00546F2C)
+0x004387D0,not-needed,replaced: Rust ownership (the session's destructor, run only by the exit clean-up 00438DA0: frees the save owner and destroys the gameplay object; the port's owners drop them)
+0x00449B40,not-needed,replaced: Rust ownership (frees the save owner's three buffers, from the session's exit-time destructor 004387D0)
+0x004871A0,not-needed,replaced: Rust ownership (unpublishes the gameplay object 0055F160 and the particle manager, from the session's exit-time destructor 004387D0)
+0x00487CD0,not-needed,replaced: Rust ownership (the gameplay object's destructor, from the session's exit-time destructor 004387D0 and its unwind funclets: releases its sound, disposes its actor, destroys the mission, particles and object manager)
+0x0048DAD0,not-needed,replaced: Rust ownership (the whole mission's destructor, only from the gameplay object's exit-time destructor 00487CD0 and its unwind funclets)
+0x00464B00,not-needed,replaced: Rust ownership (the particle manager's destructor, only from the gameplay object's exit-time destructor 00487CD0 and its unwind funclets)
+0x00478BB0,not-needed,replaced: Rust ownership (the object manager's destructor, only from the gameplay object's exit-time destructor 00487CD0 and its unwind funclets)
+0x00494580,not-needed,replaced: Rust ownership (the scheduler-linked base destructor: unlinks the session, from its exit-time destructor 004387D0)
+0x00494540,not-needed,replaced: Rust ownership (the scheduler-linked base's deleting destructor: unlinks and frees it at exit)
+0x00494350,not-needed,replaced: Rust ownership (the scheduler module's clean-up at exit: unlinks every session of list 0055F4D0)
+0x00495A60,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 02 (a line), which no retail model carries (inf-formats tests/retail_census.rs)
+0x00495B70,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 02 (a line, Far), which no retail model carries (inf-formats tests/retail_census.rs)
+0x004A12E0,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 09 (the two-slot basis sub-object), which no retail model carries (inf-formats tests/retail_census.rs)
+0x004A1530,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 18 (a rotated sprite), which no retail model carries (inf-formats tests/retail_census.rs)
+0x004A26A0,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 18 (a rotated sprite, Far), which no retail model carries (inf-formats tests/retail_census.rs)
+0x004A1940,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 19 (a rotated sprite), which no retail model carries (inf-formats tests/retail_census.rs)
+0x004A2AD0,not-needed,dead: the renderer's Near and Far tables (00540DC0, 005411C0) reach it only for model command 19 (a rotated sprite, Far), which no retail model carries (inf-formats tests/retail_census.rs)
+0x00439E40,not-needed,dead: 004260C0's custom-vertex selector-3 kernel; only models 118 and 119, the player vehicle's forms, carry 2D selector 3 (inf-formats tests/retail_census.rs), and the vehicle's own +10 (00415D30) answers selector 3 without 004260C0; no other actor carries those models
+0x00440510,not-needed,dead: the base course gate's +4C (table 005229D8); only factory case 63 builds that base alone (00461304), and no overlay's constructor bank holds a selector-63 resource (inf-formats tests/retail_census.rs)
+0x00444A90,not-needed,dead: selector 88's +44 (table 00524AC0) runs only when the player's update (0046A260) finds its held unit live; selector 88 is only in the intro's world 22 (every world's load, 0 to 24 but 19), a fixed cinematic whose full retail run (lab newgame-intro coverage) runs 0046A260 and selector 88's +24 but never this
+0x00447BD0,not-needed,dead: the mode-4 leg child's +0C (table 00524EB8); every +0C call in the executable is on another kind of object, and the leg helper calls only its children's +04 and +08
+0x00447D80,not-needed,dead: the leg child's +0C (table 00524E88); every +0C call in the executable is on another kind of object, and the leg helper calls only its children's +04 and +08
+0x0044FB50,not-needed,dead: the terrain callback table 00537090's +18 (a water plane); its only user 0044EC50 hands the table to the auxiliary interpreter 004F2C50, which calls slots +00 to +10 only
+0x00462D70,not-needed,no behaviour: a bare RET 0C (the +08 of every model callback table, 00520378 to 00528518, and 00526B50's +84); whatever calls it, nothing changes
+0x00463800,not-needed,replaced: the port's SDL platform (the registry's Game Path under HKCU Software\Frontier Developments Ltd\Infestation, read once and cached for the save file's directory; the port takes its data root from the launcher or --data-root)
+0x00463780,not-needed,replaced: the port's SDL platform (writes the cached Game Path back to the registry; the port keeps no install path there)
+0x00466CC0,not-needed,compiler glue: an exception-unwinding helper that frees the allocation its frame owns; only the unwind funclets 0051D4E0..0051E0D5 call it, when an error's longjmp leaves that frame (the port's typed errors and Drop replace them)
+0x00468A60,not-needed,dead: selector 13's +90 (table 005269C4); selector 13's only resource (1.ovl local 85) is placed in no campaign world (each world's load, 0 to 24 but 19), no world sweep spawns one (the port stops on that constructor; none in the 2026-10-18 sweeps), and retail coverage over 46 scenarios never reaches it
+0x0046D360,not-needed,dead: the initialise of a module (record 0053A5D0, table 005271F0) that nothing acquires: no thunk, dependency table or boot code names its record
+0x00478940,not-needed,compiler glue: an exception-unwinding helper that releases the service its frame holds (0047DE80); only the unwind funclets 0051DC56 and 0051DCA1 call it, when an error's longjmp leaves that frame
+0x004789E0,not-needed,dead: the actor packet wrapper's +04 (table 00527B18, used only for auxiliary queries) and selector 18's +13C; auxiliary opcode 97, the only caller of a wrapper's +04, is in no retail model (tests/model_auxiliary_corpus.rs), and +13C runs only from descriptor update 00469310, which only the scientists' code installs (record 00527038 at 00467004)
+0x00482D1C,not-needed,not a function: the four NOP bytes before 00482D20, which the census took as a start from a table of code-range values at 00541D10 (no code jumps or calls there)
+0x00488D00,not-needed,dead: the +14 furniture response of particle classes 005287F4, 00528834 and 00528934; only the projectile lane 00465570 (the +0C collision of classes 00526EFC, 00526F20 and 00526F60) calls a particle's +14, and these classes' +0C is 00488CC0, which reaches only the ground classifier and +10
+0x00489490,not-needed,dead: the splash class 005287B4's +10 ground response; a particle's +10 runs only from its own +0C collision, and the splash's +0C is 00402720, which collides with nothing
+0x00492280,not-needed,replaced: the port's typed errors and crash log (a status error object's text, Status:0x%08x, which only the status error screen's 004923B0 asks for)
+0x004950C0,not-needed,replaced: the port's title-video player (DirectShow: 00404890 opens Title.avi through this filter-graph build; title_playback.rs decodes the frames itself)
+0x00494CD0,not-needed,replaced: the port's title-video player (DirectShow: 00404890's call to the current movie's interface +38, slot +1C)
+0x00495460,not-needed,replaced: the port's title-video player (DirectShow: the movie's stop and release calls from 00494DC0 and a failed 004950C0)
+0x00494A50,not-needed,replaced: the port's title-video player and typed errors (a DirectShow movie error's text through AMGetErrorTextA)
+0x004A4840,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004AF040,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +18 clipped 16-bit span fill on the locked back buffer; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it; the software renderer that shares it is never built)
+0x004AF810,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +1C 16-step colour ramp; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it; the software renderer that shares it is never built)
+0x004AF670,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +20 translucent rectangle fill; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it; the software renderer that shares it is never built)
+0x004AE900,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +28 16-bit image blit; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it; the software renderer that shares it is never built)
+0x004A4AE0,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +0C text pass-through to 004A3AB0; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it; the software renderer that shares it is never built)
+0x004BCA80,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +2C 2D sprite; no offline screen draws with it: retail coverage over 46 lab scenarios, every phase from the title to the results, never reaches it)
+0x004BCA60,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +38, 0050D960 on its argument's +4; no offline screen reaches it in retail coverage over 46 lab scenarios)
+0x004EB480,not-needed,replaced: the port's SDL/OpenGL platform (the Direct3D renderer's +00 device-byte test; no offline screen reaches it in retail coverage over 46 lab scenarios)
+0x004EB190,not-needed,dead: the Direct3D renderer's +30 2D line, queued only through thunk 004A39F0, which only the line command 02's handlers (00495A60, 00495B70) queue, and no retail model carries command 02
+0x004EB470,not-needed,dead: the Direct3D renderer's +34 (its +30 with the argument), queued only through thunk 004A3A30, which only the line command 02's handlers queue, and no retail model carries command 02
+0x004EE100,not-needed,replaced: Rust ownership (the scene-tree module's clean-up at exit: unloads the active root, deletes the tree and frees its lookup)
+0x004EE380,not-needed,replaced: Rust ownership (a scene-tree leaf's destructor: frees its four request tables and outputs, reached only from the exit-time teardown 004EE100)
+0x004EEB80,not-needed,replaced: Rust ownership (a scene-tree branch's destructor: deletes its children, reached only from the exit-time teardown 004EE100)
+0x004EECE0,not-needed,replaced: Rust ownership (a scene-tree Select's destructor: deletes its children, reached only from the exit-time teardown 004EE100)
+0x004EEE00,not-needed,replaced: Rust ownership (a scene-tree Group's destructor: deletes its children, reached only from the exit-time teardown 004EE100)
+0x004EF0A0,not-needed,replaced: Rust ownership (frees a leaf's request table: every handler's list, then the array)
+0x004EEF10,not-needed,replaced: Rust ownership (a tracked free of a scene-tree allocation, unregistering it from the allocation tracker 00494910 first)
+0x004F5470,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F5490,not-needed,replaced: the port's SDL platform (the DirectInput and WinMM device objects, their threads and timers; the port reads its pad once a frame)
+0x004F57C0,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F57D0,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F7E60,not-needed,replaced: the port's SDL platform (MCI CD audio, message boxes, the command line, DirectX and CRT error texts)
+0x004F8C80,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050EE40,not-needed,replaced: the port's SDL/OpenGL platform (Direct3D texture pages: allocation, packing, upload, eviction and binding; the port gives each sprite its own bordered surface with retail's first-allocation UVs)
+0x0050B630,not-needed,compiler glue: an exception-unwinding helper in the texture-page code; only the unwind funclet 0051E440 calls it, when an error's longjmp leaves that frame
+0x0050F940,not-needed,replaced: the port's typed errors and crash log (the deleting destructor of the DirectShow and DirectX error objects, tables 00528E08 and 00529838)
+0x00479080,not-needed,dead: moves an object onto the manager's current update list; its only caller is selector 88's +44 (00444A90), which never runs
+0x004922C0,not-needed,replaced: the port's typed errors and crash log (builds a status error object, table 00528CF8, that the save, display and file layers raise through 004949A0)
+0x00492350,not-needed,replaced: the port's typed errors and crash log (builds a status error object with up to 255 characters of text, table 00528D00)
+0x00492300,not-needed,replaced: the port's typed errors and crash log (a texted status error object's text, Status 0x%08x (%s), for the status error screen)
+0x00493D90,not-needed,replaced: the port's network transport (DirectPlay's setup: the DPLAYX object and its connection from an address, through COM calls and moveable global blocks)
+0x004928C0,not-needed,replaced: the port's network transport (DirectPlay's HRESULT texts, which its start, join, calls and send thread report)
+0x00494130,not-needed,replaced: the port's network transport (frees a moveable global block of DirectPlay's descriptions, 00493F30's counterpart)

@@ -1,0 +1,22 @@
+#version 460
+// SMAA's first pass (smaa.glsl): the colour's edges by luma.
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 0) uniform sampler2D color_image;
+layout(set = 0, binding = 1, rgba8) uniform writeonly image2D edges_out;
+
+#include "smaa.glsl"
+
+void main() {
+    ivec2 pixel;
+    vec2 texcoord;
+    if (!smaa_pixel(pixel, texcoord)) {
+        return;
+    }
+    vec4 offset[3];
+    SMAAEdgeDetectionVS(texcoord, offset);
+    vec2 edges = SMAALumaEdgeDetectionPS(texcoord, offset, color_image);
+    imageStore(edges_out, pixel, vec4(edges, 0.0, 0.0));
+}

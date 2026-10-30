@@ -1,0 +1,94 @@
+#version 460
+// Thermal vision's automatic gain: a histogram of the heat on a grid of
+// samples over the frame, the sky left out, whose low and high shares set
+// the range heat maps to black through white (a few hot pixels no longer
+// wash out the rest). The camera's range follows a share of it each frame
+// (all of it on the first), so a sudden hot thing briefly dims the rest. A
+// view of nothing but sky keeps the range it had. One workgroup.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 256) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+
+layout(set = 0, binding = 1, r32f) uniform readonly image2D heat_image;
+// The range heat maps to black through white.
+layout(set = 0, binding = 2, scalar) buffer Gain {
+    vec2 range;
+} gain;
+// The traced depth: 1 where the ray met the sky.
+layout(set = 0, binding = 3, r32f) uniform readonly image2D depth_image;
+layout(push_constant) uniform Push {
+    // 1 when the last frame ran no thermal vision.
+    int fresh;
+    // The shares of the scene below black and above white.
+    float low;
+    float high;
+} push;
+
+const ivec2 SAMPLES = ivec2(64, 36);
+// The least span the range keeps, so a uniform scene is not all noise
+// (centred, so it reads mid-grey, not black).
+const float LEAST_SPAN = 0.1;
+// The histogram's bins over heat 0 to HEAT_TOP.
+const uint BINS = 256u;
+const float HEAT_TOP = 2.0;
+
+shared uint bins[BINS];
+
+void main() {
+    uint index = gl_LocalInvocationID.x;
+    bins[index] = 0u;
+    barrier();
+    ivec2 size = imageSize(heat_image);
+    for (uint i = index; i < uint(SAMPLES.x * SAMPLES.y); i += 256u) {
+        ivec2 cell = ivec2(int(i) % SAMPLES.x, int(i) / SAMPLES.x);
+        ivec2 at = (cell * 2 + 1) * size / (SAMPLES * 2);
+        if (imageLoad(depth_image, at).r >= 1.0) {
+            continue;
+        }
+        float heat = imageLoad(heat_image, at).r;
+        uint bin = uint(clamp(heat / HEAT_TOP, 0.0, 1.0) * float(BINS - 1u) + 0.5);
+        atomicAdd(bins[bin], 1u);
+    }
+    barrier();
+    if (index == 0u) {
+        uint total = 0u;
+        for (uint b = 0u; b < BINS; b++) {
+            total += bins[b];
+        }
+        if (total == 0u) {
+            if (push.fresh != 0) {
+                gain.range = vec2(0.0, 1.0);
+            }
+            return;
+        }
+        uint below = uint(push.low * float(total));
+        uint above = uint(push.high * float(total));
+        uint seen = 0u;
+        float low = 0.0;
+        float high = HEAT_TOP;
+        bool found_low = false;
+        for (uint b = 0u; b < BINS; b++) {
+            seen += bins[b];
+            float heat = float(b) / float(BINS - 1u) * HEAT_TOP;
+            if (!found_low && seen > below) {
+                low = heat;
+                found_low = true;
+            }
+            if (seen >= above) {
+                high = heat;
+                break;
+            }
+        }
+        // A narrow range is centred on its middle: a uniform view (nose on
+        // a cliff) reads mid-grey, and anything hotter than it bright.
+        float middle = 0.5 * (low + high);
+        vec2 now = high - low < LEAST_SPAN
+            ? vec2(middle - 0.5 * LEAST_SPAN, middle + 0.5 * LEAST_SPAN)
+            : vec2(low, high);
+        gain.range = push.fresh != 0 ? now : mix(gain.range, now, frame.thermal_rate);
+    }
+}

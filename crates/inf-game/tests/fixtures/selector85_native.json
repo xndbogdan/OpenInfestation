@@ -1,0 +1,5638 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original selector 85 bodies with the real RNG, integer square root and the vehicle's and shared table's +58/+D0; the player, the unit, the debris, the pickup, the attack, the lifecycle, the attack's constructor and the H12 loader supplied or recorded."
+ },
+ "guards": [
+  {
+   "address": 4218640,
+   "size": 123,
+   "sha256": "a1ac95f223da16ed5b887921426eed3e0b2f1716fe8172afcced0369da36b468"
+  },
+  {
+   "address": 4218816,
+   "size": 1636,
+   "sha256": "eec40506040b5df1e8d3d57233a3f0f9bc5de591e2780527f6deda211b29574d"
+  },
+  {
+   "address": 4220464,
+   "size": 15,
+   "sha256": "08e8a851b5befb9ae50b969727c2049a4abecd471160d8f3438dd981cb816c0f"
+  }
+ ],
+ "coverage": {
+  "cases": 73
+ },
+ "cases": [
+  {
+   "input": {
+    "mode": "ctor",
+    "state": 7,
+    "clock": 57005,
+    "swing": 48879,
+    "speeds": [
+     4660,
+     22136
+    ],
+    "words": [
+     4369,
+     8738,
+     13107,
+     17476,
+     21845,
+     26214
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "attack_ctor",
+     "self": true
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     26214
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "ctor",
+    "state": 7,
+    "clock": 57005,
+    "swing": 48879,
+    "speeds": [
+     4660,
+     22136
+    ],
+    "words": [
+     4369,
+     8738,
+     13107,
+     17476,
+     21845,
+     26214
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 1,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": []
+   },
+   "events": [
+    {
+     "kind": "attack_ctor",
+     "self": true
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     26214
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 1,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 13107
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 21845
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     2
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 26214
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     3
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 30583
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     4
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 34952
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     5
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 39321
+   }
+  },
+  {
+   "input": {
+    "mode": "registers",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0,
+     6
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     286335522,
+     858997828
+    ],
+    "words": [
+     21845,
+     26214,
+     30583,
+     34952,
+     39321,
+     43690
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0,
+    "ax": 43690
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 31,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 32,
+    "clock": 1,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 524256,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     32
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 524288,
+    "clock": 32,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65534,
+     63352,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 524288,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 564288,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65527,
+     63359,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 1048544,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 1088544,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64312,
+     64574,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 1048576,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1193046
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 2241622,
+    "clock": 1193046,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64900,
+     63986,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 1572832,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     32
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 1572864,
+    "clock": 32,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     63351,
+     65535,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 2097120,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     32
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 2097152,
+    "clock": 32,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 4294967280,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     32
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 16,
+    "clock": 32,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 305419896,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 305459896,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     63541,
+     65345,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 2596069104,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     33333
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 2596102437,
+    "clock": 33333,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     63905,
+     64981,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 16777216,
+    "swing": 262144,
+    "speeds": [
+     4660,
+     4294901760
+    ],
+    "words": [
+     0,
+     4096,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 1,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    },
+    {
+     "kind": "pickup",
+     "player": true,
+     "args": [
+      41,
+      1
+     ],
+     "quiet": 1
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 302144,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65301,
+     63585,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1244,
+    "player_58": 0,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 16777216,
+    "swing": 262144,
+    "speeds": [
+     4660,
+     4294901760
+    ],
+    "words": [
+     0,
+     4096,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 1,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    },
+    {
+     "kind": "pickup",
+     "player": true,
+     "args": [
+      41,
+      1
+     ],
+     "quiet": 1
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 302144,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65301,
+     63585,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1244,
+    "player_58": 0,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 16777216,
+    "swing": 262144,
+    "speeds": [
+     4660,
+     4294901760
+    ],
+    "words": [
+     0,
+     4096,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 1,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    },
+    {
+     "kind": "pickup",
+     "player": true,
+     "args": [
+      41,
+      1
+     ],
+     "quiet": 1
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 302144,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65301,
+     63585,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1244,
+    "player_58": 0,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 8,
+    "clock": 16777216,
+    "swing": 262144,
+    "speeds": [
+     4660,
+     4294901760
+    ],
+    "words": [
+     0,
+     4096,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 1,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    },
+    {
+     "kind": "pickup",
+     "player": true,
+     "args": [
+      41,
+      1
+     ],
+     "quiet": 1
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 302144,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     65301,
+     63585,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1244,
+    "player_58": 0,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 6,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     1280
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 1,
+    "shift": 9,
+    "plane": 4294311936,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     64256
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 4294311936,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     1280
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 8,
+    "plane": 305419896,
+    "loaded": false,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "load",
+     "this": 5631544,
+     "arg": 0
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     13398
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 305419896,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 0,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 0,
+    "plane": 2147483648,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     0
+    ],
+    "attack": 0,
+    "may_target": 0,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 2147483648,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": false,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 52345,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": null,
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 52345,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "shared",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 52345,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": null,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 52345,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100070,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 52345,
+    "dword_180": 0,
+    "state": 1,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 0,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 1,
+    "clock": 12345,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 0,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "first_player"
+    },
+    {
+     "kind": "first_unit"
+    },
+    {
+     "kind": "pickup",
+     "player": true,
+     "args": [
+      41,
+      1
+     ],
+     "quiet": 1
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 0,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 2,
+    "clock": 777,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 1,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40777,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "phase": 1,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 2,
+    "clock": 777,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 2,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": 2,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "attack",
+     "self": true,
+     "delta": 40000
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40777,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 2,
+    "may_target": 1,
+    "phase": 2,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 2,
+    "clock": 777,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 2,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": 3,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "attack",
+     "self": true,
+     "delta": 40000
+    },
+    {
+     "kind": "lifecycle",
+     "self": true,
+     "args": [
+      0,
+      12100069,
+      2
+     ]
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 3,
+    "may_target": 1,
+    "phase": 2,
+    "restart": 0,
+    "shake": 1,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 2,
+    "clock": 777,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": 3,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40777,
+    "dword_180": 0,
+    "state": 2,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 1,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 2,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 3,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 3,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 3,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 3,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 40000,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64573,
+     64313,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     63039,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 1023,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 1024,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65471,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 983040,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      3933,
+      558,
+      13160
+     ],
+     "velocity": [
+      44,
+      748,
+      65048
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 1180440810
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 1023040,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     1599,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1180440810,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 1032192,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 65535,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      9675,
+      19914,
+      113
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     0,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 1048575,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 32768,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     0
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      64375,
+      558,
+      41126
+     ],
+     "velocity": [
+      44,
+      748,
+      65048
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 1180440810
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 1048575,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     63,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1180440810,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 0,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1048576
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4096,
+      539,
+      12288
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     0,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 4294967295,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 32767,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      64375,
+      558,
+      41125
+     ],
+     "velocity": [
+      44,
+      748,
+      65048
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 1180440810
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1180440810,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 4,
+    "clock": 524288,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     65535,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 4660,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4492,
+      539,
+      16082
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 564288,
+    "dword_180": 0,
+    "state": 4,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     30271,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     65535,
+     0,
+     64443,
+     64443,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     4294967077,
+     4294967077
+    ],
+    "words": [
+     65535,
+     0,
+     64434,
+     64434,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     4294963200,
+     2048
+    ],
+    "words": [
+     65535,
+     0,
+     57344,
+     61440,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     4294963116,
+     1886
+    ],
+    "words": [
+     48791,
+     0,
+     57184,
+     61511,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     4294967040,
+     4294967280
+    ],
+    "words": [
+     4096,
+     0,
+     53504,
+     53328,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      3933,
+      558,
+      13160
+     ],
+     "velocity": [
+      44,
+      748,
+      65048
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 1180440810
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     4294967030,
+     4294967273
+    ],
+    "words": [
+     1295,
+     0,
+     53493,
+     53327,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1180440810,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     4096,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     4294967291,
+     4294967291
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     4294967291,
+     4294967291
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53249,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1244,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      3933,
+      558,
+      13160
+     ],
+     "velocity": [
+      44,
+      748,
+      65048
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 1180440810
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     4294967291,
+     4294967291
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 1180440810,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     2147483647,
+     2147483648
+    ],
+    "words": [
+     65535,
+     0,
+     65535,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     4294967295
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 4294967295,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     2147487743,
+     2147483648
+    ],
+    "words": [
+     32759,
+     0,
+     61438,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 5,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     74565,
+     4294892730
+    ],
+    "words": [
+     32768,
+     0,
+     0,
+     32767,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     1048576
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 1048576,
+    "dword_180": 0,
+    "state": 5,
+    "speeds": [
+     101061,
+     4294902842
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 6,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 7,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 6,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65535,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     65223,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 6,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53264,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 6,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53249,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     2147483647
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 2147483647,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53250,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 6,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     5,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 4,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     128
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 128,
+    "dword_180": 0,
+    "state": 6,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 4,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 4960000,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 5000000,
+    "dword_180": 0,
+    "state": 7,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 655360,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 4960001,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 5000001,
+    "dword_180": 0,
+    "state": 7,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 148992,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 20000000,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     65408
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 20040000,
+    "dword_180": 0,
+    "state": 7,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     65408
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 105472,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 49999999,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 8,
+    "plane": 655360,
+    "loaded": false,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "load",
+     "this": 5631544,
+     "arg": 0
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 8,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 330496,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 49960000,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 50000000,
+    "dword_180": 0,
+    "state": 7,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 660992,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 50000000,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     32768
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 0,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 8,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     32768
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 4294935528,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 7,
+    "clock": 4294927295,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     32767
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 4,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 0,
+    "dword_180": 0,
+    "state": 8,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     32767
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 0,
+    "shake": 0,
+    "plane": 2049584,
+    "seed": 2599648,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 8,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 9,
+    "plane": 655360,
+    "loaded": true,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 8,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     291
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 1,
+    "shake": 0,
+    "plane": 148992,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "state": 8,
+    "clock": 0,
+    "swing": 0,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     65408
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "radius": 1024,
+    "position": [
+     4096,
+     512,
+     12288
+    ],
+    "phase": 5,
+    "restart": 0,
+    "aliens": 0,
+    "shift": 8,
+    "plane": 655360,
+    "loaded": false,
+    "seed": 1239,
+    "player": true,
+    "unit": "vehicle",
+    "lock": 12100069,
+    "attack_after": null,
+    "args": [
+     40000
+    ]
+   },
+   "events": [
+    {
+     "kind": "spark",
+     "selector": 1,
+     "point": [
+      4183,
+      539,
+      13121
+     ],
+     "velocity": [
+      65097,
+      437,
+      65000
+     ],
+     "owner": 12100069,
+     "flags": 0,
+     "seed": 3149944589
+    },
+    {
+     "kind": "load",
+     "this": 5631544,
+     "arg": 0
+    }
+   ],
+   "output": {
+    "table": 5372364,
+    "swing": 0,
+    "clock": 40000,
+    "dword_180": 0,
+    "state": 8,
+    "speeds": [
+     0,
+     0
+    ],
+    "words": [
+     0,
+     0,
+     53248,
+     53248,
+     53248,
+     65408
+    ],
+    "attack": 0,
+    "may_target": 1,
+    "phase": 5,
+    "restart": 1,
+    "shake": 0,
+    "plane": 4294934528,
+    "seed": 3149944589,
+    "player_58": 1,
+    "player_89": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,2376 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "boundary": "selector10 helper deleting virtual supplied; stop before lower00429E70",
+  "cases": [
+    {
+      "mode": 0,
+      "index": -2,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": -1,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 0,
+      "helper": false,
+      "class": "base",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 1,
+      "helper": false,
+      "class": "base",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 2,
+      "helper": false,
+      "class": "base",
+      "callback": 4349440,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4349440,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -2,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -1,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 0,
+      "helper": false,
+      "class": "base",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 1,
+      "helper": false,
+      "class": "base",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 2,
+      "helper": false,
+      "class": "base",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 3,
+      "helper": false,
+      "class": "base",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 4,
+      "helper": false,
+      "class": "base",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 5,
+      "helper": false,
+      "class": "base",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 6,
+      "helper": false,
+      "class": "base",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 7,
+      "helper": false,
+      "class": "base",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -2,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -1,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 0,
+      "helper": false,
+      "class": "base",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 1,
+      "helper": false,
+      "class": "base",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 2,
+      "helper": false,
+      "class": "base",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 3,
+      "helper": false,
+      "class": "base",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 4,
+      "helper": false,
+      "class": "base",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 5,
+      "helper": false,
+      "class": "base",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 6,
+      "helper": false,
+      "class": "base",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 7,
+      "helper": false,
+      "class": "base",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 8,
+      "helper": false,
+      "class": "base",
+      "callback": 4349296,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4349296,
+          "index_184": 8
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -2,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -1,
+      "helper": false,
+      "class": "base",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": -2,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967294
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": -1,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967295
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 0,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 0
+        },
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 1,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 1
+        },
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 2,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4349440,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 2
+        },
+        {
+          "kind": "exit",
+          "address": 4349440,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -2,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967294
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -1,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967295
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 0,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 0
+        },
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 1,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 1
+        },
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 2,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 2
+        },
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 3,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 3
+        },
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 4,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4
+        },
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 5,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 5
+        },
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 6,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 6
+        },
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 7,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 7
+        },
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -2,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967294
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -1,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967295
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 0,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 0
+        },
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 1,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 1
+        },
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 2,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 2
+        },
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 3,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 3
+        },
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 4,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4
+        },
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 5,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 5
+        },
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 6,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 6
+        },
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 7,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 7
+        },
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 8,
+      "helper": true,
+      "class": "selector10",
+      "callback": 4349296,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 8
+        },
+        {
+          "kind": "exit",
+          "address": 4349296,
+          "index_184": 8
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -2,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967294
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -1,
+      "helper": true,
+      "class": "selector10",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        621,
+        622
+      ],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 4294967295
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": -2,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": -1,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 0,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 1,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "index": 2,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4349440,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4349440,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -2,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": -1,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 0,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 1,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 2,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 3,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 4,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 5,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 6,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 1,
+      "index": 7,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -2,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": -1,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 0,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280,
+          "index_184": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 1,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000,
+          "index_184": 1
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 2,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455168,
+          "index_184": 2
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 3,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4411728,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411728,
+          "index_184": 3
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 4,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328,
+          "index_184": 4
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 5,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792,
+          "index_184": 5
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 6,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455424,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455424,
+          "index_184": 6
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 7,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4455040,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455040,
+          "index_184": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 8,
+      "helper": false,
+      "class": "selector36",
+      "callback": 4349296,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4349296,
+          "index_184": 8
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -2,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967294,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967294
+        }
+      ]
+    },
+    {
+      "mode": 65535,
+      "index": -1,
+      "helper": false,
+      "class": "selector36",
+      "callback": null,
+      "index_184": 4294967295,
+      "helper_cleared": null,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 8,
+      "helper": false,
+      "class": "selector10",
+      "callback": 4349296,
+      "index_184": 4294967295,
+      "helper_cleared": true,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4349296,
+          "index_184": 8
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936,
+          "index_184": 4294967295
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "index": 8,
+      "helper": true,
+      "stop_helper": true,
+      "class": "selector10",
+      "callback": 4349296,
+      "index_184": 8,
+      "helper_cleared": false,
+      "changed_offsets": [],
+      "events": [
+        {
+          "kind": "helper_delete",
+          "index_184": 8
+        }
+      ]
+    }
+  ]
+}

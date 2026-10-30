@@ -1,0 +1,3622 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original selector34 Attack entry 00433FB0 and update 00433CC0.\n\nTarget refresh, clone, deletion and RNG execute unchanged; only allocator/free\nreturns are supplied. Native pointers project to handle/kind/focus. Default\ncompares; --write regenerates LF."
+  },
+  "guards": [
+    {
+      "address": 4407216,
+      "size": 194,
+      "sha256": "04ad5aa925a188884146a235fa67568d56376562df650b43ce0ac58456377dd6"
+    },
+    {
+      "address": 4406464,
+      "size": 744,
+      "sha256": "630c8eafa270d9f7c5545924c825f6ff05728c375931407c70a58e5b1feaad49"
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "mode": "change",
+        "entering": false,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "exit"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": null,
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "no-source"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "first-0"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2000304,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 1299827,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "first-1"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2000624,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 2599648,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "first-ffffffff"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2000000,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 6,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "first-12345678"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": {
+          "kind": 8,
+          "handle": 8,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ]
+        },
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "preferred-wins"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": {
+          "kind": 8,
+          "handle": 8,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ]
+        },
+        "preferred_score": 10,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "equal-score-first"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": null,
+        "source_score": 10,
+        "preferred": {
+          "kind": 8,
+          "handle": 8,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ]
+        },
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "preferred-only"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1011,
+            1021,
+            1031
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "null"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "clone-null"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "null"
+        },
+        {
+          "kind": "fault",
+          "eip": 4407390
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": null,
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "change",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 16,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "object-source"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 24,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2750432,
+          "0x228": 5444164,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3073801867,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            5,
+            6,
+            7
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 1,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "stood-down"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "decay"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8168,
+            1200,
+            11100
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 1001,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "decay-far"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 1001,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8168,
+            1200,
+            11100
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 2,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "low-status"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 2,
+          "0x15c": 3900848,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3689883679,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5819,
+            1020,
+            10444
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": null,
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 100,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-no-source"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3609824,
+          "0x18c": 1750432,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4609,
+        "byte22c": 0,
+        "rng": 2497899996,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8275,
+            1200,
+            8644
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-same-0"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3142448,
+          "0x18c": 2395888,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 583525767,
+        "current": {
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5387,
+            2,
+            8614
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 0,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-nearer-0"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2395888,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 1621583466,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-same-1"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3198496,
+          "0x18c": 2789552,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 813039812,
+        "current": {
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            7053,
+            2,
+            11309
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 1,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-nearer-1"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2789552,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3234068179,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-same-ffffffff"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3086416,
+          "0x18c": 2002208,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 354011722,
+        "current": {
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            7818,
+            2,
+            10015
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 4294967295,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-nearer-ffffffff"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2002208,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 9098753,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-same-12345678"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 800,
+          "0x150": 3,
+          "0x15c": 3900848,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3689883679,
+        "current": {
+          "handle": 7,
+          "focus": [
+            1,
+            2,
+            3
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5819,
+            2,
+            10444
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-nearer-12345678"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3185728930,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-farther"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3900848,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3689883679,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            5819,
+            1200,
+            10444
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 16,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "expired-object-source"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 24,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3185728930,
+        "current": {
+          "handle": 1985229328,
+          "focus": [
+            5,
+            6,
+            7
+          ],
+          "kind": 16
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "null"
+        ],
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 0,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "clone-null"
+      },
+      "events": [
+        {
+          "kind": "free",
+          "target": "current"
+        },
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "null"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 5000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 2777760,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3185728930,
+        "current": null,
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-near"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8168,
+            1200,
+            11100
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "null"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-null-allocation"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "null"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-zero-velocity"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            3931,
+            1200,
+            4038
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          32768,
+          0,
+          32767
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-large-velocity"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            17914,
+            1200,
+            55591
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": -5,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-negative-248"
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "outcome": "allocate"
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 3149040,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 610499949,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 1985229328,
+          "focus": [
+            8168,
+            1200,
+            11100
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 750,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-248-at-limit"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 350
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 1500,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-distance-at-limit"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1500,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 10,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": null,
+        "secondary": null,
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "secondary-null-current"
+      },
+      "events": [
+        {
+          "kind": "fault",
+          "eip": 4407106
+        }
+      ],
+      "output": {
+        "words": {
+          "0x14c": 10,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 500,
+          "0x234": 750
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 3185728930,
+        "current": null,
+        "secondary": null
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": {
+          "kind": 8,
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 1001,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "existing-secondary-far"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1001,
+          "0x150": 3,
+          "0x15c": 1,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 600
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": 2000,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": {
+          "kind": 8,
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "existing-secondary-near"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 1000,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 350
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ],
+          "kind": 8
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entering": true,
+        "delta": 100,
+        "rng": 305419896,
+        "null": 1985229328,
+        "position": [
+          1000,
+          1000,
+          1000
+        ],
+        "velocity": [
+          30,
+          40,
+          50
+        ],
+        "byte239": 0,
+        "word240": 750,
+        "word248": 100,
+        "word164": -3,
+        "flags22e": 4608,
+        "byte22c": 0,
+        "source": {
+          "kind": 8,
+          "handle": 7,
+          "focus": [
+            1010,
+            1020,
+            1030
+          ]
+        },
+        "source_score": 10,
+        "preferred": null,
+        "preferred_score": 11,
+        "current": {
+          "kind": 8,
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ]
+        },
+        "secondary": {
+          "kind": 8,
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ]
+        },
+        "allocations": [
+          "allocate",
+          "allocate"
+        ],
+        "words": {
+          "0x14c": 0,
+          "0x150": 3,
+          "0x15c": 55,
+          "0x18c": 1000,
+          "0x228": 0,
+          "0x230": 0,
+          "0x234": 0
+        },
+        "name": "existing-secondary-negative-radius"
+      },
+      "events": [],
+      "output": {
+        "words": {
+          "0x14c": 0,
+          "0x150": 3,
+          "0x15c": 1,
+          "0x18c": 900,
+          "0x228": 0,
+          "0x230": 200,
+          "0x234": 350
+        },
+        "flags22e": 4608,
+        "byte22c": 0,
+        "rng": 305419896,
+        "current": {
+          "handle": 9,
+          "focus": [
+            1100,
+            1200,
+            1300
+          ],
+          "kind": 8
+        },
+        "secondary": {
+          "handle": 3,
+          "focus": [
+            4,
+            5,
+            6
+          ],
+          "kind": 8
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+#version 460
+// The traced world's depth at the display's size, unjittered, when the
+// tracer renders smaller and an upscaler brings its colour up: the
+// raster's later draws and the sky behind the world meet it at the
+// display's own edges. One primary ray a pixel, nothing shaded.
+#extension GL_EXT_ray_query : require
+#extension GL_EXT_nonuniform_qualifier : require
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+// The trace's own set: its frame, scene and sprites, and the display's
+// depth.
+#define FRAME_BINDING 4
+#include "pt_frame.glsl"
+#include "pt_scene.glsl"
+#include "pt_spray.glsl"
+
+layout(set = 0, binding = 20, r32f) uniform writeonly image2D depth_out;
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (pixel.x >= int(frame.display.x) || pixel.y >= int(frame.display.y)) {
+        return;
+    }
+    vec3 direction =
+        native_direction((vec2(pixel) + 0.5) * frame.native / frame.display - 0.5);
+    rayQueryEXT query;
+    // What the eye sees but the painted sky, which the raster draws itself.
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoneEXT, MASK_VIEW, vec3(0.0), frame.near,
+                          direction, trace_reach());
+    PROCEED_THROUGH_CUTOUTS(query);
+    float depth = 1.0;
+    bool met = rayQueryGetIntersectionTypeEXT(query, true) != gl_RayQueryCommittedIntersectionNoneEXT;
+    float reach = met ? rayQueryGetIntersectionTEXT(query, true) : trace_reach();
+    // The water a blast threw up stands in front of what lies behind it.
+    vec3 normal;
+    float coverage;
+    if (frame.spray_count > 0.5 && frame.thermal < 0.5
+        && spray_hit(direction, reach, normal, coverage) >= 0) {
+        met = true;
+    }
+    if (met) {
+        depth = raster_depth(dot(direction * reach, frame.forward));
+    }
+    imageStore(depth_out, pixel, vec4(depth));
+}

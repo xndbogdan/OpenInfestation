@@ -1,0 +1,1528 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original43E6D0 with status47C990 and D843F880 supplied normal returns; actual fixed target refresh, clearance grid and arithmetic; no behavior140/fire in this fixture. Free return supplied. Stops at43EF60 and excludes motion/audio."
+  },
+  "guard": {
+    "address": 4450000,
+    "size": 2191,
+    "sha256": "e3e733f9008357f8cc653fecb662056da1bd68afea6e7036978f237e87620031"
+  },
+  "cases": [
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": false,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "word14c": 2271560481,
+        "word150": 2557891634,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 195948557,
+        "byte250": 0,
+        "flags": 0
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 0,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 0
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 1,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          65535,
+          0,
+          0,
+          0
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 195948557,
+        "byte250": 1,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 1,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          19566,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": -400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          400,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 5000,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          0,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": true,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          500,
+          0,
+          4294967096,
+          4294966996
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": true,
+        "word158": 1063,
+        "word15c": 34464,
+        "word260": 360,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": true,
+        "secondary_timer": 1,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880",
+        "free"
+      ],
+      "output": {
+        "controls": [
+          0,
+          500,
+          0,
+          4294967096,
+          4294966996
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 1063,
+        "word15c": 1,
+        "word260": 360,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": true,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1000,
+          2000,
+          1000
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880",
+        "free"
+      ],
+      "output": {
+        "controls": [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 0,
+        "word15c": 100000,
+        "word260": 0,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          10,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          65535,
+          0,
+          0,
+          0
+        ],
+        "word14c": 5585,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 195948557,
+        "byte250": 1,
+        "flags": 0
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          200,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 10,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          65535,
+          0,
+          0,
+          0
+        ],
+        "word14c": 5503,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 195948557,
+        "byte250": 1,
+        "flags": 0
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          200,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          65400,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          1150,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5503,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 0
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          700,
+          10,
+          800
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          65000,
+          65000,
+          64000
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": -100,
+        "spacing": 256,
+        "height_shift": 4,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          1000,
+          1000,
+          1
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 1,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          4294934528,
+          4294966796,
+          0,
+          0,
+          4294966297
+        ],
+        "word14c": 1413,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 999,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          1000,
+          1000,
+          1000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          4294966796,
+          200,
+          0,
+          0
+        ],
+        "word14c": 1000,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 0,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          33768,
+          34768,
+          33768
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          4294966584,
+          200,
+          32768,
+          32768
+        ],
+        "word14c": 56754,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 0,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 4294967295,
+        "current": true,
+        "secondary": true,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          0,
+          0,
+          1065353216
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          500,
+          0,
+          4294967096,
+          4294966996
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": true,
+        "word158": 1063,
+        "word15c": 100001,
+        "word260": 360,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    },
+    {
+      "input": {
+        "delta": 65536,
+        "current": true,
+        "secondary": false,
+        "secondary_timer": 100000,
+        "position": [
+          1000,
+          2000,
+          1000
+        ],
+        "focus": [
+          4000,
+          2500,
+          5000
+        ],
+        "secondary_focus": [
+          1200,
+          3000,
+          1300
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "size": 100,
+        "speed": 400,
+        "height": 0,
+        "spacing": 128,
+        "height_shift": 5,
+        "byte238": 1,
+        "byte250": 0,
+        "alternate": 0,
+        "offset": 0,
+        "desired_height": 512,
+        "flags": 0,
+        "source_basis": [
+          0,
+          0,
+          0,
+          1065353216,
+          0,
+          1056964608,
+          0,
+          3212836864,
+          0,
+          0
+        ]
+      },
+      "events": [
+        "0x47c990",
+        "0x43f880"
+      ],
+      "output": {
+        "controls": [
+          0,
+          250,
+          2300,
+          3000,
+          4000
+        ],
+        "word14c": 5024,
+        "word150": 4,
+        "secondary": false,
+        "word158": 2882400001,
+        "word15c": 100000,
+        "word260": 5000,
+        "byte250": 0,
+        "flags": 67108864
+      }
+    }
+  ]
+}

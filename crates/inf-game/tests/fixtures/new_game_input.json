@@ -1,0 +1,18 @@
+[
+  { "frame": 10, "key": "Return", "pressed": true },
+  { "frame": 11, "key": "Return", "pressed": false },
+  { "frame": 100, "key": "Return", "pressed": true },
+  { "frame": 101, "key": "Return", "pressed": false },
+  { "frame": 180, "key": "Down", "pressed": true },
+  { "frame": 181, "key": "Down", "pressed": false },
+  { "frame": 200, "key": "Down", "pressed": true },
+  { "frame": 201, "key": "Down", "pressed": false },
+  { "frame": 220, "key": "Down", "pressed": true },
+  { "frame": 221, "key": "Down", "pressed": false },
+  { "frame": 240, "key": "Down", "pressed": true },
+  { "frame": 241, "key": "Down", "pressed": false },
+  { "frame": 260, "key": "Return", "pressed": true },
+  { "frame": 261, "key": "Return", "pressed": false },
+  { "frame": 300, "key": "Tab", "pressed": true },
+  { "frame": 301, "key": "Tab", "pressed": false }
+]

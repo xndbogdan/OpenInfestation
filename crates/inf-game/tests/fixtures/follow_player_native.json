@@ -1,0 +1,1793 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original 00425D30 (with the actor table 00520B84 selecting +12C = 00423B40, 00427620 and 0048EFC0) and 00423A80. Supplied actor and player fields; 0046B030, 00511708 and 004825D0 are recorded boundaries with supplied returns; no hooks, no patched code."
+  },
+  "guards": [
+    {
+      "address": 4349232,
+      "size": 62,
+      "sha256": "7dadfeda303d444506f1aba3d45c366c51220efcff06a87d5aa470b8709690f1"
+    },
+    {
+      "address": 4340544,
+      "size": 133,
+      "sha256": "f950471217293bf3e442cf9854d5ce7560593c8639b664a2c31eb076c46aa045"
+    },
+    {
+      "address": 4340352,
+      "size": 192,
+      "sha256": "42c2323038f343c0e72fd240bfb17edc6daf3552b644bcfd12f7e2cfa7aff8a8"
+    },
+    {
+      "address": 4355616,
+      "size": 24,
+      "sha256": "cff2c20271ae285b589656b865260a5e187e5de61401fb935e717d841b6c4283"
+    }
+  ],
+  "cases": [
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 46096,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 1,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 46096,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 0,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 65535,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": -65536,
+        "entering": 1
+      },
+      "output": {
+        "score": 4294961534,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": -3,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 2147483647,
+        "entering": 1
+      },
+      "output": {
+        "score": 11524,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 67145728,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 67145728,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": false,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 1,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 0,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 2,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 46096,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 4294967295,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          20512,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          20513,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 59896,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          20000,
+          1512,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          20000,
+          1000,
+          29487
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 59896,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          27999,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 8,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          28000,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          28001,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 4294959296,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 4294885392,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 4294959296,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          28000,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 0,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 0,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 50000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          65000,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 235712,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          100,
+          65500,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          65000,
+          400,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 57832,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          32768,
+          0,
+          0
+        ],
+        "radius": 60000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          0,
+          32768,
+          32768
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 480000,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "score",
+      "input": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "radius": 60000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          32767,
+          32767,
+          32767
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "score": 480000,
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 656,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 0
+      },
+      "output": {
+        "calls": [],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 256
+      },
+      "output": {
+        "calls": [],
+        "actor": {
+          "status_228": 3735928559,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 4294967041
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 656,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": false,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15990784
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 67145728,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15990784
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 67145728,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 15990784
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": false,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 0,
+          "distance_208": 656,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 65535,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 65791,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 0,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 256,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 0,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 656,
+          "bytes_22c": 15728640
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 16449536,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 656,
+          "bytes_22c": 16449536
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 4294967295,
+        "coefficient": 3,
+        "player": false,
+        "player_position": [
+          22000,
+          1100,
+          31000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 3735928559,
+          "distance_208": 3735928559,
+          "bytes_22c": 4294967295
+        }
+      }
+    },
+    {
+      "kind": "change",
+      "input": {
+        "position": [
+          20000,
+          1000,
+          30000
+        ],
+        "radius": 8000,
+        "target_1d4": 0,
+        "target_1f4": 0,
+        "bytes_22c": 15728640,
+        "coefficient": 3,
+        "player": true,
+        "player_position": [
+          20000,
+          1000,
+          30000
+        ],
+        "player_size": 400,
+        "player_handle": 214237186,
+        "player_state": 3,
+        "allocation": true,
+        "current": 0,
+        "bias": 5,
+        "entering": 1
+      },
+      "output": {
+        "calls": [
+          {
+            "call": "0046B030"
+          },
+          {
+            "call": "00511708",
+            "size": 32
+          },
+          {
+            "call": "004825D0",
+            "this": 67145728,
+            "handle": 214237186,
+            "point": 0
+          }
+        ],
+        "actor": {
+          "status_228": 5442848,
+          "target_148": 67145728,
+          "distance_208": 656,
+          "bytes_22c": 15728640
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,3455 @@
+#version 460
+// The modern mode's path tracer: one ray per output pixel through the
+// game's own projection, the frame's scene feed in an acceleration
+// structure, the texture times the vertex colour as albedo, the sun with a
+// traced shadow, retail's own light, and one bounce of light. Positions are
+// relative to the eye. Instance custom index 0 is the frame's models, 1 a
+// copy of the ground (world units, placed around the eye by its transform).
+//
+// Output, for the denoiser and the composite: the albedo, the direct light
+// (and how much of the bounce light the surface takes), one noisy bounce
+// sample, the fog, the geometry (normal and distance) and the depth the
+// raster's later draws test against. Under thermal vision, each surface's
+// heat instead of the bounce light.
+#extension GL_EXT_ray_query : require
+#extension GL_EXT_nonuniform_qualifier : require
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 4
+#include "pt_frame.glsl"
+#define SKY_SHADOW_BINDING 24
+#include "pt_sky.glsl"
+#include "pt_scene.glsl"
+#include "pt_spray.glsl"
+#define CACHE_BINDING 31
+#include "pt_cache.glsl"
+
+// The modern sky in every direction, its clouds over it (pt_sky_clouds.comp
+// pass 1); the clouds' shadow map (pass 2) is pt_sky.glsl's.
+layout(set = 0, binding = 23) uniform samplerCube sky_cube;
+
+// The sky a reflection sees along `direction` where retail's painting is
+// not: the modern sky with its clouds, or retail's clear colour.
+vec3 sky_objects(vec3 direction, float lod);
+
+// The sky's light along `direction`, in linear light, for the rays it
+// lights: retail's ambient, as bright and in its colour, given out as the
+// modern sky's cube is bright (the cube leaves out the sun's disc: only the
+// sun's own rays carry the sun), at the world's tuned share of it
+// (sky.light: retail's ambient stood for the sky and every bounce, and
+// bounces now bring their own light); under retail's painted sky an even
+// sky at retail's ambient.
+// The modern sky's mean light over the upper half, cosine-weighted, in
+// linear light, which its light is measured against: sixteen directions
+// spread cosine-weighted over it, read at a coarse level of the cube (a
+// texel some 22 degrees across), once a workgroup (measure_sky).
+shared vec3 sky_samples[16];
+vec3 sky_mean_light;
+
+void measure_sky() {
+    uint i = gl_LocalInvocationIndex;
+    if (i < 16u) {
+        // A Fibonacci spiral over the disc, lifted onto the half sphere.
+        float r = sqrt((float(i) + 0.5) / 16.0);
+        float a = float(i) * 2.39996323;
+        vec3 direction = vec3(r * cos(a), sqrt(max(1.0 - r * r, 0.0)), r * sin(a));
+        sky_samples[i] = frame.sky_modern > 0.5
+            ? to_linear(textureLod(sky_cube, direction, 5.0).rgb)
+            : vec3(0.0);
+    }
+    barrier();
+    vec3 sum = vec3(0.0);
+    for (int k = 0; k < 16; k++) {
+        sum += sky_samples[k];
+    }
+    sky_mean_light = sum / 16.0;
+}
+
+vec3 sky_light(vec3 direction) {
+    vec3 ambient = light_to_linear(frame.ambient);
+    if (frame.sky_modern > 0.5) {
+        // A bounce's light is soft: a finer level than the mean's, not the
+        // finest, so bright cloud edges do not sparkle.
+        vec3 shape = to_linear(textureLod(sky_cube, direction, 2.0).rgb)
+            / max(sky_mean_light, vec3(1.0e-4));
+        return ambient * min(shape, vec3(16.0)) * frame.sky_light;
+    }
+    return ambient * frame.sky_light;
+}
+
+vec3 sky_along(vec3 direction) {
+    if (frame.sky_modern > 0.5) {
+        return textureLod(sky_cube, direction, 0.0).rgb + sky_objects(direction, 2.0);
+    }
+    return frame.sky;
+}
+
+// The light retail shaded a model with: its ambient (the light grid at the
+// model included) and its sun's colour and direction.
+struct ModelLight {
+    vec3 ambient;
+    vec3 color;
+    vec3 direction;
+    // How much of the light retail gave the model the tracer keeps (the
+    // pick-ups'), the rest traced.
+    float own;
+};
+
+// A ground vertex: world position, normal, and the albedo that gives
+// retail's baked shade under full light (scene_terrain.rs).
+struct GroundVertex {
+    vec3 position;
+    vec3 normal;
+    float albedo;
+};
+
+// Albedo, and in alpha 1 where light applies (0: unlit surfaces, the sky).
+layout(set = 0, binding = 5, rgba8) uniform image2D albedo_out;
+layout(set = 0, binding = 6, r32f) uniform image2D depth_out;
+layout(set = 0, binding = 7, scalar) readonly buffer GroundVertices { GroundVertex ground_vertices[]; };
+layout(set = 0, binding = 8, scalar) readonly buffer GroundIndices { uint ground_indices[]; };
+// Per ground triangle: the blend rank, then each corner's place in its
+// tile's texture, 6 bits each from bit 8 (ground_uv).
+layout(set = 0, binding = 9, scalar) readonly buffer GroundTriangles { uint ground_triangles[]; };
+// The ground's detail patch round the eye (scene_ground_detail.rs): its
+// points (from its south-west corner; the height the world's), how far each
+// lies carved below the ground and the uncarved ground's normal; its
+// indices; and its triangles' words, as the ground's.
+struct DetailVertex {
+    vec3 position;
+    vec3 normal;
+    float albedo;
+    float carve;
+    vec3 flat_normal;
+};
+layout(set = 0, binding = 28, scalar) readonly buffer DetailVertices { DetailVertex detail_vertices[]; };
+layout(set = 0, binding = 29, scalar) readonly buffer DetailIndices { uint detail_indices[]; };
+layout(set = 0, binding = 30, scalar) readonly buffer DetailTriangles { uint detail_triangles[]; };
+// Each blend rank's texture slot.
+layout(set = 0, binding = 10, scalar) readonly buffer Blends { uint blends[]; };
+// Retail's dynamic light grid: 90 by 90 cells, X-major, signed RGB bytes.
+layout(set = 0, binding = 11, scalar) readonly buffer LightGrid { uint grid[]; };
+#include "pt_light_grid.glsl"
+layout(set = 0, binding = 12, scalar) readonly buffer ModelLights { ModelLight model_lights[]; };
+// The direct light, and in alpha how much of the bounce light applies.
+layout(set = 0, binding = 13, rgba16f) uniform image2D direct_out;
+// One bounce sample of the light arriving from the surroundings.
+layout(set = 0, binding = 14, rgba16f) uniform image2D bounce_out;
+// The fog's colour, and in alpha how much.
+layout(set = 0, binding = 15, rgba8) uniform writeonly image2D fog_out;
+// The world normal facing the eye, and in alpha the distance along the ray
+// (0 for the sky).
+layout(set = 0, binding = 16, rgba16f) uniform image2D geometry_out;
+// Thermal vision's heat (one pixel without it).
+layout(set = 0, binding = 17, r32f) uniform writeonly image2D heat_out;
+// The lights retail deposited into its grid this frame, a little above the
+// ground under each (eye-relative), the nearest first.
+struct LightSource {
+    vec3 position;
+    float radius;
+    vec3 color;
+    // 1 for a particle's light, which anything may shadow; nothing shadows
+    // an actor's (share_shadowed). 2 for a glowing model's (glow_light).
+    float particle;
+    // Where it shines from: the actor carrying it (the headlamp lights the
+    // ground far ahead of its hull) or the particle shedding it.
+    vec3 emitter;
+    // How much it warms what it lights under thermal vision.
+    float heat;
+};
+layout(set = 0, binding = 19, scalar) readonly buffer LightSources { LightSource sources[]; };
+// A primary hit's sun before its shadow (the world's, or the light its
+// model was shaded with), which the resolve takes times the visibility the
+// denoiser filters (`bounce_out`'s alpha): soft shadows.
+layout(set = 0, binding = 21, rgba16f) uniform writeonly image2D sun_out;
+// Each primary hit's own motion: where its model's point was in the last
+// frame, less where it is.
+layout(set = 0, binding = 25, rgba16f) uniform writeonly image2D motion_out;
+// Each lit primary hit's flat face (octahedral, in xy), metalness, and
+// roughness (negative under a clear coat), which the path pass reads (the
+// trace and the path pass also read back the albedo, depth, direct light,
+// bounce and geometry they share).
+layout(set = 0, binding = 27, rgba16f) uniform image2D path_surface;
+// Each lit primary hit's specular light from the sun, before its shadow.
+layout(set = 0, binding = 32, rgba16f) uniform writeonly image2D specular_out;
+#ifdef PATHS_PASS
+// Which lobe the path pass's bounce took at each pixel it traced: where it
+// was glossy, how far its ray went (0 where it cast none), else -1. The
+// temporal pass keeps the two lobes' light apart by it, and follows the
+// glossy one's by its reflected image.
+layout(set = 0, binding = 36, r16f) uniform writeonly image2D glossy_out;
+#endif
+
+// A unit vector to two numbers and back (octahedral).
+vec2 octahedral(vec3 n) {
+    n /= abs(n.x) + abs(n.y) + abs(n.z);
+    vec2 folded = (1.0 - abs(n.zx)) * vec2(n.x >= 0.0 ? 1.0 : -1.0, n.z >= 0.0 ? 1.0 : -1.0);
+    return n.y >= 0.0 ? n.xz : folded;
+}
+
+vec3 from_octahedral(vec2 e) {
+    vec3 n = vec3(e.x, 1.0 - abs(e.x) - abs(e.y), e.y);
+    float t = max(-n.y, 0.0);
+    n.x += n.x >= 0.0 ? -t : t;
+    n.z += n.z >= 0.0 ? -t : t;
+    return normalize(n);
+}
+// The blended sprites that add light (bolts, flames, fireballs), the
+// nearest first: where each is (eye-relative), its half-size, the colour it
+// is drawn in and its texture slot (scene_capture.rs's emitters).
+struct Emitter {
+    vec3 position;
+    float radius;
+    vec3 color;
+    float texture;
+    vec3 span;
+    float pad;
+};
+layout(set = 0, binding = 26, scalar) readonly buffer Emitters { Emitter emitters[]; };
+
+// The traced scene's emissive light list (emissive.rs): the faces retail
+// drew unlit, each with its triangle, its group, its area, its power (area
+// times its light's luminance), how many times brighter than retail it
+// glows (materials.emitters) and its group's power up to and with it (the
+// face pick's binary search); and each group's sphere round its faces
+// (eye-relative), its power and where its faces lie in the list, the
+// likeliest from the eye first. The path pass samples them as lights
+// (emissive_sample).
+struct EmissiveFace {
+    uint triangle;
+    uint group;
+    float area;
+    float power;
+    float gain;
+    float running;
+};
+struct EmissiveGroup {
+    vec3 centre;
+    float radius;
+    float power;
+    uint first;
+    uint count;
+    uint pad;
+};
+layout(set = 0, binding = 33, scalar) readonly buffer EmissiveFaces { EmissiveFace emissive_faces[]; };
+layout(set = 0, binding = 34, scalar) readonly buffer EmissiveGroups { EmissiveGroup emissive_groups[]; };
+// Each triangle's face in the list, or NO_LIGHT: apart from the triangles'
+// own records, which every hit reads, so those keep their size.
+layout(set = 0, binding = 35, scalar) readonly buffer TriangleEmitters { uint triangle_emitters[]; };
+// The spatiotemporal blue noise (vk_device/blue_noise.rs): 64 frames of 64
+// by 64 pairs of numbers, a byte each, two pairs to a word.
+layout(set = 0, binding = 37, scalar) readonly buffer BlueNoise { uint blue_noise[]; };
+
+const uint NO_LIGHT = 0xffffffffu;
+const uint SURFACE_WATER = 1u;
+const uint SURFACE_EMISSIVE = 2u;
+// Retail's painted backdrop, which only reflections see.
+const uint SURFACE_SKY = 3u;
+// A ground corner's place in its tile's texture: U, then V, in quarters of
+// the tile, 3 bits each (scene_terrain.rs's texture_place).
+vec2 ground_uv(uint place) {
+    return vec2(float(place & 7u), float((place >> 3) & 7u)) * 0.25;
+}
+// How far a bounce ray looks for what lights a surface (world units); past
+// it the sky does.
+const float BOUNCE_REACH = 8192.0;
+// How far a reflection and a ray under water look.
+const float REFLECTION_REACH = 16384.0;
+const float UNDERWATER_REACH = 4096.0;
+// How many clarities deep a sunk pick-up's glow fades to 1/e (sunk_glow):
+// three times a blast's, as a pick-up must read where retail's see-through
+// water showed it whole. Retail sinks tokens only where the buggy and the
+// truck reach them on the bed (2026-10-25), so the water over one
+// is shallow: one 80 deep in world 18's murky river keeps two thirds of its
+// light. Between the two tried: at 6 it was a bit too visible (the same
+// day), at 4 faint against the dark water.
+const float SUNK_REACH = 5.0;
+// The water's body in shade, against in the sun: retail's ambient, a
+// quarter of its sun.
+const float WATER_SHADED = 0.25;
+// The most a bounce sample may bring, in full light: past it a sample is a
+// firefly the denoiser would smear.
+const float BOUNCE_CLAMP = 8.0;
+// The mip level a bounce reads textures at: bounce light is soft.
+const float BOUNCE_LOD = 4.0;
+
+float ground_reflectance();
+vec4 mirror_fog(float z, float t, bool met);
+
+// What a ray hit: albedo (in linear light), the shading and face normals
+// facing the ray, whether retail draws it unlit, and whether it is the
+// ground.
+struct Surface {
+    vec4 albedo;
+    vec3 normal;
+    vec3 face;
+    bool emissive;
+    bool ground;
+    bool water;
+    // The triangle's texture slot (the water's, for its colour).
+    uint texture_slot;
+    // Its heat before the sun and lights warm it, for thermal vision.
+    float heat;
+    // How metallic it is (0: matte) and how rough its reflections are.
+    float metal;
+    float rough;
+    uint light;
+    // Retail's light at the hit (a shade of 128 is one), or alpha 0.
+    vec4 shade;
+    // Retail's fog at the hit: its colour, and in alpha how much.
+    vec4 fog;
+    // How far its shadow rays rise off the flat facet to the smooth surface
+    // its corners' normals shade (terminator_lift).
+    vec3 lift;
+    // Its draw fogs it in a fog of its own (OWN_FOG).
+    bool own_fog;
+    // Bare, no paint under a clear coat (BARE): the tyres' rubber.
+    bool bare;
+    // One of the scenery crystals (CRYSTAL), which a spark runs over.
+    bool crystal;
+    // The ground's detail patch (scene_ground_detail.rs): how far the hit
+    // lies carved below the ground (under a puddle's water), and the
+    // uncarved ground's normal there; 0 and the normal elsewhere.
+    float sunk;
+    vec3 flat_normal;
+};
+
+// A ray in the hit instance's space (the ground's tiles are moved by their
+// transforms). A primary ray carries the rays through the next pixel across
+// and down; a bounce ray reads textures at a fixed mip level (lod >= 0).
+struct Ray {
+    vec3 origin;
+    vec3 direction;
+    float t;
+    vec3 dx;
+    vec3 dy;
+    float lod;
+};
+
+vec4 unpack(uint color) {
+    return vec4(color & 0xffu, (color >> 8) & 0xffu, (color >> 16) & 0xffu, color >> 24) / 255.0;
+}
+
+// The instance masks the rays traced now leave out (shade_ray's).
+uint skipped = 0u;
+
+bool occluded_by(vec3 origin, vec3 direction, float distance, uint mask) {
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsTerminateOnFirstHitEXT, mask & ~skipped,
+                          origin, 0.0, direction, distance);
+    PROCEED_THROUGH_CUTOUTS(query);
+    return rayQueryGetIntersectionTypeEXT(query, true) != gl_RayQueryCommittedIntersectionNoneEXT;
+}
+
+bool occluded(vec3 origin, vec3 direction, float distance) {
+    return occluded_by(origin, direction, distance, MASK_SOLID);
+}
+
+uint hash(uint x) {
+    x ^= x >> 16;
+    x *= 0x7feb352du;
+    x ^= x >> 15;
+    x *= 0x846ca68bu;
+    x ^= x >> 16;
+    return x;
+}
+
+float random(inout uint state) {
+    state = hash(state);
+    return float(state >> 8) / 16777216.0;
+}
+
+// A direction within the cone of cosine `cone` about `axis`, even over its
+// solid angle: a point of the sun's disc.
+// Two numbers in [0, 1) for texel `at` this frame, from the spatiotemporal
+// blue noise: spread evenly over the screen, and over the square frame by
+// frame. `at` is a pixel, or for the path pass its cell of the lattice, so
+// that the samples it traces are even over the lattice the denoiser gathers.
+// `salt` keeps two uses apart (each its own place and frame in the texture).
+// Each run through the texture's 64 frames lays it over the screen at
+// another place, so that a pixel's numbers do not come round again: a
+// light met by a few of them would keep the error those few left.
+vec2 even_numbers(ivec2 at, uint salt) {
+    uint frame_index = uint(frame.frame_index);
+    uint place = hash((frame_index >> 6) ^ (salt << 24));
+    uvec2 texel = (uvec2(at) + uvec2(place, place >> 8)) & 63u;
+    uint index = (((frame_index + salt * 29u) & 63u) * 64u + texel.y) * 64u + texel.x;
+    uint pair = blue_noise[index >> 1] >> ((index & 1u) * 16u);
+    return (vec2(pair & 0xffu, (pair >> 8) & 0xffu) + 0.5) / 256.0;
+}
+
+vec3 cone_direction(vec3 axis, float cone, vec2 xi) {
+    float cos_theta = mix(1.0, cone, xi.x);
+    float sin_theta = sqrt(max(0.0, 1.0 - cos_theta * cos_theta));
+    vec3 tangent = normalize(abs(axis.y) < 0.99 ? cross(axis, vec3(0.0, 1.0, 0.0))
+                                                : cross(axis, vec3(1.0, 0.0, 0.0)));
+    vec3 bitangent = cross(axis, tangent);
+    float phi = 6.28318530718 * xi.y;
+    return tangent * (sin_theta * cos(phi)) + bitangent * (sin_theta * sin(phi))
+        + axis * cos_theta;
+}
+
+// A direction about `normal`, cosine-weighted: the light a diffuse surface
+// gathers, each sample counting alike.
+vec3 cosine_direction(vec3 normal, vec2 xi) {
+    vec3 tangent = normalize(abs(normal.y) < 0.99 ? cross(normal, vec3(0.0, 1.0, 0.0))
+                                                  : cross(normal, vec3(1.0, 0.0, 0.0)));
+    vec3 bitangent = cross(normal, tangent);
+    float phi = 6.28318530718 * xi.x;
+    float radius = sqrt(xi.y);
+    return normalize(tangent * (radius * cos(phi)) + bitangent * (radius * sin(phi))
+                     + normal * sqrt(max(0.0, 1.0 - xi.y)));
+}
+
+#include "pt_glossy.glsl"
+
+// The sun's highlight on a metal at `normal`, seen along `view`: GGX's
+// distribution with Schlick's Fresnel at the metal's own colour (the
+// resolve multiplies by the albedo), over the cosine the diffuse light
+// already took.
+float sun_highlight(vec3 normal, vec3 view, vec3 sun, float roughness) {
+    vec3 half_way = normalize(sun - view);
+    float n_h = max(dot(normal, half_way), 0.0);
+    float n_l = max(dot(normal, sun), 0.0);
+    float n_v = max(dot(normal, -view), 1.0e-3);
+    float alpha = roughness * roughness;
+    float a2 = alpha * alpha;
+    float d = a2 / (3.14159265 * pow(n_h * n_h * (a2 - 1.0) + 1.0, 2.0));
+    float k = alpha * 0.5;
+    float visibility = 1.0 / ((n_l * (1.0 - k) + k) * (n_v * (1.0 - k) + k));
+    return d * visibility * 0.25 * n_l;
+}
+
+#include "pt_sun.glsl"
+
+// A model's roughness for its specular: the matte ones (tuned so or not
+// tuned) a soft sheen, as painted metal and plastic have.
+const float MODEL_SHEEN = 0.75;
+
+// Ray differentials: the texture coordinate steps to the next pixel across
+// and down, where those pixels' rays meet the hit triangle's plane, so the
+// sampler picks mips and filters anisotropically as a rasterizer would.
+void uv_steps(Ray ray, vec3 a, vec3 b, vec3 c, vec2 uva, vec2 uvb, vec2 uvc, vec2 uv,
+              out vec2 ddx, out vec2 ddy) {
+    vec3 e0 = b - a;
+    vec3 e1 = c - a;
+    vec3 plane = cross(e0, e1);
+    float d00 = dot(e0, e0);
+    float d01 = dot(e0, e1);
+    float d11 = dot(e1, e1);
+    float det = d00 * d11 - d01 * d01;
+    ddx = vec2(0.0);
+    ddy = vec2(0.0);
+    if (det <= 1.0e-12) {
+        return;
+    }
+    float height = dot(a - ray.origin, plane);
+    vec3 directions[2] = vec3[](ray.dx, ray.dy);
+    vec2 steps[2];
+    for (int i = 0; i < 2; i++) {
+        float along = dot(directions[i], plane);
+        float t = abs(along) > 1.0e-20 ? height / along : ray.t;
+        if (t <= 0.0) {
+            t = ray.t;
+        }
+        vec3 v = ray.origin + directions[i] * t - a;
+        float d20 = dot(v, e0);
+        float d21 = dot(v, e1);
+        float w1 = (d11 * d20 - d01 * d21) / det;
+        float w2 = (d00 * d21 - d01 * d20) / det;
+        steps[i] = uva * (1.0 - w1 - w2) + uvb * w1 + uvc * w2 - uv;
+    }
+    ddx = steps[0];
+    ddy = steps[1];
+}
+
+vec4 sample_texture(uint slot, vec2 uv, Ray ray, vec3 a, vec3 b, vec3 c, vec2 uva, vec2 uvb,
+                    vec2 uvc) {
+    if (ray.lod >= 0.0) {
+        return textureLod(textures[nonuniformEXT(slot)], uv, ray.lod);
+    }
+    vec2 ddx;
+    vec2 ddy;
+    uv_steps(ray, a, b, c, uva, uvb, uvc, uv, ddx, ddy);
+    return textureGrad(textures[nonuniformEXT(slot)], uv, ddx, ddy);
+}
+
+// Where a shadow ray leaves a hit at `weights` on triangle a, b, c,
+// raised from the flat facet to the curved surface its corners' normals
+// shade (Hanika's terminator offset), as a move from the facet: a slope lit
+// along its smooth normals is not shadowed in blocks by its own facets (the
+// ground on Pillier Stren and Oolbryte, the plan's item 17). Only outward,
+// along `face`; none where a corner has no normal.
+vec3 terminator_lift(vec3 a, vec3 b, vec3 c, vec3 na, vec3 nb, vec3 nc, vec3 weights,
+                     vec3 face) {
+    if (min(dot(na, na), min(dot(nb, nb), dot(nc, nc))) < 0.25) {
+        return vec3(0.0);
+    }
+    na = normalize(na);
+    nb = normalize(nb);
+    nc = normalize(nc);
+    vec3 p = a * weights.x + b * weights.y + c * weights.z;
+    vec3 curved = (p - dot(p - a, na) * na) * weights.x + (p - dot(p - b, nb) * nb) * weights.y
+        + (p - dot(p - c, nc) * nc) * weights.z;
+    vec3 lift = curved - p;
+    return dot(lift, face) > 0.0 ? lift : vec3(0.0);
+}
+
+// The face normal of a, b, c and the interpolated `normal`, both turned to
+// face against `direction`; a zero normal takes the face's.
+void orient(inout Surface surface, vec3 a, vec3 b, vec3 c, vec3 normal, vec3 direction) {
+    vec3 face = normalize(cross(b - a, c - a));
+    if (dot(face, direction) > 0.0) {
+        face = -face;
+    }
+    if (dot(normal, normal) < 0.25) {
+        normal = face;
+    } else {
+        normal = normalize(normal);
+        if (dot(normal, face) < 0.0) {
+            normal = -normal;
+        }
+    }
+    surface.face = face;
+    surface.normal = normal;
+}
+
+Surface model_surface(int primitive, vec3 weights, Ray ray) {
+    Vertex a = vertices[indices[primitive * 3 + 0]];
+    Vertex b = vertices[indices[primitive * 3 + 1]];
+    Vertex c = vertices[indices[primitive * 3 + 2]];
+    vec2 uv = a.uv * weights.x + b.uv * weights.y + c.uv * weights.z;
+    Surface surface;
+    surface.albedo = unpack(a.color) * weights.x + unpack(b.color) * weights.y
+        + unpack(c.color) * weights.z;
+    Triangle triangle = triangles[primitive];
+    if (triangle.texture != NO_TEXTURE) {
+        surface.albedo *= sample_texture(triangle.texture, uv, ray, a.position, b.position,
+                                         c.position, a.uv, b.uv, c.uv);
+    }
+    surface.albedo.rgb = to_linear(surface.albedo.rgb);
+    // Retail draws the painted sky unlit too.
+    surface.emissive = triangle.surface == SURFACE_EMISSIVE || triangle.surface == SURFACE_SKY;
+    // An unlit face the tuning makes glow brighter than retail drew it
+    // (materials.emitters) sends its colour times its gain, past full light.
+    if (surface.emissive && triangle_emitters[primitive] != NO_LIGHT) {
+        surface.albedo.rgb *= emissive_faces[triangle_emitters[primitive]].gain;
+    }
+    surface.ground = false;
+    surface.water = triangle.surface == SURFACE_WATER;
+    surface.texture_slot = triangle.texture;
+    surface.heat = triangle.heat;
+    // The truck's hubs: the tyre's side wall over the metal (materials.sprites).
+    uint split = triangle.above >> 16;
+    uint material = split != 0u && uv.y < float(split) / 65536.0 ? triangle.above
+                                                                 : triangle.material;
+    surface.metal = min(float(material & 0xffu) / 255.0 * frame.reflect_gain, 1.0);
+    surface.rough = max(float((material >> 8) & 0xffu) / 255.0
+                        / max(frame.reflect_gain, 1.0e-3), 0.02);
+    surface.light = triangle.light;
+    surface.shade = (unpack(a.shade) * weights.x + unpack(b.shade) * weights.y
+                     + unpack(c.shade) * weights.z) * vec4(vec3(255.0 / 128.0), 1.0);
+    surface.fog = unpack(a.fog) * weights.x + unpack(b.fog) * weights.y + unpack(c.fog) * weights.z;
+    // The model's own normals where the game lit along them.
+    orient(surface, a.position, b.position, c.position,
+           a.normal * weights.x + b.normal * weights.y + c.normal * weights.z, ray.direction);
+    surface.lift = terminator_lift(a.position, b.position, c.position, a.normal, b.normal,
+                                   c.normal, weights, surface.face);
+    surface.own_fog = (triangle.material & OWN_FOG) != 0u;
+    surface.bare = (triangle.material & BARE) != 0u;
+    surface.crystal = (triangle.material & CRYSTAL) != 0u;
+    surface.sunk = 0.0;
+    surface.flat_normal = surface.normal;
+    return surface;
+}
+
+Surface ground_surface(int primitive, vec3 weights, Ray ray) {
+    GroundVertex a = ground_vertices[ground_indices[primitive * 3 + 0]];
+    GroundVertex b = ground_vertices[ground_indices[primitive * 3 + 1]];
+    GroundVertex c = ground_vertices[ground_indices[primitive * 3 + 2]];
+    uint word = ground_triangles[primitive];
+    vec2 uva = ground_uv(word >> 8);
+    vec2 uvb = ground_uv(word >> 14);
+    vec2 uvc = ground_uv(word >> 20);
+    vec2 uv = uva * weights.x + uvb * weights.y + uvc * weights.z;
+    uint texture_slot = blends[word & 0xffu];
+    Surface surface;
+    surface.albedo = vec4(1.0);
+    if (texture_slot != NO_TEXTURE) {
+        surface.albedo = sample_texture(texture_slot, uv, ray, a.position, b.position,
+                                        c.position, uva, uvb, uvc);
+    }
+    // Retail's baked shade gives way to traced light: the ground keeps its
+    // texture, at its reflectance (scene_terrain.rs's ground_reflectance).
+    surface.albedo.rgb = to_linear(surface.albedo.rgb) * ground_reflectance();
+    surface.emissive = false;
+    surface.ground = true;
+    surface.water = false;
+    surface.texture_slot = texture_slot;
+    surface.heat = frame.thermal_ground;
+    surface.metal = 0.0;
+    surface.rough = 1.0;
+    surface.light = NO_LIGHT;
+    surface.shade = vec4(0.0);
+    surface.fog = vec4(0.0);
+    orient(surface, a.position, b.position, c.position,
+           a.normal * weights.x + b.normal * weights.y + c.normal * weights.z, ray.direction);
+    surface.lift = terminator_lift(a.position, b.position, c.position, a.normal, b.normal,
+                                   c.normal, weights, surface.face);
+    surface.own_fog = false;
+    surface.bare = false;
+    surface.crystal = false;
+    surface.sunk = 0.0;
+    surface.flat_normal = surface.normal;
+    return surface;
+}
+
+// The detail patch's surface: as the ground's, its points the patch's,
+// with how far each lies carved and the uncarved ground's normal.
+Surface detail_surface(int primitive, vec3 weights, Ray ray) {
+    DetailVertex a = detail_vertices[detail_indices[primitive * 3 + 0]];
+    DetailVertex b = detail_vertices[detail_indices[primitive * 3 + 1]];
+    DetailVertex c = detail_vertices[detail_indices[primitive * 3 + 2]];
+    uint word = detail_triangles[primitive];
+    vec2 uva = ground_uv(word >> 8);
+    vec2 uvb = ground_uv(word >> 14);
+    vec2 uvc = ground_uv(word >> 20);
+    vec2 uv = uva * weights.x + uvb * weights.y + uvc * weights.z;
+    uint texture_slot = blends[word & 0xffu];
+    Surface surface;
+    surface.albedo = vec4(1.0);
+    if (texture_slot != NO_TEXTURE) {
+        surface.albedo = sample_texture(texture_slot, uv, ray, a.position, b.position,
+                                        c.position, uva, uvb, uvc);
+    }
+    // Retail's baked shade gives way to traced light: the ground keeps its
+    // texture, at its reflectance (scene_terrain.rs's ground_reflectance).
+    surface.albedo.rgb = to_linear(surface.albedo.rgb) * ground_reflectance();
+    surface.emissive = false;
+    surface.ground = true;
+    surface.water = false;
+    surface.texture_slot = texture_slot;
+    surface.heat = frame.thermal_ground;
+    surface.metal = 0.0;
+    surface.rough = 1.0;
+    surface.light = NO_LIGHT;
+    surface.shade = vec4(0.0);
+    surface.fog = vec4(0.0);
+    orient(surface, a.position, b.position, c.position,
+           a.normal * weights.x + b.normal * weights.y + c.normal * weights.z, ray.direction);
+    surface.lift = terminator_lift(a.position, b.position, c.position, a.normal, b.normal,
+                                   c.normal, weights, surface.face);
+    surface.own_fog = false;
+    surface.bare = false;
+    surface.crystal = false;
+    surface.sunk = a.carve * weights.x + b.carve * weights.y + c.carve * weights.z;
+    vec3 flat_normal = normalize(a.flat_normal * weights.x + b.flat_normal * weights.y
+                                 + c.flat_normal * weights.z);
+    surface.flat_normal = dot(flat_normal, surface.face) < 0.0 ? -flat_normal : flat_normal;
+    return surface;
+}
+
+// The surface a committed hit of `query` names.
+Surface hit_surface(rayQueryEXT query, Ray ray) {
+    // A ground tile's triangles start at its record offset in the ground's,
+    // the models outside the view past the view's of their kind.
+    int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, true)
+        + int(rayQueryGetIntersectionInstanceShaderBindingTableRecordOffsetEXT(query, true));
+    vec2 bary = rayQueryGetIntersectionBarycentricsEXT(query, true);
+    vec3 weights = vec3(1.0 - bary.x - bary.y, bary.x, bary.y);
+    uint kind = rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) & ~INSTANCE_OUTSIDE;
+    if (kind == INSTANCE_GROUND) {
+        return ground_surface(primitive, weights, ray);
+    }
+    if (kind == INSTANCE_DETAIL) {
+        return detail_surface(primitive, weights, ray);
+    }
+    int first = kind == INSTANCE_WATER ? 0
+        : kind == INSTANCE_SKY ? int(frame.sky_first)
+        : kind == INSTANCE_CUTOUT ? int(frame.cutout_first) : int(frame.model_first);
+    return model_surface(primitive + first, weights, ray);
+}
+
+// The committed hit's face in the emissive light list, or NO_LIGHT.
+uint hit_emitter(rayQueryEXT query) {
+    uint kind = rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) & ~INSTANCE_OUTSIDE;
+    if (kind != INSTANCE_MODELS && kind != INSTANCE_CUTOUT) {
+        return NO_LIGHT;
+    }
+    // Those outside the view start past the view's, at their instance's
+    // record offset.
+    int first = kind == INSTANCE_CUTOUT ? int(frame.cutout_first) : int(frame.model_first);
+    return triangle_emitters[rayQueryGetIntersectionPrimitiveIndexEXT(query, true) + first
+        + int(rayQueryGetIntersectionInstanceShaderBindingTableRecordOffsetEXT(query, true))];
+}
+
+// Where the committed hit's point was in the last frame, less where it is:
+// its model's own motion, from its triangle's corners. The ground, the
+// water and the sky keep still.
+vec3 hit_motion(rayQueryEXT query) {
+    uint kind = rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) & ~INSTANCE_OUTSIDE;
+    if (kind == INSTANCE_GROUND || kind == INSTANCE_DETAIL || kind == INSTANCE_WATER
+        || kind == INSTANCE_SKY) {
+        return vec3(0.0);
+    }
+    int first = kind == INSTANCE_CUTOUT ? int(frame.cutout_first) : int(frame.model_first);
+    int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, true) + first
+        + int(rayQueryGetIntersectionInstanceShaderBindingTableRecordOffsetEXT(query, true));
+    vec2 bary = rayQueryGetIntersectionBarycentricsEXT(query, true);
+    vec3 weights = vec3(1.0 - bary.x - bary.y, bary.x, bary.y);
+    return vertices[indices[primitive * 3 + 0]].motion * weights.x
+        + vertices[indices[primitive * 3 + 1]].motion * weights.y
+        + vertices[indices[primitive * 3 + 2]].motion * weights.z;
+}
+
+// How far short of a deposited light its shadow ray stops, so what it
+// spawned from (a projectile, the wreck an explosion leaves) does not
+// shadow it.
+const float LIGHT_CLEARANCE = 160.0;
+// The least contribution a deposited light shadows: 0.08 of full light in
+// retail's tones, in linear light.
+const float SHADOWED_LIGHT = 0.0073;
+
+// Whether an eye-relative point lies on retail's light grid; beyond it
+// retail lights everything with the executable's colour.
+bool on_grid(vec3 position) {
+    vec2 world = frame.eye.xz + position.xz;
+    ivec2 cell = ivec2(floor(mod(world - frame.grid_anchor, 65536.0) / 128.0)) & 511;
+    return cell.x < GRID_SIDE && cell.y < GRID_SIDE;
+}
+
+// The ground's reflectance, its texture times this: retail drew the ground
+// at the tint times its baked shade, about `a` N.L (`frame.ground_slope`),
+// capped at full light; with the sun at sun_light's strength the ground's
+// sunlit face shows as retail drew it.
+float ground_reflectance() {
+    vec3 tint = frame.sun_color;
+    float peak = max(1.0, max(tint.r, max(tint.g, tint.b)));
+    return to_linear(vec3(min(1.0, frame.ground_slope * peak))).x / peak;
+}
+
+// One light's light at a point, worked out in retail's tones as its pool
+// was made and tuned (its colour, its falloff), in linear light: the sum of
+// lights and their surfaces' facing then run in linear light. A channel
+// below zero (retail's signed colours: a missile's green and blue near the
+// ground) lights nothing.
+vec3 light_of(vec3 retail) {
+    return light_to_linear(max(retail, vec3(0.0)));
+}
+
+// A lamp's light at eye-relative `position` in linear light (lamp_beam's
+// `toward` and `distance`): a headlamp's colour decoded and its strength as
+// it is, so it falls off with the square of the distance as light does.
+// Decoded whole as a display tone, as retail's lights are, it fell off with
+// the 4.4th power: blown out near the bumper, dark not far beyond (2026-10-29: the
+// area they cover was a little too small). The rear lamps
+// keep the decoding their look was tuned in.
+vec3 lamp_linear(Lamp lamp, vec3 position, out vec3 toward, out float distance) {
+    float strength = lamp_strength(lamp, position, toward, distance);
+    return lamp.look < 0.5 ? to_linear(lamp.color) * strength : light_of(lamp.color * strength);
+}
+
+float deep_caustic(vec3 bottom, float depth);
+
+// What reaches a point `depth` under the water's plane, with the eye under
+// the water too, of a light from the sky toward `toward`, as a share of it
+// above: what the plane lets in, less what the water absorbs along its
+// refracted way down; and in `up`, that way back up.
+vec3 under_plane(vec3 toward, float depth, out vec3 up) {
+    float enters;
+    up = -water_beam(toward, enters);
+    return enters > 0.0 ? enters * exp(-water_extinction() * (depth / up.y)) : vec3(0.0);
+}
+
+// The sun's light at eye-relative `position`, `depth` under the water's
+// plane (under_plane), focused into the caustics the ripples make there.
+vec3 sun_under_water(vec3 position, float depth, out vec3 toward) {
+    return under_plane(frame.sun_direction, depth, toward) * deep_caustic(position, depth);
+}
+
+// Whether the sun toward `toward` is cut off from `origin`, `depth` under
+// the water's plane: along its refracted way up to the plane, then on
+// toward it from where it entered (`entry`). Water casts no shadow.
+bool sun_cut(vec3 origin, vec3 toward, float depth, out vec3 entry) {
+    vec3 up = -refract(-toward, vec3(0.0, 1.0, 0.0), 1.0 / 1.333);
+    float way = depth / max(up.y, 1.0e-3);
+    entry = origin + up * way;
+    return toward.y <= 0.0 || occluded(origin, up, way) || occluded(entry, toward, 1.0e6);
+}
+
+// One of retail's deposited lights at an eye-relative point facing
+// `normal`: as retail deposits it (its colour times 1 - d^2/r^2 within its
+// reach, now by the distance in 3D), and on a model once all round and
+// once more as the surface faces its emitter, as retail's grid gave a
+// model its light once in the ambient and once in the sun's colour. None
+// for a glow. `toward` and `reach` lead to its emitter.
+vec3 source_share(LightSource source, vec3 position, vec3 normal, bool model, out vec3 toward,
+                  out float reach) {
+    toward = vec3(0.0);
+    reach = 0.0;
+    vec3 offset = source.position - position;
+    float r2 = source.radius * source.radius;
+    float d2 = dot(offset, offset);
+    if (source.particle > 1.5 || d2 >= r2) {
+        return vec3(0.0);
+    }
+    vec3 emitter = source.emitter - position;
+    reach = length(emitter);
+    toward = emitter / max(reach, 1.0e-3);
+    vec3 light = light_of(source.color * (1.0 - d2 / r2));
+    return model ? light * (1.0 + max(dot(normal, toward), 0.0)) : light;
+}
+
+// How far across the shots', the glows' and the particles' lights cast
+// their shadows from (world units): a point cast them hard (the plan's
+// item 17).
+const float LIGHT_SIZE = 40.0;
+
+float ground_height(vec2 world);
+
+// The ground's smooth surface at world X/Z: Catmull-Rom through its grid
+// points, the surface whose slopes the ground's vertex normals already are
+// (their central differences, scene_terrain.rs), so what lights the ground
+// along those normals is shadowed by the same surface.
+float ground_smooth_height(vec2 world) {
+    int points = int(frame.ground_points);
+    if (points < 2) {
+        return frame.water_level;
+    }
+    int cells = points - 1;
+    vec2 grid_at = mod(world, 65536.0) / frame.ground_spacing;
+    ivec2 corner = ivec2(floor(grid_at));
+    vec2 t = grid_at - vec2(corner);
+    vec4 wx = vec4(((-0.5 * t.x + 1.0) * t.x - 0.5) * t.x,
+                   (1.5 * t.x - 2.5) * t.x * t.x + 1.0,
+                   ((-1.5 * t.x + 2.0) * t.x + 0.5) * t.x,
+                   (0.5 * t.x - 0.5) * t.x * t.x);
+    vec4 wz = vec4(((-0.5 * t.y + 1.0) * t.y - 0.5) * t.y,
+                   (1.5 * t.y - 2.5) * t.y * t.y + 1.0,
+                   ((-1.5 * t.y + 2.0) * t.y + 0.5) * t.y,
+                   (0.5 * t.y - 0.5) * t.y * t.y);
+    float height = 0.0;
+    for (int i = 0; i < 4; i++) {
+        int x = (corner.x + i - 1 + cells) % cells;
+        float row = 0.0;
+        for (int j = 0; j < 4; j++) {
+            int z = (corner.y + j - 1 + cells) % cells;
+            row += wz[j] * ground_vertices[x * points + z].position.y;
+        }
+        height += wx[i] * row;
+    }
+    return height;
+}
+
+// The ground's smooth-surface march for the local lights' shadow rays: the
+// first step and how fast the steps grow with distance, and how wide the
+// shadow's soft edge is at the start and per unit of distance (a lamp's
+// penumbra widens away from what casts it).
+const float GROUND_MARCH_FIRST = 12.0;
+const float GROUND_MARCH_GROWTH = 0.12;
+const int GROUND_MARCH_STEPS = 40;
+const float GROUND_SOFT_BASE = 2.0;
+const float GROUND_SOFT_GROWTH = 0.015;
+
+// How much of a local light's ray from `from` along `direction` within
+// `distance` the ground lets through: marched against its smooth surface
+// (ground_smooth_height), never its flat facets, so the shadows of a low
+// lamp grazing the coarse ground follow its hills and not its triangles
+// (2026-10-26: the light looked blocky). A ray
+// leaving the ground leaves from that surface, which a facet may lie under.
+float ground_through(vec3 from, vec3 direction, float distance) {
+    if (frame.ground_points < 1.5) {
+        return occluded_by(from, direction, distance, MASK_GROUND) ? 0.0 : 1.0;
+    }
+    vec3 origin = frame.eye + from;
+    float surface = ground_smooth_height(origin.xz);
+    if (origin.y < surface + 1.0 && origin.y > surface - 32.0) {
+        origin.y = surface + 1.0;
+    }
+    float seen = 1.0;
+    float t = GROUND_MARCH_FIRST;
+    for (int k = 0; k < GROUND_MARCH_STEPS && t < distance; k++) {
+        vec3 at = origin + direction * t;
+        // Well above the bilinear ground, the smooth one cannot reach it.
+        float rough = ground_height(at.xz);
+        float soft = GROUND_SOFT_BASE + GROUND_SOFT_GROWTH * t;
+        if (at.y - rough < 24.0 + soft) {
+            float above = at.y - ground_smooth_height(at.xz);
+            seen = min(seen, smoothstep(-soft, soft, above));
+            if (seen <= 0.0) {
+                return 0.0;
+            }
+        }
+        t += max(GROUND_MARCH_FIRST, t * GROUND_MARCH_GROWTH);
+    }
+    return seen;
+}
+
+// How much of a local light's ray from `from` along `direction` within
+// `distance` gets through: none past a model, else, for a light low over
+// the ground (`grazing`: the headlamps), what the ground's smooth surface
+// lets by (ground_through); the other lights (glows, shots, particles) sit
+// above the ground they light and take its mesh as it is, which costs one
+// ray.
+float light_through(vec3 from, vec3 direction, float distance, bool grazing) {
+    if (!grazing) {
+        return occluded_by(from, direction, distance, MASK_SOLID) ? 0.0 : 1.0;
+    }
+    if (occluded_by(from, direction, distance, MASK_MODEL)) {
+        return 0.0;
+    }
+    return ground_through(from, direction, distance);
+}
+
+// The share of a light `reach` along `toward` from `from` that gets past
+// what stands between, its rays stopping `stop` short of it: `rays` rays
+// (2 or 4) at points across it (`size` across), turned per pixel and frame,
+// so its shadow softens away from what casts it, as the sun's does. For a
+// light in front of the `surface` it lights (a unit normal, or none), a
+// point of it under that surface's plane counts from as far above: a light
+// hugging the ground (the VTOL's jets at rest) lit only a hard disc round
+// it, its rays toward its points under the ground stopped by the ground.
+float light_visibility(vec3 from, vec3 toward, float reach, float stop, int rays, float size,
+                       vec3 surface, bool grazing, inout uint seed) {
+    vec3 tangent = normalize(abs(toward.y) < 0.99 ? cross(toward, vec3(0.0, 1.0, 0.0))
+                                                  : cross(toward, vec3(1.0, 0.0, 0.0)));
+    vec3 bitangent = cross(toward, tangent);
+    vec3 mirror = dot(toward, surface) > 0.0 ? surface : vec3(0.0);
+    float turn = 6.28318530718 * random(seed);
+    float seen = 0.0;
+    for (int k = 0; k < rays; k++) {
+        float angle = turn + 6.28318530718 * float(k) / float(rays);
+        // Alternately half way and nearly all the way out.
+        float out_by = size * ((k & 1) == 0 ? 0.35 : 0.8);
+        vec3 target = toward * reach + (tangent * cos(angle) + bitangent * sin(angle)) * out_by;
+        target -= 2.0 * min(dot(target, mirror), 0.0) * mirror;
+        float distance = length(target);
+        seen += light_through(from, target / distance, max(distance - stop, 0.0), grazing);
+    }
+    return seen / float(rays);
+}
+
+// How much of a share of a light gets through: a particle's past whatever
+// stands between the point and the particle, softly at a primary hit
+// (`soft`), with one ray at a bounce's. An actor's light is not shadowed:
+// it lights every slope of its pool alike, and the coarse ground shadowing
+// a low lamp (the headlamp, from its hull) cut the pool into hard black
+// facets (2026-10-22). A faint share (a debris spark's, a light's far
+// edge) is not worth its rays: explosions shed dozens.
+float share_visibility(LightSource source, vec3 light, vec3 position, vec3 face, vec3 toward,
+                       float reach, bool soft, inout uint seed) {
+    if (source.particle < 0.5 || max(light.r, max(light.g, light.b)) <= SHADOWED_LIGHT
+        || reach <= LIGHT_CLEARANCE) {
+        return 1.0;
+    }
+    vec3 from = position + face * 0.5;
+    if (soft) {
+        return light_visibility(from, toward, reach, LIGHT_CLEARANCE, 2, LIGHT_SIZE, vec3(0.0),
+                                false, seed);
+    }
+    return light_through(from, toward, reach - LIGHT_CLEARANCE, false);
+}
+
+// Retail's dynamic lights at an eye-relative point on the grid (the ground,
+// or a `model`'s surface facing `normal`), from the frame's sources, each
+// shadowed.
+vec3 traced_sources(vec3 position, vec3 normal, vec3 face, bool model, inout uint seed) {
+    vec3 sum = vec3(0.0);
+    for (int i = 0; i < int(frame.light_count); i++) {
+        vec3 toward;
+        float reach;
+        vec3 light = source_share(sources[i], position, normal, model, toward, reach);
+        if (light != vec3(0.0)) {
+            sum += light
+                * share_visibility(sources[i], light, position, face, toward, reach, true, seed);
+        }
+    }
+    return sum;
+}
+
+// How far short of a glow its shadow ray stops: its own model's size.
+const float GLOW_CLEARANCE = 48.0;
+
+// A glow's light at an eye-relative point facing `normal`, unshadowed, and
+// the way and distance to its nearest point; false for a source that is no
+// glow or lies out of reach.
+bool glow_share(LightSource source, vec3 position, vec3 normal, out vec3 light,
+                out vec3 direction, out float reach) {
+    light = vec3(0.0);
+    direction = vec3(0.0);
+    reach = 0.0;
+    if (source.particle < 1.5) {
+        return false;
+    }
+    vec3 span = source.emitter - source.position;
+    float len2 = dot(span, span);
+    vec3 emitter = len2 > 0.0
+        ? source.position + span * clamp(dot(position - source.position, span) / len2, 0.0, 1.0)
+        : source.emitter;
+    vec3 toward = emitter - position;
+    float d2 = dot(toward, toward);
+    float r2 = source.radius * source.radius;
+    if (d2 >= r2) {
+        return false;
+    }
+    reach = sqrt(d2);
+    direction = toward / max(reach, 1.0e-3);
+    float fade = 1.0 - d2 / r2;
+    float facing = 0.5 + 0.5 * dot(normal, direction);
+    light = light_of(source.color * (fade * fade)) * (facing * facing);
+    return true;
+}
+
+// The glowing models' light at an eye-relative point facing `normal` (the
+// tuning's glows: the crystals, the shots), each fading to nothing at its
+// reach and softly on surfaces turned from it, shadowed softly by what
+// stands between.
+vec3 glow_light(vec3 position, vec3 normal, vec3 face, inout uint seed) {
+    vec3 sum = vec3(0.0);
+    for (int i = 0; i < int(frame.light_count); i++) {
+        vec3 light;
+        vec3 direction;
+        float reach;
+        if (!glow_share(sources[i], position, normal, light, direction, reach)) {
+            continue;
+        }
+        if (reach > GLOW_CLEARANCE) {
+            light *= light_visibility(position + face * 0.5 + normal * frame.shadow_lift,
+                                      direction, reach, GLOW_CLEARANCE, 4, LIGHT_SIZE, face,
+                                      false, seed);
+        }
+        sum += light;
+    }
+    return sum;
+}
+
+// How far short of a lamp its shadow ray stops: a rear lamp's just short; a
+// headlamp's past the craft's own nose and front wheels, which stand beside
+// the lamps on the narrow nose and cut their wide spill into hard-edged
+// wedges, where real lamps sit clear of the wheels. And how far up the
+// ground's normal the ground's leaves.
+const float LAMP_CLEARANCE = 4.0;
+const float HEADLAMP_CLEARANCE = 160.0;
+const float LAMP_LIFT = 4.0;
+
+// Whether `lamp`, `distance` along `toward` from `from`, lights it: one
+// ray, stopping short of the lamp; unless a `point`, for a lamp whose look
+// has a size, the share of two rays at points across it, turned per point
+// and frame. The rear lamps sit between the buggy's rear pods, which a point
+// would cut into hard edges.
+float lamp_visibility(Lamp lamp, vec3 from, vec3 toward, float distance, bool point) {
+    float stop = lamp.look < 0.5 ? HEADLAMP_CLEARANCE : LAMP_CLEARANCE;
+    float size = point ? 0.0 : frame.lamp_looks[int(lamp.look)].size;
+    if (size <= 0.0) {
+        return light_through(from, toward, max(distance - stop, 0.0), true);
+    }
+    uint seed = hash(floatBitsToUint(from.x) ^ hash(floatBitsToUint(from.z)
+                                                    ^ hash(uint(frame.frame_index))));
+    return light_visibility(from, toward, distance, stop, 2, size, vec3(0.0), true, seed);
+}
+
+// The headlamps' light at a hit facing `normal` (`face` its flat face): each
+// lamp's beam by the surface's facing, wrapped on the ground (the low lamps
+// graze it), shadowed by one ray toward the lamp, which the ground stops
+// only where it passes under its smooth surface (ground_through): the coarse
+// ground's facets no longer cut the pool into black facets (2026-10-22) nor into steps (2026-10-26).
+vec3 lamp_light(vec3 position, vec3 normal, vec3 face, bool ground) {
+    vec3 sum = vec3(0.0);
+    for (int i = 0; i < int(frame.lamp_count); i++) {
+        vec3 toward;
+        float distance;
+        vec3 beam = lamp_linear(frame.lamps[i], position, toward, distance);
+        float facing = dot(normal, toward);
+        float response = ground ? (facing + frame.lamp_wrap) / (1.0 + frame.lamp_wrap)
+                                : facing;
+        if (beam == vec3(0.0) || response <= 0.0) {
+            continue;
+        }
+        vec3 from = position + face * 0.5 + (ground ? normal * LAMP_LIFT : vec3(0.0));
+        float seen = lamp_visibility(frame.lamps[i], from, toward, distance, false);
+        sum += beam * (response * seen);
+    }
+    return sum;
+}
+
+// Light number `index` at a bounce ray's hit, unshadowed, among retail's
+// deposited lights (where `records`), the glows (both in the sources), then
+// the lamps; `toward` and `reach` lead to it, and `kind` says which (0 a
+// deposited light, 1 a glow, 2 a lamp).
+vec3 bounce_candidate(int index, vec3 position, vec3 normal, bool model, bool ground,
+                      bool records, out vec3 toward, out float reach, out int kind) {
+    int source_count = int(frame.light_count);
+    if (index < source_count) {
+        LightSource source = sources[index];
+        if (source.particle > 1.5) {
+            kind = 1;
+            vec3 light;
+            if (!glow_share(source, position, normal, light, toward, reach)) {
+                return vec3(0.0);
+            }
+            return light;
+        }
+        kind = 0;
+        if (!records) {
+            toward = vec3(0.0);
+            reach = 0.0;
+            return vec3(0.0);
+        }
+        return source_share(source, position, normal, model, toward, reach);
+    }
+    kind = 2;
+    vec3 beam = lamp_linear(frame.lamps[index - source_count], position, toward, reach);
+    float facing = dot(normal, toward);
+    float response = ground ? (facing + frame.lamp_wrap) / (1.0 + frame.lamp_wrap) : facing;
+    return beam * max(response, 0.0);
+}
+
+// One light at a bounce ray's hit, standing in for them all (retail's
+// deposited lights where `records`, the glows, the lamps): picked by its
+// share of their unshadowed light there, shadowed with one ray, its light
+// divided by its odds; the denoiser gathers the samples. One pick for all
+// of them: a pick of each kind (two loops over every light each, three
+// shadow rays) cost half the bounce.
+vec3 sampled_light(vec3 position, vec3 normal, vec3 face, bool model, bool ground, bool records,
+                   inout uint seed) {
+    int count = int(frame.light_count) + int(frame.lamp_count);
+    float total = 0.0;
+    for (int i = 0; i < count; i++) {
+        vec3 toward;
+        float reach;
+        int kind;
+        vec3 light = bounce_candidate(i, position, normal, model, ground, records, toward, reach,
+                                      kind);
+        total += light.r + light.g + light.b;
+    }
+    if (total <= 0.0) {
+        return vec3(0.0);
+    }
+    float pick = random(seed) * total;
+    for (int i = 0; i < count; i++) {
+        vec3 toward;
+        float reach;
+        int kind;
+        vec3 light = bounce_candidate(i, position, normal, model, ground, records, toward, reach,
+                                      kind);
+        float weight = light.r + light.g + light.b;
+        if (weight <= 0.0) {
+            continue;
+        }
+        pick -= weight;
+        if (pick >= 0.0 && i < count - 1) {
+            continue;
+        }
+        float seen = 1.0;
+        if (kind == 0) {
+            seen = share_visibility(sources[i], light, position, face, toward, reach, false,
+                                    seed);
+        } else if (kind == 1) {
+            seen = reach > GLOW_CLEARANCE
+                ? light_through(position + face * 0.5, toward, reach - GLOW_CLEARANCE, false)
+                : 1.0;
+        } else {
+            vec3 from = position + face * 0.5 + (ground ? normal * LAMP_LIFT : vec3(0.0));
+            seen = lamp_visibility(frame.lamps[i - int(frame.light_count)], from, toward, reach,
+                                   true);
+        }
+        return seen > 0.5 ? light * (total / weight) : vec3(0.0);
+    }
+    return vec3(0.0);
+}
+
+// A surface's light (in light_of's units) from the sun, the glows, the
+// lamps and retail's deposited lights, the sky's (and everything bounced)
+// left to the bounce ray (`bounce`, the scale it takes it at). Full path
+// tracing: retail's own per-corner shade lights nothing (only the pick-ups'
+// share of it, direct_light); every model and the ground take the world's
+// sun. A primary hit leaves the sun out: `sun` is what it adds unshadowed,
+// toward `sun_toward`, which its caller shadows softly. A bounce ray's hit
+// (`sampled`) takes one glow, one lamp and one deposited light, each picked
+// by its share and shadowed with one ray, and the sun shadowed with one ray
+// toward its middle; a mirror's hit (neither) takes every light, as a
+// primary hit does, so the mirror stays free of noise.
+vec3 traced_light(Surface surface, vec3 position, bool primary, bool sampled, bool lamps,
+                  inout uint seed, out float bounce, out vec3 sun, out vec3 sun_toward) {
+    // Shadow rays leave from the smooth surface (terminator_lift).
+    position += surface.lift;
+    vec3 origin = position + surface.face * 0.5;
+    vec3 normal = surface.normal;
+    bounce = 1.0;
+    sun = vec3(0.0);
+    sun_toward = frame.sun_direction;
+    if (surface.emissive) {
+        // Retail draws it unlit: it keeps its own brightness (its albedo
+        // carries the tuning's gain).
+        bounce = 0.0;
+        return vec3(1.0);
+    }
+    bool model = !surface.ground;
+    // Retail's deposited lights: models take them where retail's dynamic
+    // lighting lit them, the ground only where it lit the ground too.
+    bool records = frame.light_count > 0.5 && on_grid(position)
+        && (model ? frame.grid_mode > 0.5 : frame.grid_mode > 1.5);
+    vec3 light = vec3(0.0);
+    if (sampled) {
+        light = sampled_light(position, normal, surface.face, model, surface.ground, records,
+                              seed);
+    } else {
+        light = glow_light(position, normal, surface.face, seed);
+        if (lamps) {
+            light += lamp_light(position, normal, surface.face, surface.ground);
+        }
+        if (records) {
+            light += traced_sources(position, normal, surface.face, model, seed);
+        }
+    }
+    // Retail lit the ground's sun and sky dimly (its baked shade) but laid
+    // its local lights on the bare texture (the grid's bytes added to its
+    // vertex colours): the ground keeps that balance, its reflectance
+    // standing for the first alone.
+    if (surface.ground) {
+        light /= max(ground_reflectance(), 1.0e-3);
+    }
+    // Under the water, with the eye under it too (the remastered camera),
+    // the sun comes down its refracted beam: what the surface lets in, less
+    // what the water above absorbs, focused into the ripples' caustics.
+    float depth = sunk_depth(position);
+    if (depth > 0.0) {
+        vec3 reach = sun_under_water(position, depth, sun_toward);
+        float facing = max(dot(normal, sun_toward), 0.0);
+        vec3 lit = sun_light() * reach * facing;
+        vec3 entry;
+        if (primary) {
+            sun = lit;
+        } else if (facing > 0.0 && !sun_cut(origin, frame.sun_direction, depth, entry)) {
+            light += lit * cloud_light(entry);
+        }
+        return light;
+    }
+    float facing = max(dot(normal, frame.sun_direction), 0.0);
+    vec3 lit = sun_light() * facing;
+    if (primary) {
+        sun = lit;
+    } else if (facing > 0.0 && !occluded(origin, frame.sun_direction, 1.0e6)) {
+        light += lit * cloud_light(position);
+    }
+    return light;
+}
+
+// A surface's light as `traced_light` gives it, but for the share of the
+// light retail gave it that its model keeps (`own`, the pick-ups'): that
+// share is retail's shade as it stands, unshadowed, in their own pulsing
+// colour, so they read in any light.
+vec3 direct_light(Surface surface, vec3 position, bool primary, bool sampled, bool lamps,
+                  inout uint seed, out float bounce, out vec3 sun, out vec3 sun_toward) {
+    vec3 light = traced_light(surface, position, primary, sampled, lamps, seed, bounce, sun,
+                              sun_toward);
+    if (surface.emissive || surface.light == NO_LIGHT || surface.shade.a < 0.99) {
+        return light;
+    }
+    float own = model_lights[surface.light].own;
+    bounce *= 1.0 - own;
+    sun *= 1.0 - own;
+    return mix(light, light_of(surface.shade.rgb), own);
+}
+
+// The water's own colour, lit as retail lit flat water: its texture's mean
+// (the last mip) times the tint at a shade of 6.
+vec3 water_body(uint texture_slot) {
+    vec3 mean = texture_slot == NO_TEXTURE
+        ? vec3(0.2, 0.3, 0.35)
+        : textureLod(textures[nonuniformEXT(texture_slot)], vec2(0.5), 16.0).rgb;
+    return mean * frame.sun_color * WATER_SHADE;
+}
+
+// Retail's sky art the modern sky keeps, along `direction` from the eye:
+// the additive (stars, glows, the nebula) summed as retail's blend added
+// them, every sky triangle the ray crosses giving its texel; a masked one
+// (the Moon) covers the rest where its texel is solid.
+vec3 sky_objects(vec3 direction, float lod) {
+    vec3 light = vec3(0.0);
+    if (frame.sky_modern < 0.5) {
+        return light;
+    }
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoOpaqueEXT, MASK_SKY, vec3(0.0), 0.0,
+                          direction, 1.0e6);
+    while (rayQueryProceedEXT(query)) {
+        int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, false) + int(frame.sky_first);
+        Triangle triangle = triangles[primitive];
+        if (triangle.texture == NO_TEXTURE) {
+            continue;
+        }
+        vec2 bary = rayQueryGetIntersectionBarycentricsEXT(query, false);
+        vec2 uv = vertices[indices[primitive * 3 + 0]].uv * (1.0 - bary.x - bary.y)
+            + vertices[indices[primitive * 3 + 1]].uv * bary.x
+            + vertices[indices[primitive * 3 + 2]].uv * bary.y;
+        vec4 texel = textureLod(textures[nonuniformEXT(triangle.texture)], uv, lod);
+        if ((triangle.material & SKY_OBJECT_MASKED) != 0u) {
+            if (texel.a >= 0.5) {
+                return texel.rgb;
+            }
+            continue;
+        }
+        light += texel.rgb;
+    }
+    return light;
+}
+
+// Retail's painted backdrop along `direction` from `origin`, at `lod`, or
+// `miss` where the ray leaves through the ring's open top (or the world's
+// sky is the modern one).
+vec3 painted_sky(vec3 origin, vec3 direction, float lod, vec3 miss) {
+    if (frame.sky_modern > 0.5) {
+        return miss;
+    }
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsOpaqueEXT, MASK_SKY, origin, 0.0, direction,
+                          1.0e6);
+    rayQueryProceedEXT(query);
+    if (rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT) {
+        return miss;
+    }
+    Ray ray;
+    ray.origin = rayQueryGetIntersectionObjectRayOriginEXT(query, true);
+    ray.direction = direction;
+    ray.t = rayQueryGetIntersectionTEXT(query, true);
+    ray.dx = direction;
+    ray.dy = direction;
+    ray.lod = lod;
+    return hit_surface(query, ray).albedo.rgb;
+}
+
+vec3 lava_glow(vec3 position, uint texture_slot);
+
+// Whether the last shade_ray met lava, whose light a bounce keeps whole.
+bool met_lava;
+// How brightly the lava lights what its bounce rays reach, over its colour.
+const float LAVA_LIGHT = 5.0;
+
+// What a ray from `origin` sees, lit (at `lod`): `miss` where it meets
+// nothing within `reach` (retail's painted sky first, where `painted`),
+// else the surface's albedo times its own light (the sky standing in for
+// that surface's own bounces), the headlamps' too where `lamps`. Water it
+// meets shows its own colour. `t` is how far it went.
+// The last shade_ray's hit, where it met a lit surface of the view's
+// (`last_hit`): its eye-relative point and its shading and flat normals,
+// which the path pass carries the radiance cache's paths on from. The
+// cache leaves out the models outside the view, its paths' rays passing
+// them (`skipped`): it holds what main's cells hold, and they reach the
+// view through its own hits' rays alone. In first person the hull moves
+// with the eye, and caught in the cells round it, a cell's worth of its
+// shade showed on the ground as a square where it had been.
+bool last_hit;
+vec3 last_position;
+vec3 last_normal;
+vec3 last_face;
+// The last shade_ray's hit's face in the emissive light list, where it met
+// one (NO_LIGHT otherwise), whose light the path pass weighs against the
+// list's own sampling of it.
+uint met_emitter;
+
+vec3 shade_ray(vec3 origin, vec3 direction, float reach, vec3 miss, float lod, uint mask,
+               bool painted, bool sampled, bool lamps, inout uint seed, out float t) {
+    met_lava = false;
+    last_hit = false;
+    met_emitter = NO_LIGHT;
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoneEXT, mask & ~skipped, origin, 0.0, direction,
+                          reach);
+    PROCEED_THROUGH_CUTOUTS(query);
+    if (rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT) {
+        t = reach;
+        return painted ? painted_sky(origin, direction, lod, miss) : miss;
+    }
+    Ray ray;
+    ray.origin = rayQueryGetIntersectionObjectRayOriginEXT(query, true);
+    ray.direction = direction;
+    ray.t = rayQueryGetIntersectionTEXT(query, true);
+    ray.dx = direction;
+    ray.dy = direction;
+    ray.lod = lod;
+    t = ray.t;
+    Surface surface = hit_surface(query, ray);
+    if (surface.water) {
+        // Lava glows on what stands near it.
+        met_lava = frame.water_glow > 0.0;
+        return to_linear(met_lava ? lava_glow(origin + direction * ray.t, surface.texture_slot)
+                                  : water_body(surface.texture_slot));
+    }
+    vec3 position = origin + direction * ray.t;
+    float sky_share;
+    vec3 unused_sun;
+    vec3 unused_toward;
+    vec3 light = direct_light(surface, position, false, sampled, lamps, seed, sky_share,
+                              unused_sun, unused_toward);
+    // The light from every bounce after this one: the radiance cache's at
+    // the hit (pt_cache.glsl), retail's ambient until a path has reached
+    // its cell.
+    light += sky_share * cached_light(position, surface.normal, light_to_linear(frame.ambient));
+    last_hit = !surface.emissive
+        && (rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) & INSTANCE_OUTSIDE) == 0u;
+#ifdef PATHS_PASS
+    // Only the path pass weighs what its rays meet against the list.
+    met_emitter = surface.emissive ? hit_emitter(query) : NO_LIGHT;
+#endif
+    last_position = position;
+    last_normal = surface.normal;
+    last_face = surface.face;
+    return surface.albedo.rgb * light;
+}
+
+// The blended sprites, beam segments and 3D additive model faces a mirrored
+// ray from `origin` passes before `t`, as water, puddles and metal show them
+// (frame.effect_mirrors): each billboard a disc facing the ray, each beam a
+// ray-facing ribbon along `span`, and each 3D additive face (flamethrower
+// cones, jet flames, blast waves, crystal shells) traced in `MASK_GLOW`.
+vec3 mirrored_effects(vec3 origin, vec3 direction, float t) {
+    vec3 sum = vec3(0.0);
+    if (frame.effect_mirrors <= 0.0) {
+        return sum;
+    }
+    vec3 side = cross(direction, vec3(0.0, 1.0, 0.0));
+    side = dot(side, side) > 1.0e-4 ? normalize(side) : vec3(1.0, 0.0, 0.0);
+    vec3 top = cross(side, direction);
+    for (int i = 0; i < int(frame.emitter_count); i++) {
+        Emitter emitter = emitters[i];
+        float len2 = dot(emitter.span, emitter.span);
+        float r2 = emitter.radius * emitter.radius;
+        vec2 uv;
+        float d2;
+        if (len2 > 1.0e-4) {
+            vec3 span_perp = emitter.span - direction * dot(emitter.span, direction);
+            float perp_len2 = dot(span_perp, span_perp);
+            if (perp_len2 <= 1.0e-6) {
+                continue;
+            }
+            float u = dot(origin - emitter.position, span_perp) / perp_len2;
+            if (u < 0.0 || u >= 1.0) {
+                continue;
+            }
+            vec3 point = emitter.position + emitter.span * u;
+            vec3 toward = point - origin;
+            float along = dot(toward, direction);
+            if (along <= 0.0 || along >= t) {
+                continue;
+            }
+            vec3 across = direction * along - toward;
+            d2 = dot(across, across);
+            if (d2 >= r2) {
+                continue;
+            }
+            vec3 beam_side = cross(emitter.span, direction);
+            beam_side = dot(beam_side, beam_side) > 1.0e-6 ? normalize(beam_side) : side;
+            uv = vec2(dot(across, beam_side) / (2.0 * emitter.radius) + 0.5, u);
+        } else {
+            vec3 toward = emitter.position - origin;
+            float along = dot(toward, direction);
+            if (along <= 0.0 || along >= t) {
+                continue;
+            }
+            // Where the ray crosses the disc, from its middle.
+            vec3 across = direction * along - toward;
+            d2 = dot(across, across);
+            if (d2 >= r2) {
+                continue;
+            }
+            uv = vec2(dot(across, side), -dot(across, top)) / (2.0 * emitter.radius) + 0.5;
+        }
+        vec3 texel = textureLod(textures[nonuniformEXT(uint(emitter.texture))], uv, 1.0).rgb;
+        float rim = 1.0 - smoothstep(0.6, 1.0, sqrt(d2 / r2));
+        sum += texel * emitter.color * rim;
+    }
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoOpaqueEXT, MASK_GLOW, origin, 0.0,
+                          direction, t);
+    while (rayQueryProceedEXT(query)) {
+        float hit_t = rayQueryGetIntersectionTEXT(query, false);
+        if (frame.water_reach > 0.0
+            && frame.eye.y + (origin + direction * hit_t).y < frame.water_level) {
+            continue;
+        }
+        int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, false)
+            + int(frame.glow_first);
+        Triangle triangle = triangles[primitive];
+        if (triangle.texture == NO_TEXTURE) {
+            continue;
+        }
+        vec2 bary = rayQueryGetIntersectionBarycentricsEXT(query, false);
+        vec3 weights = vec3(1.0 - bary.x - bary.y, bary.x, bary.y);
+        Vertex a = vertices[indices[primitive * 3 + 0]];
+        Vertex b = vertices[indices[primitive * 3 + 1]];
+        Vertex c = vertices[indices[primitive * 3 + 2]];
+        vec2 uv = a.uv * weights.x + b.uv * weights.y + c.uv * weights.z;
+        vec3 shade_a = (a.shade >> 24) > 0u ? min(unpack(a.shade).rgb * (255.0 / 128.0), vec3(1.0)) : vec3(1.0);
+        vec3 shade_b = (b.shade >> 24) > 0u ? min(unpack(b.shade).rgb * (255.0 / 128.0), vec3(1.0)) : vec3(1.0);
+        vec3 shade_c = (c.shade >> 24) > 0u ? min(unpack(c.shade).rgb * (255.0 / 128.0), vec3(1.0)) : vec3(1.0);
+        vec3 color = unpack(a.color).rgb * shade_a * weights.x
+            + unpack(b.color).rgb * shade_b * weights.y
+            + unpack(c.color).rgb * shade_c * weights.z;
+        sum += textureLod(textures[nonuniformEXT(triangle.texture)], uv, 1.0).rgb * color;
+    }
+    return sum * frame.effect_mirrors;
+}
+
+// The light `light` arriving at eye-relative `origin` along `direction`
+// from `t` away, through the water with the eye under it (the remastered
+// camera), where `origin` lies in the water too (a primary hit then does,
+// wherever it lies: the view ends at the surface): what the water leaves
+// of it, and the sun's and the sky's light it scatters on the way. A way up
+// past the water mesh's reach leaves the water at its plane.
+// How far of `t` along `direction` from eye-relative `origin` runs through
+// the water (in_water's way).
+float water_way(vec3 origin, vec3 direction, float t) {
+    float depth = max(frame.water_level - frame.eye.y - origin.y, 0.0);
+    if (direction.y > 0.0) {
+        float crossing = depth / direction.y;
+        vec3 plane = origin + direction * crossing;
+        if (max(abs(plane.x), abs(plane.z)) > frame.water_reach) {
+            t = min(t, crossing);
+        }
+    }
+    return t;
+}
+
+// The light the water scatters along in_water's way, and in `through` what
+// it leaves of the light from beyond.
+vec3 water_leg(vec3 origin, vec3 direction, float t, out vec3 through) {
+    return water_through(origin, direction, water_way(origin, direction, t), true, through);
+}
+
+vec3 in_water(vec3 origin, vec3 direction, float t, vec3 light) {
+    if (frame.eye_under < 0.5) {
+        return light;
+    }
+    vec3 through;
+    vec3 scattered = water_leg(origin, direction, t, through);
+    return light * through + scattered;
+}
+
+// The light the water scattered along the last bounce_light's ray (none with
+// the eye above it): not the light of what the ray met, so not weighed
+// against the emitters' sampling of that.
+vec3 bounce_scattered;
+
+// The light arriving along one bounce ray from `origin`: what the surface it
+// meets sends on, lit by one of retail's lights sampled, or the sky's. A
+// diffuse bounce takes the sky as retail's ambient, calibrated so an open
+// surface gets it, and keeps only its tuned share of colour so sunlit grass
+// does not tint shaded walls green; a metal's reflection sees the sky's own
+// colour, and the blended effects it passes. Lava is a light, not a lit
+// surface: what meets it takes its light whole, at LAVA_LIGHT.
+vec3 bounce_light(vec3 origin, vec3 direction, bool glossy, inout uint seed, out float t) {
+    vec3 light = shade_ray(origin, direction, BOUNCE_REACH,
+                           glossy ? to_linear(sky_along(direction)) : sky_light(direction),
+                           BOUNCE_LOD, MASK_WORLD, glossy, true, false, seed, t);
+    if (met_lava) {
+        return light * LAVA_LIGHT;
+    }
+    if (frame.eye_under > 0.5) {
+        light = glossy ? light + to_linear(mirrored_effects(origin, direction, t))
+                       : mix(vec3(dot(light, vec3(0.2126, 0.7152, 0.0722))), light,
+                             frame.bounce_colour);
+        vec3 through;
+        bounce_scattered = water_leg(origin, direction, t, through);
+        return light * through + bounce_scattered;
+    }
+    if (glossy) {
+        return light + to_linear(mirrored_effects(origin, direction, t));
+    }
+    return mix(vec3(dot(light, vec3(0.2126, 0.7152, 0.0722))), light, frame.bounce_colour);
+}
+
+#include "pt_water.glsl"
+
+// Lava, where the world's water tile is lava (frame.water_glow: Shak'tahh,
+// Caradion). 2026-10-27: the best-looking version of itself,
+// molten rock rather than a glowing decal, throwing its orange on the walls,
+// ground and vehicles round it, far less see-through and less mirror-like
+// than water, slowly moving and mixing; and retail's own, its hue the
+// retail tile's.
+//
+// The melt is light, its colour running with its heat (lava_ramp). On it
+// float basalt plates (lava_cells), crowding the shallows and welded against
+// the banks, drifting rafts over the deep (lava_cover): rock that the sun,
+// the sky, retail's lights, the headlamps and the lightning light as they
+// light the ground, its cracks and edges glowing. The plates stand
+// LAVA_CRUST proud of the melt, so a crack seen at a slant shows its far
+// wall glowing, not the melt at its floor. The melt crawls under the plates
+// faster than they drift, its filaments stretched along its flow, a darker
+// cooling skin over it torn by bright seams, and slow swells shape its glassy
+// sheen; now and then an upwelling swells, bursts and spreads fresh melt,
+// pushing the plates aside (lava_well). Detail finer than a pixel gives way
+// to its average, so the far lake neither shimmers nor darkens. It lights
+// what stands round it through the bounce rays that meet it (lava_glow).
+
+// The plates' cells across the 65,536-unit wrap (about 182 units each), how
+// far they stand proud of the melt, a crack's half-width at its narrowest
+// and widest, how far an edge glows into its plate and how wide its bevel
+// is (world units).
+const int LAVA_PLATES = 360;
+const float LAVA_CRUST = 5.0;
+const float LAVA_CRACK_MIN = 1.2;
+const float LAVA_CRACK_MAX = 9.0;
+const float LAVA_RIM = 9.0;
+const float LAVA_BEVEL = 4.0;
+// How far the melt and the plates drift a second (world units): thick lava
+// crawls, the crust on it slower still.
+const vec2 LAVA_MELT_DRIFT = vec2(7.0, 2.0);
+const vec2 LAVA_PLATE_DRIFT = vec2(2.6, 0.9);
+// The melt's skin: its cells a side across the wrap (about 120 by 80 units,
+// stretched along its flow), and how fast it drifts.
+const ivec2 LAVA_SKIN = ivec2(546, 819);
+const vec2 LAVA_SKIN_DRIFT = vec2(4.5, 1.4);
+// The upwellings' cells across the wrap (about 1,365 units each).
+const int LAVA_WELLS = 48;
+// Basalt's colour.
+const vec3 LAVA_BASALT = vec3(0.085, 0.072, 0.066);
+
+// The retail tile's mean colour (its last mip).
+vec3 lava_mean(uint texture_slot) {
+    return texture_slot == NO_TEXTURE
+        ? vec3(1.0, 0.3, 0.06)
+        : textureLod(textures[nonuniformEXT(texture_slot)], vec2(0.5), 16.0).rgb;
+}
+
+// The lava's hue: the retail tile's mean at full brightness.
+vec3 lava_hue(vec3 mean) {
+    return mean / max(max(mean.r, max(mean.g, mean.b)), 1.0e-3);
+}
+
+// The retail tile's brightness at `uv` (wrapped) over its mean's, for a
+// `footprint` of world units on a tile `span` units across: its detail, 1 on
+// average.
+float lava_tile(uint texture_slot, vec2 uv, float footprint, float span, vec3 mean) {
+    if (texture_slot == NO_TEXTURE) {
+        return 1.0;
+    }
+    vec2 size = vec2(textureSize(textures[nonuniformEXT(texture_slot)], 0));
+    float lod = log2(max(footprint * size.x / span, 1.0));
+    vec3 tile = textureLod(textures[nonuniformEXT(texture_slot)], fract(uv), lod).rgb;
+    const vec3 LUMA = vec3(0.3, 0.59, 0.11);
+    return dot(tile, LUMA) / max(dot(mean, LUMA), 1.0e-3);
+}
+
+// The melt's colour at a heat of 0 to 1, as a blackbody's runs: nothing,
+// dull red, deep crimson, the retail tile's own hue at about 0.6, orange,
+// and a yellow-white core. The surface is finished here (the composite takes
+// its colour as it is), so it stays within full brightness.
+vec3 lava_ramp(float heat, vec3 hue) {
+    heat = clamp(heat, 0.0, 1.0);
+    vec3 color = vec3(0.24, 0.014, 0.004) * smoothstep(0.0, 0.2, heat);
+    color = mix(color, hue * vec3(0.6, 0.24, 0.2), smoothstep(0.16, 0.42, heat));
+    color = mix(color, hue, smoothstep(0.38, 0.64, heat));
+    color = mix(color, vec3(1.0, 0.6, 0.15), smoothstep(0.64, 0.88, heat));
+    return mix(color, vec3(1.0, 0.92, 0.66), smoothstep(0.88, 1.0, heat));
+}
+
+// How deep the lava is at world X/Z: the game's plane less the ground under
+// it, or deep where the world has no ground data.
+float lava_depth(vec2 world) {
+    if (frame.ground_points < 1.5) {
+        return 1.0e6;
+    }
+    return max(frame.water_level - ground_height(world), 0.0);
+}
+
+// How much of the lake the crust covers at `plates` (a point drifted with
+// them), `depth` deep: welded against the banks (over 1), crowding the
+// shallows, and over the deep rafts of plates drifting on open melt, below 0
+// away from them.
+float lava_cover(vec2 plates, float depth) {
+    float bank = 1.0 - smoothstep(4.0, 110.0, depth);
+    float rafts = 0.7 * wrap_noise(plates, 40, 0x7a1u) + 0.3 * wrap_noise(plates, 112, 0x7a2u);
+    return mix(min(0.8 * (rafts - 0.4) / 0.35, 0.8), 1.25, bank);
+}
+
+// A plate's point within its cell (wrapping at `period` cells a side) and
+// its hash.
+vec2 lava_seed(ivec2 cell, ivec2 period, uint layer, out uint id) {
+    ivec2 c = ((cell % period) + period) % period;
+    id = hash(uint(c.x) + hash(uint(c.y) + hash(layer)));
+    return 0.15 + 0.7 * vec2(id & 0xffffu, id >> 16) / 65536.0;
+}
+
+// The plates round a point, from lava_cells: the nearest plate, the nearest
+// of its borders that is open (a crack), and the nearest of any kind (a
+// sealed seam, where that is nearer). Distances and seeds are in cells.
+struct LavaCells {
+    uint id;
+    vec2 seed;
+    float border;
+    vec2 away;
+    uint other;
+    float seam;
+    vec2 seam_away;
+    uint seam_other;
+    vec2 seam_seed;
+};
+
+// The plates round `p` (in cells of a wrap `period` cells a side), Voronoi's
+// border distance: the nearest plate's hash and seed; the distance to its
+// nearest open border, the unit direction from that border into the plate
+// and the hash of the plate across it; and the same for its nearest border
+// of any kind, with that neighbour's seed. A share `open` of the borders are
+// open, each by its own pair's hash, so a crack's glow fades smoothly rather
+// than ending where a sealed border lies nearer.
+LavaCells lava_cells(vec2 p, ivec2 period, uint layer, float open) {
+    ivec2 base = ivec2(floor(p));
+    vec2 f = p - vec2(base);
+    float nearest = 8.0;
+    ivec2 own = ivec2(0);
+    vec2 to_own = vec2(0.0);
+    LavaCells cells;
+    cells.id = 0u;
+    for (int k = 0; k < 9; k++) {
+        ivec2 o = ivec2(k % 3 - 1, k / 3 - 1);
+        uint h;
+        vec2 r = vec2(o) + lava_seed(base + o, period, layer, h) - f;
+        float d = dot(r, r);
+        if (d < nearest) {
+            nearest = d;
+            own = o;
+            to_own = r;
+            cells.id = h;
+        }
+    }
+    cells.seed = p + to_own;
+    cells.border = 8.0;
+    cells.away = vec2(1.0, 0.0);
+    cells.other = cells.id;
+    cells.seam = 8.0;
+    cells.seam_away = vec2(1.0, 0.0);
+    cells.seam_other = cells.id;
+    cells.seam_seed = cells.seed;
+    for (int k = 0; k < 9; k++) {
+        ivec2 o = own + ivec2(k % 3 - 1, k / 3 - 1);
+        uint h;
+        vec2 r = vec2(o) + lava_seed(base + o, period, layer, h) - f;
+        vec2 between = r - to_own;
+        float len2 = dot(between, between);
+        if (len2 > 1.0e-6) {
+            vec2 n = between * inversesqrt(len2);
+            float d = dot(0.5 * (to_own + r), n);
+            if (d < cells.seam) {
+                cells.seam = d;
+                cells.seam_away = -n;
+                cells.seam_other = h;
+                cells.seam_seed = p + r;
+            }
+            if (d < cells.border && float(hash(cells.id ^ h) >> 24) < open * 256.0) {
+                cells.border = d;
+                cells.away = -n;
+                cells.other = h;
+            }
+        }
+    }
+    return cells;
+}
+
+// How far the plate seeded at `seed` (in cells `cell` units across) with
+// hash `id` has melted in from its edges (world units): none while it floats
+// as its own share of the cover where it lies, all of it once it has drifted
+// off its raft or over deeper melt.
+float lava_inset(vec2 seed, uint id, float cell, float time) {
+    vec2 seat = mod(seed * cell, 65536.0);
+    float margin = lava_cover(seat, lava_depth(mod(seat + LAVA_PLATE_DRIFT * time, 65536.0)))
+        - float(hash(id ^ 0x5bd1e995u) >> 8) / 16777216.0;
+    return clamp((0.15 - margin) / 0.15, 0.0, 1.0) * 0.8 * cell;
+}
+
+// The slope of the melt's slow swells at world X/Z: three long waves, their
+// wave numbers whole over the wrap so that they meet themselves there.
+vec2 lava_swell(vec2 world, float time) {
+    const float K = 6.28318530718 / 65536.0;
+    const vec2 k1 = K * vec2(97.0, 31.0);
+    const vec2 k2 = K * vec2(-53.0, 88.0);
+    const vec2 k3 = K * vec2(151.0, -67.0);
+    return k1 * (4.0 * cos(dot(k1, world) - time * 0.31))
+        + k2 * (3.0 * cos(dot(k2, world) - time * 0.23 + 1.7))
+        + k3 * (2.0 * cos(dot(k3, world) - time * 0.41 + 4.1));
+}
+
+// The upwelling under way near world X/Z, if any: how much it heats the melt
+// there, how much crust it clears, how far it has pushed the plates there
+// outward (world units), and the slope of its dome. Five cells in eight
+// have one, each on its own turn of 40 to 90 seconds: a dome swells for
+// SWELL seconds, bursts white-hot, and its fresh melt spreads, cooling, for
+// SPREAD more while the crust it pushed aside closes in again.
+void lava_well(vec2 world, float time, out float heat, out float clear, out vec2 push,
+               out vec2 slope) {
+    const float SWELL = 2.5;
+    const float SPREAD = 16.0;
+    heat = 0.0;
+    clear = 0.0;
+    push = vec2(0.0);
+    slope = vec2(0.0);
+    float size = 65536.0 / float(LAVA_WELLS);
+    vec2 at = mod(world, 65536.0);
+    ivec2 cell = ivec2(floor(at / size)) % LAVA_WELLS;
+    uint h = hash(uint(cell.x) + hash(uint(cell.y) + hash(0x7e1u)));
+    if ((h & 7u) < 3u) {
+        return;
+    }
+    // Kept within its cell's middle, so that no well reaches past its cell.
+    vec2 centre = (vec2(cell) + 0.3 + 0.4 * vec2((h >> 3) & 0x3ffu, (h >> 13) & 0x3ffu) / 1023.0)
+        * size;
+    uint g = hash(h);
+    float period = 40.0 + 50.0 * float(h >> 24) / 255.0;
+    float age = mod(time + period * float(g >> 8) / 16777216.0, period);
+    if (age >= SWELL + SPREAD) {
+        return;
+    }
+    vec2 offset = at - centre;
+    float r = length(offset);
+    vec2 outward = offset / max(r, 1.0e-3);
+    float dome = 36.0 + 30.0 * float(g & 0xffu) / 255.0;
+    if (age < SWELL) {
+        float rise = age / SWELL;
+        float bump = exp(-r * r / (dome * dome));
+        heat = 0.35 * rise * rise * bump;
+        slope = -outward * (14.0 * rise * r / (dome * dome) * bump);
+        return;
+    }
+    float s = (age - SWELL) / SPREAD;
+    float reach = dome + 170.0 * (1.0 - exp(-5.0 * s));
+    float inside = 1.0 - smoothstep(0.8 * reach, 1.05 * reach, r);
+    float burst = 0.35 * exp(-r * r / (0.4 * dome * dome)) * max(1.0 - 8.0 * s, 0.0);
+    heat = inside * 0.45 * (1.0 - s) * (1.0 - s) + burst
+        + 0.3 * (1.0 - s) * exp(-(r - reach) * (r - reach) / 100.0);
+    clear = inside * (1.0 - smoothstep(0.55, 1.0, s));
+    push = outward * (0.55 * reach * (1.0 - smoothstep(0.6, 1.0, s))
+                      * (1.0 - smoothstep(0.9 * reach, 2.2 * reach, r)));
+}
+
+// The lava at an eye-relative point of its surface seen along `direction`,
+// finished (the composite takes its colour as it is), and in `warmth` how
+// hot it reads, 0 to 1 (thermal vision).
+vec3 lava_color(vec3 position, vec3 direction, uint texture_slot, out float warmth) {
+    float time = frame.water_clock / 50.0;
+    vec3 mean = lava_mean(texture_slot);
+    vec3 hue = lava_hue(mean);
+    vec2 world = mod(frame.eye.xz + position.xz, 65536.0);
+    if (direction.y >= 0.0) {
+        // From under it: only its glow.
+        warmth = 0.8;
+        return lava_ramp(0.55, hue) * frame.water_glow;
+    }
+    float down = max(-direction.y, 0.03);
+    // A pixel's footprint on the lake (world units), stretched toward the
+    // horizon: the finest detail it can show.
+    float pixel = length(position) * (frame.native.x / frame.target.x) / frame.focal.x;
+    float footprint = pixel / sqrt(down);
+    float depth = lava_depth(world);
+    float deep = smoothstep(4.0, 110.0, depth);
+
+    float well_heat;
+    float well_clear;
+    vec2 well_push;
+    vec2 well_slope;
+    lava_well(world, time, well_heat, well_clear, well_push, well_slope);
+    well_heat *= deep;
+    well_clear *= deep;
+
+    // The crust sways a little as it drifts: a bounded, slowly turning bend,
+    // so its cracks open and close without the lake stretching away.
+    vec2 plates = world - LAVA_PLATE_DRIFT * time - well_push * deep;
+    vec2 sway = vec2(wrap_noise(plates + time * vec2(1.3, -0.9), 48, 0x7b1u),
+                     wrap_noise(plates - time * vec2(0.7, 1.1), 48, 0x7b2u)) - 0.5;
+    plates = mod(plates + sway * 90.0, 65536.0);
+    float cover = lava_cover(plates, depth) - well_clear;
+
+    // The melt's flow: long filaments stretched along it (its noise three
+    // times finer across it), a finer run slipping over them. Where it runs
+    // hot it pulls the skin over it apart.
+    vec2 melt = mod(world - LAVA_MELT_DRIFT * time + sway * 150.0, 65536.0);
+    vec2 across = vec2(melt.x, 3.0 * melt.y);
+    float flow = 0.5 + 0.62 * (wrap_noise(across, 96, 0x7c1u) - 0.5)
+        + 0.42 * (wrap_noise(across + vec2(time * 5.0, 0.0), 288, 0x7c2u) - 0.5);
+    // The retail tile, carried with the melt as its detail.
+    flow *= mix(1.0,
+                clamp(lava_tile(texture_slot, melt / 512.0, footprint, 512.0, mean), 0.5, 1.5),
+                0.25);
+    // The skin: a thin, dark red crust over the melt, its cells stretched
+    // along the flow and bent with it, glowing the brighter the thinner it
+    // is. It cracks where the flow pulls it (`tension`), a few cracks open
+    // anywhere and the more and the wider the harder it pulls, and it is gone
+    // where the flow runs hottest. A pixel wider than its cracks shows their
+    // average.
+    float tension = smoothstep(0.42, 0.86, flow);
+    float skin_heat = 0.17 + 0.22 * flow;
+    float torn = smoothstep(0.76, 0.94, flow);
+    vec2 skin_cell = 65536.0 / vec2(LAVA_SKIN);
+    float skin_detail = 1.0 - smoothstep(0.25 * skin_cell.y, 0.8 * skin_cell.y, footprint);
+    float melt_heat = skin_heat + 0.06 + 0.25 * tension;
+    if (skin_detail > 0.0) {
+        vec2 skin_at = mod(world - LAVA_SKIN_DRIFT * time + sway * 120.0, 65536.0);
+        vec2 ragged = (vec2(wrap_noise(skin_at, 2048, 0x7c4u), wrap_noise(skin_at, 2048, 0x7c5u))
+                       - 0.5)
+                * 0.4
+            + (vec2(wrap_noise(skin_at, 160, 0x7c7u), wrap_noise(skin_at, 160, 0x7c8u)) - 0.5)
+                * 0.6;
+        LavaCells cells = lava_cells(skin_at / skin_cell + ragged, LAVA_SKIN, 0x7c6u, 0.45);
+        // The crack's distance in world units across the stretched cells.
+        float e = cells.border / length(cells.away / skin_cell);
+        uint edge = hash(cells.id ^ cells.other);
+        float half_width = mix(0.4, 1.0, float((edge >> 16) & 0xffu) / 255.0)
+            + 6.0 * tension * float(edge & 0xffffu) / 65535.0;
+        float lo = max(e - 0.5 * footprint, -half_width);
+        float hi = min(e + 0.5 * footprint, half_width);
+        float in_crack = clamp((hi - lo) / max(footprint, 1.0e-3), 0.0, 1.0);
+        float spread = 4.0 + 0.5 * footprint;
+        // From the crack's middle, not its edge: two cracks' glows meet where
+        // they are equally far, with no step between their widths.
+        float rim = exp(-e / spread) * (4.0 / spread);
+        float sheet = skin_heat
+                * mix(1.0, clamp(lava_tile(texture_slot, skin_at / 128.0, footprint, 128.0, mean),
+                                 0.5, 1.5),
+                      0.4)
+            + 0.3 * rim;
+        float crack_glow = 0.7 + 0.2 * (1.0 - clamp(e / max(half_width, 1.0e-3), 0.0, 1.0))
+            + 0.06 * tension;
+        melt_heat = mix(melt_heat, mix(sheet, crack_glow, in_crack), skin_detail);
+    }
+    melt_heat = mix(melt_heat, 0.7 + 0.2 * flow, torn);
+    melt_heat = clamp(melt_heat + well_heat, 0.0, 1.0);
+    float skin = 1.0 - torn;
+    vec2 slope = lava_swell(world, time) + well_slope * deep;
+    vec3 melt_normal = normalize(vec3(-slope.x, 1.0, -slope.y));
+    float facing = clamp(dot(-direction, melt_normal), 0.0, 1.0);
+    float fresnel = 0.04 + 0.96 * pow(1.0 - facing, 5.0);
+
+    vec3 crust_normal = vec3(0.0, 1.0, 0.0);
+    vec3 crust_color = vec3(0.0);
+    vec3 wall_color = vec3(0.0);
+    float crack_heat = melt_heat;
+    float crust = 0.0;
+    float crack = 0.0;
+    float wall = 0.0;
+    float cell = 65536.0 / float(LAVA_PLATES);
+    // Past the plates' own size a pixel shows their average.
+    float detail = 1.0 - smoothstep(0.2 * cell, 0.6 * cell, footprint);
+    float covered = clamp(cover, 0.0, 1.0);
+    vec3 basalt = LAVA_BASALT;
+    if (detail > 0.0) {
+        // The plates where the ray crosses their tops, LAVA_CRUST above the
+        // melt: `shift` is how far it goes on across before the melt.
+        vec2 shift = direction.xz * (LAVA_CRUST / down);
+        vec2 top = mod(plates - shift, 65536.0);
+        // Ragged edges, and a broad bend so that no two plates are alike.
+        vec2 ragged = (vec2(wrap_noise(top, 1536, 0x7b3u), wrap_noise(top, 1536, 0x7b4u)) - 0.5)
+            * 0.22
+            + (vec2(wrap_noise(top, 224, 0x7b8u), wrap_noise(top, 224, 0x7b9u)) - 0.5) * 0.9;
+        // A third of their borders are sealed, joining plates into larger
+        // ones.
+        LavaCells cells = lava_cells(top / cell + ragged, ivec2(LAVA_PLATES), 0x7b5u, 0.67);
+        uint id = cells.id;
+        // Each plate floats as its own share of the cover where it lies,
+        // whole; one drifting into deeper melt or off its raft melts from
+        // its edges inward (`inset`) rather than vanishing at once.
+        float inset = lava_inset(cells.seed, id, cell, time);
+        // A sealed seam whose plate across has melted opens on the melt.
+        bool sealed = cells.seam < cells.border;
+        if (sealed && lava_inset(cells.seam_seed, cells.seam_other, cell, time) > 0.0) {
+            cells.border = cells.seam;
+            cells.away = cells.seam_away;
+            cells.other = cells.seam_other;
+            sealed = false;
+        }
+        float e = cells.border * cell;
+        vec2 away = cells.away;
+        // Each crack its own width, breathing open and shut; hairlines where
+        // the crust is welded.
+        uint edge = hash(id ^ cells.other);
+        float open = clamp(0.25 + 0.75 * float((edge >> 8) & 0xffffu) / 65535.0
+                               + 0.3 * sin(time * 0.09 + float(edge & 0xffu) * 0.0246),
+                           0.05, 1.0);
+        float half_width = mix(LAVA_CRACK_MIN, LAVA_CRACK_MAX, open * open)
+            * mix(1.0, 0.3, smoothstep(0.95, 1.2, cover));
+        float gap = max(half_width, inset);
+        // Box-filtered over the footprint: the share of the pixel inside the
+        // crack (or the melt round a melting plate); an upwelling's fresh
+        // melt is open melt.
+        float lo = max(e - 0.5 * footprint, -gap);
+        float hi = min(e + 0.5 * footprint, gap);
+        float in_crack = clamp((hi - lo) / max(footprint, 1.0e-3), 0.0, 1.0);
+        float on_melt = smoothstep(0.3, 0.8, well_clear);
+        // Through the crack's opening at a slant the ray meets a wall where
+        // the floor it would reach lies past the opening's far side; a crack
+        // finer than the pixel shows its walls in their average share.
+        float slant = dot(shift, away);
+        float bottom = e + slant;
+        float wall_at = clamp((bottom - gap) / max(footprint, 1.0e-3) + 0.5, 0.0, 1.0)
+            + clamp((-gap - bottom) / max(footprint, 1.0e-3) + 0.5, 0.0, 1.0);
+        float wall_share = mix(min(wall_at, 1.0),
+                               clamp(abs(slant) / max(2.0 * gap, 1.0e-3), 0.0, 1.0),
+                               smoothstep(0.5, 2.0, footprint / max(2.0 * gap, 1.0e-3)));
+        crust = (1.0 - on_melt) * (1.0 - in_crack);
+        crack = (1.0 - on_melt) * in_crack * (1.0 - wall_share);
+        wall = (1.0 - on_melt) * in_crack * wall_share;
+
+        uint plate = hash(id + 0x68e31da4u);
+        float tone = 0.65 + 0.7 * float(plate & 0xffu) / 255.0;
+        vec2 tilt = (vec2((plate >> 8) & 0xffu, (plate >> 16) & 0xffu) / 255.0 - 0.5) * 0.14;
+        float crack_distance = max(e - gap, 0.0);
+        float bevel = 0.7 * (1.0 - smoothstep(0.0, LAVA_BEVEL + footprint, crack_distance));
+        crust_normal = normalize(vec3(tilt.x - bevel * away.x, 1.0, tilt.y - bevel * away.y));
+        // The plate's grain: the retail tile's detail as the rock's.
+        tone *= mix(1.0, clamp(lava_tile(texture_slot, top / 128.0 + vec2(plate & 0xffu) / 255.0,
+                                         footprint, 128.0, mean),
+                               0.4, 1.6),
+                    0.45);
+        // The edges glow into the plate, the more the wider the crack, its
+        // edge on open melt the most; a young plate glows dull red all over.
+        // Both widen and dim as the pixel grows, so their light holds. A
+        // sealed crack is a dark seam, and close by the plate's own cooling
+        // cracks craze it darker.
+        float spread = LAVA_RIM + 0.5 * footprint;
+        float rim = exp(-crack_distance / spread) * (inset > half_width ? 1.0 : 0.3 + 0.7 * open)
+            * (LAVA_RIM / spread);
+        float young = float((plate >> 24) & 0xffu) / 255.0;
+        float glow_heat = 0.56 * rim + (young < 0.1 ? 0.2 - young : 0.0);
+        if (sealed) {
+            tone *= 1.0 - 0.45 * (1.0 - smoothstep(0.0, 1.5 + footprint, cells.seam * cell));
+        }
+        if (footprint < 6.0 && crust > 0.0) {
+            LavaCells crazing = lava_cells(top / (cell / 3.5)
+                                               + vec2(plate & 0xfffu, plate >> 20) / 64.0 + ragged,
+                                           ivec2(LAVA_PLATES * 7 / 2), 0x7b7u, 1.0);
+            float line = 1.0 - smoothstep(0.0, 0.7 + footprint, crazing.seam * cell / 3.5);
+            tone *= 1.0 - 0.25 * line * (1.0 - smoothstep(1.0, 6.0, footprint));
+        }
+        basalt = LAVA_BASALT * tone;
+        // The melt in a crack is fresh, hottest along its middle; round a
+        // melting plate it is the melt's own.
+        float fresh = 0.68 + 0.27 * (1.0 - clamp(e / max(gap, 1.0e-3), 0.0, 1.0));
+        crack_heat = max(melt_heat, mix(fresh, melt_heat, smoothstep(10.0, 30.0, gap)));
+        crust_color = lava_ramp(glow_heat, hue);
+        wall_color = lava_ramp(0.42 + 0.12 * open, hue);
+    }
+    // How much of the pixel is rock.
+    float solid = mix(min(covered, 1.0), crust + 0.5 * wall, detail);
+
+    // The sun on the rock, shadowed; on the melt only its highlight, which
+    // nothing shadows: what stands over the melt hides it.
+    vec3 sun = frame.sun_direction;
+    float sun_seen = 0.0;
+    if (sun.y > 0.0) {
+        sun_seen = solid > 0.0
+                && occluded(position + vec3(0.0, LAVA_CRUST + 0.5, 0.0), sun, 1.0e6)
+            ? 0.0
+            : cloud_light(position);
+    }
+    // The melt's sheen: glassy, faint, rough with its swells, the skin a
+    // little brighter; the sun's highlight broad and dim.
+    vec3 sheen = fresnel * mix(0.3, 0.55, skin)
+        * (sky_along(reflect(direction, melt_normal))
+           + frame.sun_color * (sun_seen * sun_highlight(melt_normal, direction, sun, 0.35)));
+    vec3 melt_color = lava_ramp(melt_heat, hue) + sheen;
+    vec3 crack_color = lava_ramp(crack_heat, hue) + 0.5 * sheen;
+
+    // The rock's light: the sky, the sun, retail's lights, the headlamps and
+    // the lightning, as the ground's; and the melt round it warming it from
+    // below, the more the more of it there is.
+    vec3 rock = vec3(0.0);
+    vec3 underglow = lava_ramp(0.6, hue) * (0.14 * (1.0 - min(covered, 1.0)) + 0.03);
+    if (solid > 0.0) {
+        vec3 around = frame.ambient * (0.6 + 0.4 * crust_normal.y);
+        if (frame.grid_mode > 0.5) {
+            around += max(grid_light(position), 0.0);
+        }
+        around += to_srgb(lamp_light(position + vec3(0.0, LAVA_CRUST, 0.0), crust_normal,
+                                     vec3(0.0, 1.0, 0.0), true));
+        vec4 flash = lightning_flash();
+        if (flash.w > 0.0) {
+            around += frame.lightning_color
+                * (frame.lightning_light * flash.w
+                   * max(dot(crust_normal, flash_toward(flash)), 0.0));
+        }
+        around += frame.sun_color * (max(dot(crust_normal, sun), 0.0) * sun_seen);
+        rock = around + underglow;
+    }
+    crust_color += basalt * rock + 0.08 * fresnel * sky_along(reflect(direction, crust_normal));
+    wall_color += 0.4 * basalt * rock;
+    vec3 near = melt_color * (1.0 - crust - crack - wall) + crust_color * crust
+        + crack_color * crack + wall_color * wall;
+    // The far lake: the melt and the crust in their shares, the crust's
+    // cracks and edges a few parts in a hundred of it.
+    vec3 far = mix(melt_color, LAVA_BASALT * rock + lava_ramp(0.7, hue) * 0.08,
+                   min(covered, 0.97));
+    vec3 color = mix(far, near, detail);
+    warmth = mix(0.55 + 0.45 * melt_heat, 0.4, solid);
+    return color * frame.water_glow;
+}
+
+// The lake's light as a ray that meets it far from the eye sees it, for
+// what it lights and what mirrors it: the melt and the crust in their
+// shares, without their detail.
+vec3 lava_glow(vec3 position, uint texture_slot) {
+    float time = frame.water_clock / 50.0;
+    vec3 hue = lava_hue(lava_mean(texture_slot));
+    vec2 world = mod(frame.eye.xz + position.xz, 65536.0);
+    float cover = clamp(lava_cover(world - LAVA_PLATE_DRIFT * time, lava_depth(world)), 0.0, 1.0);
+    return mix(lava_ramp(0.58, hue), lava_ramp(0.66, hue) * 0.14, cover) * frame.water_glow;
+}
+
+#define SPLASH_BINDING 18
+#include "pt_splash.glsl"
+
+// The additive sprites sunk under the water (a token on a lake's bed) seen
+// through its surface along the view from `start`, just under it: each
+// texel the view crosses added where nothing solid stands in front of it,
+// as retail's blend adds it over its see-through water, at retail's own
+// place on the screen rather than where the surface bends the view. A light
+// under murky water lights the water over it, so each fades with how deep
+// it lies, not how long the view's slant through the water is, over
+// SUNK_REACH clarities, taking the water's colour with depth.
+vec3 sunk_glow(vec3 start, vec3 direction, vec3 body) {
+    vec3 glow = vec3(0.0);
+    vec3 hue = body / max(max(body.r, max(body.g, body.b)), 1.0e-3);
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoOpaqueEXT, MASK_GLOW, start, 0.0, direction,
+                          UNDERWATER_REACH);
+    while (rayQueryProceedEXT(query)) {
+        int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, false)
+            + int(frame.glow_first);
+        Triangle triangle = triangles[primitive];
+        if (triangle.texture == NO_TEXTURE) {
+            continue;
+        }
+        vec2 bary = rayQueryGetIntersectionBarycentricsEXT(query, false);
+        vec3 weights = vec3(1.0 - bary.x - bary.y, bary.x, bary.y);
+        Vertex a = vertices[indices[primitive * 3 + 0]];
+        Vertex b = vertices[indices[primitive * 3 + 1]];
+        Vertex c = vertices[indices[primitive * 3 + 2]];
+        vec2 uv = a.uv * weights.x + b.uv * weights.y + c.uv * weights.z;
+        vec3 color = unpack(a.color).rgb * weights.x + unpack(b.color).rgb * weights.y
+            + unpack(c.color).rgb * weights.z;
+        vec3 texel = textureLod(textures[nonuniformEXT(triangle.texture)], uv, 0.0).rgb * color;
+        if (max(texel.r, max(texel.g, texel.b)) < 1.0 / 255.0) {
+            continue;
+        }
+        float t = rayQueryGetIntersectionTEXT(query, false);
+        float depth = frame.water_level - frame.eye.y - (start + direction * t).y;
+        if (depth <= 0.0 || occluded_by(start, direction, max(t - 1.0, 0.0), MASK_VIEW_SOLID)) {
+            continue;
+        }
+        float through = exp(-depth / (frame.water_clarity * SUNK_REACH));
+        glow += texel * mix(hue, vec3(1.0), sqrt(through)) * through;
+    }
+    return glow * frame.sunk_pickups;
+}
+
+#include "pt_ground.glsl"
+
+// A struck crystal's spark at `distance` from where the bolt struck, `age`
+// seconds after, in a crystal reaching `radius`: a bright point there gone
+// in a tenth of a second, and a front spreading out through the crystal in
+// a third of one, dimming; nothing left behind it (crystal_flares.rs's
+// spark_glow is the same).
+float spark_glow(float distance, float age, float radius) {
+    if (age < 0.0 || age >= frame.spark_seconds) {
+        return 0.0;
+    }
+    radius = max(radius, 1.0);
+    float front = radius * 1.2 / 0.35 * age;
+    float width = 0.22 * radius;
+    float band = exp(-pow((distance - front) / width, 2.0))
+        * (1.0 - smoothstep(0.2, max(frame.spark_seconds, 0.3), age));
+    float core = 2.0 * exp(-pow(distance / (0.12 * radius), 2.0)) * exp(-age * 14.0);
+    return min(band + core, 2.0);
+}
+
+// The light of the sparks running through struck crystals near eye-relative
+// `position`, each in the colour of what struck it (plasma blue, laser
+// yellow).
+vec3 sparks_at(vec3 position) {
+    vec3 light = vec3(0.0);
+    float glow = 0.0;
+    for (int i = 0; i < int(frame.spark_count); i++) {
+        float radius = frame.spark_radius[i];
+        float distance = length(position - frame.spark_at[i].xyz);
+        if (distance < 1.6 * radius) {
+            float own = spark_glow(distance, frame.spark_at[i].w, radius);
+            light += frame.spark_light[i].rgb * own;
+            glow += own;
+        }
+    }
+    return glow > 2.0 ? light * (2.0 / glow) : light;
+}
+
+// How deep the water is, for its shore's fade, at an eye-relative point of
+// its surface whose refracted ray found the bottom `depth` below: the
+// smaller of that and the depth over the ground drawn bilinear between its
+// grid points, whose contours curve within each tile as retail's shore
+// sprites do where the triangulated ground's run straight; and its wander.
+float shore_depth(vec3 position, float depth) {
+    vec2 world = frame.eye.xz + position.xz;
+    float smooth_depth = frame.water_level - ground_height(world);
+    return min(depth, smooth_depth) + shore_wander(world);
+}
+
+// The thin foam line along the shore, at a depth that creeps slowly up and
+// back as small waves lap, broken along its length.
+float shore_line(vec3 position, float depth) {
+    return lap_line(position, shore_depth(position, depth));
+}
+
+// How much of its colour damp ground keeps at an eye-relative point: the
+// damp share at the waterline, none `wet_height` above it (the shore's
+// wander included), and only where water lies near, fading out from a
+// tile's width to two from the nearest grid point under the water's plane,
+// so dry flats stay dry.
+float damp_ground(vec3 position) {
+    if (frame.wet_height <= 0.0 || frame.water_reach <= 0.0 || frame.water_glow > 0.0) {
+        return 1.0;
+    }
+    vec2 world = frame.eye.xz + position.xz;
+    float above = frame.eye.y + position.y - frame.water_level + shore_wander(world);
+    if (above >= frame.wet_height) {
+        return 1.0;
+    }
+    float near = water_near(world);
+    return mix(1.0, mix(frame.damp, 1.0, smoothstep(0.0, frame.wet_height, above)), near);
+}
+
+// What glints on standing water from above (open water and puddles alike):
+// the rain's flecks, the sun's highlight, retail's dynamic lights and glows
+// (point lights and continuous laser beams alike), and the headlamps'
+// specular lobe.
+vec3 water_surface_glints(vec3 position, vec3 direction, vec3 normal, vec3 face,
+                          float least, float cover, float edge) {
+    vec3 color = vec3(0.0);
+    float fleck = rain_flecks(position) * edge;
+    if (fleck > 0.0) {
+        color += min((frame.ambient * 2.0 + frame.sun_color * 0.5) * frame.precip_color,
+                     vec3(1.0)) * (0.7 * fleck);
+    }
+    vec3 half_way = normalize(frame.sun_direction - direction);
+    float glint = pow(max(dot(normal, half_way), 0.0), 600.0) * 4.0 * (1.0 - cover) * edge;
+    if (glint > 0.001 && !occluded(position + face * 0.5, frame.sun_direction, 1.0e6)) {
+        color += frame.sun_color * glint * cloud_light(position);
+    }
+    vec3 mirrored = reflect(direction, normal);
+    // Retail's dynamic lights and glows glint in it as the sun does, within
+    // each one's reach: an explosion, bolt or laser beam by the water
+    // sparkles in its ripples.
+    for (int i = 0; i < int(frame.light_count); i++) {
+        LightSource source = sources[i];
+        vec3 span = source.particle > 1.5 ? source.emitter - source.position : vec3(0.0);
+        float len2 = dot(span, span);
+        vec3 point = source.position;
+        vec3 emitter = source.emitter;
+        if (len2 > 1.0e-4) {
+            vec3 w0 = position - source.position;
+            float b = dot(mirrored, span);
+            float d = dot(mirrored, w0);
+            float e = dot(span, w0);
+            float denom = len2 - b * b;
+            float u = denom > 1.0e-4 ? clamp((b * d - e) / denom, 0.0, 1.0)
+                                     : clamp(-e / len2, 0.0, 1.0);
+            point = source.position + span * u;
+            emitter = point;
+        }
+        vec3 toward = point - position;
+        float r2 = source.radius * source.radius;
+        float d2 = dot(toward.xz, toward.xz);
+        if (d2 < r2) {
+            vec3 from = normalize(emitter - position);
+            float shine = pow(max(dot(normal, normalize(from - direction)), 0.0), 120.0);
+            color += max(source.color, 0.0) * (1.0 - d2 / r2) * shine * 2.0 * (1.0 - cover)
+                * edge;
+        }
+    }
+    float roughness = max(frame.lamp_water_gloss, 0.02);
+    float a2 = roughness * roughness * roughness * roughness;
+    float shine = least + (1.0 - least) * pow(1.0 - max(dot(-direction, normal), 0.0), 5.0);
+    for (int i = 0; i < int(frame.lamp_count); i++) {
+        vec3 toward;
+        float distance;
+        vec3 beam = lamp_beam(frame.lamps[i], position, toward, distance);
+        if (beam == vec3(0.0) || toward.y <= 0.0
+            || lamp_visibility(frame.lamps[i], position + face * 0.5, toward, distance, true)
+                   <= 0.0) {
+            continue;
+        }
+        float nh = max(dot(normal, normalize(toward - direction)), 0.0);
+        float d = nh * nh * (a2 - 1.0) + 1.0;
+        float lobe = a2 / (3.14159265 * d * d);
+        color += beam * min(lobe * shine * 0.25, 4.0) * (1.0 - cover) * edge;
+    }
+    return color;
+}
+
+// The modern water: what it mirrors and what lies below it, mixed by the
+// Fresnel term (water's index 1.33), the bottom fading into the water's own
+// colour with depth, and the sun's glint where it is not shadowed. At the
+// shore it fades in from nothing over its first few units of depth, its
+// reflection, ripples and glints with it, a thin foam line lapping at the
+// edge.
+vec3 water_color(Surface surface, vec3 position, vec3 direction) {
+    bool from_above = surface.face.y > 0.0;
+    float foam;
+    vec3 rippled_normal = splashed(rippled(surface.normal, position), position, foam);
+    vec3 body = churned(water_body(surface.texture_slot), position);
+    // The light the water's body scatters is the sun's where the sun
+    // reaches its surface (retail's flat shade lit it everywhere, a cliff's
+    // shadow and all), and in shade the sky's, retail's ambient share of it.
+    if (from_above) {
+        float sunlit = frame.sun_direction.y > 0.0
+                && !occluded(position + vec3(0.0, 0.5, 0.0), frame.sun_direction, 1.0e6)
+            ? cloud_light(position)
+            : 0.0;
+        body *= mix(WATER_SHADED, 1.0, sunlit);
+    }
+    // Its Fresnel term, at least the world's share: murky water shines.
+    float least = max(frame.water_reflect, 0.02);
+    float t;
+    // The water is finished here, not denoised: what it shows takes the
+    // grid, not a sampled light.
+    uint unsampled = 0u;
+    // What lies below first: the shore's fade takes the depth there.
+    vec3 bent = refract(direction, rippled_normal, from_above ? 1.0 / 1.333 : 1.333);
+    vec3 below = body;
+    float depth = 1.0e6;
+    bool inside = dot(bent, bent) < 0.5;
+    if (!inside) {
+        // Half a unit back towards the eye, never inside the bank where the
+        // water thins to nothing (the ray skips the water itself).
+        vec3 start = position - direction * 0.5;
+        // The bottom takes the headlamps: the lit beach goes on under the
+        // shallows.
+        // The water works in retail's tones (until the full path tracing
+        // plan's stage 4 makes it a medium): the traced light it sees
+        // comes back to them.
+        vec3 seen = to_srgb(shade_ray(start, bent, UNDERWATER_REACH,
+                                      to_linear(from_above ? body : sky_along(bent)), 0.0,
+                                      MASK_VIEW_SOLID, !from_above, false, true, unsampled, t));
+        seen += mirrored_effects(start, bent, t);
+        float clear = water_clear(t);
+        if (from_above && t < UNDERWATER_REACH) {
+            vec3 bottom = start + bent * t;
+            depth = position.y - bottom.y;
+            // The ground under the water is wet, as the damp band beside it
+            // (where a world has one, so the two meet at the edge), and as
+            // dark as the rain makes the bank: the bed came out lighter
+            // than the soaked shore, a straight seam along the waterline.
+            seen *= (frame.wet_height > 0.0 ? frame.damp : 1.0)
+                * (1.0 - RAIN_DARKEN * frame.wet_ground);
+            if (clear > 0.05 && frame.sun_direction.y > 0.0) {
+                // The sunlit bottom takes the ripples' caustics, as much as
+                // the sun lights it.
+                float sun = dot(frame.sun_color, vec3(0.3, 0.6, 0.1)) * frame.sun_direction.y;
+                float share = sun / max(sun + dot(frame.ambient, vec3(0.3, 0.6, 0.1)), 1.0e-3);
+                if (depth > 1.0
+                    && !occluded(bottom + vec3(0.0, 0.5, 0.0), frame.sun_direction, 1.0e6)) {
+                    seen *= mix(1.0, caustic(bottom, depth), share * cloud_light(bottom));
+                }
+            }
+        }
+        below = from_above ? mix(body, seen, clear)
+                                 + lamps_in_water(start, bent, min(t, UNDERWATER_REACH))
+                           : seen;
+        if (from_above) {
+            // Screened in, so it brightens without passing full light.
+            vec3 glow = under_glow(start, bent, min(t, UNDERWATER_REACH), body);
+            below = 1.0 - (1.0 - min(below, 1.0)) * (1.0 - glow);
+        }
+    }
+    // At the shore the water adds nothing at its edge: no ripples, no
+    // reflection, no glint.
+    float edge = from_above && frame.shore_fade > 0.0
+        ? smoothstep(0.0, frame.shore_fade, shore_depth(position, depth))
+        : 1.0;
+    vec3 normal = normalize(mix(vec3(0.0, from_above ? 1.0 : -1.0, 0.0), rippled_normal, edge));
+    float cos_i = clamp(dot(-direction, normal), 0.0, 1.0);
+    // Total internal reflection, from below.
+    // Eye candy mirrors more (its reflections share, 1.3; 1 under Remaster
+    // and thermal vision): 2026-10-26, more plasma bolts and
+    // more world reflections, a 25-50% boost.
+    float fresnel = inside ? 1.0
+                           : min((least + (1.0 - least) * pow(1.0 - cos_i, 5.0)) * edge
+                                     * max(frame.reflect_gain, 1.0), 1.0);
+    vec3 mirrored = reflect(direction, normal);
+    vec3 reflected = to_srgb(shade_ray(position + surface.face * 0.5, mirrored, REFLECTION_REACH,
+                                       to_linear(from_above ? sky_along(mirrored) : body), 0.0,
+                                       MASK_WORLD, from_above, false, true, unsampled, t));
+    reflected += mirrored_effects(position + surface.face * 0.5, mirrored, t);
+    vec4 far_fog = mirror_fog(length(position), t, t < REFLECTION_REACH);
+    reflected = mix(reflected, far_fog.rgb, far_fog.a);
+    vec3 color = mix(below, reflected, fresnel);
+    if (from_above) {
+        // What glows under it, as much as the surface lets through.
+        color += sunk_glow(position + direction * 0.5, direction, body) * (1.0 - fresnel);
+        float cover = foam_cover(position, max(frame.splash_foam * foam,
+                                                shore_line(position, depth)));
+        color += water_surface_glints(position, direction, normal, surface.face, least, cover,
+                                      edge);
+        vec3 hue = body / max(max(body.r, max(body.g, body.b)), 1.0e-3);
+        // The headlamps: their light entering
+        // the water scatters off what floats in it and comes back in the
+        // water's own colour (murky water glows near its surface; clear water
+        // lets it down to the bottom, which the refracted ray lit); their
+        // white glint on the ripples is water_surface_glints'.
+        vec3 lamps_on_foam = vec3(0.0);
+        float deep = 1.0 - exp(-min(depth, UNDERWATER_REACH) / frame.water_clarity);
+        for (int i = 0; i < int(frame.lamp_count); i++) {
+            vec3 toward;
+            float distance;
+            vec3 beam = lamp_beam(frame.lamps[i], position, toward, distance);
+            if (beam == vec3(0.0) || toward.y <= 0.0
+                || lamp_visibility(frame.lamps[i], position + surface.face * 0.5, toward, distance,
+                                   true) <= 0.0) {
+                continue;
+            }
+            float entering = (toward.y + frame.lamp_wrap) / (1.0 + frame.lamp_wrap);
+            float enters = 1.0 - (least + (1.0 - least) * pow(1.0 - toward.y, 5.0));
+            color += hue * beam * (entering * enters * frame.lamp_water_scatter * deep * edge
+                                   * (1.0 - cover));
+            lamps_on_foam += beam * entering;
+        }
+        if (cover > 0.0) {
+            // Foam lies on the water as a white surface, a little of the
+            // liquid's colour in it, lit as the ground is: the sun at its
+            // angle, shadowed, under the clouds, the sky's light and
+            // retail's lights and lamps, under the game's light cap.
+            vec3 light = frame.ambient + lamps_on_foam;
+            if (frame.sun_direction.y > 0.0
+                && !occluded(position + surface.face * 0.5, frame.sun_direction, 1.0e6)) {
+                light += frame.sun_color * frame.sun_direction.y * cloud_light(position);
+            }
+            if (frame.grid_mode > 0.5) {
+                light += max(grid_light(position), 0.0);
+            }
+            vec3 white = 0.85 * mix(vec3(1.0), hue, FOAM_TINT);
+            color = mix(color, white * light, cover);
+        }
+    }
+    return color;
+}
+
+// The water's surface seen from an eye under it (the remastered camera),
+// water_color's view from below: from an eye in the water a ray meets the
+// surface from below wherever it meets it (a trough lower than the eye that
+// the eye sees the top of lies past a crest the ray left by). Inside
+// Snell's window what lies above, bent out through the rippled surface;
+// past it, and within it by Fresnel's share from below, the water mirrored
+// back down, through the water on its way, which the air's fog has no part
+// in.
+vec3 water_from_below(Surface surface, vec3 position, vec3 direction) {
+    float foam;
+    vec3 normal = splashed(rippled(surface.normal, position), position, foam);
+    vec3 body = churned(water_body(surface.texture_slot), position);
+    float least = max(frame.water_reflect, 0.02);
+    uint unsampled = 0u;
+    float t;
+    vec3 bent = refract(direction, normal, 1.333);
+    bool inside = dot(bent, bent) < 0.5;
+    vec3 below = body;
+    if (!inside) {
+        vec3 start = position - direction * 0.5;
+        // The eye's own view up through the surface: not what lies outside it.
+        below = to_srgb(shade_ray(start, bent, UNDERWATER_REACH, to_linear(sky_along(bent)), 0.0,
+                                  MASK_VIEW_SOLID, true, false, true, unsampled, t));
+        below += mirrored_effects(start, bent, t);
+    }
+    float cos_i = clamp(dot(-direction, normal), 0.0, 1.0);
+    float fresnel = inside ? 1.0
+                           : min((least + (1.0 - least) * pow(1.0 - cos_i, 5.0))
+                                     * max(frame.reflect_gain, 1.0), 1.0);
+    vec3 mirrored = reflect(direction, normal);
+    vec3 from = position + surface.face * 0.5;
+    vec3 back = shade_ray(from, mirrored, REFLECTION_REACH, to_linear(body), 0.0, MASK_WORLD, false,
+                          false, true, unsampled, t);
+    vec3 reflected = to_srgb(in_water(from, mirrored, t, back)) + mirrored_effects(from, mirrored, t);
+    return mix(below, reflected, fresnel);
+}
+
+// Thermal vision's heat of a surface at `position`: its own (glowing ones
+// hot), warmed by retail's lights by their own colour (infrared's lamp on
+// the player warms nothing), and on the ground by the heat they left there
+// (scorch marks, cooling). The sun warms nothing: the lamp at the eye
+// shades the image, and a second light would fight it.
+float surface_heat(Surface surface, vec3 position) {
+    if (surface.emissive) {
+        return frame.thermal_glowing;
+    }
+    float heat = surface.heat;
+    float lit = 0.0;
+    for (int i = 0; i < int(frame.light_count); i++) {
+        LightSource source = sources[i];
+        if (source.heat > 0.0) {
+            vec3 span = source.particle > 1.5 ? source.emitter - source.position : vec3(0.0);
+            float len2 = dot(span, span);
+            vec3 point = len2 > 0.0
+                ? source.position + span * clamp(dot(position - source.position, span) / len2, 0.0, 1.0)
+                : source.position;
+            vec3 toward = point - position;
+            float reach = 1.0 - dot(toward, toward) / max(source.radius * source.radius, 1.0);
+            // The hottest light there, not their sum: a barrage stays a
+            // barrage of warm spots, not one hot field.
+            lit = max(lit, source.heat * max(reach, 0.0));
+        }
+    }
+    if (surface.ground) {
+        lit += remembered_heat(position);
+    }
+    return heat + frame.thermal_lights * lit;
+}
+
+// Infrared's own reach: F, the furthest any world's fog lies (Luna
+// Azine's), past which the game submits nothing.
+const float THERMAL_REACH = 12480.0;
+// The share of the reach the heat stays full to, fading out by its end.
+const float THERMAL_HEAT_FULL = 0.75;
+
+// Infrared's image of a surface `distance` along `direction`: the ACAM's
+// projector at the eye lights what the camera sees, so nothing it shows is
+// in shadow; a surface darkens only as it turns from the lamp and toward
+// the lamp's reach. Its brightness is its colour's (its reflectance), and
+// heat lies on top (what is alive, running, firing or burning), full to
+// most of the reach and fading to the sky's by its end, so nothing pops in.
+// No fog: infrared sees through it.
+float thermal_image(Surface surface, float heat, vec3 direction, float distance) {
+    float x = clamp(distance / THERMAL_REACH, 0.0, 1.0);
+    float falloff = (1.0 - x * x) * (1.0 - x * x);
+    float facing = abs(dot(surface.normal, direction));
+    // Its colour in retail's tones (the ground's texture alone).
+    vec3 tone = to_srgb(surface.ground ? surface.albedo.rgb / max(ground_reflectance(), 1.0e-3)
+                                       : surface.albedo.rgb);
+    float reflectance = surface.emissive ? 0.0 : dot(tone, vec3(0.3, 0.59, 0.11));
+    float fade = 1.0 - smoothstep(THERMAL_HEAT_FULL, 1.0, x);
+    return mix(frame.thermal_sky, heat, fade) + frame.thermal_lamp * reflectance * facing * falloff;
+}
+
+// The haze over the ground and the water at view depth `z`: retail's fade
+// from its start, thickening until it is complete where retail's far
+// terrain ends, so distant relief stays in sight past the fog's end, as
+// retail's far terrain keeps it. Its colour turns from the fog's to retail's
+// far terrain colour beyond the fog's end.
+vec4 haze(float z) {
+    float x = clamp((z - frame.fog_start) / max(frame.haze_reach - frame.fog_start, 1.0), 0.0,
+                    1.0);
+    float amount = mix(1.0 - exp(-frame.haze_rate * x), 1.0, smoothstep(0.75, 1.0, x));
+    vec3 color = mix(frame.fog_color, frame.far_color,
+                     smoothstep(frame.fog_end, frame.haze_reach, z));
+    return vec4(color, amount);
+}
+
+// The fog a reflection's own leg takes, in retail's tones: the fog counts
+// from the eye, so a mirror `z` from it showing what lies `t` beyond loses
+// the share of its light the fog takes between z and z + t (the eye's own
+// leg the composite fogs), toward the fog's colour. Nothing for a ray that
+// met nothing (the sky, which the fog leaves).
+vec4 mirror_fog(float z, float t, bool met) {
+    if (!met) {
+        return vec4(0.0);
+    }
+    if (frame.distance_fog > 0.5) {
+        float span = max(frame.fog_end - frame.fog_near, 1.0);
+        float near = max((z - frame.fog_near) / span, 0.0);
+        float far = max((z + t - frame.fog_near) / span, 0.0);
+        float lost = 1.0 - exp(-frame.fog_depth * (pow(far, frame.fog_curve)
+                                                     - pow(near, frame.fog_curve)));
+        return vec4(frame.fog_color, clamp(lost, 0.0, 1.0));
+    }
+    vec4 near = haze(z);
+    vec4 far = haze(z + t);
+    return vec4(far.rgb, clamp(1.0 - (1.0 - far.a) / max(1.0 - near.a, 1.0e-3), 0.0, 1.0));
+}
+
+// A drop of the water a blast threw up, at `position` with `normal`. Clear
+// water mirrors the sky, shows the light through it, and glints where the
+// sun's reflection meets the eye: the sparkle. White water is lit as foam
+// is, its shadow traced. Finished here, as the water's surface is.
+vec3 drop_color(vec3 position, vec3 direction, vec3 normal, float kind) {
+    if (dot(normal, direction) > 0.0) {
+        normal = -normal;
+    }
+    bool sunlit = !occluded(position + normal * 0.5, frame.sun_direction, 1.0e6);
+    vec3 mirrored = reflect(direction, normal);
+    float fresnel = 0.02 + 0.98 * pow(1.0 - clamp(dot(-direction, normal), 0.0, 1.0), 5.0);
+    vec3 sky = sky_along(mirrored);
+    float glint = sunlit ? pow(max(dot(mirrored, frame.sun_direction), 0.0), 80.0) : 0.0;
+    vec3 lights = max(grid_light(position), 0.0)
+        + to_srgb(lamp_light(position, normal, normal, false));
+    // A drop passes on the light it catches from every side, so spray is
+    // white, a little of the world's light in it; a clear drop mirrors more
+    // of the sky and glints harder.
+    vec3 lit = frame.sun_color * (sunlit ? 0.9 : 0.25) + frame.ambient * 1.6 + lights;
+    lit = mix(lit, vec3(max(lit.r, max(lit.g, lit.b))), 0.25) * 0.95;
+    bool clear = kind < 0.5;
+    // Spray takes much of its liquid's colour (the Brain's red reads red),
+    // the aerated white water less.
+    vec3 body = water_body(frame.water_texture < 0.0 ? NO_TEXTURE : uint(frame.water_texture));
+    vec3 hue = body / max(max(body.r, max(body.g, body.b)), 1.0e-3);
+    lit *= mix(vec3(1.0), hue, clear ? frame.drop_tint : 0.6 * frame.drop_tint);
+    return mix(lit, sky, fresnel * (clear ? 0.8 : 0.3))
+        + frame.sun_color * glint * (clear ? 3.0 : 1.2);
+}
+
+// If the primary ray through `pixel` meets a drop of the water a blast
+// threw up before `reach`, shade it and store it, finished, as water is.
+bool shade_spray(ivec2 pixel, vec3 direction, float reach) {
+    if (frame.spray_count < 0.5 || frame.thermal > 0.5) {
+        return false;
+    }
+    vec3 normal;
+    float coverage;
+    float t = reach;
+    int drop = spray_hit(direction, t, normal, coverage);
+    if (drop < 0) {
+        return false;
+    }
+    // A drop smaller than a pixel shows in as many frames as it fills, and
+    // a see-through one lets what lies behind show as often: a clear drop
+    // the tuning's share, white water less.
+    uint seed = hash(uint(pixel.x) * 7919u + hash(uint(pixel.y) * 104729u
+                                                   + uint(frame.frame_index)));
+    float opacity = 1.0 - frame.see_through * (spray[drop].b.w < 0.5 ? 1.0 : 0.35);
+    if (random(seed) > coverage * opacity) {
+        return false;
+    }
+    vec3 position = direction * t;
+    float view_z = dot(position, frame.forward);
+    vec3 color = drop_color(position, direction, normal, spray[drop].b.w);
+    imageStore(albedo_out, pixel, vec4(color, 0.0));
+    imageStore(direct_out, pixel, vec4(to_linear(color), 0.0));
+    imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, 1.0));
+    imageStore(fog_out, pixel, frame.distance_fog > 0.5 ? vec4(0.0) : haze(view_z));
+    imageStore(geometry_out, pixel, vec4(dot(normal, direction) > 0.0 ? -normal : normal, t));
+    imageStore(depth_out, pixel, vec4(raster_depth(view_z)));
+    return true;
+}
+
+// Next-event estimation for the path pass's diffuse bounce (the full path
+// tracing plan's stage 5): a bounce ray finds a small lamp or sign, or the
+// lava below a wall, only now and then; a sample of the emissive light list
+// or of the lava aims at it every time. Each way's sample is weighed
+// against the other way of finding the same light by the power heuristic
+// (Veach), so together they count it once and the noise of whichever is
+// worse drops out. In the bounce's units: the light arriving, the
+// cosine-weighted bounce's density cancelled.
+
+// How far short of a sampled point of an emitter its shadow ray stops: a
+// face drawn over another (a sign on its wall) would shadow it otherwise.
+const float EMITTER_CLEARANCE = 0.25;
+const float PI = 3.14159265;
+// The least light (light_of's units) the emitters' unshadowed sum gives a
+// point for it to sample them, 3 of 255 on a white surface in display
+// tones: a lamp thousands of units off is not worth its ray, and the
+// bounce rays still find it as they did.
+const float EMITTER_LEAST = 0.001;
+
+// The power heuristic's weight of a sample the way that found it had
+// density `chosen` for, the other way `other`.
+float power_heuristic(float chosen, float other) {
+    if (chosen <= 0.0) {
+        return 0.0;
+    }
+    float ratio = other / chosen;
+    return 1.0 / (1.0 + ratio * ratio);
+}
+
+// How likely emissive group `group` lights a point at `position` facing
+// `normal`, the weight its pick takes: its power over its distance squared
+// (its own size at the least), by how far its sphere rises over the point's
+// horizon; none for one wholly under it or past the bounce's reach, where a
+// bounce ray meets the sky instead.
+float emissive_weight(EmissiveGroup group, vec3 position, vec3 normal) {
+    vec3 to = group.centre - position;
+    float d2 = dot(to, to);
+    float d = sqrt(d2);
+    if (d - group.radius > BOUNCE_REACH) {
+        return 0.0;
+    }
+    float rise = d > group.radius ? clamp((dot(normal, to) + group.radius) / d, 0.0, 1.0) : 1.0;
+    return group.power * rise / max(d2, group.radius * group.radius);
+}
+
+// The sampled groups' weights at a point, summed: the pick's whole; none
+// where the emitters are too faint to sample (EMITTER_LEAST: their light,
+// unshadowed, within PI of the sum), which the bounce rays alone light.
+float emissive_total(vec3 position, vec3 normal) {
+    float total = 0.0;
+    for (int i = 0; i < int(frame.emissive_groups); i++) {
+        total += emissive_weight(emissive_groups[i], position, normal);
+    }
+    return total < PI * EMITTER_LEAST ? 0.0 : total;
+}
+
+// The density by solid angle with which emissive_sample from `position`
+// facing `normal` (its groups' weights summing to `total`) picks the point a
+// ray meets on list face `face`, `t` away and at cosine `cosine` to the
+// face: none for a face whose group the pick passes over.
+float emissive_density(uint face, vec3 position, vec3 normal, float total, float t,
+                       float cosine) {
+    EmissiveFace entry = emissive_faces[face];
+    if (total <= 0.0 || entry.group >= uint(frame.emissive_groups) || cosine <= 1.0e-4) {
+        return 0.0;
+    }
+    EmissiveGroup group = emissive_groups[entry.group];
+    float pick = emissive_weight(group, position, normal) / total * (entry.power / group.power);
+    return pick / entry.area * t * t / cosine;
+}
+
+// One point of the emissive faces as a light for `position` facing
+// `normal`, its group picked by emissive_weight (summing to `total`), its
+// face by power and the point even over the face (`xi`): the light it sends
+// there as a bounce ray meeting it would take it (its colour at the
+// bounce's mip, times its gain), if nothing stands between, weighed against
+// that bounce ray.
+vec3 emissive_sample(vec3 position, vec3 normal, float total, vec2 xi, inout uint seed) {
+    float pick = random(seed) * total;
+    int chosen = -1;
+    float weight = 0.0;
+    for (int i = 0; i < int(frame.emissive_groups); i++) {
+        float here = emissive_weight(emissive_groups[i], position, normal);
+        if (here <= 0.0) {
+            continue;
+        }
+        chosen = i;
+        weight = here;
+        pick -= here;
+        if (pick < 0.0) {
+            break;
+        }
+    }
+    if (chosen < 0) {
+        return vec3(0.0);
+    }
+    EmissiveGroup group = emissive_groups[chosen];
+    float within = random(seed) * group.power;
+    // The first face whose running power passes it (the last at the most).
+    uint face = group.first;
+    uint last = group.first + group.count - 1u;
+    while (face < last) {
+        uint middle = (face + last) / 2u;
+        if (emissive_faces[middle].running > within) {
+            last = middle;
+        } else {
+            face = middle + 1u;
+        }
+    }
+    EmissiveFace entry = emissive_faces[face];
+    uint primitive = entry.triangle;
+    Vertex a = vertices[indices[primitive * 3u + 0u]];
+    Vertex b = vertices[indices[primitive * 3u + 1u]];
+    Vertex c = vertices[indices[primitive * 3u + 2u]];
+    float s = sqrt(xi.x);
+    vec3 weights = vec3(1.0 - s, s * (1.0 - xi.y), s * xi.y);
+    vec3 to = a.position * weights.x + b.position * weights.y + c.position * weights.z - position;
+    float d2 = dot(to, to);
+    float d = sqrt(d2);
+    vec3 toward = to / max(d, 1.0e-4);
+    float facing = dot(normal, toward);
+    float cosine = abs(dot(normalize(cross(b.position - a.position, c.position - a.position)),
+                           toward));
+    if (facing <= 0.0 || cosine <= 1.0e-4 || d > BOUNCE_REACH) {
+        return vec3(0.0);
+    }
+    Triangle triangle = triangles[primitive];
+    vec2 uv = a.uv * weights.x + b.uv * weights.y + c.uv * weights.z;
+    vec4 colour = unpack(a.color) * weights.x + unpack(b.color) * weights.y
+        + unpack(c.color) * weights.z;
+    if (triangle.texture != NO_TEXTURE) {
+        // A masked sprite's keyed texels let rays by: no light from them.
+        if (primitive >= uint(frame.cutout_first)
+            && textureLod(textures[nonuniformEXT(triangle.texture)], uv, 0.0).a < 0.5) {
+            return vec3(0.0);
+        }
+        colour *= textureLod(textures[nonuniformEXT(triangle.texture)], uv, BOUNCE_LOD);
+    }
+    if (occluded_by(position, toward, max(d - EMITTER_CLEARANCE, 0.0), MASK_WORLD)) {
+        return vec3(0.0);
+    }
+    float density = weight / total * (entry.power / group.power) / entry.area * d2 / cosine;
+    float bsdf = facing / PI;
+    // With the eye under the water, what the water leaves of it on its way,
+    // as a bounce ray meeting the face takes it (bounce_light).
+    vec3 through = frame.eye_under > 0.5
+        ? exp(-water_extinction() * water_way(position, toward, d))
+        : vec3(1.0);
+    return to_linear(colour.rgb) * entry.gain * through * (bsdf / density)
+        * power_heuristic(density, bsdf);
+}
+
+// Whether a ray from `origin` along `toward` crosses the lava's plane over
+// a water tile (a tile any of whose corners' ground lies under the plane,
+// scene_water.rs's rule) within the water mesh's reach and the bounce's:
+// lava's sampler aims only there, so a point over land spends no ray on it.
+bool over_lava(vec3 origin, vec3 toward) {
+    float above = frame.eye.y + origin.y - frame.water_level;
+    int points = int(frame.ground_points);
+    if (toward.y >= 0.0 || above <= 0.0 || points < 2) {
+        return false;
+    }
+    float t = above / -toward.y;
+    vec3 at = origin + toward * t;
+    if (t > BOUNCE_REACH || max(abs(at.x), abs(at.z)) > frame.water_reach) {
+        return false;
+    }
+    vec2 grid_at = mod(frame.eye.xz + at.xz, 65536.0) / frame.ground_spacing;
+    ivec2 corner = clamp(ivec2(floor(grid_at)), ivec2(0), ivec2(points - 2));
+    int first = corner.x * points + corner.y;
+    float lowest = min(min(ground_vertices[first].position.y, ground_vertices[first + 1].position.y),
+                       min(ground_vertices[first + points].position.y,
+                           ground_vertices[first + points + 1].position.y));
+    return lowest < frame.water_level;
+}
+
+// Lava's own sampler, where the world's water is lava and the point stands
+// over its plane: a direction drawn as the bounce draws one, cosine-weighted
+// about the surface's normal, but turned down where it rose (its height
+// mirrored), so a wall or a vehicle over the lake aims at the melt below it,
+// round its foot as far as it faces it; the ray finds the melt or what
+// stands on it. Its density by solid angle from `origin` (both draws that
+// give a direction counted); none for one that rises or crosses the plane
+// over land (over_lava).
+float lava_density(vec3 origin, vec3 normal, vec3 toward) {
+    if (!over_lava(origin, toward)) {
+        return 0.0;
+    }
+    vec3 risen = vec3(toward.x, -toward.y, toward.z);
+    return (max(dot(normal, toward), 0.0) + max(dot(normal, risen), 0.0)) / PI;
+}
+
+// The light the lava sends back along `toward` to `origin` as a bounce ray
+// meeting it takes it (lava_glow at LAVA_LIGHT), or none where the ray
+// meets something else first or nothing within the bounce's reach.
+vec3 lava_seen(vec3 origin, vec3 toward) {
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoneEXT, MASK_WORLD, origin, 0.0, toward,
+                          BOUNCE_REACH);
+    PROCEED_THROUGH_CUTOUTS(query);
+    if (rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT
+        || rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) != INSTANCE_WATER) {
+        return vec3(0.0);
+    }
+    int primitive = rayQueryGetIntersectionPrimitiveIndexEXT(query, true);
+    float t = rayQueryGetIntersectionTEXT(query, true);
+    return to_linear(lava_glow(origin + toward * t, triangles[primitive].texture)) * LAVA_LIGHT;
+}
+
+// Whether lava's sampler runs for a bounce from `origin`: in a world whose
+// water is lava, over its plane.
+bool lava_sampled(vec3 origin) {
+    return frame.water_glow > 0.0 && frame.eye.y + origin.y > frame.water_level;
+}
+
+// A bounce sample held to BOUNCE_CLAMP times full light, its hue kept: a
+// firefly (a ray finding a small bright light that sampling missed).
+vec3 bounce_held(vec3 bounce) {
+    float brightest = max(bounce.r, max(bounce.g, bounce.b));
+    return brightest > BOUNCE_CLAMP ? bounce * (BOUNCE_CLAMP / brightest) : bounce;
+}
+
+// The pixel the path pass and the emitters' pass take for invocation
+// `cell` (one of each two by two, turning each frame, or every pixel for
+// Ray Reconstruction), and its bounce's random numbers.
+ivec2 path_pixel(ivec2 cell) {
+    return frame.guides > 0.5 ? cell : cell * 2 + path_offset();
+}
+
+uint path_seed(ivec2 pixel) {
+    return hash(uint(pixel.x) + hash(uint(pixel.y) + hash(uint(frame.frame_index) ^ 0x6a09e667u)));
+}
+
+#if !defined(PATHS_PASS) && !defined(EMITTERS_PASS)
+// A primary ray's water (at `distance`, eye-relative `position`, the
+// raster's `depth`), finished here: the composite takes its colour as it
+// is; lava too, and how hot it reads.
+void store_water(ivec2 pixel, Surface surface, vec3 position, vec3 direction, float distance,
+                 float depth) {
+    float view_z = dot(position, frame.forward);
+    float warmth = 0.0;
+    vec3 color = frame.water_glow > 0.0 ? lava_color(position, direction, surface.texture_slot, warmth)
+        : frame.eye_under > 0.5         ? water_from_below(surface, position, direction)
+                                        : water_color(surface, position, direction);
+    // A flash glints on the water where it mirrors the flash.
+    vec4 flash = lightning_flash();
+    if (flash.w > 0.0 && frame.water_glow <= 0.0) {
+        float mirror = max(dot(reflect(direction, surface.normal), flash_toward(flash)), 0.0);
+        color += frame.lightning_color * (flash.w * 1.5 * pow(mirror, 48.0));
+    }
+    imageStore(albedo_out, pixel, vec4(color, 0.0));
+    imageStore(direct_out, pixel, vec4(to_linear(color), 0.0));
+    imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, 1.0));
+    // Seen from under it, the water lies between (the resolve's), not the
+    // air's haze.
+    imageStore(fog_out, pixel,
+               frame.distance_fog > 0.5 || frame.eye_under > 0.5 ? vec4(0.0) : haze(view_z));
+    imageStore(geometry_out, pixel, vec4(surface.normal, distance));
+    imageStore(depth_out, pixel, vec4(depth));
+    if (frame.thermal > 0.5) {
+        float heat = frame.water_glow > 0.0 ? frame.thermal_glowing * (0.6 + 0.4 * warmth)
+                                            : frame.thermal_water;
+        imageStore(heat_out, pixel, vec4(thermal_image(surface, heat, direction, distance)));
+        imageStore(fog_out, pixel, vec4(0.0));
+    }
+}
+#endif
+
+#ifdef PATHS_PASS
+// The path pass: the bounce light from the lit primary hits the trace left
+// (their depth, normal, face and material), at one pixel of each two by two
+// (frame.path_offset's, turning each frame; pt_temporal fills the rest) or,
+// for Ray Reconstruction, at every pixel. Into the bounce image's colour,
+// beside the sun's visibility the trace put in its alpha.
+void main() {
+    // Every invocation, before any returns: it holds a barrier.
+    measure_sky();
+    ivec2 pixel = path_pixel(ivec2(gl_GlobalInvocationID.xy));
+    if (pixel.x >= int(frame.target.x) || pixel.y >= int(frame.target.y)) {
+        return;
+    }
+    vec4 shade = imageLoad(bounce_out, pixel);
+    vec4 geometry = imageLoad(geometry_out, pixel);
+    float bounce_scale = imageLoad(direct_out, pixel).a;
+    vec4 albedo = imageLoad(albedo_out, pixel);
+    if (geometry.w <= 0.0 || albedo.a < 0.5 || bounce_scale <= 0.0) {
+        imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, shade.a));
+        imageStore(glossy_out, pixel, vec4(-1.0));
+        return;
+    }
+    vec3 direction = pixel_direction(vec2(pixel));
+    float z = depth_distance(imageLoad(depth_out, pixel).r);
+    vec3 position = direction * (z / max(dot(direction, frame.forward), 1.0e-4));
+    vec4 material = imageLoad(path_surface, pixel);
+    vec3 face = from_octahedral(material.xy);
+    vec3 normal = geometry.xyz;
+    float metal = material.z;
+    float rough = abs(material.w);
+    uint seed = path_seed(pixel);
+    vec2 xi = even_numbers(ivec2(gl_GlobalInvocationID.xy), 1u);
+    // A metal mirrors its surroundings as often as it is metallic, and
+    // keeps the rest of its painted diffuse light.
+    bool glossy = metal > 0.0 && random(seed) < metal;
+    float weight = 1.0;
+    vec3 toward = glossy ? glossy_direction(direction, normal, rough, xi, weight)
+                         : cosine_direction(normal, xi);
+    vec3 origin = position + face * 0.5;
+    float t = 0.0;
+    // What the bounce ray met, for a bounce that casts none (a glossy one
+    // turned under its surface): nothing. Unset, the cache's feed below read
+    // whatever the registers held, and frames differed run to run.
+    last_hit = false;
+    met_lava = false;
+    met_emitter = NO_LIGHT;
+    bounce_scattered = vec3(0.0);
+    vec3 bounce = weight > 0.0 ? bounce_light(origin, toward, glossy, seed, t) * weight
+                               : vec3(0.0);
+    // The emitters' pass samples the emitters and the lava as lights for
+    // a diffuse bounce (EMITTERS_PASS): what the bounce ray met of them
+    // counts at the power heuristic's share against that sampling.
+    if (!glossy && (met_emitter != NO_LIGHT || met_lava)) {
+        float bsdf = max(dot(normal, toward), 0.0) / PI;
+        if (met_emitter != NO_LIGHT) {
+            float total = emissive_total(origin, normal);
+            bounce = (bounce - bounce_scattered)
+                    * power_heuristic(bsdf, emissive_density(met_emitter, origin, normal, total, t,
+                                                             abs(dot(last_face, toward))))
+                + bounce_scattered;
+        } else if (lava_sampled(origin)) {
+            bounce *= power_heuristic(bsdf, lava_density(origin, normal, toward));
+        }
+    }
+    bounce = bounce_held(bounce);
+    // A clear layer's reflection is not its surface's colour.
+    if (glossy && material.w < 0.0) {
+        bounce /= max(to_linear(albedo.rgb), vec3(0.003));
+    }
+    imageStore(bounce_out, pixel, vec4(bounce, shade.a));
+    imageStore(glossy_out, pixel, vec4(glossy ? t : -1.0));
+    // One traced pixel in four feeds the radiance cache: from the bounce's
+    // hit, one bounce further, the light arriving there, which itself takes
+    // the cache's light at its own hit, so the cells gather every bounce.
+    if (last_hit && (cache_hash(uint(pixel.x) * 9277u ^ cache_hash(uint(pixel.y))
+                                ^ uint(frame.frame_index)) & 3u) == 0u) {
+        vec3 from = last_position;
+        vec3 facing = last_normal;
+        vec3 face_there = last_face;
+        vec3 onward = cosine_direction(facing, vec2(random(seed), random(seed)));
+        float t;
+        skipped = MASK_OUTSIDE;
+        vec3 arriving = shade_ray(from + face_there * 0.5, onward, BOUNCE_REACH,
+                                  sky_light(onward), BOUNCE_LOD, MASK_WORLD, false, true, false,
+                                  seed, t);
+        skipped = 0u;
+        if (met_lava) {
+            arriving *= LAVA_LIGHT;
+        }
+        // As the bounce light takes it (bounce.colour).
+        arriving = mix(vec3(dot(arriving, vec3(0.2126, 0.7152, 0.0722))), arriving,
+                       frame.bounce_colour);
+        // What the bounce met under the water takes the water on its way.
+        if (sunk_depth(from) > 0.0) {
+            arriving = in_water(from + face_there * 0.5, onward, t, arriving);
+        }
+        cache_add(from, facing, arriving);
+    }
+}
+#elif defined(EMITTERS_PASS)
+// The emitters' pass, after the path pass at the same pixels: next-event
+// estimation toward the emissive light list and the lava for the pixels
+// whose bounce was diffuse (the path pass's own pick, from the same random
+// numbers), added to the bounce image's colour. A dispatch of its own, run
+// only while the frame has emitters or lava, so the path pass keeps its
+// registers, and its speed, everywhere.
+void main() {
+    ivec2 pixel = path_pixel(ivec2(gl_GlobalInvocationID.xy));
+    if (pixel.x >= int(frame.target.x) || pixel.y >= int(frame.target.y)) {
+        return;
+    }
+    vec4 geometry = imageLoad(geometry_out, pixel);
+    if (geometry.w <= 0.0 || imageLoad(albedo_out, pixel).a < 0.5
+        || imageLoad(direct_out, pixel).a <= 0.0) {
+        return;
+    }
+    vec4 material = imageLoad(path_surface, pixel);
+    uint seed = path_seed(pixel);
+    if (material.z > 0.0 && random(seed) < material.z) {
+        return;
+    }
+    vec3 direction = pixel_direction(vec2(pixel));
+    float z = depth_distance(imageLoad(depth_out, pixel).r);
+    vec3 origin = direction * (z / max(dot(direction, frame.forward), 1.0e-4))
+        + from_octahedral(material.xy) * 0.5;
+    vec3 normal = geometry.xyz;
+    seed = hash(seed ^ 0x3c6ef372u);
+    vec3 light = vec3(0.0);
+    float emissive = emissive_total(origin, normal);
+    if (emissive > 0.0) {
+        vec3 lit = emissive_sample(origin, normal, emissive,
+                                   even_numbers(ivec2(gl_GlobalInvocationID.xy), 3u), seed);
+        // As the bounce light takes it (bounce.colour).
+        light += mix(vec3(dot(lit, vec3(0.2126, 0.7152, 0.0722))), lit, frame.bounce_colour);
+    }
+    if (lava_sampled(origin)) {
+        vec3 down = cosine_direction(normal, vec2(random(seed), random(seed)));
+        down.y = -abs(down.y);
+        float facing = dot(normal, down);
+        float density = facing > 0.0 ? lava_density(origin, normal, down) : 0.0;
+        if (density > 0.0) {
+            float bsdf = facing / PI;
+            light += lava_seen(origin, down) * (bsdf / density) * power_heuristic(density, bsdf);
+        }
+    }
+    if (light != vec3(0.0)) {
+        vec4 bounce = imageLoad(bounce_out, pixel);
+        imageStore(bounce_out, pixel, vec4(bounce_held(bounce.rgb + light), bounce.a));
+    }
+}
+#else
+void main() {
+    // Every invocation, before any returns: it holds a barrier.
+    measure_sky();
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (pixel.x >= int(frame.target.x) || pixel.y >= int(frame.target.y)) {
+        return;
+    }
+    vec3 direction = pixel_direction(vec2(pixel));
+
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsNoneEXT, MASK_VIEW, vec3(0.0), frame.near,
+                          direction, trace_reach());
+    PROCEED_THROUGH_CUTOUTS(query);
+    // Past the dissolve's start a model's pixel shows what lies behind it
+    // as often as it is near the fog's end, at random each frame: what rises
+    // above the fog fades in, blended over frames, rather than popping in
+    // whole where retail starts drawing it. By distance from the eye, as
+    // the fog counts: by view depth the backdrop's land band dissolved at
+    // the view's middle but stood half-dissolved at its sides.
+    uint dither = hash(uint(pixel.x) * 0x9e3779b1u
+                       ^ hash(uint(pixel.y) + hash(uint(frame.frame_index) + 0x2545u)));
+    for (int pass = 0; pass < 2 && frame.distance_fog > 0.5; pass++) {
+        if (rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT) {
+            break;
+        }
+        uint kind = rayQueryGetIntersectionInstanceCustomIndexEXT(query, true);
+        if (kind != INSTANCE_MODELS && kind != INSTANCE_CUTOUT) {
+            break;
+        }
+        float t = rayQueryGetIntersectionTEXT(query, true);
+        // Out to the draw distance, which may lie past the fog's end.
+        float share = (t - frame.fog_dissolve)
+            / max(max(frame.far, frame.fog_end) - frame.fog_dissolve, 1.0);
+        if (share <= 0.0 || random(dither) >= share) {
+            break;
+        }
+        rayQueryInitializeEXT(query, scene, gl_RayFlagsNoneEXT, MASK_VIEW, vec3(0.0), t + 1.0,
+                              direction, trace_reach());
+        PROCEED_THROUGH_CUTOUTS(query);
+    }
+    imageStore(sun_out, pixel, vec4(0.0));
+    imageStore(motion_out, pixel, vec4(0.0));
+    bool met = rayQueryGetIntersectionTypeEXT(query, true) != gl_RayQueryCommittedIntersectionNoneEXT;
+    // With the eye under the water (the remastered camera) a view up past
+    // the water mesh's reach meets the surface at its plane, from below; a
+    // view that meets nothing is the water's (the resolve lays it).
+    bool under = frame.eye_under > 0.5;
+    float plane_t = 0.0;
+    if (under && direction.y > 0.0 && frame.eye.y < frame.water_level) {
+        float crossing = (frame.water_level - frame.eye.y) / direction.y;
+        vec3 plane = direction * crossing;
+        if (max(abs(plane.x), abs(plane.z)) > frame.water_reach
+            && (!met || crossing < rayQueryGetIntersectionTEXT(query, true))) {
+            plane_t = crossing;
+        }
+    }
+    if (under && !met && plane_t <= 0.0) {
+        imageStore(albedo_out, pixel, vec4(0.0));
+        imageStore(direct_out, pixel, vec4(0.0));
+        imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, 1.0));
+        imageStore(fog_out, pixel, vec4(0.0));
+        imageStore(geometry_out, pixel, vec4(0.0));
+        imageStore(depth_out, pixel, vec4(1.0));
+        return;
+    }
+    if (plane_t > 0.0) {
+        vec3 down = vec3(0.0, -1.0, 0.0);
+        Surface plane = Surface(vec4(0.0), down, down, false, false, true,
+                                frame.water_texture < 0.0 ? NO_TEXTURE : uint(frame.water_texture),
+                                0.0, 0.0, 1.0, NO_LIGHT, vec4(0.0), vec4(0.0), vec3(0.0), false,
+                                false, false, 0.0, down);
+        vec3 position = direction * plane_t;
+        store_water(pixel, plane, position, direction, plane_t,
+                    raster_depth(dot(position, frame.forward)));
+        return;
+    }
+    if (!met) {
+        if (shade_spray(pixel, direction, trace_reach())) {
+            return;
+        }
+        // A cheap sky where the ray met nothing, for the edges an upscaler
+        // blends; the composite draws the whole sky over it.
+        vec3 sky = frame.sky_modern > 0.5 ? sky_gradient(direction, frame.sky_disc) + sky_objects(direction, 0.0)
+                                          : frame.sky;
+        imageStore(albedo_out, pixel, vec4(sky, 0.0));
+        imageStore(direct_out, pixel, vec4(to_linear(sky), 0.0));
+        imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, 1.0));
+        imageStore(fog_out, pixel, vec4(0.0));
+        imageStore(geometry_out, pixel, vec4(0.0));
+        imageStore(depth_out, pixel, vec4(1.0));
+        if (frame.thermal > 0.5) {
+            imageStore(heat_out, pixel, vec4(frame.thermal_sky));
+        }
+        return;
+    }
+    float distance = rayQueryGetIntersectionTEXT(query, true);
+    Ray ray;
+    ray.origin = rayQueryGetIntersectionObjectRayOriginEXT(query, true);
+    ray.direction = direction;
+    ray.t = distance;
+    ray.dx = pixel_direction(vec2(pixel) + vec2(frame.texel_step, 0.0));
+    ray.dy = pixel_direction(vec2(pixel) + vec2(0.0, frame.texel_step));
+    ray.lod = -1.0;
+    Surface surface = hit_surface(query, ray);
+    imageStore(motion_out, pixel, vec4(hit_motion(query), 0.0));
+    vec3 position = direction * distance;
+    // Past the water mesh's reach the open water is its plane: a ray from
+    // above that reaches ground under the water's level crossed it there.
+    if (!under && surface.ground && frame.water_reach > 0.0 && frame.eye.y > frame.water_level
+        && frame.eye.y + position.y < frame.water_level) {
+        float crossing = (frame.water_level - frame.eye.y) / direction.y;
+        vec3 plane = direction * crossing;
+        if (crossing > 0.0 && crossing < distance
+            && max(abs(plane.x), abs(plane.z)) > frame.water_reach) {
+            surface.water = true;
+            surface.ground = false;
+            surface.normal = vec3(0.0, 1.0, 0.0);
+            surface.face = vec3(0.0, 1.0, 0.0);
+            surface.texture_slot = frame.water_texture < 0.0 ? NO_TEXTURE : uint(frame.water_texture);
+            distance = crossing;
+            position = plane;
+        }
+    }
+    // The spray's drops fly in the air, which a view from under the water
+    // never reaches.
+    if (!under && shade_spray(pixel, direction, distance)) {
+        return;
+    }
+    float view_z = dot(position, frame.forward);
+    // The raster's depth, for its later draws: what the ray met, through a
+    // masked sprite's keyed texels. The raster sorts masked sprites with
+    // its blended draws, back to front, so a glow behind one shows through
+    // them (the markers' flares around their edge strips).
+    float depth = raster_depth(view_z);
+
+    if (surface.water) {
+        store_water(pixel, surface, position, direction, distance, depth);
+        return;
+    }
+
+    // Infrared: the lamp at the eye and the heat, no shadow rays, no
+    // bounce light and no fog.
+    if (frame.thermal > 0.5) {
+        float heat = surface_heat(surface, position);
+        float image = thermal_image(surface, heat, direction, distance);
+        // A puddle reads as the water does (2026-10-26: all
+        // puddles appear the same as the water in infrared): the water's heat, level, its colour (the water mesh
+        // samples its texture at UV 0 at every corner, scene_water.rs).
+        float pool = surface.ground
+            ? smoothstep(0.45, 0.7, puddle_at(position, surface.flat_normal))
+            : 0.0;
+        if (pool > 0.0) {
+            Surface water = surface;
+            water.normal = vec3(0.0, 1.0, 0.0);
+            water.albedo.rgb = frame.water_texture < 0.0
+                ? vec3(1.0)
+                : textureLod(textures[nonuniformEXT(uint(frame.water_texture))], vec2(0.0), 0.0).rgb;
+            float water_heat = frame.water_glow > 0.0 ? frame.thermal_glowing : frame.thermal_water;
+            image = mix(image, thermal_image(water, water_heat, direction, distance), pool);
+        }
+        imageStore(heat_out, pixel, vec4(image));
+        imageStore(albedo_out, pixel, vec4(to_srgb(surface.albedo.rgb), surface.emissive ? 0.0 : 1.0));
+        imageStore(direct_out, pixel, vec4(0.0));
+        imageStore(bounce_out, pixel, vec4(0.0, 0.0, 0.0, 1.0));
+        imageStore(fog_out, pixel, vec4(0.0));
+        imageStore(geometry_out, pixel, vec4(surface.normal, distance));
+        imageStore(depth_out, pixel, vec4(depth));
+        return;
+    }
+
+    // The weather's wet (world_weather.rs): a puddle lies flat and mirrors,
+    // ringed while the rain falls; a wet model's metal mirrors more and
+    // its paint takes a faint gloss, its upper faces the most.
+    // A puddle is clear water: it shows the wet ground under it and mirrors
+    // as water does, faintly looking down and more toward the horizon
+    // (Fresnel), its reflection the water's, not the ground's colour, plasma
+    // and all; the rain rings it only where it stands, and the craft stirs
+    // it. `coat` marks such a clear layer over a surface's own colour.
+    // By the lake a puddle takes the lake's look (puddle_shore): its
+    // least share, its mirror and glints fading out at the waterline as the
+    // lake's do, its sunk bank flattening into the damp shore.
+    // On the detail patch round the eye the ground truly sinks under it
+    // (scene_ground_detail.rs, 2026-10-26: the ground carves
+    // inwards slightly and the puddles have volume): the hit is the bed,
+    // and the water's surface lies over it where the uncarved ground was,
+    // which the ray crossed on its way down; the shaded dip and dark bank
+    // stand in only where nothing is carved (beyond the patch).
+    float puddle = 0.0;
+    float puddle_water = 0.0;
+    float puddle_mirror = 0.0;
+    float puddle_least = WATER_F0;
+    float puddle_edge = 0.0;
+    float puddle_sunk = 0.0;
+    float puddle_carved = 0.0;
+    vec3 puddle_surface = position;
+    vec3 puddle_normal = surface.normal;
+    bool coat = false;
+    // How soaked bare rubber is, which darkens it as the rain does the
+    // ground.
+    float soaked = 0.0;
+    // Under the water (an eye under it sees nothing else) no weather wets
+    // anything: no puddle, sheen or coat.
+    if (!under && surface.ground && frame.puddles > 0.0) {
+        puddle = puddle_at(position, surface.flat_normal);
+        if (puddle > 0.0) {
+            puddle_carved = smoothstep(0.0, 1.0, surface.sunk);
+            if (surface.sunk > 0.0) {
+                puddle_surface = position - direction * (surface.sunk / max(-direction.y, 0.1));
+            }
+            float lake_edge;
+            float shore = puddle_shore(position + vec3(0.0, surface.sunk, 0.0), lake_edge);
+            float lake_least = max(frame.water_reflect, 0.02);
+            puddle_sunk = 1.0 - shore;
+            // The ground sinks under it (2026-10-26: the ground
+            // slightly tessellated inwards and the water over it, to bring it
+            // up to level): round the shore it slopes down into the hollow,
+            // shaded so, and the water lies level over the sunk part.
+            puddle_water = smoothstep(0.45, 0.7, puddle);
+            vec3 ground = surface.normal;
+            if (puddle_water < 1.0) {
+                vec3 e = vec3(24.0, 0.0, 0.0);
+                vec2 slope = vec2(puddle_at(position + e.xyy, ground) - puddle_at(position - e.xyy, ground),
+                                  puddle_at(position + e.yyx, ground) - puddle_at(position - e.yyx, ground));
+                ground = normalize(ground + vec3(slope.x, 0.0, slope.y) * (20.0 / 48.0)
+                                   * (1.0 - puddle_water) * puddle_sunk * (1.0 - puddle_carved));
+            }
+            surface.normal = ground;
+            vec3 still = normalize(mix(ground, vec3(0.0, 1.0, 0.0), puddle_water));
+            still = normalize(mix(still, normalize(rained(still, puddle_surface)), puddle_water));
+            puddle_normal = normalize(waked(still, puddle_surface));
+            // A mirror as standing water is, the more toward the horizon,
+            // its reflection the water's own, plasma, lasers, flames and all.
+            float facing = clamp(dot(-direction, puddle_normal), 0.0, 1.0);
+            float fresnel = pow(1.0 - facing, 5.0);
+            float water = WATER_F0 + (1.0 - WATER_F0) * fresnel;
+            float lake = (lake_least + (1.0 - lake_least) * fresnel) * lake_edge;
+            puddle_mirror = min(puddle_water * mix(water, lake, shore)
+                                    * max(frame.reflect_gain, 1.0),
+                                0.95);
+            puddle_least = mix(WATER_F0, lake_least, shore);
+            puddle_edge = puddle_water * mix(1.0, lake_edge, shore);
+        }
+    } else if (!under && !surface.ground && !surface.emissive && frame.wet_models > 0.0) {
+        wet_model(surface.normal.y, surface.bare, surface.metal, surface.rough, soaked, coat);
+    }
+
+    float bounce_scale;
+    vec3 sun;
+    vec3 sun_toward;
+    uint seed = hash(uint(pixel.x) + hash(uint(pixel.y) + hash(uint(frame.frame_index))));
+    vec3 direct = direct_light(surface, position, true, false, true, seed, bounce_scale, sun,
+                               sun_toward);
+    // A flash of lightning lights what faces it and sees it, from high
+    // toward it: not the inside of a tunnel or a bunker.
+    vec4 flash = lightning_flash();
+    // Under the water it comes down through the surface as the sun does.
+    float sunk = sunk_depth(position);
+    if (flash.w > 0.0 && sunk <= 0.0) {
+        vec3 toward_flash = flash_toward(flash);
+        float facing_flash = max(dot(surface.normal, toward_flash), 0.0);
+        if (facing_flash > 0.0
+            && !occluded(position + surface.lift + surface.face * 0.5, toward_flash, 1.0e6)) {
+            direct += light_of(frame.lightning_color)
+                * (frame.lightning_light * flash.w * facing_flash);
+        }
+    } else if (flash.w > 0.0) {
+        vec3 toward_flash = flash_toward(flash);
+        vec3 up;
+        vec3 reach = under_plane(toward_flash, sunk, up);
+        float facing_flash = max(dot(surface.normal, up), 0.0);
+        vec3 entry;
+        if (facing_flash > 0.0
+            && !sun_cut(position + surface.lift + surface.face * 0.5, toward_flash, sunk, entry)) {
+            direct += light_of(frame.lightning_color) * reach
+                * (frame.lightning_light * flash.w * facing_flash);
+        }
+    }
+    // The rain wets the ground as long as it has soaked it (world_weather.rs):
+    // darker, with a water film's broad, faint sheen where the sun catches it.
+    float wet = surface.ground && !under ? frame.wet_ground : 0.0;
+    float pooled = puddle_water * puddle_sunk;
+    vec3 wet_sheen = vec3(0.0);
+    if (wet > 0.0 && pooled < 1.0 && max(sun.r, max(sun.g, sun.b)) > 0.0) {
+        wet_sheen = wet * (1.0 - pooled) * sun_light()
+            * sun_specular(surface.normal, direction, sun_toward, WET_GROUND_ROUGHNESS,
+                           vec3(WATER_F0));
+    }
+    // Ground just above the water is damp; wet ground darker, the more
+    // under a puddle and at its bank, so it sits a little sunk.
+    // The darkenings were tuned in retail's tones: as factors of linear
+    // light they take the power of retail's gamma.
+    float damp = surface.ground ? damp_ground(position) : 1.0;
+    float bank = smoothstep(0.0, 0.3, puddle) * (1.0 - smoothstep(0.35, 0.8, puddle));
+    float darker = damp * (1.0 - RAIN_DARKEN * max(wet, soaked))
+        * (1.0 - 0.2 * puddle * puddle_sunk)
+        * (1.0 - 0.125 * bank * puddle_sunk * (1.0 - puddle_carved));
+    vec3 albedo = surface.albedo.rgb * pow(max(darker, 0.0), 2.2);
+    vec3 bounce = vec3(0.0);
+    // The sun's shadow, toward a point of its disc: soft once the denoiser
+    // has gathered the frames' and neighbours' samples.
+    float seen = 1.0;
+    if (max(sun.r, max(sun.g, sun.b)) > 0.0 && sunk > 0.0) {
+        // Under the water, toward a point of the sun's disc along its way
+        // bent at the surface.
+        vec3 toward = cone_direction(frame.sun_direction, frame.shadow_cone,
+                                     even_numbers(pixel, 2u));
+        vec3 from = position + surface.lift + surface.face * 0.5
+            + surface.normal * frame.shadow_lift;
+        vec3 entry;
+        seen = sun_cut(from, toward, sunk, entry) ? 0.0 : cloud_light(entry);
+    } else if (max(sun.r, max(sun.g, sun.b)) > 0.0) {
+        vec3 toward = cone_direction(sun_toward, frame.shadow_cone, even_numbers(pixel, 2u));
+        vec3 from = position + surface.lift + surface.face * 0.5
+            + surface.normal * frame.shadow_lift;
+        seen = occluded(from, toward, 1.0e6) ? 0.0 : cloud_light(position);
+    }
+    if (bounce_scale > 0.0) {
+        // The bounce light comes from the path pass (PATHS_PASS), which
+        // finds the hit from these.
+        imageStore(path_surface, pixel, vec4(octahedral(surface.face), surface.metal,
+                                             coat ? -surface.rough : surface.rough));
+    }
+    // Specular from the sun, every model's: a dielectric's (F0 0.04),
+    // rising to the metal's own colour as it is metallic, under the same
+    // soft shadow as its diffuse light; the diffuse less what the surface
+    // reflects, and none of a metal's.
+    vec3 specular = vec3(0.0);
+    if (!surface.ground && !surface.emissive && max(sun.r, max(sun.g, sun.b)) > 0.0) {
+        vec3 f0 = mix(vec3(0.04), albedo, surface.metal);
+        specular = sun_light() * sun_specular(surface.normal, direction, sun_toward,
+                                              min(surface.rough, MODEL_SHEEN), f0);
+        if (sunk > 0.0) {
+            vec3 unused_up;
+            specular *= sun_under_water(position, sunk, unused_up);
+        }
+        float diffuse = (1.0 - surface.metal)
+            * (1.0 - fresnel(vec3(0.04), dot(surface.normal, -direction)).x);
+        direct *= diffuse;
+        sun *= diffuse;
+    }
+
+    vec4 fog;
+    if (frame.distance_fog > 0.5 || under) {
+        // The distance fog in the mist's grid fogs it, as all else, or the
+        // water round an eye under it (the resolve's); a model whose draw
+        // fogs it in its own (the actor flash) keeps that.
+        fog = surface.own_fog ? surface.fog : vec4(0.0);
+    } else if (surface.ground) {
+        fog = haze(view_z);
+    } else {
+        // A model takes the fog retail gave its vertices.
+        fog = surface.fog;
+    }
+    // A puddle is standing water over the wet ground: it transmits `(1 -
+    // puddle_mirror)` of the ground bed below and adds the same deterministic
+    // mirror ray (`shade_ray` + `mirrored_effects`) and surface glints
+    // (`water_surface_glints`, lightning included) as `water_color`, uncoloured
+    // by the mud below.
+    if (puddle_mirror > 0.0) {
+        direct *= 1.0 - puddle_mirror;
+        sun *= 1.0 - puddle_mirror;
+        bounce_scale *= 1.0 - puddle_mirror;
+        uint unsampled = 0u;
+        float reflect_t;
+        vec3 mirrored = reflect(direction, puddle_normal);
+        vec3 reflected = shade_ray(puddle_surface + surface.face * 0.5, mirrored, REFLECTION_REACH,
+                                   to_linear(sky_along(mirrored)), 0.0, MASK_WORLD,
+                                   true, false, true, unsampled, reflect_t);
+        // The effects and glints are worked out in retail's tones.
+        reflected += to_linear(mirrored_effects(puddle_surface + surface.face * 0.5, mirrored,
+                                                reflect_t));
+        vec4 far_fog = mirror_fog(length(puddle_surface), reflect_t, reflect_t < REFLECTION_REACH);
+        reflected = to_linear(mix(to_srgb(reflected), far_fog.rgb, far_fog.a));
+        vec3 glints = water_surface_glints(puddle_surface, direction, puddle_normal, surface.face,
+                                           puddle_least, 0.0, puddle_edge);
+        if (flash.w > 0.0) {
+            float mirror = max(dot(mirrored, flash_toward(flash)), 0.0);
+            glints += frame.lightning_color * (flash.w * 1.5 * pow(mirror, 48.0)) * puddle_edge;
+        }
+        glints = to_linear(glints);
+        // The resolve multiplies by the albedo as stored (sRGB, 8 bits a
+        // channel), so divide by that same value: the water's light comes
+        // back whole.
+        albedo = to_linear(max(round(to_srgb(albedo) * 255.0), vec3(1.0)) / 255.0);
+        vec3 water_light = (reflected * puddle_mirror + glints) / albedo;
+        direct += water_light;
+    }
+    // A struck crystal's spark, its own light (crystal_flares.rs), on the
+    // crystals' faces alone: not on the craft or anything else near it.
+    if (surface.crystal && frame.spark_count > 0.5) {
+        vec3 spark = to_linear(sparks_at(position));
+        if (surface.emissive) {
+            albedo += spark;
+        } else {
+            direct += spark / max(albedo, vec3(0.003));
+        }
+    }
+    // The albedo is stored sRGB-encoded (linear in 8 bits bands the darks).
+    imageStore(albedo_out, pixel, vec4(to_srgb(albedo), surface.emissive ? 0.0 : 1.0));
+    // An emissive surface is finished: its own colour, which the resolve
+    // takes from the light image.
+    imageStore(direct_out, pixel, surface.emissive ? vec4(albedo, 0.0) : vec4(direct, bounce_scale));
+    imageStore(bounce_out, pixel, vec4(bounce, seen));
+    imageStore(sun_out, pixel, vec4(sun, 0.0));
+    imageStore(specular_out, pixel, vec4(specular + wet_sheen, 0.0));
+    imageStore(fog_out, pixel, fog);
+    imageStore(geometry_out, pixel, vec4(surface.normal, distance));
+    imageStore(depth_out, pixel, vec4(depth));
+}
+#endif

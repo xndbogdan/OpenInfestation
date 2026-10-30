@@ -1,0 +1,220 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original 00486420; the child factory, burst, message walk and disposal recorded."
+ },
+ "guards": [
+  {
+   "address": 4744224,
+   "size": 133,
+   "sha256": "5d85f6e5428ea223010d755fa2e27cca89fff35d3842476ca6f8a0957941faff"
+  }
+ ],
+ "coverage": {
+  "cases": 4
+ },
+ "cases": [
+  {
+   "input": {
+    "flags": 36,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "handle": 65604
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      54,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      1000,
+      600,
+      2000,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "walk",
+     "self": true,
+     "radius": 2000,
+     "code": 12,
+     "argument": 2000
+    },
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ]
+  },
+  {
+   "input": {
+    "flags": 2147483684,
+    "position": [
+     1000,
+     600,
+     2000
+    ],
+    "handle": 65604
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      54,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      1000,
+      600,
+      2000,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "walk",
+     "self": true,
+     "radius": 2000,
+     "code": 12,
+     "argument": 2000
+    },
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ]
+  },
+  {
+   "input": {
+    "flags": 36,
+    "position": [
+     65535,
+     0,
+     32768
+    ],
+    "handle": 4294901761
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      54,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      65535,
+      0,
+      32768,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "walk",
+     "self": true,
+     "radius": 2000,
+     "code": 12,
+     "argument": 2000
+    },
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ]
+  },
+  {
+   "input": {
+    "flags": 4294967295,
+    "position": [
+     32767,
+     32768,
+     1
+    ],
+    "handle": 7
+   },
+   "events": [
+    {
+     "kind": "child",
+     "self": true,
+     "args": [
+      0,
+      54,
+      0
+     ]
+    },
+    {
+     "kind": "burst",
+     "words": [
+      16,
+      32767,
+      32768,
+      1,
+      20
+     ],
+     "dwords": [
+      1,
+      1,
+      1,
+      8,
+      0
+     ]
+    },
+    {
+     "kind": "walk",
+     "self": true,
+     "radius": 2000,
+     "code": 12,
+     "argument": 2000
+    },
+    {
+     "kind": "dispose",
+     "self": true
+    }
+   ]
+  }
+ ]
+}

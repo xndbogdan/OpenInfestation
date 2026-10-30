@@ -1,0 +1,2486 @@
+{
+  "schema_version": 1,
+  "retail_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "source_guards": [
+    {
+      "address": 4411728,
+      "length": 20,
+      "sha256": "a04bec305569a8cde2ebb576859b61ba0345a97228a32d5d7e5841522450a5df"
+    },
+    {
+      "address": 4341328,
+      "length": 143,
+      "sha256": "e983c907a545fa923e6b1f1b71adf49b63aa5dcc8c1ad16cdcf5c3f13f1e4e26"
+    },
+    {
+      "address": 4447744,
+      "length": 164,
+      "sha256": "47e50b960e627a382ef7e9ca799774e7d794b91421fe704f2f0d6fb38ca581a8"
+    }
+  ],
+  "virtual_128": {
+    "parent": {
+      "table": 5376900,
+      "target": 4341328
+    },
+    "selector10": {
+      "table": 5377224,
+      "target": 4341328
+    },
+    "selector36": {
+      "table": 5406432,
+      "target": 4341328
+    },
+    "selector35": {
+      "table": 5383996,
+      "target": 4447744
+    }
+  },
+  "scope": "Original435150 thunk and parent/10/36 +128=423E50,35 +128=43DE00.\n\nThe allocator return is supplied (nonnull, genuine NULL, or stopped service).\nOriginal constructor writes and48F060 execute unchanged. Missing process NULL\nor XYZ cases stop before that source instruction; only caller fields/RNG and\nallocation custody are compared in Rust, not partial raw target backing.\n",
+  "cases": [
+    {
+      "name": "parent_enter_0",
+      "input": {
+        "profile": "parent",
+        "entering": 0,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "parent_enter_1",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_enter_100",
+      "input": {
+        "profile": "parent",
+        "entering": 256,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "parent_enter_101",
+      "input": {
+        "profile": "parent",
+        "entering": 257,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_enter_ffffffff",
+      "input": {
+        "profile": "parent",
+        "entering": 4294967295,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_rng_0",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 0,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 1299827
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_rng_1",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 1,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2001,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2599648
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_rng_ffffffff",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 4294967295,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 6
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_rng_80000000",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483648,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2148783475
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_rng_7fffffff",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483647,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2147483654
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_null_allocation",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": true,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": null,
+        "rng": 3073801867
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "parent_stop_allocation",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "allocation",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "allocation"
+    },
+    {
+      "name": "parent_stop_process_null",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "process_null",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "process_null"
+    },
+    {
+      "name": "parent_stop_position",
+      "input": {
+        "profile": "parent",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "position",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "position"
+    },
+    {
+      "name": "selector10_enter_0",
+      "input": {
+        "profile": "selector10",
+        "entering": 0,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector10_enter_1",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_enter_100",
+      "input": {
+        "profile": "selector10",
+        "entering": 256,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector10_enter_101",
+      "input": {
+        "profile": "selector10",
+        "entering": 257,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_enter_ffffffff",
+      "input": {
+        "profile": "selector10",
+        "entering": 4294967295,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_rng_0",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 0,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 1299827
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_rng_1",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 1,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2001,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2599648
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_rng_ffffffff",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 4294967295,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 6
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_rng_80000000",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483648,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2148783475
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_rng_7fffffff",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483647,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2147483654
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_null_allocation",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": true,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": null,
+        "rng": 3073801867
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector10_stop_allocation",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "allocation",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "allocation"
+    },
+    {
+      "name": "selector10_stop_process_null",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "process_null",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "process_null"
+    },
+    {
+      "name": "selector10_stop_position",
+      "input": {
+        "profile": "selector10",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "position",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "position"
+    },
+    {
+      "name": "selector36_enter_0",
+      "input": {
+        "profile": "selector36",
+        "entering": 0,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector36_enter_1",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_enter_100",
+      "input": {
+        "profile": "selector36",
+        "entering": 256,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector36_enter_101",
+      "input": {
+        "profile": "selector36",
+        "entering": 257,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_enter_ffffffff",
+      "input": {
+        "profile": "selector36",
+        "entering": 4294967295,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_rng_0",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 0,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 1299827
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_rng_1",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 1,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2001,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2599648
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_rng_ffffffff",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 4294967295,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 6
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_rng_80000000",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483648,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2148783475
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_rng_7fffffff",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483647,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2147483654
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_null_allocation",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": true,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": null,
+        "rng": 3073801867
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector36_stop_allocation",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "allocation",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "allocation"
+    },
+    {
+      "name": "selector36_stop_process_null",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "process_null",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "process_null"
+    },
+    {
+      "name": "selector36_stop_position",
+      "input": {
+        "profile": "selector36",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "position",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "position"
+    },
+    {
+      "name": "selector35_enter_0",
+      "input": {
+        "profile": "selector35",
+        "entering": 0,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector35_enter_1",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_enter_100",
+      "input": {
+        "profile": "selector35",
+        "entering": 256,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5443872,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "new_target": null,
+      "allocation_attempts": 0,
+      "stopped": null
+    },
+    {
+      "name": "selector35_enter_101",
+      "input": {
+        "profile": "selector35",
+        "entering": 257,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_enter_ffffffff",
+      "input": {
+        "profile": "selector35",
+        "entering": 4294967295,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 3073801867,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_rng_0",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 0,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 1299827,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_rng_1",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 1,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2001,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2599648,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_rng_ffffffff",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 4294967295,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 2000,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 6,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_rng_80000000",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483648,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2148783475,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_rng_7fffffff",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 2147483647,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": false,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3024,
+        "speed": 0,
+        "fire": 0,
+        "target": "new",
+        "rng": 2147483654,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": {
+        "vtable": 5370196,
+        "handle": 1985229328,
+        "focus": [
+          65535,
+          32768,
+          7
+        ],
+        "kind": 8
+      },
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_null_allocation",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": true,
+        "stop": null,
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 0,
+        "distance": 0,
+        "duration": 3465,
+        "speed": 0,
+        "fire": 0,
+        "target": null,
+        "rng": 3073801867,
+        "word230": 500,
+        "word234": 500
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": null
+    },
+    {
+      "name": "selector35_stop_allocation",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "allocation",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "allocation"
+    },
+    {
+      "name": "selector35_stop_process_null",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "process_null",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "process_null"
+    },
+    {
+      "name": "selector35_stop_position",
+      "input": {
+        "profile": "selector35",
+        "entering": 1,
+        "allocation_null": false,
+        "stop": "position",
+        "position": [
+          65535,
+          32768,
+          7
+        ],
+        "process_null": 1985229328,
+        "rng": 305419896,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "status": 5443872,
+        "fire": 165,
+        "old": true,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "output": {
+        "status": 5442864,
+        "timer": 2864434397,
+        "distance": 3735928559,
+        "duration": 2147483648,
+        "speed": 305419896,
+        "fire": 165,
+        "target": "old",
+        "rng": 305419896,
+        "word230": 2271560481,
+        "word234": 2864434397
+      },
+      "new_target": null,
+      "allocation_attempts": 1,
+      "stopped": "position"
+    }
+  ]
+}

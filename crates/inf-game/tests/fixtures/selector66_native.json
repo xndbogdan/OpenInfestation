@@ -1,0 +1,5279 @@
+{
+  "provenance": {
+    "scope": "Original4051C0/4053C0/405420/4054C0; real object setters/disposal.\nOwner resolution, model refresh, terrain height, particles, actor factory and\nreferent draw returns are explicitly supplied lower-service segments.\n",
+    "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956"
+  },
+  "cases": [
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "refresh",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 33024,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 33024,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 0,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 291,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 35,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "refresh",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 33024,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 35,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 7,
+          "dirty": 33026,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 0,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 35,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "refresh"
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "refresh",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 33024,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 33024,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "mutate_refresh": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "refresh",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 33024,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 7,
+          "dirty": 33026,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 305419864,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 305419896,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "owner_null": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 0,
+          "dirty": 32770,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 7,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "ground",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                250,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                250,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              250,
+              300
+            ],
+            "velocity": [
+              5,
+              0,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            250,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                250,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                250,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              250,
+              300
+            ],
+            "velocity": [
+              5,
+              0,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            250,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 7,
+          "dirty": 32768,
+          "position": [
+            100,
+            250,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            250,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          250,
+          300
+        ],
+        "velocity": [
+          5,
+          0,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 7,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 100
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "ground",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 7,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 0,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 33333,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 500000,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 500000,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 0,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 0,
+          "dirty": 32770,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 500000,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 5999999,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 6033332,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 6033332,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 6033332,
+        "idle": 33333,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 4294967295,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 1,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 4294967295,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "smoke"
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "flash"
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 7,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "ground"
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "ground",
+          "state": {
+            "actor": {
+              "flags": 7,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 7,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "mutate_smoke": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                81,
+                82,
+                83
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            81,
+            82,
+            83
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            81,
+            82,
+            83
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          100,
+          0,
+          0
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          0
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 1,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        },
+        {
+          "kind": "flash",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 0,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 2,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 0,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "update",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 1,
+        "idle": 4294967295,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "smoke",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 33334,
+            "idle": 4294967295,
+            "previous": [
+              100,
+              200,
+              300
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          },
+          "selector": 0,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "flags": 0
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 0,
+          "dirty": 32770,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 33334,
+        "idle": 4294967295,
+        "previous": [
+          100,
+          200,
+          300
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "cleanup",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 0,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 0,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 4194307,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 0,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "cleanup",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 0,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 4294967295,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 4294967295,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 4294967292,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "cleanup",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 256,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 256,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 4194563,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 256,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "cleanup",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 7,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 268435456,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 272629767,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 268435456,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "cleanup",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "owner_null": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        },
+        {
+          "kind": "component"
+        },
+        {
+          "kind": "update",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32774,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 10,
+              "source": 878051330,
+              "classification": 2
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32774,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 10,
+          "source": 878051330,
+          "classification": 2
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "null_parent": true
+      },
+      "events": [],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "factory_null": true
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "component_null": true
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        },
+        {
+          "kind": "component"
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "mutate_factory": true
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        },
+        {
+          "kind": "component"
+        },
+        {
+          "kind": "update",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32774,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 77,
+              "source": 878051330,
+              "classification": 88
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                99,
+                100,
+                101
+              ],
+              "model": 9,
+              "identity": 77,
+              "source": 3735928559,
+              "classification": 88
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32774,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 77,
+          "source": 878051330,
+          "classification": 88
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            99,
+            100,
+            101
+          ],
+          "model": 9,
+          "identity": 77,
+          "source": 3735928559,
+          "classification": 88
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "factory"
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "attach",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "update"
+      },
+      "events": [
+        {
+          "kind": "factory",
+          "source": 1985229328,
+          "position": [
+            400,
+            500,
+            600
+          ]
+        },
+        {
+          "kind": "component"
+        },
+        {
+          "kind": "update",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32774,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 10,
+              "source": 878051330,
+              "classification": 2
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                400,
+                500,
+                600
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32774,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 10,
+          "source": 878051330,
+          "classification": 2
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    },
+    {
+      "input": {
+        "op": "draw",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "draw",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 290,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "draw",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "owner_null": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 0,
+          "dirty": 32770,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": true
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "draw",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "mutate_draw": true
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "draw",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 290,
+          "dirty": 16386,
+          "position": [
+            400,
+            500,
+            600
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": true
+    },
+    {
+      "input": {
+        "op": "draw",
+        "actor_flags": 263,
+        "actor_dirty": 32768,
+        "actor_position": [
+          100,
+          200,
+          300
+        ],
+        "actor_model": 3,
+        "actor_identity": 4,
+        "actor_handle": 305397761,
+        "actor_source": 878051330,
+        "actor_class": 1,
+        "owner_flags": 291,
+        "owner_dirty": 16384,
+        "owner_position": [
+          400,
+          500,
+          600
+        ],
+        "owner_model": 9,
+        "owner_identity": 10,
+        "owner_handle": 878051330,
+        "owner_source": 3735928559,
+        "owner_class": 2,
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "null": 1985229328,
+        "delta": 33333,
+        "height": 250,
+        "stop": "draw"
+      },
+      "events": [
+        {
+          "kind": "resolve",
+          "source": 878051330
+        },
+        {
+          "kind": "draw",
+          "state": {
+            "actor": {
+              "flags": 263,
+              "dirty": 32768,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 3,
+              "identity": 4,
+              "source": 878051330,
+              "classification": 1
+            },
+            "owner": {
+              "flags": 291,
+              "dirty": 16384,
+              "position": [
+                100,
+                200,
+                300
+              ],
+              "model": 9,
+              "identity": 10,
+              "source": 3735928559,
+              "classification": 2
+            },
+            "saved": 287454020,
+            "elapsed": 0,
+            "idle": 0,
+            "previous": [
+              1,
+              2,
+              3
+            ],
+            "velocity": [
+              5,
+              65530,
+              7
+            ],
+            "disposed": false
+          }
+        }
+      ],
+      "output": {
+        "actor": {
+          "flags": 263,
+          "dirty": 32768,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 3,
+          "identity": 4,
+          "source": 878051330,
+          "classification": 1
+        },
+        "owner": {
+          "flags": 291,
+          "dirty": 16384,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "model": 9,
+          "identity": 10,
+          "source": 3735928559,
+          "classification": 2
+        },
+        "saved": 287454020,
+        "elapsed": 0,
+        "idle": 0,
+        "previous": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          5,
+          65530,
+          7
+        ],
+        "disposed": false
+      },
+      "normal_return": false
+    }
+  ]
+}

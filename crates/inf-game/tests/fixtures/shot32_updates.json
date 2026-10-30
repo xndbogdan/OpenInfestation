@@ -1,0 +1,6216 @@
+{
+ "updates": [
+  {
+   "at": "E6D7C7:14FF",
+   "shot": "3857ea0",
+   "delta": 125000,
+   "rng_in": 196190603,
+   "rng_out": 2505931551,
+   "entry": {
+    "position": [
+     47583,
+     96,
+     27845
+    ],
+    "aim": [
+     65188,
+     0,
+     7
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213057537
+   },
+   "exit": {
+    "position": [
+     47583,
+     96,
+     27845
+    ],
+    "aim": [
+     65188,
+     0,
+     7
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 50031
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      47583,
+      96,
+      27845
+     ],
+     "velocity": [
+      62537,
+      0,
+      60
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      145686529,
+      6338691,
+      27852,
+      2,
+      6338691,
+      5205196,
+      4288086016
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon01.log"
+  },
+  {
+   "at": "E6EA12:1E9",
+   "shot": "3857ea0",
+   "delta": 125000,
+   "rng_in": 3866355300,
+   "rng_out": 2810847751,
+   "entry": {
+    "position": [
+     47578,
+     96,
+     27844
+    ],
+    "aim": [
+     65207,
+     0,
+     1
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "exit": {
+    "position": [
+     47578,
+     96,
+     27844
+    ],
+    "aim": [
+     65207,
+     0,
+     1
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 42890
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon01.log"
+  },
+  {
+   "at": "E6FC48:A2E",
+   "shot": "3857ea0",
+   "delta": 125000,
+   "rng_in": 3585673002,
+   "rng_out": 2062537813,
+   "entry": {
+    "position": [
+     47573,
+     96,
+     27844
+    ],
+    "aim": [
+     65219,
+     0,
+     0
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "exit": {
+    "position": [
+     47573,
+     96,
+     27844
+    ],
+    "aim": [
+     65219,
+     0,
+     0
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 31471
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon01.log"
+  },
+  {
+   "at": "E70E07:1589",
+   "shot": "3857ea0",
+   "delta": 125000,
+   "rng_in": 2923416690,
+   "rng_out": 1926151165,
+   "entry": {
+    "position": [
+     47568,
+     96,
+     27844
+    ],
+    "aim": [
+     65223,
+     0,
+     65535
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "exit": {
+    "position": [
+     47568,
+     96,
+     27844
+    ],
+    "aim": [
+     65223,
+     0,
+     65535
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 29390
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon01.log"
+  },
+  {
+   "at": "E71F45:180A",
+   "shot": "3857ea0",
+   "delta": 125000,
+   "rng_in": 2848081392,
+   "rng_out": 2848081392,
+   "entry": {
+    "position": [
+     47564,
+     96,
+     27844
+    ],
+    "aim": [
+     65221,
+     0,
+     65530
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "exit": {
+    "position": [
+     47564,
+     96,
+     27844
+    ],
+    "aim": [
+     65221,
+     0,
+     65530
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213057537
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon01.log"
+  },
+  {
+   "at": "2EC5D6:2EE",
+   "shot": "3791400",
+   "delta": 125000,
+   "rng_in": 1685779252,
+   "rng_out": 1950771800,
+   "entry": {
+    "position": [
+     21819,
+     111,
+     36566
+    ],
+    "aim": [
+     32,
+     65487,
+     177
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21819,
+     111,
+     36566
+    ],
+    "aim": [
+     32,
+     65487,
+     177
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 8611
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 8,
+     "target": [
+      5370196,
+      0,
+      4085083,
+      7704455,
+      8,
+      58263980,
+      33,
+      17
+     ],
+     "draws": 3,
+     "ground_selector": 2
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2ED9E2:16C0",
+   "shot": "3791400",
+   "delta": 125000,
+   "rng_in": 3631260347,
+   "rng_out": 4082087442,
+   "entry": {
+    "position": [
+     21822,
+     109,
+     36567
+    ],
+    "aim": [
+     29,
+     65489,
+     176
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21822,
+     109,
+     36567
+    ],
+    "aim": [
+     29,
+     65489,
+     176
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 62287
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2EF137:16AB",
+   "shot": "3791400",
+   "delta": 125000,
+   "rng_in": 3455488424,
+   "rng_out": 2830672379,
+   "entry": {
+    "position": [
+     21825,
+     112,
+     36577
+    ],
+    "aim": [
+     29,
+     65490,
+     173
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21825,
+     112,
+     36577
+    ],
+    "aim": [
+     29,
+     65490,
+     173
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 43192
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2EF137:171B",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 2830672379,
+   "rng_out": 3222622863,
+   "entry": {
+    "position": [
+     21834,
+     108,
+     36573
+    ],
+    "aim": [
+     20,
+     65494,
+     177
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21834,
+     108,
+     36573
+    ],
+    "aim": [
+     20,
+     65494,
+     177
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 31511
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 8,
+     "target": [
+      5370196,
+      0,
+      4347230,
+      7704462,
+      8,
+      58263980,
+      33,
+      17
+     ],
+     "draws": 3,
+     "ground_selector": 2
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F0A1B:1E6A",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 1528738674,
+   "rng_out": 1705451564,
+   "entry": {
+    "position": [
+     21841,
+     115,
+     36590
+    ],
+    "aim": [
+     1066,
+     533,
+     2233
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21841,
+     115,
+     36590
+    ],
+    "aim": [
+     1066,
+     533,
+     2233
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 43242
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21841,
+      115,
+      36590
+     ],
+     "velocity": [
+      1263,
+      631,
+      2646
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F0A1B:2055",
+   "shot": "3791400",
+   "delta": 125000,
+   "rng_in": 1705451564,
+   "rng_out": 3108316207,
+   "entry": {
+    "position": [
+     21832,
+     119,
+     36593
+    ],
+    "aim": [
+     1075,
+     529,
+     2230
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21832,
+     119,
+     36593
+    ],
+    "aim": [
+     1075,
+     529,
+     2230
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 47429
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F215A:165C",
+   "shot": "3791400",
+   "delta": 125000,
+   "rng_in": 3106019415,
+   "rng_out": 3106019415,
+   "entry": {
+    "position": [
+     21841,
+     125,
+     36616
+    ],
+    "aim": [
+     1086,
+     534,
+     2203
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21841,
+     125,
+     36616
+    ],
+    "aim": [
+     1086,
+     534,
+     2203
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F215A:16E6",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 3106019415,
+   "rng_out": 5084542,
+   "entry": {
+    "position": [
+     21850,
+     122,
+     36613
+    ],
+    "aim": [
+     1077,
+     537,
+     2206
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21850,
+     122,
+     36613
+    ],
+    "aim": [
+     1077,
+     537,
+     2206
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 77
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F372D:1F4D",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 3733155319,
+   "rng_out": 1105013406,
+   "entry": {
+    "position": [
+     21862,
+     131,
+     36639
+    ],
+    "aim": [
+     1085,
+     538,
+     2176
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21862,
+     131,
+     36639
+    ],
+    "aim": [
+     1085,
+     538,
+     2176
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 16861
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F4DE5:1810",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 2496905937,
+   "rng_out": 2496905937,
+   "entry": {
+    "position": [
+     21872,
+     141,
+     36657
+    ],
+    "aim": [
+     1096,
+     536,
+     2153
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21872,
+     141,
+     36657
+    ],
+    "aim": [
+     1096,
+     536,
+     2153
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2F8F27:27B1",
+   "shot": "3791410",
+   "delta": 125000,
+   "rng_in": 742595932,
+   "rng_out": 1667668083,
+   "entry": {
+    "position": [
+     21865,
+     155,
+     36646
+    ],
+    "aim": [
+     61,
+     65473,
+     308
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21865,
+     155,
+     36646
+    ],
+    "aim": [
+     61,
+     65473,
+     308
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 56808
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21865,
+      155,
+      36646
+     ],
+     "velocity": [
+      571,
+      64947,
+      2885
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 8,
+     "target": [
+      5370196,
+      0,
+      6051238,
+      36954,
+      8,
+      58296269,
+      33,
+      33
+     ],
+     "draws": 3,
+     "ground_selector": 2
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2FA4AC:1E6A",
+   "shot": "3791410",
+   "delta": 125000,
+   "rng_in": 2969142615,
+   "rng_out": 2273576729,
+   "entry": {
+    "position": [
+     21867,
+     158,
+     36643
+    ],
+    "aim": [
+     59,
+     65473,
+     309
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21867,
+     158,
+     36643
+    ],
+    "aim": [
+     59,
+     65473,
+     309
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 56247
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21867,
+      158,
+      36643
+     ],
+     "velocity": [
+      551,
+      64947,
+      2889
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2FBAEC:E7E",
+   "shot": "3791410",
+   "delta": 125000,
+   "rng_in": 3898414169,
+   "rng_out": 3829304408,
+   "entry": {
+    "position": [
+     21869,
+     160,
+     36640
+    ],
+    "aim": [
+     57,
+     65474,
+     309
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21869,
+     160,
+     36640
+    ],
+    "aim": [
+     57,
+     65474,
+     309
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 58430
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2FBAEC:EEE",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 3829304408,
+   "rng_out": 2878939580,
+   "entry": {
+    "position": [
+     21877,
+     156,
+     36638
+    ],
+    "aim": [
+     49,
+     65478,
+     311
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21877,
+     156,
+     36638
+    ],
+    "aim": [
+     49,
+     65478,
+     311
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 41986
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 8,
+     "target": [
+      5370196,
+      0,
+      6444454,
+      36949,
+      8,
+      58296269,
+      33,
+      32
+     ],
+     "draws": 3,
+     "ground_selector": 2
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2FCFA9:F85",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 2504464325,
+   "rng_out": 2042551636,
+   "entry": {
+    "position": [
+     21878,
+     159,
+     36636
+    ],
+    "aim": [
+     64,
+     65473,
+     372
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21878,
+     159,
+     36636
+    ],
+    "aim": [
+     64,
+     65473,
+     372
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 31166
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02a.log"
+  },
+  {
+   "at": "2FE74C:A32",
+   "shot": "3791410",
+   "delta": 125000,
+   "rng_in": 749050875,
+   "rng_out": 749050875,
+   "entry": {
+    "position": [
+     21870,
+     167,
+     36641
+    ],
+    "aim": [
+     73,
+     65467,
+     367
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21870,
+     167,
+     36641
+    ],
+    "aim": [
+     73,
+     65467,
+     367
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "2FE74C:ABC",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 749050875,
+   "rng_out": 1627395666,
+   "entry": {
+    "position": [
+     21879,
+     162,
+     36639
+    ],
+    "aim": [
+     64,
+     65472,
+     369
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21879,
+     162,
+     36639
+    ],
+    "aim": [
+     64,
+     65472,
+     369
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 24832
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "2FFC48:2055",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 1733468771,
+   "rng_out": 3434633370,
+   "entry": {
+    "position": [
+     21879,
+     162,
+     36641
+    ],
+    "aim": [
+     64,
+     65472,
+     367
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21879,
+     162,
+     36641
+    ],
+    "aim": [
+     64,
+     65472,
+     367
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 52408
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "300FC4:1278",
+   "shot": "37911a0",
+   "delta": 125000,
+   "rng_in": 631587078,
+   "rng_out": 631587078,
+   "entry": {
+    "position": [
+     21879,
+     160,
+     36639
+    ],
+    "aim": [
+     64,
+     65473,
+     367
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21879,
+     160,
+     36639
+    ],
+    "aim": [
+     64,
+     65473,
+     367
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "30D06B:1874",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 1563370646,
+   "rng_out": 1255237594,
+   "entry": {
+    "position": [
+     21909,
+     140,
+     36652
+    ],
+    "aim": [
+     1575,
+     64,
+     1433
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21909,
+     140,
+     36652
+    ],
+    "aim": [
+     1575,
+     64,
+     1433
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 40377
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21909,
+      140,
+      36652
+     ],
+     "velocity": [
+      2217,
+      90,
+      2018
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      146276353,
+      13392828,
+      38085,
+      2,
+      13392828,
+      4269184197,
+      23068587
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "30E442:1EA7",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 1503599115,
+   "rng_out": 2596488429,
+   "entry": {
+    "position": [
+     21919,
+     142,
+     36659
+    ],
+    "aim": [
+     1522,
+     51,
+     1465
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21919,
+     142,
+     36659
+    ],
+    "aim": [
+     1522,
+     51,
+     1465
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 30798
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21919,
+      142,
+      36659
+     ],
+     "velocity": [
+      2160,
+      71,
+      2079
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "30F7E9:F00",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 3259291182,
+   "rng_out": 1952784200,
+   "entry": {
+    "position": [
+     21921,
+     142,
+     36658
+    ],
+    "aim": [
+     1482,
+     39,
+     1532
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21921,
+     142,
+     36658
+    ],
+    "aim": [
+     1482,
+     39,
+     1532
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 58113
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21921,
+      142,
+      36658
+     ],
+     "velocity": [
+      2085,
+      54,
+      2155
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "30F7E9:1107",
+   "shot": "3792df0",
+   "delta": 125000,
+   "rng_in": 1952784200,
+   "rng_out": 777335724,
+   "entry": {
+    "position": [
+     21927,
+     137,
+     36653
+    ],
+    "aim": [
+     1476,
+     44,
+     1537
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21927,
+     137,
+     36653
+    ],
+    "aim": [
+     1476,
+     44,
+     1537
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 1153
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      146276353,
+      11885419,
+      38190,
+      2,
+      11885419,
+      4274558254,
+      36568995
+     ],
+     "draws": 3
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "310BAA:F2D",
+   "shot": "3792df0",
+   "delta": 125000,
+   "rng_in": 3315112260,
+   "rng_out": 2246345550,
+   "entry": {
+    "position": [
+     21928,
+     136,
+     36652
+    ],
+    "aim": [
+     1438,
+     19,
+     1602
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21928,
+     136,
+     36652
+    ],
+    "aim": [
+     1438,
+     19,
+     1602
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 31134
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21928,
+      136,
+      36652
+     ],
+     "velocity": [
+      2003,
+      26,
+      2232
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "310BAA:1118",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 2246345550,
+   "rng_out": 3798573993,
+   "entry": {
+    "position": [
+     21922,
+     142,
+     36657
+    ],
+    "aim": [
+     1444,
+     13,
+     1597
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21922,
+     142,
+     36657
+    ],
+    "aim": [
+     1444,
+     13,
+     1597
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 57961
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "312121:15D",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 3348364464,
+   "rng_out": 3523174292,
+   "entry": {
+    "position": [
+     21923,
+     143,
+     36657
+    ],
+    "aim": [
+     1407,
+     65509,
+     1660
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21923,
+     143,
+     36657
+    ],
+    "aim": [
+     1407,
+     65509,
+     1660
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 56420
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      146276353,
+      7625506,
+      38317,
+      2,
+      7625506,
+      4275475885,
+      34995900
+     ],
+     "draws": 3
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "312121:449",
+   "shot": "3792df0",
+   "delta": 125000,
+   "rng_in": 3523174292,
+   "rng_out": 475585054,
+   "entry": {
+    "position": [
+     21929,
+     137,
+     36651
+    ],
+    "aim": [
+     1401,
+     65515,
+     1666
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21929,
+     137,
+     36651
+    ],
+    "aim": [
+     1401,
+     65515,
+     1666
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 64593
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      21929,
+      137,
+      36651
+     ],
+     "velocity": [
+      1930,
+      65508,
+      2295
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "313549:1DA8",
+   "shot": "3792df0",
+   "delta": 125000,
+   "rng_in": 868214635,
+   "rng_out": 3779486978,
+   "entry": {
+    "position": [
+     21938,
+     139,
+     36654
+    ],
+    "aim": [
+     1357,
+     65461,
+     1725
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21938,
+     139,
+     36654
+    ],
+    "aim": [
+     1357,
+     65461,
+     1725
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 57670
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "313549:1DFC",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 3779486978,
+   "rng_out": 4231889229,
+   "entry": {
+    "position": [
+     21932,
+     144,
+     36660
+    ],
+    "aim": [
+     1363,
+     65456,
+     1719
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21932,
+     144,
+     36660
+    ],
+    "aim": [
+     1363,
+     65456,
+     1719
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 64573
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "314D70:E7E",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 2949380451,
+   "rng_out": 314925978,
+   "entry": {
+    "position": [
+     21947,
+     147,
+     36668
+    ],
+    "aim": [
+     2436,
+     65417,
+     1474
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21947,
+     147,
+     36668
+    ],
+    "aim": [
+     2436,
+     65417,
+     1474
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 4805
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "314D70:ED2",
+   "shot": "3792df0",
+   "delta": 125000,
+   "rng_in": 314925978,
+   "rng_out": 314925978,
+   "entry": {
+    "position": [
+     21952,
+     141,
+     36662
+    ],
+    "aim": [
+     2431,
+     65423,
+     1480
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21952,
+     141,
+     36662
+    ],
+    "aim": [
+     2431,
+     65423,
+     1480
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02b.log"
+  },
+  {
+   "at": "317531:EBA",
+   "shot": "3791490",
+   "delta": 125000,
+   "rng_in": 3847730384,
+   "rng_out": 3847730384,
+   "entry": {
+    "position": [
+     21990,
+     142,
+     36690
+    ],
+    "aim": [
+     2114,
+     65390,
+     885
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     21990,
+     142,
+     36690
+    ],
+    "aim": [
+     2114,
+     65390,
+     885
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "3579AC:162B",
+   "shot": "37936f0",
+   "delta": 125000,
+   "rng_in": 2028103903,
+   "rng_out": 334286656,
+   "entry": {
+    "position": [
+     19159,
+     46,
+     34562
+    ],
+    "aim": [
+     63153,
+     65467,
+     64194
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     19159,
+     46,
+     34562
+    ],
+    "aim": [
+     63153,
+     65467,
+     64194
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 41545
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147390465,
+      4293476744,
+      33220,
+      2,
+      4293476744,
+      33220,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "358D94:E4C",
+   "shot": "37936f0",
+   "delta": 125000,
+   "rng_in": 3685955673,
+   "rng_out": 3600257771,
+   "entry": {
+    "position": [
+     19061,
+     46,
+     34512
+    ],
+    "aim": [
+     63251,
+     65467,
+     64244
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     19061,
+     46,
+     34512
+    ],
+    "aim": [
+     63251,
+     65467,
+     64244
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 55263
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      19061,
+      46,
+      34512
+     ],
+     "velocity": [
+      62926,
+      65458,
+      64061
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35A066:301",
+   "shot": "37936f0",
+   "delta": 125000,
+   "rng_in": 3169675971,
+   "rng_out": 3883370874,
+   "entry": {
+    "position": [
+     18967,
+     47,
+     34466
+    ],
+    "aim": [
+     63345,
+     65466,
+     64290
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18967,
+     47,
+     34466
+    ],
+    "aim": [
+     63345,
+     65466,
+     64290
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 59255
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35A066:371",
+   "shot": "3793590",
+   "delta": 125000,
+   "rng_in": 3883370874,
+   "rng_out": 341393367,
+   "entry": {
+    "position": [
+     18971,
+     46,
+     34457
+    ],
+    "aim": [
+     63341,
+     65467,
+     64299
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18971,
+     46,
+     34457
+    ],
+    "aim": [
+     63341,
+     65467,
+     64299
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 14185
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147390465,
+      4293476744,
+      33220,
+      2,
+      4293476744,
+      33220,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35B452:1F7A",
+   "shot": "3793590",
+   "delta": 125000,
+   "rng_in": 1645799011,
+   "rng_out": 2511817882,
+   "entry": {
+    "position": [
+     18894,
+     47,
+     34423
+    ],
+    "aim": [
+     63621,
+     65522,
+     64964
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18894,
+     47,
+     34423
+    ],
+    "aim": [
+     63621,
+     65522,
+     64964
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 38327
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35B452:1FCE",
+   "shot": "37936f0",
+   "delta": 125000,
+   "rng_in": 2511817882,
+   "rng_out": 4048131333,
+   "entry": {
+    "position": [
+     18891,
+     47,
+     34433
+    ],
+    "aim": [
+     63621,
+     65522,
+     64964
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18891,
+     47,
+     34433
+    ],
+    "aim": [
+     63621,
+     65522,
+     64964
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 61769
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35C976:1D5D",
+   "shot": "37936f0",
+   "delta": 125000,
+   "rng_in": 2077137790,
+   "rng_out": 2077137790,
+   "entry": {
+    "position": [
+     18832,
+     47,
+     34421
+    ],
+    "aim": [
+     63552,
+     7,
+     65294
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18832,
+     47,
+     34421
+    ],
+    "aim": [
+     63552,
+     7,
+     65294
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35C976:1DE7",
+   "shot": "3793590",
+   "delta": 125000,
+   "rng_in": 2077137790,
+   "rng_out": 2711883032,
+   "entry": {
+    "position": [
+     18833,
+     47,
+     34411
+    ],
+    "aim": [
+     63552,
+     7,
+     65294
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18833,
+     47,
+     34411
+    ],
+    "aim": [
+     63552,
+     7,
+     65294
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 10437
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18833,
+      47,
+      34411
+     ],
+     "velocity": [
+      62559,
+      10,
+      65174
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35DEE4:1F3B",
+   "shot": "3793590",
+   "delta": 125000,
+   "rng_in": 3958055382,
+   "rng_out": 2570734481,
+   "entry": {
+    "position": [
+     18793,
+     47,
+     34411
+    ],
+    "aim": [
+     62899,
+     65466,
+     27
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18793,
+     47,
+     34411
+    ],
+    "aim": [
+     62899,
+     65466,
+     27
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 39226
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "35F262:1C4D",
+   "shot": "3793590",
+   "delta": 125000,
+   "rng_in": 3263344511,
+   "rng_out": 3263344511,
+   "entry": {
+    "position": [
+     18774,
+     47,
+     34418
+    ],
+    "aim": [
+     63599,
+     26,
+     490
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18774,
+     47,
+     34418
+    ],
+    "aim": [
+     63599,
+     26,
+     490
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "360609:819",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 612246236,
+   "rng_out": 2618258086,
+   "entry": {
+    "position": [
+     18777,
+     47,
+     34430
+    ],
+    "aim": [
+     63641,
+     19,
+     633
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18777,
+     47,
+     34430
+    ],
+    "aim": [
+     63641,
+     19,
+     633
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 4893
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18777,
+      47,
+      34430
+     ],
+     "velocity": [
+      62691,
+      27,
+      950
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "361AB9:E4C",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1470122862,
+   "rng_out": 4225513096,
+   "entry": {
+    "position": [
+     18777,
+     47,
+     34430
+    ],
+    "aim": [
+     63641,
+     9,
+     633
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18777,
+     47,
+     34430
+    ],
+    "aim": [
+     63641,
+     9,
+     633
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 18240
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18777,
+      47,
+      34430
+     ],
+     "velocity": [
+      62691,
+      13,
+      950
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "362F26:1DB4",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2106799753,
+   "rng_out": 5049032,
+   "entry": {
+    "position": [
+     18768,
+     47,
+     34432
+    ],
+    "aim": [
+     63632,
+     65535,
+     607
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18768,
+     47,
+     34432
+    ],
+    "aim": [
+     63632,
+     65535,
+     607
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 77
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "3641D4:F33",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2999003159,
+   "rng_out": 3428977214,
+   "entry": {
+    "position": [
+     18760,
+     47,
+     34434
+    ],
+    "aim": [
+     63613,
+     65527,
+     544
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18760,
+     47,
+     34434
+    ],
+    "aim": [
+     63613,
+     65527,
+     544
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 52322
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "36533D:EEB",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2596528110,
+   "rng_out": 2596528110,
+   "entry": {
+    "position": [
+     18752,
+     47,
+     34434
+    ],
+    "aim": [
+     63588,
+     65524,
+     443
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18752,
+     47,
+     34434
+    ],
+    "aim": [
+     63588,
+     65524,
+     443
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "369C62:1F1B",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 3655648220,
+   "rng_out": 1505196966,
+   "entry": {
+    "position": [
+     18622,
+     47,
+     34416
+    ],
+    "aim": [
+     63600,
+     65529,
+     65039
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18622,
+     47,
+     34416
+    ],
+    "aim": [
+     63600,
+     65529,
+     65039
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 42693
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18622,
+      47,
+      34416
+     ],
+     "velocity": [
+      62631,
+      65526,
+      64791
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "36AD09:1E89",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 744750386,
+   "rng_out": 1166958572,
+   "entry": {
+    "position": [
+     18585,
+     47,
+     34406
+    ],
+    "aim": [
+     63610,
+     65531,
+     65002
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18585,
+     47,
+     34406
+    ],
+    "aim": [
+     63610,
+     65531,
+     65002
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 58119
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18585,
+      47,
+      34406
+     ],
+     "velocity": [
+      62646,
+      65529,
+      64735
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "36BE28:105",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 3495743664,
+   "rng_out": 2323865349,
+   "entry": {
+    "position": [
+     18566,
+     47,
+     34406
+    ],
+    "aim": [
+     63126,
+     65466,
+     32
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18566,
+     47,
+     34406
+    ],
+    "aim": [
+     63126,
+     65466,
+     32
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 28235
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147456001,
+      4293476124,
+      34438,
+      2,
+      4293476124,
+      34438,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "36BE28:3FD",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 2323865349,
+   "rng_out": 3996765753,
+   "entry": {
+    "position": [
+     18565,
+     47,
+     34416
+    ],
+    "aim": [
+     63127,
+     65466,
+     22
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18565,
+     47,
+     34416
+    ],
+    "aim": [
+     63127,
+     65466,
+     22
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 21873
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18565,
+      47,
+      34416
+     ],
+     "velocity": [
+      62538,
+      65450,
+      27
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147456001,
+      4293476124,
+      34438,
+      2,
+      4293476124,
+      34438,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02c.log"
+  },
+  {
+   "at": "36D112:EE8",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 2853463594,
+   "rng_out": 2299850148,
+   "entry": {
+    "position": [
+     18565,
+     47,
+     34420
+    ],
+    "aim": [
+     63127,
+     65466,
+     18
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18565,
+     47,
+     34420
+    ],
+    "aim": [
+     63127,
+     65466,
+     18
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 63714
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18565,
+      47,
+      34420
+     ],
+     "velocity": [
+      62538,
+      65450,
+      21
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "36D112:10D3",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2299850148,
+   "rng_out": 1793226823,
+   "entry": {
+    "position": [
+     18565,
+     47,
+     34410
+    ],
+    "aim": [
+     63127,
+     65466,
+     28
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18565,
+     47,
+     34410
+    ],
+    "aim": [
+     63127,
+     65466,
+     28
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 27362
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "36E4A2:24E0",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 191930774,
+   "rng_out": 3267998938,
+   "entry": {
+    "position": [
+     18565,
+     47,
+     34413
+    ],
+    "aim": [
+     63127,
+     65466,
+     25
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18565,
+     47,
+     34413
+    ],
+    "aim": [
+     63127,
+     65466,
+     25
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 37788
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18565,
+      47,
+      34413
+     ],
+     "velocity": [
+      62538,
+      65450,
+      30
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147456001,
+      4293476124,
+      34438,
+      2,
+      4293476124,
+      34438,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "36E4A3:167",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 3267998938,
+   "rng_out": 1123365844,
+   "entry": {
+    "position": [
+     18566,
+     47,
+     34423
+    ],
+    "aim": [
+     63126,
+     65466,
+     15
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18566,
+     47,
+     34423
+    ],
+    "aim": [
+     63126,
+     65466,
+     15
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 12189
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18566,
+      47,
+      34423
+     ],
+     "velocity": [
+      62538,
+      65450,
+      18
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "36F692:1EE2",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 1574719596,
+   "rng_out": 1037037423,
+   "entry": {
+    "position": [
+     18559,
+     47,
+     34425
+    ],
+    "aim": [
+     63578,
+     6,
+     403
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18559,
+     47,
+     34425
+    ],
+    "aim": [
+     63578,
+     6,
+     403
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 15823
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "36F692:1F36",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1037037423,
+   "rng_out": 2177043185,
+   "entry": {
+    "position": [
+     18557,
+     47,
+     34415
+    ],
+    "aim": [
+     63578,
+     6,
+     403
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18557,
+     47,
+     34415
+    ],
+    "aim": [
+     63578,
+     6,
+     403
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 6417
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18557,
+      47,
+      34415
+     ],
+     "velocity": [
+      62598,
+      8,
+      604
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "370903:117A",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 68593836,
+   "rng_out": 3215152374,
+   "entry": {
+    "position": [
+     18538,
+     47,
+     34421
+    ],
+    "aim": [
+     63614,
+     11,
+     549
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18538,
+     47,
+     34421
+    ],
+    "aim": [
+     63614,
+     11,
+     549
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 7380
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18538,
+      47,
+      34421
+     ],
+     "velocity": [
+      62652,
+      16,
+      823
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "370903:1365",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 3215152374,
+   "rng_out": 3215152374,
+   "entry": {
+    "position": [
+     18541,
+     47,
+     34431
+    ],
+    "aim": [
+     63614,
+     11,
+     549
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18541,
+     47,
+     34431
+    ],
+    "aim": [
+     63614,
+     11,
+     549
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "371B54:106F",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 721667688,
+   "rng_out": 779868091,
+   "entry": {
+    "position": [
+     18509,
+     47,
+     34432
+    ],
+    "aim": [
+     63693,
+     17,
+     772
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18509,
+     47,
+     34432
+    ],
+    "aim": [
+     63693,
+     17,
+     772
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 11899
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "372DBA:46F",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 3392029701,
+   "rng_out": 3392029701,
+   "entry": {
+    "position": [
+     18473,
+     47,
+     34449
+    ],
+    "aim": [
+     63757,
+     24,
+     910
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18473,
+     47,
+     34449
+    ],
+    "aim": [
+     63757,
+     24,
+     910
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "3789C1:809",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 864058195,
+   "rng_out": 4220348106,
+   "entry": {
+    "position": [
+     18239,
+     47,
+     34557
+    ],
+    "aim": [
+     63562,
+     7,
+     312
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18239,
+     47,
+     34557
+    ],
+    "aim": [
+     63562,
+     7,
+     312
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 64397
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "379C16:1FE9",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1657580405,
+   "rng_out": 480031145,
+   "entry": {
+    "position": [
+     18224,
+     47,
+     34558
+    ],
+    "aim": [
+     63468,
+     65466,
+     65416
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18224,
+     47,
+     34558
+    ],
+    "aim": [
+     63468,
+     65466,
+     65416
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 5520
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18224,
+      47,
+      34558
+     ],
+     "velocity": [
+      62543,
+      65435,
+      65363
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147456001,
+      4293476124,
+      34438,
+      2,
+      4293476124,
+      34438,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37AEE4:2059",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1001090866,
+   "rng_out": 1280100285,
+   "entry": {
+    "position": [
+     18224,
+     47,
+     34560
+    ],
+    "aim": [
+     63558,
+     2,
+     285
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18224,
+     47,
+     34560
+    ],
+    "aim": [
+     63558,
+     2,
+     285
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 19532
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37AEE4:20C9",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 1280100285,
+   "rng_out": 838607340,
+   "entry": {
+    "position": [
+     18223,
+     47,
+     34550
+    ],
+    "aim": [
+     63558,
+     2,
+     285
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18223,
+     47,
+     34550
+    ],
+    "aim": [
+     63558,
+     2,
+     285
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 12796
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37C19D:106F",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 404179096,
+   "rng_out": 78394923,
+   "entry": {
+    "position": [
+     18228,
+     47,
+     34550
+    ],
+    "aim": [
+     63558,
+     65535,
+     285
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18228,
+     47,
+     34550
+    ],
+    "aim": [
+     63558,
+     65535,
+     285
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 1196
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37C19D:10D3",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 78394923,
+   "rng_out": 1269411010,
+   "entry": {
+    "position": [
+     18229,
+     47,
+     34560
+    ],
+    "aim": [
+     63558,
+     65535,
+     285
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18229,
+     47,
+     34560
+    ],
+    "aim": [
+     63558,
+     65535,
+     285
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 19369
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37D422:B06",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1601173039,
+   "rng_out": 1601173039,
+   "entry": {
+    "position": [
+     18224,
+     47,
+     34559
+    ],
+    "aim": [
+     63557,
+     65534,
+     273
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18224,
+     47,
+     34559
+    ],
+    "aim": [
+     63557,
+     65534,
+     273
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37D422:B90",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 1601173039,
+   "rng_out": 221368241,
+   "entry": {
+    "position": [
+     18223,
+     47,
+     34549
+    ],
+    "aim": [
+     63557,
+     65534,
+     273
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18223,
+     47,
+     34549
+    ],
+    "aim": [
+     63557,
+     65534,
+     273
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 4113
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18223,
+      47,
+      34549
+     ],
+     "velocity": [
+      62565,
+      65534,
+      409
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37E6E2:10B3",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 2091900903,
+   "rng_out": 174480846,
+   "entry": {
+    "position": [
+     18206,
+     47,
+     34551
+    ],
+    "aim": [
+     63560,
+     65533,
+     297
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18206,
+     47,
+     34551
+    ],
+    "aim": [
+     63560,
+     65533,
+     297
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 2662
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "37FA5A:1073",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 2366318309,
+   "rng_out": 2366318309,
+   "entry": {
+    "position": [
+     18192,
+     47,
+     34554
+    ],
+    "aim": [
+     63580,
+     65533,
+     406
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18192,
+     47,
+     34554
+    ],
+    "aim": [
+     63580,
+     65533,
+     406
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "383185:1022",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 973963600,
+   "rng_out": 2371581059,
+   "entry": {
+    "position": [
+     18183,
+     47,
+     34567
+    ],
+    "aim": [
+     63608,
+     1,
+     526
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18183,
+     47,
+     34567
+    ],
+    "aim": [
+     63608,
+     1,
+     526
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 36187
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "3843F7:F21",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2909725567,
+   "rng_out": 4261436806,
+   "entry": {
+    "position": [
+     18172,
+     47,
+     34571
+    ],
+    "aim": [
+     63612,
+     2,
+     540
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18172,
+     47,
+     34571
+    ],
+    "aim": [
+     63612,
+     2,
+     540
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 65024
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "38566B:26EF",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 2030813041,
+   "rng_out": 2901329530,
+   "entry": {
+    "position": [
+     18150,
+     47,
+     34578
+    ],
+    "aim": [
+     63079,
+     65466,
+     924
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18150,
+     47,
+     34578
+    ],
+    "aim": [
+     63079,
+     65466,
+     924
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 34240
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147521537,
+      4293475661,
+      101038,
+      2,
+      4293475661,
+      35502,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "3869E8:1EAB",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1502523283,
+   "rng_out": 3003390389,
+   "entry": {
+    "position": [
+     18120,
+     47,
+     34589
+    ],
+    "aim": [
+     63109,
+     65466,
+     913
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18120,
+     47,
+     34589
+    ],
+    "aim": [
+     63109,
+     65466,
+     913
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 57810
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18120,
+      47,
+      34589
+     ],
+     "velocity": [
+      62729,
+      65456,
+      1055
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02d.log"
+  },
+  {
+   "at": "387DF1:2DB",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 278969816,
+   "rng_out": 278969816,
+   "entry": {
+    "position": [
+     18081,
+     47,
+     34608
+    ],
+    "aim": [
+     63788,
+     2,
+     967
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18081,
+     47,
+     34608
+    ],
+    "aim": [
+     63788,
+     2,
+     967
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "387DF1:365",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 278969816,
+   "rng_out": 3917570667,
+   "entry": {
+    "position": [
+     18076,
+     47,
+     34599
+    ],
+    "aim": [
+     63788,
+     2,
+     967
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18076,
+     47,
+     34599
+    ],
+    "aim": [
+     63788,
+     2,
+     967
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 59777
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "3890B8:2C4",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 3565868434,
+   "rng_out": 3249741644,
+   "entry": {
+    "position": [
+     18040,
+     47,
+     34621
+    ],
+    "aim": [
+     63837,
+     0,
+     1051
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18040,
+     47,
+     34621
+    ],
+    "aim": [
+     63837,
+     0,
+     1051
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 56505
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18040,
+      47,
+      34621
+     ],
+     "velocity": [
+      62985,
+      0,
+      1577
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38A413:585",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 439584227,
+   "rng_out": 3756851333,
+   "entry": {
+    "position": [
+     18003,
+     47,
+     34643
+    ],
+    "aim": [
+     63833,
+     0,
+     1044
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18003,
+     47,
+     34643
+    ],
+    "aim": [
+     63833,
+     0,
+     1044
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 63042
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      18003,
+      47,
+      34643
+     ],
+     "velocity": [
+      62979,
+      0,
+      1567
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38A413:780",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 3756851333,
+   "rng_out": 2471147284,
+   "entry": {
+    "position": [
+     18009,
+     47,
+     34652
+    ],
+    "aim": [
+     63833,
+     0,
+     1044
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     18009,
+     47,
+     34652
+    ],
+    "aim": [
+     63833,
+     0,
+     1044
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 37706
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38B70A:E4C",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 628571494,
+   "rng_out": 3762290090,
+   "entry": {
+    "position": [
+     17988,
+     47,
+     34659
+    ],
+    "aim": [
+     63241,
+     65466,
+     843
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17988,
+     47,
+     34659
+    ],
+    "aim": [
+     63241,
+     65466,
+     843
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 47232
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      17988,
+      47,
+      34659
+     ],
+     "velocity": [
+      62721,
+      65451,
+      1033
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147521537,
+      4293475661,
+      35502,
+      2,
+      4293475661,
+      35502,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38B70A:1826",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 3762290090,
+   "rng_out": 2778731975,
+   "entry": {
+    "position": [
+     17984,
+     47,
+     34650
+    ],
+    "aim": [
+     63245,
+     65466,
+     852
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17984,
+     47,
+     34650
+    ],
+    "aim": [
+     63245,
+     65466,
+     852
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 36095
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 2,
+     "target": [
+      5406776,
+      147521537,
+      4293475661,
+      35502,
+      2,
+      4293475661,
+      35502,
+      0
+     ],
+     "draws": 2
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38CBC2:24D3",
+   "shot": "37935e0",
+   "delta": 125000,
+   "rng_in": 1780068491,
+   "rng_out": 1780068491,
+   "entry": {
+    "position": [
+     17982,
+     47,
+     34647
+    ],
+    "aim": [
+     63247,
+     65466,
+     855
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17982,
+     47,
+     34647
+    ],
+    "aim": [
+     63247,
+     65466,
+     855
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38CBC2:255D",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 1780068491,
+   "rng_out": 2805508002,
+   "entry": {
+    "position": [
+     17985,
+     47,
+     34656
+    ],
+    "aim": [
+     63244,
+     65466,
+     846
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17985,
+     47,
+     34656
+    ],
+    "aim": [
+     63244,
+     65466,
+     846
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 42808
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38E013:1015",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 508186256,
+   "rng_out": 2378504387,
+   "entry": {
+    "position": [
+     17989,
+     47,
+     34655
+    ],
+    "aim": [
+     63240,
+     65466,
+     847
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17989,
+     47,
+     34655
+    ],
+    "aim": [
+     63240,
+     65466,
+     847
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 36293
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "38F3DD:1381",
+   "shot": "3793740",
+   "delta": 125000,
+   "rng_in": 3198702710,
+   "rng_out": 3198702710,
+   "entry": {
+    "position": [
+     17999,
+     47,
+     34654
+    ],
+    "aim": [
+     63230,
+     65466,
+     848
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     17999,
+     47,
+     34654
+    ],
+    "aim": [
+     63230,
+     65466,
+     848
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "442346:1462",
+   "shot": "3794ca0",
+   "delta": 125000,
+   "rng_in": 3371556881,
+   "rng_out": 4073382917,
+   "entry": {
+    "position": [
+     13652,
+     58,
+     37096
+    ],
+    "aim": [
+     65394,
+     65516,
+     170
+    ],
+    "life": 600000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13652,
+     58,
+     37096
+    ],
+    "aim": [
+     65394,
+     65516,
+     170
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 50549
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 4,
+     "target": [
+      5406816,
+      0,
+      4292883712,
+      37376,
+      4,
+      2503878,
+      37266,
+      16
+     ],
+     "draws": 3
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "44314F:1DA8",
+   "shot": "3794ca0",
+   "delta": 125000,
+   "rng_in": 1161782113,
+   "rng_out": 2921969971,
+   "entry": {
+    "position": [
+     13651,
+     58,
+     37096
+    ],
+    "aim": [
+     65395,
+     65517,
+     170
+    ],
+    "life": 475000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13651,
+     58,
+     37096
+    ],
+    "aim": [
+     65395,
+     65517,
+     170
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 39411
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      13651,
+      58,
+      37096
+     ],
+     "velocity": [
+      63628,
+      65279,
+      2300
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "443F7C:A6B",
+   "shot": "3794ca0",
+   "delta": 125000,
+   "rng_in": 619368569,
+   "rng_out": 3346462731,
+   "entry": {
+    "position": [
+     13651,
+     58,
+     37096
+    ],
+    "aim": [
+     65395,
+     65517,
+     170
+    ],
+    "life": 350000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13651,
+     58,
+     37096
+    ],
+    "aim": [
+     65395,
+     65517,
+     170
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 36990
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      13651,
+      58,
+      37096
+     ],
+     "velocity": [
+      63628,
+      65279,
+      2300
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "443F7C:C72",
+   "shot": "3794b40",
+   "delta": 125000,
+   "rng_in": 3346462731,
+   "rng_out": 147831199,
+   "entry": {
+    "position": [
+     13643,
+     59,
+     37090
+    ],
+    "aim": [
+     65403,
+     65516,
+     176
+    ],
+    "life": 600000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 1,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13643,
+     59,
+     37090
+    ],
+    "aim": [
+     65403,
+     65516,
+     176
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 21229
+    },
+    {
+     "kind": "owner",
+     "found": true
+    },
+    {
+     "kind": "deliver",
+     "packet": [
+      200,
+      0,
+      6,
+      0
+     ],
+     "target_type": 4,
+     "target": [
+      5406816,
+      0,
+      4292883712,
+      37376,
+      4,
+      2569414,
+      37266,
+      16
+     ],
+     "draws": 3
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "444D7D:9F3",
+   "shot": "3794b40",
+   "delta": 125000,
+   "rng_in": 886101410,
+   "rng_out": 432313709,
+   "entry": {
+    "position": [
+     13636,
+     59,
+     37099
+    ],
+    "aim": [
+     65413,
+     65515,
+     166
+    ],
+    "life": 475000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13636,
+     59,
+     37099
+    ],
+    "aim": [
+     65413,
+     65515,
+     166
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 6596
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "444D7D:A47",
+   "shot": "3794ca0",
+   "delta": 125000,
+   "rng_in": 432313709,
+   "rng_out": 3191996447,
+   "entry": {
+    "position": [
+     13644,
+     58,
+     37105
+    ],
+    "aim": [
+     65405,
+     65516,
+     160
+    ],
+    "life": 225000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13644,
+     58,
+     37105
+    ],
+    "aim": [
+     65405,
+     65516,
+     160
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 41010
+    },
+    {
+     "kind": "spark",
+     "particle_type": 5,
+     "position": [
+      13644,
+      58,
+      37105
+     ],
+     "velocity": [
+      63645,
+      65248,
+      2310
+     ],
+     "draws": 1
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "445E70:11EA",
+   "shot": "3794ca0",
+   "delta": 125000,
+   "rng_in": 3662415225,
+   "rng_out": 3662415225,
+   "entry": {
+    "position": [
+     13632,
+     58,
+     37122
+    ],
+    "aim": [
+     65019,
+     14,
+     699
+    ],
+    "life": 100000,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13632,
+     58,
+     37122
+    ],
+    "aim": [
+     65019,
+     14,
+     699
+    ],
+    "life": 0,
+    "slot": 1,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "445E70:1274",
+   "shot": "3794b40",
+   "delta": 125000,
+   "rng_in": 3662415225,
+   "rng_out": 2600130296,
+   "entry": {
+    "position": [
+     13624,
+     58,
+     37116
+    ],
+    "aim": [
+     65027,
+     14,
+     705
+    ],
+    "life": 350000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13624,
+     58,
+     37116
+    ],
+    "aim": [
+     65027,
+     14,
+     705
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 39674
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "446E1D:2BF",
+   "shot": "3794b40",
+   "delta": 125000,
+   "rng_in": 2606862404,
+   "rng_out": 179492455,
+   "entry": {
+    "position": [
+     13606,
+     58,
+     37144
+    ],
+    "aim": [
+     65145,
+     4,
+     630
+    ],
+    "life": 225000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13606,
+     58,
+     37144
+    ],
+    "aim": [
+     65145,
+     4,
+     630
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "roll",
+     "value": 2738
+    },
+    {
+     "kind": "owner",
+     "found": true
+    }
+   ],
+   "recording": "cannon02e.log"
+  },
+  {
+   "at": "447C71:1D85",
+   "shot": "3794b40",
+   "delta": 125000,
+   "rng_in": 4210000408,
+   "rng_out": 4210000408,
+   "entry": {
+    "position": [
+     13586,
+     58,
+     37181
+    ],
+    "aim": [
+     65284,
+     65527,
+     559
+    ],
+    "life": 100000,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "exit": {
+    "position": [
+     13586,
+     58,
+     37181
+    ],
+    "aim": [
+     65284,
+     65527,
+     559
+    ],
+    "life": 0,
+    "slot": 0,
+    "strength": 200,
+    "channel": 6,
+    "pending": 0,
+    "owner": 213254145
+   },
+   "calls": [
+    {
+     "kind": "dispose"
+    }
+   ],
+   "recording": "cannon02e.log"
+  }
+ ]
+}

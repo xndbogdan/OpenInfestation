@@ -1,0 +1,42 @@
+[package]
+name = "inf-game"
+version = "0.1.0"
+edition = "2021"
+license.workspace = true
+repository.workspace = true
+description = "Evidence-backed Infestation runtime foundations"
+
+[dependencies]
+inf-formats = { path = "../inf-formats" }
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+sdl2 = "0.38"
+ash = "0.38"
+gpu-allocator = { version = "0.27", default-features = false, features = ["vulkan"] }
+libloading = "0.8"
+png = "0.17"
+lewton = "0.10.2"
+tinyvec = { version = "1.11", features = ["alloc"] }
+sha2 = "0.10"
+
+# The launcher must start when the EXE is copied alone to another PC, so
+# Windows builds link SDL2 in, as OpenV2K does, rather than load SDL2.dll.
+[target.'cfg(windows)'.dependencies]
+sdl2 = { version = "0.38", features = ["static-link", "bundled"] }
+
+# The Linux launcher's window and folder chooser (the xdg portal); Windows
+# keeps its native Win32 launcher and never builds these.
+[target.'cfg(not(windows))'.dependencies]
+eframe = { version = "0.32", default-features = false, features = ["glow", "wayland", "x11", "default_fonts"] }
+rfd = { version = "0.15", default-features = false, features = ["xdg-portal", "async-std"] }
+
+# Clicks the Linux launcher's controls headlessly.
+[target.'cfg(not(windows))'.dev-dependencies]
+egui_kittest = "0.32"
+# kittest turns on egui's accesskit; egui-winit then needs it too.
+eframe = { version = "0.32", default-features = false, features = ["accesskit"] }
+
+[build-dependencies]
+gl_generator = "0.14"

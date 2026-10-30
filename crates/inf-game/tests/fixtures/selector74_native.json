@@ -1,0 +1,4868 @@
+{
+ "provenance": {
+  "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "fpcw": 639,
+  "code_patched": false,
+  "scope": "Original selector 74 bodies with the real world-to-local and local-to-world transforms, square root, sine table and H12 height; shared commands, base initializer, payload reads, retirement and particle birth recorded."
+ },
+ "guards": [
+  {
+   "address": 4380016,
+   "size": 314,
+   "sha256": "4ec1785748c69ae7630ceea6a4164338e3b8c417f8149bdf5bb26a5b0b3ab500"
+  },
+  {
+   "address": 4380336,
+   "size": 54,
+   "sha256": "8eaf8725a714a361df64ae5e0a9fce4ec9e90330848c64e5d9579f030168c3da"
+  },
+  {
+   "address": 4380400,
+   "size": 106,
+   "sha256": "0138f8d3f630766847509e5a11e48cccbff11061e412341e19935b1872f08219"
+  },
+  {
+   "address": 4380512,
+   "size": 30,
+   "sha256": "defa095b7991044d99b67ff3ebb74a05d11cb0d7aad3dc4d7286a4ad4e0cefed"
+  },
+  {
+   "address": 4380544,
+   "size": 70,
+   "sha256": "5289d8005f74539c1cb70c4b0d9d92ece51150f5e0c5714f9283c0245be29da9"
+  },
+  {
+   "address": 4380624,
+   "size": 378,
+   "sha256": "e53a8faae16fe52211e2642a5e1904659f4f6f044b1f3e7274cfed88250bf268"
+  },
+  {
+   "address": 4381008,
+   "size": 144,
+   "sha256": "66b13be145ef1b52531c6ebd2b89eccbce213d96b85d4c20d4cb82bd2805c216"
+  }
+ ],
+ "coverage": {
+  "cases": 66
+ },
+ "cases": [
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     0,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "code": 0,
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     15,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "code": 15,
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     2147483648,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "code": 2147483648,
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     4294967295,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "shared",
+     "code": 4294967295,
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     0,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     1,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     0,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     3,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     801,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     400,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32767,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     16383,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32768,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     49152,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65535,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     0,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     16,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65534,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     65535,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     0
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     1,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     0
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     3,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     1
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     801,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32767,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     16383
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32768,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     49152
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65535,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     0
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     17,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65534,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     65535
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     0,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     1,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     1,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     3,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     3,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     801,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     801,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32767,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     32767,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     32768,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     32768,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65535,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     65535,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     18,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65534,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     65534,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     19,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "command",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     2147483647,
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "payload",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     300,
+     2000,
+     800
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "payload_reads",
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 1000
+   }
+  },
+  {
+   "input": {
+    "mode": "payload",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     1,
+     3
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "payload_reads",
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     0,
+     0,
+     1
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "payload",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     65535,
+     4294967295,
+     2147483649
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "payload_reads",
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     65535,
+     0,
+     1
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "payload",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "payload"
+    ],
+    "candidates": [],
+    "payload": [
+     4660,
+     131072,
+     2147483647
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "payload_reads",
+     "payload": true
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     4660,
+     0,
+     65535
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 1250000,
+    "timer": 0,
+    "circle": 1077,
+    "count": 1,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 1118
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     0,
+     0,
+     0
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     0,
+     0,
+     0
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     1,
+     1,
+     1
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 3,
+    "timer": 0,
+    "circle": 1,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     1,
+     1,
+     1
+    ],
+    "extent_28": 1
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     32767,
+     32767,
+     32767
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 3221028867,
+    "timer": 0,
+    "circle": 46339,
+    "count": 81,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     32767,
+     32767,
+     32767
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     65535,
+     400,
+     32768
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 1073901825,
+    "timer": 0,
+    "circle": 32770,
+    "count": 4294967256,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     65535,
+     400,
+     32768
+    ],
+    "extent_28": 32770
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     100,
+     799,
+     1
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 648402,
+    "timer": 0,
+    "circle": 799,
+    "count": 1,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     100,
+     799,
+     1
+    ],
+    "extent_28": 805
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     5,
+     400,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 320025,
+    "timer": 0,
+    "circle": 565,
+    "count": 1,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     5,
+     400,
+     400
+    ],
+    "extent_28": 565
+   }
+  },
+  {
+   "input": {
+    "mode": "finish",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     7,
+     64512,
+     300
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 1138625,
+    "timer": 0,
+    "circle": 1067,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     7,
+     64512,
+     300
+    ],
+    "extent_28": 1067
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     0,
+     0,
+     7,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 1,
+    "links": 1,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 5,
+    "args": [
+     0,
+     0,
+     7,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 1,
+    "links": 6,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 1,
+    "args": [
+     0,
+     0,
+     8,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     0,
+     0,
+     8,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 4294967295,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 3,
+    "args": [
+     0,
+     0,
+     9,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 3,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "message",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 1,
+    "args": [
+     0,
+     0,
+     21,
+     0
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 1,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0,
+    "eax": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1440000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     125000
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     },
+     {
+      "answers": false,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    }
+   ],
+   "output": {
+    "radius2": 1440000,
+    "timer": 1953,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1440000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 1,
+    "links": 0,
+    "args": [
+     125000
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     },
+     {
+      "answers": false,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": true,
+     "candidate": null
+    }
+   ],
+   "output": {
+    "radius2": 1440000,
+    "timer": 1953,
+    "circle": 0,
+    "count": 0,
+    "linked": 1,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1440000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 1,
+    "links": 2,
+    "args": [
+     125000
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     },
+     {
+      "answers": false,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    }
+   ],
+   "output": {
+    "radius2": 1440000,
+    "timer": 1953,
+    "circle": 0,
+    "count": 0,
+    "linked": 1,
+    "links": 2,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1250000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     33333
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20299,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20300,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1599,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30399
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       29600
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20250,
+       1500,
+       30350
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       18900,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20350,
+       700,
+       30150
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20100,
+       700,
+       30420
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 1
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 2
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 5
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 9
+    }
+   ],
+   "output": {
+    "radius2": 1250000,
+    "timer": 520,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.7,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1250000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     33333
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20299,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20300,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1599,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30399
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       29600
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20250,
+       1500,
+       30350
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       18900,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20350,
+       700,
+       30150
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20100,
+       700,
+       30420
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1061407923,
+     0,
+     3206867827,
+     0,
+     1065353216,
+     0,
+     1059384179,
+     0,
+     1061407923
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 1
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 2
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 5
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 6
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 9
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 10
+    }
+   ],
+   "output": {
+    "radius2": 1250000,
+    "timer": 520,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": -2.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 1250000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     33333
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20299,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20300,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1599,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       1600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       30399
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20000,
+       600,
+       29600
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20250,
+       1500,
+       30350
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       18900,
+       600,
+       30000
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20350,
+       700,
+       30150
+      ]
+     },
+     {
+      "answers": true,
+      "position": [
+       20100,
+       700,
+       30420
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     3201634611,
+     0,
+     1063831479,
+     0,
+     1065353216,
+     0,
+     3211315127,
+     0,
+     3201634611
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 1
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 2
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 5
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 6
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 9
+    },
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 10
+    }
+   ],
+   "output": {
+    "radius2": 1250000,
+    "timer": 520,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 0,
+    "count": 0,
+    "timer": 4294967232,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     4294967295
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       20100,
+       650,
+       30050
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 67108799,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "update",
+    "position": [
+     65500,
+     600,
+     10
+    ],
+    "yaw": 0.0,
+    "extents": [
+     2000,
+     2000,
+     2000
+    ],
+    "radius2": 1000000,
+    "circle": 0,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     0
+    ],
+    "candidates": [
+     {
+      "answers": true,
+      "position": [
+       30,
+       600,
+       65400
+      ]
+     }
+    ],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "retire",
+     "self": false,
+     "candidate": 0
+    }
+   ],
+   "output": {
+    "radius2": 1000000,
+    "timer": 0,
+    "circle": 0,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     2000,
+     2000,
+     2000
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 500,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 0,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 248,
+    "height_shift": 4,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 500,
+    "count": 0,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 1,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20000,
+      50,
+      30400
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 500,
+    "count": 1,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 1,
+    "timer": 0,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 248,
+    "height_shift": 4,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20000,
+      65458,
+      30400
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 0,
+    "circle": 500,
+    "count": 1,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 4,
+    "timer": 4096,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20191,
+      50,
+      30400
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20461,
+      50,
+      29808
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19808,
+      50,
+      29600
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19538,
+      50,
+      30191
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 4096,
+    "circle": 500,
+    "count": 4,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 500,
+    "count": 4,
+    "timer": 4096,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 248,
+    "height_shift": 4,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1065353216,
+     0,
+     2147483648,
+     0,
+     1065353216,
+     0,
+     0,
+     0,
+     1065353216
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20191,
+      65458,
+      30400
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20461,
+      65458,
+      29808
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19808,
+      65458,
+      29600
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19538,
+      65458,
+      30191
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 4096,
+    "circle": 500,
+    "count": 4,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.5,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 1077,
+    "count": 6,
+    "timer": 74565,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1063299392,
+     0,
+     3203757892,
+     0,
+     1065353216,
+     0,
+     1056274244,
+     0,
+     1063299392
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20911,
+      50,
+      29958
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20705,
+      50,
+      29204
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19978,
+      50,
+      29556
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19088,
+      50,
+      30043
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19295,
+      50,
+      30795
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20021,
+      50,
+      30445
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 74565,
+    "circle": 1077,
+    "count": 6,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": 0.5,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "radius2": 0,
+    "circle": 1077,
+    "count": 6,
+    "timer": 74565,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 248,
+    "height_shift": 4,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1063299392,
+     0,
+     3203757892,
+     0,
+     1065353216,
+     0,
+     1056274244,
+     0,
+     1063299392
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20911,
+      65458,
+      29958
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20705,
+      65458,
+      29204
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19978,
+      65458,
+      29556
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19088,
+      65458,
+      30043
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19295,
+      65458,
+      30795
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20021,
+      65458,
+      30445
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 74565,
+    "circle": 1077,
+    "count": 6,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     1000,
+     400
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": -1.0,
+    "extents": [
+     300,
+     100,
+     200
+    ],
+    "radius2": 0,
+    "circle": 3000,
+    "count": 3,
+    "timer": 8192,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 0,
+    "height_shift": 5,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1057640768,
+     0,
+     1062693540,
+     0,
+     1065353216,
+     0,
+     3210177188,
+     0,
+     1057640768
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19886,
+      50,
+      30192
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20222,
+      50,
+      29976
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19778,
+      50,
+      30024
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 8192,
+    "circle": 3000,
+    "count": 3,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     100,
+     200
+    ],
+    "extent_28": 0
+   }
+  },
+  {
+   "input": {
+    "mode": "draw",
+    "position": [
+     20000,
+     600,
+     30000
+    ],
+    "yaw": -1.0,
+    "extents": [
+     300,
+     100,
+     200
+    ],
+    "radius2": 0,
+    "circle": 3000,
+    "count": 3,
+    "timer": 8192,
+    "linked": 0,
+    "links": 0,
+    "args": [
+     "context"
+    ],
+    "candidates": [],
+    "payload": [
+     0,
+     0,
+     0
+    ],
+    "cell": 248,
+    "height_shift": 4,
+    "spacing_mask": 127,
+    "basis_bits": [
+     1057640768,
+     0,
+     1062693540,
+     0,
+     1065353216,
+     0,
+     3210177188,
+     0,
+     1057640768
+    ]
+   },
+   "events": [
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19886,
+      65458,
+      30192
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      20222,
+      65458,
+      29976
+     ],
+     "arg": 0
+    },
+    {
+     "kind": "birth",
+     "type": 2,
+     "point": [
+      19778,
+      65458,
+      30024
+     ],
+     "arg": 0
+    }
+   ],
+   "output": {
+    "radius2": 0,
+    "timer": 8192,
+    "circle": 3000,
+    "count": 3,
+    "linked": 0,
+    "links": 0,
+    "extents": [
+     300,
+     100,
+     200
+    ],
+    "extent_28": 0
+   }
+  }
+ ]
+}

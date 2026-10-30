@@ -1,0 +1,310 @@
+use super::tests::assets;
+use sha2::{Digest, Sha256};
+#[test]
+fn complete_class10_tail_motion_common_helper_and_force_bodies_match_original_bf09() {
+    let bytes = assets().executable_bytes();
+    assert_eq!(
+        format!("{:x}", Sha256::digest(bytes)),
+        "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956"
+    );
+    //Complete originals, never mapped() text reads or decompiler authority.
+    for (name, start, end, expected) in [
+        (
+            "selector10_update",
+            0x00424830_usize,
+            0x00424C32_usize,
+            "556ab56d68c4dddb67f8410cf3a89eb4ef30ce97f568355590b934f6685c50a1",
+        ),
+        (
+            "selector10_helper_select_postinit",
+            0x004252B0_usize,
+            0x004253E0_usize,
+            "890ec02555d9a12c9b8e36857aaf1e407e49e11f428634a0979704809142f233",
+        ),
+        (
+            "selector10_motion",
+            0x00425400_usize,
+            0x00425816_usize,
+            "d091b64fb6a3986295f509bfe5e752eba87215fa747b8ed6967dc9a507b1a5b7",
+        ),
+        (
+            "lazy_cleanup_425820",
+            0x00425820_usize,
+            0x00425821_usize,
+            "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+        ),
+        (
+            "lazy_cleanup_425830",
+            0x00425830_usize,
+            0x00425831_usize,
+            "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+        ),
+        (
+            "common_d8",
+            0x00425AF0_usize,
+            0x00425B6D_usize,
+            "e34458649614549d35bdf9099aa815feec6a07508261830a98386d399edc47cf",
+        ),
+        (
+            "derived_constructor",
+            0x00425E60_usize,
+            0x00425F47_usize,
+            "bf30316b8a96753a1746060565737be661587136bd06968fe94e80224cb9bec7",
+        ),
+        (
+            "shared_contact",
+            0x00426270_usize,
+            0x0042672E_usize,
+            "8638c9f07b39c27a7a3c77cbee0183001e9f2d72c03ee0b0fa4e137cf7ffbf50",
+        ),
+        (
+            "shared_alignment_wrapper",
+            0x00426730_usize,
+            0x00426752_usize,
+            "171b6beff60bd84dbc7eca9c2122da6edd17b831e2ec6523520000bef546574e",
+        ),
+        (
+            "derived_payload",
+            0x00426C10_usize,
+            0x00426C7A_usize,
+            "28e2994e6804f8f87f3edb48ce54a185a9a9ae798a7f4d77c3b6da0493fa56a9",
+        ),
+        (
+            "helper_child_ctor445a70",
+            0x00445A70_usize,
+            0x00445A82_usize,
+            "c41d44c5889b6eb34102dd255a82ed580480441f643a13f7e7e692dc0a926e0f",
+        ),
+        (
+            "helper_header_ctor445a90",
+            0x00445A90_usize,
+            0x00445ABE_usize,
+            "da3ac85c6ae83b871a767d85a9076466ca6f97fd1a8dc91a020b976bfd982879",
+        ),
+        (
+            "helper_children_ctor445ae0",
+            0x00445AE0_usize,
+            0x00445B74_usize,
+            "3ec978a56cc1722f3b984c502de41d2f0317f8210bddc740dc4338b874f26199",
+        ),
+        (
+            "common_child_step",
+            0x00445BC0_usize,
+            0x00445CD0_usize,
+            "0696deb3e86574fd534a4575d25b9d3431b2880e0b64205a6a748d1820ebf9ac",
+        ),
+        (
+            "common_helper",
+            0x00445CD0_usize,
+            0x00445F55_usize,
+            "9c380e5357db4d5558ba747dfc6b86399e1234edc0c79ea17bc186665402d255",
+        ),
+        (
+            "extended_helper_boundary",
+            0x004476D0_usize,
+            0x00447AD3_usize,
+            "a9b8e2879076a98f32a610e61c1e275e56c7ebc7ad41f346ea221de21b84c840",
+        ),
+        (
+            "terrain_normal",
+            0x0047A2F0_usize,
+            0x0047A488_usize,
+            "e8b32026107432ba38f152e68395320f24603be9133dbefa90721771607f9684",
+        ),
+        (
+            "inverse_wrapper",
+            0x0047A660_usize,
+            0x0047A675_usize,
+            "bb8af2f0dba9f6f5795022ec5f4692afd2a3c7986d8443a74725d8c63c4831ed",
+        ),
+        (
+            "integer_sqrt",
+            0x0048EFC0_usize,
+            0x0048F05B_usize,
+            "cdec5838e3c2402b0deab3be8c3cd6cccff09fa60049ed34ec75610fbb6858ff",
+        ),
+        (
+            "process_rng",
+            0x0048F060_usize,
+            0x0048F079_usize,
+            "e7848b6caf06850740711a5eb206007001af8db642280353cd14fd509d714f86",
+        ),
+        (
+            "shared_lateral",
+            0x00426760_usize,
+            0x0042685C_usize,
+            "da63ea53d73a1a774785a74831ba40cb6e5aa246cd8bad1ee92320a012816945",
+        ),
+        (
+            "shared_forward",
+            0x00426860_usize,
+            0x004269C8_usize,
+            "c55d9f97738f686a1f8f51fd66cc0d48c0fd30c91ced24b63f48404ee38bd1a3",
+        ),
+        (
+            "shared_forward_response",
+            0x004269D0_usize,
+            0x00426A4B_usize,
+            "4a16e63a225eb449c33199a2acedf80d3f40a32d9c8f9154cf9e7e8dd202f487",
+        ),
+        (
+            "shared_angular_response",
+            0x00426A50_usize,
+            0x00426ADA_usize,
+            "3a5792c9214e707280c5f52fef357f31373c3401b35c69b1bf5df758edc406ad",
+        ),
+        (
+            "shared_angular",
+            0x00426AE0_usize,
+            0x00426BF0_usize,
+            "3ba8a2af1363581f7d405bbf08e3ea01824e3d37d6230d40466e53b536b7a04b",
+        ),
+        (
+            "shared_physics",
+            0x0047B1E0_usize,
+            0x0047B46C_usize,
+            "af464e62df5c02a472c39c222e76d46128ded5ab845ad1e71dbdada386da7bcf",
+        ),
+        (
+            "shared_impulse",
+            0x0047B510_usize,
+            0x0047B537_usize,
+            "f469b273b7e6d7030a608c2a375b48867d7bf263432de0ce63864799b9622893",
+        ),
+        (
+            "shared_flag_or",
+            0x0047A720_usize,
+            0x0047A730_usize,
+            "6093058e6ae69667fbaaa8029261ea0247ad05f287c5ccc94452282c175d66ec",
+        ),
+        (
+            "crt_registration_wrapper",
+            0x00511D89_usize,
+            0x00511D9B_usize,
+            "f08b5f4550f61873da85812c9ed808ffb1b8d3a95f4c91123034d42c9cadc5e1",
+        ),
+    ] {
+        let body = &bytes[start - 0x400000..end - 0x400000];
+        assert_eq!(format!("{:x}", Sha256::digest(body)), expected, "{name}");
+    }
+}
+#[test]
+fn exact_descriptors_final_callbacks_and_physical_push_pop_local_are_source_guarded() {
+    let bytes = assets().executable_bytes();
+    assert_eq!(
+        format!("{:x}", Sha256::digest(bytes)),
+        "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956"
+    );
+    for (name, offset, length, expected) in [
+        (
+            "mode1_helper_descriptor",
+            1247488_usize,
+            72_usize,
+            "c9370c9f398203aea55e727f516adf653af442383e66e23cc0c53a3372dcfa80",
+        ),
+        (
+            "helper_descriptor0",
+            1247224_usize,
+            104_usize,
+            "9fb1d6d6d108b60a7d6b9fd70324e3584dfe60889685470ac136b1011dbb10c7",
+        ),
+        (
+            "helper_descriptor2",
+            1247752_usize,
+            72_usize,
+            "9c1c81f6a35463af5667b59749a79ba2d80129d234990a49c7d7bf373001ac38",
+        ),
+        (
+            "helper_descriptor3",
+            1248016_usize,
+            40_usize,
+            "2f525a7c3f9f63ecb4f23528c7c0786039c764a11f40c610c467a081baeea03c",
+        ),
+        (
+            "helper_descriptor4",
+            1248280_usize,
+            40_usize,
+            "b72383c6685e3e690fe8d39aec67ff729606174c579b4ed1c6ea731d9be6aa98",
+        ),
+        (
+            "helper_select_jump",
+            152544_usize,
+            20_usize,
+            "abc783d11c088b3763b44252f2d386af97e9df7d1fd2b42ef45071f70b3e2c10",
+        ),
+        (
+            "final_10_24",
+            1182956_usize,
+            4_usize,
+            "4ba3ee4a544d647e1e5ee07f0b60981a291d89de665c8dd5ccc15e232e50a925",
+        ),
+        (
+            "final_10_48",
+            1182992_usize,
+            4_usize,
+            "407a9313ea95914f2a82c70fad09b697090f7cd77d3567c6149746f3e339bc95",
+        ),
+        (
+            "final_10_D8",
+            1183136_usize,
+            4_usize,
+            "f035d575e70db0f30edec66c04cd950c1bd3fdf23409165c552df72b05c58b9b",
+        ),
+        (
+            "final_10_118",
+            1183200_usize,
+            4_usize,
+            "c0a106116ab6f026bb3f06ce578fbd16adc5fbd4d939aee3c3f675fba0be941b",
+        ),
+        (
+            "final_helper_4",
+            1199788_usize,
+            4_usize,
+            "8e011e708b1c6bc3be4ccb7e2a4017293c6beeeb6b09ff6a40fabbbc01e1e7fe",
+        ),
+        (
+            "class10_lazy_up_vector",
+            1337936_usize,
+            12_usize,
+            "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+        ),
+        (
+            "class10_vector_flags",
+            1337960_usize,
+            1_usize,
+            "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        ),
+        (
+            "class10_cross_vector",
+            1337992_usize,
+            12_usize,
+            "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+        ),
+    ] {
+        assert_eq!(
+            format!("{:x}", Sha256::digest(&bytes[offset..offset + length])),
+            expected,
+            "{name}"
+        );
+    }
+    assert_eq!(
+        &bytes[0x52fe58 - 0x400000..0x52fe58 - 0x400000 + 12],
+        &[0xa8, 0x02, 0, 0x04, 0, 0x08, 0, 0x08, 0, 0x10, 0, 0]
+    );
+    for (address, expected) in [
+        (0x445cdf_usize, &[0x89, 0x54, 0x24, 0x0c][..]),
+        (0x445cf5, &[0x57][..]),
+        (0x445ec2, &[0x8b, 0x4c, 0x24, 0x10][..]),
+        (0x445ecf, &[0x89, 0x4c, 0x24, 0x10][..]),
+        (0x445f0f, &[0x5f][..]),
+        (0x445f21, &[0x8b, 0x44, 0x24, 0x0c][..]),
+        (0x424bf7, &[0x89, 0x86, 0x6c, 0x01, 0x00, 0x00][..]),
+        (0x424bfd, &[0x89, 0x86, 0x70, 0x01, 0x00, 0x00][..]),
+    ] {
+        assert_eq!(
+            &bytes[address - 0x400000..address - 0x400000 + expected.len()],
+            expected,
+            "{address:08X}"
+        );
+    }
+}

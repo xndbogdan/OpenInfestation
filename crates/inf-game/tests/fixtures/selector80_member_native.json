@@ -1,0 +1,3573 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "boundary": "original 00409070 and, through selector 77, 00409010; 00450A30 supplied, 0047CE90 and 00479FA0 returned after recording",
+  "cases": [
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3796,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 0,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4096,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 65535,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4097,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3901,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          4035,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4096,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          4036,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4096,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          4608,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4096,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 0,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 4294967295,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 4096,
+        "idle": 4294967295,
+        "up": 0,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          32768,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 32829,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": -65536,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 64980,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2147418112,
+        "shift": 0,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 0,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 12,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 256,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 15000000,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 15125000,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 15000001,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 15000001,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 4875000,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 5000000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 4875001,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 5000001,
+        "up": 125001,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 4875001,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 0,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 2147483647,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 2147483647,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 2147483648,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 2147608648,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 4294967295,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 124999,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 99,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 0,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 0,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          0,
+          3996,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          0,
+          3995,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          0,
+          32768,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 4261412863,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3779,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 0,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 0,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 4095,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 4096,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 4097,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 32767,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": -1,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 305419896,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 3,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 0,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3796,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 29207,
+        "speed": 18296,
+        "extension": 2436,
+        "phase": 3906,
+        "rng": 3185728930
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 3,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "phase": 0,
+        "remaining": 0,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3796,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 4294935584,
+        "speed": 18296,
+        "extension": 63355,
+        "phase": 3906,
+        "rng": 3185728930
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 3,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 0,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 0
+      },
+      "output": {
+        "y": 3796,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 6476,
+        "speed": 12329,
+        "extension": 1725,
+        "phase": 3906,
+        "rng": 1621583466
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 3,
+        "rise": 1,
+        "up": 0,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3796,
+        "idle": 0,
+        "up": 1,
+        "rise": 1,
+        "remaining": 48,
+        "speed": 8192,
+        "extension": 1232,
+        "phase": 3906,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 3,
+        "rise": 0,
+        "up": 1,
+        "idle": 0,
+        "flags": 33554432,
+        "radius": 300,
+        "position": [
+          16384,
+          3840,
+          20480
+        ],
+        "origin": [
+          16384,
+          3968,
+          20480
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 0,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1048576,
+        "shift": 8,
+        "ground": 2048,
+        "delta": 125000,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3840,
+        "idle": 125000,
+        "up": 125001,
+        "rise": 0,
+        "remaining": 29207,
+        "speed": 18296,
+        "extension": 2436,
+        "phase": 3906,
+        "rng": 3185728930
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67125248,
+          "z": 2774159360,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 3038212,
+        "flags": 0,
+        "radius": 15975,
+        "position": [
+          37991,
+          58683,
+          42251
+        ],
+        "origin": [
+          0,
+          52624,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 158927955,
+        "shift": 11,
+        "ground": 1898668253,
+        "delta": 3237965,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 57102,
+        "idle": 3038212,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67146855,
+          "z": 2774181131,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 15335546,
+        "idle": 5632718,
+        "flags": 33554432,
+        "radius": 1332,
+        "position": [
+          34384,
+          3755,
+          20318
+        ],
+        "origin": [
+          0,
+          9689,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1192793879,
+        "shift": 12,
+        "ground": 3964395383,
+        "delta": 2906996,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 2336,
+        "idle": 5632718,
+        "up": 15335546,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67143248,
+          "z": 2774159198,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 3782842,
+        "flags": 0,
+        "radius": 39862,
+        "position": [
+          43084,
+          21623,
+          56722
+        ],
+        "origin": [
+          0,
+          14563,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1033799275,
+        "shift": 15,
+        "ground": 2868310586,
+        "delta": 2202722,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 22698,
+        "idle": 3782842,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67151948,
+          "z": 2774195602,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 0,
+        "idle": 4442253,
+        "flags": 0,
+        "radius": 4477,
+        "position": [
+          51833,
+          31934,
+          41338
+        ],
+        "origin": [
+          0,
+          21989,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2672765801,
+        "shift": 2,
+        "ground": 709576063,
+        "delta": 2525698,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 47453,
+        "idle": 4442253,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67160697,
+          "z": 2774180218,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 4635733,
+        "idle": 2806167,
+        "flags": 33554432,
+        "radius": 33508,
+        "position": [
+          484,
+          63156,
+          7790
+        ],
+        "origin": [
+          0,
+          1554,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 4099579293,
+        "shift": 7,
+        "ground": 3196564692,
+        "delta": 2142841,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 46395,
+        "idle": 4949008,
+        "up": 6778574,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67109348,
+          "z": 2774146670,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 0,
+        "idle": 466131,
+        "flags": 33554432,
+        "radius": 19450,
+        "position": [
+          21732,
+          12445,
+          42848
+        ],
+        "origin": [
+          0,
+          41121,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2397883280,
+        "shift": 12,
+        "ground": 3167388615,
+        "delta": 2044988,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 12445,
+        "idle": 2511119,
+        "up": 2044988,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67130596,
+          "z": 2774181728,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 741021,
+        "flags": 0,
+        "radius": 5291,
+        "position": [
+          49863,
+          49150,
+          50110
+        ],
+        "origin": [
+          0,
+          22032,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2781019681,
+        "shift": 11,
+        "ground": 275962601,
+        "delta": 1161339,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 48583,
+        "idle": 741021,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67158727,
+          "z": 2774188990,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 0,
+        "idle": 1165840,
+        "flags": 0,
+        "radius": 8045,
+        "position": [
+          24625,
+          45444,
+          17192
+        ],
+        "origin": [
+          0,
+          65036,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 1586148365,
+        "shift": 2,
+        "ground": 3690484753,
+        "delta": 3266836,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 43849,
+        "idle": 1165840,
+        "up": 0,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67133489,
+          "z": 2774156072,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 1007766,
+        "idle": 1575425,
+        "flags": 0,
+        "radius": 37939,
+        "position": [
+          46494,
+          45749,
+          48338
+        ],
+        "origin": [
+          0,
+          35480,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 2267699038,
+        "shift": 15,
+        "ground": 4052794344,
+        "delta": 665960,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 45424,
+        "idle": 1575425,
+        "up": 1007766,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67155358,
+          "z": 2774187218,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 1,
+        "idle": 3547700,
+        "flags": 0,
+        "radius": 31614,
+        "position": [
+          11153,
+          26151,
+          11521
+        ],
+        "origin": [
+          0,
+          45597,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1907319022,
+        "shift": 15,
+        "ground": 1189283943,
+        "delta": 2903987,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 24734,
+        "idle": 3547700,
+        "up": 1,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67120017,
+          "z": 2774150401,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 298145,
+        "idle": 3973882,
+        "flags": 0,
+        "radius": 28626,
+        "position": [
+          59579,
+          2392,
+          48227
+        ],
+        "origin": [
+          0,
+          39027,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 164698562,
+        "shift": 8,
+        "ground": 1055034794,
+        "delta": 3515441,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 53529,
+        "idle": 7489323,
+        "up": 3813586,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67168443,
+          "z": 2774187107,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 853730,
+        "flags": 33554432,
+        "radius": 40730,
+        "position": [
+          44633,
+          41044,
+          18620
+        ],
+        "origin": [
+          0,
+          29211,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 1865534269,
+        "shift": 6,
+        "ground": 1921818282,
+        "delta": 3413270,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 42710,
+        "idle": 853730,
+        "up": 1,
+        "rise": 1,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67153497,
+          "z": 2774157500,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 3272990,
+        "idle": 2026250,
+        "flags": 33554432,
+        "radius": 44492,
+        "position": [
+          38574,
+          55397,
+          33437
+        ],
+        "origin": [
+          0,
+          62619,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2741935649,
+        "shift": 0,
+        "ground": 3691682373,
+        "delta": 1583560,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 55397,
+        "idle": 3609810,
+        "up": 4856550,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67147438,
+          "z": 2774172317,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 9607579,
+        "idle": 5953273,
+        "flags": 33554432,
+        "radius": 11644,
+        "position": [
+          33974,
+          49335,
+          15864
+        ],
+        "origin": [
+          0,
+          3305,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 326335869,
+        "shift": 12,
+        "ground": 2190499725,
+        "delta": 893622,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 48899,
+        "idle": 5953273,
+        "up": 9607579,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67142838,
+          "z": 2774154744,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 1,
+        "idle": 1283265,
+        "flags": 0,
+        "radius": 49743,
+        "position": [
+          46923,
+          28231,
+          40659
+        ],
+        "origin": [
+          0,
+          6674,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 542739082,
+        "shift": 10,
+        "ground": 4197045795,
+        "delta": 1885133,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 5730,
+        "idle": 0,
+        "up": 1885134,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67155787,
+          "z": 2774179539,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 1,
+        "up": 10475471,
+        "idle": 2742770,
+        "flags": 33554432,
+        "radius": 25132,
+        "position": [
+          42888,
+          30177,
+          46573
+        ],
+        "origin": [
+          0,
+          23504,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 3770664188,
+        "shift": 12,
+        "ground": 4100921476,
+        "delta": 1340940,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 3068,
+        "idle": 4083710,
+        "up": 11816411,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67151752,
+          "z": 2774185453,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 17329053,
+        "idle": 1386737,
+        "flags": 0,
+        "radius": 28468,
+        "position": [
+          55362,
+          6138,
+          2181
+        ],
+        "origin": [
+          0,
+          63456,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 2095705023,
+        "shift": 0,
+        "ground": 4238165164,
+        "delta": 3485387,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 6138,
+        "idle": 4872124,
+        "up": 17329053,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67164226,
+          "z": 2774141061,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 1,
+        "idle": 5046312,
+        "flags": 33554432,
+        "radius": 25685,
+        "position": [
+          27241,
+          51595,
+          6194
+        ],
+        "origin": [
+          0,
+          59667,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": false,
+        "liquid_base": 326585119,
+        "shift": 15,
+        "ground": 3395903882,
+        "delta": 2187825,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 51595,
+        "idle": 7234137,
+        "up": 2187826,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67136105,
+          "z": 2774145074,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": 0,
+        "up": 0,
+        "idle": 5988172,
+        "flags": 0,
+        "radius": 3310,
+        "position": [
+          35107,
+          34107,
+          43177
+        ],
+        "origin": [
+          0,
+          53865,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 431144601,
+        "shift": 11,
+        "ground": 4075061417,
+        "delta": 1551688,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 34107,
+        "idle": 0,
+        "up": 1551688,
+        "rise": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "ground",
+          "x": 67143971,
+          "z": 2774182057,
+          "third": 0
+        }
+      ]
+    },
+    {
+      "input": {
+        "lifecycle": 2,
+        "rise": -1,
+        "up": 8504330,
+        "idle": 1806575,
+        "flags": 0,
+        "radius": 53584,
+        "position": [
+          13084,
+          22298,
+          23704
+        ],
+        "origin": [
+          0,
+          64070,
+          0
+        ],
+        "pose": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          256
+        ],
+        "phase": 0,
+        "remaining": 1024,
+        "speed": 8192,
+        "target": true,
+        "liquid_base": 631888560,
+        "shift": 9,
+        "ground": 4098049313,
+        "delta": 3614986,
+        "rng": 305419896
+      },
+      "output": {
+        "y": 20533,
+        "idle": 1806575,
+        "up": 8504330,
+        "rise": 4294967295,
+        "remaining": 1024,
+        "speed": 8192,
+        "extension": 256,
+        "phase": 0,
+        "rng": 305419896
+      },
+      "events": [
+        {
+          "kind": "dispose"
+        },
+        {
+          "kind": "ground",
+          "x": 67121948,
+          "z": 2774162584,
+          "third": 0
+        },
+        {
+          "kind": "retire"
+        }
+      ]
+    }
+  ]
+}

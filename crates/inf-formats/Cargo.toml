@@ -1,0 +1,13 @@
+[package]
+name = "inf-formats"
+version = "0.1.0"
+edition = "2021"
+license.workspace = true
+repository.workspace = true
+description = "Strict PreLoad.dat and OVL framing parsers for Infestation"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"

@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "crates/inf-formats",
+    "crates/inf-game",
+    "crates/inf-extract",
+    "crates/inf-inspect",
+    "crates/inf-viewer",
+]
+resolver = "2"
+default-members = ["crates/inf-game"]
+
+[workspace.package]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/xndbogdan/OpenInfestation"

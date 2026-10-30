@@ -1,0 +1,445 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11">
+<rect width="1200" height="720" fill="#ffffff"/>
+<rect x="4" y="8" width="14" height="14" fill="#2da44e"/><text x="23" y="19" fill="#1f2328">referenced by port code</text>
+<rect x="182" y="8" width="14" height="14" fill="#d4a72c"/><text x="201" y="19" fill="#1f2328">by RE notes only</text>
+<rect x="318" y="8" width="14" height="14" fill="#cf222e"/><text x="337" y="19" fill="#1f2328">not referenced</text>
+<rect x="442" y="8" width="14" height="14" fill="#8c959f"/><text x="461" y="19" fill="#1f2328">omitted (status.csv not-needed)</text>
+<text x="1196" y="19" fill="#59636e" text-anchor="end">tiles sized by function bytes, grouped by owning RE note</text>
+<g><title>Pixel (PIXEL_RUNTIME.md): 49 code, 197 omitted</title>
+<rect x="1" y="31" width="319.6" height="369.5" fill="#2da44e"/>
+<rect x="1" y="400.5" width="319.6" height="318.5" fill="#8c959f"/>
+<text x="3" y="43" fill="#1f2328">Pixel 100.0%</text>
+</g>
+<g><title>Vehicle drive (VEHICLE_DRIVE_RUNTIME.md): 103 code, 9 omitted</title>
+<rect x="322.6" y="31" width="181.9" height="243.6" fill="#2da44e"/>
+<rect x="322.6" y="274.6" width="181.9" height="2.3" fill="#8c959f"/>
+<text x="324.6" y="43" fill="#1f2328">Vehicle drive 100.0%</text>
+</g>
+<g><title>Primitive (PRIMITIVE_RUNTIME.md): 62 code</title>
+<rect x="322.6" y="278.9" width="181.9" height="235.7" fill="#2da44e"/>
+<text x="324.6" y="290.9" fill="#1f2328">Primitive 100.0%</text>
+</g>
+<g><title>Gameplay (GAMEPLAY_RUNTIME.md): 134 code, 14 omitted</title>
+<rect x="322.6" y="516.6" width="181.9" height="190.5" fill="#2da44e"/>
+<rect x="322.6" y="707.1" width="181.9" height="11.9" fill="#8c959f"/>
+<text x="324.6" y="528.6" fill="#1f2328">Gameplay 100.0%</text>
+</g>
+<g><title>Network (NETWORK_RUNTIME.md): 282 code, 19 omitted</title>
+<rect x="506.5" y="31" width="145.7" height="234.8" fill="#2da44e"/>
+<rect x="506.5" y="265.8" width="145.7" height="7.4" fill="#8c959f"/>
+<text x="508.5" y="43" fill="#1f2328">Network 100.0%</text>
+</g>
+<g><title>Terrain (TERRAIN_RUNTIME.md): 59 code, 9 omitted</title>
+<rect x="506.5" y="275.2" width="145.7" height="181.9" fill="#2da44e"/>
+<rect x="506.5" y="457.1" width="145.7" height="0.4" fill="#8c959f"/>
+<text x="508.5" y="287.2" fill="#1f2328">Terrain 100.0%</text>
+</g>
+<g><title>Player messages (PLAYER_MESSAGES.md): 78 code, 1 omitted</title>
+<rect x="506.5" y="459.5" width="145.6" height="131.4" fill="#2da44e"/>
+<rect x="652.1" y="459.5" width="0.2" height="131.4" fill="#8c959f"/>
+<text x="508.5" y="471.5" fill="#1f2328">Player messages 100.0%</text>
+</g>
+<g><title>Platform (PLATFORM_RUNTIME.md): 8 code, 84 omitted</title>
+<rect x="506.5" y="592.8" width="13.7" height="126.2" fill="#2da44e"/>
+<rect x="520.2" y="592.8" width="132.1" height="126.2" fill="#8c959f"/>
+<text x="508.5" y="604.8" fill="#1f2328">Platform 100.0%</text>
+</g>
+<g><title>Frontend (FRONTEND_RUNTIME.md): 109 code, 11 omitted</title>
+<rect x="654.3" y="31" width="132.7" height="123.8" fill="#2da44e"/>
+<rect x="787" y="31" width="9.8" height="123.8" fill="#8c959f"/>
+<text x="656.3" y="43" fill="#1f2328">Frontend 100.0%</text>
+</g>
+<g><title>Profile (PROFILE_RUNTIME.md): 71 code, 11 omitted</title>
+<rect x="798.9" y="31" width="140.2" height="123.8" fill="#2da44e"/>
+<rect x="939.1" y="31" width="1.9" height="123.8" fill="#8c959f"/>
+<text x="800.9" y="43" fill="#1f2328">Profile 100.0%</text>
+</g>
+<g><title>Model scratch (MODEL_SCRATCH.md): 8 code, 11 omitted</title>
+<rect x="943" y="31" width="10.4" height="123.8" fill="#2da44e"/>
+<rect x="953.4" y="31" width="122.2" height="123.8" fill="#8c959f"/>
+<text x="945" y="43" fill="#1f2328">Model scratch 100.0%</text>
+</g>
+<g><title>Family4236d0 (FAMILY4236D0_RUNTIME.md): 70 code, 7 omitted</title>
+<rect x="1077.6" y="31" width="121.4" height="116.6" fill="#2da44e"/>
+<rect x="1077.6" y="147.6" width="121.4" height="7.3" fill="#8c959f"/>
+<text x="1079.6" y="43" fill="#1f2328">Family4236d0 100.…</text>
+</g>
+<g><title>Constructor assets (CONSTRUCTOR_ASSETS.md): 106 code, 7 omitted</title>
+<rect x="654.3" y="156.8" width="117.5" height="126.6" fill="#2da44e"/>
+<rect x="654.3" y="283.4" width="117.5" height="0.4" fill="#8c959f"/>
+<text x="656.3" y="168.8" fill="#1f2328">Constructor asset…</text>
+</g>
+<g><title>Actor (ACTOR_RUNTIME.md): 126 code, 12 omitted</title>
+<rect x="773.8" y="156.8" width="111.4" height="125.7" fill="#2da44e"/>
+<rect x="773.8" y="282.5" width="111.4" height="1.3" fill="#8c959f"/>
+<text x="775.8" y="168.8" fill="#1f2328">Actor 100.0%</text>
+</g>
+<g><title>Briefing (BRIEFING_RUNTIME.md): 55 code, 2 omitted</title>
+<rect x="887.3" y="156.8" width="103.8" height="126.9" fill="#2da44e"/>
+<rect x="887.3" y="283.7" width="103.8" height="0.1" fill="#8c959f"/>
+<text x="889.3" y="168.8" fill="#1f2328">Briefing 100.0%</text>
+</g>
+<g><title>Actor behavior (ACTOR_BEHAVIOR_RUNTIME.md): 118 code, 162 omitted</title>
+<rect x="993" y="156.8" width="102.5" height="114.2" fill="#2da44e"/>
+<rect x="993" y="271" width="102.5" height="12.9" fill="#8c959f"/>
+<text x="995" y="168.8" fill="#1f2328">Actor behavior…</text>
+</g>
+<g><title>Family40d800 (FAMILY40D800_RUNTIME.md): 87 code, 8 omitted</title>
+<rect x="1097.5" y="156.8" width="101.5" height="126.4" fill="#2da44e"/>
+<rect x="1097.5" y="283.3" width="101.5" height="0.6" fill="#8c959f"/>
+<text x="1099.5" y="168.8" fill="#1f2328">Family40d800 1…</text>
+</g>
+<g><title>Format documentation (FORMAT_DOCUMENTATION.md): 48 code, 17 omitted</title>
+<rect x="654.3" y="285.9" width="91.3" height="88.2" fill="#2da44e"/>
+<rect x="654.3" y="374.1" width="91.3" height="28.4" fill="#8c959f"/>
+<text x="656.3" y="297.9" fill="#1f2328">Format docume…</text>
+</g>
+<g><title>Model (MODEL_RUNTIME.md): 50 code, 8 omitted</title>
+<rect x="654.3" y="404.5" width="91.3" height="69.7" fill="#2da44e"/>
+<rect x="654.3" y="474.1" width="91.3" height="42.7" fill="#8c959f"/>
+<text x="656.3" y="416.5" fill="#1f2328">Model 100.0%</text>
+</g>
+<g><title>Audio (AUDIO_RUNTIME.md): 57 code, 14 omitted</title>
+<rect x="654.3" y="518.8" width="91.3" height="100.2" fill="#2da44e"/>
+<rect x="654.3" y="619" width="91.3" height="1.5" fill="#8c959f"/>
+<text x="656.3" y="530.8" fill="#1f2328">Audio 100.0%</text>
+</g>
+<g><title>Contact geometry (CONTACT_GEOMETRY.md): 23 code, 9 omitted</title>
+<rect x="654.3" y="622.5" width="91.3" height="85" fill="#2da44e"/>
+<rect x="654.3" y="707.5" width="91.3" height="11.5" fill="#8c959f"/>
+<text x="656.3" y="634.5" fill="#1f2328">Contact geome…</text>
+</g>
+<g><title>Particle (PARTICLE_RUNTIME.md): 54 code, 9 omitted</title>
+<rect x="747.6" y="285.9" width="91.2" height="91.4" fill="#2da44e"/>
+<rect x="747.6" y="377.2" width="91.2" height="1.8" fill="#8c959f"/>
+<text x="749.6" y="297.9" fill="#1f2328">Particle 100.…</text>
+</g>
+<g><title>World contact (WORLD_CONTACT.md): 31 code</title>
+<rect x="747.6" y="381" width="91.2" height="88.3" fill="#2da44e"/>
+<text x="749.6" y="393" fill="#1f2328">World contact…</text>
+</g>
+<g><title>Results (RESULTS_RUNTIME.md): 34 code, 2 omitted</title>
+<rect x="747.6" y="471.3" width="88.7" height="83" fill="#2da44e"/>
+<rect x="836.2" y="471.3" width="2.5" height="83" fill="#8c959f"/>
+<text x="749.6" y="483.3" fill="#1f2328">Results 100.0%</text>
+</g>
+<g><title>Alien brain (ALIEN_BRAIN_RUNTIME.md): 41 code, 3 omitted</title>
+<rect x="747.6" y="556.3" width="91" height="82" fill="#2da44e"/>
+<rect x="838.5" y="556.3" width="0.2" height="82" fill="#8c959f"/>
+<text x="749.6" y="568.3" fill="#1f2328">Alien brain 1…</text>
+</g>
+<g><title>Runtime foundation (RUNTIME_FOUNDATION.md): 64 code, 33 omitted</title>
+<rect x="747.6" y="640.4" width="70.9" height="78.6" fill="#2da44e"/>
+<rect x="818.5" y="640.4" width="20.3" height="78.6" fill="#8c959f"/>
+<text x="749.6" y="652.4" fill="#1f2328">Runtime found…</text>
+</g>
+<g><title>Selector18 (SELECTOR18_RUNTIME.md): 19 code, 1 omitted</title>
+<rect x="840.7" y="285.9" width="94.6" height="72" fill="#2da44e"/>
+<rect x="935.4" y="285.9" width="0.1" height="72" fill="#8c959f"/>
+<text x="842.7" y="297.9" fill="#1f2328">Selector18 10…</text>
+</g>
+<g><title>Camera (CAMERA_RUNTIME.md): 19 code, 16 omitted</title>
+<rect x="937.5" y="285.9" width="85.2" height="72" fill="#2da44e"/>
+<rect x="1022.7" y="285.9" width="2.5" height="72" fill="#8c959f"/>
+<text x="939.5" y="297.9" fill="#1f2328">Camera 100.0%</text>
+</g>
+<g><title>Model auxiliary (MODEL_AUXILIARY.md): 26 code, 21 omitted</title>
+<rect x="1027.2" y="285.9" width="80" height="72" fill="#2da44e"/>
+<rect x="1107.2" y="285.9" width="7.6" height="72" fill="#8c959f"/>
+<text x="1029.2" y="297.9" fill="#1f2328">Model auxili…</text>
+</g>
+<g><title>Loading (LOADING_RUNTIME.md): 52 code, 50 omitted</title>
+<rect x="1116.7" y="285.9" width="76.8" height="72" fill="#2da44e"/>
+<rect x="1193.6" y="285.9" width="5.4" height="72" fill="#8c959f"/>
+<text x="1118.7" y="297.9" fill="#1f2328">Loading 100…</text>
+</g>
+<g><title>Instance assets (INSTANCE_ASSETS.md): 49 code, 1 omitted</title>
+<rect x="840.7" y="359.9" width="72.2" height="75.2" fill="#2da44e"/>
+<rect x="840.7" y="435.1" width="72.2" height="2" fill="#8c959f"/>
+<text x="842.7" y="371.9" fill="#1f2328">Instance a…</text>
+</g>
+<g><title>Save format (SAVE_FORMAT.md): 25 code, 2 omitted</title>
+<rect x="915" y="359.9" width="71.6" height="72.1" fill="#2da44e"/>
+<rect x="915" y="432" width="71.6" height="5.1" fill="#8c959f"/>
+<text x="917" y="371.9" fill="#1f2328">Save form…</text>
+</g>
+<g><title>Intro sequence (INTRO_SEQUENCE.md): 16 code, 1 omitted</title>
+<rect x="988.6" y="359.9" width="70.2" height="77" fill="#2da44e"/>
+<rect x="988.6" y="436.9" width="70.2" height="0.2" fill="#8c959f"/>
+<text x="990.6" y="371.9" fill="#1f2328">Intro seq…</text>
+</g>
+<g><title>Hold items (HOLD_ITEMS.md): 49 code, 9 omitted</title>
+<rect x="1060.8" y="359.9" width="69.5" height="76.3" fill="#2da44e"/>
+<rect x="1060.8" y="436.2" width="69.5" height="0.9" fill="#8c959f"/>
+<text x="1062.8" y="371.9" fill="#1f2328">Hold item…</text>
+</g>
+<g><title>Sample assets (SAMPLE_ASSETS.md): 5 code, 2 omitted</title>
+<rect x="1132.3" y="359.9" width="66.7" height="77" fill="#2da44e"/>
+<rect x="1132.3" y="436.9" width="66.7" height="0.2" fill="#8c959f"/>
+<text x="1134.3" y="371.9" fill="#1f2328">Sample as…</text>
+</g>
+<g><title>Input (INPUT_RUNTIME.md): 39 code, 14 omitted</title>
+<rect x="840.7" y="439.1" width="66.6" height="62.4" fill="#2da44e"/>
+<rect x="840.7" y="501.5" width="66.6" height="7.9" fill="#8c959f"/>
+<text x="842.7" y="451.1" fill="#1f2328">Input 100…</text>
+</g>
+<g><title>Actor descriptor changes (ACTOR_DESCRIPTOR_CHANGES.md): 41 code, 2 omitted</title>
+<rect x="840.7" y="511.4" width="66.6" height="69.5" fill="#2da44e"/>
+<rect x="840.7" y="581" width="66.6" height="0.2" fill="#8c959f"/>
+<text x="842.7" y="523.4" fill="#1f2328">Actor des…</text>
+</g>
+<g><title>Selector35 (SELECTOR35_RUNTIME.md): 44 code, 1 omitted</title>
+<rect x="840.7" y="583.2" width="66.6" height="66.4" fill="#2da44e"/>
+<rect x="840.7" y="649.6" width="66.6" height="1.2" fill="#8c959f"/>
+<text x="842.7" y="595.2" fill="#1f2328">Selector3…</text>
+</g>
+<g><title>Selector30 (SELECTOR30_RUNTIME.md): 21 code, 3 omitted</title>
+<rect x="840.7" y="652.8" width="66.3" height="66.2" fill="#2da44e"/>
+<rect x="907.1" y="652.8" width="0.3" height="66.2" fill="#8c959f"/>
+<text x="842.7" y="664.8" fill="#1f2328">Selector3…</text>
+</g>
+<g><title>Actor movement tails (ACTOR_MOVEMENT_TAILS.md): 12 code</title>
+<rect x="909.4" y="439.1" width="55.8" height="69.8" fill="#2da44e"/>
+<text x="911.4" y="451.1" fill="#1f2328">Actor m…</text>
+</g>
+<g><title>Family428650 (FAMILY428650_RUNTIME.md): 23 code, 5 omitted</title>
+<rect x="909.4" y="510.9" width="55.8" height="64.7" fill="#2da44e"/>
+<rect x="909.4" y="575.6" width="55.8" height="4" fill="#8c959f"/>
+<text x="911.4" y="522.9" fill="#1f2328">Family4…</text>
+</g>
+<g><title>Selector68 (SELECTOR68_RUNTIME.md): 18 code, 3 omitted</title>
+<rect x="909.4" y="581.6" width="55.8" height="67.4" fill="#2da44e"/>
+<rect x="909.4" y="649" width="55.8" height="0.3" fill="#8c959f"/>
+<text x="911.4" y="593.6" fill="#1f2328">Selecto…</text>
+</g>
+<g><title>Projectile collision (PROJECTILE_COLLISION_RUNTIME.md): 25 code, 4 omitted</title>
+<rect x="909.4" y="651.3" width="55.8" height="67.2" fill="#2da44e"/>
+<rect x="909.4" y="718.5" width="55.8" height="0.5" fill="#8c959f"/>
+<text x="911.4" y="663.3" fill="#1f2328">Project…</text>
+</g>
+<g><title>Selector25 (SELECTOR25_RUNTIME.md): 23 code</title>
+<rect x="967.1" y="439.1" width="60.4" height="51" fill="#2da44e"/>
+<text x="969.1" y="451.1" fill="#1f2328">Selector…</text>
+</g>
+<g><title>Family target selection (FAMILY_TARGET_SELECTION.md): 15 code, 1 omitted</title>
+<rect x="1029.5" y="439.1" width="55.5" height="51" fill="#2da44e"/>
+<rect x="1084.9" y="439.1" width="0.4" height="51" fill="#8c959f"/>
+<text x="1031.5" y="451.1" fill="#1f2328">Family …</text>
+</g>
+<g><title>Selector31 (SELECTOR31_RUNTIME.md): 12 code, 1 omitted</title>
+<rect x="1087.4" y="439.1" width="55.3" height="51" fill="#2da44e"/>
+<rect x="1142.7" y="439.1" width="0" height="51" fill="#8c959f"/>
+<text x="1089.4" y="451.1" fill="#1f2328">Selecto…</text>
+</g>
+<g><title>Selector67 (SELECTOR67_RUNTIME.md): 11 code, 1 omitted</title>
+<rect x="1144.7" y="439.1" width="54.2" height="51" fill="#2da44e"/>
+<rect x="1198.9" y="439.1" width="0.1" height="51" fill="#8c959f"/>
+<text x="1146.7" y="451.1" fill="#1f2328">Selecto…</text>
+</g>
+<g><title>Object (OBJECT_RUNTIME.md): 39 code, 6 omitted</title>
+<rect x="967.1" y="492.1" width="50.1" height="53.6" fill="#2da44e"/>
+<rect x="967.1" y="545.7" width="50.1" height="1.4" fill="#8c959f"/>
+<text x="969.1" y="504.1" fill="#1f2328">Object…</text>
+</g>
+<g><title>Object model callbacks (OBJECT_MODEL_CALLBACKS.md): 26 code, 2 omitted</title>
+<rect x="967.1" y="549.1" width="48.3" height="48.4" fill="#2da44e"/>
+<rect x="1015.4" y="549.1" width="1.8" height="48.4" fill="#8c959f"/>
+<text x="969.1" y="561.1" fill="#1f2328">Object…</text>
+</g>
+<g><title>Weapon firing (WEAPON_FIRING_RUNTIME.md): 11 code</title>
+<rect x="967.1" y="599.5" width="50.1" height="46.1" fill="#2da44e"/>
+<text x="969.1" y="611.5" fill="#1f2328">Weapon…</text>
+</g>
+<g><title>Attract demo (ATTRACT_DEMO_RUNTIME.md): 20 code, 21 omitted</title>
+<rect x="967.1" y="647.6" width="42.8" height="35.2" fill="#2da44e"/>
+<rect x="1009.9" y="647.6" width="7.3" height="35.2" fill="#8c959f"/>
+<text x="969.1" y="659.6" fill="#1f2328">Attrac…</text>
+</g>
+<g><title>Pickup (PICKUP_RUNTIME.md): 17 code</title>
+<rect x="967.1" y="684.8" width="50.1" height="34.2" fill="#2da44e"/>
+<text x="969.1" y="696.8" fill="#1f2328">Pickup…</text>
+</g>
+<g><title>Water rendering (WATER_RENDERING.md): 5 code</title>
+<rect x="1019.2" y="492.1" width="44.1" height="38" fill="#2da44e"/>
+<text x="1021.2" y="504.1" fill="#1f2328">Water…</text>
+</g>
+<g><title>Behavior damage cache (BEHAVIOR_DAMAGE_CACHE.md): 7 code</title>
+<rect x="1065.3" y="492.1" width="43.7" height="38" fill="#2da44e"/>
+<text x="1067.3" y="504.1" fill="#1f2328">Behav…</text>
+</g>
+<g><title>Selector26 (SELECTOR26_RUNTIME.md): 10 code</title>
+<rect x="1111" y="492.1" width="43.3" height="38" fill="#2da44e"/>
+<text x="1113" y="504.1" fill="#1f2328">Selec…</text>
+</g>
+<g><title>Text (TEXT_RUNTIME.md): 11 code, 4 omitted</title>
+<rect x="1156.3" y="492.1" width="41.9" height="38" fill="#2da44e"/>
+<rect x="1198.3" y="492.1" width="0.7" height="38" fill="#8c959f"/>
+<text x="1158.3" y="504.1" fill="#1f2328">Text …</text>
+</g>
+<g><title>Object draw (OBJECT_DRAW_RUNTIME.md): 12 code</title>
+<rect x="1019.2" y="532.1" width="38.1" height="42.5" fill="#2da44e"/>
+<text x="1021.2" y="544.1" fill="#1f2328">Obje…</text>
+</g>
+<g><title>Selector27 (SELECTOR27_RUNTIME.md): 15 code</title>
+<rect x="1059.2" y="532.1" width="36.4" height="42.5" fill="#2da44e"/>
+<text x="1061.2" y="544.1" fill="#1f2328">Sele…</text>
+</g>
+<g><title>Object lighting (OBJECT_LIGHTING.md): 7 code, 1 omitted</title>
+<rect x="1097.7" y="532.1" width="34.7" height="42.4" fill="#2da44e"/>
+<rect x="1097.7" y="574.5" width="34.7" height="0.1" fill="#8c959f"/>
+<text x="1099.7" y="544.1" fill="#1f2328">Obj…</text>
+</g>
+<g><title>Model asset coverage (MODEL_ASSET_COVERAGE.md): 6 code</title>
+<rect x="1134.4" y="532.1" width="31.4" height="42.5" fill="#2da44e"/>
+<text x="1136.4" y="544.1" fill="#1f2328">Mod…</text>
+</g>
+<g><title>World assets (WORLD_ASSETS.md): 7 code, 2 omitted</title>
+<rect x="1167.8" y="532.1" width="31.2" height="42.1" fill="#2da44e"/>
+<rect x="1167.8" y="574.2" width="31.2" height="0.4" fill="#8c959f"/>
+<text x="1169.8" y="544.1" fill="#1f2328">Wor…</text>
+</g>
+<g><title>Target (TARGET_RUNTIME.md): 26 code</title>
+<rect x="1019.2" y="576.6" width="35.7" height="36.4" fill="#2da44e"/>
+<text x="1021.2" y="588.6" fill="#1f2328">Targ…</text>
+</g>
+<g><title>Particle factory (PARTICLE_FACTORY_RUNTIME.md): 13 code, 1 omitted</title>
+<rect x="1019.2" y="615" width="35.6" height="34.1" fill="#2da44e"/>
+<rect x="1054.7" y="615" width="0.1" height="34.1" fill="#8c959f"/>
+<text x="1021.2" y="627" fill="#1f2328">Part…</text>
+</g>
+<g><title>Selector60 (SELECTOR60_RUNTIME.md): 9 code</title>
+<rect x="1019.2" y="651.1" width="35.7" height="33.5" fill="#2da44e"/>
+<text x="1021.2" y="663.1" fill="#1f2328">Sele…</text>
+</g>
+<g><title>World flash (WORLD_FLASH.md): 7 code, 1 omitted</title>
+<rect x="1019.2" y="686.6" width="35.3" height="32.4" fill="#2da44e"/>
+<rect x="1054.5" y="686.6" width="0.4" height="32.4" fill="#8c959f"/>
+<text x="1021.2" y="698.6" fill="#1f2328">Worl…</text>
+</g>
+<g><title>Dynamic model observation (DYNAMIC_MODEL_OBSERVATION.md): 14 code</title>
+<rect x="1056.8" y="576.6" width="35.4" height="32.6" fill="#2da44e"/>
+<text x="1058.8" y="588.6" fill="#1f2328">Dyna…</text>
+</g>
+<g><title>Actor contact (ACTOR_CONTACT_RUNTIME.md): 2 code</title>
+<rect x="1094.3" y="576.6" width="34.2" height="32.6" fill="#2da44e"/>
+<text x="1096.3" y="588.6" fill="#1f2328">Act…</text>
+</g>
+<g><title>Parent model observation (PARENT_MODEL_OBSERVATION.md): 7 code</title>
+<rect x="1130.4" y="576.6" width="33.7" height="32.6" fill="#2da44e"/>
+<text x="1132.4" y="588.6" fill="#1f2328">Par…</text>
+</g>
+<g><title>Selector76 (SELECTOR76_RUNTIME.md): 7 code</title>
+<rect x="1166.1" y="576.6" width="32.9" height="32.6" fill="#2da44e"/>
+<text x="1168.1" y="588.6" fill="#1f2328">Sel…</text>
+</g>
+<g><title>Selector32 (SELECTOR32_RUNTIME.md): 9 code</title>
+<rect x="1056.8" y="611.2" width="27.5" height="36" fill="#2da44e"/>
+</g>
+<g><title>Selector38 (SELECTOR38_RUNTIME.md): 10 code</title>
+<rect x="1056.8" y="649.2" width="27.5" height="35.9" fill="#2da44e"/>
+</g>
+<g><title>Route (ROUTE_RUNTIME.md): 16 code, 1 omitted</title>
+<rect x="1056.8" y="687.1" width="27.5" height="31.8" fill="#2da44e"/>
+<rect x="1056.8" y="718.9" width="27.5" height="0.1" fill="#8c959f"/>
+</g>
+<g><title>World cleanup (WORLD_CLEANUP.md): 8 code, 3 omitted</title>
+<rect x="1086.3" y="611.2" width="25" height="26.1" fill="#2da44e"/>
+<rect x="1111.3" y="611.2" width="7.6" height="26.1" fill="#8c959f"/>
+<text x="1088.3" y="623.2" fill="#1f2328">Wor…</text>
+</g>
+<g><title>Actor interactions (ACTOR_INTERACTIONS.md): 13 code, 2 omitted</title>
+<rect x="1086.3" y="639.3" width="32.1" height="26" fill="#2da44e"/>
+<rect x="1118.4" y="639.3" width="0.5" height="26" fill="#8c959f"/>
+<text x="1088.3" y="651.3" fill="#1f2328">Act…</text>
+</g>
+<g><title>Player construction (PLAYER_CONSTRUCTION.md): 4 code, 1 omitted</title>
+<rect x="1086.3" y="667.3" width="31.8" height="25.6" fill="#2da44e"/>
+<rect x="1118.1" y="667.3" width="0.8" height="25.6" fill="#8c959f"/>
+<text x="1088.3" y="679.3" fill="#1f2328">Pla…</text>
+</g>
+<g><title>Furniture (FURNITURE_RUNTIME.md): 8 code, 10 omitted</title>
+<rect x="1086.3" y="694.9" width="26.1" height="24.1" fill="#2da44e"/>
+<rect x="1112.5" y="694.9" width="6.5" height="24.1" fill="#8c959f"/>
+<text x="1088.3" y="706.9" fill="#1f2328">Fur…</text>
+</g>
+<g><title>Actor capture (ACTOR_CAPTURE.md): 7 code</title>
+<rect x="1120.9" y="611.2" width="25.5" height="30.6" fill="#2da44e"/>
+</g>
+<g><title>Actor angular response (ACTOR_ANGULAR_RESPONSE.md): 10 code</title>
+<rect x="1148.5" y="611.2" width="24.7" height="30.6" fill="#2da44e"/>
+</g>
+<g><title>Actor effect attachment (ACTOR_EFFECT_ATTACHMENT.md): 8 code</title>
+<rect x="1175.2" y="611.2" width="23.8" height="30.6" fill="#2da44e"/>
+</g>
+<g><title>Shared actor factory (SHARED_ACTOR_FACTORY.md): 7 code</title>
+<rect x="1120.9" y="643.8" width="24.7" height="27" fill="#2da44e"/>
+</g>
+<g><title>Presentation policy (PRESENTATION_POLICY.md): 2 code, 1 omitted</title>
+<rect x="1120.9" y="672.7" width="21.7" height="22.8" fill="#2da44e"/>
+<rect x="1142.6" y="672.7" width="3" height="22.8" fill="#8c959f"/>
+</g>
+<g><title>Family grant grid (FAMILY_GRANT_GRID.md): 2 code</title>
+<rect x="1120.9" y="697.5" width="24.7" height="21.5" fill="#2da44e"/>
+</g>
+<g><title>Actor grant notification (ACTOR_GRANT_NOTIFICATION.md): 8 code</title>
+<rect x="1147.7" y="643.8" width="26.3" height="18.3" fill="#2da44e"/>
+</g>
+<g><title>Weapon pickups (WEAPON_PICKUPS.md): 4 code, 2 omitted</title>
+<rect x="1175.9" y="643.8" width="22.4" height="18.3" fill="#2da44e"/>
+<rect x="1198.3" y="643.8" width="0.7" height="18.3" fill="#8c959f"/>
+</g>
+<g><title>Model composition (MODEL_COMPOSITION.md): 8 code</title>
+<rect x="1147.7" y="664" width="17.7" height="22.7" fill="#2da44e"/>
+</g>
+<g><title>Hidden goodies (HIDDEN_GOODIES.md): 4 code</title>
+<rect x="1167.4" y="664" width="14.9" height="22.7" fill="#2da44e"/>
+</g>
+<g><title>Family helper history (FAMILY_HELPER_HISTORY.md): 4 code</title>
+<rect x="1184.3" y="664" width="14.7" height="22.7" fill="#2da44e"/>
+</g>
+<g><title>World map (WORLD_MAP_RUNTIME.md): 5 code, 7 omitted</title>
+<rect x="1147.7" y="688.7" width="18.6" height="14.2" fill="#2da44e"/>
+<rect x="1166.3" y="688.7" width="2.5" height="14.2" fill="#8c959f"/>
+</g>
+<g><title>Player command (PLAYER_COMMAND_RUNTIME.md): 7 code</title>
+<rect x="1147.7" y="704.9" width="21.1" height="14.1" fill="#2da44e"/>
+</g>
+<g><title>World mission (WORLD_MISSION.md): 5 code, 1 omitted</title>
+<rect x="1170.8" y="688.7" width="15.5" height="12.6" fill="#2da44e"/>
+<rect x="1186.3" y="688.7" width="1.5" height="12.6" fill="#8c959f"/>
+</g>
+<g><title>Grant difference (GRANT_DIFFERENCE_RUNTIME.md): 3 code</title>
+<rect x="1189.8" y="688.7" width="9.2" height="12.6" fill="#2da44e"/>
+</g>
+<g><title>Task relations (TASK_RELATIONS.md): 4 code, 1 omitted</title>
+<rect x="1170.8" y="703.3" width="12.6" height="7.8" fill="#2da44e"/>
+<rect x="1183.4" y="703.3" width="0.3" height="7.8" fill="#8c959f"/>
+</g>
+<g><title>Model process graphics (MODEL_PROCESS_GRAPHICS.md): 2 code, 1 omitted</title>
+<rect x="1170.8" y="713.1" width="11.2" height="5.9" fill="#2da44e"/>
+<rect x="1181.9" y="713.1" width="1.7" height="5.9" fill="#8c959f"/>
+</g>
+<g><title>World load lifetime (WORLD_LOAD_LIFETIME.md): 1 code</title>
+<rect x="1185.6" y="703.3" width="7" height="7.4" fill="#2da44e"/>
+</g>
+<g><title>Gameplay overlay (GAMEPLAY_OVERLAY.md): 1 code</title>
+<rect x="1194.6" y="703.3" width="4.4" height="7.4" fill="#2da44e"/>
+</g>
+<g><title>Player vehicle state (PLAYER_VEHICLE_STATE.md): 2 code</title>
+<rect x="1185.6" y="712.7" width="5.2" height="2.3" fill="#2da44e"/>
+</g>
+<g><title>Process actor state (PROCESS_ACTOR_STATE.md): 1 code</title>
+<rect x="1185.6" y="717" width="5.2" height="2" fill="#2da44e"/>
+</g>
+<g><title>Player actor lookup (PLAYER_ACTOR_LOOKUP.md): 1 code</title>
+<rect x="1192.8" y="712.7" width="2.5" height="4.2" fill="#2da44e"/>
+</g>
+<g><title>Grant (GRANT_RUNTIME.md): 1 code</title>
+<rect x="1197.3" y="712.7" width="1.7" height="4.2" fill="#2da44e"/>
+</g>
+<g><title>World visibility (WORLD_VISIBILITY.md): 1 code</title>
+<rect x="1192.8" y="718.9" width="5.8" height="0.1" fill="#2da44e"/>
+</g>
+<g><title>Furniture collision (FURNITURE_COLLISION.md): 1 code</title>
+</g>
+</svg>

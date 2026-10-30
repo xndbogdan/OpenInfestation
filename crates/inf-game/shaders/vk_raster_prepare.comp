@@ -1,0 +1,68 @@
+#version 460
+// The raster's world as the upscalers and TAA take it, when no rays are
+// traced: the frame's colour and depth after the world's last draw, and
+// each pixel's motion, where its point sat in the last frame less where it
+// sits now, in target pixels and without the jitter. A point moves with the
+// camera, unless a moving model drew it: the motion pass left that model's
+// own motion under it.
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 0) uniform sampler2D frame_color;
+layout(set = 0, binding = 1) uniform sampler2D frame_depth;
+layout(set = 0, binding = 2, rgba16f) uniform writeonly image2D color_out;
+layout(set = 0, binding = 3, r32f) uniform writeonly image2D depth_out;
+layout(set = 0, binding = 4, rg16f) uniform writeonly image2D motion_out;
+// Moving models' own motion in native pixels, and in alpha where they drew.
+layout(set = 0, binding = 5, rgba16f) uniform readonly image2D object_motion;
+
+layout(push_constant) uniform Pass {
+    // This view's axes in the last view's (rows), each with the eye's move
+    // since then along that axis, across the world's wrap.
+    vec4 turn[3];
+    // Focal lengths and centre, now and in the last frame.
+    vec4 now;
+    vec4 then;
+    // The native frame's size and the target's.
+    vec4 size;
+    // The image's offset this frame in target pixels, the near plane, and
+    // 1 when the last frame's view can be followed.
+    vec4 extra;
+} pass;
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    // The world was drawn at the inputs' size, at the frame's top left.
+    if (any(greaterThanEqual(pixel, imageSize(color_out)))) {
+        return;
+    }
+    imageStore(color_out, pixel, vec4(texelFetch(frame_color, pixel, 0).rgb, 1.0));
+    // The TL depth the game gives a point at view distance z: 1 - near/z.
+    float depth = texelFetch(frame_depth, pixel, 0).r;
+    imageStore(depth_out, pixel, vec4(depth));
+    vec2 motion = vec2(0.0);
+    if (pass.extra.w > 0.5) {
+        // The raster draws native x at target (x + 0.5) * target / native,
+        // plus the jitter.
+        vec2 here = vec2(pixel) + 0.5 - pass.extra.xy;
+        vec2 native = here * pass.size.xy / pass.size.zw - 0.5;
+        vec2 ray = (native - pass.now.zw) / pass.now.xy;
+        vec3 along = vec3(ray.x, -ray.y, 1.0);
+        vec3 turned = vec3(dot(pass.turn[0].xyz, along), dot(pass.turn[1].xyz, along),
+                           dot(pass.turn[2].xyz, along));
+        // Where nothing was drawn, the sky turns with the view alone.
+        vec3 view = turned;
+        if (depth < 1.0) {
+            float z = pass.extra.z / max(1.0 - depth, 1.0e-7);
+            view = z * turned + vec3(pass.turn[0].w, pass.turn[1].w, pass.turn[2].w);
+        }
+        vec4 object = imageLoad(object_motion, pixel);
+        if (object.a > 0.5) {
+            motion = object.xy * pass.size.zw / pass.size.xy;
+        } else if (view.z > 1.0e-3) {
+            vec2 was = pass.then.zw + pass.then.xy * vec2(view.x, -view.y) / view.z;
+            motion = (was + 0.5) * pass.size.zw / pass.size.xy - here;
+        }
+    }
+    imageStore(motion_out, pixel, vec4(motion, 0.0, 0.0));
+}

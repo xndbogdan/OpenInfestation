@@ -1,0 +1,287 @@
+#version 460
+// The mist's light, one cell of its grid an invocation: the grid spans the
+// view, its slices each a fixed ratio deeper than the last, and they stack
+// down one image. A cell's density thins with height above the mist's base,
+// and in a world's view the distance fog adds its own, which grows from
+// retail's fog start so that it hides nearly all at the fog's end near the
+// ground, thinner above its top; its colour turns from the fog's to the far
+// colour by the fog's end. The light is that colour from the sky, and from
+// the sun scattered
+// forward where a ray finds the sun unshadowed (terrain and buildings cast
+// light shafts), and retail's dynamic lights glowing near the ground. Each
+// frame takes a point jittered within the cell and blends into the last
+// frame's value where the cell's centre was seen then.
+//
+// Output: the light scattered (times the density) and the density, both
+// per thousand world units. With the eye under the water (the remastered
+// camera) the grid holds the water's instead: the sun's light each cell
+// scatters (water_sun), no air, no density.
+#extension GL_EXT_ray_query : require
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+#include "pt_water.glsl"
+
+// A ground vertex: world position, normal, and its albedo.
+struct GroundVertex {
+    vec3 position;
+    vec3 normal;
+    float albedo;
+};
+
+layout(set = 0, binding = 1) uniform accelerationStructureEXT scene;
+layout(set = 0, binding = 2, scalar) readonly buffer GroundVertices { GroundVertex ground_vertices[]; };
+layout(set = 0, binding = 3, scalar) readonly buffer LightGrid { uint grid[]; };
+#include "pt_light_grid.glsl"
+// The last frame's cells.
+layout(set = 0, binding = 4) uniform sampler2D history;
+layout(set = 0, binding = 5, rgba16f) uniform writeonly image2D cells_out;
+// The thrusters' trails: how many puffs, the
+// box they fill (eye-relative), then each puff's middle and radius, and its
+// colour and density per thousand units.
+layout(set = 0, binding = 6, scalar) readonly buffer Trails {
+    vec4 trail_count;
+    vec4 trail_low;
+    vec4 trail_high;
+    vec4 puffs[];
+};
+// 1 when the last frame's cells cannot be followed (it lit no mist).
+layout(push_constant) uniform Push {
+    int fresh;
+} push;
+
+// Water casts no shadow; what lies outside the view does (pt_scene.glsl's
+// MASK_SOLID).
+const uint MASK_SOLID = 0x41u;
+// The last frame's share where its cell can be followed.
+const float KEEP = 0.9;
+// How far above the ground retail's lights glow in the mist, by e.
+const float GLOW_REACH = 384.0;
+// The trails' light: their colour times the ambient's (the sky's) and the
+// sun's shares.
+const float TRAIL_SKY = 2.0;
+const float TRAIL_SUN = 0.6;
+
+// The ground's height under world X/Z, between its grid points.
+float ground_height(vec2 world) {
+    int points = int(frame.ground_points);
+    vec2 grid_at = mod(world, 65536.0) / frame.ground_spacing;
+    ivec2 corner = clamp(ivec2(floor(grid_at)), ivec2(0), ivec2(points - 2));
+    vec2 t = clamp(grid_at - vec2(corner), 0.0, 1.0);
+    int at = corner.x * points + corner.y;
+    float near_row = mix(ground_vertices[at].position.y, ground_vertices[at + points].position.y, t.x);
+    float far_row = mix(ground_vertices[at + 1].position.y,
+                        ground_vertices[at + points + 1].position.y, t.x);
+    return mix(near_row, far_row, t.y);
+}
+
+// The mist's density at world height `y`, per thousand units.
+float density_at(float y) {
+    float above = max(y - frame.mist_base, 0.0) / max(frame.mist_height, 1.0);
+    return frame.mist_density * (frame.mist_floor + (1.0 - frame.mist_floor) * exp(-above));
+}
+
+// The distance fog's density at distance `z` from the eye and world height
+// `y`, per thousand units along the ray: none before its start, then such
+// that its optical depth reaches fog_depth at the fog's end near the ground,
+// as its curve grows it; its top's share above its band.
+float fog_density_at(float z, float y) {
+    if (frame.distance_fog < 0.5 || z <= frame.fog_near) {
+        return 0.0;
+    }
+    float span = max(frame.fog_end - frame.fog_near, 1.0);
+    float x = max((z - frame.fog_near) / span, 1.0e-4);
+    float rate = frame.fog_depth * frame.fog_curve * pow(x, frame.fog_curve - 1.0) / span;
+    float thin = mix(1.0, frame.fog_above, smoothstep(frame.fog_top, frame.fog_top + frame.fog_band, y));
+    return 1000.0 * rate * thin;
+}
+
+// A smooth value noise over the plane, 0 to 1.
+float drift_noise(vec2 p) {
+    vec2 cell = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float n[4];
+    for (int k = 0; k < 4; k++) {
+        vec2 corner = cell + vec2(k & 1, k >> 1);
+        uint h = uint(int(corner.x) * 73856093) ^ uint(int(corner.y) * 19349663);
+        h ^= h >> 13;
+        h *= 0x5bd1e995u;
+        h ^= h >> 15;
+        n[k] = float(h & 0xffffu) / 65535.0;
+    }
+    return mix(mix(n[0], n[1], f.x), mix(n[2], n[3], f.x), f.y);
+}
+
+// The drawn wind's drift at eye-relative `position`: snow, sand, dust or ash blown low over the ground in streaks
+// stretched along the wind and carried by it, thinning with height above
+// the ground, only near the camera. Per thousand units.
+float drift_at(vec3 position, float y) {
+    if (frame.drift_density <= 0.0 || frame.ground_points < 1.5) {
+        return 0.0;
+    }
+    float near = 1.0 - smoothstep(2500.0, 4500.0, length(position));
+    if (near <= 0.0) {
+        return 0.0;
+    }
+    vec2 world = frame.eye.xz + position.xz;
+    float above = y - ground_height(world);
+    if (above < 0.0) {
+        return 0.0;
+    }
+    float speed = length(frame.drift_wind);
+    vec2 along = speed > 1.0e-3 ? frame.drift_wind / speed : vec2(0.0, 1.0);
+    vec2 across = vec2(-along.y, along.x);
+    vec2 carried = world - frame.drift_wind * (frame.water_clock / 50.0);
+    vec2 p = vec2(dot(carried, along) / 900.0, dot(carried, across) / 220.0);
+    float streaks = 0.65 * drift_noise(p) + 0.35 * drift_noise(p * 2.7 + 17.0);
+    return frame.drift_density * smoothstep(0.35, 0.8, streaks)
+        * exp(-above / max(frame.drift_height, 1.0)) * near;
+}
+
+bool sunlit(vec3 origin) {
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsOpaqueEXT | gl_RayFlagsTerminateOnFirstHitEXT,
+                          MASK_SOLID, origin, 0.0, frame.sun_direction, 1.0e6);
+    rayQueryProceedEXT(query);
+    return rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT;
+}
+
+bool clear_way(vec3 origin, vec3 direction, float reach) {
+    rayQueryEXT query;
+    rayQueryInitializeEXT(query, scene, gl_RayFlagsOpaqueEXT | gl_RayFlagsTerminateOnFirstHitEXT,
+                          MASK_SOLID, origin, 0.0, direction, reach);
+    rayQueryProceedEXT(query);
+    return rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT;
+}
+
+// The sun's light the water round an eye under it scatters toward the eye
+// at eye-relative `position` (world height `y`), before the water's share
+// (water_albedo) and what it loses on its way to the eye
+// (pt_fog_integrate.comp): what comes down the refracted beam
+// (pt_frame.glsl's water_beam) less what the water above absorbs, where
+// nothing cuts it off on its way, up that beam to the surface and on to the
+// sun, times the water's forward scattering. The ripples' caustics focus it
+// as they focus it on the bed (pt_water.glsl's caustic), so its shafts
+// run down the beam from the bright cells at the surface, blurring out with
+// depth; finer ripples than a cell is wide are left out.
+vec3 water_sun(vec3 position, float y) {
+    float enters;
+    vec3 up = -water_beam(frame.sun_direction, enters);
+    if (enters <= 0.0) {
+        return vec3(0.0);
+    }
+    float depth = max(frame.water_level - y, 0.0);
+    float way = depth / up.y;
+    if (!clear_way(position, up, way) || !sunlit(position + up * way)) {
+        return vec3(0.0);
+    }
+    float cell = length(position) * frame.native.x / (frame.volume.x * frame.focal.x);
+    float focus = depth < CAUSTIC_DEPTH ? caustic_seen(position, depth, cell) : 1.0;
+    return sun_light() * enters * exp(-water_extinction() * way)
+        * forward_scatter(dot(normalize(position), up), WATER_FORWARD) * focus;
+}
+
+// The eye-relative point at grid coordinate `at` (0 to 1 each way).
+vec3 cell_point(vec3 at, float far) {
+    vec3 direction = native_direction(at.xy * frame.native - 0.5);
+    float z = slice_depth(at.z * frame.volume.z, far);
+    return direction * (z / dot(direction, frame.forward));
+}
+
+void main() {
+    ivec2 texel = ivec2(gl_GlobalInvocationID.xy);
+    ivec3 cells = ivec3(frame.volume);
+    if (texel.x >= cells.x || texel.y >= cells.y * cells.z) {
+        return;
+    }
+    ivec3 cell = ivec3(texel.x, texel.y % cells.y, texel.y / cells.y);
+    vec3 position = cell_point((vec3(cell) + frame.volume_jitter) / frame.volume, frame.volume_far);
+    float y = frame.eye.y + position.y;
+    bool water = frame.eye_under > 0.5;
+    float mist = water ? 0.0 : density_at(y);
+    // The distance fog's density, per thousand units along the ray. It
+    // counts by distance from the eye, so it veils alike whichever way the
+    // eye turns. Counted by view depth, as retail's raster fog is, the far
+    // ground and the backdrop's land stood clear at the view's sides while
+    // its middle hazed over, and the haze turned with the view
+    // (seen 2026-10-25 on Artoria and Exxodus).
+    float z = length(position);
+    float fog = water ? 0.0 : fog_density_at(z, y);
+    float haze = mist + fog;
+    // The trails' puffs here, each a soft ball thinning to its edge, and
+    // their colours by how much each holds.
+    float smoke = 0.0;
+    vec3 smoke_color = vec3(0.0);
+    int puff_count = water ? 0 : int(trail_count.x);
+    if (puff_count > 0 && all(greaterThanEqual(position, trail_low.xyz))
+        && all(lessThanEqual(position, trail_high.xyz))) {
+        for (int i = 0; i < puff_count; i++) {
+            vec4 ball = puffs[2 * i];
+            vec3 offset = position - ball.xyz;
+            float inside = 1.0 - dot(offset, offset) / (ball.w * ball.w);
+            if (inside > 0.0) {
+                vec4 look = puffs[2 * i + 1];
+                float here = look.a * inside * inside;
+                smoke += here;
+                smoke_color += look.rgb * here;
+            }
+        }
+    }
+    float drift = water ? 0.0 : drift_at(position, y);
+    float density = haze + smoke + drift;
+    vec4 current = vec4(0.0);
+    if (haze > 0.0) {
+        vec3 far = mix(frame.fog_color, frame.far_color, smoothstep(frame.fog_near, frame.fog_end, z));
+        vec3 tint = (frame.fog_color * mist + far * fog) / haze;
+        vec3 light = tint * (1.0 - frame.mist_sun);
+        if (frame.mist_sun > 0.0 && sunlit(position)) {
+            float facing = dot(normalize(position), frame.sun_direction);
+            light += tint * frame.mist_sun * forward_scatter(facing, frame.mist_anisotropy);
+        }
+        if (frame.grid_mode > 0.5 && frame.mist_glow > 0.0 && frame.ground_points > 1.5) {
+            float above = max(y - ground_height(frame.eye.xz + position.xz), 0.0);
+            light += frame.mist_glow * max(grid_light(position), 0.0) * exp(-above / GLOW_REACH);
+        }
+        current = vec4(light * haze, haze);
+    }
+    if (smoke > 0.0) {
+        // Lit as a grey surface is: the sky's share, and the sun where it
+        // reaches.
+        vec3 lit = frame.ambient * TRAIL_SKY + (sunlit(position) ? frame.sun_color * TRAIL_SUN : vec3(0.0));
+        current += vec4(smoke_color * lit, smoke);
+    }
+    if (drift > 0.0) {
+        // Lit as the trails are: the sky's share, and the sun where it
+        // reaches.
+        vec3 lit = frame.ambient * TRAIL_SKY + (sunlit(position) ? frame.sun_color * TRAIL_SUN : vec3(0.0));
+        current += vec4(frame.drift_color * lit * drift, drift);
+    }
+    if (water) {
+        current = vec4(water_sun(position, y), 0.0);
+    }
+
+    // Where this cell's centre was in the last frame's grid.
+    vec4 result = current;
+    if (frame.history_valid > 0.5 && push.fresh == 0) {
+        vec3 centre = cell_point((vec3(cell) + 0.5) / frame.volume, frame.volume_far);
+        vec3 relative = frame.eye + centre - frame.previous_eye;
+        relative.xz = mod(relative.xz + 32768.0, 65536.0) - 32768.0;
+        vec3 view = vec3(dot(relative, frame.previous_right), dot(relative, frame.previous_up),
+                         dot(relative, frame.previous_forward));
+        if (view.z > frame.near) {
+            vec2 native = frame.previous_centre + frame.previous_focal * vec2(view.x, -view.y) / view.z;
+            vec2 uv = (native + 0.5) / frame.native;
+            float slice = depth_slice(view.z, frame.previous_volume_far);
+            if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThanEqual(uv, vec2(1.0)))
+                && slice < frame.volume.z) {
+                result = mix(current, sample_volume(history, uv, slice), KEEP);
+            }
+        }
+    }
+    imageStore(cells_out, texel, result);
+}

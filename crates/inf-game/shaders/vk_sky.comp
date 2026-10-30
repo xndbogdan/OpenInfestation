@@ -1,0 +1,216 @@
+#version 460
+// The modern sky over Vulkan's raster (docs/rt-plans/modern-raster.md's
+// stage 2), in two passes, as the tracer's composite (pt_composite.frag)
+// lays it over the traced world:
+// 0. the backdrop, once the painting is drawn and before the world, at the
+//    size and with the jitter the world is drawn at: the raster cleared the
+//    sky to black and drew only the painting's land, its painted sky cut
+//    away and laid on by its alpha, and the art the sky keeps (the Moon,
+//    the stars' domes), as retail drew it; `band` holds how much of the
+//    sky shows through the land. The gradient goes behind the land and the
+//    art, the view's clouds over them all, and a near strike's bolt under
+//    the clouds; the world's draws then come over it, its smoke and leaves
+//    blending with the sky as they did with the painting;
+// 1. after the anti-aliasing or the upscaler, at the display's size: the
+//    clouds over the world wherever it lies beyond them, a flash of
+//    lightning over the world, and the snow or rain over everything.
+// What none of it reaches passes through as the raster drew it.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+#include "pt_sky.glsl"
+#include "pt_weather.glsl"
+#include "pt_arcs.glsl"
+
+layout(set = 0, binding = 1) uniform sampler2D colour_image;
+// The world's depth, drawn at the render size in the frame's top left.
+layout(set = 0, binding = 2) uniform sampler2D depth_image;
+// How much of the sky shows through the land, at the render size.
+layout(set = 0, binding = 3) uniform sampler2D band_image;
+// The view's clouds at a quarter of the display's size: their light, and
+// how much of the sky behind shows (pt_sky_clouds.comp pass 0); and where
+// along the view they lie (pt_sky.glsl's clouds_before).
+layout(set = 0, binding = 4) uniform sampler2D sky_clouds;
+layout(set = 0, binding = 5) uniform sampler2D sky_clouds_away;
+layout(set = 0, binding = 6, rgba8) uniform writeonly image2D result;
+
+layout(push_constant) uniform Pass {
+    // The size this pass writes, and the size the world is drawn at.
+    vec2 size;
+    vec2 render;
+    uint which;
+} pass;
+
+// The view direction through this pass's texel `texel`: the backdrop's
+// texels and the world's pass's are the world's, jittered (pixel_direction),
+// the display's not.
+vec3 texel_direction(ivec2 texel) {
+    if (pass.which < 2u) {
+        return pixel_direction(vec2(texel));
+    }
+    return native_direction((vec2(texel) + 0.5) / pass.size * frame.native - 0.5);
+}
+
+// How much of the sky along `direction` the distance fog hides, as the
+// tracer's grid holds it (pt_fog_inject.comp's fog_density_at): its optical
+// depth out to the grid's end, 1.05 times the fog's end, thinning above its
+// top, which follows a high eye half its band below it, so the haze rises
+// a little over the horizon and fades into the sky.
+float sky_veil(vec3 direction) {
+    float near = max(frame.fog_near, 0.0);
+    float far = 1.05 * frame.fog_end;
+    float span = max(frame.fog_end - near, 1.0);
+    float step_length = (far - near) / 16.0;
+    float depth = 0.0;
+    for (int i = 0; i < 16; i++) {
+        float z = near + (float(i) + 0.5) * step_length;
+        float x = max((z - near) / span, 1.0e-4);
+        float rate = frame.fog_depth * frame.fog_curve * pow(x, frame.fog_curve - 1.0) / span;
+        float y = frame.eye.y + direction.y * z;
+        depth += rate * mix(1.0, frame.fog_above,
+                            smoothstep(frame.fog_top, frame.fog_top + frame.fog_band, y));
+    }
+    return 1.0 - exp(-depth * step_length);
+}
+
+// The view distance along the ray through display texel `texel` to what
+// the world shows there (1e9 for the sky), and its direction.
+float shown_along(ivec2 texel, out vec3 direction) {
+    direction = texel_direction(texel);
+    vec2 uv = (vec2(texel) + 0.5) / pass.size;
+    float depth = texelFetch(depth_image, ivec2(min(uv * pass.render, pass.render - 1.0)), 0).r;
+    return depth >= 1.0 ? 1.0e9
+                        : depth_distance(depth) / max(dot(direction, frame.forward), 1.0e-3);
+}
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (any(greaterThanEqual(vec2(pixel), pass.size))) {
+        return;
+    }
+    vec4 drawn = texelFetch(colour_image, pixel, 0);
+    vec2 uv = (vec2(pixel) + 0.5) / pass.size;
+    vec4 flash = lightning_flash();
+    if (pass.which == 0u) {
+        vec3 direction = texel_direction(pixel);
+        vec4 clouds = texture(sky_clouds, uv);
+        float through = texture(band_image, uv).r;
+        // Below the horizon, where an eye high up sees past the far
+        // ground's edge, the sky behind the clouds takes the colour that
+        // ground fades into (the pass's next stage), its edge one pixel soft,
+        // as the tracer's composite paints it.
+        float below = 0.0;
+        if (frame.distance_fog > 0.5) {
+            float rise = abs(texel_direction(pixel + ivec2(0, 1)).y - direction.y);
+            below = clamp(0.5 - direction.y / max(rise, 1.0e-6), 0.0, 1.0);
+        }
+        vec3 shown = mix(drawn.rgb + sky_gradient(direction, frame.sky_disc) * through,
+                         frame.far_color, below)
+            * clouds.a + clouds.rgb;
+        // The fog's haze over the sky and the clouds behind it, below the
+        // horizon too: the clouds there lie past the far ground's edge, and
+        // the far ground's own clouds take the same veil (the next stage).
+        if (frame.distance_fog > 0.5) {
+            shown = mix(shown, frame.far_color, sky_veil(direction));
+        }
+        if (flash.w > 0.0) {
+            shown += (shown * 0.4 + 0.03) * frame.lightning_color
+                * (flash.w * frame.lightning_light);
+            shown += lightning_bolt(direction);
+        }
+        // Wholly the modern sky's: its light past full brightness rolls
+        // off to white (the tonemap).
+        imageStore(result, pixel, vec4(to_srgb(tonemap(to_linear(shown))), drawn.a));
+        return;
+    }
+    vec3 direction;
+    float along = shown_along(pixel, direction);
+    bool sky = along >= 1.0e9;
+    vec3 shown = drawn.rgb;
+    bool touched = false;
+    // The world's pass runs on the world as drawn before its blended draws
+    // (crystals, orbs, smoke), which go in after it, so their pixels never
+    // take the fade or clouds of the ground behind them; the over pass, on
+    // the display after the anti-aliasing, lays what goes over them.
+    if (!sky && pass.which == 1u) {
+        // The world past the fog's end fades into the fog's colour by 1.6
+        // times it, as the tracer's does: the far ground melts into the haze
+        // and the sky below the horizon (the backdrop's `below`).
+        float beyond = frame.distance_fog > 0.5 ? smoothstep(frame.fog_end, 1.6 * frame.fog_end, along) : 0.0;
+        if (beyond > 0.0) {
+            shown = mix(shown, frame.far_color, beyond);
+            touched = true;
+        }
+        vec4 clouds = texture(sky_clouds, uv);
+        if (clouds.a < 1.0) {
+            // Only the clouds in front of the world (beyond 0: the ones
+            // behind the far ground stay behind it); past the fog's end
+            // veiled by its haze as the sky's are, so they meet the far
+            // skyline without a seam.
+            vec4 before = clouds_before(clouds, texture(sky_clouds_away, uv), along, 0.0);
+            if (beyond > 0.0 && before.a < 1.0) {
+                float veil = sky_veil(direction) * beyond;
+                before = vec4(before.rgb * (1.0 - veil), mix(before.a, 1.0, veil));
+            }
+            if (before.a < 1.0) {
+                shown = shown * before.a + before.rgb;
+                touched = true;
+            }
+        }
+        // A flash of lightning briefly lights the world a little, in its
+        // colour (the backdrop's pass lit the sky).
+        if (flash.w > 0.0) {
+            shown += (shown * 0.4 + 0.03) * frame.lightning_color
+                * (flash.w * frame.lightning_light);
+            touched = true;
+        }
+        if (frame.precip_kind > 1.5 && frame.precip_kind < 2.5) {
+            // The drops striking the ground near the eye, lit as the rain
+            // is: the ground's slope from its neighbours' points.
+            vec3 across;
+            vec3 down;
+            vec3 point = direction * along;
+            float right_along = shown_along(pixel + ivec2(1, 0), across);
+            float below_along = shown_along(pixel + ivec2(0, 1), down);
+            vec3 right = across * right_along;
+            vec3 below = down * below_along;
+            vec3 facing = cross(right - point, below - point);
+            float up = abs(facing.y) / max(length(facing), 1.0e-6);
+            float splash = drop_splashes(point, up, along);
+            if (splash > 0.0) {
+                vec3 light = min((frame.ambient * 2.0 + frame.sun_color * 0.5)
+                                     * frame.precip_color,
+                                 vec3(1.0));
+                shown += light * (0.55 * splash);
+                touched = true;
+            }
+        }
+    }
+    // A struck crystal's arcs, as the tracer's composite lays them, and the
+    // light it throws round it (pt_arcs.glsl).
+    if (frame.spark_count > 0.5) {
+        if (!sky && pass.which == 1u) {
+            shown += crystal_underglow(direction * along, shown);
+            touched = true;
+        }
+        if (pass.which == 2u) {
+            shown += crystal_arcs(direction, along);
+            touched = true;
+        }
+    }
+    if (frame.precip_kind > 0.5 && pass.which == 2u) {
+        vec4 fall = precipitation(direction, along);
+        if (fall.a > 0.0) {
+            shown = shown * (1.0 - fall.a) + fall.rgb;
+            touched = true;
+        }
+    }
+    if (touched) {
+        drawn.rgb = clamp(shown, 0.0, 1.0);
+    }
+    imageStore(result, pixel, drawn);
+}

@@ -1,0 +1,468 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "cases": [
+    {
+      "input": {
+        "selector": 10,
+        "flags": 0,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          158,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    },
+    {
+      "input": {
+        "selector": 13,
+        "flags": 0,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          158,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          13
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    },
+    {
+      "input": {
+        "selector": 10,
+        "flags": 264,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          415,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    },
+    {
+      "input": {
+        "selector": 10,
+        "flags": 1,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          159,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    },
+    {
+      "input": {
+        "selector": 10,
+        "flags": 0,
+        "phase": 2,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": true,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          158,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": []
+      }
+    },
+    {
+      "input": {
+        "selector": 13,
+        "flags": 0,
+        "phase": 2,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": true,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          158,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          13
+        ],
+        "rng": 305419896,
+        "pending": []
+      }
+    },
+    {
+      "input": {
+        "selector": 0,
+        "flags": 0,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": false,
+        "scratch": false,
+        "fields": [],
+        "rng": 305419896,
+        "pending": []
+      }
+    },
+    {
+      "input": {
+        "selector": 65546,
+        "flags": 0,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": false,
+        "scratch": false,
+        "fields": [],
+        "rng": 305419896,
+        "pending": []
+      }
+    },
+    {
+      "input": {
+        "selector": 10,
+        "flags": 0,
+        "phase": 4,
+        "source": 0,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          0,
+          0,
+          0,
+          1535,
+          158,
+          0,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    },
+    {
+      "input": {
+        "selector": 10,
+        "flags": 0,
+        "phase": 4,
+        "source": 305419896,
+        "position": [
+          65530,
+          32767,
+          7
+        ],
+        "velocity": [
+          65535,
+          32768,
+          32767
+        ],
+        "rng": 305419896
+      },
+      "output": {
+        "returned": true,
+        "scratch": false,
+        "fields": [
+          5402496,
+          65530,
+          32767,
+          7,
+          65535,
+          32768,
+          32767,
+          1535,
+          158,
+          305419896,
+          5480296,
+          1024,
+          5480096,
+          0,
+          10
+        ],
+        "rng": 305419896,
+        "pending": [
+          399
+        ]
+      }
+    }
+  ],
+  "fields": [
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      12,
+      2
+    ],
+    [
+      14,
+      2
+    ],
+    [
+      16,
+      2
+    ],
+    [
+      18,
+      2
+    ],
+    [
+      20,
+      4
+    ],
+    [
+      40,
+      4
+    ],
+    [
+      44,
+      4
+    ],
+    [
+      52,
+      4
+    ],
+    [
+      56,
+      4
+    ],
+    [
+      60,
+      4
+    ]
+  ],
+  "boundary": "complete offline factory and native allocator/constructor; no supplied service returns"
+}

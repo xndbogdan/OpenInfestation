@@ -1,0 +1,137 @@
+#version 460
+// The traced world's colour at the render size, for an upscaler or the
+// composite: the direct light plus the filtered bounce light times the
+// albedo, uncapped, then the fog, and the finished colour (the sky's, the
+// water's, a glow's) where the trace finished it; in the transport form
+// (pt_frame.glsl), or as linear light for Ray Reconstruction. With it, each pixel's motion:
+// where its point (the sky: its direction) sat in the last traced frame,
+// less where it sits now, in render pixels and without the jitter. Under
+// Ray Reconstruction the bounce light comes unfiltered, and the resolve also
+// writes RR's guides. Under thermal vision the colour is each pixel's heat
+// in grey, the camera's range black to white, distance cooling it a little.
+#extension GL_EXT_scalar_block_layout : require
+#extension GL_GOOGLE_include_directive : require
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+#define FRAME_BINDING 0
+#include "pt_frame.glsl"
+
+layout(set = 0, binding = 1, rgba8) uniform readonly image2D albedo_image;
+layout(set = 0, binding = 2, rgba16f) uniform readonly image2D direct_image;
+layout(set = 0, binding = 3, rgba16f) uniform readonly image2D bounce_image;
+layout(set = 0, binding = 4, rgba8) uniform readonly image2D fog_image;
+layout(set = 0, binding = 5, rgba16f) uniform readonly image2D geometry_image;
+layout(set = 0, binding = 6, rgba16f) uniform writeonly image2D color_out;
+layout(set = 0, binding = 7, rg16f) uniform writeonly image2D motion_out;
+layout(set = 0, binding = 8, rgba8) uniform writeonly image2D diffuse_albedo_out;
+layout(set = 0, binding = 9, rgba16f) uniform writeonly image2D normal_roughness_out;
+layout(set = 0, binding = 10, rgba8) uniform writeonly image2D specular_albedo_out;
+layout(set = 0, binding = 11, r32f) uniform readonly image2D heat_image;
+// Thermal vision's range, which heat maps to black through white.
+layout(set = 0, binding = 12, scalar) readonly buffer Gain {
+    vec2 range;
+} gain;
+// The sun before its shadow, which the bounce image's alpha (its filtered
+// visibility, or the raw sample under Ray Reconstruction) shadows.
+layout(set = 0, binding = 13, rgba16f) uniform readonly image2D sun_image;
+// Each primary hit's own motion (the trace's): where its model's point was
+// in the last frame, less where it is.
+layout(set = 0, binding = 14, rgba16f) uniform readonly image2D object_motion;
+// The sun's specular light, before its shadow (not the surface's colour:
+// a dielectric's highlight is white).
+layout(set = 0, binding = 15, rgba16f) uniform readonly image2D specular_image;
+// Each lit primary hit's face, metalness and roughness (the trace's).
+layout(set = 0, binding = 16, rgba16f) uniform readonly image2D path_surface;
+
+// The share of the light a surface reflects specularly, seen at `n_v`,
+// for its F0 and roughness: Karis's analytic fit of the split sum's
+// environment BRDF.
+vec3 specular_albedo(vec3 f0, float roughness, float n_v) {
+    vec4 r = roughness * vec4(-1.0, -0.0275, -0.572, 0.022) + vec4(1.0, 0.0425, 1.04, -0.04);
+    float a004 = min(r.x * r.x, exp2(-9.28 * n_v)) * r.x + r.y;
+    vec2 scale_bias = vec2(-1.04, 1.04) * a004 + r.zw;
+    return f0 * scale_bias.x + scale_bias.y;
+}
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (pixel.x >= int(frame.target.x) || pixel.y >= int(frame.target.y)) {
+        return;
+    }
+    vec4 albedo = imageLoad(albedo_image, pixel);
+    vec4 geometry = imageLoad(geometry_image, pixel);
+    vec4 direct = imageLoad(direct_image, pixel);
+    // Where the rays met nothing, or the trace finished the colour, its
+    // colour is in the light image.
+    vec3 color = direct.rgb;
+    // The albedo is stored sRGB-encoded.
+    vec3 surface_albedo = to_linear(albedo.rgb);
+    if (geometry.w > 0.0 && albedo.a > 0.5) {
+        vec4 bounce = imageLoad(bounce_image, pixel);
+        vec4 sun = imageLoad(sun_image, pixel);
+        color = surface_albedo * (direct.rgb + sun.rgb * bounce.a + direct.a * bounce.rgb)
+            + imageLoad(specular_image, pixel).rgb * bounce.a;
+    }
+    // Retail's fog, mixed in retail's tones as retail mixed it.
+    vec4 fog = imageLoad(fog_image, pixel);
+    color = to_linear(mix(to_srgb(color), fog.rgb, fog.a));
+    // With the eye under the water (the remastered camera) the view to
+    // what it met (the surface at most) or past all it could meet runs
+    // through the water: what it leaves of the light, and the sky's light
+    // it scatters along the way; the mist's grid adds the sun's, with its
+    // shafts (pt_fog_inject.comp). Noise-free, so the denoiser never sees
+    // it. A view that met nothing ends where the grid does (trace.rs), six
+    // times water_murk off, where nothing seen through it shows.
+    if (frame.eye_under > 0.5) {
+        vec3 through;
+        vec3 scattered = water_through(vec3(0.0), pixel_direction(vec2(pixel)),
+                                       geometry.w > 0.0 ? geometry.w : 6.0 * frame.water_murk,
+                                       false, through);
+        color = color * through + scattered;
+    }
+    if (frame.thermal > 0.5) {
+        float heat = mix(imageLoad(heat_image, pixel).r, frame.thermal_sky, 0.5 * fog.a);
+        color = to_linear(vec3(clamp((heat - gain.range.x) / max(gain.range.y - gain.range.x, 1.0e-3),
+                                     0.0, 1.0)));
+    }
+    imageStore(color_out, pixel, vec4(frame.guides > 0.5 ? color : to_transport(color), 1.0));
+    // A failed Ray Reconstruction leaves one-pixel guides behind.
+    if (frame.guides > 0.5 && all(lessThan(pixel, imageSize(diffuse_albedo_out)))) {
+        // The albedo the diffuse light was multiplied by (where the colour
+        // is finished, as water and glow, the colour itself), world normals,
+        // and for a lit surface its roughness and the share it reflects
+        // specularly (a metal all of it, its diffuse none). The sky takes
+        // the defaults NVIDIA gives: grey albedo, no normal, no roughness.
+        bool surface = geometry.w > 0.0;
+        bool lit = surface && albedo.a > 0.5 && direct.a > 0.0;
+        vec4 material = lit ? imageLoad(path_surface, pixel) : vec4(0.0, 0.0, 0.0, 1.0);
+        float roughness = abs(material.w);
+        vec3 f0 = mix(vec3(0.04), surface_albedo, material.z);
+        float n_v = max(dot(geometry.xyz, -pixel_direction(vec2(pixel))), 1.0e-3);
+        imageStore(diffuse_albedo_out, pixel,
+                   vec4(surface ? surface_albedo * (1.0 - material.z) : vec3(0.5), 1.0));
+        imageStore(normal_roughness_out, pixel, surface ? vec4(geometry.xyz, roughness) : vec4(0.0));
+        imageStore(specular_albedo_out, pixel,
+                   vec4(lit ? specular_albedo(f0, roughness, n_v) : vec3(0.0), 1.0));
+    }
+
+    // Where the point sat in the last frame: a moving model's where its
+    // point was, through that view and the world's wrap; the sky through
+    // the last view's turn alone.
+    vec3 direction = pixel_direction(vec2(pixel));
+    vec3 relative = geometry.w > 0.0
+        ? frame.eye + direction * geometry.w + imageLoad(object_motion, pixel).xyz
+            - frame.previous_eye
+        : direction * 1.0e6;
+    relative.xz = geometry.w > 0.0 ? mod(relative.xz + 32768.0, 65536.0) - 32768.0 : relative.xz;
+    vec3 view = vec3(dot(relative, frame.previous_right), dot(relative, frame.previous_up),
+                     dot(relative, frame.previous_forward));
+    vec2 motion = vec2(0.0);
+    if (frame.history_valid > 0.5 && view.z > 1.0e-3) {
+        vec2 native = frame.previous_centre + frame.previous_focal * vec2(view.x, -view.y) / view.z;
+        vec2 then = (native + 0.5) * frame.target / frame.native;
+        motion = then - (vec2(pixel) + 0.5 + frame.jitter);
+    }
+    imageStore(motion_out, pixel, vec4(motion, 0.0, 0.0));
+}

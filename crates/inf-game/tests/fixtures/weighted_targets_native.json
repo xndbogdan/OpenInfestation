@@ -1,0 +1,3092 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "boundaries": "unchanged00427110/00427220/00482760/00482860/00402720 and target lifecycle; actual registry/cache resolver; allocation/free explicit hosts; no scoring or actor+24 acceptance",
+  "cases": [
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 1,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 1
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 1,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 2147483648
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 1,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 4294967295
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          16377,
+          32768
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 1
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 1
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 1
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2147483648
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 2147483648
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2147483648
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          65535,
+          14,
+          32768
+        ],
+        "word_10": 2,
+        "focus_14": [
+          65535,
+          14,
+          32768
+        ],
+        "velocity_1a": null
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 4294967295
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 4294967295
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 4294967295
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 1,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 1,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2271560481,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 1,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 1,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 1
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 1,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 1
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 1
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2147483648
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2147483648
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 2147483648
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          65535,
+          65530,
+          32768
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 4294967295
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 4294967295
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 4294967295
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 0,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 1,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 1,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 2147483648,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 2147483648,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": null,
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": null,
+      "returned": 0,
+      "final_score": 0,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 2271560481
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 4294967295,
+      "referent": "first",
+      "allocation_fails": true,
+      "resolves": true,
+      "size_word": 65532,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 16,
+        "object_14": "first"
+      },
+      "returned": 0,
+      "final_score": 4294967295,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": null,
+        "word_10": 2,
+        "focus_14": null,
+        "velocity_1a": null
+      },
+      "returned": 1,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 7
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": false
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": [
+          11,
+          12,
+          13
+        ],
+        "word_10": 2,
+        "focus_14": [
+          21,
+          22,
+          23
+        ],
+        "velocity_1a": [
+          31,
+          32,
+          33
+        ]
+      },
+      "returned": 0,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": false
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 134283265,
+        "focus_08": null,
+        "word_10": 2,
+        "focus_14": null,
+        "velocity_1a": null
+      },
+      "returned": 0,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": false
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "other",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          7,
+          8,
+          9
+        ],
+        "word_10": 16,
+        "object_14": "other"
+      },
+      "returned": 1,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "other",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          7,
+          8,
+          9
+        ],
+        "word_10": 16,
+        "object_14": "other"
+      },
+      "returned": 0,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "other",
+      "allocation_fails": false,
+      "resolves": false,
+      "size_word": 32771,
+      "target": {
+        "handle_04": 305419896,
+        "focus_08": [
+          7,
+          8,
+          9
+        ],
+        "word_10": 16,
+        "object_14": "other"
+      },
+      "returned": 0,
+      "final_score": 7,
+      "events": [],
+      "referents_unchanged": true,
+      "stopped": false,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "allocation",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "constructor",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": null,
+          "score": 7
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "published"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "allocation",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "released"
+    },
+    {
+      "publisher": "actor",
+      "old_kind": "object",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "constructor",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 32,
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "resolve",
+          "handle": 134283265
+        },
+        {
+          "kind": "resolved",
+          "found": true
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "released"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "allocation",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": null,
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "constructor",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": null,
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "published"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "allocation",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "released"
+    },
+    {
+      "publisher": "object",
+      "old_kind": "follow",
+      "old_score": 2271560481,
+      "score": 7,
+      "referent": "first",
+      "allocation_fails": false,
+      "resolves": true,
+      "size_word": 65532,
+      "stop_stage": "constructor",
+      "target": null,
+      "returned": null,
+      "final_score": 7,
+      "events": [
+        {
+          "kind": "free",
+          "pointer": "old",
+          "score": 7
+        },
+        {
+          "kind": "allocate",
+          "bytes": 24,
+          "pointer": "old",
+          "score": 7
+        }
+      ],
+      "referents_unchanged": true,
+      "stopped": true,
+      "custody": "released"
+    }
+  ],
+  "clears": [
+    {
+      "method": 4363360,
+      "secondary": false,
+      "byte_22c": 0,
+      "word_208": 305419896,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 0,
+      "frees": [
+        "old"
+      ]
+    },
+    {
+      "method": 4363360,
+      "secondary": true,
+      "byte_22c": 0,
+      "word_208": 305419896,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 0,
+      "frees": [
+        "old",
+        "secondary"
+      ]
+    },
+    {
+      "method": 4348784,
+      "secondary": false,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 1,
+      "frees": [
+        "old"
+      ]
+    },
+    {
+      "method": 4348784,
+      "secondary": true,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 1,
+      "frees": [
+        "old",
+        "secondary"
+      ]
+    },
+    {
+      "method": 4623840,
+      "secondary": false,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 1,
+      "frees": [
+        "old"
+      ]
+    },
+    {
+      "method": 4623840,
+      "secondary": true,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 67109120,
+      "dirty_word": 64,
+      "word_230": 0,
+      "word_234": 0,
+      "byte_238": 0,
+      "byte_260": 1,
+      "frees": [
+        "old",
+        "secondary"
+      ]
+    },
+    {
+      "method": 4454672,
+      "secondary": false,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 256,
+      "dirty_word": 64,
+      "word_230": 150,
+      "word_234": 200,
+      "byte_238": 1,
+      "byte_260": 1,
+      "frees": [
+        "old"
+      ]
+    },
+    {
+      "method": 4454672,
+      "secondary": true,
+      "byte_22c": 0,
+      "word_208": 0,
+      "flags": 256,
+      "dirty_word": 64,
+      "word_230": 150,
+      "word_234": 200,
+      "byte_238": 1,
+      "byte_260": 1,
+      "frees": [
+        "old",
+        "secondary"
+      ]
+    }
+  ]
+}

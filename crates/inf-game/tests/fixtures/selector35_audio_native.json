@@ -1,0 +1,643 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original43E6D0 prologue/NULL-target path and43EE75 audio suffix. Status/D8/motion, camera and record services supplied; record birth/update/deletion bodies excluded."
+  },
+  "guard": {
+    "address": 4451957,
+    "size": 234,
+    "sha256": "2dcdb0cfb8addba03c18475f49b5c023a2f214798c26ebc43ea524057186525a"
+  },
+  "cases": [
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 0,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 399,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 401,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 64,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 65536,
+          "pitch": 8192,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 65535,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 64,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 65536,
+          "pitch": 8192,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": true,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "update",
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 16384,
+          "pitch": 65536
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 401,
+        "existing": true,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "update",
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 65536,
+          "pitch": 8192
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": false,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": false
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": false,
+        "word8c": 400,
+        "existing": true,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          7780,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            100,
+            200,
+            300
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          7781,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": false
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          7781,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": true,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "delete"
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": false
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          32868,
+          32968,
+          33068
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": true,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "delete"
+        }
+      ],
+      "output": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "sound": false
+      }
+    },
+    {
+      "input": {
+        "position": [
+          65535,
+          0,
+          65530
+        ],
+        "camera": [
+          0,
+          0,
+          1
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": null
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            65535,
+            0,
+            65530
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          65535,
+          0,
+          65530
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": false,
+        "camera_mutation": [
+          107,
+          208,
+          309
+        ]
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "create",
+          "slot": 16,
+          "position": [
+            107,
+            208,
+            309
+          ],
+          "volume": 16384,
+          "pitch": 65536,
+          "control": 0
+        }
+      ],
+      "output": {
+        "position": [
+          107,
+          208,
+          309
+        ],
+        "sound": true
+      }
+    },
+    {
+      "input": {
+        "position": [
+          100,
+          200,
+          300
+        ],
+        "camera": [
+          100,
+          200,
+          300
+        ],
+        "camera_present": true,
+        "word8c": 400,
+        "existing": true,
+        "camera_mutation": [
+          20000,
+          200,
+          300
+        ]
+      },
+      "events": [
+        {
+          "kind": "camera"
+        },
+        {
+          "kind": "delete"
+        }
+      ],
+      "output": {
+        "position": [
+          20000,
+          200,
+          300
+        ],
+        "sound": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,7882 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "null": 2147418112,
+  "cases": [
+    {
+      "input": {
+        "id": 2,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 2,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "dispose",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 3,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 3,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "set_state",
+          "obj0",
+          0,
+          2147418112,
+          4
+        ],
+        [
+          "dispose",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 4,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 4,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "set_state",
+          "obj0",
+          0,
+          2147418112,
+          3
+        ],
+        [
+          "dispose",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 5,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 5,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "set_state",
+          "obj0",
+          0,
+          2147418112,
+          1
+        ],
+        [
+          "dispose",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 6,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 6,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "set_state",
+          "obj0",
+          0,
+          2147418112,
+          0
+        ],
+        [
+          "dispose",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 20,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 20,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "sonic_pulse",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 25,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 25,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "effect_431ef0",
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 1,
+        "sender": 2,
+        "resolve": {
+          "134222097": 0
+        },
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": null
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "send",
+          1,
+          7,
+          36864
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 1,
+        "sender": 2,
+        "resolve": {
+          "134222097": 1
+        },
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": null
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "send",
+          1,
+          2,
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 1,
+        "sender": 2,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": null
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "send",
+          1,
+          2,
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 1,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "slot_unknown",
+          134222097
+        ],
+        [
+          "slot_object",
+          134222097
+        ],
+        [
+          "dispose",
+          "obj0"
+        ],
+        [
+          "slot_free",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 1,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 1,
+          "slot_object": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "slot_unknown",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 1,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": null
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ],
+        [
+          "slot_unknown",
+          134222097
+        ],
+        [
+          "slot_object",
+          134222097
+        ],
+        [
+          "slot_free",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 3,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 2,
+        "resolve": {},
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 7,
+        "payload": "11110008",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 2,
+        "sender": 1,
+        "resolve": {
+          "134222097": 0
+        },
+        "answers": {
+          "slot_unknown": 0,
+          "slot_object": 0
+        }
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "resolve",
+          134222097
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0,
+          "8738": 1
+        },
+        "answers": {
+          "component": 2
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "hold",
+          "obj0",
+          1,
+          8738,
+          "stack"
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj1"
+        ],
+        [
+          "component_take",
+          "comp2",
+          8738,
+          "obj0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 1,
+          "8738": 0
+        },
+        "answers": {
+          "component": 2
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj0"
+        ],
+        [
+          "component_take",
+          "comp2",
+          8738,
+          "obj1"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0,
+          "8738": 1
+        },
+        "answers": {
+          "component": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "hold",
+          "obj0",
+          1,
+          8738,
+          "stack"
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj1"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 2,
+          "8738": 1
+        },
+        "answers": {
+          "component": 2
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "8738": 1
+        },
+        "answers": {
+          "component": 2
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 8,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        },
+        "answers": {
+          "component": 2
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 2,
+          "8738": 1
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj1"
+        ],
+        [
+          "component_drop",
+          "comp1",
+          "obj1",
+          "obj2"
+        ],
+        [
+          "hold",
+          "obj2",
+          0,
+          2147418112,
+          "obj2+d4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 2,
+          "8738": 1
+        },
+        "answers": {
+          "component": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj1"
+        ],
+        [
+          "ground",
+          "obj2"
+        ],
+        [
+          "hold",
+          "obj2",
+          0,
+          2147418112,
+          "obj2+d4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 2
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "ground",
+          "obj2"
+        ],
+        [
+          "hold",
+          "obj2",
+          0,
+          2147418112,
+          "obj2+d4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 3,
+          "8738": 1
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "resolve",
+          8738
+        ],
+        [
+          "component",
+          "obj1"
+        ],
+        [
+          "component_drop",
+          "comp1",
+          "obj1",
+          "obj3"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4,
+          "8738": 1
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0,
+          "8738": 1
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 9,
+        "payload": "1111000022220000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "8738": 1
+        },
+        "answers": {
+          "component": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "banner_taken",
+          "obj0",
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 10,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "banner_dropped",
+          "obj0",
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 11,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "banner_captured",
+          "obj0",
+          8738,
+          13107
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 12,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj0",
+          2,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj1",
+          2,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 13,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj0",
+          0,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj1",
+          0,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 14,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj0",
+          1,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj1",
+          1,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 15,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj0",
+          3,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj1",
+          3,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 16,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj0",
+          4,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 0
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ],
+        [
+          "first_player"
+        ],
+        [
+          "banner_event",
+          "player",
+          "obj1",
+          4,
+          8738
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": 1
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 4
+        },
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "banner_of",
+          "obj4"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 17,
+        "payload": "111100002222000033330000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {},
+        "answers": {
+          "banner_of": null
+        }
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 18,
+        "payload": "44440000111100004d000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 0
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ],
+        [
+          "damage",
+          "obj0",
+          17476,
+          77
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 18,
+        "payload": "44440000111100004d000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {
+          "4369": 1
+        }
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 18,
+        "payload": "44440000111100004d000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "resolve": {}
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "resolve",
+          4369
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 19,
+        "payload": "550000000102030405061415161718191a1b1c1d",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 20,
+      "calls": [
+        [
+          "world_effect",
+          "G",
+          "1415161718191a1b1c1d",
+          "010203040506",
+          85,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 23,
+        "payload": "0102030405060708090a0b0c34120000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 16,
+      "calls": [
+        [
+          "point_effect_0",
+          4660,
+          "010203040506",
+          "0708090a0b0c",
+          2147418112,
+          1
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 23,
+        "payload": "0102030405060708090a0b0c34120100",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 16,
+      "calls": [
+        [
+          "point_effect_1",
+          4660,
+          "010203040506",
+          "0708090a0b0c",
+          2147418112,
+          1
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 23,
+        "payload": "0102030405060708090a0b0c34120200",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 16,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 23,
+        "payload": "0102030405060708090a0b0c3412ffff",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 16,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 24,
+        "payload": "0102030405060708090a0b0c3412000099000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 20,
+      "calls": [
+        [
+          "point_effect_0",
+          4660,
+          "010203040506",
+          "0708090a0b0c",
+          153,
+          1
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 24,
+        "payload": "0102030405060708090a0b0c3412010099000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 20,
+      "calls": [
+        [
+          "point_effect_1",
+          4660,
+          "010203040506",
+          "0708090a0b0c",
+          153,
+          1
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 24,
+        "payload": "0102030405060708090a0b0c3412020099000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 20,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 24,
+        "payload": "0102030405060708090a0b0c3412ffff99000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 20,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 0,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 0,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 21,
+        "payload": "11110000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 4,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 26,
+        "payload": "05000300",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1,
+        "sender": 2,
+        "kill_words": [
+          0,
+          0,
+          589829,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        589829,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 26,
+        "payload": "05000300",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1,
+        "sender": 2,
+        "kill_words": [
+          0,
+          0,
+          589829,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        589829,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 26,
+        "payload": "05000300",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 0,
+        "sender": 2,
+        "kill_words": [
+          0,
+          0,
+          589829,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        589829,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 26,
+        "payload": "02000200",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1,
+        "sender": 2,
+        "kill_words": [
+          0,
+          0,
+          589829,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        131074,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          3,
+          0
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 26,
+        "payload": "01001100",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1,
+        "sender": 4,
+        "kill_words": [
+          0,
+          0,
+          589829,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        589829,
+        0,
+        1114113,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 27,
+        "payload": "64000305",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          200
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          600
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 27,
+        "payload": "64000305",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 0
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          400
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 27,
+        "payload": "0a000404",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "host": 1
+      },
+      "consumed": 4,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ],
+        [
+          3,
+          3,
+          300
+        ],
+        [
+          4,
+          4,
+          390
+        ],
+        [
+          5,
+          5,
+          500
+        ],
+        [
+          6,
+          6,
+          600
+        ],
+        [
+          7,
+          7,
+          700
+        ],
+        [
+          8,
+          8,
+          800
+        ],
+        [
+          9,
+          9,
+          900
+        ],
+        [
+          10,
+          10,
+          1000
+        ],
+        [
+          11,
+          11,
+          1100
+        ],
+        [
+          12,
+          12,
+          1200
+        ],
+        [
+          13,
+          13,
+          1300
+        ],
+        [
+          14,
+          14,
+          1400
+        ],
+        [
+          15,
+          15,
+          1500
+        ],
+        [
+          16,
+          16,
+          1600
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "0999692258bbf1642789c1777163ac804e018fa51c45b4f1c1334afcff0f64cf15b1690c31865759d43ceaa7975cb193a0f04c450f24bbcd9f937521c02bc73a86e1d495ddeec4e0888697420bddd99754ebca8f75eeffccbd91ec1656fe9cc663cfdc3fc4d24f74450464f1c3be52b1ab71",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 114,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          334,
+          42383,
+          17692
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          61876,
+          13249,
+          64586
+        ],
+        [
+          4095,
+          53092,
+          45333
+        ],
+        [
+          3177,
+          34353,
+          22871
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          15572,
+          42986,
+          23703
+        ],
+        [
+          37809,
+          61600,
+          17740
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          9231,
+          52667,
+          37791
+        ],
+        [
+          8565,
+          11200,
+          15047
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "state_820": [
+        577345801,
+        1693563736,
+        2009172263
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          57734,
+          38356,
+          61149,
+          57540,
+          34440
+        ],
+        [
+          17047,
+          56587,
+          38873,
+          60244,
+          36810
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          61045,
+          52479,
+          37309,
+          5868,
+          65110
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          50844,
+          53091,
+          16348,
+          53956,
+          29775
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1093,
+          61796,
+          48835,
+          45394,
+          29099
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "a8b6b6478ec10447726370cce3d6c2f725419b00fc95c09d2fbf4d85597dda2784c89833cfef8e4eca2fb10bbe91e9e35aed49571141cf1cd89f683c6c1df7868072e8600af5607b2d59748cbaac6adde028a28f11009dc38436327cbdd5391752bd3fd95cea8d082ed8ca5ea4071f570c6de2143f0da7aa78587bd669562a3fede5692d42773562c61332492d25acc53f834c4ca4fb58dec84bccab594a92e32a2e2ea8ac386f10454087b0f5ad62b6",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 176,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          16677,
+          155,
+          38396
+        ],
+        [
+          40384,
+          48943,
+          34125
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          32089,
+          10202,
+          51332
+        ],
+        [
+          13208,
+          61391,
+          20110
+        ],
+        [
+          12234,
+          2993,
+          37310
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          58345,
+          60762,
+          22345
+        ],
+        [
+          16657,
+          7375,
+          40920
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          15464,
+          7532,
+          34551
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          29312,
+          24808,
+          62730
+        ],
+        [
+          31584,
+          22829,
+          35956
+        ]
+      ],
+      "state_820": [
+        1203156648,
+        1191494030,
+        3429917554
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          44218,
+          56682,
+          10464,
+          36770,
+          17
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          50077,
+          13956,
+          31794,
+          54717,
+          5945
+        ],
+        [
+          48466,
+          55615,
+          59996,
+          2189,
+          55342
+        ],
+        [
+          24266,
+          1956,
+          22303,
+          27916,
+          5346
+        ],
+        [
+          3391,
+          43687,
+          22648,
+          54907,
+          22121
+        ],
+        [
+          16170,
+          58861,
+          11625,
+          30530,
+          25141
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5062,
+          18738,
+          9517,
+          50604,
+          33599
+        ],
+        [
+          19532,
+          64420,
+          56920,
+          19400,
+          43980
+        ],
+        [
+          19033,
+          58258,
+          11818,
+          43054,
+          14508
+        ],
+        [
+          4207,
+          16453,
+          45191,
+          44533,
+          46690
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "0f45809ae5958f856f5a22c443297c97ba52b889295ab30366f0747c97db28c2c946539f574df7b89affca82300271c739dfb8de52b7fd58b9f4f3a69e49f00209dbd6d87b9043beb350007dc1d764383e553ea9ffcc73dda3016ff27ce5dd2fa0a3f8704d3dc2bb7203d9f5019a9f09273d64a1a9447874f4fee2a02101f36822e0b53abc1166961f410d414de090e6be8309147e722b2e",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 152,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          21178,
+          35256,
+          23081
+        ],
+        [
+          947,
+          61542,
+          31860
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          56215,
+          49704,
+          18121
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          40787,
+          19799,
+          47351
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          65434,
+          33482,
+          560
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          51057,
+          57145,
+          57016
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "state_820": [
+        2592097551,
+        2240779749,
+        3290585711
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          46930,
+          22781,
+          62649,
+          42739,
+          18846
+        ],
+        [
+          752,
+          56073,
+          55510,
+          36987,
+          48707
+        ],
+        [
+          20659,
+          32000,
+          55233,
+          14436,
+          21822
+        ],
+        [
+          43326,
+          52479,
+          56691,
+          419,
+          62063
+        ],
+        [
+          58748,
+          12253,
+          41888,
+          28920,
+          15693
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          48066,
+          882,
+          62937,
+          39425,
+          2463
+        ],
+        [
+          15655,
+          41316,
+          17577,
+          29816,
+          65268
+        ],
+        [
+          41186,
+          289,
+          26867,
+          57378,
+          15029
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4540,
+          38502,
+          16671,
+          16653,
+          57421
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          59024,
+          33726,
+          5129,
+          29310,
+          11819
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "02946f1aec177f0c116e64c3d8a0a97fb9ee8aac3f1d742fcb120868ece657d1a86e786c55ed7f19173da8c4104130008e478f9baa6155c579e5cc1492b6310c6c3e529330e2d1301d103a3a4ebfdc5e120d84dc711683a3bd117174424bade2ecef9c15d0c4da824baa0907469a7f18c6c8e6fc4926e330637e1923755e70a7ff0f3706c6d0b5b46c00f16a336e4a3dbb8f6560630bd97e19171381ef9b5b8bd1d6",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 162,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          61113,
+          44170,
+          7487
+        ],
+        [
+          12148,
+          4811,
+          26632
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          59116,
+          53591,
+          28328
+        ],
+        [
+          27768,
+          60757,
+          6527
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          15639,
+          50344,
+          16656
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          18318,
+          39823
+        ]
+      ],
+      "state_820": [
+        443520002,
+        209655788,
+        3278138897
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          25002,
+          50517,
+          58745,
+          5324,
+          46738
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3121,
+          15980,
+          37714,
+          57904,
+          12497
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4125,
+          14906,
+          48974,
+          24284,
+          3346
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          56452,
+          5745,
+          41859,
+          4541,
+          29809
+        ],
+        [
+          19266,
+          58029,
+          61420,
+          5532,
+          50384
+        ],
+        [
+          33498,
+          43595,
+          1801,
+          39494,
+          6271
+        ],
+        [
+          51398,
+          64742,
+          9801,
+          12515,
+          32355
+        ],
+        [
+          8985,
+          24181,
+          42864,
+          4095,
+          1591
+        ],
+        [
+          53446,
+          46261,
+          108,
+          27377,
+          28211
+        ],
+        [
+          15690,
+          36795,
+          24677,
+          2915,
+          32473
+        ],
+        [
+          5913,
+          33043,
+          39919,
+          35675,
+          54993
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "72585d7cc810cbae19715c7d9057c5e1d146d71f493e72d7c20fafbe3c13e71640f0842f262b0de3dc2ae6b571b54e7b99a7dbc1fafb5cf7b57aba9a3e329811da179a7db92c452ce4fa882600fdc8de637ebc266042e2a08df289b0f1bfa87dc2154827d0c67b7f0d1ff4e55220243e871dd9b4bde47bca03bc76d068fc9195f77e38d45cc911b36774",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 138,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          18129,
+          8151,
+          15945
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          55154,
+          4034,
+          48815
+        ],
+        [
+          4924,
+          5863,
+          61504
+        ],
+        [
+          12164,
+          11046,
+          58125
+        ],
+        [
+          10972,
+          46566,
+          46449
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          31566,
+          42905,
+          49627
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          64506,
+          63324,
+          31413
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "state_820": [
+        2086492274,
+        2932543688,
+        2103210265
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          39610,
+          12862,
+          4504,
+          6106,
+          32154
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          11449,
+          11333,
+          64228,
+          9864,
+          64768
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          57032,
+          32355,
+          9916,
+          16992,
+          41186
+        ],
+        [
+          62093,
+          45193,
+          49137,
+          32168,
+          5570
+        ],
+        [
+          10056,
+          50896,
+          32635,
+          7949,
+          58868
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8274,
+          15908,
+          7559,
+          46297,
+          58557
+        ],
+        [
+          51835,
+          48131,
+          53366,
+          64616,
+          38289
+        ],
+        [
+          32503,
+          54328,
+          51548,
+          45841,
+          29799
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 28,
+        "payload": "71e51e676343e33ad6bac516d11572a8a9be75c45dd9a8ac637e2a6eb11358ef012986a0e4446d7b3a6f8bfe2def2cfceec5d396e9b9281b6bd242916e977c340b6b05a47341f5f9199019b1305828297d16d1dc2cb9f97b0b2caec21865259c04a41118d98d2240e7c4ff137b7dcecb5a4da9b6c8eab9b46997ef9c74891bc1",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 128,
+      "calls": [],
+      "kill_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scores": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48809,
+          50293,
+          55645
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          44200,
+          32355,
+          28202
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          5041,
+          61272,
+          10497
+        ],
+        [
+          41094,
+          17636,
+          31597
+        ],
+        [
+          28474,
+          65163,
+          61229
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          64556,
+          50670,
+          38611
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          47593,
+          6952,
+          53867
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "state_820": [
+        1730078065,
+        987972451,
+        382057174
+      ],
+      "teams": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          37186,
+          38766,
+          13436,
+          27403,
+          41989
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          16755,
+          63989,
+          36889,
+          45337,
+          22576
+        ],
+        [
+          10536,
+          5757,
+          56529,
+          47404,
+          31737
+        ],
+        [
+          11275,
+          49838,
+          25880,
+          39973,
+          41988
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6161,
+          36313,
+          16418,
+          50407,
+          5119
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          32123,
+          52174,
+          19802,
+          46761,
+          60104
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          46265,
+          38761,
+          40175,
+          35188,
+          49435
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 29,
+        "payload": "03000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 3,
+        "present": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "send",
+          1,
+          30,
+          "name3"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 29,
+        "payload": "03000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 3,
+        "present": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "consumed": 4,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 29,
+        "payload": "04000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 3,
+        "present": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "consumed": 4,
+      "calls": []
+    },
+    {
+      "input": {
+        "id": 29,
+        "payload": "00000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "local_slot": 0,
+        "present": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "send",
+          1,
+          30,
+          "name0"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 30,
+        "payload": "303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "sender": 0,
+        "present": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 32,
+      "calls": [],
+      "present": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "names": [
+        "363738393a3b3c3d3e3f404142434445",
+        "42434445464748494a4b4c4d4e4f5051",
+        "434445464748494a4b4c4d4e4f505152",
+        "4445464748494a4b4c4d4e4f50515253",
+        "45464748494a4b4c4d4e4f5051525354",
+        "464748494a4b4c4d4e4f505152535455",
+        "4748494a4b4c4d4e4f50515253545556",
+        "48494a4b4c4d4e4f5051525354555657",
+        "494a4b4c4d4e4f505152535455565758",
+        "4a4b4c4d4e4f50515253545556575859",
+        "4b4c4d4e4f505152535455565758595a",
+        "4c4d4e4f505152535455565758595a5b",
+        "4d4e4f505152535455565758595a5b5c",
+        "4e4f505152535455565758595a5b5c5d",
+        "4f505152535455565758595a5b5c5d5e",
+        "505152535455565758595a5b5c5d5e5f",
+        "5152535455565758595a5b5c5d5e5f60"
+      ],
+      "details": [
+        "303132333435",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000"
+      ]
+    },
+    {
+      "input": {
+        "id": 30,
+        "payload": "303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "sender": 5,
+        "present": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 32,
+      "calls": [],
+      "present": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "names": [
+        "4142434445464748494a4b4c4d4e4f50",
+        "42434445464748494a4b4c4d4e4f5051",
+        "434445464748494a4b4c4d4e4f505152",
+        "4445464748494a4b4c4d4e4f50515253",
+        "45464748494a4b4c4d4e4f5051525354",
+        "363738393a3b3c3d3e3f404142434445",
+        "4748494a4b4c4d4e4f50515253545556",
+        "48494a4b4c4d4e4f5051525354555657",
+        "494a4b4c4d4e4f505152535455565758",
+        "4a4b4c4d4e4f50515253545556575859",
+        "4b4c4d4e4f505152535455565758595a",
+        "4c4d4e4f505152535455565758595a5b",
+        "4d4e4f505152535455565758595a5b5c",
+        "4e4f505152535455565758595a5b5c5d",
+        "4f505152535455565758595a5b5c5d5e",
+        "505152535455565758595a5b5c5d5e5f",
+        "5152535455565758595a5b5c5d5e5f60"
+      ],
+      "details": [
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "303132333435",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000"
+      ]
+    },
+    {
+      "input": {
+        "id": 30,
+        "payload": "303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "sender": 16,
+        "present": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "consumed": 32,
+      "calls": [],
+      "present": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "names": [
+        "4142434445464748494a4b4c4d4e4f50",
+        "42434445464748494a4b4c4d4e4f5051",
+        "434445464748494a4b4c4d4e4f505152",
+        "4445464748494a4b4c4d4e4f50515253",
+        "45464748494a4b4c4d4e4f5051525354",
+        "464748494a4b4c4d4e4f505152535455",
+        "4748494a4b4c4d4e4f50515253545556",
+        "48494a4b4c4d4e4f5051525354555657",
+        "494a4b4c4d4e4f505152535455565758",
+        "4a4b4c4d4e4f50515253545556575859",
+        "4b4c4d4e4f505152535455565758595a",
+        "4c4d4e4f505152535455565758595a5b",
+        "4d4e4f505152535455565758595a5b5c",
+        "4e4f505152535455565758595a5b5c5d",
+        "4f505152535455565758595a5b5c5d5e",
+        "505152535455565758595a5b5c5d5e5f",
+        "363738393a3b3c3d3e3f404142434445"
+      ],
+      "details": [
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "000000000000",
+        "303132333435"
+      ]
+    },
+    {
+      "input": {
+        "id": 31,
+        "payload": "0668656c6c6f00",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "answers": {
+          "player": 1
+        }
+      },
+      "consumed": 7,
+      "calls": [
+        [
+          "first_player"
+        ],
+        [
+          "player_text",
+          "player+88",
+          "68656c6c6f",
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 31,
+        "payload": "0100",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "answers": {
+          "player": 1
+        }
+      },
+      "consumed": 2,
+      "calls": [
+        [
+          "first_player"
+        ],
+        [
+          "player_text",
+          "player+88",
+          "",
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 31,
+        "payload": "0461626300",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "answers": {
+          "player": 0
+        }
+      },
+      "consumed": 5,
+      "calls": [
+        [
+          "first_player"
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 31,
+        "payload": "c9787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787800",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ],
+        "answers": {
+          "player": 1
+        }
+      },
+      "consumed": 202,
+      "calls": [
+        [
+          "first_player"
+        ],
+        [
+          "player_text",
+          "player+88",
+          "7878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878",
+          0
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 32,
+        "payload": "223344551101000022020000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "sound",
+          34,
+          [
+            13056,
+            17408,
+            21760
+          ],
+          65536,
+          65536,
+          0
+        ],
+        [
+          "error_dispose",
+          57568
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 33,
+        "payload": "223344551101000022020000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "sound",
+          34,
+          [
+            13056,
+            17408,
+            21760
+          ],
+          65536,
+          273,
+          0
+        ],
+        [
+          "error_dispose",
+          57568
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 34,
+        "payload": "223344551101000022020000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 8,
+      "calls": [
+        [
+          "sound",
+          34,
+          [
+            13056,
+            17408,
+            21760
+          ],
+          273,
+          65536,
+          0
+        ],
+        [
+          "error_dispose",
+          57568
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 35,
+        "payload": "223344551101000022020000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 12,
+      "calls": [
+        [
+          "sound",
+          34,
+          [
+            13056,
+            17408,
+            21760
+          ],
+          546,
+          273,
+          0
+        ],
+        [
+          "error_dispose",
+          57568
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 36,
+        "payload": "01000000020000000300000004000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 16,
+      "calls": [
+        [
+          "world_words",
+          "mission",
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          16
+        ]
+      ]
+    },
+    {
+      "input": {
+        "id": 37,
+        "payload": "25000000",
+        "objects": [
+          {
+            "flags": 0
+          },
+          {
+            "flags": 2147483648
+          },
+          {
+            "flags": 128,
+            "word_70": 8738
+          },
+          {
+            "flags": 2147483776,
+            "word_70": 8738
+          },
+          {
+            "flags": 128,
+            "word_70": 21845
+          }
+        ]
+      },
+      "consumed": 4,
+      "calls": [
+        [
+          "world_bit",
+          "mission",
+          37
+        ]
+      ]
+    }
+  ],
+  "boundary": "original receivers; their game routines and actor virtuals record and answer"
+}

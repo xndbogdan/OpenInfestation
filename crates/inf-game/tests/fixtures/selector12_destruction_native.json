@@ -1,0 +1,1068 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "boundary": "target deleting virtual supplied; stop before lower00429E70",
+  "cases": [
+    {
+      "behavior_present": false,
+      "index": -2,
+      "initial_29c": 7,
+      "callback": null,
+      "index_184": 4294967294,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": -1,
+      "initial_29c": 7,
+      "callback": null,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 0,
+      "initial_29c": 7,
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 1,
+      "initial_29c": 7,
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 2,
+      "initial_29c": 7,
+      "callback": 4624752,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624752
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 3,
+      "initial_29c": 7,
+      "callback": 4624880,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624880
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 4,
+      "initial_29c": 7,
+      "callback": 4624848,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624848
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 5,
+      "initial_29c": 7,
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 6,
+      "initial_29c": 7,
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 7,
+      "initial_29c": 7,
+      "callback": 4625136,
+      "index_184": 4294967295,
+      "byte_29c": 0,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        668
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625136
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": -2,
+      "initial_29c": 7,
+      "callback": null,
+      "index_184": 4294967294,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967294,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": -1,
+      "initial_29c": 7,
+      "callback": null,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1
+      ],
+      "events": [
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 0,
+      "initial_29c": 7,
+      "callback": 4625280,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625280
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 1,
+      "initial_29c": 7,
+      "callback": 4456000,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4456000
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 2,
+      "initial_29c": 7,
+      "callback": 4624752,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624752
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 3,
+      "initial_29c": 7,
+      "callback": 4624880,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624880
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 4,
+      "initial_29c": 7,
+      "callback": 4455168,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455168
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 5,
+      "initial_29c": 7,
+      "callback": 4624848,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4624848
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 6,
+      "initial_29c": 7,
+      "callback": 4455328,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4455328
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 7,
+      "initial_29c": 7,
+      "callback": 4411792,
+      "index_184": 4294967295,
+      "byte_29c": 7,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4411792
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 7
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": true,
+      "index": 8,
+      "initial_29c": 7,
+      "callback": 4625136,
+      "index_184": 4294967295,
+      "byte_29c": 0,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        668
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625136
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 620,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "lower_boundary",
+          "address": 4365936
+        }
+      ]
+    },
+    {
+      "behavior_present": false,
+      "index": 7,
+      "initial_29c": 7,
+      "stop_target": 628,
+      "callback": 4625136,
+      "index_184": 4294967295,
+      "byte_29c": 0,
+      "changed_offsets": [
+        0,
+        1,
+        388,
+        389,
+        390,
+        391,
+        668
+      ],
+      "events": [
+        {
+          "kind": "exit",
+          "address": 4625136
+        },
+        {
+          "kind": "delete",
+          "offset": 644,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 636,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        },
+        {
+          "kind": "delete",
+          "offset": 628,
+          "index_184": 4294967295,
+          "byte_29c": 0
+        }
+      ]
+    }
+  ]
+}

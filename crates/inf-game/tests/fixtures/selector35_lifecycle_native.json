@@ -1,0 +1,4404 @@
+{
+  "provenance": {
+    "exe_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+    "fpcw": 639,
+    "scope": "Original four selector35 lifecycle callbacks and actual RNG/target stores. Heap allocation, trails, bursts, radius, scatter and state services are explicit supplied boundaries; their event mutations and stops are fixture inputs, not lower-owner execution."
+  },
+  "guards": [
+    {
+      "address": 4447920,
+      "size": 235,
+      "sha256": "be39ef2336235b5f74764bfff6090a8b3ee3cf20a7ae54f80fc6fd94c26a8d3a"
+    },
+    {
+      "address": 4448160,
+      "size": 379,
+      "sha256": "35dcc6b08dfc7b422ec37882e1d54df2c8da7d0d82456203ba3c308d06dfd3d7"
+    },
+    {
+      "address": 4448544,
+      "size": 155,
+      "sha256": "6cc75372e0b6a17f6205a24b503e3d51b36fc7230f14d80de8a1d144eaa9289a"
+    },
+    {
+      "address": 4448704,
+      "size": 140,
+      "sha256": "210984da8627ec336836898d0b993d6b8937828740b42725aa9477da96342748"
+    },
+    {
+      "address": 4448848,
+      "size": 18,
+      "sha256": "66b358621fbd21f052ed31cfd647515fe3106a8d301dd10c6bdc066a3fdcf0a9"
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "method": "dying_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          33,
+          195,
+          32905
+        ],
+        "angular": [
+          241,
+          125,
+          2147483777
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 5442876,
+        "offset": 0,
+        "byte238": 0,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            200,
+            5
+          ],
+          "kind": 8,
+          "source": 305419896
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_change",
+        "entering": 0,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_change",
+        "entering": 1,
+        "rng": 4294967295,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "rng": 4294967295
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          138,
+          32849
+        ],
+        "angular": [
+          20,
+          32,
+          2147483868
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 5442876,
+        "offset": 0,
+        "byte238": 0,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1960610037,
+        "target": {
+          "focus": [
+            65520,
+            200,
+            5
+          ],
+          "kind": 8,
+          "source": 305419896
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": true,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          33,
+          195,
+          32905
+        ],
+        "angular": [
+          241,
+          125,
+          2147483777
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 5442876,
+        "offset": 0,
+        "byte238": 0,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": null
+      }
+    },
+    {
+      "input": {
+        "method": "dying_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "allocate",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "allocate",
+          "size": 20,
+          "rng": 1
+        }
+      ],
+      "stopped_at": "allocate",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 5442876,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 15000000,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 15000001,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "state",
+          "target": 0,
+          "source": 305419896,
+          "argument": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 2147483648,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 4294967295,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 1,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 199,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            79,
+            200,
+            65454
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 201,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 10,
+          "position": [
+            65522,
+            200,
+            27
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 65535,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 10,
+          "position": [
+            16564,
+            200,
+            61840
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 0,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": "division",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 0,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            27,
+            200,
+            65455
+          ],
+          "velocity": [
+            65470,
+            71,
+            32749
+          ],
+          "flags": 0,
+          "rng": 707715822
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 707715822
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 707715822,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 2,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            65436,
+            200,
+            23
+          ],
+          "velocity": [
+            26,
+            36,
+            32786
+          ],
+          "flags": 0,
+          "rng": 2496894688
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 2496894688
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2496894688,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 7,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            51,
+            200,
+            10
+          ],
+          "velocity": [
+            65474,
+            10,
+            32814
+          ],
+          "flags": 0,
+          "rng": 527390909
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 527390909
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 527390909,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 4294967295,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            22,
+            200,
+            3
+          ],
+          "velocity": [
+            65487,
+            25,
+            32795
+          ],
+          "flags": 0,
+          "rng": 1960610037
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 1960610037
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 31249,
+        "color_timer": 55,
+        "rng": 1960610037,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 2,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 2,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "trail",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": "trail",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "scatter",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "count_minus_one": 0,
+          "rng": 3749788903
+        }
+      ],
+      "stopped_at": "scatter",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3749788903,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 15000001,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "state",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "state",
+          "target": 0,
+          "source": 305419896,
+          "argument": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": "state",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dying_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": {
+          "at": "trail",
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "flags": 0,
+          "source": 99,
+          "rng": 55
+        }
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 9,
+          "position": [
+            31,
+            200,
+            65507
+          ],
+          "velocity": [
+            44,
+            118,
+            32704
+          ],
+          "flags": 0,
+          "rng": 3749788903
+        },
+        {
+          "kind": "scatter",
+          "position": [
+            1,
+            2,
+            3
+          ],
+          "count_minus_one": 0,
+          "rng": 55
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          1,
+          2,
+          3
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 99,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 55,
+        "target": {
+          "focus": [
+            65520,
+            60536,
+            5
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 0,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        },
+        {
+          "kind": "radius",
+          "block": 5444176,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "source": 591751049,
+          "replicate": 1,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 0,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 2147483648,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 2147483648,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        },
+        {
+          "kind": "radius",
+          "block": 5444176,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "source": 591751049,
+          "replicate": 1,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 5442884,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 2147483648,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 2147483648,
+        "source": 591751049,
+        "status": 5442884,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "burst",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": "burst",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": "radius",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        },
+        {
+          "kind": "radius",
+          "block": 5444176,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "source": 591751049,
+          "replicate": 1,
+          "rng": 1
+        }
+      ],
+      "stopped_at": "radius",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": {
+          "at": "burst",
+          "position": [
+            7,
+            8,
+            9
+          ],
+          "flags": 0,
+          "source": 44,
+          "rng": 55
+        }
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        },
+        {
+          "kind": "radius",
+          "block": 5444176,
+          "position": [
+            7,
+            8,
+            9
+          ],
+          "source": 44,
+          "replicate": 1,
+          "rng": 55
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          7,
+          8,
+          9
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 44,
+        "status": 5442884,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 55,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_change",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": {
+          "at": "burst",
+          "position": [
+            7,
+            8,
+            9
+          ],
+          "flags": 2147483648,
+          "source": 44,
+          "rng": 55
+        }
+      },
+      "events": [
+        {
+          "kind": "burst",
+          "count": 16,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "radius": 20,
+          "central": 2,
+          "debris": [
+            1,
+            1
+          ],
+          "speed": 8,
+          "flags": 0,
+          "rng": 1
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          7,
+          8,
+          9
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 2147483648,
+        "source": 44,
+        "status": 5442884,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 55,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 16384,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 43008,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 3234068179
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 45056,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 47104,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 2599648
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2599648,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 49152,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 2599648
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2599648,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 49153,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 2599648
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2599648,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 2147483648,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 2599648
+        }
+      ],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2599648,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 4294967295,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 3234068179,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 0,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 1621583466,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 4294967295,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 0,
+        "allocation_null": false,
+        "stop": null,
+        "mutation": null
+      },
+      "events": [],
+      "stopped_at": null,
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 9098753,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    },
+    {
+      "input": {
+        "method": "dormant_update",
+        "entering": 1,
+        "rng": 1,
+        "elapsed": 0,
+        "source_null": 305419896,
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "size": 200,
+        "flags": 0,
+        "source": 591751049,
+        "current": true,
+        "target_kind": 8,
+        "target_focus": [
+          11,
+          22,
+          33
+        ],
+        "status": 195939070,
+        "byte238": 1,
+        "offset": 777,
+        "color": 123,
+        "color_timer": 456,
+        "load": 49152,
+        "allocation_null": false,
+        "stop": "trail",
+        "mutation": null
+      },
+      "events": [
+        {
+          "kind": "trail",
+          "particle_type": 6,
+          "position": [
+            65520,
+            200,
+            5
+          ],
+          "velocity": [
+            0,
+            39,
+            0
+          ],
+          "flags": 0,
+          "rng": 2599648
+        }
+      ],
+      "stopped_at": "trail",
+      "output": {
+        "position": [
+          65520,
+          200,
+          5
+        ],
+        "velocity": [
+          65530,
+          0,
+          32767
+        ],
+        "angular": [
+          4294967295,
+          7,
+          2147483648
+        ],
+        "flags": 0,
+        "source": 591751049,
+        "status": 195939070,
+        "offset": 777,
+        "byte238": 1,
+        "color": 123,
+        "color_timer": 456,
+        "rng": 2599648,
+        "target": {
+          "focus": [
+            11,
+            22,
+            33
+          ],
+          "kind": 8,
+          "source": 77
+        }
+      }
+    }
+  ]
+}

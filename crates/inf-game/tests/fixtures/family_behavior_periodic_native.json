@@ -1,0 +1,2991 @@
+{
+  "executable_sha256": "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956",
+  "profiles": [
+    {
+      "name": "family-mode0",
+      "table": 5441456,
+      "count": 3,
+      "records": [
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "family-mode1",
+      "table": 5441456,
+      "count": 3,
+      "records": [
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "family-mode2",
+      "table": 5441456,
+      "count": 3,
+      "records": [
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "selector12-absent",
+      "table": 5480672,
+      "count": 5,
+      "records": [
+        {
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_factory": 4355648
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 4355648
+        },
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "selector12-present",
+      "table": 5480672,
+      "count": 5,
+      "records": [
+        {
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_factory": 4355648
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 4355648
+        },
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "selector35",
+      "table": 5455232,
+      "count": 3,
+      "records": [
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 0
+        }
+      ]
+    },
+    {
+      "name": "selector34",
+      "table": 5450272,
+      "count": 3,
+      "records": [
+        {
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_factory": 0
+        },
+        {
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_factory": 4355648
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "profile": 0,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 0,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 0,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 0,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 0,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 1,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 1,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 1,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 1,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 1,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 2,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 2,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 2,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 2,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 2,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 0
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 256
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 4294967168
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 1,
+      "null_factory": true,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": false
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 1,
+      "stop_at": "factory",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        }
+      ],
+      "final_timer": 117,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 0,
+      "result": 1,
+      "stop_at": "release",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 0
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 256
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 4294967168
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 1,
+      "null_factory": true,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": false
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 1,
+      "stop_at": "factory",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        }
+      ],
+      "final_timer": 117,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 1,
+      "result": 1,
+      "stop_at": "release",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 3,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 3,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 3,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 3,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 3,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 3,
+      "index": 4,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 4,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 4,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 3,
+      "index": 4,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 3,
+      "index": 4,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 0
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 256
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 4294967168
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 1,
+      "null_factory": true,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": false
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 1,
+      "stop_at": "factory",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        }
+      ],
+      "final_timer": 117,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 0,
+      "result": 1,
+      "stop_at": "release",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355216,
+          "actor_offset": 620,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 0
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 256
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 4294967168
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 1,
+      "null_factory": true,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": false
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 1,
+      "stop_at": "factory",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        }
+      ],
+      "final_timer": 101,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        }
+      ],
+      "final_timer": 117,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 1,
+      "result": 1,
+      "stop_at": "release",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 3,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 3,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 3,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 3,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 3,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 4,
+      "index": 4,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 4,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 4,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 4,
+      "index": 4,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 4,
+      "index": 4,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4623920,
+          "actor_offset": 644,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 5,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 5,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 5,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 5,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 5,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 6,
+      "index": 0,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 0,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 0,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 0,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 0,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349184,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 6,
+      "index": 1,
+      "result": 0,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 0
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 1,
+      "result": 1,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 1,
+      "result": 256,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 256
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 1,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 4294967168
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 1,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "probe",
+          "before": 100,
+          "after": 116,
+          "callback": 4349168,
+          "actor_offset": 0,
+          "input_present": false,
+          "result": 1
+        }
+      ],
+      "final_timer": 116,
+      "result_byte": null
+    },
+    {
+      "profile": 6,
+      "index": 2,
+      "result": 0,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 0
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 2,
+      "result": 1,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 2,
+      "result": 256,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 256
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 0
+    },
+    {
+      "profile": 6,
+      "index": 2,
+      "result": 4294967168,
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 4294967168
+        },
+        {
+          "kind": "release",
+          "before": 117,
+          "after": 373
+        }
+      ],
+      "final_timer": 373,
+      "result_byte": 1
+    },
+    {
+      "profile": 6,
+      "index": 2,
+      "result": 1,
+      "stop_at": "probe",
+      "events": [
+        {
+          "kind": "factory",
+          "before": 100,
+          "after": 101,
+          "factory": 4355648,
+          "allocated": true
+        },
+        {
+          "kind": "probe",
+          "before": 101,
+          "after": 117,
+          "callback": 4355344,
+          "actor_offset": 508,
+          "input_present": true,
+          "result": 1
+        }
+      ],
+      "final_timer": 117,
+      "result_byte": null
+    }
+  ]
+}
