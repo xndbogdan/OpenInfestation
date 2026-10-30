@@ -38,8 +38,8 @@ covers (865 not needed are [omitted](docs/progress/README.md#omitted)),
 
 Releases have Windows and Linux (x86-64) builds: a `windows-x64` zip with
 `OpenInfestation.exe` and a Linux tarball with `openinfestation`. SDL2 is
-built into the binary, so no DLLs are needed (the optional upscalers below
-are the only exception).
+built into the binary. The Windows zip also carries the upscalers'
+libraries beside the executable (see [Renderers](#renderers)).
 
 **What you need from your copy.** The launcher checks the installation
 before Play turns on:
@@ -147,14 +147,15 @@ with `--renderer`:
 
 Network games play retail's game on every renderer.
 
-The upscalers are optional libraries placed beside the executable; none
-ship with the port. [`scripts/build-upscalers.ps1`](scripts/build-upscalers.ps1)
-builds the DLSS bridge ([`ngx-bridge/`](ngx-bridge/)) and copies them:
+The upscalers are libraries beside the executable. The Windows release
+zip includes them; for a build of your own,
+[`scripts/build-upscalers.ps1`](scripts/build-upscalers.ps1) builds the DLSS
+bridge ([`ngx-bridge/`](ngx-bridge/)) and copies them:
 
 - FSR 3.1: AMD's `amd_fidelityfx_vk.dll` (FidelityFX SDK 1.1.4, MIT);
-- XeSS: Intel's `libxess.dll` (Intel Simplified Software License);
+- XeSS: Intel's `libxess.dll` 2.0.2 (Intel Simplified Software License);
 - DLSS: the port's `inf_ngx.dll` plus NVIDIA's `nvngx_dlss.dll` and
-  `nvngx_dlssd.dll`.
+  `nvngx_dlssd.dll` 310.9.16 (NVIDIA RTX SDK license).
 
 A missing library makes its upscaler unavailable, and the log says so once.
 
@@ -326,12 +327,13 @@ and are not distributed with this project.
   Audio Bundles and from Splice's royalty-free sounds; the full list of
   artists is in [`ambience/manifest.json`](ambience/manifest.json) and goes
   into the pak's `credits.txt`.
-- The optional upscalers stay under their vendors' terms: AMD FidelityFX
-  SDK (MIT), Intel XeSS SDK (Intel Simplified Software License) and NVIDIA
-  DLSS (NVIDIA RTX SDK license). NVIDIA's SDK headers are not in this
+- The upscaler libraries in the Windows zip stay under their vendors'
+  terms: AMD FidelityFX SDK (MIT), Intel XeSS SDK (Intel Simplified
+  Software License) and NVIDIA DLSS (NVIDIA RTX SDK license). NVIDIA, DLSS
+  and RTX are trademarks of NVIDIA Corporation. NVIDIA's SDK is not in this
   repository.
 - Release packages include `THIRD_PARTY_LICENSES.html` for the Rust
-  dependencies.
+  dependencies, and in the Windows zip the upscalers' licence texts.
 - [`DISCLOSURE.md`](DISCLOSURE.md) lists the third-party content release
   archives carry (the remastered sounds in `Remastered.pak`, and the
   runtime components) and the terms each comes under.

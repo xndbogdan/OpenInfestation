@@ -56,13 +56,23 @@ paks.
   implementation by Jorge Jimenez, Jose I. Echevarria, Belen Masia, Fernando
   Navarro and Diego Gutierrez, MIT license
   ([details](crates/inf-game/shaders/smaa/README.md)).
-- **Upscalers** (Vulkan, Windows): the port can load AMD FidelityFX FSR 3.1
-  (`amd_fidelityfx_vk.dll`, MIT), Intel XeSS (`libxess.dll`, Intel Simplified
-  Software License) and NVIDIA DLSS through the port's `inf_ngx.dll` bridge
-  (`nvngx_dlss.dll`, `nvngx_dlssd.dll`, NVIDIA RTX SDK license). These
-  libraries are not in this repository or in the release archives; placed
-  beside the executable, each one's upscaler becomes available
-  ([Renderers](README.md#renderers)). Each stays under its vendor's terms.
+- **Upscalers** (Vulkan, Windows): the Windows release zip carries, beside
+  the executable and unmodified, the vendors' runtime libraries:
+  - AMD FidelityFX FSR 3.1: `amd_fidelityfx_vk.dll` (file version
+    1.0.1.41314) from the FidelityFX SDK 1.1.4, MIT license, Copyright (C)
+    2024 Advanced Micro Devices, Inc.;
+  - Intel XeSS: `libxess.dll` 2.0.2.68 from the XeSS SDK, Intel Simplified
+    Software License, Copyright (C) 2025 Intel Corporation;
+  - NVIDIA DLSS: `nvngx_dlss.dll` and `nvngx_dlssd.dll` (Ray
+    Reconstruction) 310.9.16 from the DLSS SDK, NVIDIA RTX SDK license,
+    Copyright (C) NVIDIA Corporation. NVIDIA, DLSS and RTX are trademarks of
+    NVIDIA Corporation. They load through `inf_ngx.dll`, the port's bridge
+    ([`ngx-bridge/`](ngx-bridge/)) linked with the SDK's NGX library.
+
+  Each stays under its vendor's terms, not the port's licence; the full
+  licence texts are in the zip's `THIRD_PARTY_LICENSES.html`. None of these
+  libraries is in this repository or in the Linux archive. Without one, its
+  upscaler is unavailable ([Renderers](README.md#renderers)).
 
 ## The original game
 
