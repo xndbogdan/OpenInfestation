@@ -332,3 +332,6 @@ and are not distributed with this project.
   repository.
 - Release packages include `THIRD_PARTY_LICENSES.html` for the Rust
   dependencies.
+- [`DISCLOSURE.md`](DISCLOSURE.md) lists the third-party content release
+  archives carry (the remastered sounds in `Remastered.pak`, and the
+  runtime components) and the terms each comes under.
