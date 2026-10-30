@@ -160,7 +160,7 @@ pub struct InstallationReport {
     pub title_video: bool,
     /// The [`MUSIC_TRACKS`] present in `cdaudio/`.
     pub music_tracks: Vec<u32>,
-    /// `Remastered.pak` beside the data (the port's own sounds, the final
+    /// `Remastered.pak` beside the data or the executable (the port's own sounds, the final
     /// stretch's item 12): how many files it holds, why it could not be
     /// read, or none when it is not there.
     pub remastered: Option<Result<usize, String>>,
@@ -455,7 +455,7 @@ pub fn validate_installation(root: &Path, settings: &Path) -> InstallationReport
     }
     report.check_title_video();
     report.check_music();
-    let pak = root.join("Remastered.pak");
+    let pak = crate::platform_audio::remastered_pak::locate(root);
     if pak.is_file() {
         report.remastered = Some(
             crate::platform_audio::remastered_pak::RemasteredPak::open(&pak)

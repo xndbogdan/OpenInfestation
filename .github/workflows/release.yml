@@ -1,12 +1,10 @@
 name: Release
 
-# Pushing a `v*` tag builds the Windows and Linux packages and publishes a
-# GitHub Release; a tag with a suffix (v0.2.0-rc1) is a pre-release. A manual
+# Manual only: releases are built locally by scripts/release.ps1, which adds
+# Remastered.pak and the upscalers' libraries this workflow cannot. A manual
 # run publishes `v<version>` from crates/inf-game's version when that tag
-# does not exist yet.
+# does not exist yet; a version with a suffix (0.2.0-rc1) is a pre-release.
 on:
-  push:
-    tags: ['v*']
   workflow_dispatch:
 
 permissions:

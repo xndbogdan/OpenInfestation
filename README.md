@@ -38,8 +38,10 @@ covers (865 not needed are [omitted](docs/progress/README.md#omitted)),
 
 Releases have Windows and Linux (x86-64) builds: a `windows-x64` zip with
 `OpenInfestation.exe` and a Linux tarball with `openinfestation`. SDL2 is
-built into the binary. The Windows zip also carries the upscalers'
-libraries beside the executable (see [Renderers](#renderers)).
+built into the binary. Both carry `Remastered.pak`, the port's own sounds,
+which the game finds beside the executable or beside the game's data. The
+Windows zip also carries the upscalers' libraries beside the executable
+(see [Renderers](#renderers)).
 
 **What you need from your copy.** The launcher checks the installation
 before Play turns on:
@@ -218,9 +220,12 @@ pak from the sound folders [`ambience/manifest.json`](ambience/manifest.json)
 names (it needs ffmpeg). `--release` leaves out every sound no licence lets
 the port ship. The sounds themselves are not in this repository.
 
-**Releases.** Pushing a `v*` tag runs the release workflow, which builds
-Windows and Linux packages with the third-party licences and a checksum
-file.
+**Releases.** `scripts/release.ps1` builds the Windows package and, in an
+`ubuntu:22.04` Docker container, the Linux one, each with the release
+`Remastered.pak` (from your sound folders, `-Packs4` and `-Splice`), the
+third-party licences and a checksum file; the Windows zip adds the
+upscalers' libraries. `-Publish` creates the GitHub Release from a clean
+`main`. The GitHub workflows run only when started by hand.
 
 ### Tests and retail data
 

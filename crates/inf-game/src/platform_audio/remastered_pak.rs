@@ -87,6 +87,20 @@ impl<'a> Cursor<'a> {
     }
 }
 
+/// Where `Remastered.pak` is: beside the game's data, else beside the
+/// executable, where a release package puts it.
+pub fn locate(data_root: &Path) -> std::path::PathBuf {
+    let beside_data = data_root.join("Remastered.pak");
+    if beside_data.is_file() {
+        return beside_data;
+    }
+    std::env::current_exe()
+        .ok()
+        .and_then(|exe| exe.parent().map(|folder| folder.join("Remastered.pak")))
+        .filter(|path| path.is_file())
+        .unwrap_or(beside_data)
+}
+
 impl RemasteredPak {
     pub fn open(path: &Path) -> Result<Self, PakError> {
         let io = |source| PakError::Io {

@@ -1008,7 +1008,7 @@ impl PlatformAudio {
             &mut voices,
         )?;
         device.resume();
-        let pak = data_root.join("Remastered.pak");
+        let pak = remastered_pak::locate(data_root);
         let remastered = match remastered_pak::RemasteredPak::open(&pak) {
             Ok(opened) => Some(opened),
             Err(error) => {
