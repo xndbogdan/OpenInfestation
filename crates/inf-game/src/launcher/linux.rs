@@ -696,7 +696,7 @@ impl Launcher {
                     ui.add_enabled(enabled, egui::Checkbox::new(&mut p.fixes[index], FIX_LABELS[index]));
                 }
             });
-            ui.checkbox(&mut p.skip, "Skip the launcher while this installation is ready");
+            ui.checkbox(&mut p.skip, "Skip the launcher when this installation is ready");
             ui.weak("Start with --launcher to open it again. Missing game files still open it.");
             ui.label(&progress);
         });

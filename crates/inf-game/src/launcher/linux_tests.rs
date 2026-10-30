@@ -136,7 +136,7 @@ fn launcher_options_save_writes_the_chosen_rows() {
     harness.step();
     click(
         &mut harness,
-        "Skip the launcher while this installation is ready",
+        "Skip the launcher when this installation is ready",
     );
     click(&mut harness, "Save");
     assert!(harness.state().options.is_none());

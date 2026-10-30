@@ -1449,7 +1449,7 @@ impl WindowState {
         }
         let skip = self.checkbox(
             window,
-            "S&kip the launcher while this installation is ready",
+            "S&kip the launcher when this installation is ready",
             ID_SKIP,
             16,
             904,
