@@ -1291,7 +1291,8 @@ impl WindowState {
         // The Vulkan renderer's modern mode.
         let modern = settings.modern();
         let support = *self.modern_support.get_or_insert_with(|| {
-            inf_game::vk_device::VkDevice::probe_modern_support().unwrap_or_default()
+            inf_game::vk_device::VkDevice::probe_modern_support()
+                .unwrap_or(inf_game::modern_settings::ModernSupport::NONE)
         });
         let vulkan_group = self.group(window, " Vulkan ", 12, 186, 536, 178);
         let vulkan_note = self.label(

@@ -342,7 +342,8 @@ impl Launcher {
         };
         let modes = self.modes.clone();
         let support = *self.support.get_or_insert_with(|| {
-            inf_game::vk_device::VkDevice::probe_modern_support().unwrap_or_default()
+            inf_game::vk_device::VkDevice::probe_modern_support()
+                .unwrap_or(inf_game::modern_settings::ModernSupport::NONE)
         });
         let modern = settings.modern();
         let words = settings.words();

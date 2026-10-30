@@ -92,6 +92,13 @@ impl Default for ModernSupport {
 }
 
 impl ModernSupport {
+    /// Nothing but Off: a GPU whose Vulkan did not start.
+    pub const NONE: Self = Self {
+        ray_tracing: false,
+        upscalers: [true, false, false, false, false],
+        modern_sky: false,
+    };
+
     pub fn runs(&self, upscaler: Upscaler) -> bool {
         upscaler == Upscaler::Off
             || Upscaler::ALL
