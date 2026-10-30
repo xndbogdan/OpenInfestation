@@ -48,8 +48,9 @@ before Play turns on:
 - `PreLoad.dat`, which lists every scene and the overlays it loads;
 - `Overlay/`, with every overlay the scenes request;
 - optional: `Title.avi` for the intro video and `cdaudio/` with the disc's
-  music tracks (2 to 9). Without them the game skips the video or runs
-  silent, as retail does with no CD in the drive.
+  music tracks (2 to 9). Without `Title.avi` the game skips the intro;
+  without the tracks it plays with no music, as retail does with no CD in
+  the drive.
 
 File-name case doesn't matter (`preload.dat` or `OVERLAY/` work too). A
 data file whose checksum no known release has only warns, since another
