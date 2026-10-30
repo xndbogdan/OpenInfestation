@@ -443,6 +443,33 @@ pub(crate) struct Placed {
     last_rung: Option<usize>,
     /// The crystals' rings held with their flares ([`PlacedTuning::attack`]).
     rings: Vec<Ring>,
+    /// The crystals' one-shot rings sounding: each one's voice, when it
+    /// began and when it runs out.
+    ringing: Vec<(u32, u64, u64)>,
+}
+
+/// The most crystal rings sounding at once (2026-10-31: a burst into a
+/// cluster stacked a ring per bolt); a newer one cuts off the oldest.
+const MOST_RINGS: usize = 3;
+/// A strike this soon (microseconds) after the last ring began adds none:
+/// a twin cannon's pair of bolts rings once.
+const RING_GAP: u64 = 80_000;
+
+/// Whether a crystal's new ring at `now` plays beside the rings sounding
+/// (`ringing`, oldest first: voice, began, ends): none within the gap after
+/// the last, unless its crystal is `taking_over` its own ring; otherwise
+/// whether it cuts off the oldest.
+fn admit_ring(ringing: &[(u32, u64, u64)], now: u64, taking_over: bool) -> Option<bool> {
+    if taking_over {
+        return Some(false);
+    }
+    if ringing
+        .last()
+        .is_some_and(|&(_, began, _)| now.saturating_sub(began) < RING_GAP)
+    {
+        return None;
+    }
+    Some(ringing.len() >= MOST_RINGS)
 }
 
 /// A crystal's ring that lasts as long as its flash: it rises over the
@@ -494,6 +521,7 @@ impl Placed {
         self.voices.clear();
         self.sounding.clear();
         self.rings.clear();
+        self.ringing.clear();
     }
 
     /// Every recording a world's placed sounds may play.
@@ -712,6 +740,24 @@ impl Placed {
         if place.sounds.is_empty() || frame.menu || distance >= place.range {
             return;
         }
+        let held = place.attack.is_some();
+        let now = frame.now;
+        let rings = &self.rings;
+        self.ringing.retain(|&(id, _, ends)| {
+            ends > now && (!held || rings.iter().any(|ring| ring.id == id))
+        });
+        // A crystal already ringing takes its new ring over from the last;
+        // another one waits out the gap.
+        let taking_over = held && self.rings.iter().any(|ring| ring.cell == cell);
+        let Some(evict) = admit_ring(&self.ringing, now, taking_over) else {
+            return;
+        };
+        if evict {
+            let (oldest, ..) = self.ringing.remove(0);
+            audio.stop_ambience(Some(oldest));
+            self.sounding.retain(|&(id, ..)| id != oldest);
+            self.rings.retain(|ring| ring.id != oldest);
+        }
         self.rung = self.rung.wrapping_add(1);
         let turn = 7_000_u32.wrapping_add(self.rung);
         let count = place.sounds.len();
@@ -737,7 +783,6 @@ impl Placed {
         );
         let pitch = 0.94 + super::pick(frame.world, turn ^ 0x51, 1_201) as f32 / 10_000.0;
         let id = super::next_voice(frame.next_voice);
-        let held = place.attack.is_some();
         // A held ring starts where its envelope does: silent with an attack,
         // whole without (the flare is whole as it is struck).
         let attack = place.attack.unwrap_or(0.0);
@@ -767,6 +812,7 @@ impl Placed {
         } else {
             self.sounding.push((id, gain, pan, cut, ends));
         }
+        self.ringing.push((id, frame.now, ends));
         crate::event_log::ambience("crystal", name, "shield");
     }
 

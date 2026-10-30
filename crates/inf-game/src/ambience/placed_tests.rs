@@ -164,6 +164,20 @@ fn a_held_ring_rises_follows_the_flash_and_gives_way() {
     assert_eq!(ring_envelope(0.6, 0.0, 0.5, Some(0.0)), 0.0);
 }
 
+/// A burst into a cluster rings no more than three crystals at once, a new
+/// one cutting off the oldest, and a pair of bolts rings once; a crystal
+/// struck again takes its own ring over at any time.
+#[test]
+fn crystal_rings_are_capped() {
+    assert_eq!(admit_ring(&[], 0, false), Some(false));
+    let two = [(1, 0, 900_000), (2, 100_000, 900_000)];
+    assert_eq!(admit_ring(&two, 150_000, false), None);
+    assert_eq!(admit_ring(&two, 150_000, true), Some(false));
+    assert_eq!(admit_ring(&two, 200_000, false), Some(false));
+    let three = [(1, 0, 900_000), (2, 100_000, 900_000), (3, 200_000, 900_000)];
+    assert_eq!(admit_ring(&three, 300_000, false), Some(true));
+}
+
 /// The crystals' rings are Splice's energy shields, which the release pak
 /// carries, held with the flash from the strike on (no attack at all,
 /// 2026-10-27), heard to 4500 units.
