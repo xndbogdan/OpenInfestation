@@ -1390,8 +1390,41 @@ impl<'r> SceneFeedBuilder<'r> {
                     }
                 })
                 .expect("two or more faces");
+            // A masked winner shows the face drawn under it through its keyed
+            // texels (the hangar's windows): the last opaque one stays, a
+            // thousandth farther from the eye so rays never tie the two.
+            let cutout = |place: usize| self.feed.triangles[list[place].triangles.start].cutout;
+            let under = (!list[winner].triangles.is_empty() && cutout(winner))
+                .then(|| {
+                    chain_of(chain.first)
+                        .filter(|&place| {
+                            place != winner
+                                && !list[place].triangles.is_empty()
+                                && !cutout(place)
+                        })
+                        .reduce(|best, next| {
+                            if list[next].drawn_after(&list[best]) {
+                                next
+                            } else {
+                                best
+                            }
+                        })
+                })
+                .flatten();
+            if let Some(under) = under {
+                let mut pushed: Vec<u32> = self.feed.triangles[list[under].triangles.clone()]
+                    .iter()
+                    .flat_map(|triangle| triangle.vertices)
+                    .collect();
+                pushed.sort_unstable();
+                pushed.dedup();
+                for index in pushed {
+                    let vertex = &mut self.feed.vertices[index as usize];
+                    vertex.position = vertex.position.map(|c| c * 1.001);
+                }
+            }
             for place in chain_of(chain.first) {
-                if place == winner {
+                if place == winner || Some(place) == under {
                     continue;
                 }
                 for triangle in &mut self.feed.triangles[list[place].triangles.clone()] {
@@ -1517,7 +1550,8 @@ mod tests {
     /// and a face it drew over one it never drew; of two it never drew, the
     /// later. One drawn for the tracer alone (outside the view) never wins
     /// over the view's, though submitted after it. The others' triangles
-    /// shrink to nothing; a face alone stays.
+    /// shrink to nothing, but for the last opaque face under a masked
+    /// winner, kept a thousandth farther from the eye; a face alone stays.
     #[test]
     fn faces_drawn_twice_keep_the_rasters_last() {
         let mut builder = SceneFeedBuilder::new(SceneCamera::default(), [6, 1, 3]);
@@ -1581,7 +1615,17 @@ mod tests {
             .map(|t| t.texture.unwrap())
             .collect();
         kept.dedup();
-        assert_eq!(kept, [2, 3, 6, 8, 9, 11, 12]);
+        assert_eq!(kept, [1, 2, 3, 6, 8, 9, 11, 12]);
+        let under = builder
+            .feed
+            .triangles
+            .iter()
+            .find(|t| t.texture == Some(1))
+            .unwrap();
+        assert_eq!(
+            builder.feed.vertices[under.vertices[2] as usize].position,
+            [1.001, 0.0, 1.001]
+        );
         let masked: Vec<bool> = builder
             .feed
             .triangles
