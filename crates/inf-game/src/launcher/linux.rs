@@ -196,7 +196,11 @@ impl Launcher {
     }
 
     fn can_play(&self) -> bool {
-        !self.busy() && self.report.as_ref().is_some_and(InstallationReport::is_ready)
+        !self.busy()
+            && self
+                .report
+                .as_ref()
+                .is_some_and(InstallationReport::is_ready)
     }
 
     fn settings_fix(&self) -> Option<&SettingsHealth> {
@@ -212,10 +216,8 @@ impl Launcher {
         self.progress = "Checking Infest.exe, PreLoad.dat, every overlay, the settings, the title video and the music...".to_string();
         let (sender, receiver) = mpsc::channel();
         thread::spawn(move || {
-            let checked = std::panic::catch_unwind(|| {
-                validate_installation(&root, &settings_path)
-            })
-            .map_err(|_| "The file check stopped unexpectedly.".to_string());
+            let checked = std::panic::catch_unwind(|| validate_installation(&root, &settings_path))
+                .map_err(|_| "The file check stopped unexpectedly.".to_string());
             let _ = sender.send(checked);
         });
         self.worker = Some((receiver, show_result));
@@ -246,11 +248,7 @@ impl Launcher {
                 }
                 .to_string();
                 if show_result && !self.close_requested {
-                    self.notice(
-                        "Infestation file check",
-                        &popup_description(&report),
-                        false,
-                    );
+                    self.notice("Infestation file check", &popup_description(&report), false);
                 }
                 self.report = Some(report);
             }
@@ -352,12 +350,20 @@ impl Launcher {
         self.options = Some(Pending {
             display: settings.display_selection(),
             modes,
-            renderer: position(RENDERERS.iter().position(|&(c, _)| c == settings.renderer())),
+            renderer: position(
+                RENDERERS
+                    .iter()
+                    .position(|&(c, _)| c == settings.renderer()),
+            ),
             scaling: position(SCALINGS.iter().position(|&(c, _)| c == settings.scaling())),
             filtering: words[inf_game::frontend_video::FILTERING_CELL],
             ray_tracing: usize::from(modern.ray_tracing && support.ray_tracing),
             upscaler: modern.upscaler,
-            quality: position(UPSCALE_QUALITIES.iter().position(|&(q, _)| q == modern.quality)),
+            quality: position(
+                UPSCALE_QUALITIES
+                    .iter()
+                    .position(|&(q, _)| q == modern.quality),
+            ),
             anti_aliasing: position(
                 ANTI_ALIASINGS
                     .iter()
@@ -406,7 +412,8 @@ impl Launcher {
             ultra_ground: false,
             ambience: pending
                 .ambience
-                .min(u32::from(inf_game::modern_settings::MOST_AMBIENCE)) as u8,
+                .min(u32::from(inf_game::modern_settings::MOST_AMBIENCE))
+                as u8,
             headphones: pending.headphones != 0,
             puddle_wheels: settings.modern().puddle_wheels,
         });
@@ -421,7 +428,11 @@ impl Launcher {
             return self.notice("Save Infestation options", &text, false);
         }
         self.request.preferences.skip_launcher = pending.skip;
-        if let Err(error) = self.request.preferences.save(&self.request.preferences_path) {
+        if let Err(error) = self
+            .request
+            .preferences
+            .save(&self.request.preferences_path)
+        {
             let text = format!(
                 "The game's settings were saved, but the launcher's preference could not be:\n\n{error}"
             );
@@ -696,7 +707,9 @@ impl Launcher {
         let mut verify = false;
         let mut close = None;
         ui.horizontal(|ui| {
-            verify = ui.add_enabled(!busy, egui::Button::new("Verify files")).clicked();
+            verify = ui
+                .add_enabled(!busy, egui::Button::new("Verify files"))
+                .clicked();
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if ui.button("Cancel").clicked() {
                     close = Some(false);
@@ -728,14 +741,24 @@ impl Launcher {
         });
         if let Some(image) = shot {
             let [width, height] = image.size;
-            let rgba: Vec<u8> = image.pixels.iter().flat_map(|p| p.to_srgba_unmultiplied()).collect();
-            let saved = std::fs::File::create(&path).map_err(|e| e.to_string()).and_then(|file| {
-                let mut encoder = png::Encoder::new(std::io::BufWriter::new(file), width as u32, height as u32);
-                encoder.set_color(png::ColorType::Rgba);
-                encoder.set_depth(png::BitDepth::Eight);
-                let mut writer = encoder.write_header().map_err(|e| e.to_string())?;
-                writer.write_image_data(&rgba).map_err(|e| e.to_string())
-            });
+            let rgba: Vec<u8> = image
+                .pixels
+                .iter()
+                .flat_map(|p| p.to_srgba_unmultiplied())
+                .collect();
+            let saved = std::fs::File::create(&path)
+                .map_err(|e| e.to_string())
+                .and_then(|file| {
+                    let mut encoder = png::Encoder::new(
+                        std::io::BufWriter::new(file),
+                        width as u32,
+                        height as u32,
+                    );
+                    encoder.set_color(png::ColorType::Rgba);
+                    encoder.set_depth(png::BitDepth::Eight);
+                    let mut writer = encoder.write_header().map_err(|e| e.to_string())?;
+                    writer.write_image_data(&rgba).map_err(|e| e.to_string())
+                });
             eprintln!("launcher snapshot {}: {saved:?}", path.display());
             self.snapshot = None;
             return;
@@ -777,7 +800,9 @@ fn combo(ui: &mut egui::Ui, name: &str, id: &str, selected: &mut usize, entries:
         });
     // Its row's label as the accessible name, for screen readers and tests.
     let enabled = ui.is_enabled();
-    shown.response.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::ComboBox, enabled, name));
+    shown
+        .response
+        .widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::ComboBox, enabled, name));
     *selected != before
 }
 

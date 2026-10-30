@@ -89,7 +89,10 @@ fn launcher_play_returns_the_installation_and_closes() {
     click(&mut harness, "Play");
     let state = harness.state();
     assert!(state.close_requested);
-    assert_eq!(state.selection.borrow().as_deref(), Some(data_root().as_path()));
+    assert_eq!(
+        state.selection.borrow().as_deref(),
+        Some(data_root().as_path())
+    );
     let saved = LauncherPreferences::load(&dir.join("launcher.json"));
     assert_eq!(saved.data_root, Some(data_root()));
 }
@@ -114,18 +117,27 @@ fn launcher_options_save_writes_the_chosen_rows() {
     assert!(harness.query_by_label("Vulkan").is_some());
     open_combo(&mut harness, "Upscaler");
     assert!(harness.query_by_label("AMD FSR 3.1").is_some());
-    for absent in ["NVIDIA DLSS", "NVIDIA DLSS Ray Reconstruction", "Path tracing"] {
+    for absent in [
+        "NVIDIA DLSS",
+        "NVIDIA DLSS Ray Reconstruction",
+        "Path tracing",
+    ] {
         assert!(harness.query_by_label(absent).is_none(), "{absent}");
     }
     click(&mut harness, "AMD FSR 3.1");
     let fix = harness.state().options.as_ref().unwrap().fixes[0];
     click(&mut harness, FIX_LABELS[0]);
     let music = harness.state().options.as_ref().unwrap().music;
-    harness.get_by_role_and_label(Role::Slider, "Music volume:").focus();
+    harness
+        .get_by_role_and_label(Role::Slider, "Music volume:")
+        .focus();
     harness.step();
     harness.key_press(egui::Key::ArrowLeft);
     harness.step();
-    click(&mut harness, "Skip the launcher while this installation is ready");
+    click(
+        &mut harness,
+        "Skip the launcher while this installation is ready",
+    );
     click(&mut harness, "Save");
     assert!(harness.state().options.is_none());
     let settings = saved_settings(&dir);
@@ -179,7 +191,10 @@ fn launcher_repairs_a_malformed_settings_file() {
     let dir = scratch("repair");
     let path = dir.join("settings.json");
     let assets = FrontendAssets::open(&data_root()).unwrap();
-    FrontendSettings::load_or_defaults(&path, &assets).unwrap().persist().unwrap();
+    FrontendSettings::load_or_defaults(&path, &assets)
+        .unwrap()
+        .persist()
+        .unwrap();
     let mut value: serde_json::Value = serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
     value["camera"] = serde_json::json!("remastered");
     fs::write(&path, serde_json::to_vec(&value).unwrap()).unwrap();
@@ -188,7 +203,10 @@ fn launcher_repairs_a_malformed_settings_file() {
     click(&mut harness, "Repair settings");
     settle(&mut harness);
     assert!(harness.state().can_play(), "{}", harness.state().details);
-    assert!(matches!(inf_game::frontend_settings::diagnose(&path, &assets), SettingsHealth::Fine));
+    assert!(matches!(
+        inf_game::frontend_settings::diagnose(&path, &assets),
+        SettingsHealth::Fine
+    ));
     assert!(path.exists());
 }
 
