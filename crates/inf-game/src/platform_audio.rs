@@ -1,6 +1,6 @@
 //! SDL playback for the recovered frontend music and H9 cue owners.
 //!
-//! Ogg files replace the CD transport, retaining disc track numbers and TMSF
+//! Ogg or WAV files replace the CD transport, retaining disc track numbers and TMSF
 //! positions. The frontend music owner still decides when to retry/loop. SDL
 //! mixing/resampling is an explicit portable backend policy, not a claim of
 //! sample-identical DirectSound output.
@@ -8,7 +8,7 @@
 use std::{
     collections::BTreeMap,
     fs::File,
-    io::BufReader,
+    io::{BufReader, Read},
     path::{Path, PathBuf},
     sync::Arc,
     time::{SystemTime, UNIX_EPOCH},
@@ -26,11 +26,12 @@ use crate::{
 };
 
 pub(crate) const OUTPUT_RATE: u32 = 44_100;
+pub mod cd_music;
 mod lifecycle;
 pub mod remastered_pak;
 pub mod reverb;
 // Original INDEX1 lengths; authority: the retail disc's track table.
-const TRACK_SECTORS: [u32; 8] = [9351, 18023, 20251, 18088, 19412, 16191, 16706, 9518];
+pub(crate) const TRACK_SECTORS: [u32; 8] = [9351, 18023, 20251, 18088, 19412, 16191, 16706, 9518];
 const SAMPLES_PER_SECTOR: usize = 588;
 
 #[derive(Debug, Error)]
@@ -42,7 +43,7 @@ pub enum PlatformAudioError {
         path: PathBuf,
         source: std::io::Error,
     },
-    #[error("cannot decode Ogg {path}: {reason}")]
+    #[error("cannot decode {path}: {reason}")]
     Decode { path: PathBuf, reason: String },
     #[error("audio track {track} must be 44,100 Hz stereo with {expected} frames, found {actual}")]
     TrackFormat {
@@ -1157,19 +1158,29 @@ impl PlatformAudio {
     /// Title-video sound from the AVI `01wb` audio: stereo 22050 Hz 16-bit
     /// interleaved frames, resampled to the mixer through the title voice.
     /// See `TitleAudioSink` for the session-facing contract.
-    fn track_path(&self, track: u32) -> Result<PathBuf, PlatformAudioError> {
+    /// The track's file: a valid OGG, else a valid WAV ([`cd_music`]); None
+    /// while neither is there.
+    fn track_file(&self, track: u32) -> Result<Option<PathBuf>, PlatformAudioError> {
         track_sectors(track)?;
-        Ok(crate::retail_path(
-            &self.directory,
-            format!("track{track:02}.ogg"),
-        ))
+        cd_music::music_track(&self.directory, track).map_err(|reason| PlatformAudioError::Decode {
+            path: self.directory.join(format!("track{track:02}")),
+            reason,
+        })
+    }
+
+    fn require_track_file(&self, track: u32) -> Result<PathBuf, PlatformAudioError> {
+        self.track_file(track)?
+            .ok_or_else(|| PlatformAudioError::Io {
+                path: self.directory.join(format!("track{track:02}.ogg")),
+                source: std::io::ErrorKind::NotFound.into(),
+            })
     }
 
     fn load_track(&mut self, track: u32) -> Result<Arc<[i16]>, PlatformAudioError> {
         if let Some(pcm) = self.tracks.get(&track) {
             return Ok(pcm.clone());
         }
-        let path = self.track_path(track)?;
+        let path = self.require_track_file(track)?;
         let pcm = decode_track(&path, track)?;
         self.tracks.insert(track, pcm.clone());
         Ok(pcm)
@@ -1644,20 +1655,15 @@ impl FrontendAudioBackend for PlatformAudio {
     }
     fn media_present(&mut self) -> Result<bool, Self::Error> {
         self.require_cd()?;
-        Ok((2..=9).all(|track| self.track_path(track).is_ok_and(|path| path.is_file())))
+        Ok((2..=9).all(|track| matches!(self.track_file(track), Ok(Some(_)))))
     }
     fn track_two_is_audio(&mut self) -> Result<bool, Self::Error> {
         self.require_cd()?;
-        let path = self.track_path(2)?;
         // A track file that was never ripped is not an audio track; the
         // caller folds this into "no media" and stays silent. A present
-        // but undecodable file stays an explicit backend failure.
-        if !path.is_file() {
-            return Ok(false);
-        }
-        let decoder = open_decoder(&path)?;
-        Ok(decoder.ident_hdr.audio_channels == 2
-            && decoder.ident_hdr.audio_sample_rate == OUTPUT_RATE)
+        // but undecodable file stays an explicit backend failure; a valid
+        // one is 44,100 Hz stereo.
+        Ok(self.track_file(2)?.is_some())
     }
     fn playback_mode(&mut self) -> Result<CdPlaybackMode, Self::Error> {
         self.require_cd()?;
@@ -1677,8 +1683,7 @@ impl FrontendAudioBackend for PlatformAudio {
     }
     fn track_length_msf(&mut self, track_word: u32) -> Result<u32, Self::Error> {
         self.require_cd()?;
-        let path = self.track_path(track_word)?;
-        File::open(&path).map_err(|source| PlatformAudioError::Io { path, source })?;
+        self.require_track_file(track_word)?;
         Ok(sectors_to_msf(track_sectors(track_word)?))
     }
     fn play_range(&mut self, range: CdPlayRange) -> Result<(), Self::Error> {
@@ -1752,8 +1757,14 @@ fn open_decoder(path: &Path) -> Result<OggStreamReader<BufReader<File>>, Platfor
         reason: e.to_string(),
     })
 }
-fn decode_track(path: &Path, track: u32) -> Result<Arc<[i16]>, PlatformAudioError> {
+pub(crate) fn decode_track(path: &Path, track: u32) -> Result<Arc<[i16]>, PlatformAudioError> {
     let expected = track_sectors(track)? as usize * SAMPLES_PER_SECTOR;
+    if path
+        .extension()
+        .is_some_and(|extension| extension.eq_ignore_ascii_case("wav"))
+    {
+        return decode_wav(path, track, expected);
+    }
     let mut decoder = open_decoder(path)?;
     if decoder.ident_hdr.audio_channels != 2 || decoder.ident_hdr.audio_sample_rate != OUTPUT_RATE {
         return Err(PlatformAudioError::TrackFormat {
@@ -1788,6 +1799,37 @@ fn decode_track(path: &Path, track: u32) -> Result<Arc<[i16]>, PlatformAudioErro
         });
     }
     Ok(pcm.into())
+}
+
+/// A WAV track holds exactly the disc track's frames, read whole as the OGG
+/// path decodes whole.
+fn decode_wav(path: &Path, track: u32, expected: usize) -> Result<Arc<[i16]>, PlatformAudioError> {
+    let decode = |reason: String| PlatformAudioError::Decode {
+        path: path.into(),
+        reason,
+    };
+    let (file, bytes) = cd_music::open_wav(path).map_err(decode)?;
+    if bytes != expected as u64 * 4 {
+        return Err(PlatformAudioError::TrackFormat {
+            track,
+            expected,
+            actual: (bytes / 4) as usize,
+        });
+    }
+    let mut raw = Vec::with_capacity(bytes as usize);
+    file.take(bytes)
+        .read_to_end(&mut raw)
+        .map_err(|source| PlatformAudioError::Io {
+            path: path.into(),
+            source,
+        })?;
+    if raw.len() as u64 != bytes {
+        return Err(decode("the WAVE data ends early".to_string()));
+    }
+    Ok(raw
+        .chunks_exact(2)
+        .map(|pair| i16::from_le_bytes([pair[0], pair[1]]))
+        .collect())
 }
 
 struct ResolvedCue {

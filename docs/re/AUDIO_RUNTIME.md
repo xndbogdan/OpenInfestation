@@ -17,7 +17,16 @@ Frontend helper `00487360` passes 7, selecting physical CD track 8: `004F68A0`
 uses the full word as the MCI track-length query's `dwTrack`, the saved TMSF as
 play-from, and the next track's low byte as play-to. The original disc-number
 mapping is separately recorded in the installed CD audio:
-physical track 8 is `cdaudio/track08.ogg`.
+physical track 8 is `cdaudio/track08.ogg`, or `track08.wav`.
+
+The port's tracks stand in for the disc ([`cd_music`](../../crates/inf-game/src/platform_audio/cd_music.rs)):
+each `cdaudio/trackNN` is an Ogg Vorbis file or a 44,100 Hz stereo 16-bit
+PCM WAV, holding exactly the disc track's frames, from its INDEX 1 to the
+next track's INDEX 1 (the table of contents MCI measures). A valid OGG wins
+over a WAV. The launcher's Extract music writes the WAVs straight from an
+image of the disc ([`disc_image`](../../crates/inf-game/src/disc_image.rs)),
+CloneCD or BIN/CUE, and refuses any track whose length differs from the
+retail disc's.
 
 The selection persists across frontend/world screens. Process globals
 `0065EE20/24/2C/30` own the shared CD transport. The Rust
@@ -48,12 +57,12 @@ required `FrontendAudioBackend`; its operations have no successful defaults.
 
 Absent-disc policy (portable transport behavior, verified against the
 an installed game's layout with no `cdaudio/`): a missing `cdaudio/`
-directory opens the transport with no media, and a missing `track02.ogg`
-probes as non-audio, so `004F68A0` takes its no-media exit and the
+directory opens the transport with no media, and a missing track 2
+(neither a valid `track02.ogg` nor `track02.wav`) probes as non-audio, so `004F68A0` takes its no-media exit and the
 frontend factory boots silent instead of failing. The selection, volume
 word and retry/deadline machinery survive for a later disc. A present
-but unreadable directory or undecodable track stays an explicit backend
-failure. The SDL playback device itself is still required.
+but unreadable directory, or a track 2 whose only files are not CD audio,
+stays an explicit backend failure. The SDL playback device itself is still required.
 
 The restart deadline comes from signed low-word CRT `time(0)` seconds at
 `00513260`, independently of scheduler microseconds. `004F68A0` queries the full

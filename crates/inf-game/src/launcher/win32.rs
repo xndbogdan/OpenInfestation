@@ -150,6 +150,34 @@ pub struct BitmapInfo {
     pub colors: [u32; 1],
 }
 
+/// `OPENFILENAMEW`, for Extract music's disc image.
+#[repr(C)]
+pub struct OpenFileName {
+    pub size: u32,
+    pub owner: Handle,
+    pub instance: Handle,
+    pub filter: *const u16,
+    pub custom_filter: *mut u16,
+    pub max_custom_filter: u32,
+    pub filter_index: u32,
+    pub file: *mut u16,
+    pub max_file: u32,
+    pub file_title: *mut u16,
+    pub max_file_title: u32,
+    pub initial_directory: *const u16,
+    pub title: *const u16,
+    pub flags: u32,
+    pub file_offset: u16,
+    pub file_extension: u16,
+    pub default_extension: *const u16,
+    pub custom_data: isize,
+    pub hook: *const c_void,
+    pub template_name: *const u16,
+    pub reserved: *mut c_void,
+    pub reserved_count: u32,
+    pub extended_flags: u32,
+}
+
 pub type BrowseCallback = unsafe extern "system" fn(Handle, u32, isize, isize) -> i32;
 
 #[repr(C)]
@@ -302,6 +330,12 @@ unsafe extern "system" {
     pub fn SHBrowseForFolderW(info: *mut BrowseInfo) -> *mut c_void;
     pub fn SHGetPathFromIDListEx(id: *const c_void, path: *mut u16, length: u32, flags: u32)
         -> i32;
+}
+
+#[link(name = "comdlg32")]
+unsafe extern "system" {
+    pub fn GetOpenFileNameW(file: *mut OpenFileName) -> i32;
+    pub fn CommDlgExtendedError() -> u32;
 }
 
 #[link(name = "ole32")]

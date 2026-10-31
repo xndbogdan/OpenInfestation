@@ -26,7 +26,8 @@ use crate::{retail_path, Installation, SceneContext};
 pub const RETAIL_EXECUTABLE_SHA256: &str =
     "bf09f66e3685d4990d95da13d4be1ca7e293fb31cddccc90bd575882921e4956";
 
-/// The CD player's music: `cdaudio/track02.ogg` through `track09.ogg`.
+/// The CD player's music: `cdaudio/track02` through `track09`, each an OGG
+/// or the WAV Extract music copies off the disc.
 pub const MUSIC_TRACKS: RangeInclusive<u32> = 2..=9;
 
 /// The overlay selectors a session can load: the display tiers 0..4 (the
@@ -158,7 +159,7 @@ pub struct InstallationReport {
     pub checksums_verified: bool,
     /// `Title.avi` and its transcoded `video/` frames open.
     pub title_video: bool,
-    /// The [`MUSIC_TRACKS`] present in `cdaudio/`.
+    /// The [`MUSIC_TRACKS`] in `cdaudio/` that the CD player can read.
     pub music_tracks: Vec<u32>,
     /// `Remastered.pak` beside the data or the executable (the port's own sounds, the final
     /// stretch's item 12): how many files it holds, why it could not be
@@ -186,6 +187,12 @@ impl InstallationReport {
                 .filter(|issue| issue.severity == IssueSeverity::Error)
                 .count()
                 == 1
+    }
+
+    /// Some music track is missing or unreadable: the launcher's Options
+    /// offer Extract music.
+    pub fn music_incomplete(&self) -> bool {
+        self.music_tracks.len() < MUSIC_TRACKS.count()
     }
 
     /// The launcher's summary: one fact per line, each issue's path on its
@@ -413,22 +420,31 @@ impl InstallationReport {
 
     fn check_music(&mut self) {
         let directory = retail_path(&self.root, "cdaudio");
-        let track = |number: u32| retail_path(&directory, format!("track{number:02}.ogg"));
-        self.music_tracks = MUSIC_TRACKS
-            .filter(|&number| track(number).is_file())
-            .collect();
+        let mut unreadable = Vec::new();
+        for number in MUSIC_TRACKS {
+            match crate::platform_audio::cd_music::music_track(&directory, number) {
+                Ok(Some(_)) => self.music_tracks.push(number),
+                Ok(None) => {}
+                Err(error) => unreadable.push(error),
+            }
+        }
+        let extract = " Options' Extract music copies it from the disc image.";
         // Without track02 the CD player finds no media and stays silent.
-        if !track(*MUSIC_TRACKS.start()).is_file() {
-            let message = "No music tracks. The game plays without music.".to_string();
-            self.issue(IssueSeverity::Warning, directory, message);
-        } else if self.music_tracks.len() < MUSIC_TRACKS.count() {
+        let mut message = if !self.music_tracks.contains(MUSIC_TRACKS.start()) {
+            format!("No music tracks. The game plays without music.{extract}")
+        } else if self.music_incomplete() {
             let missing: Vec<String> = MUSIC_TRACKS
                 .filter(|number| !self.music_tracks.contains(number))
-                .map(|number| format!("track{number:02}.ogg"))
+                .map(|number| format!("track{number:02}"))
                 .collect();
-            let message = format!("Missing music: {}.", missing.join(", "));
-            self.issue(IssueSeverity::Warning, directory, message);
+            format!("Missing music: {}.{extract}", missing.join(", "))
+        } else {
+            return;
+        };
+        for error in unreadable {
+            message.push_str(&format!("\nUnreadable: {error}."));
         }
+        self.issue(IssueSeverity::Warning, directory, message);
     }
 }
 

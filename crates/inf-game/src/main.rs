@@ -9,7 +9,7 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 use std::time::Duration;
 
-use clap::{Parser, ValueEnum};
+use clap::{Parser, Subcommand, ValueEnum};
 use inf_game::frontend_settings::FrontendSettings;
 use inf_game::launcher_setup::{
     default_preferences_path, discover_installation, holds_retail_data, validate_installation,
@@ -31,9 +31,26 @@ enum Mode {
     Resident,
 }
 
+#[derive(Debug, Subcommand)]
+enum Command {
+    /// Copy the CD music off a disc image (.ccd/.img or .cue/.bin) into
+    /// <DATA_ROOT>/cdaudio as lossless WAV, as the launcher's Options do.
+    ExtractMusic {
+        /// The image's .ccd or .cue, or the .img or .bin beside it.
+        #[arg(long)]
+        image: PathBuf,
+        /// The installation, holding PreLoad.dat and Overlay.
+        #[arg(long)]
+        data_root: PathBuf,
+    },
+}
+
 #[derive(Debug, Parser)]
 #[command(about = "Infestation port: frontend menu and resource inspection")]
 struct Args {
+    #[command(subcommand)]
+    command: Option<Command>,
+
     /// Directory containing the installed PreLoad.dat and Overlay directory.
     /// Without the flag, the executable's own directory wins when it holds
     /// retail data (double-click beside the installed game); then, for a
@@ -1120,10 +1137,31 @@ fn report_crash(desktop: bool, message: &str) {
     }
 }
 
+fn extract_music(image: &Path, data_root: &Path) -> ExitCode {
+    let extracted = inf_game::disc_image::DiscImage::open(image).and_then(|disc| {
+        disc.extract_music(data_root, |track| {
+            println!("Extracting track {track:02}...")
+        })
+    });
+    match extracted {
+        Ok(result) => {
+            println!("{}", result.summary());
+            ExitCode::SUCCESS
+        }
+        Err(error) => {
+            eprintln!("Extract music failed: {error}");
+            ExitCode::FAILURE
+        }
+    }
+}
+
 fn main() -> ExitCode {
     launcher::prepare_console();
     let mut raw: Vec<String> = std::env::args().collect();
     let mut args = Args::parse();
+    if let Some(Command::ExtractMusic { image, data_root }) = args.command.take() {
+        return extract_music(&image, &data_root);
+    }
     // Any failure from here on leaves a crash log (infest-crash-log-<time>.txt).
     inf_game::crash_log::install(crash_context(&args, &raw, None));
     inf_game::crash_log::set_notifier(launcher::show_error);

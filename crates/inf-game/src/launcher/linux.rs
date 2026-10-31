@@ -11,6 +11,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 use eframe::egui;
+use inf_game::disc_image::DiscImage;
 use inf_game::display_selection::{DisplayMode, DisplaySelection, MonitorModes};
 use inf_game::frontend_assets::FrontendAssets;
 use inf_game::frontend_settings::{repair, reset, FrontendSettings, SettingsHealth};
@@ -99,6 +100,13 @@ fn monitor_modes() -> MonitorModes {
     )
 }
 
+/// Extract music's worker: a progress line per track, then its summary or
+/// error.
+enum Extraction {
+    Progress(String),
+    Done(Result<String, String>),
+}
+
 struct Notice {
     title: String,
     text: String,
@@ -138,6 +146,7 @@ struct Launcher {
     details: String,
     progress: String,
     worker: Option<(Receiver<Result<InstallationReport, String>>, bool)>,
+    extraction: Option<Receiver<Extraction>>,
     notice: Option<Notice>,
     options: Option<Pending>,
     modes: MonitorModes,
@@ -173,6 +182,7 @@ impl Launcher {
             details: "Checking files...".to_string(),
             progress: String::new(),
             worker: None,
+            extraction: None,
             notice: None,
             options: None,
             modes,
@@ -192,7 +202,70 @@ impl Launcher {
     }
 
     fn busy(&self) -> bool {
-        self.worker.is_some()
+        self.worker.is_some() || self.extraction.is_some()
+    }
+
+    /// The game files are ready and some music track is missing.
+    fn can_extract_music(&self) -> bool {
+        self.can_play()
+            && self
+                .report
+                .as_ref()
+                .is_some_and(InstallationReport::music_incomplete)
+    }
+
+    /// Copies the music off a disc image the player picks into
+    /// `cdaudio/`, on a worker thread, then checks the files again.
+    fn extract_music(&mut self) {
+        let Some(image) = rfd::FileDialog::new()
+            .set_title("Select the Infestation disc image (CloneCD .ccd or BIN/CUE .cue)")
+            .add_filter("Disc images", &["ccd", "cue", "img", "bin"])
+            .pick_file()
+        else {
+            return;
+        };
+        let root = self.root.clone();
+        self.progress = "Reading the disc image...".to_string();
+        let (sender, receiver) = mpsc::channel();
+        thread::spawn(move || {
+            let extracted = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                DiscImage::open(&image).and_then(|disc| {
+                    disc.extract_music(&root, |track| {
+                        let line = format!("Extracting music track {track:02}...");
+                        let _ = sender.send(Extraction::Progress(line));
+                    })
+                })
+            }));
+            let result = match extracted {
+                Ok(result) => result.map(|done| done.summary()),
+                Err(_) => Err("Extracting the music stopped unexpectedly.".to_string()),
+            };
+            let _ = sender.send(Extraction::Done(result));
+        });
+        self.extraction = Some(receiver);
+    }
+
+    fn poll_extraction(&mut self) {
+        let Some(receiver) = &self.extraction else {
+            return;
+        };
+        let mut done = None;
+        while let Ok(event) = receiver.try_recv() {
+            match event {
+                Extraction::Progress(line) => self.progress = line,
+                Extraction::Done(result) => done = Some(result),
+            }
+        }
+        let Some(result) = done else {
+            return;
+        };
+        self.extraction = None;
+        self.progress.clear();
+        if !self.close_requested {
+            let text = result.unwrap_or_else(|error| error);
+            self.notice("Extract music", &text, false);
+        }
+        self.check_files(false);
     }
 
     fn can_play(&self) -> bool {
@@ -706,11 +779,21 @@ impl Launcher {
     fn options_buttons(&mut self, ui: &mut egui::Ui) {
         let busy = self.busy();
         let mut verify = false;
+        let mut extract = false;
         let mut close = None;
+        let missing = self
+            .report
+            .as_ref()
+            .is_some_and(|report| report.is_ready() && report.music_incomplete());
         ui.horizontal(|ui| {
             verify = ui
                 .add_enabled(!busy, egui::Button::new("Verify files"))
                 .clicked();
+            if missing {
+                extract = ui
+                    .add_enabled(!busy, egui::Button::new("Extract music..."))
+                    .clicked();
+            }
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if ui.button("Cancel").clicked() {
                     close = Some(false);
@@ -722,6 +805,8 @@ impl Launcher {
         });
         if verify {
             self.check_files(true);
+        } else if extract && self.can_extract_music() {
+            self.extract_music();
         }
         match close {
             Some(true) => self.save_options(),
@@ -833,6 +918,7 @@ impl Launcher {
     /// One frame of the window: eframe's update, and the click tests' step.
     fn frame(&mut self, ctx: &egui::Context) {
         self.poll_worker();
+        self.poll_extraction();
         if self
             .request
             .smoke_timeout

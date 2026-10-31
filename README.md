@@ -54,6 +54,19 @@ before Play turns on:
   without the tracks it plays with no music, as retail does with no CD in
   the drive.
 
+**Music from your CD.** Retail plays its music straight off the CD, so an
+installation has none. While tracks are missing, the launcher's Options
+offer **Extract music...**: pick an image of your disc, a CloneCD
+`Infestation.ccd` (with its `.img` beside it; the `.sub` isn't needed) or a
+BIN/CUE `.cue`, and it copies tracks 2 to 9 into `cdaudio/` as
+`track02.wav` to `track09.wav`: lossless 44.1 kHz stereo, the CD's own
+audio, about 300 MB. No encoder or other tool is needed. Each track must
+have the Infestation disc's exact length, so another disc's tracks are
+refused. The game plays `trackNN.ogg` as well (Ogg Vorbis at 44.1 kHz
+stereo, the full track); where both are there, a valid OGG wins and the
+extraction leaves it alone. From a shell:
+`OpenInfestation.exe extract-music --image D:\Discs\Infestation.ccd --data-root D:\Games\Infestation`.
+
 File-name case doesn't matter (`preload.dat` or `OVERLAY/` work too). A
 data file whose checksum no known release has only warns, since another
 build may play fine ([`retail-checksums.json`](crates/inf-game/src/retail-checksums.json)).

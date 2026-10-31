@@ -52,6 +52,7 @@ pub mod d3d_textured_shade_uv;
 pub mod d3d_textured_triangle;
 pub mod d3d_textured_uv;
 pub mod d3d_viewport;
+pub mod disc_image;
 pub mod display_selection;
 pub mod draw_queue;
 mod error;

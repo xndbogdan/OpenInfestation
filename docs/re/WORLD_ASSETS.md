@@ -153,7 +153,7 @@ must not replace these consumer contracts. Derived H13 class data and
 specialized/conditional H14 command payloads remain gameplay asset boundaries.
 
 Non-OVL source media is already present: `Title.avi` contains 640x480 IV50
-video, and cdaudio owns eight canonical Ogg tracks
+video, and cdaudio owns eight canonical Ogg (or extracted WAV) tracks
 with original CD track numbers. Codec/playback integration is distinct from
 recovering proprietary asset semantics. `Infestation.swg` is the shipped
 SideWinder controller profile; `Infest.sav` files are save/settings state,

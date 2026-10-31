@@ -324,26 +324,37 @@ fn music_needs_track_two_and_names_the_missing_tracks() {
     let root = scratch("music");
     let directory = root.join("cdaudio");
     fs::create_dir(&directory).unwrap();
-    fs::write(directory.join("track05.ogg"), []).unwrap();
+    let wav = crate::platform_audio::cd_music::wav_header(4);
+    let extract = " Options' Extract music copies it from the disc image.";
+    fs::write(directory.join("track05.wav"), [&wav[..], &[0; 4]].concat()).unwrap();
     let report = validate_installation(&root, &root.join("settings.json"));
     assert_eq!(report.music_tracks, [5]);
     assert_eq!(
         messages(&report, &directory),
         [(
             IssueSeverity::Warning,
-            "No music tracks. The game plays without music.".to_string()
+            format!("No music tracks. The game plays without music.{extract}")
         )]
     );
-    fs::write(directory.join("track02.ogg"), []).unwrap();
+    fs::copy(
+        data_root().join("cdaudio/track02.ogg"),
+        directory.join("track02.ogg"),
+    )
+    .unwrap();
+    // A file that is no CD audio is named, not counted.
+    fs::write(directory.join("track03.ogg"), []).unwrap();
     let report = validate_installation(&root, &root.join("settings.json"));
     assert_eq!(report.music_tracks, [2, 5]);
-    assert_eq!(
-        messages(&report, &directory),
-        [(
-            IssueSeverity::Warning,
-            "Missing music: track03.ogg, track04.ogg, track06.ogg, track07.ogg, track08.ogg, track09.ogg."
-                .to_string()
-        )]
+    assert!(report.music_incomplete());
+    let [(severity, message)] = &messages(&report, &directory)[..] else {
+        panic!("{:?}", report.issues);
+    };
+    assert_eq!(*severity, IssueSeverity::Warning);
+    assert!(
+        message.starts_with(&format!(
+            "Missing music: track03, track04, track06, track07, track08, track09.{extract}\nUnreadable: track03.ogg: "
+        )),
+        "{message}"
     );
     fs::remove_dir_all(root).unwrap();
 }
@@ -430,8 +441,9 @@ fn a_copy_named_in_another_case_is_ready() {
     }
     fs::write(root.join("title.avi"), b"NOT_AN_AVI").unwrap();
     fs::create_dir(root.join("CDAUDIO")).unwrap();
+    let wav = [&crate::platform_audio::cd_music::wav_header(4)[..], &[0; 4]].concat();
     for number in MUSIC_TRACKS {
-        fs::write(root.join(format!("CDAUDIO/TRACK{number:02}.OGG")), []).unwrap();
+        fs::write(root.join(format!("CDAUDIO/TRACK{number:02}.WAV")), &wav).unwrap();
     }
     assert!(holds_retail_data(&root));
     let report = validate_installation(&root, &root.join("settings.json"));

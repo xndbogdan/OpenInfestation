@@ -12,6 +12,7 @@ use std::sync::mpsc::{self, Receiver, Sender};
 use std::thread::{self, JoinHandle};
 use std::time::Instant;
 
+use inf_game::disc_image::DiscImage;
 use inf_game::display_selection::{DisplayMode, DisplaySelection, MonitorModes};
 use inf_game::frontend_assets::FrontendAssets;
 use inf_game::frontend_settings::{repair, reset, FrontendSettings, SettingsHealth};
@@ -94,6 +95,7 @@ const ID_VERIFY: usize = 105;
 const ID_SAVE: usize = 106;
 const ID_CANCEL: usize = 107;
 const ID_SETTINGS_FIX: usize = 108;
+const ID_EXTRACT: usize = 109;
 const ID_DISPLAY: usize = 201;
 const ID_RESOLUTION: usize = 202;
 const ID_RENDERER: usize = 203;
@@ -159,6 +161,8 @@ struct OptionControls {
     skip: Handle,
     progress: Handle,
     verify: Handle,
+    /// Extract music: shown while some music track is missing.
+    extract: Handle,
     save: Handle,
     cancel: Handle,
     /// The Vulkan group box, its note and its six row labels: hidden unless
@@ -203,6 +207,9 @@ enum WorkerEvent {
         show_result: bool,
     },
     Failure(String),
+    /// Extract music's progress line, then its summary or error.
+    Progress(String),
+    Extracted(Result<String, String>),
 }
 
 struct WindowState {
@@ -1002,6 +1009,7 @@ impl WindowState {
             ID_SETTINGS_FIX if !self.busy => self.fix_settings(),
             ID_CHANGE if !self.busy => self.choose_installation(),
             ID_VERIFY if !self.busy => self.check_files(true),
+            ID_EXTRACT if self.can_extract_music() => self.extract_music(),
             ID_SAVE if !self.busy => self.save_options(),
             ID_CANCEL => self.close_options(),
             id if (ID_FIXES..ID_FIXES + FIXES).contains(&id) => {
@@ -1059,6 +1067,15 @@ impl WindowState {
         }
     }
 
+    /// The game files are ready and some music track is missing.
+    fn can_extract_music(&self) -> bool {
+        self.can_play()
+            && self
+                .report
+                .as_ref()
+                .is_some_and(InstallationReport::music_incomplete)
+    }
+
     unsafe fn set_busy(&mut self, busy: bool) {
         self.busy = busy;
         let ready = self.can_play();
@@ -1071,6 +1088,47 @@ impl WindowState {
                 EnableWindow(control, i32::from(!busy));
             }
         }
+        let extract = self.option_controls.extract;
+        if extract != 0 {
+            let missing = self
+                .report
+                .as_ref()
+                .is_some_and(|report| report.is_ready() && report.music_incomplete());
+            ShowWindow(extract, if missing { SW_SHOW } else { SW_HIDE });
+            EnableWindow(extract, i32::from(!busy));
+        }
+    }
+
+    /// Copies the music off a disc image the player picks into
+    /// `cdaudio/`, on the worker thread, then checks the files again.
+    unsafe fn extract_music(&mut self) {
+        let image = match choose_image(self.dialog_owner()) {
+            Ok(Some(image)) => image,
+            Ok(None) => return,
+            Err(error) => {
+                notice(self.dialog_owner(), "Extract music", &error, MB_ICONERROR);
+                return;
+            }
+        };
+        let root = self.root.clone();
+        self.set_busy(true);
+        self.set_progress("Reading the disc image...");
+        let sender = self.sender.clone();
+        self.worker = Some(thread::spawn(move || {
+            let extracted = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                DiscImage::open(&image).and_then(|disc| {
+                    disc.extract_music(&root, |track| {
+                        let line = format!("Extracting music track {track:02}...");
+                        let _ = sender.send(WorkerEvent::Progress(line));
+                    })
+                })
+            }));
+            let result = match extracted {
+                Ok(result) => result.map(|done| done.summary()),
+                Err(_) => Err("Extracting the music stopped unexpectedly.".to_string()),
+            };
+            let _ = sender.send(WorkerEvent::Extracted(result));
+        }));
     }
 
     unsafe fn set_progress(&self, message: &str) {
@@ -1104,10 +1162,25 @@ impl WindowState {
 
     unsafe fn poll_worker(&mut self) {
         while let Ok(event) = self.receiver.try_recv() {
-            if let Some(worker) = self.worker.take() {
-                let _ = worker.join();
+            if !matches!(event, WorkerEvent::Progress(_)) {
+                if let Some(worker) = self.worker.take() {
+                    let _ = worker.join();
+                }
             }
             match event {
+                WorkerEvent::Progress(line) => self.set_progress(&line),
+                WorkerEvent::Extracted(result) => {
+                    self.set_busy(false);
+                    self.set_progress("");
+                    if !self.close_requested {
+                        let (text, flags) = match result {
+                            Ok(summary) => (summary, MB_ICONINFORMATION),
+                            Err(error) => (error, MB_ICONWARNING),
+                        };
+                        notice(self.dialog_owner(), "Extract music", &text, flags);
+                    }
+                    self.check_files(false);
+                }
                 WorkerEvent::Checked {
                     report,
                     show_result,
@@ -1467,6 +1540,7 @@ impl WindowState {
         );
         let progress = self.label(window, "", 16, 958, 528, 20);
         let verify = self.button(window, "&Verify files", ID_VERIFY, 12, 986, 160, 32);
+        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, 986, 120, 32);
         let save = self.button(window, "Save", ID_SAVE, 308, 986, 112, 32);
         let cancel = self.button(window, "Cancel", ID_CANCEL, 436, 986, 112, 32);
         self.option_controls = OptionControls {
@@ -1490,6 +1564,7 @@ impl WindowState {
             skip,
             progress,
             verify,
+            extract,
             save,
             cancel,
             vulkan_group,
@@ -1750,6 +1825,7 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
         (controls.skip_note, 34, 930),
         (controls.progress, 16, 958),
         (controls.verify, 12, 986),
+        (controls.extract, 180, 986),
         (controls.save, 308, 986),
         (controls.cancel, 436, 986),
     ] {
@@ -1938,6 +2014,43 @@ unsafe fn slider_position(control: Handle) -> u32 {
 
 unsafe fn checked(control: Handle) -> bool {
     SendMessageW(control, BM_GETCHECK, 0, 0) == 1
+}
+
+/// The disc image for Extract music: its `.ccd` or `.cue`, or the `.img` or
+/// `.bin` beside one.
+unsafe fn choose_image(owner: Handle) -> Result<Option<PathBuf>, String> {
+    let mut buffer = vec![0u16; 32768];
+    let filter: Vec<u16> =
+        "Disc images (*.ccd;*.cue;*.img;*.bin)\0*.ccd;*.cue;*.img;*.bin\0All files (*.*)\0*.*\0\0"
+            .encode_utf16()
+            .collect();
+    let title = wide("Select the Infestation disc image (CloneCD .ccd or BIN/CUE .cue)");
+    let mut request: OpenFileName = zeroed();
+    request.size = size_of::<OpenFileName>() as u32;
+    request.owner = owner;
+    request.filter = filter.as_ptr();
+    request.filter_index = 1;
+    request.file = buffer.as_mut_ptr();
+    request.max_file = buffer.len() as u32;
+    request.title = title.as_ptr();
+    // Explorer style; the file and path must exist; no read-only box; keep
+    // the working directory.
+    request.flags = 0x0008_180c;
+    let selected = GetOpenFileNameW(&mut request);
+    redraw_after_dialog(owner);
+    if selected != 0 {
+        let length = buffer
+            .iter()
+            .position(|&unit| unit == 0)
+            .unwrap_or(buffer.len());
+        return Ok(Some(PathBuf::from(OsString::from_wide(&buffer[..length]))));
+    }
+    match CommDlgExtendedError() {
+        0 => Ok(None),
+        error => Err(format!(
+            "The file chooser failed (Windows error {error:#x})."
+        )),
+    }
 }
 
 unsafe extern "system" fn browse_callback(
