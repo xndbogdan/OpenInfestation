@@ -58,12 +58,17 @@ void main() {
     float z = frame.near / max(1.0 - a_position.z, 1.0e-7);
     vec3 toward = native_direction(a_position.xy + 0.5);
     vec3 point = toward * (z / max(dot(toward, frame.forward), 1.0e-3));
+    // The point is only as exact as its TL corner, a pixel or so across at
+    // its distance: a corner on the ground (a crystal's foot) lay now above
+    // it, now below, and its face flashed lit and dark as the camera crept
+    // (2026-10-31). The ray starts a few pixels' worth up and out.
+    float lift = max(2.0, z * 0.01);
     float seen = 0.0;
     if (frame.sun_direction.y > 0.0) {
         rayQueryEXT query;
         rayQueryInitializeEXT(query, scene,
                               gl_RayFlagsTerminateOnFirstHitEXT | gl_RayFlagsOpaqueEXT, MASK_SOLID,
-                              point, 2.0, frame.sun_direction, 1.0e6);
+                              point + vec3(0.0, lift, 0.0), lift, frame.sun_direction, 1.0e6);
         rayQueryProceedEXT(query);
         seen = rayQueryGetIntersectionTypeEXT(query, true) == gl_RayQueryCommittedIntersectionNoneEXT
             ? 1.0
