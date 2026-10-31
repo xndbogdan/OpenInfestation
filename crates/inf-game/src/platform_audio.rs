@@ -706,7 +706,10 @@ impl AudioCallback for Mixer {
             }
             // Retail's music and title, before the ambience and the limiter.
             let music = [frame[0] - effects[0], frame[1] - effects[1]];
-            if self.ambience_volume > 0.0 && !self.ambience.is_empty() {
+            // The Brain's beds (music voices) play at Ambience 0 too.
+            if (self.ambience_volume > 0.0 || self.ambience.iter().any(|voice| voice.music))
+                && !self.ambience.is_empty()
+            {
                 // The bed dips under retail's loud effects (a blast near
                 // by), at once, and comes back over about 0.8 s.
                 let loud = effects[0].abs().max(effects[1].abs());

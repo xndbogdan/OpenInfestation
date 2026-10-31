@@ -1131,7 +1131,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 frontend.audio.remastered().is_some_and(|pak| {
                     crate::ambience::replaces_music(
                         world.mission.current_world_a0,
-                        frontend.settings.ambience(),
+                        frontend.settings.remastered_sound(),
                         crate::modern_tuning::current().atmosphere(),
                         |name| pak.contains(name),
                     )
@@ -1153,7 +1153,10 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
             platform.audio.set_under_water(under_water);
             platform.audio.hush_music(hushed);
             let inputs = crate::ambience::AmbienceInputs {
-                world: world.filter(|_| playing.is_some() && platform.settings.ambience() > 0),
+                // The Brain's beds are its music: they play at Ambience 0 too.
+                world: world.filter(|_| {
+                    playing.is_some() && (platform.settings.ambience() > 0 || brain.is_some())
+                }),
                 music: brain,
                 menu: playing == Some(true),
                 now: clock.last,

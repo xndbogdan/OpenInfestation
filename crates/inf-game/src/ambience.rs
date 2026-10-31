@@ -162,19 +162,20 @@ pub struct Ambience {
     pub wait: bool,
 }
 
-/// The rule for the Alien Brain's worlds (0 and 19): with the
-/// ambience playing (`ambience`, the Ambience in effect, above 0: Vulkan's)
-/// and the pak holding (`present`) a loop of the world's bed or the one
-/// beneath it, the beds play instead of the world's music (track 5).
+/// The rule for the Alien Brain's worlds (0 and 19): with the port's sound
+/// in play (`remastered`: Vulkan's, whatever the Ambience volume, since the
+/// beds are music at the Music volume) and the pak holding (`present`) a
+/// loop of the world's bed or the one beneath it, the beds play instead of
+/// the world's music (track 5).
 pub fn replaces_music(
     world: u32,
-    ambience: u8,
+    remastered: bool,
     atmosphere: &AtmosphereTuning,
     present: impl Fn(&str) -> bool,
 ) -> bool {
     let Some((_, bed)) = atmosphere
         .bed(world)
-        .filter(|_| ambience > 0 && matches!(world, 0 | 19))
+        .filter(|_| remastered && matches!(world, 0 | 19))
     else {
         return false;
     };
@@ -779,10 +780,10 @@ mod tests {
     }
 
     /// The Alien Brain's beds play instead of its music (0 and 19) with the
-    /// pak holding them and the Ambience up under Vulkan; without them, at
-    /// Ambience 0, under OpenGL or software (also standing in for a Vulkan
-    /// that failed to start), and on every other world, the music plays as
-    /// retail's.
+    /// pak holding them under Vulkan, the Ambience volume aside (they take
+    /// the Music volume); without them, under OpenGL or software (also
+    /// standing in for a Vulkan that failed to start), and on every other
+    /// world, the music plays as retail's.
     #[test]
     fn the_brains_beds_replace_its_music() {
         use crate::presentation::{RendererBackend, RendererChoice};
@@ -792,13 +793,13 @@ mod tests {
         let no_brain = |name: &str| !name.starts_with("beds/brain");
         for world in 0..=33 {
             let brain = matches!(world, 0 | 19);
-            assert_eq!(replaces_music(world, 10, atmosphere, all), brain);
-            assert!(!replaces_music(world, 10, atmosphere, no_brain));
-            assert!(!replaces_music(world, 0, atmosphere, all));
+            assert_eq!(replaces_music(world, true, atmosphere, all), brain);
+            assert!(!replaces_music(world, true, atmosphere, no_brain));
+            assert!(!replaces_music(world, false, atmosphere, all));
         }
         // The swirl beneath alone is the Brain's ambience too.
         let swirl = |name: &str| name == "beds/brain-swirl.ogg";
-        assert!(replaces_music(19, 1, atmosphere, swirl));
+        assert!(replaces_music(19, true, atmosphere, swirl));
         let manifest = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
         let assets =
             crate::frontend_assets::FrontendAssets::open(&manifest.join("../../retail")).unwrap();
@@ -809,8 +810,9 @@ mod tests {
         assert!(!path.exists());
         let mut settings =
             crate::frontend_settings::FrontendSettings::load_or_defaults(path, &assets).unwrap();
+        // Ambience 0: the Brain's beds are music, not the ambience.
         let mut modern = settings.modern();
-        modern.ambience = 10;
+        modern.ambience = 0;
         settings.set_modern(modern);
         // The renderer chosen, and the one running (none: the window not yet
         // open).
@@ -832,8 +834,8 @@ mod tests {
                 settings.set_running(backend);
             }
             for world in [0, 19] {
-                let ambience = settings.ambience();
-                assert_eq!(replaces_music(world, ambience, atmosphere, all), replaced);
+                let remastered = settings.remastered_sound();
+                assert_eq!(replaces_music(world, remastered, atmosphere, all), replaced);
             }
         }
     }

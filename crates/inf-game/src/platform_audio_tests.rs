@@ -1695,6 +1695,12 @@ fn a_music_ambience_voice_takes_the_music_volume() {
         (right - left * 0.5).abs() < 1.0e-4,
         "{right} against {left}"
     );
+    // At Ambience 0 the music voice plays on, as loud.
+    let [silent_bus, _] = level(true, 0.0, [1.0, 0.5], false);
+    assert!(
+        (silent_bus - left).abs() < 1.0e-4,
+        "{silent_bus} against {left}"
+    );
     // At the same volume, after a blast the ambience is dipped and the music
     // only held down by the limiter, as retail's CD music is.
     let [music_after, _] = level(true, 1.0, [1.0, 1.0], true);

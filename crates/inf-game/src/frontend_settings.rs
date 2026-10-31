@@ -1035,16 +1035,23 @@ impl FrontendSettings {
     /// retail's sound, also when they stand in
     /// for a Vulkan that failed to start.
     pub fn ambience(&self) -> u8 {
-        let running = self
-            .running
-            .is_none_or(|backend| backend == crate::presentation::RendererBackend::Vulkan);
-        if self.renderer == crate::presentation::RendererChoice::Vulkan && running {
+        if self.remastered_sound() {
             self.modern
                 .ambience
                 .min(crate::modern_settings::MOST_AMBIENCE)
         } else {
             0
         }
+    }
+
+    /// The port's sound is in play: Vulkan, as chosen and running (not
+    /// OpenGL or the software renderer, also standing in for a Vulkan that
+    /// failed to start), whatever the Ambience volume.
+    pub fn remastered_sound(&self) -> bool {
+        let running = self
+            .running
+            .is_none_or(|backend| backend == crate::presentation::RendererBackend::Vulkan);
+        self.renderer == crate::presentation::RendererChoice::Vulkan && running
     }
 
     /// 00463000 writes only Current Display immediately. Other live settings
