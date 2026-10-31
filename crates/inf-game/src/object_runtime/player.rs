@@ -663,8 +663,10 @@ impl ObjectArena {
     }
 
     /// Where the vehicles stand (16-bit world words) whose players thrust
-    /// them, for the tracer's trails: a boost
-    /// running, or Thrust held on the hovercraft, the VTOL or the skimmer.
+    /// them, for the tracer's trails and thruster lights: a boost running,
+    /// Thrust held on the hovercraft, the VTOL or the skimmer, or the
+    /// skimmer's power ahead from Climb (Up) or the stick, as its drive
+    /// takes them (00422574).
     /// It changes nothing, not even the handle lookup's cache.
     pub fn thrusting_vehicles(&self) -> Vec<[u16; 3]> {
         let Some(handles) = self.actor_handles() else {
@@ -677,8 +679,13 @@ impl ObjectArena {
                 let vehicle = handles.peek(player.handle_d4)?;
                 let actor = self.selector2_actor(vehicle).ok()?;
                 let boosting = actor.dwords_220_224[1] != 0;
-                let thrust =
-                    player.controls.thrust_1c > 0 && (3..=5).contains(&actor.dwords_1e8_1f4[0]);
+                let form = actor.dwords_1e8_1f4[0];
+                let controls = &player.controls;
+                let thrust = controls.thrust_1c > 0 && (3..=5).contains(&form)
+                    || form == 5
+                        && controls.thrust_1c == 0
+                        && (controls.pitch_18 < 0
+                            || controls.pitch_18 == 0 && controls.analog_forward());
                 (boosting || thrust)
                     .then(|| self.object(vehicle).ok()?.base.position_words)
                     .flatten()

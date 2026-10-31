@@ -490,6 +490,11 @@ pub(crate) fn capture_primitive<'a>(
     // byte towards the far colour; Near records are unfogged.
     let far = (request.dispatch == ModelDispatch::Far)
         .then(|| crate::d3d_effect::far_rgb(far_color, builder.material_shifts));
+    let glows_with_thrust = (surface == SceneSurface::Opaque
+        && matches!(face.material.domain, ModelMaterialDomain::Handler3Texture))
+    .then(|| thrust_glow(builder, request, face.material.global_id))
+    .flatten();
+    let first_triangle = builder.feed.triangles.len();
     // Each pass's corners first, so a primitive is taken whole or not at all.
     let passes: &[i16] = if face.mirror { &[1, 0] } else { &[0] };
     let mut polygons: tinyvec::ArrayVec<
@@ -669,6 +674,18 @@ pub(crate) fn capture_primitive<'a>(
             }
         }
         builder.face(corners, texture, surface, Some(model), light, cutout);
+    }
+    if let Some(glow) = glows_with_thrust {
+        let position = builder.world(request.transform.view_position);
+        builder
+            .feed
+            .thrust_glows
+            .push(crate::scene_feed::SceneThrustGlow {
+                triangles: first_triangle..builder.feed.triangles.len(),
+                position,
+                gain: glow.gain,
+                seconds: glow.seconds,
+            });
     }
     if additive_glow && !sunk {
         builder.glow_fed = true;
@@ -1250,6 +1267,33 @@ fn model_glow(
     crate::modern_tuning::current()
         .materials()
         .glow_of(&String::from_utf8_lossy(name), sprite)
+}
+
+/// How `request`'s model's faces in sprite `sprite` glow with its vehicle's
+/// thrust, if the tuning says they do (the skimmer's lights).
+fn thrust_glow(
+    builder: &mut SceneFeedBuilder<'_>,
+    request: &ModelPrimitiveRequest<'_>,
+    sprite: i16,
+) -> Option<crate::modern_tuning::ThrustGlow> {
+    let tuning = crate::modern_tuning::current();
+    let name = model_name(request)?;
+    // Most models have none: each model's answer is kept for the frame.
+    let has = *builder
+        .thrust_models
+        .entry(request.model.identity.global_index)
+        .or_insert_with(|| {
+            tuning
+                .materials()
+                .glows_with_thrust(&String::from_utf8_lossy(name))
+        });
+    if !has {
+        return None;
+    }
+    tuning
+        .materials()
+        .thrust_glow_of(&String::from_utf8_lossy(name), sprite)
+        .cloned()
 }
 
 /// The exhausts the tuning's trails name on `request`'s model, as drawn: each group of slots' middle, pushing away

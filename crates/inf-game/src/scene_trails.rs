@@ -217,9 +217,85 @@ fn between(from: [f64; 3], to: [f64; 3]) -> [f64; 3] {
     ]
 }
 
+/// The thruster lights' glow ([`crate::scene_feed::SceneThrustGlow`]), 0
+/// to 1, kept from frame to frame: up while a vehicle near the lit faces
+/// thrusts, down when it lets go, each way over the tuning's seconds.
+// shortcut: one level for every model's lights, the player's skimmer the
+// only one the tuning names; keep one per vehicle if others get lights.
+#[derive(Debug, Default)]
+pub struct ThrustGlow {
+    level: f32,
+    clock: Option<u64>,
+}
+
+impl ThrustGlow {
+    /// The glow at `clock` for `glows`, given where the thrusting vehicles
+    /// stand (both eye-relative).
+    pub fn update(
+        &mut self,
+        clock: u64,
+        glows: &[crate::scene_feed::SceneThrustGlow],
+        thrusts: &[[f32; 3]],
+    ) -> f32 {
+        let seconds = self
+            .clock
+            .filter(|&then| then <= clock && clock - then <= JUMP)
+            .map_or(0.0, |then| (clock - then) as f32 / 1.0e6);
+        self.clock = Some(clock);
+        let thrusting = glows.iter().any(|glow| {
+            thrusts.iter().any(|vehicle| {
+                (0..3)
+                    .map(|axis| (vehicle[axis] - glow.position[axis]).powi(2))
+                    .sum::<f32>()
+                    < VEHICLE_REACH * VEHICLE_REACH
+            })
+        });
+        let ease = glows.first().map_or(0.0, |glow| glow.seconds);
+        self.level = ease_toward(self.level, f32::from(u8::from(thrusting)), seconds, ease);
+        self.level
+    }
+}
+
+/// `level` moved toward `target` by `seconds` of an ease taking `ease`
+/// seconds end to end (none: at once).
+fn ease_toward(level: f32, target: f32, seconds: f32, ease: f32) -> f32 {
+    if ease <= 0.0 {
+        return target;
+    }
+    let step = seconds / ease;
+    if target > level {
+        (level + step).min(target)
+    } else {
+        (level - step).max(target)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The thruster lights rise while their vehicle thrusts and fade when
+    /// it lets go, each over the tuning's seconds; a vehicle far off, or a
+    /// jump in the clock, moves nothing.
+    #[test]
+    fn thruster_lights_ease_with_the_thrust() {
+        let glows = [crate::scene_feed::SceneThrustGlow {
+            triangles: 0..2,
+            position: [0.0, 0.0, 100.0],
+            gain: 2.0,
+            seconds: 0.3,
+        }];
+        let near = [[0.0, 0.0, 150.0]];
+        let mut glow = ThrustGlow::default();
+        assert_eq!(glow.update(0, &glows, &near), 0.0, "no time has passed");
+        assert!((glow.update(150_000, &glows, &near) - 0.5).abs() < 1.0e-5);
+        assert_eq!(glow.update(400_000, &glows, &near), 1.0);
+        assert_eq!(glow.update(400_000 + JUMP + 1, &glows, &[]), 1.0, "a load");
+        let far = [[0.0, 0.0, 100.0 + VEHICLE_REACH + 1.0]];
+        let at = 400_000 + JUMP + 1;
+        assert!((glow.update(at + 150_000, &glows, &far) - 0.5).abs() < 1.0e-5);
+        assert_eq!(glow.update(at + 400_000, &glows, &far), 0.0);
+    }
 
     const SMOKE: TrailLook = TrailLook {
         color: [0.8, 0.8, 0.8],

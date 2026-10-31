@@ -522,6 +522,8 @@ pub(super) struct Tracer {
     eruptions: crate::scene_spray::Eruptions,
     /// The thrusters' trails showing.
     trails: crate::scene_trails::Trails,
+    /// The thruster lights' glow.
+    thrust_glow: crate::scene_trails::ThrustGlow,
     /// The mist's cells by `parity` (each frame blends into the last's),
     /// and the mist gathered along the view.
     mist_cells: [Option<Image>; 2],
@@ -777,6 +779,7 @@ impl Tracer {
             texture_energy: HashMap::new(),
             eruptions: Default::default(),
             trails: Default::default(),
+            thrust_glow: Default::default(),
             mist_cells: [None, None],
             mist_gathered: None,
             mist_ran: false,
@@ -2878,14 +2881,47 @@ impl State {
             .step(feed.clock_micros, &roots, &feed.shots, thermal);
         // The faces retail drew unlit, as lights the path pass samples
         // (emissive.rs), and each triangle's place among them.
+        // The thruster lights while their vehicle thrusts: faces lit as
+        // retail drew them that glow, as its unlit faces do, up to their gain.
+        let thrust =
+            tracer
+                .thrust_glow
+                .update(feed.clock_micros, &feed.thrust_glows, &feed.thrusts);
+        let thrust_gains: HashMap<[u32; 3], f32> = if thrust > 0.02 {
+            feed.thrust_glows
+                .iter()
+                .flat_map(|glow| {
+                    let gain = 1.0 + (glow.gain - 1.0) * thrust;
+                    feed.triangles[glow.triangles.clone()]
+                        .iter()
+                        .map(move |triangle| (triangle.vertices, gain))
+                })
+                .collect()
+        } else {
+            HashMap::new()
+        };
+        let lit_as_glowing: Vec<crate::scene_feed::SceneTriangle> = ordered()
+            .map(|triangle| {
+                let mut triangle = *triangle;
+                if thrust_gains.contains_key(&triangle.vertices) {
+                    triangle.surface = SceneSurface::Emissive;
+                }
+                triangle
+            })
+            .collect();
         let emissive = super::emissive::emissive_list(
-            ordered(),
+            &lit_as_glowing,
             &feed.vertices,
             |triangle| {
-                triangle
-                    .model
-                    .and_then(|model| model_looks.get(&model))
-                    .map_or(1.0, |look| look.emission)
+                thrust_gains
+                    .get(&triangle.vertices)
+                    .copied()
+                    .unwrap_or_else(|| {
+                        triangle
+                            .model
+                            .and_then(|model| model_looks.get(&model))
+                            .map_or(1.0, |look| look.emission)
+                    })
             },
             |triangle| {
                 triangle
@@ -2901,6 +2937,7 @@ impl State {
                     .and_then(|index| slots.get(index as usize).copied())
                     .unwrap_or(NO_TEXTURE);
                 let surface = match triangle.surface {
+                    SceneSurface::Opaque if thrust_gains.contains_key(&triangle.vertices) => 2,
                     SceneSurface::Opaque => 0,
                     SceneSurface::Water => 1,
                     SceneSurface::Emissive | SceneSurface::Shown => 2,

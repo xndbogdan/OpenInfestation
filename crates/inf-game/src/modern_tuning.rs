@@ -919,6 +919,24 @@ pub struct MaterialTuning {
     /// default, every emitter as retail drew it.
     #[serde(default)]
     pub emitters: Vec<(String, f32)>,
+    /// Model names whose faces in `sprites` glow while their vehicle thrusts
+    /// ([`crate::object_runtime::ObjectArena::thrusting_vehicles`]), easing
+    /// up to `gain` times their texture over `seconds`, and down again as
+    /// it lets go: the skimmer's thruster lights (2026-10-31: the user's
+    /// wish; retail drew them lit, glowing only through the morph).
+    #[serde(default)]
+    pub thrust_glows: Vec<ThrustGlow>,
+}
+
+/// A model's faces that glow with its vehicle's thrust
+/// ([`MaterialTuning::thrust_glows`]).
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct ThrustGlow {
+    pub name: String,
+    pub sprites: Vec<i16>,
+    pub gain: f32,
+    pub seconds: f32,
 }
 
 /// A gate's redrawn lightning: its model's name (`*` as in `names`), the
@@ -996,6 +1014,21 @@ impl Material {
 }
 
 impl MaterialTuning {
+    /// Whether any faces of the model named `name` glow with its thrust.
+    pub fn glows_with_thrust(&self, name: &str) -> bool {
+        self.thrust_glows
+            .iter()
+            .any(|glow| glob(glow.name.as_bytes(), name.as_bytes()))
+    }
+
+    /// How the faces of the model named `name` in sprite `sprite` glow with
+    /// its vehicle's thrust, if they do.
+    pub fn thrust_glow_of(&self, name: &str, sprite: i16) -> Option<&ThrustGlow> {
+        self.thrust_glows.iter().find(|glow| {
+            glob(glow.name.as_bytes(), name.as_bytes()) && glow.sprites.contains(&sprite)
+        })
+    }
+
     /// The light the model named `name` gives from its parts in sprite
     /// `sprite`, if they glow.
     pub fn glow_of(&self, name: &str, sprite: i16) -> Option<Glow> {

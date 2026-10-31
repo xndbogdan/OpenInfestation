@@ -355,6 +355,18 @@ pub struct SceneExhaust {
     pub look: u8,
 }
 
+/// A model's faces that glow while its vehicle thrusts
+/// ([`crate::modern_tuning::MaterialTuning::thrust_glows`]): its triangles
+/// in [`SceneFeed::triangles`], where the model stands (eye-relative), and
+/// the glow's gain and easing seconds.
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct SceneThrustGlow {
+    pub triangles: std::ops::Range<usize>,
+    pub position: [f32; 3],
+    pub gain: f32,
+    pub seconds: f32,
+}
+
 /// A blended sprite the raster adds over the traced world (a particle's,
 /// a bolt's streak, a beam segment, a model's effect billboard), for
 /// mirrored effects: where it starts or sits (eye-relative), its span to its
@@ -638,6 +650,8 @@ pub struct SceneFeed {
     /// their exhausts leave trails ([`crate::scene_trails`]).
     pub exhausts: Vec<SceneExhaust>,
     pub thrusts: Vec<[f32; 3]>,
+    /// The faces that glow while their vehicle thrusts.
+    pub thrust_glows: Vec<SceneThrustGlow>,
     /// The player's craft the camera follows (eye-relative), which the
     /// clouds keep in sight; none in first person, while the player steers
     /// the Cranial Implanter's missile, and without a world.
@@ -697,6 +711,7 @@ impl SceneFeed {
         self.lamps.clear();
         self.exhausts.clear();
         self.thrusts.clear();
+        self.thrust_glows.clear();
         self.clip = None;
     }
 
@@ -838,6 +853,9 @@ pub struct SceneFeedBuilder<'r> {
     /// Each model this frame by its global index: whether the tuning gives
     /// it exhausts ([`crate::scene_capture`]'s `trail_exhausts`).
     pub(crate) exhaust_models: crate::fast_hash::FastMap<u16, bool>,
+    /// Each model this frame by its global index: whether the tuning gives
+    /// it faces that glow with its thrust (`scene_capture`'s `thrust_glow`).
+    pub(crate) thrust_models: crate::fast_hash::FastMap<u16, bool>,
     /// A round part's split corners, kept from draw to draw.
     pub(crate) split_corners: Vec<SceneVertex>,
     /// The models drawing now are for the tracer alone, outside the view
@@ -952,6 +970,7 @@ impl<'r> SceneFeedBuilder<'r> {
             target_height: 0.0,
             round_parts: Default::default(),
             exhaust_models: Default::default(),
+            thrust_models: Default::default(),
             split_corners: Vec::new(),
             tread_profiles: Default::default(),
             culled: false,
