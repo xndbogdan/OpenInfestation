@@ -693,6 +693,25 @@ impl ObjectArena {
             .collect()
     }
 
+    /// Where each player's vehicle stands (16-bit world words) and its
+    /// engine load (+55C, the drive's power times its grip less its gear,
+    /// which the engine's sound follows), for the thruster lights. It
+    /// changes nothing.
+    pub fn engine_loads(&self) -> Vec<([u16; 3], i32)> {
+        let Some(handles) = self.actor_handles() else {
+            return Vec::new();
+        };
+        self.players
+            .list
+            .iter()
+            .filter_map(|player| {
+                let vehicle = handles.peek(player.handle_d4)?;
+                let load = self.selector2_actor(vehicle).ok()?.drive.dword_55c? as i32;
+                Some((self.object(vehicle).ok()?.base.position_words?, load))
+            })
+            .collect()
+    }
+
     /// The first player's vehicle and controls, for the remastered camera.
     /// Like [`Self::thrusting_vehicles`], it changes nothing.
     pub fn first_player_drive(&self) -> Option<(ObjectId, super::PlayerControlBlock)> {

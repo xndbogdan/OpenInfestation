@@ -357,14 +357,15 @@ pub struct SceneExhaust {
 
 /// A model's faces that glow while its vehicle thrusts
 /// ([`crate::modern_tuning::MaterialTuning::thrust_glows`]): its triangles
-/// in [`SceneFeed::triangles`], where the model stands (eye-relative), and
-/// the glow's gain and easing seconds.
+/// in [`SceneFeed::triangles`], where the model stands (eye-relative), the
+/// glow's gain, its easing seconds and the engine load it glows fully at.
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct SceneThrustGlow {
     pub triangles: std::ops::Range<usize>,
     pub position: [f32; 3],
     pub gain: f32,
     pub seconds: f32,
+    pub load: f32,
 }
 
 /// A blended sprite the raster adds over the traced world (a particle's,
@@ -652,6 +653,9 @@ pub struct SceneFeed {
     pub thrusts: Vec<[f32; 3]>,
     /// The faces that glow while their vehicle thrusts.
     pub thrust_glows: Vec<SceneThrustGlow>,
+    /// Where the players' vehicles stand (eye-relative) and their engine
+    /// loads ([`crate::object_runtime::ObjectArena::engine_loads`]).
+    pub engine_loads: Vec<([f32; 3], f32)>,
     /// The player's craft the camera follows (eye-relative), which the
     /// clouds keep in sight; none in first person, while the player steers
     /// the Cranial Implanter's missile, and without a world.
@@ -712,6 +716,7 @@ impl SceneFeed {
         self.exhausts.clear();
         self.thrusts.clear();
         self.thrust_glows.clear();
+        self.engine_loads.clear();
         self.clip = None;
     }
 

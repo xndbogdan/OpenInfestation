@@ -685,6 +685,7 @@ pub(crate) fn capture_primitive<'a>(
                 position,
                 gain: glow.gain,
                 seconds: glow.seconds,
+                load: glow.load,
             });
     }
     if additive_glow && !sunk {

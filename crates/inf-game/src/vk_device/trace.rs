@@ -2886,7 +2886,7 @@ impl State {
         let thrust =
             tracer
                 .thrust_glow
-                .update(feed.clock_micros, &feed.thrust_glows, &feed.thrusts);
+                .update(feed.clock_micros, &feed.thrust_glows, &feed.engine_loads);
         let thrust_gains: HashMap<[u32; 3], f32> = if thrust > 0.02 {
             feed.thrust_glows
                 .iter()

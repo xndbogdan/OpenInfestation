@@ -1700,8 +1700,20 @@ fn draw_world_pass<'r>(
             light.water_hue = Some(host.backend.water_colour().unwrap_or(WATER_HUE));
             host.backend.pixels.frame.raster_lamps(light);
         }
-        // The vehicles thrusting, whose exhausts leave trails.
+        // The vehicles thrusting, whose exhausts leave trails, and their
+        // engines' loads, which their thruster lights follow.
         if let Some(builder) = host.backend.scene_feed_mut() {
+            builder.feed.engine_loads = world
+                .arena
+                .engine_loads()
+                .into_iter()
+                .map(|(words, load)| {
+                    let at = std::array::from_fn(|c| {
+                        f32::from(i32::from(words[c]).wrapping_sub(view.eye[c]) as i16)
+                    });
+                    (at, load as f32)
+                })
+                .collect();
             builder.feed.thrusts = world
                 .arena
                 .thrusting_vehicles()

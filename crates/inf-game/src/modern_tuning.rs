@@ -919,11 +919,13 @@ pub struct MaterialTuning {
     /// default, every emitter as retail drew it.
     #[serde(default)]
     pub emitters: Vec<(String, f32)>,
-    /// Model names whose faces in `sprites` glow while their vehicle thrusts
-    /// ([`crate::object_runtime::ObjectArena::thrusting_vehicles`]), easing
-    /// up to `gain` times their texture over `seconds`, and down again as
-    /// it lets go: the skimmer's thruster lights (2026-10-31: the user's
-    /// wish; retail drew them lit, glowing only through the morph).
+    /// Model names whose faces in `sprites` glow with their vehicle's
+    /// engine load ([`crate::object_runtime::ObjectArena::engine_loads`]),
+    /// the throttle that bites: up to `gain` times their texture at `load`
+    /// or more, none at none, easing over `seconds`. The skimmer's thruster
+    /// lights (2026-10-31: the user's wish; retail drew them lit, glowing
+    /// only through the morph); in the air, where its thrust finds less
+    /// grip, they dim as its engine's load drops.
     #[serde(default)]
     pub thrust_glows: Vec<ThrustGlow>,
 }
@@ -937,6 +939,7 @@ pub struct ThrustGlow {
     pub sprites: Vec<i16>,
     pub gain: f32,
     pub seconds: f32,
+    pub load: f32,
 }
 
 /// A gate's redrawn lightning: its model's name (`*` as in `names`), the
