@@ -789,11 +789,9 @@ impl Launcher {
             verify = ui
                 .add_enabled(!busy, egui::Button::new("Verify files"))
                 .clicked();
-            if missing {
-                extract = ui
-                    .add_enabled(!busy, egui::Button::new("Extract music..."))
-                    .clicked();
-            }
+            extract = ui
+                .add_enabled(!busy && missing, egui::Button::new("Extract music..."))
+                .clicked();
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if ui.button("Cancel").clicked() {
                     close = Some(false);

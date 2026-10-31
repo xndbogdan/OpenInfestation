@@ -161,7 +161,8 @@ struct OptionControls {
     skip: Handle,
     progress: Handle,
     verify: Handle,
-    /// Extract music: shown while some music track is missing.
+    /// Extract music: always shown, as OpenV2K's; enabled while some music
+    /// track is missing.
     extract: Handle,
     save: Handle,
     cancel: Handle,
@@ -1088,14 +1089,11 @@ impl WindowState {
                 EnableWindow(control, i32::from(!busy));
             }
         }
-        let extract = self.option_controls.extract;
-        if extract != 0 {
-            let missing = self
-                .report
-                .as_ref()
-                .is_some_and(|report| report.is_ready() && report.music_incomplete());
-            ShowWindow(extract, if missing { SW_SHOW } else { SW_HIDE });
-            EnableWindow(extract, i32::from(!busy));
+        if self.option_controls.extract != 0 {
+            EnableWindow(
+                self.option_controls.extract,
+                i32::from(self.can_extract_music()),
+            );
         }
     }
 
