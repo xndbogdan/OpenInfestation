@@ -1419,6 +1419,24 @@ unsafe fn blit_pipeline(core: &Core, depth: bool) -> Result<vk::Pipeline, VkDevi
 /// How much farther a covered blended face is laid ([`VkFrame::draw_covered`]).
 const COVERED_DEPTH: f32 = 1.0015;
 
+/// How much a flat polygon's depth changes over one screen pixel, across
+/// and down together (its first three corners' plane); none when they
+/// stand in a line.
+fn depth_slope(corners: &[DeviceVertex]) -> f32 {
+    let [Some(a), Some(b), Some(c)] = [0, 1, 2].map(|index| corners.get(index)) else {
+        return 0.0;
+    };
+    let from_a = |corner: &DeviceVertex| -> [f32; 3] {
+        std::array::from_fn(|axis| corner.position[axis] - a.position[axis])
+    };
+    let ([x1, y1, d1], [x2, y2, d2]) = (from_a(b), from_a(c));
+    let area = x1 * y2 - x2 * y1;
+    if area.abs() < 1.0e-6 {
+        return 0.0;
+    }
+    ((d1 * y2 - d2 * y1) / area).abs() + ((x1 * d2 - x2 * d1) / area).abs()
+}
+
 fn blend_factors(blend: D3dTextureBlend) -> Option<(vk::BlendFactor, vk::BlendFactor)> {
     match blend {
         D3dTextureBlend::Copy => None,
@@ -2806,10 +2824,19 @@ impl VkFrame {
         // Behind the face that covers it (the traced depth lies a
         // thousandth back, `raster_depth`) and before the face under that
         // one's keyed texels (a thousandth further, `settle_faces`): the
-        // hangar's green glass shows through its windows alone.
+        // hangar's green glass shows through its windows alone. Also a
+        // pixel's worth of its slope back: the traced depth is sampled up to
+        // a pixel off (jittered, or at the render size), which across a wall
+        // seen aslant is more than the thousandths (2026-10-31: the glass
+        // flickered over the wall, a triangle at a time).
         if self.draw_covered {
+            // At most half a hundredth back, before the face under (a
+            // hundredth back, settle_faces).
+            let slope = depth_slope(&corners);
             for corner in &mut corners {
-                corner.position[2] = 1.0 - (1.0 - corner.position[2]) / COVERED_DEPTH;
+                let near = 1.0 - corner.position[2];
+                corner.position[2] =
+                    (1.0 - near / COVERED_DEPTH + slope.min(near * 0.005)).min(1.0);
             }
         }
         if self.device.state.borrow().thermal_effects {
@@ -4030,9 +4057,40 @@ impl Drop for VkFrame {
 #[cfg(test)]
 mod tests {
     use super::{
-        downsampled, ground_corner, holds_for_water, supersampled, D3dTextureBlend, D3dTlVertex,
-        DeviceVertex, PipelineKey,
+        depth_slope, downsampled, ground_corner, holds_for_water, supersampled, D3dTextureBlend,
+        D3dTlVertex, DeviceVertex, PipelineKey,
     };
+
+    /// A polygon's depth change over a pixel, across and down together:
+    /// none for one facing the screen or standing in a line.
+    #[test]
+    fn depth_slope_is_a_pixels_change() {
+        let corner = |x: f32, y: f32, depth: f32| DeviceVertex {
+            position: [x, y, depth],
+            texture: [0.0; 3],
+            diffuse: [0; 4],
+            fog: [0; 4],
+        };
+        let aslant = [
+            corner(0.0, 0.0, 0.5),
+            corner(10.0, 0.0, 0.6),
+            corner(0.0, 10.0, 0.45),
+        ];
+        assert!((depth_slope(&aslant) - 0.015).abs() < 1.0e-6);
+        let facing = [
+            corner(0.0, 0.0, 0.5),
+            corner(9.0, 1.0, 0.5),
+            corner(2.0, 7.0, 0.5),
+        ];
+        assert_eq!(depth_slope(&facing), 0.0);
+        let line = [
+            corner(0.0, 0.0, 0.5),
+            corner(1.0, 1.0, 0.6),
+            corner(2.0, 2.0, 0.7),
+        ];
+        assert_eq!(depth_slope(&line), 0.0);
+        assert_eq!(depth_slope(&aslant[..2]), 0.0);
+    }
 
     /// The ground's corners carry the fog the ground took: a textured
     /// corner its own, a colored quad's the colour it mixed in and its

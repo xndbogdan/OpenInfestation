@@ -230,12 +230,6 @@ pub(crate) fn retail_face(request: &ModelPrimitiveRequest<'_>) -> Option<Face> {
     })
 }
 
-/// Copy `request`'s faces into `builder`. True when the primitive is the
-/// scene's: its faces went to the tracer, or deliberately to nobody (opcode
-/// 2C's ground shadows), so in modern mode the raster leaves it. A
-/// primitive the tap cannot place whole (a corner without a view point, a
-/// missing texture) stays the raster's. The backdrop stays the raster's
-/// too, and the feed keeps a copy as the sky reflections see.
 /// A blended face the raster keeps over the traced world: its corners join
 /// the feed's faces, so a traced face the raster drew after it over the
 /// same corners covers it ([`SceneFeedBuilder::raster_face`]).
@@ -262,6 +256,12 @@ fn note_raster_face(
     }
 }
 
+/// Copy `request`'s faces into `builder`. True when the primitive is the
+/// scene's: its faces went to the tracer, or deliberately to nobody (opcode
+/// 2C's ground shadows), so in modern mode the raster leaves it. A
+/// primitive the tap cannot place whole (a corner without a view point, a
+/// missing texture) stays the raster's. The backdrop stays the raster's
+/// too, and the feed keeps a copy as the sky reflections see.
 pub(crate) fn capture_primitive<'a>(
     builder: &mut SceneFeedBuilder<'a>,
     resources: &RenderResources<'a>,

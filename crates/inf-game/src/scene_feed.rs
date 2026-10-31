@@ -1443,6 +1443,7 @@ impl<'r> SceneFeedBuilder<'r> {
                 continue;
             };
             // The raster's blended faces the winner was drawn after.
+            let covering = self.covered.len();
             for place in chain_of(chain.first) {
                 if let (true, Some((_, order))) = (list[place].raster_only, list[place].drawn) {
                     if list[winner].drawn_after(&list[place]) {
@@ -1452,7 +1453,10 @@ impl<'r> SceneFeedBuilder<'r> {
             }
             // A masked winner shows the face drawn under it through its keyed
             // texels (the hangar's windows): the last opaque one stays, a
-            // thousandth farther from the eye so rays never tie the two.
+            // thousandth farther from the eye so rays never tie the two, or a
+            // hundredth when a blend it covers lies between them (the device
+            // lays that up to about half a hundredth back, vk_device's
+            // COVERED_DEPTH and its slope).
             let cutout = |place: usize| self.feed.triangles[list[place].triangles.start].cutout;
             let under = (!list[winner].triangles.is_empty() && cutout(winner))
                 .then(|| {
@@ -1470,6 +1474,11 @@ impl<'r> SceneFeedBuilder<'r> {
                 })
                 .flatten();
             if let Some(under) = under {
+                let push = if self.covered.len() > covering {
+                    1.01
+                } else {
+                    1.001
+                };
                 let mut pushed: Vec<u32> = self.feed.triangles[list[under].triangles.clone()]
                     .iter()
                     .flat_map(|triangle| triangle.vertices)
@@ -1478,7 +1487,7 @@ impl<'r> SceneFeedBuilder<'r> {
                 pushed.dedup();
                 for index in pushed {
                     let vertex = &mut self.feed.vertices[index as usize];
-                    vertex.position = vertex.position.map(|c| c * 1.001);
+                    vertex.position = vertex.position.map(|c| c * push);
                 }
             }
             for place in chain_of(chain.first) {
