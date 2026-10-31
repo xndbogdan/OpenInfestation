@@ -54,6 +54,18 @@ before Play turns on:
   without the tracks it plays with no music, as retail does with no CD in
   the drive.
 
+**Installing from your CD.** No installation yet? While game files are
+missing, the launcher offers **Install from disc image...** in place of
+Play: pick an image of your disc (a CloneCD `Infestation.ccd` with its
+`.img`, a BIN/CUE `.cue`, or an `.iso`), then a folder, and it copies
+`Infest.exe`, `PreLoad.dat`, `Title.avi` and `Overlay/` off the disc's data
+track, then the music as below. Retail's own installer is never run. The
+copy is checked against the disc and by the launcher's own file check
+before anything in the folder changes; files it replaces are kept in
+`infestation-backups/`. The launcher then opens that folder and remembers
+it. An `.iso` holds no music. From a shell:
+`OpenInfestation.exe install --image D:\Discs\Infestation.ccd --destination D:\Games\Infestation`.
+
 **Music from your CD.** Retail plays its music straight off the CD, so an
 installation has none. While tracks are missing, the launcher's Options
 offer **Extract music...**: pick an image of your disc, a CloneCD
@@ -76,6 +88,8 @@ build may play fine ([`retail-checksums.json`](crates/inf-game/src/retail-checks
 1. Extract the zip.
 2. Run `OpenInfestation.exe`. Place it beside the installed game, or press
    Change in the launcher and pick the installation; it is remembered.
+   Without one, press **Install from disc image...** and pick your disc's
+   image.
 3. Press Play.
 
 Releases are unsigned, so Windows SmartScreen may warn on first launch.

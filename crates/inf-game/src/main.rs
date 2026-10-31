@@ -43,6 +43,17 @@ enum Command {
         #[arg(long)]
         data_root: PathBuf,
     },
+    /// Install the game files (Infest.exe, PreLoad.dat, Title.avi, Overlay)
+    /// and the music off a disc image (.ccd/.img, .cue/.bin or .iso) into
+    /// DESTINATION, as the launcher's Install from disc image does.
+    Install {
+        /// The image's .ccd, .cue or .iso, or the .img or .bin beside one.
+        #[arg(long)]
+        image: PathBuf,
+        /// The folder to install to; made if missing.
+        #[arg(long)]
+        destination: PathBuf,
+    },
 }
 
 #[derive(Debug, Parser)]
@@ -1137,6 +1148,24 @@ fn report_crash(desktop: bool, message: &str) {
     }
 }
 
+fn install(image: &Path, destination: &Path) -> ExitCode {
+    let installed = inf_game::disc_image::DiscImage::open(image).and_then(|disc| {
+        disc.install(destination, &FrontendSettings::default_path(), |line| {
+            println!("{line}")
+        })
+    });
+    match installed {
+        Ok(result) => {
+            println!("{}\n\n{}", result.summary(), result.report.description());
+            ExitCode::SUCCESS
+        }
+        Err(error) => {
+            eprintln!("Install failed: {error}");
+            ExitCode::FAILURE
+        }
+    }
+}
+
 fn extract_music(image: &Path, data_root: &Path) -> ExitCode {
     let extracted = inf_game::disc_image::DiscImage::open(image).and_then(|disc| {
         disc.extract_music(data_root, |track| {
@@ -1159,8 +1188,12 @@ fn main() -> ExitCode {
     launcher::prepare_console();
     let mut raw: Vec<String> = std::env::args().collect();
     let mut args = Args::parse();
-    if let Some(Command::ExtractMusic { image, data_root }) = args.command.take() {
-        return extract_music(&image, &data_root);
+    match args.command.take() {
+        Some(Command::ExtractMusic { image, data_root }) => {
+            return extract_music(&image, &data_root)
+        }
+        Some(Command::Install { image, destination }) => return install(&image, &destination),
+        None => {}
     }
     // Any failure from here on leaves a crash log (infest-crash-log-<time>.txt).
     inf_game::crash_log::install(crash_context(&args, &raw, None));

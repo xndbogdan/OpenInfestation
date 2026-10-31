@@ -185,8 +185,10 @@ fn open_wants_the_sheet_beside_an_image_and_refuses_other_files() {
     image(&dir.join("lone.img"), 1);
     let error = DiscImage::open(&dir.join("lone.img")).unwrap_err();
     assert!(error.contains("holds the track boundaries"), "{error}");
-    let error = DiscImage::open(&dir.join("disc.iso")).unwrap_err();
+    let error = DiscImage::open(&dir.join("disc.nrg")).unwrap_err();
     assert!(error.contains(".ccd"), "{error}");
+    let error = DiscImage::open(&dir.join("missing.iso")).unwrap_err();
+    assert!(error.starts_with("Cannot open"), "{error}");
     fs::write(
         dir.join("huge.ccd"),
         vec![b' '; MAX_SHEET_BYTES as usize + 1],

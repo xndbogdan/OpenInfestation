@@ -79,6 +79,9 @@ const GW_OWNER: u32 = 4;
 const MB_ICONERROR: u32 = 0x10;
 const MB_ICONWARNING: u32 = 0x30;
 const MB_ICONINFORMATION: u32 = 0x40;
+const MB_ICONQUESTION: u32 = 0x20;
+const MB_YESNO: u32 = 0x04;
+const IDYES: i32 = 6;
 /// `HALFTONE`: averages the downscaled banner instead of dropping pixels.
 const HALFTONE: i32 = 4;
 const SRCCOPY: u32 = 0x00cc_0020;
@@ -96,6 +99,7 @@ const ID_SAVE: usize = 106;
 const ID_CANCEL: usize = 107;
 const ID_SETTINGS_FIX: usize = 108;
 const ID_EXTRACT: usize = 109;
+const ID_INSTALL: usize = 110;
 const ID_DISPLAY: usize = 201;
 const ID_RESOLUTION: usize = 202;
 const ID_RENDERER: usize = 203;
@@ -137,6 +141,8 @@ struct MainControls {
     /// Repair or Reset settings, in Play's and Options' place while only the
     /// settings file stops the game.
     settings_fix: Handle,
+    /// Install from disc image, in their place while game files are missing.
+    install: Handle,
 }
 
 #[derive(Default)]
@@ -211,6 +217,8 @@ enum WorkerEvent {
     /// Extract music's progress line, then its summary or error.
     Progress(String),
     Extracted(Result<String, String>),
+    /// Install from disc image's installation and summary, or its error.
+    Installed(Result<(PathBuf, String), String>),
 }
 
 struct WindowState {
@@ -812,6 +820,15 @@ impl WindowState {
         let play = self.button(window, "&Play", ID_PLAY, 16, 381, 192, 42);
         let options = self.button(window, "&Options...", ID_OPTIONS, 234, 381, 192, 42);
         let settings_fix = self.button(window, "", ID_SETTINGS_FIX, 16, 381, 410, 42);
+        let install = self.button(
+            window,
+            "&Install from disc image...",
+            ID_INSTALL,
+            16,
+            381,
+            410,
+            42,
+        );
         self.button(window, "&Quit", ID_QUIT, 452, 381, 192, 42);
         self.controls = MainControls {
             root,
@@ -821,10 +838,12 @@ impl WindowState {
             play,
             options,
             settings_fix,
+            install,
         };
         EnableWindow(play, 0);
         EnableWindow(options, 0);
         ShowWindow(settings_fix, SW_HIDE);
+        ShowWindow(install, SW_HIDE);
     }
 
     /// What fixes the settings file, while it is all that stops the game.
@@ -835,8 +854,16 @@ impl WindowState {
             .map(|report| &report.settings)
     }
 
+    /// Game files are missing or damaged: the disc can install them.
+    fn install_needed(&self) -> bool {
+        self.report
+            .as_ref()
+            .is_some_and(|report| !report.is_ready() && !report.only_settings_broken())
+    }
+
     /// Play and Options give way to Repair settings, or Reset settings when
-    /// nothing can be read from the file: never both (2026-10-28).
+    /// nothing can be read from the file: never both (2026-10-28). While
+    /// game files are missing they give way to Install from disc image.
     unsafe fn show_settings_fix(&self) {
         let fix = self.settings_fix();
         if let Some(health) = fix {
@@ -846,11 +873,14 @@ impl WindowState {
             };
             text(self.controls.settings_fix, label);
         }
+        let install = self.install_needed();
         let shown = |shown: bool| if shown { SW_SHOW } else { SW_HIDE };
-        ShowWindow(self.controls.play, shown(fix.is_none()));
-        ShowWindow(self.controls.options, shown(fix.is_none()));
+        ShowWindow(self.controls.play, shown(fix.is_none() && !install));
+        ShowWindow(self.controls.options, shown(fix.is_none() && !install));
         ShowWindow(self.controls.settings_fix, shown(fix.is_some()));
+        ShowWindow(self.controls.install, shown(install));
         EnableWindow(self.controls.settings_fix, i32::from(!self.busy));
+        EnableWindow(self.controls.install, i32::from(!self.busy));
     }
 
     /// Repairs or resets the settings file, then checks the files again. The
@@ -1008,6 +1038,7 @@ impl WindowState {
             ID_OPTIONS if self.can_play() => self.open_options(),
             ID_QUIT => self.quit(),
             ID_SETTINGS_FIX if !self.busy => self.fix_settings(),
+            ID_INSTALL if !self.busy && self.install_needed() => self.install_from_disc(),
             ID_CHANGE if !self.busy => self.choose_installation(),
             ID_VERIFY if !self.busy => self.check_files(true),
             ID_EXTRACT if self.can_extract_music() => self.extract_music(),
@@ -1097,6 +1128,59 @@ impl WindowState {
         }
     }
 
+    /// Installs the game files and music off a disc image into a folder the
+    /// player picks, on the worker thread; the launcher then opens that
+    /// installation and remembers it.
+    unsafe fn install_from_disc(&mut self) {
+        let image = match choose_image(self.window) {
+            Ok(Some(image)) => image,
+            Ok(None) => return,
+            Err(error) => {
+                notice(self.window, "Install from disc image", &error, MB_ICONERROR);
+                return;
+            }
+        };
+        let Some(destination) = choose_folder(
+            self.window,
+            "Choose where to install Infestation. You can make a new folder here.",
+            Some(&self.root),
+        ) else {
+            return;
+        };
+        let question = format!(
+            "Install Infestation's game files and music from:\n{}\n\ninto:\n{}\n\nFiles it \
+             replaces are kept in infestation-backups. Continue?",
+            image.display(),
+            destination.display()
+        );
+        if notice(
+            self.window,
+            "Install from disc image",
+            &question,
+            MB_ICONQUESTION | MB_YESNO,
+        ) != IDYES
+        {
+            return;
+        }
+        self.set_busy(true);
+        self.set_progress("Reading the disc image...");
+        let sender = self.sender.clone();
+        self.worker = Some(thread::spawn(move || {
+            let installed = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                DiscImage::open(&image).and_then(|disc| {
+                    disc.install(&destination, &FrontendSettings::default_path(), |line| {
+                        let _ = sender.send(WorkerEvent::Progress(line.to_string()));
+                    })
+                })
+            }));
+            let result = match installed {
+                Ok(result) => result.map(|done| (done.root.clone(), done.summary())),
+                Err(_) => Err("Installing stopped unexpectedly.".to_string()),
+            };
+            let _ = sender.send(WorkerEvent::Installed(result));
+        }));
+    }
+
     /// Copies the music off a disc image the player picks into
     /// `cdaudio/`, on the worker thread, then checks the files again.
     unsafe fn extract_music(&mut self) {
@@ -1176,6 +1260,46 @@ impl WindowState {
                             Err(error) => (error, MB_ICONWARNING),
                         };
                         notice(self.dialog_owner(), "Extract music", &text, flags);
+                    }
+                    self.check_files(false);
+                }
+                WorkerEvent::Installed(result) => {
+                    self.set_busy(false);
+                    self.set_progress("");
+                    match result {
+                        Ok((root, summary)) => {
+                            self.root = root;
+                            text(self.controls.root, &self.root.display().to_string());
+                            self.request.preferences.data_root = Some(self.root.clone());
+                            let remembered = self
+                                .request
+                                .preferences
+                                .save(&self.request.preferences_path);
+                            if !self.close_requested {
+                                let mut summary = summary;
+                                if let Err(error) = remembered {
+                                    summary.push_str(&format!(
+                                        "\n\nThe launcher could not remember this folder: {error}"
+                                    ));
+                                }
+                                notice(
+                                    self.window,
+                                    "Install from disc image",
+                                    &summary,
+                                    MB_ICONINFORMATION,
+                                );
+                            }
+                        }
+                        Err(error) => {
+                            if !self.close_requested {
+                                notice(
+                                    self.window,
+                                    "Install from disc image",
+                                    &error,
+                                    MB_ICONWARNING,
+                                );
+                            }
+                        }
                     }
                     self.check_files(false);
                 }
@@ -2019,10 +2143,10 @@ unsafe fn checked(control: Handle) -> bool {
 unsafe fn choose_image(owner: Handle) -> Result<Option<PathBuf>, String> {
     let mut buffer = vec![0u16; 32768];
     let filter: Vec<u16> =
-        "Disc images (*.ccd;*.cue;*.img;*.bin)\0*.ccd;*.cue;*.img;*.bin\0All files (*.*)\0*.*\0\0"
+        "Disc images (*.ccd;*.cue;*.img;*.bin;*.iso)\0*.ccd;*.cue;*.img;*.bin;*.iso\0All files (*.*)\0*.*\0\0"
             .encode_utf16()
             .collect();
-    let title = wide("Select the Infestation disc image (CloneCD .ccd or BIN/CUE .cue)");
+    let title = wide("Select the Infestation disc image (CloneCD .ccd, BIN/CUE .cue or .iso)");
     let mut request: OpenFileName = zeroed();
     request.size = size_of::<OpenFileName>() as u32;
     request.owner = owner;

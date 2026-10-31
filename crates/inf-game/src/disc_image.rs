@@ -1,7 +1,9 @@
-//! The music off a disc image, for the launcher's Extract music and
-//! `inf-game extract-music`: a CloneCD image (`.ccd` with its `.img`, the
-//! usual copy of the retail disc) or a CUE sheet with its BIN files. After
-//! OpenV2K's `setup::disc`; port setup, not a retail path.
+//! A disc image's tracks, for the launcher's Extract music and Install from
+//! disc image (`inf-game extract-music`, `inf-game install`): a CloneCD
+//! image (`.ccd` with its `.img`, the usual copy of the retail disc), a CUE
+//! sheet with its BIN files, or a data-only `.iso`. After OpenV2K's
+//! `setup::disc`; port setup, not a retail path. The data track's files are
+//! read by [`crate::disc_install`].
 //!
 //! The retail disc is mixed mode: track 1 is data, tracks 2 to 9 are CD-DA.
 //! Each music track is copied as lossless 44,100 Hz stereo 16-bit WAV to
@@ -26,6 +28,8 @@ use crate::retail_path;
 
 /// One raw CD sector: 588 stereo 16-bit frames of audio.
 const RAW_SECTOR: u64 = 2352;
+/// A data sector's user data, all an `.iso` keeps of it.
+pub(crate) const DATA_SECTOR: u64 = 2048;
 /// A `.ccd` or `.cue` is a few KB; refuse anything that is plainly not one.
 const MAX_SHEET_BYTES: u64 = 1 << 20;
 
@@ -40,6 +44,8 @@ struct Segment {
 #[derive(Clone, Debug)]
 struct ImageFile {
     path: PathBuf,
+    /// 2352 for raw sectors, 2048 for an `.iso`.
+    sector_bytes: u64,
     /// Whole sectors in the file; `None` when it cannot be opened.
     sectors: Option<u64>,
 }
@@ -49,16 +55,59 @@ struct ImageFile {
 struct Track {
     number: u8,
     audio: bool,
+    /// Where a data track's 2048 bytes start in each sector: 16 after a
+    /// Mode 1 header, 24 after Mode 2's XA subheader (Form 1), 0 in an `.iso`.
+    payload: u64,
     /// Its sectors, or why they cannot be read.
     segments: Result<Vec<Segment>, String>,
 }
 
-/// A disc image's table of contents and files, read from its `.ccd` or
-/// `.cue`.
+/// A disc image's table of contents and files, read from its `.ccd`, `.cue`
+/// or `.iso`.
 #[derive(Debug)]
 pub struct DiscImage {
     files: Vec<ImageFile>,
     tracks: Vec<Track>,
+}
+
+/// The first data track's 2048-byte sectors: where they are and how to read
+/// them.
+#[derive(Clone, Debug)]
+pub(crate) struct DataTrack {
+    pub path: PathBuf,
+    pub start: u64,
+    pub sectors: u64,
+    pub sector_bytes: u64,
+    pub payload: u64,
+}
+
+impl DataTrack {
+    /// Data sectors `extent..` holding `length` bytes.
+    pub fn read(&self, extent: u64, length: u64) -> Result<Vec<u8>, String> {
+        let count = length.div_ceil(DATA_SECTOR);
+        if extent
+            .checked_add(count)
+            .is_none_or(|end| end > self.sectors)
+        {
+            return Err("an ISO extent leaves the data track".to_string());
+        }
+        let mut file = File::open(&self.path).map_err(|error| error.to_string())?;
+        let mut bytes = Vec::new();
+        bytes
+            .try_reserve_exact(length as usize)
+            .map_err(|error| error.to_string())?;
+        let mut sector = vec![0; self.sector_bytes as usize];
+        let payload = self.payload as usize;
+        for index in 0..count {
+            let offset = (self.start + extent + index) * self.sector_bytes;
+            file.seek(SeekFrom::Start(offset))
+                .and_then(|_| file.read_exact(&mut sector))
+                .map_err(|error| format!("data sector {}: {error}", extent + index))?;
+            let take = (length - bytes.len() as u64).min(DATA_SECTOR) as usize;
+            bytes.extend_from_slice(&sector[payload..payload + take]);
+        }
+        Ok(bytes)
+    }
 }
 
 /// What Extract music did, track by track.
@@ -99,13 +148,33 @@ impl MusicExtraction {
 
 impl DiscImage {
     /// Open `path`: a `.ccd` or `.cue`, or an `.img` or `.bin` beside its
-    /// `.ccd` or `.cue` (the track boundaries are only there).
+    /// `.ccd` or `.cue` (the track boundaries are only there), or an `.iso`,
+    /// whose one data track holds no music.
     pub fn open(path: &Path) -> Result<Self, String> {
         let extension = path
             .extension()
             .and_then(|extension| extension.to_str())
             .unwrap_or("")
             .to_ascii_lowercase();
+        if extension == "iso" {
+            let file = image_file(path.to_path_buf(), DATA_SECTOR);
+            let sectors = file
+                .sectors
+                .ok_or_else(|| format!("Cannot open {}", path.display()))?;
+            return Ok(DiscImage {
+                files: vec![file],
+                tracks: vec![Track {
+                    number: 1,
+                    audio: false,
+                    payload: 0,
+                    segments: Ok(vec![Segment {
+                        file: 0,
+                        start: 0,
+                        end: sectors,
+                    }]),
+                }],
+            });
+        }
         let sheet = match extension.as_str() {
             "ccd" | "cue" => path.to_path_buf(),
             "img" | "bin" => {
@@ -123,7 +192,8 @@ impl DiscImage {
             }
             _ => {
                 return Err(
-                    "Select the disc image's .ccd (CloneCD) or .cue (BIN/CUE) file".to_string(),
+                    "Select the disc image's .ccd (CloneCD), .cue (BIN/CUE) or .iso file"
+                        .to_string(),
                 )
             }
         };
@@ -154,6 +224,38 @@ impl DiscImage {
             }
             Ok(image)
         }
+    }
+
+    /// The first data track, which holds the game's files.
+    pub(crate) fn data_track(&self) -> Result<DataTrack, String> {
+        let track = self
+            .tracks
+            .iter()
+            .find(|track| !track.audio)
+            .ok_or("The image has no data track, only audio")?;
+        let segments = track.segments.as_ref().map_err(|reason| {
+            format!(
+                "The data track (track {}) cannot be read: {reason}",
+                track.number
+            )
+        })?;
+        // A track in a FILE of its own may end with the next one's pregap;
+        // the data is in the first segment.
+        let segment = &segments[0];
+        let file = &self.files[segment.file];
+        let sectors = file
+            .sectors
+            .ok_or_else(|| format!("{} cannot be read", file.path.display()))?;
+        if segment.end > sectors {
+            return Err(format!("{} ends early (truncated)", file.path.display()));
+        }
+        Ok(DataTrack {
+            path: file.path.clone(),
+            start: segment.start,
+            sectors: segment.end - segment.start,
+            sector_bytes: file.sector_bytes,
+            payload: track.payload,
+        })
     }
 
     /// Track `number`'s sectors, if the image holds it as audio of the
@@ -296,20 +398,24 @@ fn read_sheet(path: &Path) -> Result<String, String> {
     Ok(String::from_utf8_lossy(&bytes).into_owned())
 }
 
-fn image_file(path: PathBuf) -> ImageFile {
+fn image_file(path: PathBuf, sector_bytes: u64) -> ImageFile {
     let sectors = fs::metadata(&path)
         .ok()
         .filter(|metadata| metadata.is_file())
-        .map(|metadata| metadata.len() / RAW_SECTOR);
-    ImageFile { path, sectors }
+        .map(|metadata| metadata.len() / sector_bytes);
+    ImageFile {
+        path,
+        sector_bytes,
+        sectors,
+    }
 }
 
 /// A CloneCD sheet: INI sections, of which the `[Entry N]` rows are the
 /// disc's raw table of contents. Point 1 to 99 starts a track at PLBA
 /// (sector of the `.img`), Control bit 2 marks data, and point 0xA2 is the
 /// session's lead-out. The `[TRACK N]` sections repeat the starts with the
-/// pregaps (INDEX 0), which the table of contents does not count; the
-/// `.sub` subchannel file is not needed.
+/// pregaps (INDEX 0), which the table of contents does not count, and give a
+/// data track's MODE; the `.sub` subchannel file is not needed.
 fn parse_ccd(text: &str, image: PathBuf) -> Result<DiscImage, String> {
     let mut sections: Vec<(String, BTreeMap<String, String>)> = Vec::new();
     for (index, line) in text.lines().enumerate() {
@@ -385,14 +491,23 @@ fn parse_ccd(text: &str, image: PathBuf) -> Result<DiscImage, String> {
             Some(_) => Err("its table of contents entry is out of order".to_string()),
             None => Err("its session has no lead-out".to_string()),
         };
+        let mode = sections
+            .iter()
+            .find(|(name, _)| *name == format!("track {number}"))
+            .and_then(|(_, keys)| keys.get("mode"));
         tracks.push(Track {
             number,
             audio,
+            payload: if mode.is_some_and(|mode| mode == "2") {
+                24
+            } else {
+                16
+            },
             segments,
         });
     }
     Ok(DiscImage {
-        files: vec![image_file(image)],
+        files: vec![image_file(image, RAW_SECTOR)],
         tracks,
     })
 }
@@ -407,8 +522,8 @@ fn parse_cue(text: &str, sheet: &Path) -> Result<DiscImage, String> {
     let parent = sheet.parent().unwrap_or(Path::new("."));
     let canonical_parent = fs::canonicalize(parent).map_err(|error| error.to_string())?;
     let mut files: Vec<ImageFile> = Vec::new();
-    // (number, audio, file, INDEX 01)
-    let mut starts: Vec<(u8, bool, usize, Option<u64>)> = Vec::new();
+    // (number, data payload or None for audio, file, INDEX 01)
+    let mut starts: Vec<(u8, Option<u64>, usize, Option<u64>)> = Vec::new();
     for (index, line) in text.lines().enumerate() {
         let line = line.trim();
         let words: Vec<&str> = line.split_whitespace().collect();
@@ -449,7 +564,7 @@ fn parse_cue(text: &str, sheet: &Path) -> Result<DiscImage, String> {
                 if files.iter().any(|file| file.path == path) {
                     return Err("The CUE sheet names one FILE twice".to_string());
                 }
-                files.push(image_file(path));
+                files.push(image_file(path, RAW_SECTOR));
             }
             "TRACK" => {
                 let [_, number, mode] = words[..] else {
@@ -460,16 +575,19 @@ fn parse_cue(text: &str, sheet: &Path) -> Result<DiscImage, String> {
                     return Err("CUE tracks must be numbered upward from 01 to 99".to_string());
                 }
                 let mode = mode.to_ascii_uppercase();
-                let audio = match mode.as_str() {
-                    "AUDIO" => true,
-                    "MODE1/2352" | "MODE2/2352" => false,
+                // shortcut: no MODE1/2048 (cooked) tracks, which would mix
+                // sector sizes in the image; support them if a sheet needs it.
+                let payload = match mode.as_str() {
+                    "AUDIO" => None,
+                    "MODE1/2352" => Some(16),
+                    "MODE2/2352" => Some(24),
                     _ => return Err(format!("CUE track mode {mode} is not supported")),
                 };
                 let file = files
                     .len()
                     .checked_sub(1)
                     .ok_or("A CUE TRACK comes before any FILE")?;
-                starts.push((number, audio, file, None));
+                starts.push((number, payload, file, None));
             }
             "INDEX" => {
                 let [_, point, time] = words[..] else {
@@ -492,7 +610,7 @@ fn parse_cue(text: &str, sheet: &Path) -> Result<DiscImage, String> {
         return Err("The CUE sheet lists no tracks".to_string());
     }
     let mut tracks = Vec::new();
-    for (index, &(number, audio, file, start)) in starts.iter().enumerate() {
+    for (index, &(number, payload, file, start)) in starts.iter().enumerate() {
         let segments = (|| {
             let start = start.ok_or("it has no INDEX 01")?;
             let file_end = || files[file].sectors.ok_or("its FILE cannot be read");
@@ -541,7 +659,8 @@ fn parse_cue(text: &str, sheet: &Path) -> Result<DiscImage, String> {
         .map_err(str::to_string);
         tracks.push(Track {
             number,
-            audio,
+            audio: payload.is_none(),
+            payload: payload.unwrap_or(0),
             segments,
         });
     }

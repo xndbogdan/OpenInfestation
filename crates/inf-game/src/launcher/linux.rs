@@ -100,11 +100,12 @@ fn monitor_modes() -> MonitorModes {
     )
 }
 
-/// Extract music's worker: a progress line per track, then its summary or
-/// error.
+/// Extract music's or Install from disc image's worker: progress lines, then
+/// its summary (and, after an install, the installation) or error.
 enum Extraction {
     Progress(String),
     Done(Result<String, String>),
+    Installed(Result<(PathBuf, String), String>),
 }
 
 struct Notice {
@@ -219,7 +220,7 @@ impl Launcher {
     fn extract_music(&mut self) {
         let Some(image) = rfd::FileDialog::new()
             .set_title("Select the Infestation disc image (CloneCD .ccd or BIN/CUE .cue)")
-            .add_filter("Disc images", &["ccd", "cue", "img", "bin"])
+            .add_filter("Disc images", &["ccd", "cue", "img", "bin", "iso"])
             .pick_file()
         else {
             return;
@@ -245,6 +246,51 @@ impl Launcher {
         self.extraction = Some(receiver);
     }
 
+    /// Game files are missing or damaged: the disc can install them.
+    fn install_needed(&self) -> bool {
+        self.report
+            .as_ref()
+            .is_some_and(|report| !report.is_ready() && !report.only_settings_broken())
+    }
+
+    /// Installs the game files and music off a disc image into a folder the
+    /// player picks, on a worker thread; the launcher then opens that
+    /// installation and remembers it.
+    fn install_from_disc(&mut self) {
+        let Some(image) = rfd::FileDialog::new()
+            .set_title("Select the Infestation disc image (CloneCD .ccd, BIN/CUE .cue or .iso)")
+            .add_filter("Disc images", &["ccd", "cue", "img", "bin", "iso"])
+            .pick_file()
+        else {
+            return;
+        };
+        let Some(destination) = rfd::FileDialog::new()
+            .set_title("Choose where to install Infestation")
+            .set_directory(&self.root)
+            .pick_folder()
+        else {
+            return;
+        };
+        let settings = self.settings_path.clone();
+        self.progress = "Reading the disc image...".to_string();
+        let (sender, receiver) = mpsc::channel();
+        thread::spawn(move || {
+            let installed = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                DiscImage::open(&image).and_then(|disc| {
+                    disc.install(&destination, &settings, |line| {
+                        let _ = sender.send(Extraction::Progress(line.to_string()));
+                    })
+                })
+            }));
+            let result = match installed {
+                Ok(result) => result.map(|done| (done.root.clone(), done.summary())),
+                Err(_) => Err("Installing stopped unexpectedly.".to_string()),
+            };
+            let _ = sender.send(Extraction::Installed(result));
+        });
+        self.extraction = Some(receiver);
+    }
+
     fn poll_extraction(&mut self) {
         let Some(receiver) = &self.extraction else {
             return;
@@ -253,17 +299,35 @@ impl Launcher {
         while let Ok(event) = receiver.try_recv() {
             match event {
                 Extraction::Progress(line) => self.progress = line,
-                Extraction::Done(result) => done = Some(result),
+                Extraction::Done(result) => done = Some(("Extract music", result)),
+                Extraction::Installed(result) => {
+                    let result = result.map(|(root, summary)| {
+                        self.root = root;
+                        self.root_text = self.root.display().to_string();
+                        self.request.preferences.data_root = Some(self.root.clone());
+                        match self
+                            .request
+                            .preferences
+                            .save(&self.request.preferences_path)
+                        {
+                            Ok(()) => summary,
+                            Err(error) => format!(
+                                "{summary}\n\nThe launcher could not remember this folder: {error}"
+                            ),
+                        }
+                    });
+                    done = Some(("Install from disc image", result));
+                }
             }
         }
-        let Some(result) = done else {
+        let Some((title, result)) = done else {
             return;
         };
         self.extraction = None;
         self.progress.clear();
         if !self.close_requested {
             let text = result.unwrap_or_else(|error| error);
-            self.notice("Extract music", &text, false);
+            self.notice(title, &text, false);
         }
         self.check_files(false);
     }
@@ -585,6 +649,12 @@ impl Launcher {
                     .clicked()
                 {
                     self.fix_settings();
+                }
+            } else if self.install_needed() {
+                let wide = egui::vec2(size.x * 2.0 + 8.0, size.y);
+                let button = egui::Button::new("Install from disc image...").min_size(wide);
+                if ui.add_enabled(!self.busy(), button).clicked() {
+                    self.install_from_disc();
                 }
             } else {
                 let ready = self.can_play();
