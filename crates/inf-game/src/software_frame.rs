@@ -577,6 +577,14 @@ impl SoftwareFrame {
         }
     }
 
+    /// The next submissions are covered by a traced face drawn after them
+    /// over the same corners (where the device traces).
+    pub fn set_draw_covered(&mut self, covered: bool) {
+        if let Some(device) = &mut self.device {
+            device.set_draw_covered(covered);
+        }
+    }
+
     /// The colour the next submissions are laid in again, added, or none
     /// (a flaring crystal's, where the device does).
     pub fn set_draw_tint(&mut self, tint: Option<crate::crystal_flares::CrystalSpark>) {
@@ -1462,6 +1470,7 @@ impl<'r> PixelBackend<'r> for SoftwarePixelBackend<'_, 'r> {
         // and a flaring crystal's its tint.
         self.frame.set_draw_motion(command.motion);
         self.frame.set_draw_tint(command.tint);
+        self.frame.set_draw_covered(command.covered);
         // A metal face's, whose metal the device mirrors the sky in.
         let metal = command.metal.is_some();
         if metal {
@@ -1481,6 +1490,7 @@ impl<'r> PixelBackend<'r> for SoftwarePixelBackend<'_, 'r> {
         let drawn = self.draw_command(invocation, command);
         self.frame.set_draw_motion(None);
         self.frame.set_draw_tint(None);
+        self.frame.set_draw_covered(false);
         if metal {
             self.frame.set_draw_metal(None);
         }

@@ -784,6 +784,11 @@ pub struct SceneFeedBuilder<'r> {
     /// over those corners, the raster's last one to stay
     /// ([`Self::settle_faces`]).
     faces: crate::fast_hash::FastMap<u64, FaceChain>,
+    /// The raster's submissions ([`Self::submitted`]) of blended faces
+    /// that a traced face over the same corners was drawn after
+    /// ([`Self::raster_face`]): retail's later draw covered them, so the
+    /// raster leaves them over the traced world.
+    pub covered: Vec<u32>,
     /// Every face remembered this frame, in order; each chain's faces link
     /// on through [`FeedFace::next`].
     face_list: Vec<FeedFace>,
@@ -843,18 +848,24 @@ pub struct SceneFeedBuilder<'r> {
 
 /// A model face's key: its exact corners, in any order.
 fn face_key(corners: &[SceneVertex]) -> u64 {
+    position_key(corners.iter().map(|corner| corner.position))
+}
+
+/// The key of a face at `corners` (eye-relative positions), in any order.
+fn position_key(corners: impl ExactSizeIterator<Item = [f32; 3]>) -> u64 {
     use std::hash::{Hash, Hasher};
     let mut hasher = crate::fast_hash::FxHasher::default();
     let mut inline = [[0_u32; 3]; 16];
     let mut spilled = Vec::new();
-    let positions: &mut [[u32; 3]] = if corners.len() <= inline.len() {
-        &mut inline[..corners.len()]
+    let count = corners.len();
+    let positions: &mut [[u32; 3]] = if count <= inline.len() {
+        &mut inline[..count]
     } else {
-        spilled.resize(corners.len(), [0; 3]);
+        spilled.resize(count, [0; 3]);
         &mut spilled
     };
     for (position, corner) in positions.iter_mut().zip(corners) {
-        *position = corner.position.map(f32::to_bits);
+        *position = corner.map(f32::to_bits);
     }
     positions.sort_unstable();
     positions.hash(&mut hasher);
@@ -882,6 +893,9 @@ struct FeedFace {
     next: Option<usize>,
     /// Drawn for the tracer alone ([`SceneFeedBuilder::culled`]).
     culled: bool,
+    /// A blended face the raster keeps, with no triangles of its own
+    /// ([`SceneFeedBuilder::raster_face`]).
+    raster_only: bool,
 }
 
 impl FeedFace {
@@ -921,6 +935,7 @@ impl<'r> SceneFeedBuilder<'r> {
             water_sprite: None,
             material_shifts,
             faces: Default::default(),
+            covered: Vec::new(),
             face_list: Vec::new(),
             pending: Vec::new(),
             sprite_index: Default::default(),
@@ -1103,7 +1118,35 @@ impl<'r> SceneFeedBuilder<'r> {
             drawn: None,
             next: None,
             culled: self.culled,
+            raster_only: false,
         });
+        self.chain(key, place);
+    }
+
+    /// A blended face the raster keeps over the traced world (a half-alpha
+    /// or darkening sprite) at eye-relative `corners`: it joins the faces
+    /// over the same corners, so one the raster drew after it covers it
+    /// there ([`Self::covered`]), as retail's later draw did (2026-10-31:
+    /// the hangar's green glass lay over its whole traced wall).
+    pub fn raster_face(&mut self, corners: &[[f32; 3]]) {
+        if self.culled || corners.len() < 3 {
+            return;
+        }
+        let place = self.face_list.len();
+        let end = self.feed.triangles.len();
+        self.face_list.push(FeedFace {
+            triangles: end..end,
+            drawn: None,
+            next: None,
+            culled: false,
+            raster_only: true,
+        });
+        self.chain(position_key(corners.iter().copied()), place);
+    }
+
+    /// Face `place` is keyed `key`: on the chain over its corners, and
+    /// waiting for the raster's submission.
+    fn chain(&mut self, key: u64, place: usize) {
         match self.faces.entry(key) {
             std::collections::hash_map::Entry::Occupied(mut chain) => {
                 let chain = chain.get_mut();
@@ -1361,13 +1404,19 @@ impl<'r> SceneFeedBuilder<'r> {
     /// The raster submitted the primitive just captured, with queue key
     /// `depth`: its faces are drawn in that place (the first submission
     /// counts, for a primitive split by clipping or mirrored).
-    pub fn submitted(&mut self, depth: u32) {
+    pub fn submitted(&mut self, depth: u32) -> u32 {
         self.submissions = self.submissions.wrapping_add(1);
         for place in self.pending.drain(..) {
             if let Some(face) = self.face_list.get_mut(place) {
                 face.drawn = Some((depth as i32, self.submissions));
             }
         }
+        self.submissions
+    }
+
+    /// Whether faces of the primitive just captured wait for its submission.
+    pub fn has_pending(&self) -> bool {
+        !self.pending.is_empty()
     }
 
     /// Of the faces drawn over the same corners, keep the one the raster
@@ -1381,7 +1430,8 @@ impl<'r> SceneFeedBuilder<'r> {
             if chain.count < 2 {
                 continue;
             }
-            let winner = chain_of(chain.first)
+            let Some(winner) = chain_of(chain.first)
+                .filter(|&place| !list[place].raster_only)
                 .reduce(|best, next| {
                     if list[next].drawn_after(&list[best]) {
                         next
@@ -1389,7 +1439,17 @@ impl<'r> SceneFeedBuilder<'r> {
                         best
                     }
                 })
-                .expect("two or more faces");
+            else {
+                continue;
+            };
+            // The raster's blended faces the winner was drawn after.
+            for place in chain_of(chain.first) {
+                if let (true, Some((_, order))) = (list[place].raster_only, list[place].drawn) {
+                    if list[winner].drawn_after(&list[place]) {
+                        self.covered.push(order);
+                    }
+                }
+            }
             // A masked winner shows the face drawn under it through its keyed
             // texels (the hangar's windows): the last opaque one stays, a
             // thousandth farther from the eye so rays never tie the two.
@@ -1398,9 +1458,7 @@ impl<'r> SceneFeedBuilder<'r> {
                 .then(|| {
                     chain_of(chain.first)
                         .filter(|&place| {
-                            place != winner
-                                && !list[place].triangles.is_empty()
-                                && !cutout(place)
+                            place != winner && !list[place].triangles.is_empty() && !cutout(place)
                         })
                         .reduce(|best, next| {
                             if list[next].drawn_after(&list[best]) {
@@ -1634,6 +1692,55 @@ mod tests {
             .map(|t| t.cutout)
             .collect();
         assert_eq!(masked, [true, true]);
+    }
+
+    /// A blended face the raster keeps is covered by a traced face drawn
+    /// after it over the same corners (the hangar's glass under its wall),
+    /// not by one drawn before it, and never wins over the traced faces.
+    #[test]
+    fn a_later_traced_face_covers_a_raster_blend() {
+        let mut builder = SceneFeedBuilder::new(SceneCamera::default(), [6, 1, 3]);
+        let quad = |x: f32| {
+            [
+                [x, 0.0, 0.0],
+                [x + 1.0, 0.0, 0.0],
+                [x + 1.0, 0.0, 1.0],
+                [x, 0.0, 1.0],
+            ]
+        };
+        let vertices = |x: f32| {
+            quad(x).map(|position| SceneVertex {
+                position,
+                ..SceneVertex::default()
+            })
+        };
+        // At 0: glass blended at key 300, the wall after it at key 100. At
+        // 10: a wall at 300, a blend over it after at key 100.
+        let mut orders = Vec::new();
+        for (x, blend_key, wall_key) in [(0.0, 300, 100), (10.0, 100, 300)] {
+            builder.begin_primitive();
+            builder.raster_face(&quad(x));
+            orders.push(builder.submitted(blend_key));
+            builder.begin_primitive();
+            builder.face(
+                &vertices(x),
+                Some(1),
+                SceneSurface::Opaque,
+                Some(1),
+                None,
+                true,
+            );
+            builder.submitted(wall_key);
+        }
+        builder.settle_faces();
+        assert_eq!(builder.covered, [orders[0]]);
+        let walls = builder
+            .feed
+            .triangles
+            .iter()
+            .filter(|t| t.vertices[0] != t.vertices[1])
+            .count();
+        assert_eq!(walls, 4);
     }
 
     /// A ribbon faces the eye: its corners stand its half width to each

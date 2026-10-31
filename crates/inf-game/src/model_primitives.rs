@@ -293,6 +293,14 @@ pub struct PrimitiveCommand<'a> {
     /// still draws it for the primary view while queue emitter capture
     /// skips it.
     pub glow_fed: bool,
+    /// Non-native: the scene feed's submission of the blended faces this
+    /// came from, which a traced face drawn after them may cover
+    /// ([`crate::scene_feed::SceneFeedBuilder::covered`]).
+    pub feed_order: Option<u32>,
+    /// Non-native, under the tracer: a traced face drawn after this
+    /// blended one over the same corners covers it, so it shows only
+    /// through that face's keyed texels.
+    pub covered: bool,
     /// Non-native: where the moving model this came from stood in the last
     /// frame, for the Vulkan raster's motion ([`crate::raster_motion`]).
     pub motion: Option<crate::raster_motion::ViewMotion>,
@@ -329,6 +337,8 @@ impl<'a> PrimitiveCommand<'a> {
             texture: None,
             scene_fed: false,
             glow_fed: false,
+            feed_order: None,
+            covered: false,
             motion: None,
             water: false,
             ground: false,

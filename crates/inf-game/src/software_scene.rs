@@ -793,6 +793,23 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
             crate::scene_capture::capture_emitter(builder, command);
         }
         builder.settle_faces();
+        // The raster's blended faces a traced face was drawn after: retail's
+        // later draw covered them but for its keyed texels, so the device
+        // lays them behind it.
+        if !builder.covered.is_empty() {
+            let covered = std::mem::take(&mut builder.covered);
+            for command in self.queue.payloads_mut() {
+                if command
+                    .feed_order
+                    .is_some_and(|order| covered.contains(&order))
+                {
+                    command.covered = true;
+                }
+            }
+        }
+        let Some(builder) = self.scene_feed.as_mut() else {
+            return;
+        };
         let upload = self.pixels.texture_state.upload;
         let resolved: Vec<_> = builder
             .sprites

@@ -133,6 +133,9 @@ pub struct ModelCommandBackend<'a, 'q, S> {
     /// The scene feed took the primitive's 3D additive glow faces, while the
     /// raster still draws it for the primary view.
     glow_fed: bool,
+    /// The scene feed's submission of the primitive's blended faces the
+    /// raster keeps, from its first command on.
+    feed_order: Option<u32>,
     /// The motion of the moving model whose primitive is being prepared.
     motion: Option<crate::raster_motion::ViewMotion>,
     /// Its tint, if any.
@@ -166,6 +169,7 @@ impl<'a, 'q, S: ModelCommandServices<'a>> ModelCommandBackend<'a, 'q, S> {
             outcome: PrimitiveOutcome::default(),
             scene_fed: false,
             glow_fed: false,
+            feed_order: None,
             motion: None,
             tint: None,
             sky: None,
@@ -342,9 +346,9 @@ impl<'a, S: ModelCommandServices<'a>> PrimitiveHost<'a> for ModelCommandBackend<
                 }
             }
         }
-        if self.scene_fed {
-            // Where the raster draws the feed's faces, for its ties.
-            if let Some(builder) = self.services.scene_feed() {
+        if let Some(builder) = self.services.scene_feed() {
+            if self.scene_fed {
+                // Where the raster draws the feed's faces, for its ties.
                 // A billboard the modern sky keeps, or a gate's flare, where
                 // its command drew.
                 if (builder.sky_billboard.is_some() || builder.gate_glint.is_some()) && effect_quad
@@ -355,8 +359,11 @@ impl<'a, S: ModelCommandServices<'a>> PrimitiveHost<'a> for ModelCommandBackend<
                     }
                 }
                 builder.submitted(command.depth);
+            } else if builder.has_pending() {
+                self.feed_order = Some(builder.submitted(command.depth));
             }
         }
+        command.feed_order = self.feed_order;
         let submission = DrawSubmission {
             depth: command.depth,
             payload_blocks: command.payload_blocks,
@@ -445,6 +452,7 @@ impl<'a, S: ModelCommandServices<'a>> ModelExecutionHost for ModelCommandBackend
             .map_err(flatten_primitive);
         self.scene_fed = false;
         self.glow_fed = false;
+        self.feed_order = None;
         self.motion = None;
         self.tint = None;
         self.sky = None;

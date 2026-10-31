@@ -174,7 +174,11 @@ fn crystal_rings_are_capped() {
     assert_eq!(admit_ring(&two, 150_000, false), None);
     assert_eq!(admit_ring(&two, 150_000, true), Some(false));
     assert_eq!(admit_ring(&two, 200_000, false), Some(false));
-    let three = [(1, 0, 900_000), (2, 100_000, 900_000), (3, 200_000, 900_000)];
+    let three = [
+        (1, 0, 900_000),
+        (2, 100_000, 900_000),
+        (3, 200_000, 900_000),
+    ];
     assert_eq!(admit_ring(&three, 300_000, false), Some(true));
 }
 

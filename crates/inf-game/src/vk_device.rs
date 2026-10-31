@@ -1416,6 +1416,9 @@ unsafe fn blit_pipeline(core: &Core, depth: bool) -> Result<vk::Pipeline, VkDevi
 }
 
 /// Source and destination factors; `None` is the CPU raster's copy.
+/// How much farther a covered blended face is laid ([`VkFrame::draw_covered`]).
+const COVERED_DEPTH: f32 = 1.0015;
+
 fn blend_factors(blend: D3dTextureBlend) -> Option<(vk::BlendFactor, vk::BlendFactor)> {
     match blend {
         D3dTextureBlend::Copy => None,
@@ -2491,6 +2494,9 @@ pub struct VkFrame {
     /// The spark the fans now are laid in again, added, each corner as
     /// near it as it lies (a struck crystal's).
     draw_tint: Option<crate::crystal_flares::CrystalSpark>,
+    /// The fans now are a blended face a traced face drawn after it over
+    /// the same corners covers but for its keyed texels.
+    draw_covered: bool,
     /// The metal face the fans now draw.
     draw_metal: Option<Rc<crate::raster_metal::MetalFace>>,
     /// This raster world's metal mirrors the sky, wet by the rain as much
@@ -2603,6 +2609,7 @@ impl VkFrame {
             world_camera: None,
             draw_motion: None,
             draw_tint: None,
+            draw_covered: false,
             draw_metal: None,
             metal_world: None,
             metal_batch: Vec::new(),
@@ -2794,6 +2801,15 @@ impl VkFrame {
         if traced_fog {
             for corner in &mut corners {
                 corner.fog = [0, 0, 0, 255];
+            }
+        }
+        // Behind the face that covers it (the traced depth lies a
+        // thousandth back, `raster_depth`) and before the face under that
+        // one's keyed texels (a thousandth further, `settle_faces`): the
+        // hangar's green glass shows through its windows alone.
+        if self.draw_covered {
+            for corner in &mut corners {
+                corner.position[2] = 1.0 - (1.0 - corner.position[2]) / COVERED_DEPTH;
             }
         }
         if self.device.state.borrow().thermal_effects {
@@ -3108,6 +3124,10 @@ impl VkFrame {
     /// The colour the next fans are laid in again, added, or none.
     pub(crate) fn set_draw_tint(&mut self, tint: Option<crate::crystal_flares::CrystalSpark>) {
         self.draw_tint = tint;
+    }
+
+    pub(crate) fn set_draw_covered(&mut self, covered: bool) {
+        self.draw_covered = covered;
     }
 
     /// The metal face the next fans draw, or none.

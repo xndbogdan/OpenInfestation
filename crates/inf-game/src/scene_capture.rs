@@ -236,6 +236,32 @@ pub(crate) fn retail_face(request: &ModelPrimitiveRequest<'_>) -> Option<Face> {
 /// primitive the tap cannot place whole (a corner without a view point, a
 /// missing texture) stays the raster's. The backdrop stays the raster's
 /// too, and the feed keeps a copy as the sky reflections see.
+/// A blended face the raster keeps over the traced world: its corners join
+/// the feed's faces, so a traced face the raster drew after it over the
+/// same corners covers it ([`SceneFeedBuilder::raster_face`]).
+fn note_raster_face(
+    builder: &mut SceneFeedBuilder<'_>,
+    request: &ModelPrimitiveRequest<'_>,
+    face: &Face,
+) {
+    let passes: &[i16] = if face.mirror { &[1, 0] } else { &[0] };
+    for &mirror in passes {
+        let corners: Option<Vec<[f32; 3]>> = face
+            .slots
+            .iter()
+            .map(|slot| {
+                request
+                    .vertices
+                    .drawn_view((slot.raw() as i16) ^ mirror)
+                    .map(|view| builder.world(view))
+            })
+            .collect();
+        if let Some(corners) = corners {
+            builder.raster_face(&corners);
+        }
+    }
+}
+
 pub(crate) fn capture_primitive<'a>(
     builder: &mut SceneFeedBuilder<'a>,
     resources: &RenderResources<'a>,
@@ -419,6 +445,7 @@ pub(crate) fn capture_primitive<'a>(
                 // the water the blend stays retail's.
                 sunk = additive_glow && under_water(builder, request, &face);
                 if !additive_glow {
+                    note_raster_face(builder, request, &face);
                     return false;
                 }
             }

@@ -224,6 +224,15 @@ impl<C> DrawQueue<C> {
         })
     }
 
+    pub fn payloads_mut(&mut self) -> impl Iterator<Item = &mut C> {
+        self.nodes
+            .iter_mut()
+            .filter_map(|node| match &mut node.command {
+                Command::Payload(payload) => Some(payload),
+                Command::Group(_) => None,
+            })
+    }
+
     pub fn submit(
         &mut self,
         submission: DrawSubmission<C>,

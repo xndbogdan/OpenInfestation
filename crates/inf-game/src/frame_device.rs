@@ -344,6 +344,14 @@ impl FrameDevice {
         }
     }
 
+    /// The next fans are covered by a traced face drawn after them over the
+    /// same corners (Vulkan).
+    pub(crate) fn set_draw_covered(&mut self, covered: bool) {
+        if let Self::Vulkan(frame) = self {
+            frame.set_draw_covered(covered);
+        }
+    }
+
     /// The colour the next fans are laid in again, added (Vulkan).
     pub(crate) fn set_draw_tint(&mut self, tint: Option<crate::crystal_flares::CrystalSpark>) {
         if let Self::Vulkan(frame) = self {
