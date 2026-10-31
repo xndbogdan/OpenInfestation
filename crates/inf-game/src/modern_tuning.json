@@ -118,7 +118,7 @@
     "fields": [],
     "emitters": [],
     "thrust_glows": [{"name": "jetmode2", "sprites": [280], "gain": 2.0, "seconds": 0.15,
-                      "load": 12000.0}],
+                      "load": 12000.0, "color": [1.0, 0.62, 0.22]}],
     "gates": [
       {"name": "gatebod", "core": 0.04, "halo": 0.5, "jag": 0.03, "brightness": 1.0,
        "glint": 1.0, "light": [0.5, 600.0]}

@@ -358,7 +358,8 @@ pub struct SceneExhaust {
 /// A model's faces that glow while its vehicle thrusts
 /// ([`crate::modern_tuning::MaterialTuning::thrust_glows`]): its triangles
 /// in [`SceneFeed::triangles`], where the model stands (eye-relative), the
-/// glow's gain, its easing seconds and the engine load it glows fully at.
+/// glow's gain, its easing seconds, the engine load it glows fully at and
+/// its colour.
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct SceneThrustGlow {
     pub triangles: std::ops::Range<usize>,
@@ -366,6 +367,7 @@ pub struct SceneThrustGlow {
     pub gain: f32,
     pub seconds: f32,
     pub load: f32,
+    pub color: [f32; 3],
 }
 
 /// A blended sprite the raster adds over the traced world (a particle's,

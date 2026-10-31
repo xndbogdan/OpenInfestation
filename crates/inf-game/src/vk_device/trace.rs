@@ -2900,6 +2900,24 @@ impl State {
         } else {
             HashMap::new()
         };
+        // Their corners in the glow's colour while they glow (each face has
+        // corners of its own).
+        let glowing_vertices = (!thrust_gains.is_empty()).then(|| {
+            let mut vertices = feed.vertices.clone();
+            for glow in &feed.thrust_glows {
+                let color = glow
+                    .color
+                    .map(|channel| (channel.clamp(0.0, 1.0) * 255.0).round() as u8);
+                for triangle in &feed.triangles[glow.triangles.clone()] {
+                    for &corner in &triangle.vertices {
+                        let vertex = &mut vertices[corner as usize];
+                        vertex.color = [color[0], color[1], color[2], vertex.color[3]];
+                    }
+                }
+            }
+            vertices
+        });
+        let vertices = glowing_vertices.as_deref().unwrap_or(&feed.vertices);
         let lit_as_glowing: Vec<crate::scene_feed::SceneTriangle> = ordered()
             .map(|triangle| {
                 let mut triangle = *triangle;
@@ -2911,7 +2929,7 @@ impl State {
             .collect();
         let emissive = super::emissive::emissive_list(
             &lit_as_glowing,
-            &feed.vertices,
+            vertices,
             |triangle| {
                 thrust_gains
                     .get(&triangle.vertices)
@@ -2990,7 +3008,7 @@ impl State {
         let geometry = vk::BufferUsageFlags::STORAGE_BUFFER
             | vk::BufferUsageFlags::SHADER_DEVICE_ADDRESS
             | vk::BufferUsageFlags::ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR;
-        let vertex_bytes = bytes_of(&feed.vertices);
+        let vertex_bytes = bytes_of(vertices);
         let index_bytes = bytes_of(&indices);
         let triangle_bytes = bytes_of(&triangle_words);
         self.grown(

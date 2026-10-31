@@ -290,6 +290,7 @@ mod tests {
             gain: 2.0,
             seconds: 0.2,
             load: 12_000.0,
+            color: [1.0; 3],
         }];
         let full = [([0.0, 0.0, 150.0], 12_032.0)];
         let mut glow = ThrustGlow::default();

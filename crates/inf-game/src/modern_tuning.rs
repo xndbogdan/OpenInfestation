@@ -922,7 +922,9 @@ pub struct MaterialTuning {
     /// Model names whose faces in `sprites` glow with their vehicle's
     /// engine load ([`crate::object_runtime::ObjectArena::engine_loads`]),
     /// the throttle that bites: up to `gain` times their texture at `load`
-    /// or more, none at none, easing over `seconds`. The skimmer's thruster
+    /// or more, none at none, easing over `seconds`, in `color` (0 to 1)
+    /// times their texture: the strips' paint is near white, and only the
+    /// world's warm light showed them orange. The skimmer's thruster
     /// lights (2026-10-31: the user's wish; retail drew them lit, glowing
     /// only through the morph); in the air, where its thrust finds less
     /// grip, they dim as its engine's load drops.
@@ -940,6 +942,7 @@ pub struct ThrustGlow {
     pub gain: f32,
     pub seconds: f32,
     pub load: f32,
+    pub color: [f32; 3],
 }
 
 /// A gate's redrawn lightning: its model's name (`*` as in `names`), the
