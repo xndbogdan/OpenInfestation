@@ -16,8 +16,8 @@
 //! shores near the camera are heard from where they are ([`placed`]). The
 //! recordings decode on a thread of their own when a world starts (the
 //! Brain's from its load, ready when its play begins). The beds fade out in
-//! the in-world menu (not the Brain's: they are its music) and stop outside
-//! play. Only a sound: it
+//! the in-world menu (not the Brain's: they are its music, at the Music
+//! volume and the CD's loudness) and stop outside play. Only a sound: it
 //! reads the session, never writes it, and never draws the game's random
 //! numbers.
 
@@ -127,6 +127,9 @@ struct Frame<'a> {
     light: f32,
     /// The share a sweetener sends to the reverb.
     send: f32,
+    /// The beds stand in for the world's music ([`replaces_music`]): they
+    /// play at the Music volume, at full level rather than under the music.
+    music: bool,
 }
 
 #[derive(Default)]
@@ -279,6 +282,7 @@ impl Ambience {
             presence: if music { 1.0 } else { self.presence },
             light: self.light,
             send: atmosphere.reverb.as_ref().map_or(0.0, |reverb| reverb.send),
+            music,
         };
         for bed in &mut self.beds {
             bed.update(&mut frame, audio);
@@ -513,6 +517,9 @@ impl Bed {
                 )
                 .min(sound.frames().saturating_sub(1));
                 audio.play_ambience_from(voice, Arc::clone(sound), true, 0.0, 0.0, start);
+                if frame.music {
+                    audio.music_ambience(voice);
+                }
                 self.current = Some(Layer {
                     recording: first,
                     voice,
@@ -537,6 +544,9 @@ impl Bed {
                     )
                     .min(sound.frames().saturating_sub(1));
                     audio.play_ambience_from(voice, Arc::clone(sound), true, 0.0, 0.0, start);
+                    if frame.music {
+                        audio.music_ambience(voice);
+                    }
                     self.leaving = Some(current);
                     self.current = Some(Layer {
                         recording: next,
@@ -549,9 +559,14 @@ impl Bed {
                 }
             }
         }
-        // The bed's gain and the level; the light and the menu's fade over
-        // them.
-        let still = self.gain * atmosphere.level.max(0.0);
+        // The bed's gain and the level (full for the Brain's, its music);
+        // the light and the menu's fade over them.
+        let under = if frame.music {
+            1.0
+        } else {
+            atmosphere.level.max(0.0)
+        };
+        let still = self.gain * under;
         let [dark_level, dark_pitch] = self.light.unwrap_or([1.0, 1.0]);
         let lit = |dark: f32| dark + (1.0 - dark) * frame.light;
         let level = still * lit(dark_level) * frame.presence;
@@ -617,6 +632,9 @@ impl Bed {
                         pan,
                     );
                     audio.pitch_ambience(voice, pitch);
+                    if frame.music {
+                        audio.music_ambience(voice);
+                    }
                     if shots.placed {
                         audio.send_ambience(voice, frame.send);
                     }

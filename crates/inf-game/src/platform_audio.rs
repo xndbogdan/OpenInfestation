@@ -372,6 +372,10 @@ struct AmbienceVoice {
     /// slider sets retail's effects, not the Ambience slider, and never
     /// dipped under them, being one.
     effect: bool,
+    /// Music of the port's (the Alien Brain's beds, which stand in for its
+    /// CD track): at the Music volume, as retail's CD audio is, and never
+    /// dipped under the effects.
+    music: bool,
 }
 
 /// How far an ambience voice's gain and pan move a frame: across their
@@ -713,11 +717,17 @@ impl AudioCallback for Mixer {
                 let effect_volume = ds_amplitude(attenuation(65536, self.effects_volume));
                 let mut send = retail_send;
                 for voice in &mut self.ambience {
-                    let volume = if voice.effect { effect_volume } else { volume };
+                    let [left_volume, right_volume] = if voice.music {
+                        self.cd_volume
+                    } else if voice.effect {
+                        [effect_volume; 2]
+                    } else {
+                        [volume; 2]
+                    };
                     if let Some([left, right]) = voice.next(self.headphones) {
-                        ambience[0] += left * volume;
-                        ambience[1] += right * volume;
-                        send += (left + right) * 0.5 * voice.send * volume;
+                        ambience[0] += left * left_volume;
+                        ambience[1] += right * right_volume;
+                        send += (left * left_volume + right * right_volume) * 0.5 * voice.send;
                     }
                 }
                 let [left, right] = self.reverb.next(send);
@@ -870,6 +880,7 @@ impl PlatformAudio {
             target_aim: None,
             ears: Ears::default(),
             effect: false,
+            music: false,
         });
     }
 
@@ -882,6 +893,16 @@ impl PlatformAudio {
                 voice.effect = true;
                 voice.gain = voice.target;
                 voice.pan = voice.target_pan;
+            }
+        }
+    }
+
+    /// Make ambience voice `id` music of the port's, at the Music volume and
+    /// never dipped ([`AmbienceVoice::music`]).
+    pub fn music_ambience(&mut self, id: u32) {
+        for voice in self.device.lock().ambience.iter_mut() {
+            if voice.id == id {
+                voice.music = true;
             }
         }
     }

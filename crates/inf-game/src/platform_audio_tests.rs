@@ -1207,6 +1207,7 @@ fn ambience_voice(id: u32, samples: Vec<i16>, channels: u8, looping: bool) -> Am
         target_aim: None,
         ears: Ears::default(),
         effect: false,
+        music: false,
     }
 }
 
@@ -1645,6 +1646,63 @@ fn the_ambience_ducks_under_loud_effects() {
     };
     let (quiet, after_blast) = (level(false), level(true));
     assert!(after_blast < quiet * 0.7, "{after_blast} against {quiet}");
+}
+
+/// The Brain's beds, music of the port's, play at the Music volume (the
+/// CD's, per channel) whatever the Ambience volume, and never dip under a
+/// blast.
+#[test]
+fn a_music_ambience_voice_takes_the_music_volume() {
+    let blast = || EffectVoice {
+        voice: crate::process_sound::ProcessSoundVoiceRef {
+            owner: 1,
+            serial: 1,
+        },
+        playing: true,
+        looping: false,
+        samples: vec![30000; 512].into(),
+        position: 0.0,
+        step: 1.0,
+        attenuation_hundredth_db: 0,
+        pan: 0,
+        gains: None,
+        placed: None,
+        low: 0.0,
+        ears: Ears::default(),
+    };
+    let level = |music: bool, ambience_volume: f32, cd_volume: [f32; 2], with_blast: bool| {
+        let mut bed = ambience_voice(1, vec![8000; 200_000], 1, true);
+        bed.music = music;
+        let mut mixer = Mixer {
+            ambience: vec![bed],
+            ambience_volume,
+            cd_volume,
+            effects: with_blast.then(blast).into_iter().collect(),
+            ..Mixer::default()
+        };
+        let mut output = vec![0.0_f32; 2 * 4096];
+        mixer.callback(&mut output);
+        // Just after the blast ends.
+        [output[2 * 600], output[2 * 600 + 1]]
+    };
+    let [ambience, _] = level(false, 0.25, [1.0, 0.5], false);
+    let [left, right] = level(true, 0.25, [1.0, 0.5], false);
+    assert!(
+        (left - ambience * 4.0).abs() < 1.0e-4,
+        "{left} against {ambience}"
+    );
+    assert!(
+        (right - left * 0.5).abs() < 1.0e-4,
+        "{right} against {left}"
+    );
+    // At the same volume, after a blast the ambience is dipped and the music
+    // only held down by the limiter, as retail's CD music is.
+    let [music_after, _] = level(true, 1.0, [1.0, 1.0], true);
+    let [ambience_after, _] = level(false, 1.0, [1.0, 1.0], true);
+    assert!(
+        music_after > ambience_after * 1.2,
+        "{music_after} against {ambience_after}"
+    );
 }
 
 /// Port option: under the water the game's sound is muffled, ramping in,
