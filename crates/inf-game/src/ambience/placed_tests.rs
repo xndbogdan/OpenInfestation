@@ -191,6 +191,13 @@ fn the_crystals_ring_splices_shields_with_the_flash() {
     let shields = tuning.atmosphere().shields.as_ref().unwrap();
     assert_eq!(shields.attack, Some(0.0));
     assert_eq!(shields.range, 4500.0);
+    // Its gain carries a ring far; a near one stops at the most.
+    let most = shields.most.unwrap();
+    assert_eq!(ring_loudness(shields, 0.0), most);
+    let far = 3_000.0;
+    let gained = shields.gain * loudness(far, shields.range);
+    assert!(gained < most);
+    assert_eq!(ring_loudness(shields, far), gained);
     assert_eq!(shields.sounds.len(), 3);
     assert!(shields
         .sounds

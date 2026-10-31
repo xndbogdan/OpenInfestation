@@ -1290,7 +1290,9 @@ pub struct SourceTuning {
 /// from the same place every `every` seconds (a span; a transformer's
 /// crackle, lava's pops). For the crystals' rings, `attack`: each ring
 /// rises over that many seconds and then follows its crystal's flare down,
-/// lasting as long as the flash (none: a one-shot at its full loudness).
+/// lasting as long as the flash (none: a one-shot at its full loudness),
+/// and `most`, the loudest a ring gets: its `gain` carries it far, and near
+/// it stops there.
 #[derive(Clone, Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct PlacedTuning {
@@ -1303,6 +1305,8 @@ pub struct PlacedTuning {
     pub every: Option<[f32; 2]>,
     #[serde(default)]
     pub attack: Option<f32>,
+    #[serde(default)]
+    pub most: Option<f32>,
 }
 
 /// A bed: its recordings, its gain, and its sweeteners: one-shot details

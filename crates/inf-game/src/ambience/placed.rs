@@ -368,6 +368,14 @@ fn loudness(distance: f32, range: f32) -> f32 {
     near * near
 }
 
+/// A crystal's ring `distance` away: its gain's share, no louder than the
+/// tuning's most (2026-10-31: the gain that carried them far made a near
+/// one overbearing).
+fn ring_loudness(place: &crate::modern_tuning::PlacedTuning, distance: f32) -> f32 {
+    let loud = place.gain * loudness(distance, place.range);
+    place.most.map_or(loud, |most| loud.min(most))
+}
+
 /// The low-pass's share of each new sample for a sound `distance` away: a
 /// cutoff from 16 kHz at its place down to 2.4 kHz at its range.
 fn dullness(distance: f32, range: f32) -> f32 {
@@ -776,7 +784,7 @@ impl Placed {
         // volume, not dipped under them; `AmbienceVoice::effect`), not at
         // the beds' level: under the ambience's level, the Ambience slider
         // and the gunfire's dip it sat 40 dB under the guns that struck it.
-        let gain = place.gain * loudness(distance, place.range);
+        let gain = ring_loudness(place, distance);
         let (pan, cut) = (
             pan(offset, distance, right),
             dullness(distance, place.range),
