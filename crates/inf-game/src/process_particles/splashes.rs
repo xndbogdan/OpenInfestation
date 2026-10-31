@@ -114,7 +114,6 @@ impl ProcessParticleRuntime {
         executable: FrontendExecutable<'_>,
         wanted: impl Fn(u32, u32) -> bool,
     ) -> Vec<ParticleBolt> {
-        use super::draw::animation::{frame_address, ParticleAnimationFrame};
         self.active
             .iter()
             .chain(&self.pending)
@@ -132,11 +131,6 @@ impl ProcessParticleRuntime {
                 let age = u16::from_le_bytes(born.try_into().ok()?)
                     .wrapping_sub(1)
                     .wrapping_sub(life);
-                let frame = ParticleAnimationFrame::read(
-                    executable,
-                    frame_address(executable, table, life).ok()?,
-                )
-                .ok()?;
                 Some(ParticleBolt {
                     position: record.position().ok()?,
                     velocity: [
@@ -144,7 +138,7 @@ impl ProcessParticleRuntime {
                         record.read_word(0x0c).ok()? as i16,
                         record.read_word(0x0e).ok()? as i16,
                     ],
-                    sprite: frame.sprite_slot,
+                    sprite: frame_sprite(record, executable)?,
                     scale: record.read_dword(0x2c).ok()? as i32 as f32 / 256.0,
                     fresh: age <= FRESH,
                 })
@@ -173,6 +167,21 @@ impl ProcessParticleRuntime {
             })
             .collect()
     }
+}
+
+/// The sprite the particle `record`'s animation shows now (`004657E0`'s
+/// frame at its life left).
+pub fn frame_sprite(
+    record: &super::ParticleRecord,
+    executable: FrontendExecutable<'_>,
+) -> Option<i16> {
+    use super::draw::animation::{frame_address, ParticleAnimationFrame};
+    let table = record.read_dword(0x28).ok()?;
+    let life = record.read_word(0x10).ok()?;
+    let frame =
+        ParticleAnimationFrame::read(executable, frame_address(executable, table, life).ok()?)
+            .ok()?;
+    Some(frame.sprite_slot)
 }
 
 #[cfg(test)]

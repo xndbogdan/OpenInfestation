@@ -356,7 +356,7 @@ impl SoftwareScene<'_, '_> {
     /// tuning names none), its facets flash toward the brightest lamp, and it
     /// lights its surroundings in its colour; `flare`, where a shot struck it
     /// (0 to 1, and what struck it), turns it and its light toward the
-    /// flare's colour for that shot. A shot
+    /// flare's colour for that shot (a bolt's its sprite's). A shot
     /// merely flying near it is no strike and makes it glow no more: the
     /// tracer lights its faces from the shot's light as it lights anything
     /// (2026-10-26: they light up only when actually struck). None for other furniture, outside a traced frame, or in
@@ -456,7 +456,7 @@ impl SoftwareScene<'_, '_> {
         let (colour, glow, thrown, reach) = match flaring {
             Some((look, (flare, kind))) => {
                 let share = flare * flare;
-                let tone = look.color_of(kind);
+                let tone = look.color_of(kind, |sprite| self.sprite_colour(i32::from(sprite)));
                 (
                     std::array::from_fn(|c| colour[c] + (tone[c] - colour[c]) * share),
                     glow + look.strength * flare,
@@ -582,7 +582,12 @@ pub(super) fn draw_furniture(
                     .zip(eye)
                     .zip(inputs.crystal_flares)
                     .and_then(|((look, eye), flares)| {
-                        flares.spark([item.xyz[0] as u16, item.xyz[2] as u16], eye, &look)
+                        flares.spark(
+                            [item.xyz[0] as u16, item.xyz[2] as u16],
+                            eye,
+                            &look,
+                            |sprite| scene.sprite_colour(i32::from(sprite)),
+                        )
                     });
                 let ambient = catch.as_ref().map_or(item.ambient_rgb, |catch| {
                     std::array::from_fn(|c| item.ambient_rgb[c] + catch.ambient[c])

@@ -430,4 +430,24 @@ fn bolts_read_back_with_their_sprite() {
     assert_eq!(bolts[0].position, [10, 20, 30]);
     // Selector 2's table 00539D28 shows sprite 2, at scale 0x1C0.
     assert_eq!((bolts[0].sprite, bolts[0].scale), (2, 1.75));
+    // An enemy's: selector 5's table 00539D78 shows the pink sprite 1, and
+    // its record alone (as the furniture collision has it) says so too.
+    let pink = pool
+        .create_factory_particle(
+            request(ParticleFactoryKind::Factory466710, 5),
+            &mut context,
+            &mut sources,
+            &mut host,
+        )
+        .unwrap()
+        .unwrap();
+    let record = pool.record(pink).unwrap();
+    assert_eq!(
+        crate::process_particles::splashes::frame_sprite(record, executable(&raw)),
+        Some(1)
+    );
+    assert!(pool
+        .bolts(executable(&raw))
+        .iter()
+        .any(|bolt| bolt.sprite == 1));
 }

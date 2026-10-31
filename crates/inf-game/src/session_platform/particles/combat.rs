@@ -406,16 +406,19 @@ impl ParticleProjectileHost for WorldProjectileHost<'_> {
         at: [u16; 3],
         context: &mut ParticleCollisionContext<'_, '_, '_>,
     ) {
-        let bolt = context
-            .particles
-            .record(id)
-            .and_then(|record| record.read_dword(0))
-            .is_ok_and(|vtable| vtable == crate::process_particles::splashes::BOLT_VTABLE);
-        if bolt {
+        use crate::process_particles::splashes::{frame_sprite, BOLT_VTABLE};
+        let Ok(record) = context.particles.record(id) else {
+            return;
+        };
+        if record
+            .read_dword(0)
+            .is_ok_and(|vtable| vtable == BOLT_VTABLE)
+        {
             self.furniture_hits
                 .push(crate::crystal_flares::FurnitureHit {
                     cell: contact.xz,
                     at,
+                    sprite: frame_sprite(record, context.executable),
                 });
         }
     }

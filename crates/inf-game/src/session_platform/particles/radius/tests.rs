@@ -296,4 +296,31 @@ fn projectile_actor_wrapper_runs_real_damage_task_and_hit_matrix_in_place() {
     let at = ((categories.target as usize) * 5 + categories.source as usize) * 4;
     expected[at..at + 4].copy_from_slice(&hits_before.wrapping_add(1).to_le_bytes());
     assert_eq!(&record[0x28..0x8c], expected);
+    // The same particle as an enemy's bolt (selector 5's pink animation,
+    // 00539D78) meeting furniture: the crystals hear of it with its sprite.
+    let scratch = session.particles.record_mut(ParticleId::Scratch).unwrap();
+    scratch
+        .write_dword(0, crate::process_particles::splashes::BOLT_VTABLE)
+        .unwrap();
+    scratch.write_dword(0x28, 0x539d78).unwrap();
+    scratch.write_word(0x10, 100).unwrap();
+    host.furniture_contact(
+        ParticleId::Scratch,
+        crate::process_particles::impact::collision::ParticleFurnitureContact { xz: [128, 256] },
+        [130, 40, 250],
+        &mut ParticleCollisionContext {
+            particles: &mut session.particles,
+            request: &mut request,
+            executable,
+            rng: &mut world.rng,
+        },
+    );
+    assert_eq!(
+        host.furniture_hits,
+        &[crate::crystal_flares::FurnitureHit {
+            cell: [128, 256],
+            at: [130, 40, 250],
+            sprite: Some(1),
+        }]
+    );
 }

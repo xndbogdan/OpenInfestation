@@ -1205,12 +1205,18 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
     /// retail's all-water tile (`00537010`'s sixteenth record), as the
     /// tracer takes it.
     pub fn water_colour(&mut self) -> Option<[f32; 3]> {
-        let slot = self.tables.water.shoreline[15].sprite_slot;
+        self.sprite_colour(i32::from(self.tables.water.shoreline[15].sprite_slot))
+    }
+
+    /// The colour sprite `slot` shines in ([`crate::d3d_texture::CpuTexture::mean_colour`],
+    /// brightest channel 1), as the tracer takes it; None where it does not
+    /// resolve.
+    pub fn sprite_colour(&mut self, slot: i32) -> Option<[f32; 3]> {
         let resource = self
             .resources
             .resolve(RenderResourceRequest {
                 kind: RenderResourceKind::Sprite,
-                argument: i32::from(slot),
+                argument: slot,
             })
             .ok()?;
         let upload = self.pixels.texture_state.upload;

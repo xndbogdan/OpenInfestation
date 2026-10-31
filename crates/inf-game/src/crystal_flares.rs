@@ -1,5 +1,7 @@
 //! The scenery crystals drinking the guns' fire: a plasma bolt passing through a crystal (`xshard*`, `xclump*`) makes
-//! it flare a strong blue, a laser beam through one a yellow, fading over
+//! it flare strongly in the bolt's own colour (its sprite's: the blue bolts
+//! blue, the enemies' pink and red ones theirs), a laser beam through one a
+//! yellow, fading over
 //! about a second, and a shield's sound rings from it. Only a look and a
 //! sound: the shot flies on as in retail.
 //!
@@ -44,11 +46,12 @@ const ARC_APART: [f32; 3] = [0.12, 0.3, 0.5];
 pub type ArcAnchors = [[[u16; 3]; 2]; ARC_PAIRS];
 
 /// What struck a crystal, which picks the colour it flares.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum StrikeKind {
-    /// A gun's bolt (the plasma's among them): the flare's blue.
-    #[default]
-    Plasma,
+    /// A gun's bolt (the plasma's among them), with the sprite its animation
+    /// showed: the flare takes that sprite's colour, the flare's blue where
+    /// it is unknown.
+    Plasma { sprite: Option<i16> },
     /// A laser beam: the flare's yellow.
     Laser,
 }
@@ -172,15 +175,17 @@ impl CrystalFlares {
     }
 
     /// The spark running through the crystal at `cell`, if any, as a draw
-    /// from `eye` takes it under `flare`.
+    /// from `eye` takes it under `flare`, a bolt's sprite in the colour
+    /// `sprite_colour` gives it.
     pub fn spark(
         &self,
         cell: [u16; 2],
         eye: [f64; 3],
         flare: &crate::modern_tuning::CrystalFlareTuning,
+        mut sprite_colour: impl FnMut(i16) -> Option<[f32; 3]>,
     ) -> Option<CrystalSpark> {
         let spark = self.sparks.get(&cell)?;
-        Some(self.as_drawn(spark, eye, flare))
+        Some(self.as_drawn(spark, eye, flare, &mut sprite_colour))
     }
 
     /// Every spark running now, as a draw from `eye` takes it.
@@ -188,10 +193,11 @@ impl CrystalFlares {
         &self,
         eye: [f64; 3],
         flare: &crate::modern_tuning::CrystalFlareTuning,
+        mut sprite_colour: impl FnMut(i16) -> Option<[f32; 3]>,
     ) -> Vec<CrystalSpark> {
         self.sparks
             .values()
-            .map(|spark| self.as_drawn(spark, eye, flare))
+            .map(|spark| self.as_drawn(spark, eye, flare, &mut sprite_colour))
             .collect()
     }
 
@@ -200,6 +206,7 @@ impl CrystalFlares {
         spark: &Spark,
         eye: [f64; 3],
         flare: &crate::modern_tuning::CrystalFlareTuning,
+        sprite_colour: &mut impl FnMut(i16) -> Option<[f32; 3]>,
     ) -> CrystalSpark {
         // The spark plays half as fast again as it lives (so the
         // effect feels snappier); the light under the crystal keeps its own pace.
@@ -220,7 +227,7 @@ impl CrystalFlares {
             seconds: flare.seconds.max(0.3),
             radius: spark.radius,
             light: flare
-                .color_of(spark.kind)
+                .color_of(spark.kind, sprite_colour)
                 .map(|channel| channel.max(0.0) * flare.strength.max(0.0)),
         }
     }
@@ -654,13 +661,15 @@ impl CrystalSurvey {
 }
 
 /// A gun's bolt that met a furniture item this tick (the game's own
-/// projectile collision, `004653B0`): the item's cell and the probe's
-/// refined centre (world words). A crystal's collision hull stands out
-/// from its faces, so the bolt dies there before it would reach them.
+/// projectile collision, `004653B0`): the item's cell, the probe's
+/// refined centre (world words) and the sprite the bolt showed. A
+/// crystal's collision hull stands out from its faces, so the bolt dies
+/// there before it would reach them.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct FurnitureHit {
     pub cell: [u16; 2],
     pub at: [u16; 3],
+    pub sprite: Option<i16>,
 }
 
 /// The crystals the game's own collision says bolts met, each once, the
@@ -682,7 +691,7 @@ fn contact_strikes(crystals: &[Crystal], hits: &[FurnitureHit], eye: [u16; 3]) -
         let toward = Shot {
             start: hit.at,
             end: middle,
-            kind: StrikeKind::Plasma,
+            kind: StrikeKind::Plasma { sprite: hit.sprite },
         };
         let strike = crystal.struck_by(&toward, eye).unwrap_or(Strike {
             cell: crystal.cell,
@@ -693,7 +702,7 @@ fn contact_strikes(crystals: &[Crystal], hits: &[FurnitureHit], eye: [u16; 3]) -
             }),
             hit: hit.at,
             radius: crystal.mesh.radius.max(1.0),
-            kind: StrikeKind::Plasma,
+            kind: toward.kind,
         });
         struck.push(strike);
     }
@@ -708,7 +717,9 @@ fn bolt_shot(bolt: &ParticleBolt, seconds: f32) -> Shot {
     Shot {
         start: std::array::from_fn(|axis| bolt.position[axis].wrapping_sub(back(axis) as u16)),
         end: bolt.position,
-        kind: StrikeKind::Plasma,
+        kind: StrikeKind::Plasma {
+            sprite: Some(bolt.sprite),
+        },
     }
 }
 
@@ -811,6 +822,9 @@ fn strikes(crystals: &[Crystal], shots: &[Shot], eye: [u16; 3]) -> Vec<Strike> {
 mod tests {
     use super::*;
 
+    /// An enemy's pink bolt (sprite 1, `00539D78`'s).
+    const BOLT: StrikeKind = StrikeKind::Plasma { sprite: Some(1) };
+
     /// A crystal standing at `origin`: a box 100 across and 200 tall from its
     /// foot, unturned.
     fn crystal(origin: [u16; 3]) -> Crystal {
@@ -838,15 +852,15 @@ mod tests {
     #[test]
     fn only_a_shot_through_its_faces_strikes_a_crystal() {
         let crystals = [crystal([1_000, 0, 2_000])];
-        let through = shot([800, 100, 2_000], [1_200, 100, 2_000], StrikeKind::Plasma);
+        let through = shot([800, 100, 2_000], [1_200, 100, 2_000], BOLT);
         let struck = strikes(&crystals, &[through], [900, 0, 2_000]);
         assert_eq!(struck.len(), 1);
         assert_eq!(struck[0].hit, [950, 100, 2_000]);
         assert_eq!(struck[0].offset, [100.0, 100.0, 0.0]);
-        assert_eq!(struck[0].kind, StrikeKind::Plasma);
+        assert_eq!(struck[0].kind, BOLT);
         // Ten units beside its face, and over its top.
-        let beside = shot([800, 100, 2_060], [1_200, 100, 2_060], StrikeKind::Plasma);
-        let over = shot([800, 210, 2_000], [1_200, 210, 2_000], StrikeKind::Plasma);
+        let beside = shot([800, 100, 2_060], [1_200, 100, 2_060], BOLT);
+        let over = shot([800, 210, 2_000], [1_200, 210, 2_000], BOLT);
         assert!(strikes(&crystals, &[beside, over], [900, 0, 2_000]).is_empty());
         // Across the wrap.
         let wrapped = [crystal([10, 0, 3_000])];
@@ -859,7 +873,8 @@ mod tests {
 
     /// A bolt the game's collision stopped on a crystal's hull strikes it,
     /// once however many probes met it, its spark on the face toward the
-    /// bolt; a contact with other furniture strikes nothing.
+    /// bolt, with the sprite the first showed; a contact with other
+    /// furniture strikes nothing.
     #[test]
     fn a_collision_contact_strikes_its_crystal() {
         let crystals = [crystal([1_000, 0, 2_000])];
@@ -867,20 +882,32 @@ mod tests {
             FurnitureHit {
                 cell: [1_000, 2_000],
                 at: [880, 100, 2_000],
+                sprite: Some(3),
             },
             FurnitureHit {
                 cell: [1_000, 2_000],
                 at: [885, 100, 2_000],
+                sprite: Some(5),
             },
             FurnitureHit {
                 cell: [5_000, 5_000],
                 at: [5_000, 50, 5_000],
+                sprite: Some(3),
             },
         ];
         let struck = contact_strikes(&crystals, &hits, [0; 3]);
         assert_eq!(struck.len(), 1);
         assert_eq!(struck[0].hit, [950, 100, 2_000]);
-        assert_eq!(struck[0].kind, StrikeKind::Plasma);
+        assert_eq!(struck[0].kind, StrikeKind::Plasma { sprite: Some(3) });
+        // A bolt whose sprite did not read strikes with none.
+        let unread = FurnitureHit {
+            sprite: None,
+            ..hits[0]
+        };
+        assert_eq!(
+            contact_strikes(&crystals, &[unread], [0; 3])[0].kind,
+            StrikeKind::Plasma { sprite: None }
+        );
     }
 
     /// A laser aimed with the crosshair on a crystal ends where the sight
@@ -894,7 +921,7 @@ mod tests {
         assert_eq!(struck.len(), 1);
         assert_eq!(struck[0].hit, [950, 100, 2_000]);
         let short = shot([600, 100, 2_000], [860, 100, 2_000], StrikeKind::Laser);
-        let bolt = shot([600, 100, 2_000], [920, 100, 2_000], StrikeKind::Plasma);
+        let bolt = shot([600, 100, 2_000], [920, 100, 2_000], BOLT);
         assert!(strikes(&crystals, &[short, bolt], [0; 3]).is_empty());
     }
 
@@ -903,12 +930,12 @@ mod tests {
     #[test]
     fn a_step_inside_a_crystal_strikes_it() {
         let crystals = [crystal([1_000, 0, 2_000])];
-        let inside = shot([990, 100, 2_000], [1_010, 100, 2_000], StrikeKind::Plasma);
+        let inside = shot([990, 100, 2_000], [1_010, 100, 2_000], BOLT);
         assert_eq!(
             strikes(&crystals, &[inside], [0; 3])[0].hit,
             [1_010, 100, 2_000]
         );
-        let outside = shot([1_100, 100, 2_000], [1_120, 100, 2_000], StrikeKind::Plasma);
+        let outside = shot([1_100, 100, 2_000], [1_120, 100, 2_000], BOLT);
         assert!(strikes(&crystals, &[outside], [0; 3]).is_empty());
     }
 
@@ -923,8 +950,8 @@ mod tests {
             radius: 305.0,
         });
         slab.rows = [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]];
-        let along_z = shot([900, 50, 1_250], [1_100, 50, 1_250], StrikeKind::Plasma);
-        let along_x = shot([1_250, 50, 900], [1_250, 50, 1_100], StrikeKind::Plasma);
+        let along_z = shot([900, 50, 1_250], [1_100, 50, 1_250], BOLT);
+        let along_x = shot([1_250, 50, 900], [1_250, 50, 1_100], BOLT);
         assert_eq!(strikes(&[slab.clone()], &[along_z], [0; 3]).len(), 1);
         assert!(strikes(&[slab], &[along_x], [0; 3]).is_empty());
     }
@@ -979,7 +1006,7 @@ mod tests {
         let through = shot(
             [middle[0].wrapping_sub(side), middle[1], middle[2]],
             [middle[0].wrapping_add(side), middle[1], middle[2]],
-            StrikeKind::Plasma,
+            BOLT,
         );
         let beside = Shot {
             start: [through.start[0], middle[1], middle[2].wrapping_add(side)],
@@ -1004,7 +1031,8 @@ mod tests {
         assert_eq!(crystal.anchors(struck.hit), struck.anchors);
     }
 
-    /// A bolt's way back is its velocity over the frame's time.
+    /// A bolt's way back is its velocity over the frame's time, a shot with
+    /// the sprite it shows; a crystal it crosses is struck with that sprite.
     #[test]
     fn a_bolt_covers_the_way_it_moved() {
         let bolt = ParticleBolt {
@@ -1017,7 +1045,10 @@ mod tests {
         let way = bolt_shot(&bolt, 0.05);
         assert_eq!(way.end, [1_000, 100, 2_000]);
         assert_eq!(way.start, [847, 100, 2_076]);
-        assert_eq!(way.kind, StrikeKind::Plasma);
+        assert_eq!(way.kind, StrikeKind::Plasma { sprite: Some(2) });
+        let crystals = [crystal([900, 0, 2_030])];
+        let struck = strikes(&crystals, &[way], [0; 3]);
+        assert_eq!(struck[0].kind, StrikeKind::Plasma { sprite: Some(2) });
     }
 
     /// A strike flares its crystal fully, fading over the given seconds; a
@@ -1033,7 +1064,7 @@ mod tests {
             anchors: [[[7, 50, 9]; 2]; ARC_PAIRS],
             hit: [7, 50, 9],
             radius: 100.0,
-            kind: StrikeKind::Plasma,
+            kind: BOLT,
         };
         assert_eq!(flares.update(&[strike], 0, 1.0).len(), 1);
         assert_eq!(flares.level([7, 9]), 1.0);
@@ -1067,14 +1098,14 @@ mod tests {
         let look = look();
         assert_eq!(flares.update(&[strike], 0, 1.2).len(), 1);
         assert_eq!(flares.flare([7, 9]), Some((1.0, StrikeKind::Laser)));
-        let first = flares.spark([7, 9], [0.0; 3], &look).unwrap();
+        let first = flares.spark([7, 9], [0.0; 3], &look, |_| None).unwrap();
         assert_eq!(first.light, [2.0, 1.6, 0.3]);
         let mut now = 0;
         let mut restarted = false;
         while now < 1_200_000 {
             now += 16_000;
             assert!(flares.update(&[strike], now, 1.2).is_empty());
-            restarted |= flares.spark([7, 9], [0.0; 3], &look).unwrap().age == 0.0;
+            restarted |= flares.spark([7, 9], [0.0; 3], &look, |_| None).unwrap().age == 0.0;
         }
         assert!(restarted, "the spark starts again while the beam holds");
     }
@@ -1127,19 +1158,22 @@ mod tests {
             anchors: [[[7, 50, 9]; 2]; ARC_PAIRS],
             hit: [1_000, 200, 3_000],
             radius: 120.0,
-            kind: StrikeKind::Plasma,
+            kind: BOLT,
         };
         flares.update(&[strike], 1_000_000, 1.2);
         let look = look();
+        let pink = |sprite: i16| (sprite == 1).then_some([1.0, 0.25, 0.5]);
         let spark = flares
-            .spark([7, 9], [900.0, 100.0, 3_000.0], &look)
+            .spark([7, 9], [900.0, 100.0, 3_000.0], &look, pink)
             .unwrap();
         assert_eq!(spark.hit, [100.0, 100.0, 0.0]);
         assert_eq!(spark.age, 0.0);
-        assert_eq!(spark.light, [0.5, 1.0, 2.0]);
+        assert_eq!(spark.light, [2.0, 0.5, 1.0]);
         flares.update(&[], 1_500_000, 1.2);
-        assert!((flares.spark([7, 9], [0.0; 3], &look).unwrap().age - 0.75).abs() < 1.0e-6);
+        assert!(
+            (flares.spark([7, 9], [0.0; 3], &look, |_| None).unwrap().age - 0.75).abs() < 1.0e-6
+        );
         flares.update(&[], 1_900_000, 1.2);
-        assert!(flares.spark([7, 9], [0.0; 3], &look).is_none());
+        assert!(flares.spark([7, 9], [0.0; 3], &look, |_| None).is_none());
     }
 }

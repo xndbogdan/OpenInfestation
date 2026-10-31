@@ -1456,7 +1456,11 @@ fn draw_world_pass<'r>(
             .crystals()
             .flare
             .map_or_else(Vec::new, |look| {
-                world.crystal_flares.sparks(view.eye.map(f64::from), &look)
+                world
+                    .crystal_flares
+                    .sparks(view.eye.map(f64::from), &look, |sprite| {
+                        host.backend.sprite_colour(i32::from(sprite))
+                    })
             }),
         clock: animation_clock,
         clock_micros: micros,

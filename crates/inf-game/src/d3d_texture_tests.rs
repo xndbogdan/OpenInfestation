@@ -432,3 +432,20 @@ mod native;
 
 #[path = "d3d_texture_corpus_tests.rs"]
 mod corpus;
+
+/// A texture's glow colour is its drawn texels' mean, the coloured ones
+/// counting most and keyed ones left out, its brightest channel 1: a dim
+/// pink bolt sprite with a white core and keyed corners shines pink.
+#[test]
+fn mean_colour_takes_the_coloured_texels_brightest_channel_one() {
+    let pink = test_texture([4, 4], |x, y| match (x, y) {
+        (0 | 3, 0 | 3) => [0, 0, 0, 0],
+        (1..=2, 1..=2) => [255, 255, 255, 255],
+        _ => [100, 10, 40, 255],
+    });
+    let [r, g, b] = pink.mean_colour();
+    assert_eq!(r, 1.0);
+    assert!(g < 0.2 && (0.35..0.6).contains(&b), "{g} {b}");
+    // Nothing drawn: white.
+    assert_eq!(test_texture([2, 2], |_, _| [0; 4]).mean_colour(), [1.0; 3]);
+}

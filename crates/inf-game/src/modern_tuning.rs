@@ -404,8 +404,9 @@ pub struct CrystalTuning {
     pub flare: Option<CrystalFlareTuning>,
 }
 
-/// A crystal's flare where a gun's bolt strikes it: the colour it turns (`color` for a plasma bolt, `laser_color`
-/// for a laser beam), the glow it gains, the share of that glow it throws
+/// A crystal's flare where a gun's bolt strikes it: the colour it turns (a
+/// plasma bolt's sprite's, `color` where that is unknown; `laser_color` for
+/// a laser beam), the glow it gains, the share of that glow it throws
 /// on what is round it (`under`), and how far its light then reaches at the
 /// strike, fading out over `seconds`.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq)]
@@ -430,10 +431,19 @@ fn whole() -> f32 {
 }
 
 impl CrystalFlareTuning {
-    /// The colour a crystal turns where `kind` struck it.
-    pub fn color_of(&self, kind: crate::crystal_flares::StrikeKind) -> [f32; 3] {
+    /// The colour a crystal turns where `kind` struck it: a bolt's its
+    /// sprite's, as `sprite_colour` gives it (brightest channel 1), the
+    /// tuned `color` where the sprite is unknown or does not resolve; a
+    /// laser's `laser_color`.
+    pub fn color_of(
+        &self,
+        kind: crate::crystal_flares::StrikeKind,
+        sprite_colour: impl FnOnce(i16) -> Option<[f32; 3]>,
+    ) -> [f32; 3] {
         match kind {
-            crate::crystal_flares::StrikeKind::Plasma => self.color,
+            crate::crystal_flares::StrikeKind::Plasma { sprite } => {
+                sprite.and_then(sprite_colour).unwrap_or(self.color)
+            }
             crate::crystal_flares::StrikeKind::Laser => self.laser_color,
         }
     }
@@ -1686,6 +1696,24 @@ pub fn current() -> Rc<ModernTuning> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A bolt's flare takes its sprite's colour; a bolt with no sprite, or
+    /// one whose sprite does not resolve, the tuned blue; a laser its yellow
+    /// whatever the sprites.
+    #[test]
+    fn a_flare_takes_its_bolts_sprite_colour() {
+        use crate::crystal_flares::StrikeKind;
+        let flare = ModernTuning::defaults().crystals().flare.unwrap();
+        let pink = |sprite: i16| (sprite == 1).then_some([1.0, 0.04, 0.31]);
+        let bolt = |sprite| StrikeKind::Plasma { sprite };
+        assert_eq!(flare.color_of(bolt(Some(1)), pink), [1.0, 0.04, 0.31]);
+        assert_eq!(flare.color_of(bolt(Some(7)), pink), flare.color);
+        assert_eq!(flare.color_of(bolt(None), pink), flare.color);
+        assert_eq!(
+            flare.color_of(StrikeKind::Laser, |_| Some([1.0; 3])),
+            flare.laser_color
+        );
+    }
 
     /// A file changes only what it names: the defaults fill the rest, and a
     /// world's own values sit over the file's.
