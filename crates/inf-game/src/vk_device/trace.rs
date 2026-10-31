@@ -188,8 +188,8 @@ struct Ground {
     /// The points and tiles the detail patch is built from, shared with the
     /// thread that builds it.
     source: std::sync::Arc<crate::scene_ground_detail::DetailGround>,
-    /// Whether [`Tracer::ground_tiles`] hold this mesh yet.
-    built: bool,
+    /// The tiles whose [`Tracer::ground_tiles`] do not hold this mesh yet.
+    unbuilt: Vec<usize>,
 }
 
 /// The ground's detail patch round the eye in device memory.
@@ -3015,24 +3015,60 @@ impl State {
                 .as_ref()
                 .is_none_or(|ground| ground.generation != mesh.generation)
             {
-                if let Some(old) = tracer.ground.take() {
-                    self.transient
-                        .extend([old.vertices, old.indices, old.triangles]);
-                }
-                let source =
-                    std::sync::Arc::new(crate::scene_ground_detail::DetailGround::new(mesh));
+                let _scope = crate::cpu_profile::scope("trace: ground upload");
                 let vertices = self.device_buffer(core, bytes_of(&mesh.vertices), geometry)?;
-                let indices =
-                    self.device_buffer(core, bytes_of(&source.tiles.indices), geometry)?;
-                let triangles =
-                    self.device_buffer(core, bytes_of(&source.tiles.triangles), geometry)?;
-                tracer.ground = Some(Ground {
-                    generation: mesh.generation,
-                    vertices,
-                    indices,
-                    triangles,
-                    source,
-                    built: false,
+                // A mesh that moved the last one's points (a bridge rising)
+                // keeps its triangles and tiles: new points, and the tiles
+                // they moved built again.
+                let patch = mesh.changed.as_ref().and_then(|(previous, moved)| {
+                    tracer
+                        .ground
+                        .take_if(|ground| ground.generation == *previous)
+                        .map(|ground| (ground, moved))
+                });
+                tracer.ground = Some(match patch {
+                    Some((old, moved)) => {
+                        self.transient.push(old.vertices);
+                        let mut unbuilt = old.unbuilt;
+                        for &tile in moved {
+                            if old.source.tiles.ranges[tile][1] > 0 && !unbuilt.contains(&tile) {
+                                unbuilt.push(tile);
+                            }
+                        }
+                        Ground {
+                            generation: mesh.generation,
+                            vertices,
+                            indices: old.indices,
+                            triangles: old.triangles,
+                            source: std::sync::Arc::new(
+                                crate::scene_ground_detail::DetailGround::moved(&old.source, mesh),
+                            ),
+                            unbuilt,
+                        }
+                    }
+                    None => {
+                        if let Some(old) = tracer.ground.take() {
+                            self.transient
+                                .extend([old.vertices, old.indices, old.triangles]);
+                        }
+                        let source = std::sync::Arc::new(
+                            crate::scene_ground_detail::DetailGround::new(mesh),
+                        );
+                        let indices =
+                            self.device_buffer(core, bytes_of(&source.tiles.indices), geometry)?;
+                        let triangles =
+                            self.device_buffer(core, bytes_of(&source.tiles.triangles), geometry)?;
+                        Ground {
+                            generation: mesh.generation,
+                            vertices,
+                            indices,
+                            triangles,
+                            unbuilt: (0..source.tiles.ranges.len())
+                                .filter(|&tile| source.tiles.ranges[tile][1] > 0)
+                                .collect(),
+                            source,
+                        }
+                    }
                 });
                 upload_barrier(core, command);
             }
@@ -3108,12 +3144,13 @@ impl State {
         let ground_stride = std::mem::size_of::<TerrainMeshVertex>() as u64;
         let tile_geometries: Vec<(usize, u32, [vk::AccelerationStructureGeometryKHR; 1])> =
             match (ground_mesh, tracer.ground.as_ref()) {
-                (Some(mesh), Some(ground)) if !ground.built => {
+                (Some(mesh), Some(ground)) => {
                     let vertices = Self::address(core, &ground.vertices);
                     let indices = Self::address(core, &ground.indices);
-                    (0..tile_count)
-                        .filter(|&tile| ground.source.tiles.ranges[tile][1] > 0)
-                        .map(|tile| {
+                    ground
+                        .unbuilt
+                        .iter()
+                        .map(|&tile| {
                             let [first, count] = ground.source.tiles.ranges[tile];
                             (
                                 tile,
@@ -3593,7 +3630,12 @@ impl State {
             build_barrier(core, command);
         }
         if !tile_geometries.is_empty() {
-            tracer.ground.as_mut().expect("uploaded above").built = true;
+            tracer
+                .ground
+                .as_mut()
+                .expect("uploaded above")
+                .unbuilt
+                .clear();
         }
         if let Some((count, geometries)) = &detail_geometries {
             build(

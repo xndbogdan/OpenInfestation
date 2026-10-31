@@ -194,7 +194,7 @@ pub struct DetailGround {
     pub points: usize,
     pub spacing: f32,
     pub vertices: Vec<TerrainMeshVertex>,
-    pub tiles: GroundTiles,
+    pub tiles: std::sync::Arc<GroundTiles>,
 }
 
 impl DetailGround {
@@ -204,7 +204,19 @@ impl DetailGround {
             points: mesh.points as usize,
             spacing: mesh.spacing,
             vertices: mesh.vertices.clone(),
-            tiles: tile_ground(mesh),
+            tiles: std::sync::Arc::new(tile_ground(mesh)),
+        }
+    }
+
+    /// `mesh`, which moved `before`'s points and kept its triangles
+    /// ([`TerrainMesh::changed`]): its tiles are `before`'s.
+    pub fn moved(before: &Self, mesh: &TerrainMesh) -> Self {
+        Self {
+            generation: mesh.generation,
+            points: mesh.points as usize,
+            spacing: mesh.spacing,
+            vertices: mesh.vertices.clone(),
+            tiles: before.tiles.clone(),
         }
     }
 }

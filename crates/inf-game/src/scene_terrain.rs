@@ -22,7 +22,10 @@ use std::{
 
 use inf_formats::{terrain_blend_table, TerrainCell, TERRAIN_GRID_SIDE};
 
-use crate::terrain_runtime::TerrainRuntime;
+use crate::{
+    scene_ground_detail::{TILES, TILE_UNITS},
+    terrain_runtime::TerrainRuntime,
+};
 
 /// The tracer's ambient light as a share of the sun's: retail's object
 /// ambient, the tint shifted right by two (`world_scene.rs`).
@@ -89,15 +92,130 @@ pub struct TerrainMesh {
     /// tones ([`ground_shade_slope`]): full path tracing's ground takes its
     /// reflectance from it.
     pub shade_slope: f32,
+    /// The mesh this one patched and the ground tiles
+    /// ([`crate::scene_ground_detail::tile_ground`]'s, X-major) whose
+    /// points it moved, when only cells' heights changed (a bridge rising):
+    /// the device rebuilds those tiles alone.
+    pub changed: Option<(u64, Vec<usize>)>,
+    /// The dry ground's typical albedo, which the ground under the water
+    /// takes.
+    underwater: Option<f32>,
     pub vertices: Vec<TerrainMeshVertex>,
-    pub indices: Vec<u32>,
+    pub indices: Rc<[u32]>,
     /// Per triangle: the blend texture's rank (H3 `0x4FC + rank`) in the low
     /// byte, then each corner's place in its tile's texture, six bits each
     /// from bit 8: U then V in quarters, 0 to 4 ([`texture_place`]).
-    pub triangles: Vec<u32>,
+    pub triangles: Rc<[u32]>,
     /// The spacing, height shift, light direction, water plane, Ultra's
     /// generation and cells it was built from.
     source: (u16, u32, [f32; 3], i32, Option<u64>, Box<[TerrainCell]>),
+}
+
+/// The low and high ground ([`TerrainMesh::low`], [`TerrainMesh::high`])
+/// of `vertices` under water at `plane`.
+fn levels(vertices: &[TerrainMeshVertex], plane: f32) -> [f32; 2] {
+    let mut levels: Vec<f32> = vertices
+        .iter()
+        .map(|vertex| vertex.position[1].max(plane))
+        .collect();
+    let fifth = levels.len() / 5;
+    let low = *levels.select_nth_unstable_by(fifth, f32::total_cmp).1;
+    let mut land: Vec<f32> = levels.into_iter().filter(|&level| level > plane).collect();
+    let high = if land.is_empty() {
+        plane
+    } else {
+        let at = land.len() * 4 / 5;
+        *land.select_nth_unstable_by(at, f32::total_cmp).1
+    };
+    [low, high]
+}
+
+/// What a ground point is made from: the terrain's cells as the mesh
+/// samples them, Ultra's fine grid if it is on, and the light.
+struct GroundGrid<'a> {
+    cells: &'a [TerrainCell],
+    /// Cells a side as sampled, and the cells between samples.
+    side: usize,
+    step: usize,
+    shift: u32,
+    ultra: Option<&'a crate::terrain_runtime::ultra::UltraGround>,
+    /// Fine points along a cell's side, and their spacing.
+    split: usize,
+    units: f32,
+    light: [f32; 3],
+}
+
+impl<'a> GroundGrid<'a> {
+    fn new(terrain: &'a TerrainRuntime, light: [f32; 3]) -> Self {
+        let spacing = terrain.sampling().spacing.units();
+        let step = usize::from(spacing >> 7);
+        // Ultra ground detail's fine grid splits each cell `split` by
+        // `split` ([`crate::terrain_runtime::ultra`]).
+        let ultra = terrain.ultra();
+        let split = if ultra.is_some() {
+            crate::terrain_runtime::ultra::SPLIT
+        } else {
+            1
+        };
+        Self {
+            cells: terrain.cells(),
+            side: TERRAIN_GRID_SIDE / step,
+            step,
+            shift: terrain.height_shift(),
+            ultra,
+            split,
+            units: f32::from(spacing) / split as f32,
+            light,
+        }
+    }
+
+    fn cell(&self, i: usize, j: usize) -> TerrainCell {
+        self.cells[(i % self.side) * self.step * TERRAIN_GRID_SIDE + (j % self.side) * self.step]
+    }
+
+    /// The height at a fine point: 00450A30's, the signed byte shifted and
+    /// kept to 16 bits, or Ultra's.
+    fn height(&self, fi: usize, fj: usize) -> f32 {
+        match self.ultra {
+            Some(ultra) => ultra.point(fi, fj),
+            None => f32::from((i32::from(self.cell(fi, fj).height_i8()) << self.shift) as i16),
+        }
+    }
+
+    /// The baked shade at a fine point, blended from its cell's corners.
+    fn shade(&self, fi: usize, fj: usize) -> f32 {
+        let split = self.split;
+        let [i, j] = [fi / split, fj / split];
+        let [s, t] = [fi % split, fj % split].map(|part| part as f32 / split as f32);
+        let at = |i, j| f32::from(self.cell(i, j).shade4()) / 15.0;
+        at(i, j) * (1.0 - s) * (1.0 - t)
+            + at(i + 1, j) * s * (1.0 - t)
+            + at(i + 1, j + 1) * s * t
+            + at(i, j + 1) * (1.0 - s) * t
+    }
+
+    /// Fine point `i`, `j` (to the fine side, whose last repeats the
+    /// first), before the water's albedo.
+    fn vertex(&self, i: usize, j: usize) -> TerrainMeshVertex {
+        let fine_side = self.side * self.split;
+        let units = self.units;
+        let [west, east] = [(i + fine_side - 1) % fine_side, (i + 1) % fine_side];
+        let [south, north] = [(j + fine_side - 1) % fine_side, (j + 1) % fine_side];
+        let slope = [
+            (self.height(east, j) - self.height(west, j)) / (2.0 * units),
+            (self.height(i, north) - self.height(i, south)) / (2.0 * units),
+        ];
+        let length = (slope[0] * slope[0] + slope[1] * slope[1] + 1.0).sqrt();
+        let normal = [-slope[0] / length, 1.0 / length, -slope[1] / length];
+        let facing = (0..3)
+            .map(|axis| normal[axis] * self.light[axis])
+            .sum::<f32>();
+        TerrainMeshVertex {
+            position: [i as f32 * units, self.height(i, j), j as f32 * units],
+            normal,
+            albedo: self.shade(i, j) / (facing.max(0.0) + AMBIENT_SHARE),
+        }
+    }
 }
 
 /// The raster's textured quad slots' UVs (0,0), (1,0), (1,1), (0,1), in
@@ -165,7 +283,13 @@ pub fn terrain_mesh(terrain: &TerrainRuntime, light: [f32; 3]) -> Rc<TerrainMesh
         {
             return mesh.clone();
         }
-        let mesh = Rc::new(TerrainMesh::build(terrain, light));
+        let _scope = crate::cpu_profile::scope("terrain: mesh build");
+        let mesh = Rc::new(
+            cached
+                .as_ref()
+                .and_then(|mesh| mesh.patched(terrain, light))
+                .unwrap_or_else(|| TerrainMesh::build(terrain, light)),
+        );
         *cached = Some(mesh.clone());
         mesh
     })
@@ -181,8 +305,6 @@ impl TerrainMesh {
         let cell =
             |i: usize, j: usize| cells[(i % side) * step * TERRAIN_GRID_SIDE + (j % side) * step];
         // 00450A30's heights: the signed byte shifted, kept to 16 bits.
-        let height =
-            |i: usize, j: usize| f32::from((i32::from(cell(i, j).height_i8()) << shift) as i16);
         // Ultra ground detail's fine grid splits each cell `split` by
         // `split` ([`crate::terrain_runtime::ultra`]).
         let ultra = terrain.ultra();
@@ -194,37 +316,11 @@ impl TerrainMesh {
         let fine_side = side * split;
         let units = f32::from(spacing) / split as f32;
         let points = fine_side + 1;
-        let fine_height = |fi: usize, fj: usize| match ultra {
-            Some(ultra) => ultra.point(fi, fj),
-            None => height(fi, fj),
-        };
-        // The baked shade at a fine point, blended from its cell's corners.
-        let shade = |fi: usize, fj: usize| {
-            let [i, j] = [fi / split, fj / split];
-            let [s, t] = [fi % split, fj % split].map(|part| part as f32 / split as f32);
-            let at = |i, j| f32::from(cell(i, j).shade4()) / 15.0;
-            at(i, j) * (1.0 - s) * (1.0 - t)
-                + at(i + 1, j) * s * (1.0 - t)
-                + at(i + 1, j + 1) * s * t
-                + at(i, j + 1) * (1.0 - s) * t
-        };
+        let grid = GroundGrid::new(terrain, light);
         let mut vertices = Vec::with_capacity(points * points);
         for i in 0..points {
             for j in 0..points {
-                let [west, east] = [(i + fine_side - 1) % fine_side, (i + 1) % fine_side];
-                let [south, north] = [(j + fine_side - 1) % fine_side, (j + 1) % fine_side];
-                let slope = [
-                    (fine_height(east, j) - fine_height(west, j)) / (2.0 * units),
-                    (fine_height(i, north) - fine_height(i, south)) / (2.0 * units),
-                ];
-                let length = (slope[0] * slope[0] + slope[1] * slope[1] + 1.0).sqrt();
-                let normal = [-slope[0] / length, 1.0 / length, -slope[1] / length];
-                let facing = (0..3).map(|axis| normal[axis] * light[axis]).sum::<f32>();
-                vertices.push(TerrainMeshVertex {
-                    position: [i as f32 * units, fine_height(i, j), j as f32 * units],
-                    normal,
-                    albedo: shade(i, j) / (facing.max(0.0) + AMBIENT_SHARE),
-                });
+                vertices.push(grid.vertex(i, j));
             }
         }
         // Retail never lit the ground under its opaque water (a baked shade
@@ -236,6 +332,7 @@ impl TerrainMesh {
             .filter(|vertex| vertex.position[1] >= f32::from(plane) && vertex.albedo > 0.0)
             .map(|vertex| vertex.albedo)
             .collect();
+        let mut underwater = None;
         if !dry.is_empty() {
             let middle = dry.len() / 2;
             let typical = *dry.select_nth_unstable_by(middle, f32::total_cmp).1;
@@ -244,6 +341,7 @@ impl TerrainMesh {
                     vertex.albedo = typical;
                 }
             }
+            underwater = Some(typical);
         }
         let shade_slope = ground_shade_slope(
             vertices
@@ -306,24 +404,11 @@ impl TerrainMesh {
                 }
             }
         }
-        let mut levels: Vec<f32> = vertices
-            .iter()
-            .map(|vertex| vertex.position[1].max(f32::from(plane)))
-            .collect();
-        let fifth = levels.len() / 5;
-        let low = *levels.select_nth_unstable_by(fifth, f32::total_cmp).1;
-        let mut land: Vec<f32> = levels
-            .into_iter()
-            .filter(|&level| level > f32::from(plane))
-            .collect();
-        let high = if land.is_empty() {
-            f32::from(plane)
-        } else {
-            let at = land.len() * 4 / 5;
-            *land.select_nth_unstable_by(at, f32::total_cmp).1
-        };
+        let [low, high] = levels(&vertices, f32::from(plane));
         Self {
             generation: GENERATION.fetch_add(1, Ordering::Relaxed),
+            changed: None,
+            underwater,
             points: points as u32,
             spacing: units,
             plane: f32::from(plane),
@@ -331,8 +416,8 @@ impl TerrainMesh {
             high,
             shade_slope,
             vertices,
-            indices,
-            triangles,
+            indices: indices.into(),
+            triangles: triangles.into(),
             source: (
                 spacing,
                 shift,
@@ -342,6 +427,121 @@ impl TerrainMesh {
                 cells.into(),
             ),
         }
+    }
+
+    /// This mesh with the points moved by cells whose heights alone
+    /// changed since it was built, and the ground under a water that rose
+    /// or fell, or none where more changed (the sampling or light; a cell's
+    /// material, shade or diagonal; Ultra ground) or too many cells for a
+    /// patch to pay. Rebuilding the whole grid each time a bridge's strip
+    /// or a water bridge's plane rose a step slowed the game down
+    /// (2026-10-31).
+    fn patched(&self, terrain: &TerrainRuntime, light: [f32; 3]) -> Option<Self> {
+        // shortcut: the shade slope and the water's albedo stay the whole
+        // build's, and so do the low and high ground while the water stays;
+        // a strip of cells barely moves them.
+        const MOST_CELLS: usize = 4096;
+        let (spacing, shift, built_light, plane, ultra, cells) = &self.source;
+        if *spacing != terrain.sampling().spacing.units()
+            || *shift != terrain.height_shift()
+            || *built_light != light
+            || ultra.is_some()
+            || terrain.ultra().is_some()
+        {
+            return None;
+        }
+        let now = terrain.cells();
+        let mut changed = Vec::new();
+        for (index, (was, is)) in cells.iter().zip(now).enumerate() {
+            if was != is {
+                if (was.raw() ^ is.raw()) & 0xff00 != 0 || changed.len() == MOST_CELLS {
+                    return None;
+                }
+                changed.push(index);
+            }
+        }
+        let grid = GroundGrid::new(terrain, light);
+        let (side, step) = (grid.side, grid.step);
+        let points = self.points as usize;
+        let water = f32::from((terrain.plane_base() >> terrain.plane_shift()) as i16);
+        let mut vertices = self.vertices.clone();
+        // A new water: the ground below it or the old one lit again, unlit
+        // ground under it taking the dry ground's albedo. No point moves.
+        if *plane != terrain.plane_base() {
+            let below = water.max(self.plane);
+            for (index, vertex) in vertices.iter_mut().enumerate() {
+                if vertex.position[1] >= below {
+                    continue;
+                }
+                let facing = (0..3)
+                    .map(|axis| vertex.normal[axis] * light[axis])
+                    .sum::<f32>();
+                let shade = grid.shade(index / points, index % points);
+                vertex.albedo = shade / (facing.max(0.0) + AMBIENT_SHARE);
+                if vertex.position[1] < water && vertex.albedo == 0.0 {
+                    vertex.albedo = self.underwater.unwrap_or(0.0);
+                }
+            }
+        }
+        let mut tiles = vec![false; TILES * TILES];
+        let tile = |at: f32| ((at / TILE_UNITS).max(0.0) as usize).min(TILES - 1);
+        for index in changed {
+            let [x, z] = [index / TERRAIN_GRID_SIDE, index % TERRAIN_GRID_SIDE];
+            if x % step != 0 || z % step != 0 {
+                continue;
+            }
+            let [i, j] = [x / step, z / step];
+            // The point and its neighbours, whose normals it slopes, each
+            // with its copy on the far edge.
+            for [di, dj] in [[0, 0], [1, 0], [side - 1, 0], [0, 1], [0, side - 1]] {
+                let [a, b] = [(i + di) % side, (j + dj) % side];
+                for a in std::iter::once(a).chain((a == 0).then_some(side)) {
+                    for b in std::iter::once(b).chain((b == 0).then_some(side)) {
+                        let mut vertex = grid.vertex(a, b);
+                        if vertex.position[1] < water && vertex.albedo == 0.0 {
+                            vertex.albedo = self.underwater.unwrap_or(0.0);
+                        }
+                        let [px, pz] = [vertex.position[0], vertex.position[2]];
+                        vertices[a * points + b] = vertex;
+                        for x in [px - self.spacing, px, px + self.spacing] {
+                            for z in [pz - self.spacing, pz, pz + self.spacing] {
+                                tiles[tile(x) * TILES + tile(z)] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        let [low, high] = if *plane == terrain.plane_base() {
+            [self.low, self.high]
+        } else {
+            levels(&vertices, water)
+        };
+        Some(Self {
+            generation: GENERATION.fetch_add(1, Ordering::Relaxed),
+            changed: Some((
+                self.generation,
+                (0..tiles.len()).filter(|&tile| tiles[tile]).collect(),
+            )),
+            underwater: self.underwater,
+            points: self.points,
+            spacing: self.spacing,
+            plane: water,
+            low,
+            high,
+            shade_slope: self.shade_slope,
+            vertices,
+            indices: self.indices.clone(),
+            triangles: self.triangles.clone(),
+            source: (
+                *spacing,
+                *shift,
+                light,
+                terrain.plane_base(),
+                None,
+                now.into(),
+            ),
+        })
     }
 
     fn built_from(&self, terrain: &TerrainRuntime, light: [f32; 3]) -> bool {
@@ -714,5 +914,73 @@ mod tests {
             &rebuilt,
             &terrain_mesh(&terrain, [0.0, 1.0, 0.0])
         ));
+    }
+
+    /// A strip of cells raised a step (a bridge rising) moves the mesh's
+    /// points as a whole build would, across the wrap and under the water,
+    /// and names every tile whose triangles moved; a changed material
+    /// builds it whole.
+    #[test]
+    fn heights_alone_patch_the_mesh() {
+        for spacing in [TerrainSpacing::Units128, TerrainSpacing::Units256] {
+            // A basin under the plane below X 8, unshaded; dry ground shaded
+            // 6 and rolling past it.
+            let cells = (0..TERRAIN_GRID_SIDE * TERRAIN_GRID_SIDE).map(|index| {
+                let [x, z] = [index / TERRAIN_GRID_SIDE, index % TERRAIN_GRID_SIDE];
+                if x < 8 {
+                    u16::from((-2_i8) as u8)
+                } else {
+                    6 << 12 | ((x + z) % 5) as u16
+                }
+            });
+            let mut terrain = TerrainRuntime::from_raw_cells(sampling(spacing), 0, cells);
+            let sun = [0.6, 0.8, 0.0];
+            let before = TerrainMesh::build(&terrain, sun);
+            for x in (0..12).chain(508..512) {
+                for z in 300..304 {
+                    terrain.write_raw_height_128([x << 7, z << 7], 64 + 32 * (x as i32 % 3));
+                }
+            }
+            let patched = before.patched(&terrain, sun).expect("heights alone");
+            let whole = TerrainMesh::build(&terrain, sun);
+            assert_eq!(patched.vertices, whole.vertices, "{spacing:?}");
+            let (previous, moved) = patched.changed.clone().expect("a patch");
+            assert_eq!(previous, before.generation);
+            let tiles = crate::scene_ground_detail::tile_ground(&whole);
+            let mut first = 0;
+            for (tile, &[_, count]) in tiles.ranges.iter().enumerate() {
+                let triangles = &tiles.indices[first as usize * 3..(first + count) as usize * 3];
+                first += count;
+                if triangles
+                    .iter()
+                    .any(|&point| before.vertices[point as usize] != whole.vertices[point as usize])
+                {
+                    assert!(moved.contains(&tile), "{spacing:?} tile {tile}");
+                }
+            }
+            assert!(Rc::ptr_eq(&patched.indices, &before.indices));
+            // A water bridge's plane: its basin covered less, then bare.
+            for plane in [-32, -100] {
+                terrain.set_plane_base(plane << terrain.plane_shift());
+                let patched = whole.patched(&terrain, sun).expect("the water alone");
+                let rebuilt = TerrainMesh::build(&terrain, sun);
+                assert_eq!(patched.vertices, rebuilt.vertices, "{spacing:?} {plane}");
+                assert_eq!(
+                    [patched.plane, patched.low, patched.high],
+                    [rebuilt.plane, rebuilt.low, rebuilt.high]
+                );
+                assert_eq!(
+                    patched.changed.as_ref().map(|(_, moved)| moved.len()),
+                    Some(0)
+                );
+            }
+            let whole = TerrainMesh::build(&terrain, sun);
+            // A cell's material is more than its height.
+            let raw = terrain.cells()[5 * TERRAIN_GRID_SIDE + 5].raw();
+            let mut cells: Vec<u16> = terrain.cells().iter().map(|cell| cell.raw()).collect();
+            cells[5 * TERRAIN_GRID_SIDE + 5] = raw ^ 0x100;
+            let recut = TerrainRuntime::from_raw_cells(sampling(spacing), 0, cells);
+            assert!(whole.patched(&recut, sun).is_none());
+        }
     }
 }
