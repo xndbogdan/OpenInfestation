@@ -199,7 +199,6 @@ impl WorldSession {
             camera_failure: None,
             drive_policy: metadata.drive_policy,
             view_focals: [0, 0],
-            shown_focals: [0, 0],
             draw_skip_logged: false,
             draw_omissions_logged: Default::default(),
             light_delta: 0,

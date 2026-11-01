@@ -153,12 +153,10 @@ frame, depth of field, motion blur, subsurface scattering, spectral light.
   so and shows it in its snapshots. The values are tuned in
   `modern_tuning.json` (no player-facing sliders).
 - **Only Vulkan with path tracing changes.** OpenGL and the software
-  raster stay retail, their game retail's under any camera or scaling;
-  the tracer reads the game's state, timing and random numbers and never
-  writes them. Vulkan single player plays the remaster's game (the
-  Remastered view and, in a session that started traced, the longer draw
-  distance drive it), and network games retail's on every renderer
-  ([the game's draw and the shown draw](../re/PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw)).
+  raster stay retail; the tracer reads the game's state, timing and random
+  numbers and never writes them. In a session that started traced the
+  longer draw distance drives the game too, and network games keep
+  retail's ([the game's view](../re/PRESENTATION_POLICY.md#the-games-view)).
 - **Each stage ends with before-and-after snapshots** of worlds 2, 3, 9,
   14 (night), 17 and 18 and Pelagia, plus a low-sun scene for the
   terminator (a bunker, round models, hills), then a commit and a push.

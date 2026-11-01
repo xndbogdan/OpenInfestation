@@ -546,10 +546,9 @@ wrapped its corners. A corner retail places beyond that keeps retail's
 extent, and a view reaching no further than retail's keeps retail's
 footprints. The footprint's walk
 is game state (the furniture's random draws, trail births and state bits,
-the near strips' dust), so it follows the game's view: retail's game draws
-its 4:3 view with retail's footprints whatever the frame, and only the
-view shown and the remaster's game take the widened ones
-([the game's draw and the shown draw](PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw)). A
+the near strips' dust), so it follows the game's view, the view shown:
+a wider view takes the widened ones, retail's 4:3 view retail's
+([the game's view](PRESENTATION_POLICY.md#the-games-view)). A
 remaster's replay recorded at a view the reach-keyed footprints widen
 parts from its recording where they walk more furniture: a
 2026-10-29 replay kept every eye position through Artoria, but the

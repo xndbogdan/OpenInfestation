@@ -65,10 +65,12 @@ impl RendererBackend {
 }
 
 /// The game a session plays (AGENTS.md, the renderers' roles): retail's on
-/// the software raster and OpenGL whatever the camera or the scaling, and
-/// the remaster's in Vulkan single player, where the view shown drives the
-/// game. Decided when the session's window opens and kept in its replay, so
-/// the recorded game replays on any renderer.
+/// the software raster, OpenGL and in every network game, and the
+/// remaster's (the tracer's draw distance, Vulkan's thermal camera and
+/// puddles) in Vulkan single player. In both the world draws once and its
+/// view is the view shown; with the Original camera at 4:3 retail's game is
+/// retail's exactly. Decided when the session's window opens and kept in
+/// its replay, so the recorded game replays on any renderer.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum GameView {
     #[default]

@@ -739,7 +739,6 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                         1.0
                     };
                     let frame = crate::world_scene::WorldFrameInputs {
-                        template_focal: self.template_projection.focal,
                         focal_src,
                         focal_kick,
                         scale_5c0: session.camera_globals.view_zoom_5c0.get() as i16,

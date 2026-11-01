@@ -149,10 +149,6 @@ pub struct WorldSession {
     /// Screen draw `00442080` focal globals `00547660/64` (BSS-zero start).
     /// Advanced by the native view setup on every world draw.
     pub view_focals: [i32; 2],
-    /// Port option: the same slew for the view shown, toward its own focal
-    /// (the remastered camera's wider one), where it differs from the
-    /// game's.
-    pub shown_focals: [i32; 2],
     /// Per-feature skip log for the native draw; logged once, then counted.
     pub draw_skip_logged: bool,
     /// Object/reason pairs already logged by the object draw and light

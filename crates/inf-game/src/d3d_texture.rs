@@ -30,7 +30,7 @@ pub struct NativeTextureUploadState {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct TextureAllocationId(usize);
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct CpuTexture {
     pub allocation_id: TextureAllocationId,
     pub dimensions: [u16; 2],

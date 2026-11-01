@@ -412,27 +412,21 @@ changes only the view the world draw publishes (`SceneView` from
 `005469E8` (which selector 86 reads) or anything the game reads of it; its
 tests keep their own `ProcessFurnitureQueryState`, so the game's query
 residue stays retail's, and its shake its own noise. Retail runs game
-logic inside the world draw for what is in view, so which view that draw
-takes is the game's
-([the game's draw and the shown draw](PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw)):
-
-- **Software, OpenGL and every network game play retail's.** The game's
-  draw keeps the camera's own eye and the template's focal, and the
-  remastered view is drawn apart from the game: there the camera changes
-  only the picture, and sound pans and fades from retail's camera.
-- **Vulkan single player plays the remaster's** (2026-10-28:
-  the Remastered view drives the game there): its eye, focal and speed
-  kick are the game's draw's. On Shak'tahh's start, reversing, Normal and
+logic inside the world draw for what is in view, and the world draws once
+from the view shown, so the Remastered camera's eye, focal and speed kick
+drive the game on every renderer (2026-11-01; Vulkan single player since
+2026-10-28) ([the game's view](PRESENTATION_POLICY.md#the-games-view)).
+On Shak'tahh's start, reversing, Normal and
   Remastered event logs parted at tick 66 (measured before the split, when
   every renderer played the drawn view), where the swung view put an
   object in view: its draw took another branch (`object_models.rs:93` for
   `:220`) and birthed a particle, and the shared random stream moved on
   from there.
 
-The session's game is fixed when its window opens and its replay records
-it. Commit `02b367d31`'s message ("so play, replays and network games are
-unchanged") was wrong for play: until the split (2026-10-29) the drawn
-view reached the game on every renderer.
+Commit `02b367d31`'s message ("so play, replays and network games are
+unchanged") was wrong for play: the drawn view reaches the game. From
+2026-10-29 to 2026-11-01 software, OpenGL and network games drew the
+Remastered view apart from a retail-view game.
 
 - **It acts in chase and first person** (camera modes 3 and 2). The view
   of a lost craft (mode 0, the death camera) and the dock's (1) let it go:

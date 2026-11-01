@@ -595,7 +595,10 @@ impl SoftwareFrame {
 
     /// The metal face the next submissions draw, or none: the device
     /// mirrors the sky in it where it does (Vulkan's modern raster).
-    pub fn set_draw_metal(&mut self, metal: Option<std::rc::Rc<crate::raster_metal::MetalFace>>) {
+    pub fn set_draw_metal(
+        &mut self,
+        metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
+    ) {
         if let Some(device) = &mut self.device {
             device.set_draw_metal(metal);
         }
@@ -706,7 +709,10 @@ impl SoftwareFrame {
 
     /// `vertex` as the world under the water draws it, else as it is.
     pub(crate) fn wet_vertex(&self, vertex: D3dTlVertex) -> D3dTlVertex {
-        self.wet.map_or(vertex, |wet| wet.apply(vertex))
+        match &self.wet {
+            Some(wet) => wet.apply(vertex),
+            None => vertex,
+        }
     }
 
     /// A textured draw's fog under the water, dimmed as its vertex colours
@@ -1115,11 +1121,13 @@ impl SoftwareFrame {
         }
         let additive =
             pipeline.alpha_blend_enabled && submission.policy.blend == D3dFlatBlend::Additive;
-        let mut polygons: [ClippedPolygon; T] = std::array::from_fn(|_| ClippedPolygon::new());
+        let mut polygons: [ClippedPolygon; T] = [const { ClippedPolygon::new_const() }; T];
         for (polygon, indices) in polygons.iter_mut().zip(submission.triangles) {
             let vertices = indices.map(|i| self.wet_vertex(submission.vertices[i]));
             if submission.clip == D3dFlatClip::Bypass {
-                polygon.extend_from_slice(&vertices);
+                polygon
+                    .try_extend_from_slice(&vertices)
+                    .expect("3 or 4 vertices");
             } else {
                 clip_polygon_into(
                     &vertices,
@@ -1464,6 +1472,12 @@ impl<'r> PixelBackend<'r> for SoftwarePixelBackend<'_, 'r> {
             Some(crate::scene_capture::RasterSkyDraw::Land(band)) => Some(band),
             _ => None,
         };
+        // Port option: under the water's own look the surface is not drawn
+        // from below; it fades into the fog as the far ground does. Its
+        // strips are queued as ever: the game reads their arena.
+        if command.water && self.frame.wet.is_some() {
+            return Ok(());
+        }
         self.band = band;
         self.frame.set_draw_band(band.is_some());
         // A moving model's fans carry its motion to a device following it,

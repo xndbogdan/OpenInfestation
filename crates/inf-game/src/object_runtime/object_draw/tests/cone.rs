@@ -1,6 +1,6 @@
-//! The cone of the view a frame draws, and the manager's pass drawing the
-//! view shown apart from the game's, where runtime allocations refuse
-//! writes.
+//! The cone of the view a frame draws, and the manager's pass drawing on
+//! a copy of the game (the tracer's models outside the view), where
+//! runtime allocations refuse writes.
 
 use super::*;
 use crate::model_context::ModelProjection;

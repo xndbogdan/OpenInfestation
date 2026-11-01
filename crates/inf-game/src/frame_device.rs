@@ -16,7 +16,7 @@ use crate::{
     gl_device::{GlDevice, GlDeviceError, GlFrame},
     presentation::{PresentationRect, RendererBackend},
     software_frame::D3dTextureSampling,
-    vk_device::{VkDevice, VkDeviceError, VkFrame},
+    vk_device::{VkDeviceError, VkFrameHandle, VkHandle},
 };
 
 /// One submission's device state: what the CPU raster reads from the TL
@@ -91,7 +91,7 @@ pub enum DeviceError {
 #[derive(Clone, Debug)]
 pub enum Device {
     OpenGl(Rc<GlDevice>),
-    Vulkan(Rc<VkDevice>),
+    Vulkan(Rc<VkHandle>),
 }
 
 impl Device {
@@ -154,9 +154,17 @@ impl Device {
                 FrameDevice::OpenGl(GlFrame::new(device, native, target, clear)?)
             }
             Self::Vulkan(device) => {
-                FrameDevice::Vulkan(VkFrame::new(device, native, target, clear)?)
+                FrameDevice::Vulkan(VkFrameHandle::new(device, native, target, clear))
             }
         })
+    }
+
+    /// Let the device finish what it was given, before its window changes
+    /// (Vulkan swaps on a thread of its own).
+    pub(crate) fn settle(&self) {
+        if let Self::Vulkan(device) = self {
+            device.settle();
+        }
     }
 
     /// Show the presented frame in `window`.
@@ -171,7 +179,7 @@ impl Device {
     pub(crate) fn drawable_size(&self, window: &Window) -> [u32; 2] {
         match self {
             Self::OpenGl(_) => window.drawable_size().into(),
-            Self::Vulkan(_) => VkDevice::drawable_size(window),
+            Self::Vulkan(_) => VkHandle::drawable_size(window),
         }
     }
 }
@@ -180,7 +188,7 @@ impl Device {
 #[derive(Debug)]
 pub enum FrameDevice {
     OpenGl(GlFrame),
-    Vulkan(VkFrame),
+    Vulkan(VkFrameHandle),
 }
 
 impl FrameDevice {
@@ -290,7 +298,7 @@ impl FrameDevice {
     /// in it).
     pub(crate) fn set_draw_metal(
         &mut self,
-        metal: Option<std::rc::Rc<crate::raster_metal::MetalFace>>,
+        metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
     ) {
         if let Self::Vulkan(frame) = self {
             frame.set_draw_metal(metal);

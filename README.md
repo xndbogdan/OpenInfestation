@@ -162,11 +162,11 @@ with `--renderer`:
 
 - **Automatic** (the default) uses OpenGL and falls back to Software when
   OpenGL cannot start.
-- **OpenGL** and **Software** play retail's game exactly. Software is the
-  CPU pixel reference: identical frames on every machine. Widescreen shows
-  more to each side, but there the extra view is only a picture: objects
-  out at the sides stand still, because retail never simulated beyond its
-  4:3 view ([widescreen](docs/re/PRESENTATION_POLICY.md#widescreen)).
+- **OpenGL** and **Software** play retail's game. Software is the CPU
+  pixel reference: identical frames on every machine. Widescreen shows more
+  to each side, and the game plays all of it: objects out at the sides act
+  as they would in front. At 4:3 with the Normal camera the game is
+  retail's exactly ([widescreen](docs/re/PRESENTATION_POLICY.md#widescreen)).
 - **Vulkan** is the remaster. With a ray-tracing GPU it path traces the
   world; on any Vulkan GPU it adds a modern sky and clouds, new water,
   rain with puddles and wet ground, and reflections on water and metal. It
@@ -202,9 +202,11 @@ mode the monitor reports, in physical pixels. Image scaling
 
 ## Performance
 
-The game is CPU-bound. On an RTX 5080 desktop at 3840x2160 widescreen,
-OpenGL and the Vulkan raster both run between 78 and 190 fps depending on
-the scene, with the GPU mostly idle. Measurements and method are in
+The game is CPU-bound and needs an x86-64-v2 processor (SSE4.2: Intel
+since 2008, AMD since 2011). On an RTX 5080 desktop at 3840x2160
+widescreen, the released Windows build runs OpenGL at 240 to 325 fps and
+the Vulkan raster at 210 to 290 fps in the measured scenes, with the GPU
+mostly idle. Measurements and method are in
 [`docs/PERFORMANCE.md`](docs/PERFORMANCE.md).
 
 ## Reverse-engineering notes

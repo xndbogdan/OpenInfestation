@@ -92,9 +92,7 @@ impl Owners {
         }
     }
 
-    /// One world frame from the views `frame` makes, the view shown then
-    /// changed by `shown`.
-    #[allow(clippy::too_many_arguments)]
+    /// One world frame from the view `frame` makes.
     fn draw<'r>(
         &mut self,
         world: &mut WorldSession,
@@ -102,10 +100,9 @@ impl Owners {
         executable: FrontendExecutable<'_>,
         animation: &AnimationClock,
         frame: WorldFrameInputs,
-        shown: impl FnOnce(&mut ViewSpec),
         host: &mut ResidentSceneHost<'r, '_, SoftwareScene<'_, 'r>>,
     ) -> Result<WorldDrawOutcome, WorldDrawError> {
-        let mut request = WorldDrawRequest {
+        let request = WorldDrawRequest {
             camera_clearance: None,
             terrain_event_5483b0: 0,
             map: Some(&mut self.map),
@@ -130,11 +127,7 @@ impl Owners {
                 phase: 4,
             }),
         };
-        let views = world_views(&mut request, &frame, host).map(|[game, mut view]| {
-            shown(&mut view);
-            [game, view]
-        });
-        draw_world_views(request, frame, views, host)
+        draw_world_frame(request, frame, host)
     }
 
     /// What the view shown's draw may not change, as text: the world's RNG,
@@ -226,265 +219,6 @@ impl Owners {
     }
 }
 
-/// Tabuchi as loaded, twice, with its objects' lights (the terrain's
-/// dynamic lighting off) and a sound host, a
-/// one-shot queued each frame at the first object. One plays retail's game
-/// at the Original camera on 4:3, one pass a frame. The other plays it with
-/// a view shown unlike retail's: the Remastered camera's 100 degrees on a
-/// 16:9 frame, its arena widened, from an eye moving ahead past an actor
-/// only it sees at first (the first object, 2000 ahead and 2500 to the
-/// right); on the way the tracer's longer reach with the look under the
-/// water, Vulkan's murk under it, infrared vision, and a network game's
-/// initials and team; then, toward the water ramp (the arena test's view),
-/// an arena that fills at the objects (0x1000 bytes: the 16:9 frame's sky
-/// alone fills 0x800), and one that cannot be made, which fails the draw.
-/// After every frame the game is the same in both, though the view shown
-/// drew more (its picture's models more than the game's).
-#[test]
-fn the_view_shown_draws_apart_and_leaves_retails_game_as_one_pass_leaves_it() {
-    let load = || {
-        load_campaign_world(
-            4,
-            9,
-            crate::terrain_runtime::TerrainSpacing::Units256,
-            crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
-        )
-    };
-    let (assets, resident_a, mut world_a, _maps_a) = load();
-    let (_, resident_b, mut world_b, _maps_b) = load();
-    let executable = FrontendExecutable::parse(assets.executable_bytes()).unwrap();
-    let tables = PrimitiveTables::from_executable(executable).unwrap();
-    let ramp = [-13712, -583, -29682].map(|v: i32| v as u16);
-    let basis = MenuBasis {
-        words: [
-            0, 3192831838, 0, 1065007702, 3198811349, 1064359848, 3180080004, 3211518361,
-            3199045599, 3192031099,
-        ],
-    };
-    let [right, forward] =
-        [1, 7].map(|at| [0, 1, 2].map(|axis| f32::from_bits(basis.words[at + axis])));
-    let side = world_a
-        .arena
-        .object(
-            world_a
-                .arena
-                .list(crate::object_runtime::ObjectList::Flag0Primary)[0]
-                .object,
-        )
-        .unwrap()
-        .base
-        .clone();
-    let beside = [0, 1, 2].map(|axis| {
-        let at = side.position_words.unwrap()[axis] as i16;
-        (f32::from(at) - 2000.0 * forward[axis] - 2500.0 * right[axis]).round() as i32 as u16
-    });
-    let four_three = crate::presentation::NativeFrame::original([1024, 768]);
-    let wide = crate::presentation::NativeFrame::for_output(
-        [1024, 768],
-        [1920, 1080],
-        crate::presentation::ClassicScaling::Widescreen,
-    );
-    let resources_a = RenderResources::new(&resident_a);
-    let resources_b = RenderResources::new(&resident_b);
-    let startup_a = frontend_startup(&resident_a, four_three).unwrap();
-    let startup_b = frontend_startup(&resident_b, wide).unwrap();
-    let mut pixels_a = SoftwareFrame::new(1024, 768, [17, 23, 31, 255]);
-    let mut pixels_b = SoftwareFrame::new(1365, 768, [17, 23, 31, 255]);
-    let mut scene_a = SoftwareScene::new(SoftwareSceneRequest {
-        model_process: crate::model_process::ModelProcessOwners::supplied_scene_fixture(
-            crate::model_scratch::ProcessModelScratch::isolated_unknown_fixture(),
-            startup_a.scene.environment,
-        ),
-        resources: resources_a,
-        tables: &tables,
-        frame: &mut pixels_a,
-        config: startup_a.scene,
-    })
-    .unwrap();
-    let mut scene_b = SoftwareScene::new(SoftwareSceneRequest {
-        model_process: crate::model_process::ModelProcessOwners::supplied_scene_fixture(
-            crate::model_scratch::ProcessModelScratch::isolated_unknown_fixture(),
-            startup_b.scene.environment,
-        ),
-        resources: resources_b,
-        tables: &tables,
-        frame: &mut pixels_b,
-        config: startup_b.scene,
-    })
-    .unwrap();
-    scene_a.set_terrain(Some(world_a.terrain.clone()));
-    scene_b.set_terrain(Some(world_b.terrain.clone()));
-    let mut owners_a = Owners::new(&assets, &world_a);
-    let mut owners_b = Owners::new(&assets, &world_b);
-    let template = startup_a.projection.focal;
-    assert_eq!(
-        (template, startup_b.projection.focal),
-        ([512, 512], template)
-    );
-    let inputs = |surface: [i32; 2], focal_src: [i32; 2], arena_bytes: u32| WorldFrameInputs {
-        template_focal: template,
-        focal_src,
-        focal_kick: 1.0,
-        scale_5c0: 0,
-        special_view_active: false,
-        surface,
-        z_buffering: true,
-        dynamic_lighting: false,
-        arena_bytes,
-        mirror_copy: crate::model_vertices::MirrorCopySource::Partner,
-        hovercraft_fans: false,
-        guided_mounts: false,
-        camera_settings: crate::object_runtime::CameraSettings {
-            first_person: 0,
-            camera_style: 0,
-        },
-        settings_7c: 0,
-        settings_70: 0,
-        network_initials: [[0; 6]; crate::network::game::SLOTS],
-        network_team_flag: 0,
-        infrared: false,
-        game: crate::presentation::GameView::Retail,
-        game_far: None,
-    };
-    let widened = world_arena_bytes([1365, 768], [430, 430]);
-    let mut animation = AnimationClock::default();
-    animation.advance(256 * 20_000);
-    #[derive(Clone, Copy, PartialEq)]
-    enum Shown {
-        Plain,
-        Deeper,
-        Murk,
-    }
-    let sound = crate::process_particles::audio::ParticleSoundRequest {
-        sound: 6,
-        position: side.position_words.unwrap(),
-        volume: 65536,
-        pitch: 65536,
-        flags: 0,
-    };
-    let moving = 10;
-    let mut cases: Vec<_> = (0..moving)
-        .map(|step| {
-            let shown = match step {
-                2 | 3 => Shown::Deeper,
-                4 => Shown::Murk,
-                _ => Shown::Plain,
-            };
-            (widened, shown, (5..7).contains(&step), step == 7)
-        })
-        .collect();
-    cases.extend([
-        (0x1000, Shown::Plain, false, false),
-        (u32::MAX, Shown::Plain, false, false),
-    ]);
-    let mut sounds_played = 0;
-    for (frame, (arena_bytes, look, infrared, network)) in cases.into_iter().enumerate() {
-        let eye = if frame < moving {
-            let ahead = 150.0 * frame as f32;
-            [0, 1, 2].map(|axis| {
-                (f32::from(beside[axis] as i16) + ahead * forward[axis]).round() as i32 as u16
-            })
-        } else {
-            ramp
-        };
-        supply_native_camera(&mut world_a, eye, basis);
-        supply_native_camera(&mut world_b, eye, basis);
-        owners_a.sounds.enqueue(&resident_a, sound).unwrap();
-        owners_b.sounds.enqueue(&resident_b, sound).unwrap();
-        let inputs = |surface: [i32; 2], focal_src: [i32; 2], arena_bytes: u32| {
-            let mut inputs = inputs(surface, focal_src, arena_bytes);
-            inputs.infrared = infrared;
-            if network {
-                inputs.network_initials = [*b"AB\0CD\0"; crate::network::game::SLOTS];
-                inputs.network_team_flag = 1;
-            }
-            inputs
-        };
-        let one = owners_a
-            .draw(
-                &mut world_a,
-                &resident_a,
-                executable,
-                &animation,
-                inputs([1024, 768], template, RETAIL_ARENA_BYTES),
-                |_| {},
-                &mut ResidentSceneHost {
-                    resources: resources_a,
-                    backend: &mut scene_a,
-                },
-            )
-            .unwrap();
-        assert!(!one.two_pass);
-        let two = owners_b.draw(
-            &mut world_b,
-            &resident_b,
-            executable,
-            &animation,
-            inputs([1365, 768], [430, 430], arena_bytes),
-            |view| match look {
-                Shown::Plain => {}
-                Shown::Deeper => {
-                    view.fade[1] = view.fade[1] * 115 / 100;
-                    view.under_water = true;
-                    view.look = UnderwaterLook::Wet;
-                }
-                Shown::Murk => {
-                    view.under_water = true;
-                    view.look = UnderwaterLook::Murk;
-                }
-            },
-            &mut ResidentSceneHost {
-                resources: resources_b,
-                backend: &mut scene_b,
-            },
-        );
-        let (retail, receipt) = (world_a.last_draw.unwrap(), world_b.last_draw.unwrap());
-        assert_eq!(
-            (receipt.game_eye, receipt.game_projection),
-            (retail.eye, retail.projection),
-            "frame {frame}"
-        );
-        assert_eq!(
-            one.sounds_started,
-            owners_a.audio.calls.len() - sounds_played
-        );
-        sounds_played = owners_a.audio.calls.len();
-        match frame.checked_sub(moving) {
-            Some(1) => assert!(two.is_err(), "{two:?}"),
-            _ => {
-                let two = two.unwrap_or_else(|error| panic!("frame {frame}: {error:?}"));
-                assert!(two.two_pass && receipt.game_outcome.two_pass);
-                assert_eq!(receipt.game_outcome.submitted_models, one.submitted_models);
-                assert_eq!(receipt.projection.focal, [430, 430]);
-                assert_eq!(two.arena_overflow, frame == moving, "{two:?}");
-                if frame == 0 {
-                    assert!(
-                        two.submitted_models > one.submitted_models,
-                        "{} shown, {} retail's",
-                        two.submitted_models,
-                        one.submitted_models
-                    );
-                }
-            }
-        }
-        let [a, b] = [
-            owners_a.game_state(&world_a, &scene_a),
-            owners_b.game_state(&world_b, &scene_b),
-        ];
-        let changed: Vec<_> = a
-            .iter()
-            .zip(&b)
-            .enumerate()
-            .filter(|(_, (a, b))| a != b)
-            .map(|(item, (_, b))| (item, &b[..b.len().min(300)]))
-            .collect();
-        assert!(changed.is_empty(), "frame {frame} changed: {changed:?}");
-        animation.advance(33_000);
-    }
-    // The sound host was asked: the game's draw served the queue.
-    assert!(sounds_played > 0);
-}
-
 /// The tracer's models outside its view and the craft round a first-person
 /// eye, drawn for its feed alone on copies of the game, leave the game and
 /// the picture as they were. Tabuchi twice, both collecting their feed as a
@@ -566,7 +300,6 @@ fn the_tracer_draws_outside_the_view_and_leaves_the_game_as_it_found_it() {
     let mut owners_b = Owners::new(&assets, &world_b);
     let template = startup_a.projection.focal;
     let inputs = WorldFrameInputs {
-        template_focal: template,
         focal_src: template,
         focal_kick: 1.0,
         scale_5c0: 0,
@@ -637,7 +370,6 @@ fn the_tracer_draws_outside_the_view_and_leaves_the_game_as_it_found_it() {
             executable,
             &animation,
             inputs,
-            |_| {},
             &mut ResidentSceneHost {
                 resources: resources_a,
                 backend: &mut scene_a,
@@ -653,7 +385,6 @@ fn the_tracer_draws_outside_the_view_and_leaves_the_game_as_it_found_it() {
                 executable,
                 &animation,
                 inputs,
-                |_| {},
                 &mut ResidentSceneHost {
                     resources: resources_b,
                     backend: &mut scene_b,

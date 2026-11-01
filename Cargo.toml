@@ -12,3 +12,12 @@ default-members = ["crates/inf-game"]
 [workspace.package]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/xndbogdan/OpenInfestation"
+
+# The shipped game (scripts/release.ps1, release-linux.sh): whole-program
+# optimisation, 5 to 10% off the CPU's frame (docs/PERFORMANCE.md) for a
+# slower build. `--release` stays the quick one for tests and probes. Rust
+# never contracts or reassociates floating point unasked, so replays match.
+[profile.ship]
+inherits = "release"
+lto = "fat"
+codegen-units = 1

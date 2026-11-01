@@ -55,6 +55,8 @@ struct SceneTerrainHost<'s, 'a, 'f, 'r> {
     first_hard: Option<TerrainDrawError<SoftwareTerrainError>>,
     /// While a water strip draws.
     water: bool,
+    /// The tiles' textures resolved in this draw (a pure lookup), by slot.
+    textures: crate::fast_hash::FastMap<i16, RenderResource<'r>>,
 }
 
 impl SceneTerrainHost<'_, '_, '_, '_> {
@@ -94,6 +96,7 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
             omissions: Vec::new(),
             first_hard: None,
             water: false,
+            textures: Default::default(),
         };
         let water_before = host.scene.stats.water_commands;
         let traversal_result = draw_terrain(traversal, &mut host);
@@ -192,15 +195,16 @@ impl<'r> TerrainDrawHost<'r> for SceneTerrainHost<'_, '_, '_, 'r> {
         {
             return Ok(None);
         }
+        if let Some(&resource) = self.textures.get(&slot) {
+            return Ok(Some(resource));
+        }
         let request = RenderResourceRequest {
             kind: RenderResourceKind::Sprite,
             argument: i32::from(slot),
         };
-        self.scene
-            .resources
-            .resolve(request)
-            .map(Some)
-            .map_err(Into::into)
+        let resource = self.scene.resources.resolve(request)?;
+        self.textures.insert(slot, resource);
+        Ok(Some(resource))
     }
 
     fn material_sorting(&mut self) -> Result<bool, Self::Error> {
@@ -293,11 +297,6 @@ impl<'r> TerrainDrawHost<'r> for SceneTerrainHost<'_, '_, '_, 'r> {
         request: TerrainStripRequest<'_>,
     ) -> Result<TerrainDrawOutcome, Self::Error> {
         self.required_entry()?;
-        // Port option: under the water its surface is not drawn from below;
-        // it fades into the murk as the far ground does.
-        if self.scene.water_fog.is_some() {
-            return Ok(TerrainDrawOutcome::default());
-        }
         let _scope = crate::cpu_profile::scope("terrain: water strips");
         let before = self.scene.stats.terrain_commands;
         self.water = true;

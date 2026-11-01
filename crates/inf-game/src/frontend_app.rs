@@ -562,8 +562,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         presentation.output,
         presentation.scaling,
     );
-    // A replay draws the remaster's game at its recording's frame, which
-    // that game sees by; retail's sees by the height alone.
+    // A replay draws at its recording's frame, which its game sees by.
     if let Some(pinned) = replayed.as_ref().and_then(|game| game.frame) {
         let live = native_frame.size;
         let [width, height] = live;
@@ -574,9 +573,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                  this run's frame is {width}x{height} (another resolution tier): its game may part \
                  from the recording"
             );
-        } else if remaster && pinned != live {
+        } else if pinned != live {
             eprintln!(
-                "Infestation replay: the remaster's game draws at its recording's \
+                "Infestation replay: the game draws at its recording's \
                  {recorded_width}x{recorded_height}, not this output's {width}x{height}"
             );
             let pin = crate::presentation::FramePin { live, pinned };
@@ -1223,9 +1222,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                             world.mission.save.mission_selection,
                             world.mission.save.elapsed_seconds,
                             world.rng,
-                            // The game's eye, the view shown's where
-                            // the game plays it.
-                            world.last_draw.map(|draw| draw.game_eye),
+                            world.last_draw.map(|draw| draw.eye),
                         )
                     });
                     eprintln!(

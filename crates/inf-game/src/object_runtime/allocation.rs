@@ -38,7 +38,7 @@ pub enum RuntimeAllocationError {
     RuntimePointerScalar { offset: u32, field_offset: u32 },
     #[error("runtime pointer at {offset:#x} has unowned native bits {value:#010x}")]
     UnownedRuntimePointer { offset: u32, value: u32 },
-    #[error("runtime write at {offset:#x} from the view shown's draw, which may change nothing")]
+    #[error("runtime write at {offset:#x} from a draw on a copy of the game, which may change nothing")]
     ShownDrawWrite { offset: u32 },
 }
 
@@ -46,8 +46,8 @@ pub enum RuntimeAllocationError {
 static NEXT_SERIAL: AtomicU64 = AtomicU64::new(0);
 
 thread_local! {
-    /// Port option: while the world draw draws the view shown apart from
-    /// the game's draw ([`refusing_writes`]), the first serial of the
+    /// Port option: during the tracer's draw of the models outside the view
+    /// ([`refusing_writes`]), the first serial of the
     /// allocations made since. It draws on a copy of the arena, which shares
     /// the allocations made before, so nothing may write those; the copy's
     /// own, which go with it, take writes.

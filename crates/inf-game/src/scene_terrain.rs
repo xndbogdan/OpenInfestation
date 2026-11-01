@@ -16,8 +16,8 @@
 
 use std::{
     cell::RefCell,
-    rc::Rc,
     sync::atomic::{AtomicU64, Ordering},
+    sync::Arc,
 };
 
 use inf_formats::{terrain_blend_table, TerrainCell, TERRAIN_GRID_SIDE};
@@ -101,11 +101,11 @@ pub struct TerrainMesh {
     /// takes.
     underwater: Option<f32>,
     pub vertices: Vec<TerrainMeshVertex>,
-    pub indices: Rc<[u32]>,
+    pub indices: Arc<[u32]>,
     /// Per triangle: the blend texture's rank (H3 `0x4FC + rank`) in the low
     /// byte, then each corner's place in its tile's texture, six bits each
     /// from bit 8: U then V in quarters, 0 to 4 ([`texture_place`]).
-    pub triangles: Rc<[u32]>,
+    pub triangles: Arc<[u32]>,
     /// The spacing, height shift, light direction, water plane, Ultra's
     /// generation and cells it was built from.
     source: (u16, u32, [f32; 3], i32, Option<u64>, Box<[TerrainCell]>),
@@ -269,12 +269,12 @@ fn tile_texture(
 static GENERATION: AtomicU64 = AtomicU64::new(1);
 
 thread_local! {
-    static MESH: RefCell<Option<Rc<TerrainMesh>>> = const { RefCell::new(None) };
+    static MESH: RefCell<Option<Arc<TerrainMesh>>> = const { RefCell::new(None) };
 }
 
 /// The mesh of `terrain` under the world's `light` (towards the sun), built
 /// again only when its cells, sampling or light changed since the last call.
-pub fn terrain_mesh(terrain: &TerrainRuntime, light: [f32; 3]) -> Rc<TerrainMesh> {
+pub fn terrain_mesh(terrain: &TerrainRuntime, light: [f32; 3]) -> Arc<TerrainMesh> {
     MESH.with(|cached| {
         let mut cached = cached.borrow_mut();
         if let Some(mesh) = cached
@@ -284,7 +284,7 @@ pub fn terrain_mesh(terrain: &TerrainRuntime, light: [f32; 3]) -> Rc<TerrainMesh
             return mesh.clone();
         }
         let _scope = crate::cpu_profile::scope("terrain: mesh build");
-        let mesh = Rc::new(
+        let mesh = Arc::new(
             cached
                 .as_ref()
                 .and_then(|mesh| mesh.patched(terrain, light))
@@ -904,13 +904,13 @@ mod tests {
         assert_eq!(mesh.triangles.len(), 2 * 256 * 256);
         // Point (1, 3) reads cell (2, 6): index 2*512+6, byte 1030 % 7 = 1.
         assert_eq!(mesh.vertices[257 + 3].position, [256.0, 32.0, 768.0]);
-        assert!(Rc::ptr_eq(&mesh, &terrain_mesh(&terrain, sun)));
+        assert!(Arc::ptr_eq(&mesh, &terrain_mesh(&terrain, sun)));
         terrain.write_raw_height_128([256, 768], 64);
         let rebuilt = terrain_mesh(&terrain, sun);
         assert!(rebuilt.generation > mesh.generation);
         assert_eq!(rebuilt.vertices[257 + 3].position[1], 64.0);
         // A new light is a new mesh too.
-        assert!(!Rc::ptr_eq(
+        assert!(!Arc::ptr_eq(
             &rebuilt,
             &terrain_mesh(&terrain, [0.0, 1.0, 0.0])
         ));
@@ -958,7 +958,7 @@ mod tests {
                     assert!(moved.contains(&tile), "{spacing:?} tile {tile}");
                 }
             }
-            assert!(Rc::ptr_eq(&patched.indices, &before.indices));
+            assert!(Arc::ptr_eq(&patched.indices, &before.indices));
             // A water bridge's plane: its basin covered less, then bare.
             for plane in [-32, -100] {
                 terrain.set_plane_base(plane << terrain.plane_shift());

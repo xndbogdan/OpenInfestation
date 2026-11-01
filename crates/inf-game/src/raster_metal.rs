@@ -209,7 +209,7 @@ impl RasterMetals {
         &mut self,
         request: &ModelPrimitiveRequest<'_>,
         resources: &RenderResources<'_>,
-    ) -> Option<Rc<MetalFace>> {
+    ) -> Option<std::sync::Arc<MetalFace>> {
         let shifts = self.shifts?;
         // The material first, which most faces end at (matte).
         let material = match &request.instruction.kind {
@@ -285,7 +285,7 @@ impl RasterMetals {
                 metal_face.passes += 1;
             }
         }
-        (metal_face.passes > 0).then(|| Rc::new(metal_face))
+        (metal_face.passes > 0).then(|| std::sync::Arc::new(metal_face))
     }
 
     /// The material of `request`'s model by its name, as the tracer takes

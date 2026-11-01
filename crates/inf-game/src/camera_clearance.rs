@@ -32,10 +32,8 @@
 //! The camera actor, its cached position and all the game reads of it stay
 //! retail's; only the view drawn changes. Retail runs some logic inside the
 //! world draw for what is in view (particle births, random draws, shots
-//! posed), so the view the game's draw takes is the game's: retail's on
-//! software, OpenGL and in every network game, where this view is drawn
-//! apart from the game (`world_scene::draw_world_views`), and this one in
-//! Vulkan single player, the remaster's game. The
+//! posed), so this view plays the game wherever it is drawn: the world
+//! draws once, from the view shown (AGENTS.md, the renderers' roles). The
 //! session's game is fixed when its window opens and its replay records it
 //! ([`crate::presentation::GameView`]). The tests keep
 //! their own copy of the furniture queries' process state, and the shake

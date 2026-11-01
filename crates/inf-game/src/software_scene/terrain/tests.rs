@@ -188,6 +188,7 @@ fn terrain_emission_uses_retained_rng_and_real_pending_particle_bank() {
         omissions: Vec::new(),
         first_hard: None,
         water: false,
+        textures: Default::default(),
     };
     assert!(matches!(
         host.particles(request),
@@ -264,6 +265,7 @@ fn water_resource_bounds_preserve_native_null_and_required_loader_paths() {
         omissions: Vec::new(),
         first_hard: None,
         water: false,
+        textures: Default::default(),
     };
     let capacity = resources.pool_capacity(RenderResourceKind::Sprite);
     let capacity = i16::try_from(capacity).unwrap();
@@ -360,6 +362,7 @@ fn water_draws_original_texture_pixels_through_direct_and_e150_callbacks() {
             omissions: Vec::new(),
             first_hard: None,
             water: false,
+            textures: Default::default(),
         };
         let outcome = host.water(strip(&terrain, draw, &rows)).unwrap();
         assert!(outcome.quads > 0, "clipped={clipped}: {outcome:?}");
@@ -445,6 +448,7 @@ fn water_failure_keeps_queued_prefix_and_allows_following_strip_pixels() {
         omissions: Vec::new(),
         first_hard: None,
         water: false,
+        textures: Default::default(),
     };
     let bad = [
         TerrainRow {
@@ -574,6 +578,7 @@ fn terrain_emission_retains_native_row_rng_and_allocation_before_missing_source(
         omissions: Vec::new(),
         first_hard: None,
         water: false,
+        textures: Default::default(),
     };
     let error = host
         .particles(crate::terrain_draw::TerrainParticleEmissionRequest {

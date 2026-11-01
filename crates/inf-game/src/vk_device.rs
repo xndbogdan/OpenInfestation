@@ -44,6 +44,8 @@ mod heat_memory;
 mod metal;
 mod mirror;
 pub(crate) use mirror::Murk;
+pub(crate) use thread::StagedRgba;
+pub use thread::{VkFrameHandle, VkHandle};
 mod object_heat;
 mod perf;
 mod raster_aa;
@@ -51,6 +53,7 @@ mod raster_sky;
 mod sky;
 mod smaa;
 mod thermal;
+mod thread;
 mod trace;
 mod upscale;
 mod xess;
@@ -91,6 +94,8 @@ static DOWNSAMPLE_FRAGMENT: &[u8] = include_bytes!("../shaders/vk_downsample.fra
 pub enum VkDeviceError {
     #[error("Vulkan loader: {0}")]
     Loader(String),
+    #[error("Vulkan device thread: {0}")]
+    Thread(String),
     #[error("Vulkan {operation}: {result}")]
     Call {
         operation: &'static str,
@@ -257,13 +262,13 @@ struct State {
     /// The last frame copied for a snapshot ([`VkFrame::stage_rgba`]): its
     /// readback buffer and the size it was drawn at.
     staged: Option<(Buffer, [u32; 2])>,
-    textures: HashMap<u64, Texture>,
+    textures: crate::fast_hash::FastMap<u64, Texture>,
     presents: u64,
     pools: Vec<vk::DescriptorPool>,
     targets: Vec<Target>,
     output: Option<Image>,
     swapchain: Option<Swapchain>,
-    pipelines: HashMap<PipelineKey, vk::Pipeline>,
+    pipelines: crate::fast_hash::FastMap<PipelineKey, vk::Pipeline>,
     /// Blit pipelines into a colour-and-depth target and into the output.
     blit_target: vk::Pipeline,
     blit_output: vk::Pipeline,
@@ -678,13 +683,13 @@ impl VkDevice {
                 vertex_chunk: 0,
                 vertex_offset: 0,
                 staged: None,
-                textures: HashMap::new(),
+                textures: Default::default(),
                 presents: 0,
                 pools: Vec::new(),
                 targets: Vec::new(),
                 output: None,
                 swapchain: None,
-                pipelines: HashMap::new(),
+                pipelines: Default::default(),
                 blit_target: vk::Pipeline::null(),
                 blit_output: vk::Pipeline::null(),
                 downsample_output: vk::Pipeline::null(),
@@ -945,9 +950,10 @@ impl VkDevice {
         window.vulkan_drawable_size().into()
     }
 
-    /// Copy the presented output to the swapchain and show it, or with no
-    /// swapchain (a hidden window) just finish the frame's work.
-    pub(crate) fn swap(&self, window: &Window) {
+    /// Copy the presented output to the swapchain, for a window whose
+    /// drawable size is `drawable`, and show it, or with no swapchain (a
+    /// hidden window) just finish the frame's work.
+    fn swap_to(&self, drawable: [u32; 2]) {
         let _swap = crate::cpu_profile::scope("swap (submit, wait, present)");
         let mut state = self.state.borrow_mut();
         let core = &self.core;
@@ -956,7 +962,7 @@ impl VkDevice {
             if core.swapchain_loader.is_none() {
                 state.submit(core, None)
             } else {
-                state.present_swapchain(core, Self::drawable_size(window))
+                state.present_swapchain(core, drawable)
             }
         };
         if let Err(error) = result {
@@ -2516,7 +2522,7 @@ pub struct VkFrame {
     /// the same corners covers but for its keyed texels.
     draw_covered: bool,
     /// The metal face the fans now draw.
-    draw_metal: Option<Rc<crate::raster_metal::MetalFace>>,
+    draw_metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
     /// This raster world's metal mirrors the sky, wet by the rain as much
     /// as this says (the weather's `wet_models`).
     metal_world: Option<f32>,
@@ -2524,6 +2530,11 @@ pub struct VkFrame {
     metal_batch: Vec<metal::MetalVertex>,
     /// A metal fan's corners, kept between fans.
     metal_scratch: Vec<metal::MetalVertex>,
+    /// A fan's corners, kept between fans so none allocates.
+    fan_corners: Vec<DeviceVertex>,
+    /// The last fan's texture (its content key and sampler) and descriptor
+    /// set, until the next present, which may retire it.
+    last_texture: Option<(u64, usize, vk::DescriptorSet)>,
     /// The raster world's moving models' triangles, each corner with its
     /// motion, for the pass that writes it under their pixels.
     motion_batch: Vec<raster_aa::MotionVertex>,
@@ -2548,7 +2559,7 @@ pub struct VkFrame {
     draw_ground: Option<[u8; 3]>,
     /// The rain wets this raster world's ground: the ground's grid its
     /// wet ground and puddles read.
-    ground_grid: Option<Rc<crate::scene_terrain::TerrainMesh>>,
+    ground_grid: Option<std::sync::Arc<crate::scene_terrain::TerrainMesh>>,
     /// That world's ground, each corner with the colour its fog took and
     /// how much of it shows through ([`ground_corner`]), for the water's
     /// pass's ground image.
@@ -2632,6 +2643,8 @@ impl VkFrame {
             metal_world: None,
             metal_batch: Vec::new(),
             metal_scratch: Vec::new(),
+            fan_corners: Vec::new(),
+            last_texture: None,
             motion_batch: Vec::new(),
             draw_water: false,
             mirror_world: None,
@@ -2754,18 +2767,26 @@ impl VkFrame {
         self.follow_supersampling();
         let mut set = vk::DescriptorSet::null();
         if let Some(texturing) = &draw.texture {
-            let mut found = None;
-            self.with_state(|state, core, _| {
-                // SAFETY: recording happens on the device's own buffer.
-                found = Some(unsafe {
-                    state.texture(core, texturing.texture, sampler_index(texturing.sampling))?
-                });
-                Ok(())
-            });
-            let Some(found) = found else {
-                return;
-            };
-            set = found;
+            let key = texturing.texture.content_key();
+            let sampler = sampler_index(texturing.sampling);
+            match self.last_texture {
+                Some((last, last_sampler, found)) if (last, last_sampler) == (key, sampler) => {
+                    set = found;
+                }
+                _ => {
+                    let mut found = None;
+                    self.with_state(|state, core, _| {
+                        // SAFETY: recording happens on the device's own buffer.
+                        found = Some(unsafe { state.texture(core, texturing.texture, sampler)? });
+                        Ok(())
+                    });
+                    let Some(found) = found else {
+                        return;
+                    };
+                    self.last_texture = Some((key, sampler, found));
+                    set = found;
+                }
+            }
         }
         // Over a traced world, its fog in place of retail's vertex fog.
         let traced_fog =
@@ -2774,10 +2795,13 @@ impl VkFrame {
         let depth_always =
             self.raster_depth && !draw.depth_test && draw.blend == D3dTextureBlend::Copy;
         let texturing = draw.texture.as_ref();
-        let mut corners: Vec<DeviceVertex> = polygon
-            .iter()
-            .map(|vertex| device_vertex(vertex, texturing))
-            .collect();
+        let mut corners = std::mem::take(&mut self.fan_corners);
+        corners.clear();
+        corners.extend(
+            polygon
+                .iter()
+                .map(|vertex| device_vertex(vertex, texturing)),
+        );
         // A metal face's solid fans, opaque (or keyed: blended by their
         // texels' alpha, at full, as retail draws its sprites, not half
         // transparent), each corner with what it takes of the face, for the
@@ -2875,6 +2899,7 @@ impl VkFrame {
             for edge in corners[1..].windows(2) {
                 triangles.extend([corners[0], edge[0], edge[1]]);
             }
+            self.fan_corners = corners;
             return;
         }
         // Retail's ground in the rain, again for the water's pass; drawn in
@@ -2978,6 +3003,7 @@ impl VkFrame {
                 }
             }
         }
+        self.fan_corners = corners;
     }
 
     /// Which of the device's own passes `polygon`, drawn keyed `key`,
@@ -3126,11 +3152,6 @@ impl VkFrame {
         self.draw_band = band;
     }
 
-    /// Whether the device draws this raster world's modern sky.
-    pub(crate) fn draws_raster_sky(&self) -> bool {
-        self.sky_world.is_some()
-    }
-
     /// The painting is drawn: the modern sky goes behind its land and art,
     /// before the world's draws.
     pub(crate) fn draw_raster_sky(&mut self) {
@@ -3158,13 +3179,11 @@ impl VkFrame {
     }
 
     /// The metal face the next fans draw, or none.
-    pub(crate) fn set_draw_metal(&mut self, metal: Option<Rc<crate::raster_metal::MetalFace>>) {
+    pub(crate) fn set_draw_metal(
+        &mut self,
+        metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
+    ) {
         self.draw_metal = metal;
-    }
-
-    /// Whether this raster world's metal mirrors the sky.
-    pub(crate) fn reflects_metal(&self) -> bool {
-        self.metal_world.is_some()
     }
 
     /// The metal face's corners for the fan `polygon` (drawn as `corners`)
@@ -3200,11 +3219,6 @@ impl VkFrame {
     /// [`Self::begin_raster_world`].
     pub(crate) fn set_world_camera(&mut self, camera: Option<crate::scene_feed::SceneCamera>) {
         self.world_camera = camera;
-    }
-
-    /// The world's camera while its draws come in, traced or raster.
-    pub(crate) fn world_camera(&self) -> Option<crate::scene_feed::SceneCamera> {
-        self.world_camera
     }
 
     fn flush(&mut self) {
@@ -3347,11 +3361,6 @@ impl VkFrame {
                 },
             },
         );
-    }
-
-    /// The size the frame is shown at, and of [`Self::read_rgba`]'s image.
-    pub(crate) fn target(&self) -> [u32; 2] {
-        self.presented
     }
 
     /// Replace every colour pixel with top-down native-sized RGBA, keeping
@@ -3578,18 +3587,6 @@ impl VkFrame {
         begun.is_some_and(|begun| begun.follows)
     }
 
-    /// Whether the device shades an untraced world's water itself (not
-    /// lava, which [`Self::begin_raster_world`] is told of): Vulkan's
-    /// raster, whose water's pass takes the frame block, which needs the
-    /// scalar block layout. The world's begin writes that block; where it
-    /// cannot, the device has failed and draws nothing more, so a world
-    /// asked to show the murk never shows the view from above in its place.
-    /// A capability, not this frame's outcome: the look under the water
-    /// decides the game's fade.
-    pub(crate) fn shades_water(&self) -> bool {
-        !self.traces_rays() && self.device.core.scalar_layout
-    }
-
     /// The raster world's `light` again, now with the vehicles' lamps the
     /// light pass kept: where the device shades the water, its frame block
     /// is written anew for the water's pass.
@@ -3763,10 +3760,10 @@ impl VkFrame {
     }
 
     /// Copy the frame's pixels on the device for a snapshot, without
-    /// waiting: [`StagedRgba::read`] reads them back, as [`Self::read_rgba`]
+    /// waiting: [`DeviceStaged::read`] reads them back, as [`Self::read_rgba`]
     /// would have now, when the snapshot is saved. Each copy replaces the
     /// last.
-    pub(crate) fn stage_rgba(&mut self) -> StagedRgba {
+    pub(crate) fn stage_rgba(&mut self) -> DeviceStaged {
         self.flush();
         let drawn = self
             .target
@@ -3837,7 +3834,7 @@ impl VkFrame {
             );
             Ok(())
         });
-        StagedRgba {
+        DeviceStaged {
             device: Rc::clone(&self.device),
             drawn,
             presented: self.presented,
@@ -3902,28 +3899,29 @@ impl VkFrame {
             state.retire_idle_textures();
             Ok(())
         });
+        self.last_texture = None;
         self.presented_since = true;
     }
 }
 
 /// A frame's pixels copied on the device for a snapshot
 /// ([`VkFrame::stage_rgba`]), read back when it is saved.
-pub(crate) struct StagedRgba {
+pub(crate) struct DeviceStaged {
     device: Rc<VkDevice>,
     drawn: [u32; 2],
     presented: [u32; 2],
 }
 
-impl fmt::Debug for StagedRgba {
+impl fmt::Debug for DeviceStaged {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("StagedRgba")
+        f.debug_struct("DeviceStaged")
             .field("drawn", &self.drawn)
             .field("presented", &self.presented)
             .finish_non_exhaustive()
     }
 }
 
-impl StagedRgba {
+impl DeviceStaged {
     /// The copied pixels at the size the frame is shown at, top row first,
     /// as [`VkFrame::read_rgba`] gives them: everything recorded so far is
     /// submitted and waited for.

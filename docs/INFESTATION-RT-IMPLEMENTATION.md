@@ -99,11 +99,10 @@ OpenV2K is out of scope for now; Infestation goes first.
   world's random numbers (the camera lookup and the scene's draws,
   2026-10-22), so every renderer runs the game's own draw pipeline each
   frame; modern mode discards its screen-space output rather than skipping
-  it. Which view that draw takes is the session's game (2026-10-28): software, OpenGL and network games play retail's, the view
-  shown drawn apart from it; Vulkan single player plays the remaster's,
-  whose Remastered camera, widescreen frame and (in a session that started
-  traced) longer draw distance drive it
-  ([the game's draw and the shown draw](re/PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw)).
+  it. That draw's view is the view shown on every renderer (2026-11-01):
+  the camera style and the frame drive the game, and in Vulkan single
+  player a session that started traced also its longer draw distance
+  ([the game's view](re/PRESENTATION_POLICY.md#the-games-view)).
 - **Off-screen geometry comes from a side-effect-free pass.** The game runs
   only the models it draws, but shadows and reflections need nearby models
   outside the view. Those run in a separate pass on copies of their state,
@@ -141,7 +140,7 @@ OpenV2K is out of scope for now; Infestation goes first.
   reflections, water, fog and thermal vision; these rows apply to it only.
   Ray tracing switched in game reaches the game itself at the next session."
   (The session's game is fixed when its window opens,
-  [the game's draw and the shown draw](re/PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw).)
+  [the game's view](re/PRESENTATION_POLICY.md#the-games-view).)
   A PrintWindow of the launcher's own Options window at 125% scaling showed
   the earlier note in three lines, with every row below in place; the
   current one measures three lines at 100% and 125% in its font (GDI

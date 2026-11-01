@@ -1504,13 +1504,11 @@ impl HudExecutor<'_, '_, '_, '_, '_, '_> {
             Flag0ObjectDrawFailurePolicy, Flag0ObjectDrawRequest, ObjectDrawCone,
             ObjectDrawContext, ObjectDrawLighting,
         };
-        // Its draw plays the game: the game's projection, not the view
-        // shown's.
         let projection = world
             .last_draw
             .as_ref()
             .ok_or("a carried actor needs the world draw's view record")?
-            .game_projection;
+            .projection;
         let fade = SceneFade::new(projection.fade);
         let view = SceneView {
             eye: [0; 3],

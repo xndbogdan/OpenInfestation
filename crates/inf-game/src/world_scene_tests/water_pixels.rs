@@ -108,7 +108,6 @@ fn native_world_draw_includes_authored_ordinary_water_pixels_and_retained_receip
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,

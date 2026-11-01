@@ -34,7 +34,7 @@ use crate::{
     software_frame::SoftwareSurface,
     software_frame::{SoftwareFrame, SoftwarePixelStats},
     software_scene::{SoftwareScene, SoftwareSceneRequest, SoftwareSceneStats},
-    vk_device::VkDevice,
+    vk_device::VkHandle,
     ResidencyRequest, ResidentRuntime,
 };
 
@@ -121,7 +121,7 @@ impl Output {
         };
         if choice == RendererChoice::Vulkan {
             let opened = window(WindowKind::Vulkan).and_then(|window| {
-                let device = VkDevice::new(&window, hidden).map_err(|error| error.to_string())?;
+                let device = VkHandle::new(&window, hidden).map_err(|error| error.to_string())?;
                 Ok((window, device))
             });
             match opened {
@@ -207,6 +207,13 @@ impl Output {
         match self {
             Self::Canvas(_) => crate::modern_settings::ModernSupport::default(),
             Self::Hardware { device, .. } => device.modern_support(),
+        }
+    }
+
+    /// Let the device finish its frames before the window changes.
+    pub fn settle(&self) {
+        if let Self::Hardware { device, .. } = self {
+            device.settle();
         }
     }
 
@@ -580,6 +587,7 @@ impl FrontendDisplayHost for SdlDisplayReset<'_, '_> {
         })
         .map_err(reset_error)?;
         let texture = texture(self.creator, dimensions)?;
+        self.output.settle();
         replace_window(self.output.window_mut(), request.device, display)?;
         //A successfully admitted replacement constructor copies CURRENT
         //default slots once. Candidate validation and epoch resume never do.

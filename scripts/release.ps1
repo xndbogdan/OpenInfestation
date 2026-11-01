@@ -85,10 +85,11 @@ try {
         'about', 'generate', '--fail', '-o', $licenses, 'about.hbs'
     )
 
-    # Windows: the MinGW-w64 GNU toolchain, as for local builds. MSYS2's GCC 15
-    # defaults to C23, which SDL2's bundled sources reject.
+    # MSYS2's GCC 15 defaults to C23, which SDL2's bundled sources reject.
     $env:CFLAGS = '-std=gnu17'
-    Invoke-Checked 'build (Windows)' 'cargo' @('build', '--release', '-p', 'inf-game')
+    # Windows: the profile-guided MSVC build, its training run on the retail
+    # installation in retail/ (scripts/build-pgo.ps1).
+    Invoke-Checked 'build (Windows)' 'pwsh' @('-NoProfile', '-File', 'scripts/build-pgo.ps1')
     $upscalers = Join-Path $out 'upscalers'
     New-Item -ItemType Directory $upscalers | Out-Null
     Invoke-Checked 'upscalers' 'pwsh' @(
@@ -105,7 +106,7 @@ try {
     New-Item -ItemType Directory $windowsDir | Out-Null
     Copy-Item README.md, DISCLOSURE.md, LICENSE-MIT, LICENSE-APACHE, $licenses, $pak $windowsDir
     Copy-Item ($libraries | ForEach-Object { Join-Path $upscalers $_ }) $windowsDir
-    Copy-Item 'target/release/inf-game.exe' (Join-Path $windowsDir 'OpenInfestation.exe')
+    Copy-Item 'target/pgo/use/x86_64-pc-windows-msvc/ship/inf-game.exe' (Join-Path $windowsDir 'OpenInfestation.exe')
     Push-Location $out
     try {
         Invoke-Checked 'package (Windows)' (Join-Path $env:SystemRoot 'System32/tar.exe') @('-a', '-c', '-f', "$windowsName.zip", $windowsName)

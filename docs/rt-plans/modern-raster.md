@@ -716,14 +716,12 @@ V2000's wobble, that fog for a sky, the surface's strips left out;
 `world_scene::UnderwaterLook`). The world draws as the same eye above
 the water has it, its fade, sky and strips and all, as the tracer's does.
 That fade is game state (the objects' pass radius, the terrain's
-footprints, the particles' flags), so the game's draw never takes an
-underwater look: the remaster's game (Vulkan single player) keeps the
-header's fade under the water on every device, as the eye above it gets,
-nearer retail, whose camera never goes under, and retail's game draws
-retail's view
-([the game's draw and the shown draw](../re/PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw)).
-Software, OpenGL, lava and devices without the scalar layout keep the old
-look on screen.
+footprints, the particles' flags), so the world draw keeps the header's
+fade under the water on every device, as the eye above it gets, nearer
+retail, whose camera never goes under
+([the game's view](../re/PRESENTATION_POLICY.md#the-games-view)).
+Software, OpenGL, lava and devices without the scalar layout keep the
+wobble, the dimmed colours and the water's fog colour at that fade.
 
 - **The water's pass runs on every pixel** (`vk_mirror.comp`): what lies
   nearer than the surface shows through the murk over its distance, and a

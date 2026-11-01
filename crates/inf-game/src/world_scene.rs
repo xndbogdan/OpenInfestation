@@ -100,12 +100,10 @@ pub fn depth_policy(z_buffering: bool) -> (u32, u32) {
 /// Inputs that vary per frame around the world's retained native state.
 #[derive(Clone, Copy, Debug)]
 pub struct WorldFrameInputs {
-    /// Template `005474E8` focals (`00546F20/24`), retail's game's; the
-    /// world path publishes them as-is, never doubled like the frontend.
-    pub template_focal: [i32; 2],
-    /// The view shown's focal source: the template's, or the remastered
-    /// camera's wider one ([`crate::camera_clearance::focal`]), which the
-    /// remaster's game takes too.
+    /// The view's focal source: template `005474E8`'s focals
+    /// (`00546F20/24`, published as-is, never doubled like the frontend's),
+    /// or the remastered camera's wider ones
+    /// ([`crate::camera_clearance::focal`]).
     pub focal_src: [i32; 2],
     /// Port option, the remastered camera's speed kick: the scale on the
     /// slewed focals for the view drawn (1 none), past [`view_focals`],
@@ -270,8 +268,6 @@ pub struct WorldDrawOutcome {
     pub sound_omissions: usize,
     /// The draw arena filled outside the terrain's strips (native 0x301).
     pub arena_overflow: bool,
-    /// Port option: the view shown was drawn apart from the game's draw.
-    pub two_pass: bool,
     /// Port option: the objects drawn for the tracer alone, outside its
     /// view or round its first-person eye (their near callbacks).
     pub outside: usize,
@@ -294,14 +290,6 @@ pub struct WorldDrawReceipt {
     /// Port option: the remastered eye was under the water's live surface,
     /// whose sound the mix muffles.
     pub under_water: bool,
-    /// Port option: where the view shown was drawn apart from the game's
-    /// draw ([`WorldDrawOutcome::two_pass`]), the game's eye and projection
-    /// and its draw's outcome; the fields above are the view shown's. Only
-    /// what plays the game reads them: the carried actors' draw, and the
-    /// status line's eye.
-    pub game_eye: [i32; 3],
-    pub game_projection: crate::model_context::ModelProjection,
-    pub game_outcome: WorldDrawOutcome,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -653,13 +641,12 @@ fn submit_world_object_models(
 /// explosion's particle may lie on the ground or under it.
 const LIGHT_SOURCE_HEIGHT: i32 = 64;
 
-/// Port option, the remastered camera under the water, where the world
-/// draw lays its own look ([`UnderwaterLook::Wet`]): the fog's end (a
-/// little nearer than the world manager's least far, `0x1400`; the terrain's
-/// strips held there on Altair's and Arcturus's deep water), how bright the
-/// water's colour lays it (Vulkan's raster lays its murk as this fog,
-/// [`UnderwaterLook::Murk`]), what the world's colours keep, and how far
-/// they take the water's hue.
+/// Port option, the remastered camera under the water: the end of Vulkan's
+/// murk ([`UnderwaterLook::Murk`], a picture over the world drawn as above;
+/// a little nearer than the world manager's least far, `0x1400`), how
+/// bright the water's colour lays the murk and the world draw's own fog
+/// ([`UnderwaterLook::Wet`], at the view's fade), what the world's colours
+/// keep, and how far they take the water's hue.
 const UNDERWATER_FAR: i32 = 0x1000;
 const UNDERWATER_FOG_LIGHT: f32 = 0.35;
 const UNDERWATER_DIM: f32 = 0.7;
@@ -688,11 +675,10 @@ pub(crate) enum UnderwaterLook {
     Plain,
     /// The world draw's own (the software and OpenGL rasters, and Vulkan's
     /// where it cannot shade the water): V2000's wobble, the world's colours
-    /// dimmed in a short fog of the water's colour with that fog for its
-    /// sky, and no surface drawn. Only the view shown takes it: the game's
-    /// draw sees the world there as above the water, its fade and all (the
-    /// short fade would set the objects' pass radius, the terrain's
-    /// footprints and the particles' flags).
+    /// dimmed in a fog of the water's colour with that fog for its sky, and
+    /// no surface drawn. The fog keeps the view's fade (the user,
+    /// 2026-11-01): the game plays by it, its objects' pass radius, the
+    /// terrain's footprints and the particles' flags.
     Wet,
     /// Vulkan's raster where it shades the water itself (not lava): the
     /// world draws as the same eye above the water has it, its fade, sky and
@@ -731,7 +717,7 @@ struct ViewSpec {
     /// The slewed focals, the speed kick in them.
     focals: [i32; 2],
     viewport: [i32; 2],
-    /// The pre-draw fade; [`UnderwaterLook::Wet`] lays its own over it.
+    /// The pre-draw fade.
     fade: [i32; 2],
     /// H7 0x74's converted colour, 0x20's under infrared vision.
     far_color: u32,
@@ -759,38 +745,6 @@ impl ViewFailure {
             far_color: None,
         }
     }
-}
-
-impl ViewSpec {
-    /// Whether a draw from this view plays the same game as one from
-    /// `other`: all of it but how the frame shows it (under the water,
-    /// Vulkan's murk draws the world as above it, its fade and all).
-    fn plays_as(&self, other: &Self) -> bool {
-        let wet = |spec: &Self| spec.look == UnderwaterLook::Wet;
-        self.view == other.view
-            && self.coordinate_shift == other.coordinate_shift
-            && self.focals == other.focals
-            && self.viewport == other.viewport
-            && self.fade == other.fade
-            && self.far_color == other.far_color
-            && wet(self) == wet(other)
-            && self.cone == other.cone
-            && self.arena_bytes == other.arena_bytes
-    }
-}
-
-/// Which of the world draw's passes [`draw_world_pass`] draws.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum WorldPass {
-    /// The frame's one pass: the view shown plays the game.
-    Whole,
-    /// Port option: the game's draw, apart from the view shown, which
-    /// shows nothing ([`SoftwareScene::set_game_draw`]): no device world,
-    /// trace or thermal camera.
-    Game,
-    /// Port option: the view shown after it, apart from the game
-    /// ([`GameAsDrawn`]), which serves no sound.
-    View,
 }
 
 impl WorldDrawRequest<'_> {
@@ -838,42 +792,16 @@ pub fn draw_world_frame<'r>(
 ) -> Result<WorldDrawOutcome, WorldDrawError> {
     crate::crash_log::step(crate::crash_log::Step::WorldDraw);
     let _world_draw = crate::cpu_profile::scope("world: draw (all)");
-    let views = world_views(&mut request, &frame, host);
-    draw_world_views(request, frame, views, host)
-}
-
-/// The world draw from its views ([`world_views`], the game's and the
-/// view shown): one pass where the view shown plays the game's (retail's
-/// view drawn as retail draws it, or the remaster's as the frame shows it).
-/// Otherwise (the AGENTS.md renderers' roles: software and OpenGL play
-/// retail's game under any camera or scaling) the game's draw runs on the
-/// live game and shows nothing, then the view shown draws apart from it,
-/// on copies of all it could write ([`GameAsDrawn`]): its runtime
-/// allocations refuse writes (an object whose draw meets one is left out
-/// of the picture), it makes no particles and writes no event line, and
-/// it serves no sound. Its picture alone stays. It draws from the game as
-/// the game's draw left it: the shots that draw fired, the pickups it
-/// collected and the particles it made are the frame's.
-fn draw_world_views<'r>(
-    mut request: WorldDrawRequest<'_>,
-    frame: WorldFrameInputs,
-    views: Result<[ViewSpec; 2], ViewFailure>,
-    host: &mut ResidentSceneHost<'r, '_, SoftwareScene<'_, 'r>>,
-) -> Result<WorldDrawOutcome, WorldDrawError> {
-    let [game, shown] = match views {
-        Ok(views) => views,
+    // One pass: the view shown is the view the game plays (AGENTS.md, the
+    // renderers' roles), as retail's one view was.
+    let spec = match world_view(&mut request, &frame, host) {
+        Ok(spec) => spec,
         Err(failure) => {
-            // The scene as far as the game's draw had reached when the view
-            // failed.
-            let arena_bytes = if frame.game == crate::presentation::GameView::Retail {
-                RETAIL_ARENA_BYTES
-            } else {
-                frame.arena_bytes
-            };
+            // The scene as far as the draw had reached when the view failed.
             begin_world_pass(
                 request.world,
                 &frame,
-                arena_bytes,
+                frame.arena_bytes,
                 request.camera.animation_clock,
                 host,
             )?;
@@ -886,34 +814,7 @@ fn draw_world_views<'r>(
             return Err(failure.error);
         }
     };
-    if game.plays_as(&shown) {
-        let receipt = draw_world_pass(request.reborrow(), frame, &shown, WorldPass::Whole, host)?;
-        request.world.last_draw = Some(receipt);
-        return Ok(receipt.outcome);
-    }
-    host.backend.set_game_draw(Some(game.viewport))?;
-    let drawn = draw_world_pass(request.reborrow(), frame, &game, WorldPass::Game, host);
-    host.backend.set_game_draw(None)?;
-    let mut game = drawn?;
-    game.outcome.two_pass = true;
-    game.game_outcome = game.outcome;
-    // A view shown that fails leaves the game's receipt.
-    request.world.last_draw = Some(game);
-    let shown_scope = crate::cpu_profile::scope("world: view shown");
-    let drawn = crate::event_log::silenced(|| {
-        crate::object_runtime::refusing_writes(|| {
-            let kept = GameAsDrawn::set_aside(&mut request.owners(), host.backend)?;
-            let drawn = draw_world_pass(request.reborrow(), frame, &shown, WorldPass::View, host);
-            kept.put_back(&mut request.owners(), host.backend)?;
-            drawn
-        })
-    });
-    drop(shown_scope);
-    let mut receipt = drawn?;
-    receipt.outcome.two_pass = true;
-    receipt.game_eye = game.eye;
-    receipt.game_projection = game.projection;
-    receipt.game_outcome = game.outcome;
+    let receipt = draw_world_pass(request.reborrow(), frame, &spec, host)?;
     request.world.last_draw = Some(receipt);
     Ok(receipt.outcome)
 }
@@ -966,21 +867,6 @@ struct GameOwners<'a> {
     sounds: Option<&'a mut crate::process_sound::ProcessSoundRuntime>,
     tables: Option<&'a mut crate::object_runtime::ProcessActorBehaviorTables>,
     map: Option<&'a mut crate::world_map::WorldMapState>,
-}
-
-impl WorldDrawRequest<'_> {
-    fn owners(&mut self) -> GameOwners<'_> {
-        GameOwners {
-            world: &mut *self.world,
-            process: &mut *self.object_draw_process,
-            particles: &mut *self.particles,
-            light_grid: &mut *self.light_grid,
-            furniture: &mut *self.furniture.state,
-            sounds: self.sound.as_mut().map(|sound| &mut *sound.queue),
-            tables: self.weapon_tables.as_deref_mut(),
-            map: self.map.as_deref_mut(),
-        }
-    }
 }
 
 impl<'r> GameAsDrawn<'r> {
@@ -1053,50 +939,35 @@ impl<'r> GameAsDrawn<'r> {
     }
 }
 
-/// The frame's two views, in pre-draw 00488380's order of what it writes
-/// of the world: the focals' slews, the camera's acquisition, the fades'
-/// slews, then the camera's eye (the remastered camera's where it is
-/// lent). The game's view is retail's in retail's game: the native eye,
-/// the template's focal slewed with no kick, a 4:3 viewport the frame's
-/// height, the header's fade, retail's cone and arena. In the remaster's
-/// it is the view shown as any renderer would show it: no underwater look,
-/// and the tracer's longer draw distance only where the session started
-/// traced. The view shown is the frame's own.
-fn world_views<'r>(
+/// The frame's one view, which the game plays and the frame shows, in
+/// pre-draw 00488380's order of what it writes of the world: the focals'
+/// slew, the camera's acquisition, the fade's slew, then the camera's eye
+/// (the remastered camera's where it is lent). With the Original camera at
+/// 4:3 it is retail's view: the template's focal, a 4:3 viewport, retail's
+/// cone and arena. The tracer's longer draw distance is the session's: one
+/// that started traced keeps it until the next.
+fn world_view<'r>(
     request: &mut WorldDrawRequest<'_>,
     frame: &WorldFrameInputs,
     host: &mut ResidentSceneHost<'r, '_, SoftwareScene<'_, 'r>>,
-) -> Result<[ViewSpec; 2], ViewFailure> {
+) -> Result<ViewSpec, ViewFailure> {
     let world = &mut *request.world;
     let camera = request.camera;
     let animation_clock = camera.animation_clock;
     let terrain_residency = camera.residency;
-    let retail = frame.game == crate::presentation::GameView::Retail;
     // View setup first: the worker reads the published focals.
     //0040FD10 publishes +5C5 before mode-specific camera targets. Draw reads
     // that retained state even when a later camera feature fails. Production
     // supplies constructor-zero +5C0 until player look/zoom input is connected.
     let decay = !frame.special_view_active;
-    let game_src = if retail {
-        frame.template_focal
-    } else {
-        frame.focal_src
-    };
-    world.view_focals = view_focals(world.view_focals, game_src, decay, frame.scale_5c0);
-    world.shown_focals = view_focals(world.shown_focals, frame.focal_src, decay, frame.scale_5c0);
-    let kicked = |focals: [i32; 2]| {
-        if frame.focal_kick == 1.0 {
-            focals
-        } else {
-            focals.map(|focal| (focal as f32 * frame.focal_kick).round() as i32)
-        }
-    };
-    let game_focals = if retail {
+    world.view_focals = view_focals(world.view_focals, frame.focal_src, decay, frame.scale_5c0);
+    let focals = if frame.focal_kick == 1.0 {
         world.view_focals
     } else {
-        kicked(world.view_focals)
+        world
+            .view_focals
+            .map(|focal| (focal as f32 * frame.focal_kick).round() as i32)
     };
-    let shown_focals = kicked(world.shown_focals);
     // 0048E7D0 captures W+20 before W+1C, before 004883AA acquires anew.
     let header_near = world.mission.dword_20.expect("loaded world header");
     let header_far = world.mission.dword_1c;
@@ -1116,8 +987,8 @@ fn world_views<'r>(
     // drawn out to the new fog's end; the raster keeps retail's.
     // It also draws a little past its fog's end (`past`), so what comes
     // into view does so inside the whole fog (the feed's fog keeps the
-    // end, `feed_world`). The remaster's game takes it from a session
-    // that started traced.
+    // end, `feed_world`). It is the session's: one that started traced
+    // keeps it, and Ray Tracing switched in game takes effect at the next.
     let fog = crate::modern_tuning::current().fog(world.mission.current_world_a0);
     let tuned = [fog.far, fog.past];
     let traced_far = |[far, past]: [f32; 2]| {
@@ -1128,29 +999,15 @@ fn world_views<'r>(
             header_far
         }
     };
-    let game_far = if frame.game == (crate::presentation::GameView::Remaster { traced: true }) {
+    let far = if frame.game == (crate::presentation::GameView::Remaster { traced: true }) {
         traced_far(frame.game_far.unwrap_or(tuned))
     } else {
         header_far
     };
-    let shown_far = if host.backend.traces_rays() {
-        traced_far(tuned)
-    } else {
-        header_far
-    };
-    let fade = world.fade.predraw(game_far, header_near, frame.scale_5c0);
-    let shown_fade = world
-        .fade
-        .shown_predraw(shown_far, header_near, frame.scale_5c0);
-    let [width, height] = frame.surface;
-    let game_viewport = if retail {
-        [width.min(height * 4 / 3), height]
-    } else {
-        frame.surface
-    };
+    let fade = world.fade.predraw(far, header_near, frame.scale_5c0);
     let setup = SceneSetup::context(SceneProjection {
-        focal: game_focals,
-        viewport: game_viewport,
+        focal: focals,
+        viewport: frame.surface,
         fade,
     });
     // 00488446..004884B7: converted H7 0x74, then 0x20 under infrared vision.
@@ -1247,49 +1104,18 @@ fn world_views<'r>(
             },
         )
     };
-    let shown = ViewSpec {
+    Ok(ViewSpec {
         view,
         coordinate_shift: shown_camera.coordinate_shift,
-        focals: shown_focals,
+        focals,
         viewport: frame.surface,
-        fade: shown_fade,
+        fade,
         far_color,
         under_water,
         look,
-        cone: cone(SceneSetup::context(SceneProjection {
-            focal: shown_focals,
-            viewport: frame.surface,
-            fade: shown_fade,
-        })),
+        cone: cone(setup),
         arena_bytes: frame.arena_bytes,
-    };
-    let game = if retail {
-        ViewSpec {
-            view: SceneView {
-                eye: native_camera.eye,
-                basis: native_camera.basis,
-            },
-            coordinate_shift: native_camera.coordinate_shift,
-            focals: game_focals,
-            viewport: game_viewport,
-            fade,
-            far_color,
-            under_water: false,
-            look: UnderwaterLook::Plain,
-            cone: crate::object_runtime::ObjectDrawCone::Retail,
-            arena_bytes: RETAIL_ARENA_BYTES,
-        }
-    } else {
-        ViewSpec {
-            focals: game_focals,
-            fade,
-            under_water: false,
-            look: UnderwaterLook::Plain,
-            cone: cone(setup),
-            ..shown
-        }
-    };
-    Ok([game, shown])
+    })
 }
 
 /// 00440F00's preamble, as the existing arena/depth preparation with the
@@ -1310,42 +1136,14 @@ fn begin_world_pass<'r>(
     publish_world_light(world, animation_clock, host)
 }
 
-/// How one pass's lines begin, so the view shown's never read as the
-/// game's own stops (the harness counts those) and never take their
-/// de-dupe keys (`draw_omissions_logged`).
-struct PassLines {
-    head: &'static str,
-    terrain: &'static str,
-    key: &'static str,
-}
-
-impl PassLines {
-    fn of(pass: WorldPass) -> Self {
-        match pass {
-            WorldPass::View => Self {
-                head: "World view shown",
-                terrain: "World view shown",
-                key: "shown ",
-            },
-            WorldPass::Whole | WorldPass::Game => Self {
-                head: "World",
-                terrain: "world",
-                key: "",
-            },
-        }
-    }
-}
-
 /// One pass of the world draw from `spec`: its scene, then everything the
 /// draw submits and the game its callbacks play, and its receipt.
 fn draw_world_pass<'r>(
     request: WorldDrawRequest<'_>,
     frame: WorldFrameInputs,
     spec: &ViewSpec,
-    pass: WorldPass,
     host: &mut ResidentSceneHost<'r, '_, SoftwareScene<'_, 'r>>,
 ) -> Result<WorldDrawReceipt, WorldDrawError> {
-    let lines = PassLines::of(pass);
     let WorldDrawRequest {
         pickup_text_data,
         world,
@@ -1385,11 +1183,10 @@ fn draw_world_pass<'r>(
     let water = crate::modern_tuning::current().water(world.mission.current_world_a0);
     let look = spec.look;
     let mut backdrop = None;
-    let (fade, far_color, setup) = if look == UnderwaterLook::Wet {
-        let fade = [UNDERWATER_FAR / 16, UNDERWATER_FAR];
-        host.submit(SceneCommand::PublishFade(
-            crate::frontend_scene::SceneFade::new(fade),
-        ))?;
+    // The wet look keeps the view's fade, which the game plays by (its
+    // objects' pass radius, the terrain's footprints, the particles' flags):
+    // the water's colour, the wobble and the dimming are the picture's.
+    let (fade, far_color) = if look == UnderwaterLook::Wet {
         let hue = host.backend.water_colour().unwrap_or(WATER_HUE);
         let rgb = hue.map(|channel| (channel * UNDERWATER_FOG_LIGHT * 255.0).round() as u8);
         let far_color =
@@ -1407,30 +1204,22 @@ fn draw_world_pass<'r>(
             dim,
         );
         host.backend.set_underwater(Some((wet, far_color)));
-        let setup = SceneSetup::context(SceneProjection {
-            focal: spec.focals,
-            viewport: spec.viewport,
-            fade,
-        });
-        (fade, far_color, setup)
+        (spec.fade, far_color)
     } else {
-        (spec.fade, spec.far_color, setup)
+        (spec.fade, spec.far_color)
     };
     // The modern mode: a frame whose device traces rays collects the world's
     // scene beside the draw (crate::scene_feed); the draw itself runs as it
     // always does, for the game's sake, and the tracer replaces its pixels.
     let camera = scene_camera(view, setup);
-    let tracing = pass != WorldPass::Game && host.backend.begin_scene_feed(camera, frame.infrared);
+    let tracing = host.backend.begin_scene_feed(camera, frame.infrared);
     // An untraced world takes the player's anti-aliasing, except under
     // infrared vision, whose camera has a resolution of its own.
-    let raster = pass != WorldPass::Game && !tracing && !frame.infrared;
-    // The craft the camera follows, and its wake through the clouds, laid
-    // by the view shown's pass.
+    let raster = !tracing && !frame.infrared;
+    // The craft the camera follows, and its wake through the clouds.
     let craft = followed_craft(world);
     let micros = animation.animation_micros();
-    if pass != WorldPass::Game {
-        world.cloud_wake.follow(craft, micros);
-    }
+    world.cloud_wake.follow(craft, micros);
     let craft = craft.map(|words| {
         std::array::from_fn(|axis| {
             f32::from(i32::from(words[axis]).wrapping_sub(view.eye[axis]) as i16)
@@ -1555,7 +1344,6 @@ fn draw_world_pass<'r>(
         sounds_started: 0,
         sound_omissions: 0,
         arena_overflow: false,
-        two_pass: false,
         outside: 0,
         focals: spec.focals,
         depth,
@@ -1637,7 +1425,7 @@ fn draw_world_pass<'r>(
             },
             host,
             &mut outcome,
-            lines.head,
+            "World",
         );
 
         drop(particles_scope);
@@ -1666,14 +1454,11 @@ fn draw_world_pass<'r>(
                 outcome.object_light_deposits = Some(light.deposits);
                 outcome.object_light_omissions = light.omissions.len();
                 for omission in light.omissions {
-                    let key = format!(
-                        "{}light {:?} {:?}",
-                        lines.key, omission.object, omission.reason
-                    );
+                    let key = format!("light {:?} {:?}", omission.object, omission.reason);
                     if world.draw_omissions_logged.insert(key) {
                         eprintln!(
                             "{} object light {:?} skipped after reached writes (clock {}): {:?}",
-                            lines.head,
+                            "World",
                             omission.object,
                             animation.animation_value(),
                             omission.reason
@@ -1688,7 +1473,7 @@ fn draw_world_pass<'r>(
                 if !world.draw_skip_logged {
                     eprintln!(
                         "{} object light pass stopped after reached writes ({error}); remaining callbacks skipped",
-                        lines.head
+                        "World"
                     );
                 }
             }
@@ -1785,7 +1570,7 @@ fn draw_world_pass<'r>(
                 if draw.emitted_shots != 0 {
                     eprintln!(
                         "{} weapon firing: {} shot(s) emitted by {} nonempty drain(s), clock {}",
-                        lines.head,
+                        "World",
                         draw.emitted_shots,
                         draw.firing_drains,
                         animation.animation_value()
@@ -1794,22 +1579,12 @@ fn draw_world_pass<'r>(
                 outcome.submitted_models += draw.common_models + draw.late_models;
                 outcome.skips.object_draw += draw.omissions.len();
                 for omission in draw.omissions {
-                    let shown = pass == WorldPass::View;
                     let key = format!(
-                        "{}draw {:?} {:?}",
-                        if shown { "shown " } else { "" },
+                        "draw {:?} {:?}",
                         omission.object,
                         omission.reason
                     );
-                    if !world.draw_omissions_logged.insert(key) {
-                    } else if shown {
-                        eprintln!(
-                            "World view shown {:?} omitted, its writes put back (clock {}): {:?}",
-                            omission.object,
-                            animation.animation_value(),
-                            omission.reason
-                        );
-                    } else {
+                    if world.draw_omissions_logged.insert(key) {
                         eprintln!(
                             "World object draw {:?} omitted after reached writes (clock {}): {:?}",
                             omission.object,
@@ -1832,7 +1607,7 @@ fn draw_world_pass<'r>(
                 if !world.draw_skip_logged {
                     eprintln!(
                         "{} object manager stopped after reached writes: {error}",
-                        lines.head
+                        "World"
                     );
                 }
             }
@@ -1865,7 +1640,7 @@ fn draw_world_pass<'r>(
             },
             host,
             &mut outcome,
-            lines.head,
+            "World",
         );
         if host.backend.arena_overflowed() {
             break 'world;
@@ -1889,14 +1664,13 @@ fn draw_world_pass<'r>(
                     break 'world;
                 }
                 world.flash.stopped_draw = true;
-                eprintln!("{} flash stopped after reached writes: {error}", lines.head);
+                eprintln!("{} flash stopped after reached writes: {error}", "World");
             }
         }
         //00480110/004800E0 follow particle transfer and precede terrain44AA10.
         // Actual process0055F0F4 remains its constructor-zero value until a writer
         // is owned; no phase number stands in for that independent policy.
-        // The view shown, drawn apart from the game's, plays no sound.
-        if let Some(sound) = sound.as_mut().filter(|_| pass != WorldPass::View) {
+        if let Some(sound) = sound.as_mut() {
             if let Some(sink) = sound.sink.as_deref_mut() {
                 // A world without water holds its plane at -4096 or below.
                 let plane = world.terrain.plane_base() >> world.terrain.plane_shift();
@@ -2003,7 +1777,7 @@ fn draw_world_pass<'r>(
                 for omission in result.omissions {
                     let line = format!(
                         "{} terrain: {:?}: {}",
-                        lines.terrain, omission.feature, omission.reason
+                        "world", omission.feature, omission.reason
                     );
                     if world.draw_omissions_logged.insert(line.clone()) {
                         eprintln!("{line}");
@@ -2014,7 +1788,7 @@ fn draw_world_pass<'r>(
                 outcome.terrain_omissions += 1;
                 let line = format!(
                     "{} terrain: remaining terrain skipped ({error:?})",
-                    lines.terrain
+                    "world"
                 );
                 if world.draw_omissions_logged.insert(line.clone()) {
                     eprintln!("{line}");
@@ -2153,7 +1927,7 @@ fn draw_world_pass<'r>(
         outcome.arena_overflow = true;
         let line = format!(
             "{} draw arena full (native 0x301): the rest of the world draw skipped, as 00440F00's catch does",
-            lines.head
+            "World"
         );
         if world.draw_omissions_logged.insert(line.clone()) {
             eprintln!("{line}");
@@ -2203,7 +1977,7 @@ fn draw_world_pass<'r>(
         host.backend.finish_raster_world();
     }
     // Under Vulkan, infrared vision is a thermal camera over the world.
-    if frame.infrared && pass != WorldPass::Game {
+    if frame.infrared {
         host.backend.finish_thermal();
     }
     // 00440FF9: renderer +14(NULL) follows the final world/player flush.
@@ -2229,9 +2003,6 @@ fn draw_world_pass<'r>(
             .height_at([view.eye[0] as u16, view.eye[2] as u16]),
         outcome,
         under_water: spec.under_water,
-        game_eye: view.eye,
-        game_projection: projection,
-        game_outcome: outcome,
     })
 }
 

@@ -318,7 +318,7 @@ pub struct PrimitiveCommand<'a> {
     pub tint: Option<crate::crystal_flares::CrystalSpark>,
     /// Non-native: the metal face it draws, which Vulkan's modern raster
     /// mirrors the sky in ([`crate::raster_metal`]).
-    pub metal: Option<std::rc::Rc<crate::raster_metal::MetalFace>>,
+    pub metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
     /// Non-native, under Vulkan: the exact native screen point of each
     /// corner, by the packed whole-pixel XY the payload holds
     /// ([`crate::model_vertices::exact`]). A corner the clipper made keeps

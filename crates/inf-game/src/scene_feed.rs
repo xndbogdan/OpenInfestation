@@ -9,8 +9,6 @@
 //! Positions are relative to the eye, in world units, so the 16-bit world's
 //! wrap never reaches the tracer and `f32` keeps its precision near the eye.
 
-use std::rc::Rc;
-
 use inf_formats::SpriteRenderMode;
 
 use crate::{
@@ -575,13 +573,13 @@ pub struct SceneFeed {
     pub sky: [f32; 3],
     /// The ground ([`crate::scene_terrain`]): the same mesh until the
     /// terrain changes, in world units rather than relative to the eye.
-    pub terrain: Option<Rc<TerrainMesh>>,
+    pub terrain: Option<std::sync::Arc<TerrainMesh>>,
     /// The same ground's grid for Vulkan's raster on a world the rain may
     /// wet, never drawn: the device uploads it ahead, and while the rain
     /// wets the ground ([`Self::raster_wet_ground`]) its wet ground and
     /// puddles read the heights and normals (the frame block's grid), where
     /// [`Self::terrain`] would take the place of retail's ground.
-    pub raster_ground: Option<Rc<TerrainMesh>>,
+    pub raster_ground: Option<std::sync::Arc<TerrainMesh>>,
     /// Each blend rank's texture, an index into [`Self::textures`] (none:
     /// untextured).
     pub terrain_textures: Vec<Option<u32>>,
@@ -677,7 +675,7 @@ pub struct SceneFeed {
 
 impl SceneFeed {
     /// [`Self::raster_ground`] while the rain wets the ground.
-    pub fn raster_wet_ground(&self) -> Option<&Rc<TerrainMesh>> {
+    pub fn raster_wet_ground(&self) -> Option<&std::sync::Arc<TerrainMesh>> {
         self.raster_ground
             .as_ref()
             .filter(|_| self.weather.is_some_and(|weather| weather.wet_ground > 0.0))

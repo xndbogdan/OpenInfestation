@@ -61,9 +61,9 @@ static LOG: Mutex<Option<(File, u64)>> = Mutex::new(None);
 static CLOCK: AtomicU32 = AtomicU32::new(0);
 
 thread_local! {
-    /// Port option: set while the world draw draws the view shown apart
-    /// from the game's draw (`world_scene::draw_world_views`), whose
-    /// writes are all put back: its events never happen.
+    /// Port option: set during the tracer's draw of the models outside the view
+    /// (`world_scene`'s `GameAsDrawn`), whose writes are all put back: its
+    /// events never happen.
     static SILENT: Cell<bool> = const { Cell::new(false) };
 }
 
@@ -500,7 +500,7 @@ mod tests {
         assert_eq!(damage["target"], "0900");
     }
 
-    /// The view shown's draw's events never happen: no line, and no tick counted,
+    /// A silenced draw's events never happen: no line, and no tick counted,
     /// while it draws; the writers skip their work too.
     #[test]
     fn silenced_draws_write_no_line() {

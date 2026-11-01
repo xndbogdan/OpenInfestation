@@ -916,7 +916,7 @@ struct ObjectSlot {
 /// Concrete object allocations and their ordered nodes. It intentionally has no
 /// successful stand-in callbacks for classes or manager passes not yet ported.
 /// A copy keeps the arena's identity and shares its runtime allocations,
-/// so it may never live on beside its original: the world draw's view shown
+/// so it may never live on beside its original: the tracer's draw of the models outside the view
 /// draws on one while those allocations refuse writes, then drops it
 /// ([`refusing_writes`]).
 #[derive(Clone, Debug)]

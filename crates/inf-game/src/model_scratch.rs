@@ -223,8 +223,8 @@ impl ProcessModelScratch {
     /// Port option: keep the arena as it is, its cursor, registrations and
     /// draw state, and from now each byte the draws allocate over, which
     /// [`Self::restore`] puts back, so the draws between leave no residue
-    /// for later draws to read (the world draw's view shown, drawn apart
-    /// from the game's). The one process owner goes on.
+    /// for later draws to read (the tracer's draw of the models outside the view,
+    /// on a copy of the game). The one process owner goes on.
     pub fn save(&self) -> Result<ModelScratchSave, ModelScratchError> {
         let mut arena = self
             .0

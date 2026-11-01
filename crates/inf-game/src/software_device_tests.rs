@@ -11,7 +11,7 @@ use crate::{
     d3d_viewport::D3dTlVertex,
     frame_device::Device,
     gl_device::GlDevice,
-    vk_device::VkDevice,
+    vk_device::VkHandle,
 };
 
 const SIZE: [u32; 2] = [64, 48];
@@ -54,7 +54,7 @@ fn vulkan_target() -> Target {
         .build()
         .unwrap();
     Target {
-        device: Device::Vulkan(VkDevice::new(&window, true).unwrap()),
+        device: Device::Vulkan(VkHandle::new(&window, true).unwrap()),
         _window: window,
         _sdl: sdl,
     }
@@ -470,7 +470,7 @@ fn vulkan_presents_through_a_swapchain() {
         .vulkan()
         .build()
         .unwrap();
-    let device = Device::Vulkan(VkDevice::new(&window, false).unwrap());
+    let device = Device::Vulkan(VkHandle::new(&window, false).unwrap());
     let output = device.drawable_size(&window);
     let destination = crate::presentation::PresentationRect {
         x: 16,
@@ -1816,7 +1816,7 @@ fn vulkan_raster_metal_mirrors_the_sky() {
         // No scalar block layout: no frame block for the metal to read.
         return;
     }
-    frame.set_draw_metal(Some(std::rc::Rc::new(face)));
+    frame.set_draw_metal(Some(std::sync::Arc::new(face)));
     frame
         .fill_flat_submission(&flat(metal, D3dFlatBlend::Copy), 64, &mut pipeline)
         .unwrap();

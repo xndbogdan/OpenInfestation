@@ -20,10 +20,6 @@ pub struct WorldVisibilityReload {
 pub struct WorldFadeState {
     smoothed_far: i32,
     smoothed_header: i32,
-    /// Port option: the same pair slewed for the view shown where it
-    /// differs from the game's (the tracer's longer draw distance), apart
-    /// from the game's.
-    shown: [i32; 2],
     pub performance: WorldTimingRing,
 }
 
@@ -40,7 +36,6 @@ impl WorldFadeState {
         Self {
             smoothed_far: far as i32,
             smoothed_header: header as i32,
-            shown: [far as i32, header as i32],
             performance,
         }
     }
@@ -54,11 +49,6 @@ impl WorldFadeState {
         let fade = predraw_pair(&mut pair, far, header, scale_5c0);
         [self.smoothed_far, self.smoothed_header] = pair;
         fade
-    }
-
-    /// Port option: [`Self::predraw`] for the view shown, on its own pair.
-    pub fn shown_predraw(&mut self, far: u32, header: u32, scale_5c0: i16) -> [i32; 2] {
-        predraw_pair(&mut self.shown, far, header, scale_5c0)
     }
 }
 

@@ -40,9 +40,8 @@ fn retails_view_keeps_retails_arena_and_a_wider_one_scales_with_its_reach() {
 /// fast machine reaches. Its 16:9 frame overflows retail's arena, whose
 /// terrain strip frames (0044AA10) drop the strips that do not fit, and the
 /// frame draws what did. The width-sized arena holds it, as retail's holds
-/// the 4:3 view of the same pose. Retail's game at 16:9 draws that 4:3 view
-/// in retail's arena, as the 4:3 frame does, the view shown drawn apart in
-/// its own; the remaster's draws the frame's view in the frame's arena.
+/// the 4:3 view of the same pose. Both games draw the frame's one view in
+/// the frame's arena.
 #[test]
 fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
     let (assets, resident, mut world, _maps) = load_campaign_world(
@@ -137,7 +136,6 @@ fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,
@@ -178,7 +176,6 @@ fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
         Retail,
     );
     let outcome = outcome.unwrap();
-    assert!(!outcome.two_pass);
     // The reproduction's fade: near (far - header) / 4, far 12480; the
     // tier's focal, as the arenas here are sized.
     let receipt = receipt.unwrap();
@@ -190,26 +187,18 @@ fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
     // The remaster's game in retail's arena: the frame's view overflows it.
     let (overflow, receipt) = draw(wide, RETAIL_ARENA_BYTES, remaster);
     let overflow = overflow.unwrap();
-    assert!(!overflow.two_pass && receipt.is_some());
+    assert!(receipt.is_some());
     assert!(overflow.terrain_omissions > 0, "{overflow:?}");
 
-    // Retail's: its draw is the 4:3 frame's whatever the view shown's
-    // arena, which fills or holds that view.
+    // Retail's game draws the frame's view too: retail's arena fills, the
+    // width-sized one holds it and the strips beyond 4:3.
     for (arena_bytes, holds) in [
         (RETAIL_ARENA_BYTES, false),
         (world_arena_bytes([1365, 768], [512, 512]), true),
     ] {
         let (outcome, receipt) = draw(wide, arena_bytes, Retail);
         let (outcome, receipt) = (outcome.unwrap(), receipt.unwrap());
-        assert!(outcome.two_pass);
-        assert_eq!(
-            (
-                receipt.game_outcome.terrain_commands,
-                receipt.game_outcome.terrain_omissions
-            ),
-            (four_three_terrain, 0)
-        );
-        assert_eq!(receipt.game_projection.viewport, [1024, 768]);
+        assert_eq!(receipt.projection.viewport, [1365, 768]);
         assert_eq!(outcome.terrain_omissions == 0, holds, "{outcome:?}");
         if holds {
             assert!(outcome.terrain_commands > overflow.terrain_commands);
@@ -222,16 +211,11 @@ fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
     }
 
     // Outside the terrain, 00440F00's frame takes the 0x301 from the models,
-    // skips the rest of the world draw and still flushes what was queued:
-    // the remaster's game's own draw, and retail's view shown, apart from
-    // its game's, whose arena is retail's.
-    let (small, receipt) = draw(four_three, 0x800, remaster);
-    let small = small.unwrap();
-    assert!(small.arena_overflow && !small.two_pass, "{small:?}");
-    assert!(small.skipped_terrain && receipt.is_some());
-    let (small, receipt) = draw(four_three, 0x800, Retail);
-    let (small, receipt) = (small.unwrap(), receipt.unwrap());
-    assert!(small.arena_overflow && small.two_pass, "{small:?}");
-    assert!(small.skipped_terrain);
-    assert!(!receipt.game_outcome.arena_overflow && !receipt.game_outcome.skipped_terrain);
+    // skips the rest of the world draw and still flushes what was queued.
+    for game in [remaster, Retail] {
+        let (small, receipt) = draw(four_three, 0x800, game);
+        let small = small.unwrap();
+        assert!(small.arena_overflow, "{small:?}");
+        assert!(small.skipped_terrain && receipt.is_some());
+    }
 }

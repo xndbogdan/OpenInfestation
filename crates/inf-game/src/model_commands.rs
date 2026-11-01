@@ -91,7 +91,7 @@ pub trait ModelCommandServices<'a>: ModelValueCallback {
         &mut self,
         _request: &ModelPrimitiveRequest<'_>,
         _resources: &RenderResources<'a>,
-    ) -> Option<std::rc::Rc<crate::raster_metal::MetalFace>> {
+    ) -> Option<std::sync::Arc<crate::raster_metal::MetalFace>> {
         None
     }
 }
@@ -143,7 +143,7 @@ pub struct ModelCommandBackend<'a, 'q, S> {
     /// How the raster draws it under its own modern sky.
     sky: Option<crate::scene_capture::RasterSkyDraw>,
     /// Its metal face, while Vulkan's raster mirrors the sky in metal.
-    metal: Option<std::rc::Rc<crate::raster_metal::MetalFace>>,
+    metal: Option<std::sync::Arc<crate::raster_metal::MetalFace>>,
     /// The exact screen points of its model's corners, while its frame
     /// keeps twins.
     exact_screens: Option<std::rc::Rc<crate::fast_hash::FastMap<u32, [f32; 2]>>>,

@@ -322,8 +322,8 @@ pub enum Flag0ObjectDrawFailurePolicy {
 
 pub struct Flag0ObjectDrawRequest<'a, T, H> {
     pub context: &'a mut ObjectDrawContext,
-    /// The near-callback cone: retail's, or the view's own where the
-    /// remaster's game or the view shown draws it.
+    /// The near-callback cone: retail's, or the view's own where it reaches
+    /// past retail's.
     pub cone: ObjectDrawCone,
     pub process: &'a mut ObjectDrawProcessState,
     /// Fresh full-DWORD55F448; this typed loan excludes arbitrary native aliases.
@@ -497,8 +497,8 @@ pub enum ObjectDrawCallbackBoundary {
         argument: i32,
         reason: String,
     },
-    /// Port option: an object's draw in the view shown, drawn apart from
-    /// the game's, wrote a runtime allocation it must leave
+    /// Port option: an object's draw in the tracer's draw of the models outside the view,
+    /// on a copy of the game, wrote a runtime allocation it must leave
     /// ([`super::refusing_writes`]).
     ShownDrawWrite,
 }
@@ -601,7 +601,7 @@ impl ObjectArena {
                         .omissions
                         .push(Flag0ObjectDrawOmission { object, reason });
                 }
-                // Port option: in the view shown, drawn apart from the game's
+                // Port option: in the tracer's draw of the models outside the view
                 // (only there are writes refused), a refused write ends this
                 // object's draw, not the pass's.
                 Err(_) if super::allocation::take_refused() => {
@@ -624,8 +624,8 @@ impl ObjectArena {
     /// manager admits one, for the tracer's feed alone. Those callbacks
     /// write game state, so the world draw runs this only on its copies of
     /// the game (`world_scene`'s `GameAsDrawn`), whose runtime allocations
-    /// refuse writes: an object whose draw meets one is left out, as the
-    /// view shown leaves it. One a later draw took off the list is passed
+    /// refuse writes: an object whose draw meets one is left out of that
+    /// draw. One a later draw took off the list is passed
     /// over.
     pub fn draw_near_callbacks<T: ActorTerrainHost, H: Flag0ObjectDrawHost>(
         &mut self,

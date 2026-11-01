@@ -39,6 +39,8 @@ problem.
 
 ```sh
 cargo build --release                      # optimized build
+cargo build --profile ship -p inf-game     # LTO, without PGO
+scripts/build-pgo.ps1                      # the Windows release (PGO, MSVC)
 cargo check                                # fast type check
 cargo test -p inf-game --lib --release     # game unit tests
 cargo test --workspace --release           # complete workspace
@@ -74,6 +76,10 @@ direct run (see [README](README.md#pre-game-launcher)).
 - Pass `--renderer software` to every snapshot, probe or retail comparison:
   the CPU raster is the deterministic pixel reference. The default renderer
   is OpenGL.
+- Compare with retail at 4:3 (`--width 1024 --height 768`) with Camera
+  Style Normal (settings `+6C` 0): only there does the port's one view
+  equal retail's. A wider frame or the Remastered camera shows, and plays,
+  more of the world.
 - `--hidden` runs are silent; keep probes and tests silent unless a test is
   about sound.
 - The executable is a Windows GUI program: PowerShell does not wait for it
@@ -106,16 +112,20 @@ looks bad; no quality-of-life deviation goes in without being agreed first.
 
 The renderers have fixed roles:
 
-- The software raster and OpenGL always play retail's game, whatever the
-  camera style or scaling: they look, sound and behave as close to the
-  original as possible. Camera Style's Remastered and the widescreen frame
-  change only their picture; see
-  [the game's draw and the shown draw](docs/re/PRESENTATION_POLICY.md#the-games-draw-and-the-shown-draw).
+- The world draws once, and the view it shows is the view the game plays,
+  as retail's one view was: a widescreen frame or Camera Style's Remastered
+  sees, and plays, more of the world at its edges. At 4:3 with the Normal
+  camera that is retail's game exactly; see
+  [the game's view](docs/re/PRESENTATION_POLICY.md#the-games-view).
+- The software raster and OpenGL look, sound and behave as close to the
+  original as possible.
 - Vulkan, plain and path traced, is the remaster in single player: every
   modern look or sound lives there only, and its game aims for retail except
   where that costs functionality.
-- Network games play retail's game on every renderer, so every machine in a
-  game agrees. Network play does not work yet.
+- Network games play retail's game on every renderer (no Vulkan
+  additions). Each machine simulates the actors it owns and sends their
+  state, so machines need not share a view. Network play does not work
+  yet.
 - Fixes for retail bugs are separate settings, on by default, and follow
   neither renderer. A remastered choice the player picks in a menu keeps
   retail's as its default.

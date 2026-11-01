@@ -39,12 +39,12 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
         // Distinct retained histories exercise decay, quarter easing and the
         // native decay overshoot (which corrects to source on the next draw).
         // Every draw reuses this actual world without reconstructing its camera.
-        // Port option: then the view shown's own slew toward the remastered
-        // camera's wider focal, apart from the game's toward retail's: into a
-        // special view (the scope), whose focal is retail's, it eases there
-        // as the game's would, and out of it it falls back by 0x50 a frame.
-        // 100 degrees across for retail's 90 (tan 45 / tan 50).
-        // The view shown's focal after each draw, worked by hand from 640x480's
+        // Port option: then the slew toward the remastered camera's wider
+        // focal, carried from draw to draw: into a special view (the scope),
+        // whose focal is retail's, it eases there, and out of it it falls
+        // back by 0x50 a frame. 100 degrees across for retail's 90
+        // (tan 45 / tan 50).
+        // The focal after each draw, worked by hand from 640x480's
         // 320: down by 0x50 a frame, or to the source when at or below it; in
         // a special view a quarter of the way to it, rounded toward the
         // larger (an arithmetic shift).
@@ -54,7 +54,7 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
         for (
             special_view_active,
             history_delta,
-            expected_delta,
+            _retail_delta,
             focal_kick,
             shown_src,
             own,
@@ -99,10 +99,9 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
             (false, [0, 0], [0, 0], 1.0, wide, true, [195, 195]),
             (false, [0, 0], [0, 0], 1.0, wide, true, [268, 268]),
         ] {
-            world.view_focals = [source[0] + history_delta[0], source[1] + history_delta[1]];
-            // The view shown follows the game's history, or keeps its own.
+            // A supplied history, or the slew carried from the last draw.
             if !own {
-                world.shown_focals = world.view_focals;
+                world.view_focals = [source[0] + history_delta[0], source[1] + history_delta[1]];
             }
             let mut frame = SoftwareFrame::new(640, 480, [16, 24, 64, 255]);
             let mut scene = SoftwareScene::new(SoftwareSceneRequest {
@@ -142,7 +141,6 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
                     sound: None,
                 },
                 WorldFrameInputs {
-                    template_focal: source,
                     focal_src: shown_src,
                     focal_kick,
                     scale_5c0: 0,
@@ -166,27 +164,15 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
                 &mut host,
             )
             .unwrap();
-            let expected = [source[0] + expected_delta[0], source[1] + expected_delta[1]];
             assert_eq!(
                 outcome.focals,
                 shown.map(|focal| (focal as f32 * focal_kick).round() as i32),
                 "selection{selection} special={special_view_active}"
             );
-            assert_eq!(world.view_focals, expected);
-            assert_eq!(world.shown_focals, shown);
-            // Two passes where the view shown is not the game's, or sees past
-            // retail's cone (a focal below the source, as a decay that
-            // overshoots leaves it), which the game's draw keeps.
-            let wider = (0..2).any(|axis| shown[axis] < source[axis]);
-            assert_eq!(
-                outcome.two_pass,
-                shown != expected || focal_kick != 1.0 || wider,
-                "selection{selection} shown {shown:?}"
-            );
-            let receipt = world.last_draw.unwrap();
-            assert_eq!(receipt.game_projection.focal, expected);
+            assert_eq!(world.view_focals, shown);
+            assert_eq!(world.last_draw.unwrap().projection.focal, outcome.focals);
         }
         // Back out of the special view, past the decay's overshoot.
-        assert_eq!(world.shown_focals, wide);
+        assert_eq!(world.view_focals, wide);
     }
 }

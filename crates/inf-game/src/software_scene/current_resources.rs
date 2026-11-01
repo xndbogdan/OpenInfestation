@@ -156,8 +156,6 @@ impl<'frame, 'epoch> SoftwareScene<'frame, 'epoch> {
                 water_fog: self.water_fog,
                 raster_sky: None,
                 raster_metals: Default::default(),
-                game_draw: None,
-                game_queue: None,
             },
             old_queue: &mut self.queue,
             reset_reached: false,
@@ -210,8 +208,6 @@ impl<'frame, 'epoch> SoftwareScene<'frame, 'epoch> {
             water_fog: _,
             raster_sky: _,
             raster_metals: _,
-            game_draw: _,
-            game_queue: _,
         } = loan.scene;
         let SoftwarePixelBackend {
             frame: _,

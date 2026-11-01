@@ -115,8 +115,10 @@ pub fn clip_polygon(
 }
 
 /// A clipped polygon on the stack: at most ten vertices, and two more
-/// before [`D3dViewportError::Capacity`] is checked.
-pub(crate) type ClippedPolygon = tinyvec::ArrayVec<[D3dTlVertex; 12]>;
+/// before [`D3dViewportError::Capacity`] is checked. Uninitialised storage:
+/// making one writes only its length, so the per-primitive arrays of them
+/// cost no fill or copy.
+pub(crate) type ClippedPolygon = arrayvec::ArrayVec<D3dTlVertex, 12>;
 
 /// [`clip_polygon`] into `out` (emptied first), without a heap allocation.
 pub(crate) fn clip_polygon_into(
@@ -152,7 +154,7 @@ pub(crate) fn clip_finite_into(
     check_shape(vertices, state)?;
     let [left, top, right, bottom] = state.bounds;
     out.clear();
-    out.extend_from_slice(vertices);
+    out.try_extend_from_slice(vertices).expect("3 or 4 vertices");
     let planes = [
         Plane::minimum(Axis::Y, top),
         Plane::minimum(Axis::X, left),

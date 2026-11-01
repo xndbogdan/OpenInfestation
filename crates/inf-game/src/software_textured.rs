@@ -123,11 +123,11 @@ impl SoftwareFrame {
             D3dTextureBlend::Copy
         };
         // Validate both clipped polygons before the first pixel submission.
-        let mut polygons: [ClippedPolygon; T] = std::array::from_fn(|_| ClippedPolygon::new());
+        let mut polygons: [ClippedPolygon; T] = [const { ClippedPolygon::new_const() }; T];
         for (polygon, indices) in polygons.iter_mut().zip(submission.triangles) {
             let vertices = indices.map(|i| self.wet_vertex(submission.vertices[i]));
             if submission.mode & 0x20 != 0 {
-                polygon.extend_from_slice(&vertices);
+                polygon.try_extend_from_slice(&vertices).expect("3 or 4 vertices");
             } else {
                 // Finite: checked above, and the wet offsets keep it so.
                 clip_finite_into(

@@ -337,7 +337,7 @@ pub struct NetworkMenu {
     close: Option<CloseToken>,
 }
 
-/// A copy (the view shown's copy of the world's arena, menus and all) never
+/// A copy (a draw's copy of the world's arena, menus and all) never
 /// closes the session when it drops: only the menu itself does.
 impl Clone for NetworkMenu {
     fn clone(&self) -> Self {

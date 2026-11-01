@@ -95,7 +95,6 @@ fn tabuchi_force_field_dome_reaches_the_pixels() {
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,

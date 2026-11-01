@@ -569,7 +569,6 @@ fn missing_birth_source_preserves_world_view_models_particle_transfer_and_audio(
             }),
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -1603,7 +1602,6 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
             sound: None,
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -1703,7 +1701,6 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,
@@ -1853,7 +1850,6 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
             sound: None,
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -1937,7 +1933,6 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
             sound: None,
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -2106,7 +2101,6 @@ fn level1_draw_uses_native_admission_and_keeps_common_resource_fixture() {
             sound: None,
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -2596,7 +2590,6 @@ fn predraw_acquisition_and_late_boundaries_preserve_reached_owners() {
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,
@@ -2856,7 +2849,6 @@ fn world_object_light_deposits_feed_the_retained_terrain_grid() {
             sound: None,
         },
         WorldFrameInputs {
-            template_focal: startup.projection.focal,
             focal_src: startup.projection.focal,
             focal_kick: 1.0,
             scale_5c0: 0,
@@ -2978,7 +2970,6 @@ fn infrared_vision_skips_the_sky_and_lights_the_vehicle_green() {
                 sound: None,
             },
             WorldFrameInputs {
-                template_focal: startup.projection.focal,
                 focal_src: startup.projection.focal,
                 focal_kick: 1.0,
                 scale_5c0: 0,

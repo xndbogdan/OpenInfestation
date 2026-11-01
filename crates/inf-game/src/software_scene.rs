@@ -544,7 +544,7 @@ impl<'a> ModelCommandServices<'a> for ModelServices<'_, 'a> {
         &mut self,
         request: &crate::model_execution::ModelPrimitiveRequest<'_>,
         resources: &RenderResources<'a>,
-    ) -> Option<std::rc::Rc<crate::raster_metal::MetalFace>> {
+    ) -> Option<std::sync::Arc<crate::raster_metal::MetalFace>> {
         self.metal.as_deref_mut()?.face(request, resources)
     }
 
@@ -617,16 +617,6 @@ pub(crate) struct SceneGlobals<'r> {
     graphics: crate::process_model_graphics::ProcessModelGraphicsSave,
     /// The textures' sort ordinals, given in the order the draws meet them.
     texture_identities: TextureIdentities<'r>,
-}
-
-/// What the game's draw sets aside while it draws
-/// ([`SoftwareScene::set_game_draw`]): the view shown's arena, the device's
-/// capture of the world and the frame's clip.
-struct GameDrawKept<'r> {
-    queue: DrawQueue<PrimitiveCommand<'r>>,
-    feed: Option<crate::scene_feed::SceneFeedBuilder<'r>>,
-    motion: Option<crate::raster_motion::RasterMotion>,
-    viewport: [i16; 4],
 }
 
 /// The first failure that stopped a batch.
@@ -703,12 +693,6 @@ pub struct SoftwareScene<'f, 'r> {
     /// The models' materials, read while Vulkan's raster mirrors the sky in
     /// the world's metal ([`crate::raster_metal`]).
     raster_metals: crate::raster_metal::RasterMetals,
-    /// Port option: set while the world draws the game's draw apart from
-    /// the view shown ([`Self::set_game_draw`]).
-    game_draw: Option<GameDrawKept<'r>>,
-    /// The game's draw's own arena between its frames, which keeps its
-    /// size (retail's) apart from the view shown's.
-    game_queue: Option<DrawQueue<PrimitiveCommand<'r>>>,
 }
 
 #[cfg(test)]
@@ -1187,8 +1171,6 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
             water_fog: None,
             raster_sky: None,
             raster_metals: Default::default(),
-            game_draw: None,
-            game_queue: None,
         })
     }
 
@@ -1348,46 +1330,6 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
         self.furniture_root_registers = globals.furniture_root_registers;
         self.draw_tint = globals.draw_tint;
         self.texture_identities = globals.texture_identities;
-        Ok(())
-    }
-
-    /// Port option: the world's game drawn apart from the view shown, on
-    /// its own arena (`set_game_draw(Some(viewport))`), or the view drawn
-    /// again (`None`). The game's draw shows nothing: its flushes replay the
-    /// queue without drawing, depth is never cleared, the device's capture
-    /// of the world waits, and the clip is the game's `viewport`, retail's
-    /// 4:3 surface in retail's game (the world flash's quads are clipped to
-    /// it).
-    pub(crate) fn set_game_draw(
-        &mut self,
-        game: Option<[i32; 2]>,
-    ) -> Result<(), SoftwareSceneError> {
-        if game.is_some() == self.game_draw.is_some() {
-            return Ok(());
-        }
-        let Some([width, height]) = game else {
-            if let Some(kept) = self.game_draw.take() {
-                self.game_queue = Some(std::mem::replace(&mut self.queue, kept.queue));
-                self.scene_feed = kept.feed;
-                self.raster_motion = kept.motion;
-                self.pixels.pipeline.viewport = kept.viewport;
-            }
-            return Ok(());
-        };
-        let queue = match self.game_queue.take() {
-            Some(queue) => queue,
-            // Renewed at the game's draw's start (`begin_frame_with_arena`).
-            None => DrawQueue::with_native_memory(0xc8000, flash::record_primitive_memory)?,
-        };
-        self.game_draw = Some(GameDrawKept {
-            queue: std::mem::replace(&mut self.queue, queue),
-            feed: self.scene_feed.take(),
-            motion: self.raster_motion.take(),
-            viewport: std::mem::replace(
-                &mut self.pixels.pipeline.viewport,
-                [0, 0, width as i16, height as i16],
-            ),
-        });
         Ok(())
     }
 
@@ -1557,8 +1499,6 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
             water_fog: None,
             raster_sky: None,
             raster_metals: Default::default(),
-            game_draw: None,
-            game_queue: None,
         })
     }
 
@@ -1718,7 +1658,7 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
     }
 
     fn reset_depth_surface(&mut self) {
-        if self.pixels.renderer.manages_depth && self.game_draw.is_none() {
+        if self.pixels.renderer.manages_depth {
             self.pixels.pipeline.depth_enabled = false;
             self.pixels.pipeline.depth_write = true;
             self.pixels.frame.clear_depth();
@@ -1812,12 +1752,7 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
             motion: self.raster_motion.as_mut(),
             tint: self.draw_tint,
             sky: self.raster_sky.as_ref(),
-            // The game's draw shows nothing.
-            metal: if self.game_draw.is_none() {
-                self.raster_metals.drawing()
-            } else {
-                None
-            },
+            metal: self.raster_metals.drawing(),
         };
         let mut commands = ModelCommandBackend::new(
             self.resources,
@@ -2160,13 +2095,7 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
                 self.graphics.publish_fade(fade)?;
             }
             ResolvedSceneCommand::FlushBatch => {
-                if self.game_draw.is_some() {
-                    // The game's draw: the queue closes its groups and
-                    // replays as a drawn one does, and draws nothing.
-                    self.queue.flush(|_, _| Ok::<_, SoftwarePixelError>(()))?;
-                } else {
-                    flush_pixels(&mut self.queue, &mut self.pixels)?;
-                }
+                flush_pixels(&mut self.queue, &mut self.pixels)?;
                 self.stats.flushes += 1;
             }
             ResolvedSceneCommand::StarView(view) | ResolvedSceneCommand::PublishView(view) => {

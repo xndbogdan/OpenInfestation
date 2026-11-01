@@ -401,6 +401,18 @@ fn raster_plan(upscaling: bool, modern: ModernSettings) -> Option<bool> {
         .then_some(upscaling || modern.anti_aliasing == AntiAliasing::Taa)
 }
 
+/// Whether a raster world under `modern` is followed over frames, as
+/// [`State::begin_raster`] decides it while its upscaler runs: what the
+/// main thread tells the world draw ahead of the device's thread. Once an
+/// upscaler fails the device follows less than this says, and the motion
+/// the models then report goes unused.
+pub(super) fn follows(modern: ModernSettings) -> bool {
+    raster_plan(
+        UpscalerChoice::from_settings(modern) != UpscalerChoice::Off,
+        modern,
+    ) == Some(true)
+}
+
 impl State {
     fn raster_aa(&mut self, core: &Core) -> Result<Box<RasterAa>, VkDeviceError> {
         match self.raster_aa.take() {

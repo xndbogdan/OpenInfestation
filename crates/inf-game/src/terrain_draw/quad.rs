@@ -96,7 +96,10 @@ pub(super) fn submit_tile<'a, H: TerrainDrawHost<'a>>(
         .fold(0, |value, (index, corner)| {
             value | ((corner.cell_flags & 3) << (index * 2))
         });
-    let blend = inf_formats::terrain_blend(combo);
+    // FUN_0044B5C0's table, built once rather than searched per tile.
+    static BLENDS: std::sync::OnceLock<[inf_formats::TerrainBlend; 256]> =
+        std::sync::OnceLock::new();
+    let blend = BLENDS.get_or_init(inf_formats::terrain_blend_table)[usize::from(combo)];
     let texture = host
         .texture(blend.texture_resource_id as i16)
         .map_err(TerrainDrawError::Host)?;

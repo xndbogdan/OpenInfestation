@@ -87,7 +87,7 @@ fn a_renewed_arena_is_a_new_one() {
 }
 
 #[test]
-fn native_draw_memory_failed_callback_keeps_its_stores_and_failed_allocation_keeps_scratch() {
+fn native_draw_memory_keeps_allocation_stores_past_a_failed_callback_and_failed_allocation_keeps_scratch() {
     let mut queue = DrawQueue::with_native_memory(128, record).unwrap();
     submit(&mut queue, 3, &[(48, 1), (49, 2), (50, 3), (51, 4)]);
     assert!(queue
@@ -97,7 +97,9 @@ fn native_draw_memory_failed_callback_keeps_its_stores_and_failed_allocation_kee
         })
         .is_err());
     queue.reset();
-    assert_eq!(queue.next_payload_word(0x20), Some(0x04030209));
+    // The record is written at allocation; receivers read their commands
+    // (the pixel backend's never write one), so a flush records nothing.
+    assert_eq!(queue.next_payload_word(0x20), Some(0x04030201));
     let before = queue.state();
     let error = queue.submit(DrawSubmission {
         depth: 0x87654321,

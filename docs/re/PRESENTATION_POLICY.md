@@ -5,11 +5,9 @@ and output scaling. Native display construction and the Video rows' retail
 behavior remain in [frontend runtime](FRONTEND_RUNTIME.md#video-menu), and
 gameplay/briefing rendering remain in their subsystem documents. These
 choices are port conveniences: retail had no widescreen. An original tier's
-own frame on a 4:3 output draws and plays exactly as before. On software
-and OpenGL a wider frame (or the Remastered camera) changes only the
-picture: the game's draw keeps retail's view and the view shown draws
-apart from it; in Vulkan single player the wider view plays the game
-([below](#the-games-draw-and-the-shown-draw)).
+own frame on a 4:3 output draws and plays exactly as before. A wider
+frame (or the Remastered camera) shows, and plays, more of the world on
+every renderer ([below](#the-games-view)).
 
 ## Display modes and resolutions
 
@@ -162,9 +160,7 @@ The tier's H2 words still give the focal pair, while the viewport, its
 centre and the startup clip rectangle (`frontend_startup`) are the drawn
 frame. The same lens therefore keeps its vertical field of view and sees
 further to each side, in gameplay, the engine intro and the frontend's 3D
-scenes. What it sees further is the picture's alone wherever the session
-plays retail's game (software, OpenGL and network play,
-[below](#the-games-draw-and-the-shown-draw)). Most 2D layout follows the surface as retail's does: menu layouts
+scenes, and the game plays what it sees ([below](#the-games-view)). Most 2D layout follows the surface as retail's does: menu layouts
 are authored in a 1024-unit space scaled by the surface's width and height
 (`menu_draw`), so rows and boxes spread with the frame while glyphs keep
 their size. Retail itself draws that way at its hidden 1280x1024 H5 record.
@@ -244,7 +240,7 @@ at 4:3) keeps retail's cone, so what its corners show beyond the cone
 stays undrawn, as in retail. The briefing's pane is retail's view on the
 4:3 canvas on any frame, and keeps retail's cone.
 
-### The game's draw and the shown draw
+### The game's view
 
 Retail runs game logic inside its world draw, so what its view sees is
 part of the game: the particle draw flags a particle off the view or past
@@ -260,6 +256,22 @@ factory's chimney passing the frustum test at focal 430, not 512), the
 Remastered eye at 4904 (a particle one unit nearer the view's edge), the
 tracer's longer draw distance at 6017, and Vulkan's underwater look at 7147.
 
+The world draws once (`world_scene::world_view`, `draw_world_frame`), and
+its view is the view shown: the camera's eye (the Remastered camera's where
+it is chosen), the focal slewed toward the template's or the Remastered
+camera's wider one with the speed kick in it (`world.view_focals`), the
+frame's viewport and the cone reaching its corners, the arena sized to that
+view (`world_arena_bytes`) and the header's fade. So the game plays what
+the picture shows, as retail's one view did: objects at a widescreen
+frame's edges act as they would in front (the user, 2026-11-01, after
+objects stood frozen in frame there). With the Normal camera at 4:3 the
+view is retail's exactly: the template's focal, a 4:3 viewport, retail's
+cone (`ObjectDrawCone::for_projection` falls back to it) and arena. Retail
+comparisons, probes and replay checks therefore run at 1024x768 with Camera
+Style Normal; on 2026-11-01 Terra Nova, a Pelagia drive and a lava world
+(1,200 frames on the software raster) wrote the same event logs and frames
+there as the retail-view game the port then kept for widescreen.
+
 Which game a session plays (`presentation::GameView`) is fixed when its
 window opens and its replay records it, with what that game reads of the
 machine (`presentation::SessionGame`, the replay's `g` line, as
@@ -268,102 +280,48 @@ frame the window opened with, what the device ran of the Vulkan rows (the
 Options cursor skips the rows it locks) and, traced, each world's fog
 `far` and `past`. A replay plays the recorded game on any renderer: the
 Vulkan rows show for the remaster's game and lock as recorded, the traced
-game sees by the recorded reach, and the remaster's game draws at the
-recorded frame (said on stderr) while this run's display gives the frame
-its window opened with; another tier's height, or a display change to
-another frame, is said too, as the game may part from the recording there.
-A replay older than the line plays the game of the renderer replaying it.
-Vulkan single player always plays the remaster's game, whatever the
-camera style (objects at a widescreen picture's edges were confirmed
-fully alive there, 2026-10-29); on the software raster and OpenGL the
-Remastered camera's sound comes from retail's camera (below; judged
-fine as is, 2026-10-29); and Ray Tracing switched in game changes the game
-only at the next session (current behaviour).
+game sees by the recorded reach, and the game draws at the recorded frame
+(said on stderr) while this run's display gives the frame its window
+opened with; another tier's height, or a display change to another frame,
+is said too, as the game may part from the recording there. A replay
+older than the line plays the game of the renderer replaying it. A
+recording from before 2026-11-01 made at 4:3 with the Normal camera
+replays exactly; a wider or Remastered one parts where its old game saw
+retail's view behind a wider picture.
 
 - **Retail's**: the software raster, OpenGL, a Vulkan choice that fell
   back to OpenGL, and every network game (the process's network flag set)
-  on any renderer. The game's view is retail's: the camera's own eye, the
-  template's focal slewed with no speed kick (`world.view_focals`), a 4:3
-  viewport the frame's height (`[min(w, h * 4/3), h]`), the header's fade,
-  retail's cone and retail's `0xC8000` arena.
-- **The remaster's**: Vulkan single player, plain or traced. The game's view
-  is the view shown as any renderer would draw it: the Remastered eye and
-  focal (its speed kick in it), the frame's viewport and cone, the widened
-  arena, the header's fade under the water (no renderer's underwater
-  look), and the tracer's longer draw distance only where the session
-  started traced (Ray Tracing switched in game changes the picture at once
-  and the game at the next session; until then the world draws twice).
-
-Each world frame builds both views (`world_scene::world_views`): the
-game's, and the frame's own with its own focal and fade slews
-(`world.shown_focals`, the fade's second pair), so the scope and the dock
-ease on screen as before.
-
-- **One pass** where the view shown plays the game's (`ViewSpec::plays_as`:
-  the same eye, focals, viewport, fade, cone and arena; Vulkan's murk counts
-  as the view above the water): most frames of the Original camera at 4:3
-  on any renderer, and the remaster's game drawn as it plays. A few frames
-  there draw two passes all the same: one whose focal's decay overshoots
-  on leaving the scope or the dock (its view sees past retail's cone), and
-  a traced network frame (its view sees by the tracer's reach). On those
-  only the game, not the picture, is the single-pass build's byte for byte.
-- **Otherwise two.** The game's draw runs on the live game and shows
-  nothing (`SoftwareScene::set_game_draw`: its own command queue, flushes
-  that replay without drawing, no depth clear, no device feed or motion,
-  the game's viewport as the clip, 4:3 in retail's game). Its lines are the
-  game's own; the view shown's begin `World view shown` and keep their own
-  once-a-world keys, so a stop grep counts the game's alone. Then the view shown draws apart from the game, on copies
-  of all it could write (`GameAsDrawn`): the RNG, arena, tint, mission
-  save and statistics, world start, creation listeners, flash, light delta,
-  the ground's furniture buckets and plane, the object process state,
+  on any renderer.
+- **The remaster's**: Vulkan single player, plain or traced: retail's and
+  the tracer's longer draw distance where the session started traced (Ray
+  Tracing switched in game changes the picture at once and the draw
+  distance at the next session), Vulkan's thermal camera step and puddles.
+- **Network games** need no common view: each machine simulates the actors
+  it owns and sends their state (message 1); another machine's copy only
+  moves on the received velocity and takes the owner's next record
+  ([remote actors](NETWORK_RUNTIME.md#remote-actors)). A wider view changes
+  only what its own machine owns, which the others then receive.
+- **Under the water** (the Remastered camera's eye below the live surface)
+  the software and OpenGL rasters wobble and dim the world in the water's
+  colour at the view's own fade, the game's (the user, 2026-11-01), and
+  leave the surface's pixels out; its strips are queued as ever, since the
+  game reads their arena. Vulkan lays its murk over the world drawn as
+  above.
+- **The tracer's models outside the view** are the one draw on copies of
+  the game (`GameAsDrawn`): the RNG, arena, tint, mission save and
+  statistics, world start, creation listeners, flash, light delta, the
+  ground's furniture buckets and plane, the object process state,
   particles, light grid, furniture bases, sounds, weapon tables, map
-  jitter, the scene's process globals with the textures' sort ordinals,
-  and every byte of the model scratch. Its runtime allocations refuse
-  writes (an object whose draw meets one is left out of the picture, logged
-  once per distinct error as `World view shown ... omitted, its writes put
-  back`), it makes no particles, writes no event line and serves no sound.
-  The originals are then put back and the copies dropped, so a copied
-  network menu never closes the session.
-- **What the view shown draws.** The game as the game's draw left it, one
-  draw ahead: the shots that draw fired, the pickups it collected and the
-  particles it made are the frame's. Its cone is its own view's, so objects
-  at its edges draw whole, their models, the particles they have and their
-  lights. A particle retail's view turned away dies at the next update, as
-  in retail, though the view shown still sees it. Objects only a wider
-  view sees (widescreen's side bands) draw from those copies, so their
-  own per-draw animation, particles and sounds stand still there: the
-  user's choice on software and OpenGL (2026-10-29: "if user picks
-  widescreen resolution then have them see frozen side objects, it's
-  their problem. Retail never handled widescreen so this is how we cope
-  with it on OpenGL and software").
-- **What reads the game's view.** The receipt (`world.last_draw`) keeps the
-  view shown, which the HUD's reticle projects through, and carries the
-  game's eye, projection and outcome: the carried actor's draw (a near
-  callback on the live arena) and the status line's eye read those. As
-  built, sound pans and fades from the game's camera, so under the
-  Remastered camera on software and OpenGL it is heard from retail's.
+  jitter, the scene's process globals and every byte of the model scratch,
+  put back after. Their runtime allocations refuse writes (an object whose
+  draw meets one is left out), and they make no particles, event lines or
+  sounds.
 
-An Altair deep-water drive (3,000 frames at 16 ms) wrote byte-identical
-event logs at Camera Style 0 and 2 at 1024x768 four-three on the software
-raster, style 0 at 1920x1080 and style 2 at 3840x2160 widescreen on OpenGL,
-and style 0's matched the single-pass build's byte for byte; a
-replay on OpenGL at styles 0 and 2, four-three and widescreen, gave the
-same `[status]` RNG and eye lines in all four. Four Original-camera 4:3
-start states (two at Tabuchi, Pelagia, Stendahl) draw pixel-identical to
-the single-pass build.
-[`the_view_shown_draws_apart_and_leaves_retails_game_as_one_pass_leaves_it`](../../crates/inf-game/src/world_scene_tests/shown_draw.rs)
-draws two Tabuchi loads with their objects' lights (the terrain's dynamic
-lighting off) and a sound host (a one-shot
-queued each frame), one Original at 4:3 and one retail's game with a 16:9
-Remastered view shown from an eye moving ahead over ten frames (a widened
-arena, a longer fade with the wet look, Vulkan's murk, infrared vision, a
-network game's initials and team), then an arena that fills at the objects
-and one that cannot be made, and compares their games after every frame:
-the world's and the lent owners' state, the one-shots played and every
-scene global the shown pass puts back. The tracer and a live network
-session need a device and a peer the test has not. The cone's and the refused
-writes' unit tests are in
-[`object_draw/tests/cone.rs`](../../crates/inf-game/src/object_runtime/object_draw/tests/cone.rs).
+Until 2026-11-01 the software raster and OpenGL kept retail's 4:3 game
+under any camera or scaling: the game's draw ran on the live game and
+showed nothing, then the view shown drew again on those copies, so objects
+only the wider view saw stood frozen in frame, and the second pass cost up
+to 3.5 ms a frame at 4K ([PERFORMANCE](../PERFORMANCE.md)).
 
 It replaced the *view band* (2026-10-28), which kept the game's draw on
 the frame's own view and widescreen cone and drew only the objects the
@@ -401,14 +359,12 @@ bytes ([`world_arena_bytes`](../../crates/inf-game/src/world_scene.rs),
 which also grows with the Remastered camera's narrower focal), 1,092,000 at
 1365x768, where the same drive peaks at 79%. An overflow outside the
 terrain skips the rest of the world draw (particles, flash, sound,
-terrain, furniture), so the arena is game state: retail's game draws its
-4:3 view in retail's arena, and with it retail's overflow, whatever the
-frame shows; the remaster's game draws in the widened one.
+terrain, furniture), so the arena is game state: a 4:3 view draws in
+retail's arena, and with it retail's overflow, and a wider one in the
+widened arena.
 [`tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails`](../../crates/inf-game/src/world_scene_tests/arena.rs)
-draws the heaviest frame of that drive at 4:3 in retail's arena, at 16:9 in
-retail's (which overflows) and in the widened one, and in retail's game at
-16:9, whose game's draw keeps the 4:3 view in retail's arena while its view
-shown gets the widened one.
+draws the heaviest frame of that drive at 4:3 in retail's arena, and at
+16:9 in retail's (which overflows) and in the widened one, in both games.
 
 The port used to lose the frame: the draw queue and the scene stopped at the
 overflow and refused the flush, so only the sky, flushed before the world,

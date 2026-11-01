@@ -591,13 +591,13 @@ impl GlFrame {
             self.key = Some(key);
         }
         let texturing = draw.texture.as_ref();
+        // Each corner converted once, then fanned from the first.
         let first = device_vertex(&polygon[0], texturing);
-        for edge in polygon[1..].windows(2) {
-            self.batch.extend([
-                first,
-                device_vertex(&edge[0], texturing),
-                device_vertex(&edge[1], texturing),
-            ]);
+        let mut previous = device_vertex(&polygon[1], texturing);
+        for vertex in &polygon[2..] {
+            let next = device_vertex(vertex, texturing);
+            self.batch.extend([first, previous, next]);
+            previous = next;
         }
     }
 

@@ -93,6 +93,8 @@ struct Group {
     sorting: bool,
     /// Native group+08 before closing, restored to arena+20 on close.
     pending_start: u32,
+    /// The group's own command in the arena; none for the implicit root.
+    offset: Option<u32>,
     /// After close these are in replay order, the reverse of the native
     /// forward list. Unsorted groups replay insertion order.
     entries: Vec<Entry>,
@@ -108,7 +110,6 @@ enum Command<C> {
 struct Node<C> {
     invocation: DrawInvocation,
     command: Command<C>,
-    allocation_bytes: u32,
 }
 
 /// Concrete deferred lists and arena accounting; actual command callbacks are
@@ -180,6 +181,7 @@ impl<C> DrawQueue<C> {
         self.groups.push(Group {
             sorting: true,
             pending_start: self.capacity,
+            offset: None,
             entries,
         });
         self.stack.clear();
@@ -273,6 +275,7 @@ impl<C> DrawQueue<C> {
         self.groups.push(Group {
             sorting,
             pending_start: self.back,
+            offset: Some(invocation.command_offset),
             entries,
         });
         self.stack.push(group);
@@ -315,15 +318,12 @@ impl<C> DrawQueue<C> {
             match &mut node.command {
                 Command::Group(group) => traversal.push((*group, 0)),
                 Command::Payload(command) => {
+                    // The byte record was written at allocation: receivers
+                    // read their commands without changing a byte, and
+                    // nothing else writes an allocated command's range
+                    // before the batch is reset, so recording it again here
+                    // wrote the same bytes.
                     let result = execute(node.invocation, command);
-                    if let Some(memory) = &mut self.memory {
-                        memory.record(
-                            node.invocation.command_offset,
-                            node.allocation_bytes,
-                            node.invocation.receiver_offset,
-                            command,
-                        );
-                    }
                     if let Err(error) = result {
                         self.stopped = true;
                         return Err(DrawQueueError::Host(error));
@@ -377,7 +377,6 @@ impl<C> DrawQueue<C> {
         self.nodes.push(Node {
             invocation,
             command,
-            allocation_bytes: payload_bytes,
         });
         if let Some(memory) = &mut self.memory {
             match &self.nodes[node].command {
@@ -403,24 +402,17 @@ impl<C> DrawQueue<C> {
             // Forward arena addresses are unique and strictly increasing, so
             // offset ordering reproduces every equal-depth tie (not material
             // address ordering and not an unspecified stable-sort assumption).
-            group.entries.sort_unstable_by(|a, b| {
-                (b.depth as i32).cmp(&(a.depth as i32)).then_with(|| {
-                    self.nodes[a.node]
-                        .invocation
-                        .command_offset
-                        .cmp(&self.nodes[b.node].invocation.command_offset)
-                })
-            });
+            // Nodes are kept in allocation order, so a node's index orders as
+            // its offset does.
+            group
+                .entries
+                .sort_unstable_by_key(|entry| (std::cmp::Reverse(entry.depth as i32), entry.node));
         }
         // These bytes are covered by the group's pending entries, already
         // reserved at allocation; closing needs no additional capacity test.
         if let Some(memory) = &mut self.memory {
-            if let Some(node) = self
-                .nodes
-                .iter()
-                .find(|node| matches!(node.command, Command::Group(index) if index == group_index))
-            {
-                memory.group_closed(node.invocation.command_offset);
+            if let Some(offset) = group.offset {
+                memory.group_closed(offset);
             }
             memory.close(
                 self.front,
