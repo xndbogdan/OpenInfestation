@@ -546,11 +546,15 @@ impl SoftwareBriefingFrame<'_, '_, '_> {
                 executable: self.effects.executable,
             },
         );
+        let shifts = self.scene.pixels.renderer.material_shifts;
         if let Some(builder) = self.scene.scene_feed_mut() {
             builder.feed.clip = Some(clip);
             // Retail draws no far terrain beyond the pane's fog: its haze
-            // completes there, in the fog's colour.
+            // completes there, in the pane's own colour. A world's tuned fog
+            // (Level 1's open blue) vanished into its water and sky.
             let fog = &mut builder.feed.fog;
+            fog.color = crate::d3d_effect::far_rgb(far_color, shifts)
+                .map(|channel| f32::from(channel) / 255.0);
             fog.far_ring = false;
             fog.far_color = fog.color;
         }

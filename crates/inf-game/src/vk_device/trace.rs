@@ -2595,6 +2595,16 @@ impl State {
         {
             return Ok(());
         }
+        // A view with no focal length sees nothing (the briefing's camera
+        // pane opens from one, as retail draws it). Its mist cells would
+        // fill the mist's history with what no view holds, a white pane
+        // fading for seconds, so the next view starts afresh.
+        if !feed.camera.focal.iter().all(|&focal| focal > 0.0) {
+            if let Some(tracer) = self.tracer.as_mut() {
+                tracer.previous = None;
+            }
+            return Ok(());
+        }
         let mut tracer = match self.tracer.take() {
             Some(tracer) => tracer,
             None => Box::new(Tracer::new(core)?),
