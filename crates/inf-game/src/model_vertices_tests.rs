@@ -350,6 +350,49 @@ fn root_preprocess_uses_distinct_ranges_and_reflects_source_x_before_world_basis
     assert_eq!(output.bytes[8..], [Some(0x31), None, None, None]);
 }
 
+/// Places a local point at its exact origin plus the point itself.
+struct OffsetProjection;
+
+impl ModelVertexProjector for OffsetProjection {
+    type Error = &'static str;
+
+    fn project(
+        &mut self,
+        _: ModelVertexInput,
+        _: &mut ModelVertexProjection,
+    ) -> Result<u32, Self::Error> {
+        Ok(0)
+    }
+
+    fn exact_view_point(&mut self, input: ModelVertexInput, exact: [f64; 3]) -> Option<[f64; 3]> {
+        let ModelVertexInput::Local(point) = input else {
+            return None;
+        };
+        Some(std::array::from_fn(|axis| {
+            exact[axis] + f64::from(point[axis])
+        }))
+    }
+}
+
+#[test]
+fn kept_twins_record_the_origins_exact_view_point() {
+    let model = source_model(2, [0, 2, 2, 2], &[[10, 11, 12]]);
+    let context = ModelContext::new([100, 200, 300], MenuBasis::INITIAL);
+    let mut slots = ModelVertices::new_invocation(2);
+    slots
+        .initialize(&model, &context, &mut OffsetProjection)
+        .unwrap();
+    assert_eq!(slots.exact_view_origin(), None);
+
+    let mut slots = ModelVertices::new_invocation(2);
+    slots.keep_exact([100.25, 200.5, 300.75]);
+    slots
+        .initialize(&model, &context, &mut OffsetProjection)
+        .unwrap();
+    assert_eq!(slots.exact_view_origin(), Some([100.25, 200.5, 300.75]));
+    assert_eq!(slots.exact_view(0), Some([110.25, 211.5, 312.75]));
+}
+
 #[test]
 fn world_transform_retains_x87_order_rounding_low_dword_and_wrapping_translation() {
     let mut context = ModelContext::new([0; 3], MenuBasis::INITIAL);

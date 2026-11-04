@@ -24,6 +24,8 @@ pub(crate) struct ExactTwins {
     pub worlds: Vec<Option<[f64; 3]>>,
     /// Each slot's view-space point, as its last projection placed it.
     pub views: Vec<Option<[f64; 3]>>,
+    /// The origin's view-space point, from its first local projection.
+    pub view_origin: Option<[f64; 3]>,
     /// The exact native screen point of each projection, by the packed
     /// whole-pixel XY it rounds to: what the raster's corners take.
     pub screens: Rc<FastMap<u32, [f32; 2]>>,
@@ -35,6 +37,7 @@ impl ExactTwins {
             origin,
             worlds: vec![None; slots],
             views: vec![None; slots],
+            view_origin: None,
             screens: Rc::default(),
         }
     }

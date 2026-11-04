@@ -597,6 +597,12 @@ impl ModelVertices {
             .flatten()
     }
 
+    /// Non-native: the model origin's exact view-space point, once a local
+    /// point was projected while twins are kept.
+    pub fn exact_view_origin(&self) -> Option<[f64; 3]> {
+        self.exact.as_deref()?.view_origin
+    }
+
     /// Non-native: the exact screen points of the projections so far, by
     /// the whole-pixel XY each rounds to, while twins are kept.
     pub(crate) fn exact_screens(
@@ -1299,6 +1305,10 @@ impl ModelVertices {
                 ModelVertexInput::Local(_) => exact.origin,
                 ModelVertexInput::World(world) => twin.unwrap_or(world.map(f64::from)),
             };
+            if matches!(input, ModelVertexInput::Local(_)) && exact.view_origin.is_none() {
+                exact.view_origin =
+                    projector.exact_view_point(ModelVertexInput::Local([0; 3]), exact.origin);
+            }
             exact.views[index] = projector.exact_view_point(input, from);
             let screen = exact.views[index].and_then(|view| projector.exact_screen_point(view));
             if let (Some([x, y]), Some(xy)) = (screen, self.slots[index].projection.read_u32(0)) {

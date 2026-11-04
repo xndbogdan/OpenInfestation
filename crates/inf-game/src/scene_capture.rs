@@ -793,7 +793,15 @@ fn round_draw<'a>(
     };
     let [x, y, z] = [row(1), row(4), row(7)];
     let axis = row(first);
-    let origin = builder.world(request.transform.view_position);
+    // The exact origin, as the exact corners stand on: the whole-unit one
+    // sat up to half a unit off them, so a skimmer jet's rim slipped in and
+    // out of its window and its cuts' count from frame to frame.
+    let origin = builder.world(
+        request
+            .vertices
+            .exact_view_origin()
+            .unwrap_or(request.transform.view_position.map(f64::from)),
+    );
     let [cx, cy, cz] = part.centre;
     let frame = |cx: f32| {
         crate::round_parts::PartFrame::new(
