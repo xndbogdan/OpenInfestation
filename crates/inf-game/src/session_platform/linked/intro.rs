@@ -384,37 +384,18 @@ impl InputHost for GameplayRouter<'_> {
                     }
                     _ => &mut self.screen.vehicle_menu_ec,
                 };
-                if self.factory_process.network_flag != 0 && *wait <= self.clock {
-                    let executable = self.executable.ok_or_else(|| {
-                        GameplayLinkedError::Tick("the network menus need the executable".into())
-                    })?;
-                    let menu = crate::session_platform::network_menus::network_menu(
-                        address,
-                        executable,
-                        &self.factory_process.settings,
-                    )
-                    .map_err(GameplayLinkedError::Tick)?;
-                    if let Some(data) = menu {
-                        if crate::session_platform::network_menus::show_network_menu(
-                            &mut self.world.arena,
-                            address,
-                            data,
-                        )
-                        .map_err(GameplayLinkedError::Tick)?
-                        {
-                            *wait = self
-                                .clock
-                                .wrapping_add(crate::session_platform::network_menus::MENU_WAIT);
-                            crate::session_platform::world_actor_update::run_key_broadcasts(
-                                &mut self.world.arena,
-                                &mut self.world.actor_updates.shop_stop,
-                                &mut self.world.draw_omissions_logged,
-                                self.factory_process,
-                                executable,
-                            );
-                        }
-                    }
-                }
+                let executable = self.executable.ok_or_else(|| {
+                    GameplayLinkedError::Tick("the network menus need the executable".into())
+                })?;
+                crate::session_platform::network_menus::press_network_menu(
+                    address,
+                    wait,
+                    self.clock,
+                    self.world,
+                    self.factory_process,
+                    executable,
+                )
+                .map_err(GameplayLinkedError::Tick)?;
             }
             GameplayInputAction::Scores { held } => self.screen.scores_f8 = held,
             GameplayInputAction::Unsupported { address, value } => {

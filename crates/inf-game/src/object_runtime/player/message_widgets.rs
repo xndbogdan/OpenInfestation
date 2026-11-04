@@ -18,9 +18,11 @@ use crate::menu_basis::MenuBasisMath;
 use crate::panel_animation::PanelAnimation;
 use crate::panel_frame::PanelFrame;
 
-/// Rows `0052FB60` over layouts `0052FB20` (offline lines).
+/// Rows `0052FB60` over layouts `0052FB20` (offline lines) or, online
+/// (`0055F448`), `0052FB40`, which starts lower.
 const LINE_ROWS: u32 = 0x0052_fb60;
 const LINE_LAYOUTS: u32 = 0x0052_fb20;
+const ONLINE_LINE_LAYOUTS: u32 = 0x0052_fb40;
 /// Rows `0052FBE0` over layouts `0052FB00` (hints).
 const HINT_ROWS: u32 = 0x0052_fbe0;
 const HINT_LAYOUTS: u32 = 0x0052_fb00;
@@ -56,6 +58,7 @@ pub const HINT_COUNT: usize = 0x49;
 #[derive(Clone, Debug)]
 pub struct PlayerMessageMenus {
     pub lines: MenuData,
+    pub online_lines: MenuData,
     pub hints: MenuData,
     /// Database entries 0 to 0xAE.
     pub database: Vec<DatabaseEntry>,
@@ -103,6 +106,7 @@ impl PlayerMessageMenus {
             .collect::<Result<_, FrontendAssetError>>()?;
         Ok(Self {
             lines: assets.menu_parts(LINE_ROWS, 4, LINE_LAYOUTS)?,
+            online_lines: assets.menu_parts(LINE_ROWS, 4, ONLINE_LINE_LAYOUTS)?,
             hints: assets.menu_parts(HINT_ROWS, 4, HINT_LAYOUTS)?,
             database,
             hint_texts,
@@ -125,8 +129,6 @@ pub enum MessageBoxError {
     Menu(String),
     #[error("message box has no current menu")]
     MissingMenu,
-    #[error("online message boxes (0055F448 set) are not ported")]
-    Network,
 }
 
 /// The services a box's menu reaches: navigation needs none, the tick
@@ -206,10 +208,11 @@ impl MessageBox {
         menus: &PlayerMessageMenus,
         network: u32,
     ) -> Result<Self, MessageBoxError> {
-        if network != 0 {
-            return Err(MessageBoxError::Network);
-        }
         let (data, viewport) = match kind {
+            // 00413230 online: wider and lower, under the scoreboard.
+            MessageBoxKind::Lines if network != 0 => {
+                (menus.online_lines.clone(), [20, 120, 900, 500])
+            }
             MessageBoxKind::Lines => (menus.lines.clone(), [20, 0, 450, 500]),
             MessageBoxKind::Hints => (menus.hints.clone(), [300, 460, 810, 820]),
         };

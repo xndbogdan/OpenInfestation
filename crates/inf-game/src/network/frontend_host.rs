@@ -35,6 +35,11 @@ impl NetworkPlatform<'_> {
     /// passes, for the local slot's `%dup` initials.
     pub fn net_identity(&mut self) -> ([u8; 16], [u8; 6]) {
         let slot = u32::from(self.link.transport.state.local_slot);
+        // 0045C940 returns before 00463D10 while 0055F2F4 is 0: a joining
+        // guest's read waits for its slot, or its initials cache as "0up".
+        if slot == 0 {
+            return ([0; 16], [0; 6]);
+        }
         let loaded = self
             .identity
             .read(

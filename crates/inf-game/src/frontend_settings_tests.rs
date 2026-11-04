@@ -1609,3 +1609,22 @@ fn puddle_wheels_follow_the_game_not_the_renderer() {
     settings.set_game_view(GameView::Remaster { traced: false });
     assert!(!settings.puddle_wheels());
 }
+
+/// 0045C940 reads 00463D10 only once 0055F2F4 is set, so a guest still
+/// waiting for its slot leaves the initials cache alone, and its slot's
+/// first read numbers them by that slot.
+#[test]
+fn a_joining_guest_reads_its_initials_once_it_has_its_slot() {
+    let fixture = Fixture::new();
+    let mut settings = fixture.load().unwrap();
+    let mut identity = PlayerIdentity::default();
+    let mut link = crate::network::link::NetworkLink::default();
+    let mut platform = crate::network::frontend_host::NetworkPlatform {
+        link: &mut link,
+        settings: &mut settings,
+        identity: &mut identity,
+    };
+    assert_eq!(platform.net_identity().1, [0; 6]);
+    platform.link.transport.state.local_slot = 2;
+    assert_eq!(&platform.net_identity().1, b"2up\0\0\0");
+}

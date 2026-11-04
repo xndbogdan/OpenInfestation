@@ -981,6 +981,11 @@ impl ActorDamageReactionHost for WorldVehicleHost<'_, '_> {
                     )
                     .map_err(|error| format!("0047D670 vehicle death: {error:?}"))
             }
+            effect @ (ActorDamageReactionEffect::NetworkDamageNotice { .. }
+            | ActorDamageReactionEffect::NetworkDeathNotice { .. }) => {
+                crate::session_platform::particles::damage::network_notice(arena, effect, rng)
+                    .map_err(|error| error.to_string())
+            }
             other => Err(format!(
                 "the vehicle's damage reaches {other:?}, whose owners the update does not lend"
             )),

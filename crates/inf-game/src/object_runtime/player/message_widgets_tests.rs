@@ -500,3 +500,24 @@ fn another_worlds_database_models_resolve_in_a_second_residency() {
         }
     }
 }
+
+/// 004135D0 online (0055F448 set) builds the lines box over layouts
+/// 0052FB40, which start at 240 rather than 0052FB20's 120, in 00413230's
+/// online controller (20, 120, 900, 500), under the scoreboard; the hint
+/// box is the same online.
+#[test]
+fn an_online_lines_box_starts_under_the_scoreboard() {
+    let (_, _, assets) = computer_arena(false);
+    let menus = PlayerMessageMenus::parse(&assets).unwrap();
+    let shown = |kind, network| {
+        let shown = MessageBox::new(kind, &menus, network).unwrap();
+        let y = shown.stack.current().unwrap().data().records().layouts[0].y;
+        (y, shown.center)
+    };
+    assert_eq!(shown(MessageBoxKind::Lines, 0), (120, [235, 0]));
+    assert_eq!(shown(MessageBoxKind::Lines, 1), (240, [460, 120]));
+    assert_eq!(
+        shown(MessageBoxKind::Hints, 1),
+        shown(MessageBoxKind::Hints, 0)
+    );
+}

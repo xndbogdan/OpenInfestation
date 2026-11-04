@@ -4,8 +4,8 @@
 //! of its own. The rows' callback `00414BF0` draws the box's ring text in
 //! the row's slot with `00453810`, left-aligned.
 //!
-//! `00413F30` skips the frame online (`0055F448`); online boxes are never
-//! built, so every drawn box is framed.
+//! `00413F30` skips the frame online (`0055F448`): a network game's boxes
+//! show their text alone.
 
 use crate::{
     frontend_camera::AnimationClock,
@@ -36,6 +36,8 @@ pub struct MessageFrameInputs<'a> {
     pub projection: SceneProjection,
     pub animation: AnimationClock,
     pub math: &'a MenuBasisMath,
+    /// `0055F448`, which leaves the frame out.
+    pub online: bool,
 }
 
 /// `00453610` over one box.
@@ -88,6 +90,13 @@ impl MenuDrawHost for MessageBoxDrawHost<'_, '_, '_, '_> {
         self.menu
             .scene_mut()
             .submit(ResolvedSceneCommand::BeginBatch)?;
+        if self.frame.online {
+            return self
+                .menu
+                .scene_mut()
+                .submit(ResolvedSceneCommand::FlushBatch)
+                .map_err(Into::into);
+        }
         let resources = self.menu.resources();
         draw_panel_frame(
             self.shape,

@@ -107,7 +107,86 @@ pub(crate) fn show_network_menu(
     Ok(true)
 }
 
+/// `00442CF0` (T) or `00442EE0` (Y) pressed: online, once the screen's wait
+/// (`+F0`, `+EC`) has passed, the arena's menu shows and the wait restarts.
+pub(crate) fn press_network_menu(
+    address: u32,
+    wait: &mut u32,
+    clock: u32,
+    world: &mut crate::world_backend::WorldSession,
+    process: &crate::process_particles::factories::ParticleFactoryProcessState,
+    executable: FrontendExecutable<'_>,
+) -> Result<(), String> {
+    if process.network_flag == 0 || *wait > clock {
+        return Ok(());
+    }
+    let Some(data) = network_menu(address, executable, &process.settings)? else {
+        return Ok(());
+    };
+    if show_network_menu(&mut world.arena, address, data)? {
+        *wait = clock.wrapping_add(MENU_WAIT);
+        super::world_actor_update::run_key_broadcasts(
+            &mut world.arena,
+            &mut world.actor_updates.shop_stop,
+            &mut world.draw_omissions_logged,
+            process,
+            executable,
+        );
+    }
+    Ok(())
+}
+
 impl<P: PortPlatform> PortSession<P> {
+    /// `00440CA8`, the gameplay screen factory's tail: in a network game of
+    /// mode 0 or 4 a first player without a unit (`+D4` the process NULL)
+    /// is shown the team menu, and in mode 0 the vehicle menu over it, as T
+    /// and Y show them.
+    pub(super) fn open_arrival_network_menus(&mut self) -> Result<(), String> {
+        let mode = self.factory_process.settings[0x10 / 4];
+        if self.factory_process.network_flag == 0 || !matches!(mode, 0 | 4) {
+            return Ok(());
+        }
+        let executable = FrontendExecutable::parse(self.catalog.assets().executable_bytes())
+            .map_err(|error| error.to_string())?;
+        let clock = crate::frontend_camera::AnimationClockSource::animation_value(&self.process);
+        let (Some(world), Some(screen)) = (self.world.as_mut(), self.gameplay.as_mut()) else {
+            return Ok(());
+        };
+        let unitless = match world.arena.first_player() {
+            Some(first) => {
+                Some(
+                    world
+                        .arena
+                        .world_player(first)
+                        .map_err(|e| e.to_string())?
+                        .handle_d4,
+                ) == self.factory_process.process_null_handle
+            }
+            None => false,
+        };
+        if unitless {
+            press_network_menu(
+                TEAM_MENU,
+                &mut screen.team_menu_f0,
+                clock,
+                world,
+                &self.factory_process,
+                executable,
+            )?;
+        }
+        if mode == 0 {
+            press_network_menu(
+                VEHICLE_MENU,
+                &mut screen.vehicle_menu_ec,
+                clock,
+                world,
+                &self.factory_process,
+                executable,
+            )?;
+        }
+        Ok(())
+    }
+
     /// A settings word the network game reads (`00463AB0`), in the live
     /// block and in the process's copy of it.
     fn set_network_setting(&mut self, offset: usize, value: u32) {

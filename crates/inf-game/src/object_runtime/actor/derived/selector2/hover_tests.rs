@@ -28,7 +28,7 @@ fn a_hovercraft_start_reads_the_engine_load_construction_left() {
         [drive.dword_55c, drive.dword_560],
         [Some(super::super::drive::VEHICLE_ENGINE_LOAD_APPROXIMATION); 2]
     );
-    world.arena.reset_vehicle_hover(vehicle).unwrap();
+    world.arena.reset_vehicle_hover(vehicle, None).unwrap();
     let drive = &world.arena.selector2_actor(vehicle).unwrap().drive;
     assert_eq!([drive.dword_55c, drive.dword_560], [Some(0); 2]);
 }
@@ -55,7 +55,7 @@ fn a_hovercraft_start_turns_on_the_hold_construction_left() {
         hold(&world),
         Some(super::super::drive::VEHICLE_TURN_HOLD_APPROXIMATION)
     );
-    world.arena.reset_vehicle_hover(vehicle).unwrap();
+    world.arena.reset_vehicle_hover(vehicle, None).unwrap();
     let controls = crate::object_runtime::PlayerControlBlock {
         turn_14: 1,
         ..Default::default()
@@ -80,7 +80,7 @@ fn hover_entry_sets_its_tables_and_clears_the_drive() {
         state.drive.dword_57c = Some(0x4321);
         state.dwords_220_224 = [7, 9];
     }
-    world.arena.reset_vehicle_hover(vehicle).unwrap();
+    world.arena.reset_vehicle_hover(vehicle, None).unwrap();
     let state = world.arena.selector2_actor(vehicle).unwrap();
     assert_eq!(
         state.words_188_194,
@@ -90,4 +90,23 @@ fn hover_entry_sets_its_tables_and_clears_the_drive() {
     assert_eq!(state.drive.dword_57c, Some(0));
     assert_eq!(state.dwords_220_224, [7, 0]);
     assert_eq!(world.arena.derived_actor(vehicle).unwrap().byte_160, 1);
+    // In Powerball (network mode 4) its own power and grip tables.
+    world.arena.reset_vehicle_hover(vehicle, Some(4)).unwrap();
+    assert_eq!(
+        world.arena.selector2_actor(vehicle).unwrap().words_188_194,
+        [0x0053_0558, 0x0053_0548, 0x0053_0508, 0x0053_0560]
+    );
+}
+
+/// Powerball's boost fade as Infest02 (2026-11-04) wrote it at 004192F9:
+/// 0x12000 with all 2 s left, falling by 0x900 each 125 ms tick.
+#[test]
+fn the_powerball_boost_fades_as_recorded() {
+    for (left, written) in [
+        (2_000_000, 0x12000),
+        (1_875_000, 0x11700),
+        (125_000, 0x9900),
+    ] {
+        assert_eq!(super::fade_maximum(0x12000, 0x9000, left), written);
+    }
 }

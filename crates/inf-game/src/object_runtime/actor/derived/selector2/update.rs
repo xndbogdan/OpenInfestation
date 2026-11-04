@@ -404,8 +404,16 @@ impl ObjectArena {
         }
         self.vehicle_mode_request(vehicle, controls, player, request, host)?;
         let clock = request.drive.ground.clock;
-        self.vehicle_weapon_cycle(vehicle, controls, player, clock, host)?;
-        self.vehicle_mode_transition(vehicle, controls, delta, null, host)?;
+        let network_mode = request.drive.network.map(|network| network.mode);
+        self.vehicle_weapon_cycle(
+            vehicle,
+            controls,
+            player,
+            clock,
+            network_mode == Some(4),
+            host,
+        )?;
+        self.vehicle_mode_transition(vehicle, controls, delta, null, network_mode, host)?;
         self.vehicle_speed_magnitudes(vehicle)?;
         self.vehicle_mode_dispatch(vehicle, controls, &request.drive, host)?;
         if let Some(player) = player {
@@ -700,9 +708,17 @@ impl ObjectArena {
         let mode_bit = |mode: u32| -> Result<u32, VehicleDriveError<H::Error>> {
             read_word(executable, MODE_UPGRADES.wrapping_add(mode.wrapping_mul(2)))
         };
+        // 004164CD: online, only settings mode 1 (no arena's) takes a
+        // request, so an arena keeps the form its settings gave the vehicle.
+        let online = request
+            .drive
+            .network
+            .is_some_and(|network| network.mode != 1);
         if let Some(player) = player.filter(|_| {
-            self.selector2_actor(vehicle)
-                .is_ok_and(|state| state.byte_1c0 == 0)
+            !online
+                && self
+                    .selector2_actor(vehicle)
+                    .is_ok_and(|state| state.byte_1c0 == 0)
         }) {
             let state = self.selector2_actor_mut(vehicle)?;
             if requested < 0 {
@@ -764,6 +780,7 @@ impl ObjectArena {
         controls: &mut PlayerControlBlock,
         delta: u32,
         null: ActorHandle,
+        network_mode: Option<u32>,
         host: &mut H,
     ) -> Result<(), VehicleDriveError<H::Error>> {
         let state = self.selector2_actor(vehicle)?;
@@ -835,7 +852,7 @@ impl ObjectArena {
         // 004169DF's table: each mode's entry.
         match requested {
             1 | 2 => self.reset_vehicle_ground_drive(vehicle)?,
-            3 => self.reset_vehicle_hover(vehicle)?,
+            3 => self.reset_vehicle_hover(vehicle, network_mode)?,
             4 => self.switch_vehicle_vtol(vehicle, true, host)?,
             5 => self.switch_vehicle_skimmer(vehicle, true, camera, null)?,
             _ => {}
@@ -1268,13 +1285,15 @@ impl ObjectArena {
     /// -1, the timer 20 clock ticks ahead); without a turn the key slides
     /// its weapon panel open. Before the timer it slides the panel open and,
     /// without a turn, restarts the timer at the clock. Either way the turn
-    /// is consumed. A key not held keeps its timer at the clock.
+    /// is consumed. A key not held keeps its timer at the clock, as does a
+    /// held one in Powerball (004166E9, 004167AF: network mode 4).
     fn vehicle_weapon_cycle<H: VehicleUpdateHost>(
         &mut self,
         vehicle: ObjectId,
         controls: &mut PlayerControlBlock,
         player: Option<PlayerId>,
         clock: u32,
+        powerball: bool,
         host: &mut H,
     ) -> Result<(), VehicleDriveError<H::Error>> {
         for (key, secondary) in [(0x40, false), (0x41, true)] {
@@ -1291,7 +1310,7 @@ impl ObjectArena {
                 }
                 _ => false,
             };
-            if !held || shown {
+            if !held || shown || powerball {
                 self.selector2_actor_mut(vehicle)?.dwords_538_554[timer] = clock;
                 continue;
             }

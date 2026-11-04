@@ -849,6 +849,8 @@ fn l_switches_the_headlights_or_infrared_vision() {
 /// with flag 400h (Helniazine's) does so for modes 4 and 5 with "Your craft
 /// cannot fly on this world." (H0 154h). Owning 0x29 lifts both. Each
 /// request runs from Infest01's first recorded entry with every mode owned.
+/// Online (004164CD), only settings mode 1, which no arena has, takes a
+/// request at all.
 #[test]
 fn a_refused_mode_says_why() {
     let fixture: Value = serde_json::from_str(include_str!(
@@ -866,6 +868,7 @@ fn a_refused_mode_says_why() {
     let player = world.arena.first_player().unwrap();
     let process =
         crate::process_particles::factories::ParticleFactoryProcessState::native_startup();
+    let network_mode = std::cell::Cell::new(None);
     let entry = Receipt {
         offsets,
         values: tick["v_in"].as_array().unwrap(),
@@ -911,7 +914,13 @@ fn a_refused_mode_says_why() {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
-                network: None,
+                network: network_mode
+                    .get()
+                    .map(|mode| super::super::drive::VehicleNetwork {
+                        mode,
+                        catchup: 0,
+                        local_slot: 1,
+                    }),
             },
             attract: false,
             current_world,
@@ -971,6 +980,14 @@ fn a_refused_mode_says_why() {
         (3, vec![])
     );
     assert_eq!(request_mode(&mut world, 4, 6, flags, false), (4, vec![]));
+    for (mode, taken) in [(4, 1), (1, 4)] {
+        network_mode.set(Some(mode));
+        assert_eq!(
+            request_mode(&mut world, 4, 6, flags, false).0,
+            taken,
+            "online in settings mode {mode}"
+        );
+    }
 }
 
 /// Every update Infest02 and Infest03 entered with a weapon cycle key held
@@ -1027,7 +1044,14 @@ fn weapon_cycling_matches_the_recorded_holds() {
         let clock = cycled["clock"].as_u64().unwrap() as u32;
         world
             .arena
-            .vehicle_weapon_cycle(vehicle, &mut controls, Some(player), clock, &mut host)
+            .vehicle_weapon_cycle(
+                vehicle,
+                &mut controls,
+                Some(player),
+                clock,
+                false,
+                &mut host,
+            )
             .unwrap();
         let state = world.arena.selector2_actor(vehicle).unwrap();
         assert_eq!(

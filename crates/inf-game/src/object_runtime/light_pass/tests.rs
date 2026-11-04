@@ -279,6 +279,7 @@ fn other_custody(arena: &ObjectArena) -> String {
         race_gates,
         race_clock,
         powerball,
+        powerball_fade_maximum,
         powerball_goals,
         powerball_seen,
         network_sends,
@@ -326,7 +327,12 @@ fn other_custody(arena: &ObjectArena) -> String {
                     spawn_markers,
                     territories,
                     (race, race_gates, race_clock),
-                    (powerball, powerball_goals, powerball_seen),
+                    (
+                        powerball,
+                        powerball_fade_maximum,
+                        powerball_goals,
+                        powerball_seen
+                    ),
                     network_sends,
                     network_game
                 )

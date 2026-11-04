@@ -402,3 +402,50 @@ fn the_vehicle_fires_as_retail_does() {
     }
     assert_eq!(predictive, 9);
 }
+
+/// Powerball's three plays Infest02 (2026-11-04) recorded at `00403940`:
+/// a hovercraft's release of 918 ms of charge, a hovercraft's kick and a
+/// buggy's kick, each from the vehicle's basis and velocity at the call.
+#[test]
+fn powerball_plays_match_the_recorded_throws() {
+    let basis = |words: [u32; 10]| inf_formats::native_basis::NativeBasis { words };
+    let cases = [
+        (
+            super::BallPlay::Release(918_000),
+            [
+                0x60, 0x3f7fdb23, 0xba342f6e, 0x3aadbaea, 0x3a366122, 0x3f7fed51, 0xbb806c03,
+                0xba9b2f01, 0x3b8076ed, 0x3f7fd011,
+            ],
+            [0, 2, 633],
+            true,
+            [-5, 17, 4496],
+        ),
+        (
+            super::BallPlay::Kick,
+            [
+                0xc, 0x3f7e8c6a, 0xbc397df8, 0x3dd2b5a9, 0x3c52fbc4, 0x3f7ff2d3, 0xbc6c481d,
+                0xbdd2476a, 0x3c8059f6, 0x3f7e8a93,
+            ],
+            [99, 7, 512],
+            true,
+            [-136, 1222, 1450],
+        ),
+        (
+            super::BallPlay::Kick,
+            [
+                0x5a, 0xbf7fd50c, 0xbb0d9a01, 0xbccfed89, 0xbb1049b7, 0x3f7fedb9, 0x3acc3328,
+                0x3ccedf3f, 0x3ad38f75, 0xbf7fe392,
+            ],
+            [29, 3, (-1172_i16) as u16],
+            false,
+            [36, 1201, -1505],
+        ),
+    ];
+    for (play, words, velocity, hover, thrown) in cases {
+        assert_eq!(
+            super::ball_play(play, &basis(words), velocity, hover),
+            thrown,
+            "{play:?}"
+        );
+    }
+}

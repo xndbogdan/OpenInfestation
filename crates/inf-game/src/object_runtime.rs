@@ -945,6 +945,9 @@ pub struct ObjectArena {
     /// `005468D0`, Powerball's ball; `0052E528`/`0052E529`, each side's
     /// goals (bit 7 a won side); `0052E52C`/`0052E52D`, the counts last said.
     powerball: Option<ObjectId>,
+    /// `00530538`, the first DWORD of the Powerball hovercraft's boost-fade
+    /// table, which the boost rewrites each tick (`004192F9`).
+    powerball_fade_maximum: u32,
     powerball_goals: [u8; 2],
     powerball_seen: [u8; 2],
     /// Messages world code sends (`00492500`) for the next network tick.
@@ -1013,6 +1016,7 @@ impl ObjectArena {
             race_gates: Vec::new(),
             race_clock: 0,
             powerball: None,
+            powerball_fade_maximum: 0x12000,
             powerball_goals: [0; 2],
             powerball_seen: [0; 2],
             network_sends: Vec::new(),

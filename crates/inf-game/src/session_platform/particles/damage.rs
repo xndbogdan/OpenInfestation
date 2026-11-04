@@ -120,6 +120,72 @@ pub(crate) enum WorldDamageError {
     Owner { phase: &'static str, reason: String },
 }
 
+/// `0045DA50` and `0045D8F0`: a network game's damage and death notices,
+/// whichever damage path reaches them.
+pub(crate) fn network_notice(
+    arena: &mut ObjectArena,
+    effect: ActorDamageReactionEffect,
+    rng: &mut u32,
+) -> Result<(), WorldDamageError> {
+    match effect {
+        ActorDamageReactionEffect::NetworkDamageNotice {
+            kind,
+            local_player,
+            source_owner,
+        } => {
+            let network = arena
+                .network_game_mut()
+                .ok_or(WorldDamageError::Required("0045DA50 network game state"))?;
+            let [low, high] = kind.to_le_bytes();
+            if let Some((id, send)) =
+                network
+                    .loan()
+                    .damage_notice([low, high, local_player, source_owner])
+            {
+                arena.queue_network_send(id, send);
+            }
+            Ok(())
+        }
+        ActorDamageReactionEffect::NetworkDeathNotice {
+            incoming_damage_low_word,
+            local_player,
+            source_owner,
+        } => {
+            let network = arena
+                .network_game_mut()
+                .ok_or(WorldDamageError::Required("0045D8F0 network game state"))?;
+            let [low, high] = incoming_damage_low_word.to_le_bytes();
+            let notice = network
+                .loan()
+                .death_notice([low, high, local_player, source_owner], rng)
+                .map_err(|error| owner("0045D8F0", error))?;
+            for (id, send) in notice.sends {
+                arena.queue_network_send(id, send);
+            }
+            // 0045DA2D: the line to the first player's +88.
+            if let (Some(line), Some(player)) = (notice.line, arena.first_player()) {
+                let mut text = line;
+                text.push(0);
+                let recipient = arena
+                    .player_message(player)
+                    .map_err(|error| owner("0045DA34 first player+88", error))?
+                    .identity();
+                arena
+                    .apply_player_message(crate::object_runtime::PlayerMessageRequest {
+                        recipient,
+                        operation: crate::object_runtime::PlayerMessageOperation::Send {
+                            text: Some(&text),
+                            flag: 0,
+                        },
+                    })
+                    .map_err(|error| owner("0045DA34 004135D0", error))?;
+            }
+            Ok(())
+        }
+        other => Err(owner("network notice", other)),
+    }
+}
+
 fn owner(phase: &'static str, error: impl std::fmt::Debug) -> WorldDamageError {
     WorldDamageError::Owner {
         phase,
@@ -579,12 +645,9 @@ impl ActorDamageReactionHost for ReactionHost<'_, '_, '_> {
         arena: &mut ObjectArena,
         vehicle: ObjectId,
     ) -> Result<u32, Self::Error> {
-        let state = arena
-            .selector2_actor(vehicle)
-            .map_err(|error| owner("vehicle+5A8", error))?;
-        state.attacked_5a8.ok_or(WorldDamageError::Required(
-            "vehicle+5A8 before its first network hit",
-        ))
+        arena
+            .vehicle_attacked_clock(vehicle)
+            .map_err(|error| owner("vehicle+5A8", error))
     }
     /// The high WORD (`+5A6`) of its last marked attacker `+5A4`.
     fn recent_source_owner_word(
@@ -727,59 +790,9 @@ impl ActorDamageReactionHost for ReactionHost<'_, '_, '_> {
                 );
                 Ok(())
             }
-            ActorDamageReactionEffect::NetworkDamageNotice {
-                kind,
-                local_player,
-                source_owner,
-            } => {
-                let network = arena
-                    .network_game_mut()
-                    .ok_or(WorldDamageError::Required("0045DA50 network game state"))?;
-                let [low, high] = kind.to_le_bytes();
-                if let Some((id, send)) =
-                    network
-                        .loan()
-                        .damage_notice([low, high, local_player, source_owner])
-                {
-                    arena.queue_network_send(id, send);
-                }
-                Ok(())
-            }
-            ActorDamageReactionEffect::NetworkDeathNotice {
-                incoming_damage_low_word,
-                local_player,
-                source_owner,
-            } => {
-                let network = arena
-                    .network_game_mut()
-                    .ok_or(WorldDamageError::Required("0045D8F0 network game state"))?;
-                let [low, high] = incoming_damage_low_word.to_le_bytes();
-                let notice = network
-                    .loan()
-                    .death_notice([low, high, local_player, source_owner], rng)
-                    .map_err(|error| owner("0045D8F0", error))?;
-                for (id, send) in notice.sends {
-                    arena.queue_network_send(id, send);
-                }
-                // 0045DA2D: the line to the first player's +88.
-                if let (Some(line), Some(player)) = (notice.line, arena.first_player()) {
-                    let mut text = line;
-                    text.push(0);
-                    let recipient = arena
-                        .player_message(player)
-                        .map_err(|error| owner("0045DA34 first player+88", error))?
-                        .identity();
-                    arena
-                        .apply_player_message(crate::object_runtime::PlayerMessageRequest {
-                            recipient,
-                            operation: crate::object_runtime::PlayerMessageOperation::Send {
-                                text: Some(&text),
-                                flag: 0,
-                            },
-                        })
-                        .map_err(|error| owner("0045DA34 004135D0", error))?;
-                }
-                Ok(())
+            effect @ (ActorDamageReactionEffect::NetworkDamageNotice { .. }
+            | ActorDamageReactionEffect::NetworkDeathNotice { .. }) => {
+                network_notice(arena, effect, rng)
             }
         }
     }

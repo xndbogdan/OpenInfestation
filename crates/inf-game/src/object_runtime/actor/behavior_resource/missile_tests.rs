@@ -338,18 +338,70 @@ fn follow(target: &Target, handle: ActorHandle) -> ActorFollowTarget {
 /// detonations match.
 #[test]
 fn missile25_update_matches_every_recorded_tick() {
-    let receipts: Receipts = serde_json::from_str(include_str!(
-        "../../../../tests/fixtures/missile25_updates.json"
-    ))
-    .unwrap();
-    let (_resident, assets, mut world) = crate::test_worlds::offline_world_retained(
+    let (count, failures) = replay_missile25_updates(
+        include_str!("../../../../tests/fixtures/missile25_updates.json"),
         23,
-        crate::terrain_runtime::TerrainSpacing::Units256,
     );
+    assert!(
+        failures.is_empty(),
+        "{} of {count} updates differ:\n{}",
+        failures.len(),
+        failures.join("\n")
+    );
+    assert_eq!(count, 28);
+}
+
+/// Every update of the five missiles Aerial Banner's base launchers
+/// (selector 94, `00458A50`) fired at the player's skimmer in the network
+/// trace Infest03 of 2026-11-04 (detail 0, so coarse terrain), run as
+/// above on world 33. Each starts with its target and has no launcher.
+#[test]
+fn banner_base_missiles_match_every_recorded_tick() {
+    let (count, failures) = replay_missile25_updates(
+        include_str!("../../../../tests/fixtures/missile25_banner_updates.json"),
+        33,
+    );
+    assert!(
+        failures.is_empty(),
+        "{} of {count} updates differ:\n{}",
+        failures.len(),
+        failures.join("\n")
+    );
+    assert_eq!(count, 358);
+}
+
+/// Each recorded update run from its entry on `world`'s coarse terrain;
+/// the number of updates and the differences.
+fn replay_missile25_updates(fixture: &str, world_index: u32) -> (usize, Vec<String>) {
+    let receipts: Receipts = serde_json::from_str(fixture).unwrap();
+    let (_resident, assets, mut world) = if world_index == 33 {
+        // The banner world loads only as a network arena: Aerial Banner
+        // (arena 3) as the host, in mode 2 so the player has a vehicle.
+        let mut settings = [0; 20];
+        settings[0x10 / 4] = 2;
+        settings[0x1c / 4] = 3;
+        crate::test_worlds::network_world(
+            33,
+            crate::process_particles::factories::ParticleFactoryProcessState {
+                network_flag: 1,
+                host_flag: 1,
+                local_slot: 1,
+                settings,
+                ..crate::process_particles::factories::ParticleFactoryProcessState::native_startup()
+            },
+        )
+    } else {
+        crate::test_worlds::offline_world_retained(
+            world_index,
+            crate::terrain_runtime::TerrainSpacing::Units256,
+        )
+    };
     let sine = assets.sine_table().values;
     let executable = inf_formats::FrontendExecutable::parse(assets.executable_bytes()).unwrap();
     let inverse_sine = inverse_sine_table(executable);
     let vehicle = world.respawn.as_ref().unwrap().vehicle.unwrap();
+    // A selector 11 stands in for a launcher; a banner base's missile has
+    // none (+88 zero), and the vehicle does for both.
     let launcher = world
         .arena
         .actor_list()
@@ -361,14 +413,18 @@ fn missile25_update_matches_every_recorded_tick() {
                 .derived_actor(actor)
                 .is_ok_and(|derived| matches!(derived.class, DerivedActorClass::Selector11(_)))
         })
-        .expect("a selector 11 in world 23");
+        .unwrap_or(vehicle);
     let vehicle_handle = world.arena.actor(vehicle).unwrap().handle;
     let launcher_handle = world.arena.actor(launcher).unwrap().handle;
     let mut failures = Vec::new();
     for update in &receipts.updates {
         let arena = &mut world.arena;
         let missile = missile(arena, &update.entry);
-        arena.actor_mut(missile).unwrap().owner_handle = launcher_handle;
+        arena.actor_mut(missile).unwrap().owner_handle = if update.entry.owner == 0 {
+            ActorHandle::from_raw(0)
+        } else {
+            launcher_handle
+        };
         let ribbon =
             (update.entry.ribbon != 0).then(|| arena.allocate_selector67(ActorHandle::from_raw(0)));
         let target = update.target_in.map(|target| {
@@ -515,14 +571,7 @@ fn missile25_update_matches_every_recorded_tick() {
             arena.release_actor_service(target).unwrap();
         }
     }
-    assert!(
-        failures.is_empty(),
-        "{} of {} updates differ:\n{}",
-        failures.len(),
-        receipts.updates.len(),
-        failures.join("\n")
-    );
-    assert_eq!(receipts.updates.len(), 28);
+    (receipts.updates.len(), failures)
 }
 
 /// Every light 00457EE0 of those missiles: within 1500 of the ground cell,

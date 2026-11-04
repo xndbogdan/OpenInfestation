@@ -155,6 +155,7 @@ fn custody(arena: &ObjectArena, player: PlayerId) -> [String; 3] {
         race_gates,
         race_clock,
         powerball,
+        powerball_fade_maximum,
         powerball_goals,
         powerball_seen,
         network_sends,
@@ -249,7 +250,12 @@ fn custody(arena: &ObjectArena, player: PlayerId) -> [String; 3] {
                     spawn_markers,
                     territories,
                     (race, race_gates, race_clock),
-                    (powerball, powerball_goals, powerball_seen),
+                    (
+                        powerball,
+                        powerball_fade_maximum,
+                        powerball_goals,
+                        powerball_seen
+                    ),
                     network_sends,
                     network_game
                 ),

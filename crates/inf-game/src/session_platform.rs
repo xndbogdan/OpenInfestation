@@ -2156,6 +2156,9 @@ impl<P: PortPlatform> SessionHost for PortSession<P> {
                 );
                 self.gameplay = Some(screen);
                 result.map_err(PortSessionError::Gameplay)?;
+                if let Err(error) = self.open_arrival_network_menus() {
+                    eprintln!("00440CA8 network menus stopped: {error}");
+                }
             }
             ScreenFactory::Phase7 => self.construct_map(state)?,
             ScreenFactory::Phase8 => self.construct_intro_results(state)?,
@@ -2179,6 +2182,10 @@ impl<P: PortPlatform> SessionHost for PortSession<P> {
                 // (`PortSession::after_input_poll`) still runs the keys'
                 // menu commands before the world's update.
                 self.after_input_poll(state);
+                // Online the menu (phase 5) keeps this callback, the world
+                // running on, and its screen's tick still repeats held keys
+                // (004392B0) as offline's paused tick does.
+                self.tick_in_world_menu_input(delta_micros, elapsed_micros, state)?;
                 // Port fix: the exact quantum steps the world in whole
                 // quanta and skips a frame that reaches none.
                 let quantum = self.platform.world_tick_quantum();

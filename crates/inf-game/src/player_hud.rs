@@ -824,6 +824,7 @@ fn draw_player_message<'r>(
                 },
                 animation: inputs.process.animation(),
                 math: &math,
+                online: inputs.factory_process.network_flag != 0,
             };
             let result = SoftwareMenu::new(SoftwareMenuRequest {
                 scene: &mut *scene,

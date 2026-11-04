@@ -6,9 +6,8 @@
 //! (`0048D340`) at its point; otherwise the shot is queued along the fire
 //! direction (`0048D0D0`). The secondary either charges (`+20` adds to
 //! `+218`), is thrown at once (`+35`) along the forward row, or releases
-//! its charge past 200 ms as a lob. The network branch at `00416E34`
-//! (network mode 4 and its launcher `00403940`) is not part of this offline
-//! update.
+//! its charge past 200 ms as a lob. In Powerball (network mode 4,
+//! `00416E34`) both keys play the ball instead.
 
 use inf_formats::native_basis::{isqrt_48efc0, normalize_words, NativeLengthPrecision};
 
@@ -31,6 +30,12 @@ const CHARGE_RANGE: u32 = 800_000;
 const LOB_RISE: i16 = 2000;
 /// `00417414`: the quick throw's speed fraction.
 const QUICK_FRACTION: u32 = 0xffff_d000;
+/// `00520390`: the kick's lift along the up row.
+const KICK_LIFT: f64 = 1200.0;
+/// `005205BC` and `00520A14`: the tapped secondary's pass, back along the
+/// forward row and up.
+const PASS_BACK: f64 = -200.0;
+const PASS_LIFT: f64 = 800.0;
 
 /// MSVCRT `__ftol` (`00511BA8`): truncation to a QWORD, of which callers
 /// keep the low DWORD.
@@ -61,6 +66,55 @@ fn fire_distance(delta: [i16; 3]) -> u32 {
     }
 }
 
+/// A Powerball key's play: the primary's kick (`00416E81`), the tapped
+/// secondary's pass (`00416FBC`) or the release of its charge (`0041706B`).
+#[derive(Clone, Copy, Debug)]
+pub(super) enum BallPlay {
+    Kick,
+    Pass,
+    Release(u32),
+}
+
+/// The velocity a play gives the ball, from the vehicle's basis (forward
+/// row words 7..9, up row 4..6), its velocity and whether it hovers.
+pub(super) fn ball_play(
+    play: BallPlay,
+    basis: &inf_formats::native_basis::NativeBasis,
+    velocity: [u16; 3],
+    hover: bool,
+) -> [i16; 3] {
+    let word = |index: usize| f64::from(f32::from_bits(basis.words[index]));
+    let row = |first: usize, scale: f64| -> [i16; 3] {
+        std::array::from_fn(|axis| ftol(word(first + axis) * scale) as i16)
+    };
+    let add = |a: [i16; 3], b: [i16; 3]| -> [i16; 3] {
+        std::array::from_fn(|axis| a[axis].wrapping_add(b[axis]))
+    };
+    let [x, y, z] = velocity.map(|word| f64::from(word as i16));
+    let forward = ftol((z * word(9) + y * word(8)) + x * word(7));
+    match play {
+        BallPlay::Kick => {
+            let speed = (if hover { 1600 } else { 1800 }) - forward / 4;
+            add(row(7, f64::from(speed as i16)), row(4, KICK_LIFT))
+        }
+        BallPlay::Pass => add(row(7, PASS_BACK), row(4, PASS_LIFT)),
+        BallPlay::Release(charge) => {
+            let mut power: i32 = if charge < CHARGE_RANGE {
+                500 + (charge * 4500 / CHARGE_RANGE) as i32
+            } else {
+                5000
+            };
+            if forward < 0 {
+                power -= forward / 2;
+            }
+            if hover {
+                power -= power / 10;
+            }
+            row(7, f64::from(power as i16))
+        }
+    }
+}
+
 impl ObjectArena {
     /// `004171A8..004174DF`.
     pub(super) fn vehicle_fire<H: VehicleUpdateHost>(
@@ -70,6 +124,13 @@ impl ObjectArena {
         request: &VehicleUpdateRequest<'_>,
         host: &mut H,
     ) -> Result<(), VehicleDriveError<H::Error>> {
+        if request
+            .drive
+            .network
+            .is_some_and(|network| network.mode == 4)
+        {
+            return self.powerball_fire(vehicle, controls, request, host);
+        }
         // 004171E4 and 00417382: in a race the weapons wait for this
         // machine's racer to run, the primary for its first 5 seconds, the
         // secondary for the first 5 of each minute.
@@ -116,6 +177,80 @@ impl ObjectArena {
         self.selector2_actor_mut(vehicle)?.dwords_210_218[2] = 0;
         controls.set_byte(0x39, 0);
         Ok(())
+    }
+
+    /// `00416E50..004171A3`, Powerball's keys. The primary kicks a ball this
+    /// vehicle holds (`+14C` its handle): 1800 along the forward row (1600
+    /// for the hovercraft) less a quarter of the forward speed, lifted by
+    /// 1200 along the up row. The secondary charges `+218` while held; a tap
+    /// (`+35`) passes back 200 and up 800, and a release throws along the
+    /// forward row at 500 plus 4500 for each 800 ms charged (5000 past it),
+    /// plus half the speed backwards, a tenth less for the hovercraft. Each
+    /// goes through `00403940` in mode 0, which lets go only the holder's
+    /// ball; then the charge and the tap clear.
+    fn powerball_fire<H: VehicleUpdateHost>(
+        &mut self,
+        vehicle: ObjectId,
+        controls: &mut PlayerControlBlock,
+        request: &VehicleUpdateRequest<'_>,
+        host: &mut H,
+    ) -> Result<(), VehicleDriveError<H::Error>> {
+        let ball = self.powerball();
+        let handle = self.actor(vehicle)?.handle;
+        let hover = self.selector2_actor(vehicle)?.dwords_1e8_1f4[0] == 3;
+        let basis = self.actor(vehicle)?.rotating.basis;
+        let velocity = self.actor(vehicle)?.words_8e_92;
+        let play = |kind| ball_play(kind, &basis, velocity, hover);
+        if controls.fire_20 != 0 {
+            if let Some(ball) = ball.filter(|&ball| {
+                self.ball(ball)
+                    .is_ok_and(|state| state.holder_14c == handle)
+            }) {
+                self.throw_powerball(ball, handle, play(BallPlay::Kick), request, host)?;
+            }
+        }
+        if controls.grenade_24 != 0 {
+            let state = self.selector2_actor_mut(vehicle)?;
+            state.dwords_210_218[2] =
+                state.dwords_210_218[2].wrapping_add(controls.grenade_24 as u32);
+            return Ok(());
+        }
+        let throw = if controls.byte(0x39) != 0 {
+            play(BallPlay::Pass)
+        } else {
+            match self.selector2_actor(vehicle)?.dwords_210_218[2] {
+                0 => return Ok(()),
+                charge => play(BallPlay::Release(charge)),
+            }
+        };
+        if let Some(ball) = ball {
+            self.throw_powerball(ball, handle, throw, request, host)?;
+        }
+        self.selector2_actor_mut(vehicle)?.dwords_210_218[2] = 0;
+        controls.set_byte(0x39, 0);
+        Ok(())
+    }
+
+    /// `00403940(holder, throw, 0)` on the ball, its draws from the host.
+    fn throw_powerball<H: VehicleUpdateHost>(
+        &mut self,
+        ball: ObjectId,
+        holder: crate::object_runtime::ActorHandle,
+        throw: [i16; 3],
+        request: &VehicleUpdateRequest<'_>,
+        host: &mut H,
+    ) -> Result<(), VehicleDriveError<H::Error>> {
+        use crate::object_runtime::BallError;
+        let null = Some(request.drive.process_null);
+        self.throw_ball_with(ball, holder, Some(throw), 0, null, || host.random())
+            .map_err(|error| match error {
+                BallError::Object(error) => VehicleDriveError::Object(error),
+                BallError::Host { error, .. } => VehicleDriveError::Host(error),
+                BallError::Unwritten(ball, field) => {
+                    VehicleDriveError::Status(format!("ball {ball:?} reads its unwritten {field}"))
+                }
+                _ => VehicleDriveError::Status("00403940 failed".into()),
+            })
     }
 
     /// `004171B7..004171E2`: an entry fires with no `+14` cooldown, a

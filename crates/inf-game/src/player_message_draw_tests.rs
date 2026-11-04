@@ -102,6 +102,7 @@ fn line_box_frames_itself_and_draws_its_ring_text() {
                     projection: startup.projection,
                     animation: AnimationClock::default(),
                     math: &math,
+                    online: false,
                 },
             )
             .unwrap();

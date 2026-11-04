@@ -572,7 +572,7 @@ impl ObjectArena {
     }
 
     /// [`Self::throw_ball`] with its draws of 0048F060 from `random`.
-    fn throw_ball_with<E>(
+    pub(in crate::object_runtime) fn throw_ball_with<E>(
         &mut self,
         ball: ObjectId,
         holder: ActorHandle,

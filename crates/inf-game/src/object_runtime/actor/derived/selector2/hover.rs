@@ -24,17 +24,33 @@ const WORLD_UP: [f32; 3] = [0.0, 1.0, 0.0];
 const SPRAY_STRENGTH: i32 = 1000;
 /// 005205B0: 4096.0, the forward row's Y in 1/4096 units.
 const PITCH_SCALE: f64 = 4096.0;
+/// Powerball's hovercraft (network mode 4): its power (+18C) and grip
+/// (+188) tables, its boost's power table and the boost's fade, whose first
+/// DWORD the boost rewrites.
+const POWERBALL_POWER: u32 = 0x0053_0548;
+const POWERBALL_GRIP: u32 = 0x0053_0558;
+const POWERBALL_BOOST: u32 = 0x0053_0528;
+const POWERBALL_FADE: u32 = 0x0053_0538;
+/// 00419270: the boost lasts 2 s (the buggy's 3).
+const POWERBALL_BOOST_MICROS: u32 = 2_000_000;
 
 impl ObjectArena {
     /// 004185D0, the mode switch's entry for mode 3: the hover tables, the
-    /// turn rate and traction cleared, byte +160 set and no boost. The
-    /// network branch (0055F448 with role 4) swaps in two other tables; the
-    /// offline game never takes it.
-    pub fn reset_vehicle_hover(&mut self, vehicle: ObjectId) -> Result<(), DerivedActorError> {
+    /// turn rate and traction cleared, byte +160 set and no boost. In
+    /// Powerball (`network_mode` 4) the power and grip tables are its own.
+    pub fn reset_vehicle_hover(
+        &mut self,
+        vehicle: ObjectId,
+        network_mode: Option<u32>,
+    ) -> Result<(), DerivedActorError> {
         {
             let state = self.selector2_actor_mut(vehicle)?;
             state.drive.dword_21c = Some(0);
             state.words_188_194 = [0x0053_0510, 0x0053_0518, 0x0053_0508, 0x0053_0560];
+            if network_mode == Some(4) {
+                state.words_188_194[1] = POWERBALL_POWER;
+                state.words_188_194[0] = POWERBALL_GRIP;
+            }
         }
         self.derived_actor_mut(vehicle)?.byte_160 = 1;
         let state = self.selector2_actor_mut(vehicle)?;
@@ -43,8 +59,8 @@ impl ObjectArena {
         Ok(())
     }
 
-    /// 004191C0 for an offline hovercraft. `controls` is the driving
-    /// player's block, which the drive only reads.
+    /// 004191C0. `controls` is the driving player's block, which the drive
+    /// only reads.
     pub fn tick_vehicle_hover<H: VehicleUpdateHost>(
         &mut self,
         vehicle: ObjectId,
@@ -62,8 +78,9 @@ impl ObjectArena {
         // 004191CE..004191E5: the spray at +32 along +8E and the +44 basis.
         host.hull_spray(self, vehicle, SPRAY_STRENGTH)
             .map_err(VehicleDriveError::Host)?;
-        // 004191EA..00419315: the player lookup feeds only the network
-        // branch, which needs 0055F448.
+        if request.network.is_some_and(|network| network.mode == 4) {
+            self.powerball_hover_boost(vehicle, controls, request, host)?;
+        }
 
         // 00419315..00419395: the power, from thrust or a boost, then the
         // pitch keys, then the analog throttle on the +18C table.
@@ -81,9 +98,11 @@ impl ObjectArena {
             let table = self.selector2_actor(vehicle)?.words_188_194[1];
             let radius = u32::from(self.object(vehicle)?.base.word_28);
             let raw = if throttle > 0 {
-                read_dword(request.executable, table)?.wrapping_mul(radius) as i32
+                self.hover_power_dword(request, table)?.wrapping_mul(radius) as i32
             } else {
-                (read_dword(request.executable, table + 4)?.wrapping_mul(radius) as i32)
+                (self
+                    .hover_power_dword(request, table + 4)?
+                    .wrapping_mul(radius) as i32)
                     .wrapping_neg()
             };
             (raw >> 12).wrapping_mul(throttle) >> 16
@@ -147,7 +166,11 @@ impl ObjectArena {
                     power: 0xffff,
                     desired_velocity: power,
                     step_units: units,
-                    table: forward_table(request.executable, table)?,
+                    table: {
+                        let mut words = forward_table(request.executable, table)?;
+                        words.maximum = self.hover_power_dword(request, table)? as i32;
+                        words
+                    },
                 },
             )?;
         }
@@ -187,6 +210,86 @@ impl ObjectArena {
         }
         Ok(())
     }
+}
+
+impl ObjectArena {
+    /// 004191EA..00419315, Powerball's boost: a held +3A, with no message
+    /// shown, command 3 owned, no boost running and a charge left, spends
+    /// the charge on 2 s of the boost table (sound 0x19). A running boost
+    /// counts down on the fade table, whose power falls from the boost's to
+    /// Powerball's own by the milliseconds left over 2000, then ends on
+    /// Powerball's table.
+    fn powerball_hover_boost<H: VehicleUpdateHost>(
+        &mut self,
+        vehicle: ObjectId,
+        controls: &PlayerControlBlock,
+        request: &VehicleDriveRequest<'_>,
+        host: &mut H,
+    ) -> Result<(), VehicleDriveError<H::Error>> {
+        let delta = request.delta;
+        if controls.byte(0x3a) != 0 {
+            // 00419223 reads player +88 through the first lookup unchecked.
+            let player = self.driving_player(vehicle, request, 0x0041_91f1)?.ok_or(
+                VehicleDriveError::Unported {
+                    vehicle,
+                    address: 0x0041_9226,
+                },
+            )?;
+            let state = self.world_player(player)?;
+            if state.message_byte_00() == 0
+                && state.bits_100[0] & 1 << 3 != 0
+                && self.selector2_actor(vehicle)?.dwords_220_224[1] == 0
+                && (state.dword_12c as i32) > 0
+            {
+                let charges = state.dword_12c;
+                self.world_player_mut(player)?.dword_12c = charges.wrapping_sub(1);
+                let boosted = self.selector2_actor_mut(vehicle)?;
+                boosted.words_188_194[1] = POWERBALL_BOOST;
+                boosted.dwords_220_224[1] = delta.wrapping_add(POWERBALL_BOOST_MICROS);
+                host.play_sound(self, vehicle, 0x19, 0x10000, 0x10000)
+                    .map_err(VehicleDriveError::Sound)?;
+            }
+        }
+        let left = self.selector2_actor(vehicle)?.dwords_220_224[1];
+        if left == 0 {
+            return Ok(());
+        }
+        // 004192AE: a signed comparison with the delta.
+        if (left as i32) > delta as i32 {
+            let left = left - delta;
+            let state = self.selector2_actor_mut(vehicle)?;
+            state.dwords_220_224[1] = left;
+            state.words_188_194[1] = POWERBALL_FADE;
+            let boost = read_dword(request.executable, POWERBALL_BOOST)? as i32;
+            let own = read_dword(request.executable, POWERBALL_POWER)? as i32;
+            self.powerball_fade_maximum = fade_maximum(boost, own, left);
+        } else {
+            let state = self.selector2_actor_mut(vehicle)?;
+            state.dwords_220_224[1] = 0;
+            state.words_188_194[1] = POWERBALL_POWER;
+        }
+        Ok(())
+    }
+
+    /// A DWORD of the power table: the executable's, but for the fade
+    /// table's first, which the boost rewrites in place.
+    fn hover_power_dword<E>(
+        &self,
+        request: &VehicleDriveRequest<'_>,
+        address: u32,
+    ) -> Result<u32, VehicleDriveError<E>> {
+        if address == POWERBALL_FADE {
+            return Ok(self.powerball_fade_maximum);
+        }
+        read_dword(request.executable, address)
+    }
+}
+
+/// 004192AE..004192F9: the fade's power, Powerball's own plus the boost's
+/// extra by the whole milliseconds left over 2000.
+fn fade_maximum(boost: i32, own: i32, left: u32) -> u32 {
+    let millis = left as i32 / 1000;
+    (boost.wrapping_sub(own).wrapping_mul(millis) / 2000).wrapping_add(own) as u32
 }
 
 /// Signed IMUL EDX:EAX, SHL EAX then RCL EDX: the high DWORD of the product

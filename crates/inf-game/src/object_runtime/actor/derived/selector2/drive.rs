@@ -675,6 +675,31 @@ impl ObjectArena {
         Ok(())
     }
 
+    /// `0046B090` on the vehicle's handle: the player whose `+D8`, or `+D4`
+    /// while `+D8` is the process NULL, names it.
+    pub(super) fn driving_player<E>(
+        &self,
+        vehicle: ObjectId,
+        request: &VehicleDriveRequest<'_>,
+        address: u32,
+    ) -> Result<Option<PlayerId>, VehicleDriveError<E>> {
+        let handle = self.actor(vehicle)?.handle;
+        let process = ParticleFactoryProcessState {
+            network_flag: 0,
+            local_slot: 1,
+            host_flag: 0,
+            settings: [0; 20],
+            process_null_handle: Some(request.process_null),
+        };
+        self.find_player_for_actor_handle(
+            PlayerActorLookupRequest { handle },
+            PlayerActorLookupContext {
+                process: Some(&process),
+            },
+        )
+        .map_err(|_| VehicleDriveError::Unported { vehicle, address })
+    }
+
     /// 004196F5..00419890: a held +3A jumps or boosts the vehicle once per
     /// charge while command 3 is owned.
     fn vehicle_jump<H: VehicleDriveHost>(
@@ -684,25 +709,7 @@ impl ObjectArena {
         request: &VehicleDriveRequest<'_>,
         host: &mut H,
     ) -> Result<(), VehicleDriveError<H::Error>> {
-        let handle = self.actor(vehicle)?.handle;
-        let process = ParticleFactoryProcessState {
-            network_flag: 0,
-            local_slot: 1,
-            host_flag: 0,
-            settings: [0; 20],
-            process_null_handle: Some(request.process_null),
-        };
-        let player = self
-            .find_player_for_actor_handle(
-                PlayerActorLookupRequest { handle },
-                PlayerActorLookupContext {
-                    process: Some(&process),
-                },
-            )
-            .map_err(|_| VehicleDriveError::Unported {
-                vehicle,
-                address: 0x0041_96fc,
-            })?;
+        let player = self.driving_player(vehicle, request, 0x0041_96fc)?;
         // 00419703 reads player +88 before testing the player for null.
         let player: PlayerId = player.ok_or(VehicleDriveError::Unported {
             vehicle,
