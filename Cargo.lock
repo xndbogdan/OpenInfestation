@@ -1659,6 +1659,7 @@ dependencies = [
  "clap",
  "eframe",
  "egui_kittest",
+ "flate2",
  "gl_generator",
  "gpu-allocator",
  "inf-formats",

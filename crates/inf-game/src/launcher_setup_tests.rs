@@ -388,6 +388,7 @@ fn preferences_round_trip_and_unreadable_ones_load_as_defaults() {
     let preferences = LauncherPreferences {
         data_root: Some(PathBuf::from("games/Infestation Ω")),
         skip_launcher: true,
+        send_crash_reports: true,
     };
     preferences.save(&path).unwrap();
     assert_eq!(LauncherPreferences::load(&path), preferences);

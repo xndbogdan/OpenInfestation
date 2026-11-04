@@ -490,6 +490,8 @@ pub struct LauncherPreferences {
     pub data_root: Option<PathBuf>,
     /// Start the game without the launcher while that installation is ready.
     pub skip_launcher: bool,
+    /// Send crash reports ([`crate::crash_reports`]); off until ticked.
+    pub send_crash_reports: bool,
 }
 
 impl LauncherPreferences {

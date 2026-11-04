@@ -253,8 +253,10 @@ the port ship. The sounds themselves are not in this repository.
 `ubuntu:22.04` Docker container, the Linux one, each with the release
 `Remastered.pak` (from your sound folders, `-Packs4` and `-Splice`), the
 third-party licences and a checksum file; the Windows zip adds the
-upscalers' libraries. `-Publish` creates the GitHub Release from a clean
-`main`. The GitHub workflows run only when started by hand.
+upscalers' libraries. Each build takes the Sentry DSN its crash reports go
+to from `-SentryDsn`, `OPENINFESTATION_SENTRY_DSN` or the ignored
+`.sentry-dsn` file; a build without one cannot send them. `-Publish` creates
+the GitHub Release from a clean `main`. The GitHub workflows run only when started by hand.
 
 ### Tests and retail data
 
@@ -314,7 +316,9 @@ replay of its own in `logs/replays/` (the newest ten). When the game stops
 on a failure, or a frame hangs for 15 seconds, it writes
 `infest-crash-log-<time>.txt` in the log folder, naming the failure, the
 game state and the last 300 lines printed. Attach the crash log and replay
-to a report.
+to a report. With Options' **Send crash reports** ticked (off until you tick
+it; its tooltip says what goes), the next start sends each new crash log to the project's Sentry with its
+run's replay, settings and saves; the same failure goes once a version.
 
 ## Verification harness
 

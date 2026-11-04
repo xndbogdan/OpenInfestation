@@ -11,6 +11,9 @@
 # Generated inf-extract output
 /extracted/
 
+# The crash reports' Sentry DSN that scripts/release.ps1 builds in
+/.sentry-dsn
+
 # Local runtime data when running from the repository root
 /settings.json
 /logs/

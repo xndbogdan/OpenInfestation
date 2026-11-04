@@ -37,6 +37,7 @@ pub mod cloud_wake;
 pub mod cpu_profile;
 pub mod craft_spray;
 pub mod crash_log;
+pub mod crash_reports;
 pub mod crystal_flares;
 pub mod d3d_d2;
 pub mod d3d_d6;

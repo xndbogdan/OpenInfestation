@@ -1204,6 +1204,14 @@ fn main() -> ExitCode {
         launcher::declare_dpi_awareness();
         match desktop_installation(&args) {
             Ok(Some(root)) => {
+                // The preference as Options last saved it.
+                let preferences = args
+                    .launcher_state
+                    .clone()
+                    .unwrap_or_else(default_preferences_path);
+                if LauncherPreferences::load(&preferences).send_crash_reports {
+                    inf_game::crash_reports::send_in_background(root.join("logs"));
+                }
                 raw = with_data_root(&raw, &root);
                 args.data_root = Some(root);
                 inf_game::crash_log::install(crash_context(&args, &raw, None));
@@ -1591,8 +1599,8 @@ mod tests {
     fn a_saved_skip_starts_a_ready_installation_unless_launcher_asks() {
         let retail = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../retail");
         let skip = LauncherPreferences {
-            data_root: None,
             skip_launcher: true,
+            ..Default::default()
         };
         let plain = Args::try_parse_from(["inf-game"]).unwrap();
         let forced = Args::try_parse_from(["inf-game", "--launcher"]).unwrap();

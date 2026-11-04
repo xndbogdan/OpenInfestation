@@ -10,7 +10,7 @@ use std::fs;
 use std::path::Path;
 
 fn data_root() -> PathBuf {
-    Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..")
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("../../retail")
 }
 
 fn scratch(name: &str) -> PathBuf {

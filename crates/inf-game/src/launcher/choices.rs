@@ -45,6 +45,12 @@ pub(super) const FIX_LABELS: [&str; FIXES] = [
     "Pelagia rework: the lagoon, crystals, return gate and factories reshape world 1",
 ];
 pub(super) const FIXES: usize = 14;
+/// Options' crash reports row ([`inf_game::crash_reports`]).
+pub(super) const CRASH_REPORTS_LABEL: &str = "Send crash reports";
+/// Its tooltip: what a report carries.
+pub(super) const CRASH_REPORTS_DETAIL: &str = "When the game crashes or freezes, the next start sends the developers its crash log, with that game's recording, settings and saves, so the crash can be replayed and fixed. Nothing is sent while this is off.";
+/// Its tooltip in a build without a crash report address.
+pub(super) const CRASH_REPORTS_UNAVAILABLE: &str = "Crash reporting is unavailable in this build. Reports go to the project's Sentry service, and this copy of the game was built without its address (the Sentry DSN). Official releases include it.";
 /// The rows of the retail bug fixes' group; the rest are the Cheats and
 /// extras group's.
 pub(super) const BUG_FIX_ROWS: usize = 11;

@@ -7,7 +7,10 @@ param(
     [switch]$SkipLinux,
     # The sound folders the pak's manifest names (ambience/manifest.json).
     [string]$Packs4 = $env:INF_SOUNDS_PACKS4,
-    [string]$Splice = $env:INF_SOUNDS_SPLICE
+    [string]$Splice = $env:INF_SOUNDS_SPLICE,
+    # Where the game sends crash reports (crates/inf-game/src/crash_reports.rs);
+    # else the ignored .sentry-dsn file. A published release needs one.
+    [string]$SentryDsn = $env:OPENINFESTATION_SENTRY_DSN
 )
 
 # Builds the release packages locally, as OpenV2K's release.ps1 does:
@@ -62,6 +65,18 @@ try {
             throw "No $($root[0]) sound folder ('$($root[1])'); pass -$($root[0]) or set INF_SOUNDS_$($root[0].ToUpper())."
         }
     }
+
+    if (-not $SentryDsn -and (Test-Path '.sentry-dsn')) {
+        $SentryDsn = (Get-Content -Raw '.sentry-dsn').Trim()
+    }
+    if (-not $SentryDsn) {
+        if ($Publish) {
+            throw 'No Sentry DSN: pass -SentryDsn, set OPENINFESTATION_SENTRY_DSN or write it to .sentry-dsn.'
+        }
+        Write-Warning 'No Sentry DSN: these packages cannot send crash reports.'
+    }
+    # Both builds read it as they compile (option_env!).
+    $env:OPENINFESTATION_SENTRY_DSN = $SentryDsn
 
     $out = Join-Path $repositoryRoot "target/dist/$tag"
     if (Test-Path $out) { Remove-Item -Recurse -Force $out }
@@ -124,6 +139,7 @@ try {
             '-v', 'openinfestation-release-cargo:/root/.cargo',
             '-v', 'openinfestation-release-target:/target',
             '-e', 'CARGO_TARGET_DIR=/target',
+            '-e', "OPENINFESTATION_SENTRY_DSN=$SentryDsn",
             '-e', "RELEASE_NAME=OpenInfestation-$tag-linux-x64",
             '-e', "RELEASE_OUT=/src/target/dist/$tag",
             'ubuntu:22.04',

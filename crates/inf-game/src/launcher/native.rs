@@ -46,6 +46,17 @@ const TBM_SETRANGE: u32 = 0x0406;
 const TBS_AUTOTICKS: u32 = 0x0001;
 const TBS_TOOLTIPS: u32 = 0x0100;
 const ICC_BAR_CLASSES: u32 = 0x0004;
+const WS_POPUP: u32 = 0x8000_0000;
+const EX_TOPMOST: u32 = 0x0000_0008;
+/// `TTS_ALWAYSTIP | TTS_NOPREFIX`: shown over an inactive window too.
+const TIP_STYLE: u32 = 0x0003;
+const TTF_IDISHWND: u32 = 0x0001;
+const TTF_SUBCLASS: u32 = 0x0010;
+const TTM_SETDELAYTIME: u32 = 0x0403;
+const TTM_SETMAXTIPWIDTH: u32 = 0x0418;
+const TTM_ADDTOOLW: u32 = 0x0432;
+const TTM_NEWTOOLRECTW: u32 = 0x0434;
+const TTDT_AUTOPOP: usize = 2;
 const IDCANCEL: usize = 2;
 const WS_CHILD: u32 = 0x4000_0000;
 const WS_VISIBLE: u32 = 0x1000_0000;
@@ -117,13 +128,14 @@ const ID_ANTI_ALIASING: usize = 223;
 const ID_LIGHTING: usize = 224;
 const ID_AMBIENCE: usize = 226;
 const ID_HEADPHONES: usize = 227;
+const ID_CRASH_REPORTS: usize = 240;
 const ID_FIXES: usize = 210;
 const WORKER_TIMER: usize = 1;
 /// The banner's flipbook: one baked frame a 20 ms frontend clock tick.
 const HEADER_TIMER: usize = 2;
 /// Logical sizes of the two windows' client areas.
 const MAIN_SIZE: [i32; 2] = [660, 439];
-const OPTIONS_SIZE: [i32; 2] = [560, 1030];
+const OPTIONS_SIZE: [i32; 2] = [560, 1056];
 /// The Vulkan group's height: hiding it lifts everything below by this,
 /// and the Options window shrinks by it.
 const VULKAN_GROUP_LIFT: i32 = 178;
@@ -165,6 +177,10 @@ struct OptionControls {
     camera: Handle,
     fixes: [Handle; FIXES],
     skip: Handle,
+    crash_reports: Handle,
+    /// The crash reports row's tooltip over its place, while this build
+    /// cannot send them; none while it can (the row holds its own).
+    crash_tip: Handle,
     progress: Handle,
     verify: Handle,
     /// Extract music: always shown, as OpenV2K's; enabled while some music
@@ -650,6 +666,38 @@ impl WindowState {
         SetWindowTheme(child, empty.as_ptr(), empty.as_ptr());
         SendMessageW(child, WM_SETFONT, self.font as usize, 1);
         child
+    }
+
+    /// A tooltip saying `text` over `control` in `window`, or with no
+    /// control over a place in `window` that [`place_tip`] sets. The window
+    /// holds that one, so it shows over a disabled control there, which
+    /// takes no mouse input.
+    unsafe fn tooltip(&self, window: Handle, control: Handle, text: &str) -> Handle {
+        let tip = CreateWindowExW(
+            EX_TOPMOST,
+            wide("tooltips_class32").as_ptr(),
+            null(),
+            WS_POPUP | TIP_STYLE,
+            0,
+            0,
+            0,
+            0,
+            window,
+            0,
+            GetModuleHandleW(null()),
+            null_mut(),
+        );
+        SendMessageW(tip, WM_SETFONT, self.font as usize, 0);
+        SendMessageW(tip, TTM_SETMAXTIPWIDTH, 0, self.pixel(380) as isize);
+        SendMessageW(tip, TTM_SETDELAYTIME, TTDT_AUTOPOP, 30_000);
+        let mut text = wide(text);
+        let mut tool = tool_info(window, Rect::default(), text.as_mut_ptr());
+        if control != 0 {
+            tool.flags |= TTF_IDISHWND;
+            tool.id = control as usize;
+        }
+        SendMessageW(tip, TTM_ADDTOOLW, 0, &tool as *const ToolInfo as isize);
+        tip
     }
 
     unsafe fn label(
@@ -1660,11 +1708,28 @@ impl WindowState {
             510,
             20,
         );
-        let progress = self.label(window, "", 16, 958, 528, 20);
-        let verify = self.button(window, "&Verify files", ID_VERIFY, 12, 986, 160, 32);
-        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, 986, 120, 32);
-        let save = self.button(window, "Save", ID_SAVE, 308, 986, 112, 32);
-        let cancel = self.button(window, "Cancel", ID_CANCEL, 436, 986, 112, 32);
+        let reporting = inf_game::crash_reports::available();
+        let crash_reports = self.checkbox(
+            window,
+            CRASH_REPORTS_LABEL,
+            ID_CRASH_REPORTS,
+            16,
+            956,
+            528,
+            reporting && self.request.preferences.send_crash_reports,
+        );
+        let crash_tip = if reporting {
+            self.tooltip(window, crash_reports, CRASH_REPORTS_DETAIL);
+            0
+        } else {
+            EnableWindow(crash_reports, 0);
+            self.tooltip(window, 0, CRASH_REPORTS_UNAVAILABLE)
+        };
+        let progress = self.label(window, "", 16, 984, 528, 20);
+        let verify = self.button(window, "&Verify files", ID_VERIFY, 12, 1012, 160, 32);
+        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, 1012, 120, 32);
+        let save = self.button(window, "Save", ID_SAVE, 308, 1012, 112, 32);
+        let cancel = self.button(window, "Cancel", ID_CANCEL, 436, 1012, 112, 32);
         self.option_controls = OptionControls {
             display: display_combo,
             resolution,
@@ -1684,6 +1749,8 @@ impl WindowState {
             camera,
             fixes,
             skip,
+            crash_reports,
+            crash_tip,
             progress,
             verify,
             extract,
@@ -1868,6 +1935,10 @@ impl WindowState {
             return;
         }
         self.request.preferences.skip_launcher = checked(controls.skip);
+        // A build that cannot send keeps the saved choice for one that can.
+        if inf_game::crash_reports::available() {
+            self.request.preferences.send_crash_reports = checked(controls.crash_reports);
+        }
         if let Err(error) = self
             .request
             .preferences
@@ -1945,11 +2016,12 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
         (controls.cheats_group, 12, 796),
         (controls.skip, 16, 904),
         (controls.skip_note, 34, 930),
-        (controls.progress, 16, 958),
-        (controls.verify, 12, 986),
-        (controls.extract, 180, 986),
-        (controls.save, 308, 986),
-        (controls.cancel, 436, 986),
+        (controls.crash_reports, 16, 956),
+        (controls.progress, 16, 984),
+        (controls.verify, 12, 1012),
+        (controls.extract, 180, 1012),
+        (controls.save, 308, 1012),
+        (controls.cancel, 436, 1012),
     ] {
         SetWindowPosW(
             control,
@@ -1977,6 +2049,13 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
             SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE,
         );
     }
+    let row = Rect {
+        left: pixel(scale, 16),
+        top: pixel(scale, 956 - lift),
+        right: pixel(scale, 16 + 528),
+        bottom: pixel(scale, 956 + 23 - lift),
+    };
+    place_tip(controls.crash_tip, window, row);
     let mut bounds = Rect {
         left: 0,
         top: 0,
@@ -1993,6 +2072,30 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
         bounds.bottom - bounds.top,
         SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE,
     );
+}
+
+/// The tool [`WindowState::tooltip`] added to `window`, over `rect`.
+fn tool_info(window: Handle, rect: Rect, text: *mut u16) -> ToolInfo {
+    ToolInfo {
+        // Without `lpReserved`, which comctl32 before 6 refuses.
+        size: (size_of::<ToolInfo>() - size_of::<usize>()) as u32,
+        flags: TTF_SUBCLASS,
+        window,
+        id: ID_CRASH_REPORTS,
+        rect,
+        instance: 0,
+        text,
+        lparam: 0,
+        reserved: null_mut(),
+    }
+}
+
+/// Move tooltip `tip`'s place in `window` to `rect`; nothing without a tip.
+unsafe fn place_tip(tip: Handle, window: Handle, rect: Rect) {
+    if tip != 0 {
+        let tool = tool_info(window, rect, null_mut());
+        SendMessageW(tip, TTM_NEWTOOLRECTW, 0, &tool as *const ToolInfo as isize);
+    }
 }
 
 fn pixel(scale: f64, logical: i32) -> i32 {

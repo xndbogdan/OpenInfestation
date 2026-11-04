@@ -136,6 +136,7 @@ struct Pending {
     camera: usize,
     fixes: [bool; FIXES],
     skip: bool,
+    crash_reports: bool,
     support: ModernSupport,
 }
 
@@ -521,6 +522,8 @@ impl Launcher {
                 .min(CAMERA_STYLES.len() - 1),
             fixes: fix_values(settings.fixes()),
             skip: self.request.preferences.skip_launcher,
+            crash_reports: inf_game::crash_reports::available()
+                && self.request.preferences.send_crash_reports,
             support,
             settings,
         });
@@ -566,6 +569,10 @@ impl Launcher {
             return self.notice("Save Infestation options", &text, false);
         }
         self.request.preferences.skip_launcher = pending.skip;
+        // A build that cannot send keeps the saved choice for one that can.
+        if inf_game::crash_reports::available() {
+            self.request.preferences.send_crash_reports = pending.crash_reports;
+        }
         if let Err(error) = self
             .request
             .preferences
@@ -842,6 +849,12 @@ impl Launcher {
             });
             ui.checkbox(&mut p.skip, "Skip the launcher when this installation is ready");
             ui.weak("Start with --launcher to open it again. Missing game files still open it.");
+            ui.add_enabled(
+                inf_game::crash_reports::available(),
+                egui::Checkbox::new(&mut p.crash_reports, CRASH_REPORTS_LABEL),
+            )
+            .on_hover_text(CRASH_REPORTS_DETAIL)
+            .on_disabled_hover_text(CRASH_REPORTS_UNAVAILABLE);
             ui.label(&progress);
         });
     }
