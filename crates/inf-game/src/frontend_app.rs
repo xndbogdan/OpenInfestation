@@ -793,6 +793,10 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         // Resident terrain snapshot for grounding controls, refreshed every
         // epoch like the resource snapshot (world loads retire the epoch).
         backend.set_terrain(session.world().map(|world| world.terrain.clone()));
+        // A new renderer (a display change) makes its tracer and upscaler
+        // now, not in its first frame's draw; nothing once they are made.
+        crate::crash_log::step(crate::crash_log::Step::PrepareRenderer);
+        backend.prepare_trace();
         let stop = 'frames: loop {
             // The frame the [input] and [phase] lines number.
             crate::crash_log::heartbeat(frames + 1);
@@ -970,6 +974,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                         }
                     };
                 }
+                crate::crash_log::step(crate::crash_log::Step::Update);
                 let first_pass = crate::cpu_profile::scope("frame: first pass (input, tick)");
                 let ticked = driver.first_pass(now_micros, &mut host!());
                 drop(first_pass);
@@ -1001,6 +1006,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 }
             }
             present_pending = false;
+            crate::crash_log::step(crate::crash_log::Step::Draw);
             let linked_present = crate::cpu_profile::scope("frame: linked present (draw)");
             let result = driver.linked_present(&mut AppFrame {
                 session: &mut session,
@@ -1044,6 +1050,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 break 'frames Stop::Failed(error);
             }
             frames += 1;
+            crate::crash_log::step(crate::crash_log::Step::AfterFrame);
             let after_present = crate::cpu_profile::scope("frame: after present (audio, ambience)");
             // The bed of the world in play, under Vulkan with the Ambience up.
             let playing = session
@@ -1187,7 +1194,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
             }
             // The tracer and its upscaler are made again behind the Options
             // after a change, not on a world's first frame.
+            crate::crash_log::step(crate::crash_log::Step::PrepareRenderer);
             backend.prepare_trace();
+            crate::crash_log::step(crate::crash_log::Step::AfterFrame);
             drop(after_present);
             crate::cpu_profile::frame_end();
             for (_, path) in request.snapshots_at.iter().filter(|(at, _)| *at == frames) {
@@ -1241,6 +1250,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 break 'frames Stop::Finished;
             }
         };
+        crate::crash_log::step(crate::crash_log::Step::Rebuild);
         let state = backend.into_state();
         if let Some(next) = staged.take() {
             // 00437DF0 built a new renderer and surface; the old one retires.

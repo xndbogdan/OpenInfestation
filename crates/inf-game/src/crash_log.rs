@@ -91,6 +91,10 @@ static NOTIFY: OnceLock<fn(&str)> = OnceLock::new();
 
 /// How long a frame may run before the watchdog calls the game stuck.
 pub const STALL: Duration = Duration::from_secs(15);
+/// How long while it prepares the renderer: a driver with no shaders
+/// cached (a new build, or a new driver) compiles them then, which on AMD
+/// can pass [`STALL`].
+pub const PREPARE_STALL: Duration = Duration::from_secs(120);
 
 /// What the main loop was doing: the breadcrumb a stall's log names.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -112,6 +116,17 @@ pub enum Step {
     WorldDraw,
     /// One object's draw.
     ObjectDraw,
+    /// The frame's update after its events: the phase's tick and screens.
+    Update,
+    /// Drawing and presenting the frame.
+    Draw,
+    /// The work after the frame is shown: its sound and ambience.
+    AfterFrame,
+    /// A new renderer for a display change or new resources.
+    Rebuild,
+    /// Making the renderer's tracer and upscaler, which compiles their
+    /// shaders when the driver has none cached.
+    PrepareRenderer,
 }
 
 impl Step {
@@ -125,6 +140,11 @@ impl Step {
             6 => "the furniture effects",
             7 => "the world draw",
             8 => "an object's draw",
+            9 => "the frame's update",
+            10 => "drawing the frame",
+            11 => "the work after the frame (its sound and ambience)",
+            12 => "rebuilding the renderer",
+            13 => "preparing the renderer (compiling its shaders)",
             _ => "starting up",
         }
     }
@@ -205,6 +225,15 @@ fn stall_report(frame: u64, frame_ms: u64, step: u8, object: usize, step_ms: u64
     ]
 }
 
+/// How long a frame in `step` may run before the watchdog logs it.
+fn stall_limit(step: u8) -> Duration {
+    if step == Step::PrepareRenderer as u8 {
+        PREPARE_STALL
+    } else {
+        STALL
+    }
+}
+
 /// The watchdog: once a second, a frame running past [`STALL`] gets one log.
 fn watch() {
     loop {
@@ -216,7 +245,8 @@ fn watch() {
         let now = now();
         let frame_ms = now.saturating_sub(began - 1);
         let frame = FRAME.load(Ordering::Relaxed);
-        if frame_ms < STALL.as_millis() as u64 || STALLED.load(Ordering::Relaxed) == frame {
+        let limit = stall_limit(STEP.load(Ordering::Relaxed));
+        if frame_ms < limit.as_millis() as u64 || STALLED.load(Ordering::Relaxed) == frame {
             continue;
         }
         STALLED.store(frame, Ordering::Relaxed);
@@ -664,6 +694,13 @@ mod tests {
             stall_report(3, 20_000, Step::Loading as u8, 0, 19_000)[1],
             "It has been in loading a world for 19.0 s."
         );
+        // A renderer compiling its shaders cold gets longer before it counts.
+        assert_eq!(
+            stall_report(3, 130_000, Step::PrepareRenderer as u8, 0, 129_500)[1],
+            "It has been in preparing the renderer (compiling its shaders) for 129.5 s."
+        );
+        assert_eq!(stall_limit(Step::PrepareRenderer as u8), PREPARE_STALL);
+        assert_eq!(stall_limit(Step::Draw as u8), STALL);
     }
 
     #[test]
