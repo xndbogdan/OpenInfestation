@@ -609,8 +609,12 @@ pub(crate) fn capture_primitive<'a>(
             let tuning = crate::modern_tuning::current();
             let (tolerance, most) = (tuning.round().tolerance, tuning.round().most);
             let pixels = round.pixels;
-            let count = |turn: f32, distance: f32| {
-                crate::round_parts::pieces(turn, distance * pixels, tolerance, most)
+            // Port fix: the count no longer follows the part's size on
+            // screen. A jet whose distance wobbled as the craft moved flipped
+            // between counts from frame to frame, and its traced rim
+            // flickered; every part now rounds as one this size would.
+            let count = |turn: f32, _distance: f32| {
+                crate::round_parts::pieces(turn, STEADY_ROUND_PIXELS, tolerance, most)
             };
             let positions: Corners<[f32; 3]> =
                 corners.iter().map(|corner| corner.position).collect();
@@ -727,6 +731,10 @@ fn sunk_below(plane: Option<f32>, points: &[[f32; 3]]) -> bool {
     !points.is_empty()
         && points.iter().map(|point| point[1]).sum::<f32>() / (points.len() as f32) < plane - 1.0
 }
+
+/// The on-screen radius, in pixels, every round part's rim edges are cut
+/// for: about 7 degrees a piece at the tuned tolerance.
+const STEADY_ROUND_PIXELS: f32 = 256.0;
 
 /// A round part in one draw (the tuning's `round`): its frame, eye-relative, as plain and as mirrored faces take it
 /// (the centre's x negated), the pixels a unit of it takes on screen at its
