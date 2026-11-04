@@ -42,7 +42,7 @@ impl ParticleFactoryHost for WorldParticleFactoryHost<'_> {
     }
 }
 
-pub(super) fn birth_factory_impact(
+pub(in crate::session_platform) fn birth_factory_impact(
     request: ParticleFactoryImpactRequest,
     particles: &mut ProcessParticleRuntime,
     context: &mut ParticleFactoryContext<'_, '_>,

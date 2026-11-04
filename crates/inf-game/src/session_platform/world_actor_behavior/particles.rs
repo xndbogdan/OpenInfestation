@@ -203,16 +203,55 @@ impl BehaviorParticleServices for WorldSelectionServices<'_> {
         //A reached future packet interface still requires its actual backing.
         Err(WorldFamilyBehaviorError::RequiredPacketSource { component, offset })
     }
+    /// A particle's network notice (`00492500`, kept for the next network
+    /// pass) and its impact (`00489600`), as the world's other particle
+    /// hosts run them.
     fn particle_effect(
         &mut self,
-        _context: BehaviorParticleServiceContext<'_, '_, '_>,
+        context: BehaviorParticleServiceContext<'_, '_, '_>,
         request: BehaviorParticleEffectRequest<'_>,
     ) -> Result<(), Self::Error> {
-        Err(WorldFamilyBehaviorError::RequiredParticleEffect {
-            phase: match request {
-                BehaviorParticleEffectRequest::NetworkNotice { .. } => "creation network notice",
-                BehaviorParticleEffectRequest::Impact489600(_) => "00489600 impact",
-            },
-        })
+        let owner = |phase, error: String| WorldFamilyBehaviorError::Owner {
+            phase,
+            source: error.into(),
+        };
+        match request {
+            BehaviorParticleEffectRequest::NetworkNotice { notice, sources } => {
+                // BehaviorScratchPositionApproximation: 0048D820's temporary
+                // particle is built from a stack buffer nothing writes, so
+                // retail's notice sends stack residue as its position; the
+                // port sends zero.
+                let position = &mut sources.vectors.position.0;
+                if position.iter().any(Option::is_none) {
+                    log_scratch_position_approximation();
+                    for byte in position.iter_mut() {
+                        byte.get_or_insert(0);
+                    }
+                }
+                crate::process_particles::factories::queue_creation_notice(
+                    context.particles,
+                    notice,
+                    sources.vectors,
+                )
+                .map_err(|error| owner("00492500 creation notice", error.into()))
+            }
+            BehaviorParticleEffectRequest::Impact489600(request) => {
+                crate::session_platform::particles::factory::birth_factory_impact(
+                    request,
+                    context.particles,
+                    context.factory,
+                    self.session,
+                )
+                .map(|_| ())
+                .map_err(|error| owner("00489600 impact", error))
+            }
+        }
+    }
+}
+
+fn log_scratch_position_approximation() {
+    static LOGGED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+    if !LOGGED.swap(true, std::sync::atomic::Ordering::Relaxed) {
+        eprintln!("BehaviorScratchPositionApproximation: a weapon's damage cache (0048D820) built its temporary particle online, whose creation notice sends the unwritten stack buffer as the position; retail sends stack residue, the port zero");
     }
 }
