@@ -133,7 +133,17 @@ redistributable). The LLVM-based MinGW target (`x86_64-pc-windows-gnullvm`
 with llvm-mingw) has the runtime too and measured the same; MSVC was
 chosen as the most travelled path and for Windows' debugging tools on
 players' crash dumps. Event logs and snapshots equal the MinGW `ship`
-build's on OpenGL, software and Vulkan raster. 4K, median of three, ms a
+build's on OpenGL, software and Vulkan raster. Re-validated 2026-11-07
+after OpenV2K's PGO showed a late-manifesting divergence there (its level
+20: identical for 2971 frames, then five actors jump at once): all nine
+training scenes re-ran at 3000 fixed-step frames, two reps each, on
+OpenGL, Vulkan path-traced, Vulkan raster and (three scenes) the software
+raster, ship against fresh PGO (`scripts/perf-bench.ps1`). All end
+snapshots byte-identical where the renderer is deterministic (Vulkan
+differs run to run even for one binary — its device thread replays
+asynchronously — so only its event logs compare, minus the audio mix,
+which runs on the audio clock) and all event logs byte-identical:
+no divergence. 4K, median of three, ms a
 frame (`.tmp/opt/pgollvm.txt`; Altair is not in the training run):
 
 | Scene | OpenGL MinGW ship | OpenGL PGO | Vulkan raster MinGW ship | Vulkan raster PGO |
