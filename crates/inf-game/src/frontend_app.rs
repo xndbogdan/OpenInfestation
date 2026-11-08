@@ -132,6 +132,10 @@ pub struct FrontendAppRequest {
     /// ([`crate::frontend_settings::PortFixes`]). None retains the saved
     /// setting, which is on by default.
     pub paced_actors: Option<bool>,
+    /// The port's paced doomed-planet explosions
+    /// ([`crate::frontend_settings::PortFixes`]). None retains the saved
+    /// setting, which is on by default.
+    pub paced_doom: Option<bool>,
     /// The port's 64 sound voices ([`crate::frontend_settings::PortFixes`]).
     /// None retains the saved setting, which is on by default.
     pub splash_voice_cap: Option<bool>,
@@ -404,6 +408,11 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
     if let Some(paced) = request.paced_actors {
         let mut fixes = settings.fixes();
         fixes.paced_actors = paced;
+        settings.set_fixes(fixes);
+    }
+    if let Some(paced) = request.paced_doom {
+        let mut fixes = settings.fixes();
+        fixes.paced_doom = paced;
         settings.set_fixes(fixes);
     }
     if let Some(more) = request.splash_voice_cap {
@@ -1770,6 +1779,7 @@ mod tests {
             guided_mounts: None,
             completion_bonus: None,
             paced_actors: None,
+            paced_doom: None,
             splash_voice_cap: None,
             mission_completion: None,
             all_cheats: None,

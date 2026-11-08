@@ -101,3 +101,51 @@ fn the_doom_with_a_unit_matches_the_native_receipt() {
         "{kinds:?}"
     );
 }
+
+/// `PortFixes::paced_doom`: over five wall seconds the paced dice keep
+/// retail's 30 fps explosion rate at any tick step. Retail's
+/// `0048E380..0048E4C5` rolls every world tick, so a game ticking 61
+/// times a second (the port's default quantum) rolls twice the dice of a
+/// 30 fps game, and faster displays roll faster still, overflowing the
+/// 400-cell particle pool: the newest bursts are reclaimed first, and
+/// births that find no cell go to undrawn scratch.
+#[test]
+fn the_paced_doom_dice_keep_their_rate_at_any_tick_step() {
+    use crate::frontend_settings::PortFixes;
+    use crate::session_platform::{ActorPacing, WorldTickCarry};
+
+    fn dice_per_five_wall_seconds(delta: u32, pacing: ActorPacing) -> (usize, usize) {
+        let mut carry = WorldTickCarry::default();
+        let mut rng = 0x1234_5678u32;
+        let mut left = 5_000_000u32;
+        let mut evaluations = 0usize;
+        let mut hits = 0usize;
+        while left > 0 {
+            if carry.doom_pace_delta(pacing, delta).is_some() {
+                evaluations += 1;
+                if countdown_chance(&mut rng, left) {
+                    hits += 1;
+                }
+            }
+            left = left.saturating_sub(delta);
+        }
+        (evaluations, hits)
+    }
+
+    let paced = PortFixes::default().doom_pacing();
+    assert_eq!(paced, ActorPacing::Paced { micros: 32768 });
+    for delta in [33_333u32, 16_384, 6_944] {
+        let (evaluations, hits) = dice_per_five_wall_seconds(delta, paced);
+        // About 30.5 evaluations a second at any tick step.
+        assert!((140..=160).contains(&evaluations), "{delta}: {evaluations}");
+        assert!((25..=85).contains(&hits), "{delta}: {hits}");
+    }
+    // Unpaced, the dice scale with the tick rate: retail's own behavior,
+    // kept by switching the fix off.
+    let (retail_evaluations, _) = dice_per_five_wall_seconds(33_333, ActorPacing::Retail);
+    let (exact_evaluations, _) = dice_per_five_wall_seconds(16_384, ActorPacing::Retail);
+    let (fast_evaluations, _) = dice_per_five_wall_seconds(6_944, ActorPacing::Retail);
+    assert_eq!(retail_evaluations, 151);
+    assert_eq!(exact_evaluations, 306);
+    assert_eq!(fast_evaluations, 721);
+}

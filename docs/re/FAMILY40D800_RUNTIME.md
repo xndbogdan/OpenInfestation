@@ -612,6 +612,14 @@ original countdown segment
 countdowns in `check_world_interactions.py`:
 the port's `+24`, `+18`, `+15` and world-end call match every one, signed
 expiries of negative countdowns and both stages of the doom's end included.
+Retail rolls the explosion dice every world tick, so the port's rate scales
+with its tick rate: twice the explosions of a 30 fps game under the default
+61 Hz quantum, more on faster displays, overflowing the 400-cell particle
+pool (the newest bursts are reclaimed first, and births that find no cell go
+to undrawn scratch). `PortFixes::paced_doom` (on by default, off in lab
+comparisons) rolls the dice every 32,768 µs of world time instead, keeping
+retail's rate; the countdown, the unit's end and the world flash timing
+stay native.
 [The mission](../../crates/inf-game/src/world_mission.rs) owns the
 arithmetic, and [a test](../../crates/inf-game/src/object_runtime/actor/selector39/course_tests.rs)
 knocks out one of world 12's generators, regrows a quarter of its health

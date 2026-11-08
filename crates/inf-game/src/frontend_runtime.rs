@@ -732,6 +732,9 @@ impl PortSessionServices for SdlPlatform {
     fn actor_pacing(&self) -> crate::session_platform::ActorPacing {
         self.frontend.settings.fixes().actor_pacing()
     }
+    fn doom_pacing(&self) -> crate::session_platform::ActorPacing {
+        self.frontend.settings.fixes().doom_pacing()
+    }
     fn mission_completion(&self) -> bool {
         self.frontend.settings.fixes().mission_completion
     }

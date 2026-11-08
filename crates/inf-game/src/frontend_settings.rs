@@ -323,6 +323,15 @@ pub struct PortFixes {
     /// [`crate::session_platform::ActorPacing`].
     #[serde(default = "fix_enabled")]
     pub paced_actors: bool,
+    /// Set off the doomed planet's explosions at retail's 30 fps rate,
+    /// every [`PACED_DOOM_MICROS`] of world time. Retail rolls the dice
+    /// every world tick (`0048E380..0048E4C5`), so at 60 ticks a second
+    /// the port sets off twice the explosions of a 30 fps game, and more
+    /// as the tick rate climbs, overflowing the 400-cell particle pool.
+    /// The countdown itself and the unit's end stay exact. See
+    /// [`crate::session_platform::WorldTickCarry::doom_pace_delta`].
+    #[serde(default = "fix_enabled")]
+    pub paced_doom: bool,
     /// Let at most [`SPLASH_VOICES`] of retail's 24 voices be water
     /// splashes. Retail's pool, full, silences the oldest one-shot for each
     /// new sound; hovering over water keeps about 20 splashes sounding (the
@@ -384,6 +393,10 @@ pub const SPLASH_VOICES: usize = 12;
 /// a second.
 pub const PACED_ACTOR_MICROS: u32 = 2 * EXACT_WORLD_TICK_MICROS;
 
+/// [`PortFixes::paced_doom`]'s step: two exact world ticks, 30.5
+/// evaluations a second, as retail's 30 fps game rolls the dice.
+pub const PACED_DOOM_MICROS: u32 = 2 * EXACT_WORLD_TICK_MICROS;
+
 fn fix_enabled() -> bool {
     true
 }
@@ -400,6 +413,7 @@ impl Default for PortFixes {
             guided_mounts: true,
             completion_bonus: true,
             paced_actors: true,
+            paced_doom: true,
             splash_voice_cap: true,
             mission_completion: true,
             all_cheats: false,
@@ -441,6 +455,19 @@ impl PortFixes {
         if self.paced_actors {
             crate::session_platform::ActorPacing::Paced {
                 micros: PACED_ACTOR_MICROS,
+            }
+        } else {
+            crate::session_platform::ActorPacing::Retail
+        }
+    }
+
+    /// The doomed planet's explosion-dice step these fixes select: retail
+    /// rolls every world tick, the paced port every [`PACED_DOOM_MICROS`]
+    /// of world time.
+    pub fn doom_pacing(self) -> crate::session_platform::ActorPacing {
+        if self.paced_doom {
+            crate::session_platform::ActorPacing::Paced {
+                micros: PACED_DOOM_MICROS,
             }
         } else {
             crate::session_platform::ActorPacing::Retail

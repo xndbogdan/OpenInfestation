@@ -38,13 +38,14 @@ pub(super) const FIX_LABELS: [&str; FIXES] = [
     "The guided missiles' launchers fold away between forms",
     "A finished campaign in the saves gives every game its bonus",
     "Scientists, alien ships and creatures move as at 30 fps",
+    "A doomed planet's explosions keep their 30 fps rate",
     "Water splashes take at most 12 of the 24 sounds",
     "A rescue completes when its last scientist boards",
     "The computer's Cheats Menu shows every cheat",
     "Pelagia: a scientist wakes the Command Centre's dead warpgate",
     "Pelagia rework: the lagoon, crystals, return gate and factories reshape world 1",
 ];
-pub(super) const FIXES: usize = 14;
+pub(super) const FIXES: usize = 15;
 /// Options' crash reports row ([`inf_game::crash_reports`]).
 pub(super) const CRASH_REPORTS_LABEL: &str = "Send crash reports";
 /// Its tooltip: what a report carries.
@@ -53,11 +54,11 @@ pub(super) const CRASH_REPORTS_DETAIL: &str = "When the game crashes or freezes,
 pub(super) const CRASH_REPORTS_UNAVAILABLE: &str = "Crash reporting is unavailable in this build. Reports go to the project's Sentry service, and this copy of the game was built without its address (the Sentry DSN). Official releases include it.";
 /// The rows of the retail bug fixes' group; the rest are the Cheats and
 /// extras group's.
-pub(super) const BUG_FIX_ROWS: usize = 11;
+pub(super) const BUG_FIX_ROWS: usize = 12;
 /// The Cheats and extras rows for Pelagia and its rework: the rework needs
 /// the gate, so it goes dark and off while the gate is off.
-pub(super) const FIX_PROTOTYPE_WORLD: usize = 12;
-pub(super) const FIX_PELAGIA_REWORK: usize = 13;
+pub(super) const FIX_PROTOTYPE_WORLD: usize = 13;
+pub(super) const FIX_PELAGIA_REWORK: usize = 14;
 
 pub(super) fn fix_values(fixes: PortFixes) -> [bool; FIXES] {
     [
@@ -70,6 +71,7 @@ pub(super) fn fix_values(fixes: PortFixes) -> [bool; FIXES] {
         fixes.guided_mounts,
         fixes.completion_bonus,
         fixes.paced_actors,
+        fixes.paced_doom,
         fixes.splash_voice_cap,
         fixes.mission_completion,
         fixes.all_cheats,
@@ -79,7 +81,7 @@ pub(super) fn fix_values(fixes: PortFixes) -> [bool; FIXES] {
 }
 
 pub(super) fn fixes_from(values: [bool; FIXES]) -> PortFixes {
-    let [vehicle_position_carry, vehicle_gun_mounts, hovercraft_fans, exact_world_ticks, database_models, exact_frontend_ticks, guided_mounts, completion_bonus, paced_actors, splash_voice_cap, mission_completion, all_cheats, prototype_world, pelagia_rework] =
+    let [vehicle_position_carry, vehicle_gun_mounts, hovercraft_fans, exact_world_ticks, database_models, exact_frontend_ticks, guided_mounts, completion_bonus, paced_actors, paced_doom, splash_voice_cap, mission_completion, all_cheats, prototype_world, pelagia_rework] =
         values;
     PortFixes {
         vehicle_position_carry,
@@ -91,6 +93,7 @@ pub(super) fn fixes_from(values: [bool; FIXES]) -> PortFixes {
         guided_mounts,
         completion_bonus,
         paced_actors,
+        paced_doom,
         splash_voice_cap,
         mission_completion,
         all_cheats,
@@ -196,17 +199,20 @@ mod tests {
             assert_eq!(fix_values(fixes_from(values)), values);
         }
         let fixes = fixes_from([
-            false, true, true, true, true, true, true, true, true, true, true, false, true, true,
+            false, true, true, true, true, true, true, true, true, true, true, true, false, true,
+            true,
         ]);
         assert!(!fixes.vehicle_position_carry && fixes.completion_bonus);
         let fixes = fixes_from([
-            true, true, true, true, true, true, true, false, true, true, true, false, true, true,
+            true, true, true, true, true, true, true, false, true, true, true, true, false, true,
+            true,
         ]);
         assert!(fixes.vehicle_position_carry && !fixes.completion_bonus);
         let fixes = fixes_from([
-            true, true, true, true, true, true, true, true, true, false, true, false, true, true,
+            true, true, true, true, true, true, true, true, true, true, false, true, false, true,
+            true,
         ]);
-        assert!(!fixes.splash_voice_cap && fixes.paced_actors);
+        assert!(!fixes.splash_voice_cap && fixes.paced_actors && fixes.paced_doom);
         assert!(fixes_from([true; FIXES]).all_cheats);
         assert!(!fixes_from(std::array::from_fn(|index| index != FIXES - 1)).pelagia_rework);
         assert!(fixes_from(std::array::from_fn(|index| index != FIXES - 1)).prototype_world);

@@ -1272,6 +1272,7 @@ fn port_fixes_default_on_and_older_sidecars_load_with_them_on() {
             "guided_mounts": true,
             "completion_bonus": true,
             "paced_actors": true,
+            "paced_doom": true,
             "splash_voice_cap": true,
             "mission_completion": true,
             "all_cheats": false,
@@ -1293,6 +1294,7 @@ fn port_fixes_default_on_and_older_sidecars_load_with_them_on() {
             && fixes.guided_mounts
             && fixes.completion_bonus
             && fixes.paced_actors
+            && fixes.paced_doom
             && fixes.splash_voice_cap
             && fixes.mission_completion
             && fixes.prototype_world
@@ -1319,6 +1321,7 @@ fn a_fix_switched_off_persists_and_selects_the_retail_step() {
         guided_mounts: false,
         completion_bonus: false,
         paced_actors: false,
+        paced_doom: false,
         splash_voice_cap: false,
         mission_completion: false,
         all_cheats: false,
@@ -1360,6 +1363,7 @@ fn a_fix_switched_off_persists_and_selects_the_retail_step() {
             "guided_mounts": false,
             "completion_bonus": false,
             "paced_actors": false,
+            "paced_doom": false,
             "splash_voice_cap": false,
             "mission_completion": false,
             "all_cheats": false,
