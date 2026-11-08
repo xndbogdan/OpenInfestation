@@ -140,16 +140,17 @@ const OPTIONS_SIZE: [i32; 2] = [560, BUTTON_TOP + 44];
 /// and the Options window shrinks by it.
 const VULKAN_GROUP_LIFT: i32 = 178;
 /// Options rows at and below the Fixes group move down one 25px row per
-/// bug-fix row: the Fixes box clears its last row by the same 10px it
-/// always has, the Cheats box keeps its 8px gaps, and the window grows
-/// with them, so a new row never overlaps the boxes below it.
+/// bug-fix row: the Fixes box clears its last row's text with room to
+/// spare, the Cheats box keeps clear gaps above and below its title, and
+/// the window grows with them, so a new row never overlaps the boxes
+/// below it.
 const FIX_ROW_TOP: i32 = 528;
 const FIX_ROW_PITCH: i32 = 25;
 const FIX_BOX_TOP: i32 = 506;
-const FIX_BOX_CLEAR: i32 = 10;
+const FIX_BOX_CLEAR: i32 = 20;
 const FIXES_GROUP_HEIGHT: i32 =
     FIX_ROW_TOP + FIX_ROW_PITCH * (BUG_FIX_ROWS as i32 - 1) + FIX_BOX_CLEAR - FIX_BOX_TOP;
-const GROUP_GAP: i32 = 8;
+const GROUP_GAP: i32 = 12;
 const CHEATS_GROUP_TOP: i32 = FIX_BOX_TOP + FIXES_GROUP_HEIGHT + GROUP_GAP;
 const CHEATS_GROUP_HEIGHT: i32 = 100;
 const CHEAT_ROW_TOP: i32 = CHEATS_GROUP_TOP + 22;
@@ -2361,10 +2362,12 @@ mod layout_tests {
             .collect();
         let fixes_bottom = FIX_BOX_TOP + FIXES_GROUP_HEIGHT;
         let cheats_bottom = CHEATS_GROUP_TOP + CHEATS_GROUP_HEIGHT;
-        // The Fixes box clears its last row by the designed pad, and the
-        // Cheats box starts a full gap below it with room for its title.
+        // The Fixes box clears its last row's text with room to spare, and
+        // the Cheats title clears the row above it.
+        assert!(FIX_BOX_CLEAR >= 18);
         assert_eq!(fixes_bottom - bug_tops[BUG_FIX_ROWS - 1], FIX_BOX_CLEAR);
         assert_eq!(CHEATS_GROUP_TOP - fixes_bottom, GROUP_GAP);
+        assert!(GROUP_GAP >= 12);
         assert!(cheat_tops[0] - CHEATS_GROUP_TOP >= 22);
         // The Cheats box holds all of its rows with room to spare.
         assert!(cheat_tops[(cheat_count - 1) as usize] + 16 <= cheats_bottom);
