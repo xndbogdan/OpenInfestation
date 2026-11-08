@@ -105,6 +105,7 @@ impl Owners {
         let request = WorldDrawRequest {
             camera_clearance: None,
             terrain_event_5483b0: 0,
+            terrain_dust_enabled: false,
             map: Some(&mut self.map),
             pickup_text_data: None,
             weapon_tables: Some(&mut self.tables),

@@ -124,6 +124,7 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
                 WorldDrawRequest {
                 camera_clearance: None,
                 terrain_event_5483b0: 0,
+                terrain_dust_enabled: false,
                 map: None,
                 pickup_text_data: None,
                     weapon_tables: None,

@@ -179,6 +179,7 @@ impl<P: PortPlatform> PortSession<P> {
         self.world_rng_custody = WorldRngCustody::LoadedWorld;
         // 0048DC30's terrain preparation 0044FDD0 clears process 005483B0.
         self.camera_shake_enabled = 0;
+        self.terrain_dust_armed = false;
         // 0048DD5B clears infrared vision's request; +5C3 keeps the last
         // world's until the first tick takes it.
         self.camera_globals.infrared_5c4.set(false);

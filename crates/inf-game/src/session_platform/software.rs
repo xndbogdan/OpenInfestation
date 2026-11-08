@@ -793,6 +793,9 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                             pickup_text_data: Some(pickup_text_data),
                             weapon_tables: Some(&mut session.actor_behavior_tables),
                             terrain_event_5483b0: session.camera_shake_enabled,
+                            terrain_dust_enabled: std::mem::take(
+                                &mut session.terrain_dust_armed,
+                            ),
                             map: session.maps.jitter_mut(world.map).ok(),
                             // Not in a special view (a factory's dock, the
                             // scope), which places the camera itself.

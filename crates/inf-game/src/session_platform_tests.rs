@@ -2133,6 +2133,14 @@ fn paced_doom_rolls_every_other_exact_tick() {
     assert_eq!(carry.paced_delta(paced, 16384), None);
     assert_eq!(carry.paced_delta(paced, 16384), Some(32768));
     assert_eq!(carry.doom_pace_delta(paced, 16384), Some(32768));
+    // The shake dust keeps its own carry too, on the same step.
+    assert_eq!(carry.dust_pace_delta(paced, 16384), None);
+    assert_eq!(carry.dust_pace_delta(paced, 16384), Some(32768));
+    assert_eq!(carry.dust_pace_delta(paced, 49152), Some(49152));
+    assert_eq!(
+        carry.dust_pace_delta(ActorPacing::Retail, 16384),
+        Some(16384)
+    );
 }
 
 /// A gameplay tick that reaches no whole quantum skips the world and holds

@@ -89,6 +89,7 @@ fn native_world_draw_includes_authored_ordinary_water_pixels_and_retained_receip
             WorldDrawRequest {
                 camera_clearance: None,
                 terrain_event_5483b0: 0,
+                terrain_dust_enabled: false,
                 map: None,
                 pickup_text_data: None,
                 weapon_tables: None,

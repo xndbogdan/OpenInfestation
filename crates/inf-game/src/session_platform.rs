@@ -300,6 +300,10 @@ pub struct WorldTickCarry {
     /// World time the doomed planet's explosion dice have not had yet
     /// ([`PortFixes::paced_doom`](crate::frontend_settings::PortFixes)).
     pub doom_micros: u32,
+    /// World time the shake dust has not had yet (same fix): the near-strip
+    /// emission runs per drawn frame, so unpaced it scales with the display
+    /// rate instead of the tick rate.
+    pub dust_pace_micros: u32,
 }
 
 impl WorldTickCarry {
@@ -334,6 +338,14 @@ impl WorldTickCarry {
     /// random explosions and the world flash are paced.
     pub fn doom_pace_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
         Self::gather_pace(&mut self.doom_micros, pacing, delta_micros)
+    }
+
+    /// The shake dust's delta for a world tick of `delta_micros`: the
+    /// gathered world time once it reaches the pace, `None` before (no
+    /// dust this tick), or the tick's own delta without pacing. The camera
+    /// shake itself keeps every tick; only the dust emission is paced.
+    pub fn dust_pace_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
+        Self::gather_pace(&mut self.dust_pace_micros, pacing, delta_micros)
     }
 
     fn gather_pace(carry: &mut u32, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
@@ -851,6 +863,11 @@ pub struct PortSession<P> {
     process_up: [f32; 3],
     /// 005483B0 BSS-zero start. Native event writers remain required owners.
     camera_shake_enabled: u32,
+    /// The shake dust's armed flag: set by the world tick at
+    /// [`PortFixes::paced_doom`](crate::frontend_settings::PortFixes)'s
+    /// rate while the shake holds, taken by the next world draw. The camera
+    /// shake itself is not paced.
+    terrain_dust_armed: bool,
     /// Current semantic 00545C74 binding, seeded once from the same supported
     /// file-backed EXE and retained across world/screen/display replacement.
     /// Unmodeled native rebindings are separate reached ownership boundaries.
@@ -1042,6 +1059,7 @@ impl<P> PortSession<P> {
             camera_clearance: Default::default(),
             process_up: [0.0, 1.0, 0.0],
             camera_shake_enabled: 0,
+            terrain_dust_armed: false,
             profile_name_classification,
             platform,
             attract: false,
@@ -2415,6 +2433,18 @@ impl<P: PortPlatform> SessionHost for PortSession<P> {
                 // follow actor/collision/camera work, before elapsed accounting.
                 self.tick_process_particles(delta_micros, state);
                 self.apply_terrain_event();
+                // `PortFixes::paced_doom`: the shake dust emits at retail's
+                // 30 fps rate while the shake holds. The emission runs per
+                // drawn frame, so unpaced it scales with the display rate.
+                // The camera shake itself keeps every tick.
+                if self.camera_shake_enabled != 0
+                    && self
+                        .world_tick_carry
+                        .dust_pace_delta(self.platform.doom_pacing(), delta_micros.max(0) as u32)
+                        .is_some()
+                {
+                    self.terrain_dust_armed = true;
+                }
                 self.return_network_game();
                 // 004878A0..00487982: the network branch.
                 self.tick_network(delta_micros as u32, state);

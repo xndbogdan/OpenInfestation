@@ -117,6 +117,7 @@ fn tabuchi_water_view_fits_the_widescreen_arena_and_overflows_retails() {
             WorldDrawRequest {
                 camera_clearance: None,
                 terrain_event_5483b0: 0,
+                terrain_dust_enabled: false,
                 map: None,
                 pickup_text_data: None,
                 weapon_tables: None,
