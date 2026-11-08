@@ -2342,3 +2342,39 @@ unsafe fn choose_folder(owner: Handle, prompt: &str, initial: Option<&Path>) -> 
         .unwrap_or(path.len());
     Some(PathBuf::from(OsString::from_wide(&path[..length])))
 }
+
+#[cfg(test)]
+mod layout_tests {
+    use super::*;
+
+    /// The fix rows clear their boxes for any bug-fix count: each box
+    /// clears its last row, boxes do not overlap, and everything below
+    /// the Fixes group follows it down.
+    #[test]
+    fn fix_rows_clear_their_boxes() {
+        let bug_tops: Vec<i32> = (0..BUG_FIX_ROWS as i32)
+            .map(|index| FIX_ROW_TOP + FIX_ROW_PITCH * index)
+            .collect();
+        let cheat_count = FIXES as i32 - BUG_FIX_ROWS as i32;
+        let cheat_tops: Vec<i32> = (0..cheat_count)
+            .map(|index| CHEAT_ROW_TOP + FIX_ROW_PITCH * index)
+            .collect();
+        let fixes_bottom = FIX_BOX_TOP + FIXES_GROUP_HEIGHT;
+        let cheats_bottom = CHEATS_GROUP_TOP + CHEATS_GROUP_HEIGHT;
+        // The Fixes box clears its last row by the designed pad, and the
+        // Cheats box starts a full gap below it with room for its title.
+        assert_eq!(fixes_bottom - bug_tops[BUG_FIX_ROWS - 1], FIX_BOX_CLEAR);
+        assert_eq!(CHEATS_GROUP_TOP - fixes_bottom, GROUP_GAP);
+        assert!(cheat_tops[0] - CHEATS_GROUP_TOP >= 22);
+        // The Cheats box holds all of its rows with room to spare.
+        assert!(cheat_tops[(cheat_count - 1) as usize] + 16 <= cheats_bottom);
+        // The rows below follow the Cheats box down with its gaps.
+        assert_eq!(SKIP_TOP, cheats_bottom + GROUP_GAP);
+        assert_eq!(SKIP_NOTE_TOP, SKIP_TOP + 26);
+        assert_eq!(CRASH_REPORTS_TOP, SKIP_NOTE_TOP + 26);
+        assert_eq!(PROGRESS_TOP, CRASH_REPORTS_TOP + 28);
+        assert_eq!(BUTTON_TOP, PROGRESS_TOP + 28);
+        // The window holds the buttons with the designed margin.
+        assert_eq!(OPTIONS_SIZE[1], BUTTON_TOP + 32 + 12);
+    }
+}
