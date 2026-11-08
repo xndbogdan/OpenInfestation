@@ -135,10 +135,29 @@ const WORKER_TIMER: usize = 1;
 const HEADER_TIMER: usize = 2;
 /// Logical sizes of the two windows' client areas.
 const MAIN_SIZE: [i32; 2] = [660, 439];
-const OPTIONS_SIZE: [i32; 2] = [560, 1056];
+const OPTIONS_SIZE: [i32; 2] = [560, BUTTON_TOP + 44];
 /// The Vulkan group's height: hiding it lifts everything below by this,
 /// and the Options window shrinks by it.
 const VULKAN_GROUP_LIFT: i32 = 178;
+/// Options rows at and below the Fixes group move down one 25px row per
+/// bug-fix row: the Fixes box clears its last row by the same 10px it
+/// always has, the Cheats box keeps its 8px gaps, and the window grows
+/// with them, so a new row never overlaps the boxes below it.
+const FIX_ROW_TOP: i32 = 528;
+const FIX_ROW_PITCH: i32 = 25;
+const FIX_BOX_TOP: i32 = 506;
+const FIX_BOX_CLEAR: i32 = 10;
+const FIXES_GROUP_HEIGHT: i32 =
+    FIX_ROW_TOP + FIX_ROW_PITCH * (BUG_FIX_ROWS as i32 - 1) + FIX_BOX_CLEAR - FIX_BOX_TOP;
+const GROUP_GAP: i32 = 8;
+const CHEATS_GROUP_TOP: i32 = FIX_BOX_TOP + FIXES_GROUP_HEIGHT + GROUP_GAP;
+const CHEATS_GROUP_HEIGHT: i32 = 100;
+const CHEAT_ROW_TOP: i32 = CHEATS_GROUP_TOP + 22;
+const SKIP_TOP: i32 = CHEATS_GROUP_TOP + CHEATS_GROUP_HEIGHT + GROUP_GAP;
+const SKIP_NOTE_TOP: i32 = SKIP_TOP + 26;
+const CRASH_REPORTS_TOP: i32 = SKIP_NOTE_TOP + 26;
+const PROGRESS_TOP: i32 = CRASH_REPORTS_TOP + 28;
+const BUTTON_TOP: i32 = PROGRESS_TOP + 28;
 
 struct WindowHost(RefCell<WindowState>);
 
@@ -1661,25 +1680,25 @@ impl WindowState {
             window,
             " Fixes for retail bugs (off restores retail) ",
             12,
-            506,
+            FIX_BOX_TOP,
             536,
-            282,
+            FIXES_GROUP_HEIGHT,
         );
         let cheats_group = self.group(
             window,
             " Cheats and extras (off is retail) ",
             12,
-            796,
+            CHEATS_GROUP_TOP,
             536,
-            100,
+            CHEATS_GROUP_HEIGHT,
         );
         let values = fix_values(settings.fixes());
         let mut fixes = [0; FIXES];
         for (index, control) in fixes.iter_mut().enumerate() {
             let y = if index < BUG_FIX_ROWS {
-                528 + 25 * index as i32
+                FIX_ROW_TOP + FIX_ROW_PITCH * index as i32
             } else {
-                818 + 25 * (index - BUG_FIX_ROWS) as i32
+                CHEAT_ROW_TOP + FIX_ROW_PITCH * (index - BUG_FIX_ROWS) as i32
             };
             *control = self.checkbox(
                 window,
@@ -1696,7 +1715,7 @@ impl WindowState {
             "S&kip the launcher when this installation is ready",
             ID_SKIP,
             16,
-            904,
+            SKIP_TOP,
             528,
             self.request.preferences.skip_launcher,
         );
@@ -1704,7 +1723,7 @@ impl WindowState {
             window,
             "Start with --launcher to open it again. Missing game files still open it.",
             34,
-            930,
+            SKIP_NOTE_TOP,
             510,
             20,
         );
@@ -1714,7 +1733,7 @@ impl WindowState {
             CRASH_REPORTS_LABEL,
             ID_CRASH_REPORTS,
             16,
-            956,
+            CRASH_REPORTS_TOP,
             528,
             reporting && self.request.preferences.send_crash_reports,
         );
@@ -1725,11 +1744,11 @@ impl WindowState {
             EnableWindow(crash_reports, 0);
             self.tooltip(window, 0, CRASH_REPORTS_UNAVAILABLE)
         };
-        let progress = self.label(window, "", 16, 984, 528, 20);
-        let verify = self.button(window, "&Verify files", ID_VERIFY, 12, 1012, 160, 32);
-        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, 1012, 120, 32);
-        let save = self.button(window, "Save", ID_SAVE, 308, 1012, 112, 32);
-        let cancel = self.button(window, "Cancel", ID_CANCEL, 436, 1012, 112, 32);
+        let progress = self.label(window, "", 16, PROGRESS_TOP, 528, 20);
+        let verify = self.button(window, "&Verify files", ID_VERIFY, 12, BUTTON_TOP, 160, 32);
+        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, BUTTON_TOP, 120, 32);
+        let save = self.button(window, "Save", ID_SAVE, 308, BUTTON_TOP, 112, 32);
+        let cancel = self.button(window, "Cancel", ID_CANCEL, 436, BUTTON_TOP, 112, 32);
         self.option_controls = OptionControls {
             display: display_combo,
             resolution,
@@ -2012,16 +2031,16 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
         (controls.controller, 136, 428),
         (controls.camera_label, 24, 466),
         (controls.camera, 136, 462),
-        (controls.fixes_group, 12, 506),
-        (controls.cheats_group, 12, 796),
-        (controls.skip, 16, 904),
-        (controls.skip_note, 34, 930),
-        (controls.crash_reports, 16, 956),
-        (controls.progress, 16, 984),
-        (controls.verify, 12, 1012),
-        (controls.extract, 180, 1012),
-        (controls.save, 308, 1012),
-        (controls.cancel, 436, 1012),
+        (controls.fixes_group, 12, FIX_BOX_TOP),
+        (controls.cheats_group, 12, CHEATS_GROUP_TOP),
+        (controls.skip, 16, SKIP_TOP),
+        (controls.skip_note, 34, SKIP_NOTE_TOP),
+        (controls.crash_reports, 16, CRASH_REPORTS_TOP),
+        (controls.progress, 16, PROGRESS_TOP),
+        (controls.verify, 12, BUTTON_TOP),
+        (controls.extract, 180, BUTTON_TOP),
+        (controls.save, 308, BUTTON_TOP),
+        (controls.cancel, 436, BUTTON_TOP),
     ] {
         SetWindowPosW(
             control,
@@ -2035,9 +2054,9 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
     }
     for (index, control) in controls.fixes.iter().enumerate() {
         let y = if index < BUG_FIX_ROWS {
-            528 + 25 * index as i32
+            FIX_ROW_TOP + FIX_ROW_PITCH * index as i32
         } else {
-            818 + 25 * (index - BUG_FIX_ROWS) as i32
+            CHEAT_ROW_TOP + FIX_ROW_PITCH * (index - BUG_FIX_ROWS) as i32
         };
         SetWindowPosW(
             *control,
@@ -2051,9 +2070,9 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
     }
     let row = Rect {
         left: pixel(scale, 16),
-        top: pixel(scale, 956 - lift),
+        top: pixel(scale, CRASH_REPORTS_TOP - lift),
         right: pixel(scale, 16 + 528),
-        bottom: pixel(scale, 956 + 23 - lift),
+        bottom: pixel(scale, CRASH_REPORTS_TOP + 23 - lift),
     };
     place_tip(controls.crash_tip, window, row);
     let mut bounds = Rect {
