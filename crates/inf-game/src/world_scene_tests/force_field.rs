@@ -73,6 +73,7 @@ fn tabuchi_force_field_dome_reaches_the_pixels() {
             WorldDrawRequest {
                 camera_clearance: None,
                 terrain_event_5483b0: 0,
+                terrain_dust_enabled: false,
                 map: None,
                 pickup_text_data: None,
                 weapon_tables: None,

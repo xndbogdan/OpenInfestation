@@ -366,6 +366,7 @@ impl<P: PortPlatform> PortSession<P> {
         self.furniture.clear();
         self.furniture_failure = None;
         self.camera_shake_enabled = 0;
+        self.terrain_dust_armed = false;
     }
 
     pub(super) fn tick_furniture_effects(&mut self, microseconds: u32, state: &SessionState) {

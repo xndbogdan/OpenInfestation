@@ -203,6 +203,10 @@ pub struct WorldDrawRequest<'a> {
     /// Process DWORD 005483B0, the terrain event (a stabiliser's death),
     /// which gates the near strips' dust (`0044C4A0`).
     pub terrain_event_5483b0: u32,
+    /// Port fix, not retail: [`PortFixes::paced_doom`] lets the dust
+    /// through at retail's 30 fps rate while the shake holds. The camera
+    /// shake above keeps every tick.
+    pub terrain_dust_enabled: bool,
     /// G+1B4's jitter, which a weapon's Sonic Shock pulse sets; None stops
     /// the pulse there.
     pub map: Option<&'a mut crate::world_map::WorldMapState>,
@@ -779,6 +783,7 @@ impl WorldDrawRequest<'_> {
             }),
             weapon_tables: self.weapon_tables.as_deref_mut(),
             terrain_event_5483b0: self.terrain_event_5483b0,
+            terrain_dust_enabled: self.terrain_dust_enabled,
             map: self.map.as_deref_mut(),
             camera_clearance: None,
         }
@@ -1159,7 +1164,8 @@ fn draw_world_pass<'r>(
         furniture,
         mut sound,
         mut weapon_tables,
-        terrain_event_5483b0,
+        terrain_event_5483b0: _,
+        terrain_dust_enabled,
         mut map,
         camera_clearance: _,
     } = request;
@@ -1745,7 +1751,7 @@ fn draw_world_pass<'r>(
             clock: animation_clock,
             world_flags: world.world_flags,
             night,
-            particles_enabled: terrain_event_5483b0 != 0,
+            particles_enabled: terrain_dust_enabled,
             tables: host.backend.primitive_tables(),
         };
         let terrain_scope = crate::cpu_profile::scope("world: terrain and furniture");
