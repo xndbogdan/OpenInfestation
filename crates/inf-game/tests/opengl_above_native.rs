@@ -158,6 +158,7 @@ fn request(screen: &Screen, tag: &str, size: [u32; 2]) -> (FrontendAppRequest, P
             guided_mounts: None,
             completion_bonus: None,
             paced_actors: None,
+            paced_doom: None,
             mission_completion: None,
             splash_voice_cap: None,
             all_cheats: None,

@@ -191,6 +191,11 @@ pub trait PortSessionServices {
     fn actor_pacing(&self) -> ActorPacing {
         ActorPacing::Retail
     }
+    /// Port fix, not a retail setting: how often the doomed planet rolls
+    /// its explosion dice (`PortFixes::paced_doom`).
+    fn doom_pacing(&self) -> ActorPacing {
+        ActorPacing::Retail
+    }
     /// Port fix, not a retail setting: a rescue completes as its last
     /// scientist boards (`PortFixes::mission_completion`).
     fn mission_completion(&self) -> bool {
@@ -292,6 +297,9 @@ pub struct WorldTickCarry {
     pub input_micros: u32,
     /// World time the paced actors have not had yet ([`ActorPacing`]).
     pub paced_micros: u32,
+    /// World time the doomed planet's explosion dice have not had yet
+    /// ([`PortFixes::paced_doom`](crate::frontend_settings::PortFixes)).
+    pub doom_micros: u32,
 }
 
 impl WorldTickCarry {
@@ -316,15 +324,28 @@ impl WorldTickCarry {
     /// gathered world time once it reaches the pace, `None` before (they
     /// skip this tick), or the tick's own delta without pacing.
     pub fn paced_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
+        Self::gather_pace(&mut self.paced_micros, pacing, delta_micros)
+    }
+
+    /// The doomed planet's explosion-dice delta for a world tick of
+    /// `delta_micros`: the gathered world time once it reaches the pace,
+    /// `None` before (no dice this tick), or the tick's own delta without
+    /// pacing. The countdown itself keeps every tick's delta; only the
+    /// random explosions and the world flash are paced.
+    pub fn doom_pace_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
+        Self::gather_pace(&mut self.doom_micros, pacing, delta_micros)
+    }
+
+    fn gather_pace(carry: &mut u32, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
         let ActorPacing::Paced { micros } = pacing else {
             return Some(delta_micros);
         };
-        let total = self.paced_micros.saturating_add(delta_micros);
+        let total = carry.saturating_add(delta_micros);
         if total < micros {
-            self.paced_micros = total;
+            *carry = total;
             return None;
         }
-        self.paced_micros = 0;
+        *carry = 0;
         Some(total)
     }
 
@@ -2283,7 +2304,23 @@ impl<P: PortPlatform> SessionHost for PortSession<P> {
                             Some(unit),
                             tick @ (MissionCountdownTick::Explosions
                             | MissionCountdownTick::UnitEnd),
-                        )) => countdown_unit = Some((unit, tick)),
+                        )) => {
+                            // `PortFixes::paced_doom`: the explosions keep
+                            // retail's 30 fps rate instead of scaling with
+                            // the tick rate. The countdown itself and the
+                            // unit's end run every tick either way.
+                            let paced = !matches!(tick, MissionCountdownTick::Explosions)
+                                || self
+                                    .world_tick_carry
+                                    .doom_pace_delta(
+                                        self.platform.doom_pacing(),
+                                        delta_micros.max(0) as u32,
+                                    )
+                                    .is_some();
+                            if paced {
+                                countdown_unit = Some((unit, tick))
+                            }
+                        }
                         Ok((_, MissionCountdownTick::MissionFailed { world: selection })) => {
                             // 0048E4F8: 00487560(W+A0, 1, 0), the results with
                             // +15 set ("Mission Failed"), then this world again.

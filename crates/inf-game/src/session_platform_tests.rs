@@ -2101,6 +2101,40 @@ fn paced_actors_update_every_other_exact_tick_with_both_ticks_time() {
     assert_eq!(carry.paced_delta(ActorPacing::Retail, 16384), Some(16384));
 }
 
+/// Paced, the doomed planet rolls its explosion dice every other exact world
+/// tick, as retail's 30 fps game does; a long tick that reaches the pace
+/// alone rolls at once. Unpaced, every tick rolls, as retail does. The
+/// countdown itself is untouched: only the random explosions (and the world
+/// flash on the same chance) are paced.
+#[test]
+fn paced_doom_rolls_every_other_exact_tick() {
+    use crate::session_platform::ActorPacing;
+
+    let paced = crate::frontend_settings::PortFixes::default().doom_pacing();
+    assert_eq!(paced, ActorPacing::Paced { micros: 32768 });
+    let mut carry = WorldTickCarry::default();
+    let deltas: Vec<Option<u32>> = (0..6)
+        .map(|_| carry.doom_pace_delta(paced, 16384))
+        .collect();
+    assert_eq!(
+        deltas,
+        [None, Some(32768), None, Some(32768), None, Some(32768)]
+    );
+    assert_eq!(carry.doom_pace_delta(paced, 49152), Some(49152));
+    assert_eq!(carry.doom_pace_delta(paced, 16384), None);
+    assert_eq!(carry.doom_pace_delta(paced, 32768), Some(49152));
+    assert_eq!(
+        carry.doom_pace_delta(ActorPacing::Retail, 16384),
+        Some(16384)
+    );
+    // The actor pacing keeps its own carry: pacing the actors neither feeds
+    // nor starves the doom's dice.
+    assert_eq!(carry.doom_pace_delta(paced, 16384), None);
+    assert_eq!(carry.paced_delta(paced, 16384), None);
+    assert_eq!(carry.paced_delta(paced, 16384), Some(32768));
+    assert_eq!(carry.doom_pace_delta(paced, 16384), Some(32768));
+}
+
 /// A gameplay tick that reaches no whole quantum skips the world and holds
 /// the frame; the next that reaches one runs it. Outside the gameplay
 /// callback the hold never applies.

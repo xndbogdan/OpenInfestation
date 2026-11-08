@@ -239,6 +239,14 @@ struct Args {
     #[arg(long, value_name = "BOOL", action = clap::ArgAction::Set)]
     paced_actors: Option<bool>,
 
+    /// Port fix, on unless saved off: a doomed planet sets off its random
+    /// explosions at retail's 30 fps rate, where rolling the dice every
+    /// world tick sets off more of them the faster the game ticks.
+    /// `false` rolls every tick, as retail does; either value replaces the
+    /// saved setting.
+    #[arg(long, value_name = "BOOL", action = clap::ArgAction::Set)]
+    paced_doom: Option<bool>,
+
     /// Port fix, on unless saved off: of retail's 24 sounds at once, at most
     /// 12 are water splashes. `false` lets splashes take them all, as
     /// retail does; either value replaces the saved setting.
@@ -552,6 +560,9 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
     if args.mode != Mode::Frontend && args.paced_actors.is_some() {
         return Err("--paced-actors requires frontend mode".into());
     }
+    if args.mode != Mode::Frontend && args.paced_doom.is_some() {
+        return Err("--paced-doom requires frontend mode".into());
+    }
     if args.mode != Mode::Frontend && args.splash_voice_cap.is_some() {
         return Err("--splash-voice-cap requires frontend mode".into());
     }
@@ -648,6 +659,7 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
             guided_mounts: args.guided_mounts,
             completion_bonus: args.completion_bonus,
             paced_actors: args.paced_actors,
+            paced_doom: args.paced_doom,
             splash_voice_cap: args.splash_voice_cap,
             mission_completion: args.mission_completion,
             all_cheats: args.all_cheats,
