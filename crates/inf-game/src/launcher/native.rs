@@ -1747,7 +1747,15 @@ impl WindowState {
         };
         let progress = self.label(window, "", 16, PROGRESS_TOP, 528, 20);
         let verify = self.button(window, "&Verify files", ID_VERIFY, 12, BUTTON_TOP, 160, 32);
-        let extract = self.button(window, "E&xtract music...", ID_EXTRACT, 180, BUTTON_TOP, 120, 32);
+        let extract = self.button(
+            window,
+            "E&xtract music...",
+            ID_EXTRACT,
+            180,
+            BUTTON_TOP,
+            120,
+            32,
+        );
         let save = self.button(window, "Save", ID_SAVE, 308, BUTTON_TOP, 112, 32);
         let cancel = self.button(window, "Cancel", ID_CANCEL, 436, BUTTON_TOP, 112, 32);
         self.option_controls = OptionControls {
