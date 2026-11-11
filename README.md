@@ -356,6 +356,15 @@ This license does not cover Infestation itself. The original game's data,
 executable, audio and video remain the property of their respective owners
 and are not distributed with this project.
 
+### A note to Frontier Developments
+
+OpenInfestation is modelled on Frontier Developments' own retail code. If
+Frontier wants to make use of anything here, for example to polish it up and
+release a remaster of Infestation, they are welcome to do whatever they like
+with it, without asking and without the conditions of the licences above.
+Third-party content (the remastered sounds, libraries and other components
+listed in [DISCLOSURE.md](DISCLOSURE.md)) keeps its own terms.
+
 ### Credits and third-party notices
 
 - The Vulkan renderer's SMAA is the reference implementation by Jorge
