@@ -91,9 +91,10 @@ static NOTIFY: OnceLock<fn(&str)> = OnceLock::new();
 
 /// How long a frame may run before the watchdog calls the game stuck.
 pub const STALL: Duration = Duration::from_secs(15);
-/// How long while it prepares the renderer: a driver with no shaders
-/// cached (a new build, or a new driver) compiles them then, which on AMD
-/// can pass [`STALL`].
+/// How long while it prepares the renderer, or its shaders compile, with no
+/// pipeline made: a driver with no shaders cached (a new build, or a new
+/// driver) compiles them then, which passes [`STALL`] (an RTX 5080 took
+/// over 15 s for the tracer's).
 pub const PREPARE_STALL: Duration = Duration::from_secs(120);
 
 /// What the main loop was doing: the breadcrumb a stall's log names.
@@ -159,6 +160,9 @@ static STEP_AT: AtomicU64 = AtomicU64::new(0);
 /// zero before the first).
 static FRAME: AtomicU64 = AtomicU64::new(0);
 static FRAME_AT: AtomicU64 = AtomicU64::new(0);
+/// While shaders compile, when the compile last moved on (milliseconds
+/// plus one; zero when none is under way).
+static COMPILED_AT: AtomicU64 = AtomicU64::new(0);
 /// The frame whose stall has been logged.
 static STALLED: AtomicU64 = AtomicU64::new(u64::MAX);
 static START: OnceLock<Instant> = OnceLock::new();
@@ -197,6 +201,14 @@ pub fn heartbeat(frame: u64) {
     step(Step::Events);
 }
 
+/// The renderer's shaders are compiling and have just moved on (`true`: a
+/// pipeline is made), or are done. Meanwhile a frame, or the start before
+/// the first, is stuck only after [`PREPARE_STALL`] with no pipeline made:
+/// a new build's compile can take long, but it keeps moving.
+pub fn compiling(active: bool) {
+    COMPILED_AT.store(if active { now() + 1 } else { 0 }, Ordering::Relaxed);
+}
+
 /// The one-based frame the main loop is on (zero before the first), as
 /// `--input-replay` numbers frames.
 pub fn frame() -> u64 {
@@ -214,38 +226,47 @@ fn stall_report(frame: u64, frame_ms: u64, step: u8, object: usize, step_ms: u64
         let _ = write!(doing, " (object slot {})", object - 1);
     }
     doing.push('.');
+    let seconds = frame_ms as f64 / 1000.0;
     vec![
-        format!(
-            "The game stopped responding: frame {frame} has not finished after {:.1} s.",
-            frame_ms as f64 / 1000.0
-        ),
+        if frame == 0 {
+            format!(
+                "The game stopped responding while starting: nothing moved on for {seconds:.1} s."
+            )
+        } else {
+            format!(
+                "The game stopped responding: frame {frame} has not finished after {seconds:.1} s."
+            )
+        },
         doing,
         "The game was still running when this was written; if it recovers, it carries on."
             .to_string(),
     ]
 }
 
-/// How long a frame in `step` may run before the watchdog logs it.
-fn stall_limit(step: u8) -> Duration {
-    if step == Step::PrepareRenderer as u8 {
+/// How long a frame in `step` may run before the watchdog logs it, while
+/// shaders compile or not.
+fn stall_limit(step: u8, compiling: bool) -> Duration {
+    if compiling || step == Step::PrepareRenderer as u8 {
         PREPARE_STALL
     } else {
         STALL
     }
 }
 
-/// The watchdog: once a second, a frame running past [`STALL`] gets one log.
+/// The watchdog: once a second, a frame running past [`STALL`] gets one log
+/// (counted from the last pipeline made while shaders compile).
 fn watch() {
     loop {
         std::thread::sleep(Duration::from_secs(1));
-        let began = FRAME_AT.load(Ordering::Relaxed);
+        let compiled = COMPILED_AT.load(Ordering::Relaxed);
+        let began = FRAME_AT.load(Ordering::Relaxed).max(compiled);
         if began == 0 {
             continue;
         }
         let now = now();
         let frame_ms = now.saturating_sub(began - 1);
         let frame = FRAME.load(Ordering::Relaxed);
-        let limit = stall_limit(STEP.load(Ordering::Relaxed));
+        let limit = stall_limit(STEP.load(Ordering::Relaxed), compiled != 0);
         if frame_ms < limit.as_millis() as u64 || STALLED.load(Ordering::Relaxed) == frame {
             continue;
         }
@@ -699,8 +720,18 @@ mod tests {
             stall_report(3, 130_000, Step::PrepareRenderer as u8, 0, 129_500)[1],
             "It has been in preparing the renderer (compiling its shaders) for 129.5 s."
         );
-        assert_eq!(stall_limit(Step::PrepareRenderer as u8), PREPARE_STALL);
-        assert_eq!(stall_limit(Step::Draw as u8), STALL);
+        assert_eq!(
+            stall_limit(Step::PrepareRenderer as u8, false),
+            PREPARE_STALL
+        );
+        assert_eq!(stall_limit(Step::Draw as u8, false), STALL);
+        // A frame waiting on shaders that still compile (2026-11-15: a new
+        // build's first frames waited 15 s on them) gets that time too.
+        assert_eq!(stall_limit(Step::Draw as u8, true), PREPARE_STALL);
+        assert_eq!(
+            stall_report(0, 120_500, Step::PrepareRenderer as u8, 0, 140_000)[0],
+            "The game stopped responding while starting: nothing moved on for 120.5 s."
+        );
     }
 
     #[test]

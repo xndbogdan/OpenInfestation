@@ -664,9 +664,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
     // The tracer and its upscaler are made now, before the title and the
     // session's clock: the title video's clock starts when the title is
     // built and its sound with its first frame. Made after that frame they
-    // held its picture still under the running sound, for 0.7 s, and for 3 s
-    // when a new build's shaders compiled cold (plan item 24). Retail's
-    // loading line shows meanwhile.
+    // held its picture still under the running sound, for 0.7 s, and for
+    // over 15 s when a new build's shaders compiled cold (plan item 24).
+    // The title waits for them, the loading line showing how far they are.
     if frame.traces_rays() {
         let resources = RenderResources::new(session.residency());
         let mut scene = SoftwareScene::new(SoftwareSceneRequest {
@@ -676,19 +676,35 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
             frame: &mut frame,
             config: startup.scene,
         })?;
-        if let Err(error) = cold_start::show_loading_line(
-            &mut scene,
-            resources,
-            language,
-            dimensions,
-            startup.clear_rgba,
-            &mut output,
-            texture.as_mut(),
-            presentation.scaling,
-        ) {
-            eprintln!("Infestation: the loading line before the title failed: {error}");
+        // The watchdog's "frame 0": stuck only once nothing moves on.
+        crate::crash_log::heartbeat(0);
+        crate::crash_log::step(crate::crash_log::Step::PrepareRenderer);
+        let mut shown = true;
+        loop {
+            let share = scene.prepare_trace();
+            if shown {
+                if let Err(error) = cold_start::show_loading_line(
+                    &mut scene,
+                    resources,
+                    language,
+                    share,
+                    dimensions,
+                    startup.clear_rgba,
+                    &mut output,
+                    texture.as_mut(),
+                    presentation.scaling,
+                ) {
+                    eprintln!("Infestation: the loading line before the title failed: {error}");
+                    shown = false;
+                }
+            }
+            if share >= 1.0 {
+                break;
+            }
+            // The window keeps answering; its events wait for the title.
+            events.pump_events();
+            std::thread::sleep(Duration::from_millis(50));
         }
-        scene.prepare_trace();
     }
     let mut clock = AppClock::new(request.clock);
     if let Some(record) = &request.session_record {

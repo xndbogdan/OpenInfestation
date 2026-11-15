@@ -16,7 +16,27 @@ use super::upscale::{Guides, UpscaleFrame, Upscaler, UpscalerChoice};
 use super::*;
 use crate::scene_feed::{SceneFeed, SceneSurface};
 use crate::scene_terrain::TerrainMeshVertex;
-use std::{collections::HashMap, rc::Rc};
+use std::{
+    collections::HashMap,
+    rc::Rc,
+    sync::{
+        atomic::{AtomicBool, AtomicU32, Ordering},
+        Arc,
+    },
+};
+
+/// The passes' pipelines [`Tracer::new`] makes beside the trace's.
+const TRACER_PASSES: u32 = 15;
+/// How much of the preparation's progress each part shows
+/// ([`TracerBuild::share`]): the passes', then the trace's, the upscaler
+/// the rest. A cold compile on an RTX 5080 (2026-11-15) made the passes'
+/// in 2.5 s and the trace's, beside them, in 18 s.
+const PASSES_SHARE: f32 = 0.25;
+const TRACE_SHARE: f32 = 0.7;
+/// The trace's one pipeline tells nothing while it compiles: its part fills
+/// with the time instead, toward its end without reaching it, four fifths
+/// of the way in 16 s.
+const TRACE_CREEP_SECONDS: f32 = 10.0;
 
 static TRACE: &[u8] = include_bytes!("../../shaders/pt_trace.comp.spv");
 /// The same source built as the path pass (`PATHS_PASS`): the bounce light
@@ -565,7 +585,8 @@ pub(super) struct Tracer {
 }
 
 impl Tracer {
-    pub(super) unsafe fn new(core: &Core) -> Result<Self, VkDeviceError> {
+    /// Make the tracer, `made` following its pipelines as they compile.
+    pub(super) unsafe fn new(core: &Core, made: &BuildProgress) -> Result<Self, VkDeviceError> {
         let device = &core.device;
         let binding = |index: u32, kind: vk::DescriptorType, count: u32| {
             vk::DescriptorSetLayoutBinding::default()
@@ -807,9 +828,16 @@ impl Tracer {
         };
         // From here a failure leaves `tracer` holding what it made; the
         // caller destroys it.
-        let made = tracer.build(core);
-        match made {
-            Ok(()) => Ok(tracer),
+        // The watchdog gives a frame waiting on the compile its own time.
+        crate::crash_log::compiling(true);
+        let built = tracer.build(core, made);
+        crate::crash_log::compiling(false);
+        match built {
+            Ok(()) => {
+                debug_assert!(made.traced.load(Ordering::Relaxed));
+                debug_assert_eq!(made.passes.load(Ordering::Relaxed), TRACER_PASSES);
+                Ok(tracer)
+            }
             Err(error) => {
                 let mut none = None;
                 tracer.destroy(core, &mut none);
@@ -818,7 +846,7 @@ impl Tracer {
         }
     }
 
-    unsafe fn build(&mut self, core: &Core) -> Result<(), VkDeviceError> {
+    unsafe fn build(&mut self, core: &Core, made: &BuildProgress) -> Result<(), VkDeviceError> {
         let device = &core.device;
         let set_layouts = [self.set_layout];
         self.layout = device
@@ -832,20 +860,50 @@ impl Tracer {
         self.trace_module = device
             .create_shader_module(&vk::ShaderModuleCreateInfo::default().code(&words), None)
             .map_err(call("tracer shader"))?;
-        let stage = vk::PipelineShaderStageCreateInfo::default()
-            .stage(vk::ShaderStageFlags::COMPUTE)
-            .module(self.trace_module)
-            .name(c"main");
-        self.pipeline = device
-            .create_compute_pipelines(
-                vk::PipelineCache::null(),
-                &[vk::ComputePipelineCreateInfo::default()
-                    .stage(stage)
-                    .layout(self.layout)],
-                None,
-            )
-            .map(|pipelines| pipelines[0])
-            .map_err(|(_, result)| call("tracer pipeline")(result))?;
+        let (layout, module) = (self.layout, self.trace_module);
+        // The trace's shader is two thirds of all the tracer's SPIR-V and
+        // most of a cold compile: it compiles beside the passes'.
+        std::thread::scope(|scope| {
+            let trace = scope.spawn(move || {
+                let stage = vk::PipelineShaderStageCreateInfo::default()
+                    .stage(vk::ShaderStageFlags::COMPUTE)
+                    .module(module)
+                    .name(c"main");
+                let pipeline = device
+                    .create_compute_pipelines(
+                        vk::PipelineCache::null(),
+                        &[vk::ComputePipelineCreateInfo::default()
+                            .stage(stage)
+                            .layout(layout)],
+                        None,
+                    )
+                    .map(|pipelines| pipelines[0])
+                    .map_err(|(_, result)| call("tracer pipeline")(result));
+                made.traced.store(true, Ordering::Relaxed);
+                crate::crash_log::compiling(true);
+                pipeline
+            });
+            let passes = self.build_passes(core, made);
+            // Kept even when a pass failed, for the caller's destroy.
+            self.pipeline = trace
+                .join()
+                .unwrap_or_else(|panic| std::panic::resume_unwind(panic))?;
+            passes
+        })
+    }
+
+    unsafe fn build_passes(
+        &mut self,
+        core: &Core,
+        made: &BuildProgress,
+    ) -> Result<(), VkDeviceError> {
+        let device = &core.device;
+        // Every pass's pipeline counts toward the build's progress.
+        let compute_pipeline = |core: &Core, layout, module| {
+            let pipeline = compute_pipeline(core, layout, module);
+            made.pass();
+            pipeline
+        };
         self.paths_module = shader_module(core, PATHS, "path pass shader")?;
         self.paths = compute_pipeline(core, self.layout, self.paths_module)?;
         self.emitters_module = shader_module(core, EMITTER_SAMPLING, "emitters pass shader")?;
@@ -908,6 +966,7 @@ impl Tracer {
             .create_shader_module(&vk::ShaderModuleCreateInfo::default().code(&words), None)
             .map_err(call("composite shader"))?;
         self.composite = composite_pipeline(core, self.composite_layout, self.composite_module)?;
+        made.pass();
         // The denoiser's passes: the frame block, then their images.
         let compute = |index: u32, kind: vk::DescriptorType, count: u32| {
             vk::DescriptorSetLayoutBinding::default()
@@ -1545,6 +1604,113 @@ impl Tracer {
             .map(|(name, (sum, most))| format!("{name} {:.2}/{:.2}", mean(*sum), most / 1e6))
             .collect();
         eprintln!("Vulkan tracer stages, mean/most ms: {}", stages.join(", "));
+    }
+}
+
+/// The tracer being made on a thread of its own, so the device's thread
+/// goes on presenting (the loading line, the Options) while its shaders
+/// compile: a new build's, with nothing cached, passed 15 s on an RTX 5080
+/// (the watchdog's stall, 2026-11-15).
+pub(super) struct TracerBuild {
+    thread: std::thread::JoinHandle<Result<Fresh, VkDeviceError>>,
+    made: Arc<BuildProgress>,
+    started: std::time::Instant,
+}
+
+/// A tracer its build's thread made.
+struct Fresh(Box<Tracer>);
+
+// SAFETY: a tracer just made holds Vulkan handles and empty collections (no
+// upscaler, no tuning), which nothing else refers to.
+unsafe impl Send for Fresh {}
+
+/// The device's core, as a build's thread reads it.
+struct Shared(*const Core);
+
+// SAFETY: the build only makes objects on the device (layouts, modules,
+// pipelines, pools, samplers, query pools), which Vulkan lets any thread
+// do, and the device joins the build before it goes (`Drop for VkDevice`).
+unsafe impl Send for Shared {}
+
+impl Shared {
+    /// A method, so a closure moves the whole wrapper (edition 2021
+    /// closures capture a field alone, here a pointer that is not `Send`).
+    unsafe fn core(&self) -> &Core {
+        &*self.0
+    }
+}
+
+impl TracerBuild {
+    pub(super) fn start(core: &Core) -> Result<Self, VkDeviceError> {
+        let made = Arc::new(BuildProgress::default());
+        let shared = Shared(core);
+        let counted = Arc::clone(&made);
+        let thread = std::thread::Builder::new()
+            .name("vulkan shaders".into())
+            // SAFETY: see `Shared`.
+            .spawn(move || {
+                unsafe { Tracer::new(shared.core(), &counted) }.map(|t| Fresh(Box::new(t)))
+            })
+            .map_err(|error| VkDeviceError::Thread(error.to_string()))?;
+        Ok(Self {
+            thread,
+            made,
+            started: std::time::Instant::now(),
+        })
+    }
+
+    pub(super) fn finished(&self) -> bool {
+        self.thread.is_finished()
+    }
+
+    /// The share of the preparation done, short of the upscaler's part,
+    /// made after the tracer.
+    pub(super) fn share(&self) -> f32 {
+        preparation_share(
+            self.made.passes.load(Ordering::Relaxed),
+            self.made.traced.load(Ordering::Relaxed),
+            self.started.elapsed().as_secs_f32(),
+        )
+    }
+
+    /// The tracer, once its thread is done (waiting for it).
+    pub(super) fn join(self) -> Result<Box<Tracer>, VkDeviceError> {
+        let made = self
+            .thread
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))?;
+        eprintln!(
+            "Infestation: the path tracer's shaders took {:.1} s",
+            self.started.elapsed().as_secs_f64()
+        );
+        Ok(made.0)
+    }
+}
+
+/// [`TracerBuild::share`] with `passes` of the passes' pipelines made, the
+/// trace's made or not, `seconds` into the build.
+fn preparation_share(passes: u32, traced: bool, seconds: f32) -> f32 {
+    let trace = if traced {
+        1.0
+    } else {
+        1.0 - (-seconds / TRACE_CREEP_SECONDS).exp()
+    };
+    passes as f32 / TRACER_PASSES as f32 * PASSES_SHARE + trace * TRACE_SHARE
+}
+
+/// How far a tracer's build is: its passes' pipelines made, and whether
+/// the trace's is.
+#[derive(Default)]
+pub(super) struct BuildProgress {
+    passes: AtomicU32,
+    traced: AtomicBool,
+}
+
+impl BuildProgress {
+    /// One of the passes' pipelines is made: the build moves on.
+    fn pass(&self) {
+        self.passes.fetch_add(1, Ordering::Relaxed);
+        crate::crash_log::compiling(true);
     }
 }
 
@@ -2626,9 +2792,10 @@ impl State {
             }
             return Ok(());
         }
-        let mut tracer = match self.tracer.take() {
-            Some(tracer) => tracer,
-            None => Box::new(Tracer::new(core)?),
+        let mut tracer = match (self.tracer.take(), self.tracer_build.take()) {
+            (Some(tracer), _) => tracer,
+            (None, Some(build)) => build.join()?,
+            (None, None) => Box::new(Tracer::new(core, &BuildProgress::default())?),
         };
         let _scope = crate::cpu_profile::scope("trace: record");
         // No wait for the frames in flight: the buffers, descriptor sets and
@@ -2642,25 +2809,35 @@ impl State {
     }
 
     /// Make the tracer, and the upscaler the settings choose for `target`,
-    /// before a traced frame needs them. Made on a world's first traced
-    /// frame, they stalled it: DLSS's feature takes about 0.9 s, and a new
-    /// build's shaders compile when the tracer is made (the
-    /// sound starts while the picture waits). Nothing once both are made.
+    /// before a traced frame needs them: the share of that done, 1 once
+    /// both are made. Made on a world's first traced frame, they stalled
+    /// it: DLSS's feature takes about 0.9 s, and a new build's shaders
+    /// compile when the tracer is made, which [`TracerBuild`] does beside
+    /// this thread; each call looks in on it.
     pub(super) unsafe fn prepare_trace(
         &mut self,
         core: &Core,
         target: &Target,
-    ) -> Result<(), VkDeviceError> {
+    ) -> Result<f32, VkDeviceError> {
         if core.acceleration_loader.is_none() {
-            return Ok(());
+            return Ok(1.0);
         }
-        let mut tracer = match self.tracer.take() {
-            Some(tracer) => tracer,
-            None => Box::new(Tracer::new(core)?),
+        let mut tracer = match (self.tracer.take(), self.tracer_build.take()) {
+            (Some(tracer), _) => tracer,
+            (None, Some(build)) if build.finished() => build.join()?,
+            (None, build) => {
+                let build = match build {
+                    Some(build) => build,
+                    None => TracerBuild::start(core)?,
+                };
+                let share = build.share();
+                self.tracer_build = Some(build);
+                return Ok(share);
+            }
         };
         let result = self.prepare_upscaler(core, &mut tracer, target);
         self.tracer = Some(tracer);
-        result
+        result.map(|()| 1.0)
     }
 
     /// [`Self::prepare_trace`]'s upscaler, as [`Self::trace_with`] chooses
@@ -5483,8 +5660,22 @@ fn view_to_clip(camera: &crate::scene_feed::SceneCamera) -> [f32; 16] {
 
 #[cfg(test)]
 mod tests {
-    use super::{sprite_energy, FRAME_FLOATS};
+    use super::{preparation_share, sprite_energy, FRAME_FLOATS, TRACER_PASSES};
     use crate::d3d_texture::test_texture;
+
+    /// The preparation's share climbs with the passes made, then with the
+    /// time the trace's pipeline takes, and stays short of the end (the
+    /// slider's last cell) until the device says all is made.
+    #[test]
+    fn the_preparation_creeps_on_but_never_finishes_itself() {
+        assert_eq!(preparation_share(0, false, 0.0), 0.0);
+        let passes = preparation_share(TRACER_PASSES, false, 2.5);
+        assert!((0.35..0.45).contains(&passes), "{passes}");
+        let late = preparation_share(TRACER_PASSES, false, 16.0);
+        assert!((0.75..0.85).contains(&late), "{late}");
+        assert!(preparation_share(TRACER_PASSES, false, 1000.0) <= 0.95 + 1e-6);
+        assert!((preparation_share(TRACER_PASSES, true, 0.0) - 0.95).abs() < 1e-6);
+    }
 
     /// The floats `pt_frame.glsl` declares for one member type, its structs
     /// and `#define`d array lengths read from the same file (scalar layout:

@@ -877,11 +877,10 @@ impl SoftwareFrame {
     }
 
     /// Make the device's tracer and upscaler ahead of the first traced
-    /// frame, so a world's first frames do not wait on them.
-    pub fn prepare_trace(&mut self) {
-        if let Some(device) = &mut self.device {
-            device.prepare_trace();
-        }
+    /// frame, so a world's first frames do not wait on them: the share of
+    /// that done, 1 once they are made (or there is nothing to make).
+    pub fn prepare_trace(&mut self) -> f32 {
+        self.device.as_mut().map_or(1.0, FrameDevice::prepare_trace)
     }
 
     /// Trace `feed` (the world in world space, its texture indices into

@@ -408,9 +408,10 @@ impl FrameDevice {
     }
 
     /// Make the tracer and its upscaler ahead of the first traced frame.
-    pub(crate) fn prepare_trace(&mut self) {
-        if let Self::Vulkan(frame) = self {
-            frame.prepare_trace();
+    pub(crate) fn prepare_trace(&mut self) -> f32 {
+        match self {
+            Self::OpenGl(_) => 1.0,
+            Self::Vulkan(frame) => frame.prepare_trace(),
         }
     }
 

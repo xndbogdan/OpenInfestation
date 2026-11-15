@@ -277,6 +277,8 @@ struct State {
     downsample_output: vk::Pipeline,
     /// The path tracer, made on first use on a device that traces rays.
     tracer: Option<Box<trace::Tracer>>,
+    /// The tracer while its shaders compile beside the device's thread.
+    tracer_build: Option<trace::TracerBuild>,
     /// Thermal vision's camera, made on first use.
     thermal: Option<Box<thermal::ThermalCamera>>,
     /// Anti-aliasing for the raster's world without traced rays, made on
@@ -698,6 +700,7 @@ impl VkDevice {
                 blit_output: vk::Pipeline::null(),
                 downsample_output: vk::Pipeline::null(),
                 tracer: None,
+                tracer_build: None,
                 thermal: None,
                 raster_aa: None,
                 mirror: None,
@@ -987,6 +990,10 @@ impl Drop for VkDevice {
         unsafe {
             let _ = core.device.device_wait_idle();
             let mut allocator = state.allocator.take();
+            // A build still compiling holds the device until it is done.
+            if let Some(Ok(tracer)) = state.tracer_build.take().map(trace::TracerBuild::join) {
+                tracer.destroy(core, &mut allocator);
+            }
             if let Some(tracer) = state.tracer.take() {
                 tracer.destroy(core, &mut allocator);
             }
@@ -3424,14 +3431,20 @@ impl VkFrame {
     }
 
     /// Make the tracer and its upscaler ahead of the first traced frame,
-    /// where this frame's world would be traced: nothing once they are.
-    pub(crate) fn prepare_trace(&mut self) {
+    /// where this frame's world would be traced: the share of that done, 1
+    /// once they are made (or never will be: no tracing, a failed device).
+    pub(crate) fn prepare_trace(&mut self) -> f32 {
+        let mut share = 1.0;
         if !self.traces_rays() {
-            return;
+            return share;
         }
         // SAFETY: the tracer and the upscaler record on the device's own
         // buffer.
-        self.with_state(|state, core, target| unsafe { state.prepare_trace(core, target) });
+        self.with_state(|state, core, target| {
+            share = unsafe { state.prepare_trace(core, target)? };
+            Ok(())
+        });
+        share
     }
 
     /// The traced world's last draw is in: its lighting preset's grade over

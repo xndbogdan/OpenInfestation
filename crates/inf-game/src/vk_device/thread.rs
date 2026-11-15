@@ -12,7 +12,10 @@ use std::{
     cell::{Cell, RefCell},
     fmt,
     rc::Rc,
-    sync::{mpsc, Arc, Condvar, Mutex, PoisonError},
+    sync::{
+        atomic::{AtomicU32, Ordering},
+        mpsc, Arc, Condvar, Mutex, PoisonError,
+    },
     thread::JoinHandle,
 };
 
@@ -67,7 +70,11 @@ struct RasterBegin {
 
 /// One [`VkFrame`] call, its fan's corners in the chunk's vertices.
 enum FrameCall {
-    Fan { start: u32, len: u32, draw: Draw },
+    Fan {
+        start: u32,
+        len: u32,
+        draw: Draw,
+    },
     ClearColor([u8; 4]),
     ClearDepth,
     ReplaceSurface(Vec<u8>),
@@ -86,7 +93,8 @@ enum FrameCall {
     SetWorldCamera(Option<Box<SceneCamera>>),
     FinishRasterWorld,
     SetTraceInfrared(bool),
-    PrepareTrace,
+    /// Where the device's thread leaves the share done (`f32` bits).
+    PrepareTrace(Arc<AtomicU32>),
     TraceWorld(Box<SceneFeed>, Vec<u64>),
     ReadRgba(mpsc::Sender<Vec<u8>>),
     StageRgba,
@@ -189,6 +197,9 @@ pub struct VkHandle {
     /// The textures the device's thread holds, each with the present a
     /// frame last drew it in.
     textures: RefCell<FastMap<u64, u64>>,
+    /// How far the tracer's preparation is (`f32` bits), as the device's
+    /// thread last found it.
+    prepared: Arc<AtomicU32>,
 }
 
 impl fmt::Debug for VkHandle {
@@ -235,6 +246,7 @@ impl VkHandle {
             frames: Cell::new(0),
             presents: Cell::new(0),
             textures: RefCell::new(FastMap::default()),
+            prepared: Arc::new(AtomicU32::new(0)),
         }))
     }
 
@@ -527,7 +539,9 @@ fn replay(
         FrameCall::SetWorldCamera(camera) => frame.set_world_camera(camera.map(|camera| *camera)),
         FrameCall::FinishRasterWorld => frame.finish_raster_world(),
         FrameCall::SetTraceInfrared(on) => frame.set_trace_infrared(on),
-        FrameCall::PrepareTrace => frame.prepare_trace(),
+        FrameCall::PrepareTrace(share) => {
+            share.store(frame.prepare_trace().to_bits(), Ordering::Relaxed);
+        }
         FrameCall::TraceWorld(feed, keys) => {
             let drawn: Vec<&CpuTexture> = keys.iter().filter_map(|key| textures.get(key)).collect();
             debug_assert_eq!(drawn.len(), keys.len(), "traced textures are sent first");
@@ -801,8 +815,26 @@ impl VkFrameHandle {
         self.call(FrameCall::SetTraceInfrared(on));
     }
 
-    pub(crate) fn prepare_trace(&mut self) {
-        self.call(FrameCall::PrepareTrace);
+    /// Make the tracer and its upscaler where this frame's world would be
+    /// traced: the share of that done (1 once they are made), as the
+    /// device's thread last found it.
+    pub(crate) fn prepare_trace(&mut self) -> f32 {
+        let stopped = || {
+            *self
+                .device
+                .swaps
+                .done
+                .lock()
+                .unwrap_or_else(PoisonError::into_inner)
+                == u64::MAX
+        };
+        if !self.traces_rays() || stopped() {
+            return 1.0;
+        }
+        self.call(FrameCall::PrepareTrace(Arc::clone(&self.device.prepared)));
+        // Looked in on at once, not when the frame's chunk fills.
+        self.device.flush();
+        f32::from_bits(self.device.prepared.load(Ordering::Relaxed))
     }
 
     pub(crate) fn trace_world(&mut self, feed: &SceneFeed, textures: &[&CpuTexture]) -> bool {

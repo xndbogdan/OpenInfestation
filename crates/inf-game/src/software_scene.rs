@@ -753,9 +753,9 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
     }
 
     /// Make the frame device's tracer and upscaler ahead of a world's first
-    /// traced frame ([`SoftwareFrame::prepare_trace`]).
-    pub fn prepare_trace(&mut self) {
-        self.pixels.frame.prepare_trace();
+    /// traced frame ([`SoftwareFrame::prepare_trace`]): the share done.
+    pub fn prepare_trace(&mut self) -> f32 {
+        self.pixels.frame.prepare_trace()
     }
 
     /// The feed being collected, to add the world's light, fog and sky.
