@@ -815,14 +815,12 @@ pub struct WaterTuning {
     /// water). Lava neither mirrors nor shows what lies under it.
     #[serde(default)]
     pub glow: f32,
-    /// How steeply a splash's ring tilts the surface (0: no rings).
+    /// How steeply the water's waves tilt its surface, the splashes' rings
+    /// and the craft's wake among them (1: as their heights make them; 0:
+    /// flat; [`crate::scene_waves`]).
     pub rings: f32,
-    /// How white a young splash's foam is (0: none).
+    /// How white the water's foam is (0: none).
     pub foam: f32,
-    /// How far a ring spreads over the splash's life, and how wide it is,
-    /// in world units at a splash's own scale.
-    pub spread: f32,
-    pub width: f32,
     /// A blast in the water (`scene_spray`): how high the plume of one just
     /// under the surface rises, in world units (0: none), the share of its
     /// drops thrown (0 to 1), and how brightly lights under the water (its

@@ -3472,6 +3472,7 @@ fn a_wheeled_craft_stirs_from_its_grounded_wheels() {
         unit: craft,
         centre: [0.0, 50.0, 0.0],
         strength: 0.7,
+        velocity: [0.0, 0.0],
     });
     let wakes = super::craft_wakes(&feed, wake, &world.terrain, eye);
     assert_eq!(wakes.len(), 2, "{wakes:?}");
@@ -3484,7 +3485,9 @@ fn a_wheeled_craft_stirs_from_its_grounded_wheels() {
         wakes,
         [crate::scene_feed::SceneWake {
             position: [0.0, 50.0, 0.0],
-            strength: 0.7
+            strength: 0.7,
+            hull: false,
+            velocity: [0.0, 0.0],
         }]
     );
     assert!(super::craft_wakes(&feed, None, &world.terrain, eye).is_empty());
@@ -3550,19 +3553,27 @@ fn a_craft_stirs_the_water_from_its_wheels_and_hull() {
             unit: craft,
             centre: [0.0, plane + height, 0.0],
             strength: 0.5,
+            velocity: [0.0, 0.0],
         })
     };
     let wakes = super::craft_wakes(&feed, wake(40.0), terrain, eye);
-    let water = |at: [f32; 2]| crate::scene_feed::SceneWake {
+    let water = |at: [f32; 2], hull: bool| crate::scene_feed::SceneWake {
         position: [at[0], plane, at[1]],
         strength: -0.5,
+        hull,
+        velocity: [0.0, 0.0],
     };
     let puddle = crate::scene_feed::SceneWake {
         position: [dry_offset[0], dry_ground, dry_offset[1]],
         strength: 0.5,
+        hull: false,
+        velocity: [0.0, 0.0],
     };
-    assert_eq!(wakes, [water([0.0, 0.0]), puddle, water([0.0, 0.0])]);
+    assert_eq!(
+        wakes,
+        [water([0.0, 0.0], false), puddle, water([0.0, 0.0], true)]
+    );
     // The hull high over the water stirs nothing there.
     let wakes = super::craft_wakes(&feed, wake(400.0), terrain, eye);
-    assert_eq!(wakes, [water([0.0, 0.0]), puddle]);
+    assert_eq!(wakes, [water([0.0, 0.0], false), puddle]);
 }

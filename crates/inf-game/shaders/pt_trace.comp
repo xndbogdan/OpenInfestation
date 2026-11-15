@@ -2096,6 +2096,8 @@ vec3 lava_glow(vec3 position, uint texture_slot) {
 }
 
 #define SPLASH_BINDING 18
+// The water's memory (vk_waves.comp, vk_device/wave_field.rs).
+#define WAVE_BINDING 38
 #include "pt_splash.glsl"
 
 // The additive sprites sunk under the water (a token on a lake's bed) seen
@@ -3285,8 +3287,13 @@ void main() {
             puddle_least = mix(WATER_F0, lake_least, shore);
             puddle_edge = puddle_water * mix(1.0, lake_edge, shore);
         }
-    } else if (!under && !surface.ground && !surface.emissive && frame.wet_models > 0.0) {
-        wet_model(surface.normal.y, surface.bare, surface.metal, surface.rough, soaked, coat);
+    } else if (!under && !surface.ground && !surface.emissive) {
+        // The rain's wet, or the water's on the craft.
+        float wet = max(frame.wet_models, craft_wetness(position));
+        if (wet > 0.0) {
+            wet_model(wet, surface.normal.y, surface.bare, surface.metal, surface.rough, soaked,
+                      coat);
+        }
     }
 
     float bounce_scale;

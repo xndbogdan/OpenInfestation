@@ -62,6 +62,9 @@ pub(super) struct RasterSky {
     /// eruptions kept from frame to frame.
     splashes: [Option<Buffer>; FRAMES_IN_FLIGHT],
     eruptions: crate::scene_spray::Eruptions,
+    /// This frame's splashes and eruptions, which stir the water's memory
+    /// once the craft's wakes are known ([`State::raster_lamps`]).
+    stirring: Vec<[f32; 7]>,
     /// What this frame's block was written with beside its feed, for the
     /// lamps the light pass finds later ([`State::raster_lamps`]).
     shape: Option<FrameShape<'static>>,
@@ -100,6 +103,7 @@ impl RasterSky {
             frame: [const { None }; FRAMES_IN_FLIGHT],
             splashes: [const { None }; FRAMES_IN_FLIGHT],
             eruptions: Default::default(),
+            stirring: Vec::new(),
             shape: None,
             band: None,
             results: [None, None, None],
@@ -300,8 +304,17 @@ impl State {
         sky_wanted: bool,
     ) -> Result<bool, VkDeviceError> {
         let camera = &feed.camera;
-        // The water's splashes and the blasts' eruptions, as the tracer's.
-        let (_, splashes) = water_splashes(&mut sky.eruptions, feed, feed.water_level);
+        // The water's splashes and the blasts' eruptions, as the tracer's:
+        // they stir the water's memory once the world's draws are in, and
+        // the splash buffer keeps the eruptions, which glow under it.
+        let (_, stirring) = water_splashes(&mut sky.eruptions, feed, feed.water_level);
+        let splashes: Vec<[f32; 7]> = stirring
+            .iter()
+            .copied()
+            .filter(|splash| splash[5] > 0.5)
+            .collect();
+        sky.stirring = stirring;
+        let waves = super::wave_field::shows_waves(feed);
         let slot = self.slot;
         if sky.splashes[slot].is_none() {
             sky.splashes[slot] = Some(self.buffer(
@@ -346,6 +359,7 @@ impl State {
             water_hue: feed.water_hue.unwrap_or_default(),
             grid: None,
             world_view: true,
+            waves,
         };
         let written = frame_block(feed, &shape, self.modern);
         sky.over = written.over;
@@ -409,11 +423,14 @@ impl State {
         Ok(true)
     }
 
-    /// This raster world's frame block written again from its `feed`, now
-    /// with the vehicles' lamps the light pass kept, for its water's pass:
-    /// the same block with its lamps and their hue in the water.
-    pub(super) fn raster_lamps(
+    /// This raster world's frame block written again from its `feed` once
+    /// its draws are in, now with the vehicles' lamps the light pass kept
+    /// and the craft's wakes, for its water's pass: the same block with its
+    /// lamps and their hue in the water; and the water's memory stepped,
+    /// stirred by the splashes and the wakes.
+    pub(super) unsafe fn raster_lamps(
         &mut self,
+        core: &Core,
         feed: &crate::scene_feed::SceneFeed,
     ) -> Result<(), VkDeviceError> {
         let slot = self.slot;
@@ -421,6 +438,7 @@ impl State {
         let Some(sky) = self.raster_sky.as_mut().filter(|sky| sky.written) else {
             return Ok(());
         };
+        let stirring = std::mem::take(&mut sky.stirring);
         let (Some(shape), Some(frame)) = (sky.shape.as_mut(), sky.frame[slot].as_mut()) else {
             return Ok(());
         };
@@ -435,6 +453,9 @@ impl State {
             .ok_or_else(|| VkDeviceError::Memory("raster sky memory is not mapped".into()))?
             [..bytes.len()]
             .copy_from_slice(bytes);
+        let command = self.begin(core)?;
+        self.end_rendering(core);
+        self.step_waves(core, command, feed, &stirring)?;
         Ok(())
     }
 

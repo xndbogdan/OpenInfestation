@@ -207,6 +207,8 @@ impl WorldSession {
             crystal_flares: Default::default(),
             cloud_wake: Default::default(),
             craft_spray: Default::default(),
+            craft_wet: Default::default(),
+            raster_eruptions: Default::default(),
         }
     }
 

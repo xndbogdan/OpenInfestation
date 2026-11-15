@@ -1,0 +1,202 @@
+#version 460
+// The water's memory (docs/rt-plans/water-memory.md, vk_device/wave_field.rs):
+// the water's own waves, foam and churn in a window of cells round the eye,
+// one step of their motion a dispatch. Retail's splashes, the blasts'
+// eruptions and where their water falls back, and the player's craft
+// through the water stamp it (each pushing the water up or down over its
+// radius, laying foam and churn); the waves run outward at the speed the
+// water's depth gives them, slow in the shallows, die at the shore and the
+// window's rim, and leave the craft's wake behind it. The water's shading
+// (pt_splash.glsl, the tracer's and Vulkan's raster's) reads the heights'
+// slopes, the foam and the churn. Only a picture: the game never reads it.
+//
+// Each image texel holds one world cell: cell (x, z) lives at texel
+// (x mod SIDE, z mod SIDE), so the window moves with the eye without
+// copying, and a texel the window takes in starts as still water.
+#extension GL_EXT_scalar_block_layout : require
+
+layout(local_size_x = 16, local_size_y = 16) in;
+
+// Height (world units over the plane), its rise a second, foam, churn.
+layout(set = 0, binding = 0, rgba16f) uniform readonly image2D before;
+layout(set = 0, binding = 1, rgba16f) uniform writeonly image2D after;
+
+// wave_field.rs's SIDE and scene_waves.rs's DEPTH_SIDE.
+const int SIDE = 1024;
+const int DEPTH_SIDE = 66;
+
+struct Stamp {
+    // Where it stands at the frame's first step and at its last,
+    // window-relative world units.
+    vec4 path;
+    // Its radius, how hard it lifts the water at its middle (units a
+    // second squared; below zero it presses it down), as much pressed the
+    // other way round it, so it adds no water and takes none (a drop's
+    // hollow and its crown, a dome and the water drawn in under it), and the
+    // foam and the churn it lays there a second.
+    vec4 shape;
+    // The lift that tilts with its motion: along xy as hard as its length,
+    // as much pressed behind (a moving hull's bow wave and wake).
+    vec4 push;
+};
+
+layout(set = 0, binding = 2, scalar) readonly buffer Waves {
+    // The window's first cell on each axis (0 to 8191), and how many cells
+    // it moved since the last frame's steps.
+    vec4 window;
+    // The stamps, 1 to start from still water, a cell's side and the depth
+    // grid's spacing, in world units.
+    vec4 shape;
+    // The depth grid's first point, window-relative.
+    vec4 depth_origin;
+    // The water's depth over each of the grid's points (X first; at or
+    // below zero: land).
+    float depths[DEPTH_SIDE * DEPTH_SIDE];
+    Stamp stamps[];
+} waves;
+
+layout(push_constant) uniform Step {
+    // This step's seconds (0: only the window's move), where along the
+    // frame's stamp paths it stands (0 to 1), and 1 on the frame's first
+    // step, when the cells the window took in start still.
+    float dt;
+    float along;
+    float first;
+} step;
+
+// Gravity on the water (world units a second squared), and the waves'
+// slowest and fastest speed: sqrt(g depth) between them.
+const float GRAVITY = 980.0;
+const float SLOWEST = 60.0;
+const float FASTEST = 450.0;
+// How fast the waves lose their motion a second: everywhere, more in the
+// shallows (dying at the shore rather than rebounding off it), and over the
+// window's rim, so nothing comes back from it.
+const float DAMPING = 0.45;
+const float SHALLOW_DAMPING = 6.0;
+const float SHALLOW = 40.0;
+const float RIM_DAMPING = 30.0;
+const float RIM_CELLS = 48.0;
+// What draws a height back to the plane, a second squared: a pressed hollow
+// fills again when its craft stops.
+const float SPRING = 3.0;
+// Foam: where a crest steepens past BREAK_SLOPE it breaks white, BREAKING
+// a second for each unit of slope past it; foam spreads a little and fades
+// over FOAM_SECONDS, never past FOAM_MOST. Churned water fades sooner.
+const float BREAK_SLOPE = 0.3;
+const float BREAKING = 3.0;
+const float SPREAD = 2.0;
+const float FOAM_SECONDS = 3.0;
+const float FOAM_MOST = 1.0;
+const float CHURN_SECONDS = 2.0;
+// The most stamps one workgroup's cells take.
+const int MOST_KEPT = 32;
+
+shared uint kept_count;
+shared int kept[MOST_KEPT];
+
+ivec2 texel_of(ivec2 window_cell) {
+    return (ivec2(waves.window.xy) + window_cell) & (SIDE - 1);
+}
+
+// Whether the window's cell held another place's water before this frame's
+// first step: the window took it in (or all start still).
+bool taken_in(ivec2 window_cell) {
+    if (step.first < 0.5) {
+        return false;
+    }
+    if (waves.shape.y > 0.5) {
+        return true;
+    }
+    ivec2 was = window_cell + ivec2(waves.window.zw);
+    return any(lessThan(was, ivec2(0))) || any(greaterThanEqual(was, ivec2(SIDE)));
+}
+
+// A window cell's water, its own at the window's rim (none past it).
+vec4 cell_at(ivec2 window_cell) {
+    window_cell = clamp(window_cell, ivec2(0), ivec2(SIDE - 1));
+    return taken_in(window_cell) ? vec4(0.0) : imageLoad(before, texel_of(window_cell));
+}
+
+// The water's depth at a window-relative point, between the grid's points.
+float water_depth(vec2 at) {
+    vec2 grid = (at - waves.depth_origin.xy) / waves.shape.w;
+    vec2 low = clamp(floor(grid), vec2(0.0), vec2(float(DEPTH_SIDE - 2)));
+    vec2 f = clamp(grid - low, 0.0, 1.0);
+    int i = int(low.y) * DEPTH_SIDE + int(low.x);
+    return mix(mix(waves.depths[i], waves.depths[i + 1], f.x),
+               mix(waves.depths[i + DEPTH_SIDE], waves.depths[i + DEPTH_SIDE + 1], f.x), f.y);
+}
+
+void main() {
+    ivec2 cell = ivec2(gl_GlobalInvocationID.xy);
+    float side = waves.shape.z;
+    // The stamps that reach this workgroup's cells this step.
+    if (gl_LocalInvocationIndex == 0u) {
+        kept_count = 0u;
+    }
+    memoryBarrierShared();
+    barrier();
+    vec2 low = vec2(gl_WorkGroupID.xy * 16u) * side;
+    vec2 high = low + 16.0 * side;
+    int count = int(waves.shape.x);
+    for (int i = int(gl_LocalInvocationIndex); i < count; i += 256) {
+        Stamp stamp = waves.stamps[i];
+        vec2 at = mix(stamp.path.xy, stamp.path.zw, step.along);
+        if (distance(at, clamp(at, low, high)) < stamp.shape.x) {
+            uint slot = atomicAdd(kept_count, 1u);
+            if (slot < uint(MOST_KEPT)) {
+                kept[slot] = i;
+            }
+        }
+    }
+    memoryBarrierShared();
+    barrier();
+
+    ivec2 texel = texel_of(cell);
+    vec2 middle = (vec2(cell) + 0.5) * side;
+    float depth = water_depth(middle);
+    if (depth <= 0.0) {
+        imageStore(after, texel, vec4(0.0));
+        return;
+    }
+    vec4 here = cell_at(cell);
+    vec4 left = cell_at(cell - ivec2(1, 0));
+    vec4 right = cell_at(cell + ivec2(1, 0));
+    vec4 down = cell_at(cell - ivec2(0, 1));
+    vec4 up = cell_at(cell + ivec2(0, 1));
+    float dt = step.dt;
+    float speed = clamp(sqrt(GRAVITY * depth), SLOWEST, FASTEST);
+    float laplacian = (left.x + right.x + down.x + up.x - 4.0 * here.x) / (side * side);
+    float rim = float(min(min(cell.x, cell.y), min(SIDE - 1 - cell.x, SIDE - 1 - cell.y)));
+    float damping = DAMPING + SHALLOW_DAMPING * (1.0 - smoothstep(0.0, SHALLOW, depth))
+        + RIM_DAMPING * (1.0 - smoothstep(0.0, RIM_CELLS, rim));
+    float height = here.x;
+    float rise = here.y;
+    float foam = here.z;
+    float churn = here.w;
+    rise += dt * (speed * speed * laplacian - SPRING * height - damping * rise);
+    for (int k = 0; k < min(int(kept_count), MOST_KEPT); k++) {
+        Stamp stamp = waves.stamps[kept[k]];
+        vec2 at = mix(stamp.path.xy, stamp.path.zw, step.along);
+        vec2 out_of = (middle - at) / stamp.shape.x;
+        float x = length(out_of);
+        if (x >= 1.0) {
+            continue;
+        }
+        float weight = (1.0 - x * x) * (1.0 - x * x);
+        // (1 - 4 x^2) weight sums to nothing over the disc.
+        rise += dt * (stamp.shape.y * (1.0 - 4.0 * x * x) + dot(stamp.push.xy, out_of)) * weight;
+        foam += dt * stamp.shape.z * weight;
+        churn += dt * stamp.shape.w * weight;
+    }
+    height += dt * rise;
+    // Crests too steep to hold break white.
+    float slope = length(vec2(right.x - left.x, up.x - down.x)) / (2.0 * side);
+    foam += dt * BREAKING * max(slope - BREAK_SLOPE, 0.0);
+    float spread = min(dt * SPREAD, 0.25);
+    foam = mix(foam, 0.25 * (left.z + right.z + down.z + up.z), spread) * exp(-dt / FOAM_SECONDS);
+    churn = mix(churn, 0.25 * (left.w + right.w + down.w + up.w), spread)
+        * exp(-dt / CHURN_SECONDS);
+    imageStore(after, texel, vec4(height, rise, min(foam, FOAM_MOST), min(churn, 1.0)));
+}

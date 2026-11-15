@@ -21,9 +21,10 @@
 // where it leaves the frame; one that leaves over land fades out. The
 // water's surface is the tracer's (pt_water.glsl): the game's swell and its
 // ripples bend the view, fading out at the shore, and the sun glints on
-// them where nothing the frame shows stands in its way. Retail's splashes
-// ring it and foam where they fell, and the blasts in it erupt, churn it
-// and glow under it (pt_splash.glsl, the tracer's splash buffer); the
+// them where nothing the frame shows stands in its way. The water's memory
+// (its waves, foam and churn from retail's splashes, the blasts and the
+// craft) tilts, whitens and lightens it, and the blasts under it glow
+// through it (pt_splash.glsl); the
 // vehicles' lamps glint on it and their light enters it and scatters back
 // in its colour, as the tracer's, where a march toward each meets nothing
 // short of its craft, and the lamps under it glow in it. What lies on the
@@ -76,49 +77,11 @@ layout(set = 0, binding = 4, std430) readonly buffer Pyramid {
 #define SKY_SHADOW_BINDING 6
 #include "pt_sky.glsl"
 #include "pt_water.glsl"
-// Retail's splashes and the blasts' eruptions, as the tracer's
-// (vk_device/raster_sky.rs writes them as trace.rs does), each pixel taking
-// only those that can reach its workgroup's water (cull_splashes), in the
-// buffer's order: a splash it skips adds nothing to the pixels it skips.
-// The eruptions it walks in the buffer; retail's rings, made once for the
-// workgroup, in shared memory (their positions, then their radius, width,
-// strength and foam's radius).
+// The blasts' eruptions and the water's memory, as the tracer's
+// (vk_device/raster_sky.rs writes the eruptions as trace.rs does; the
+// memory is wave_field.rs's).
 #define SPLASH_BINDING 12
-#define FOR_EACH_SPLASH(i) for (int i = next_splash(-1); i >= 0; i = next_splash(i))
-#define FOR_EACH_RING(i) \
-    for (int i = 0; frame.splash_count >= 0.5 && i < int(tile_ring_count); i++)
-#define RING_AT(i) \
-    Ring(tile_ring_at[i].xyz, tile_ring_shape[i].x, tile_ring_shape[i].y, tile_ring_shape[i].z, \
-         tile_ring_shape[i].w)
-// trace.rs's SPLASHES: a bit each.
-const int SPLASH_WORDS = 4;
-const int SPLASH_LIMIT = SPLASH_WORDS * 32;
-shared uint tile_splashes[SPLASH_WORDS];
-shared uint tile_kept[SPLASH_WORDS];
-shared uint tile_ring_count;
-shared vec4 tile_ring_at[SPLASH_LIMIT];
-shared vec4 tile_ring_shape[SPLASH_LIMIT];
-// The workgroup's water's eye-relative X and Z extent, as ordered keys.
-shared uint tile_bounds[4];
-
-// The first splash the workgroup keeps after number `after`, or -1 (none
-// without splashes, where cull_splashes keeps nothing).
-int next_splash(int after) {
-    if (frame.splash_count < 0.5) {
-        return -1;
-    }
-    int from = after + 1;
-    for (int word = from >> 5; word < SPLASH_WORDS; word++) {
-        uint bits = tile_splashes[word];
-        if (word == from >> 5) {
-            bits &= ~0u << uint(from & 31);
-        }
-        if (bits != 0u) {
-            return word * 32 + findLSB(bits);
-        }
-    }
-    return -1;
-}
+#define WAVE_BINDING 13
 #include "pt_splash.glsl"
 // Retail's water strips, as it laid them, where the mask has water.
 layout(set = 0, binding = 7) uniform sampler2D surface_image;
@@ -599,92 +562,9 @@ vec3 from_below(ivec2 pixel, vec3 colour, vec4 water) {
     return mix(mix(murk, above, murk_shows(reach)), below, fresnel);
 }
 
-// A float as a key that orders as the float does.
-uint order_key(float value) {
-    uint bits = floatBitsToUint(value);
-    return (bits & 0x80000000u) != 0u ? ~bits : bits | 0x80000000u;
-}
-
-float from_key(uint key) {
-    return uintBitsToFloat((key & 0x80000000u) != 0u ? key & 0x7fffffffu : ~key);
-}
-
-// The splashes that can reach the workgroup's water pixels: the eruptions
-// all (their glow under the surface reaches past their rings), and each of
-// retail's whose ring and foam (splashed's reach, its width twice past its
-// radius) come within a unit of the box round the water's points, made
-// once into the workgroup's rings. Every invocation calls it, before any
-// returns: it holds barriers.
-void cull_splashes(ivec2 pixel, bool inside) {
-    if (frame.splash_count < 0.5) {
-        return;
-    }
-    uint index = gl_LocalInvocationIndex;
-    if (index < uint(SPLASH_WORDS)) {
-        tile_splashes[index] = 0u;
-        tile_kept[index] = 0u;
-        tile_bounds[index] = index < 2u ? 0xffffffffu : 0u;
-    }
-    memoryBarrierShared();
-    barrier();
-    vec4 water = inside ? imageLoad(mask_image, pixel) : vec4(0.0);
-    if (water.a >= 0.5 && water.r > 0.0) {
-        vec2 ray = (to_native(vec2(pixel) + 0.5) - camera.centre) / camera.focal;
-        vec3 point = (camera.right * ray.x - camera.up * ray.y + camera.forward)
-            * (RHW_SCALE / water.r);
-        atomicMin(tile_bounds[0], order_key(point.x));
-        atomicMin(tile_bounds[1], order_key(point.z));
-        atomicMax(tile_bounds[2], order_key(point.x));
-        atomicMax(tile_bounds[3], order_key(point.z));
-    }
-    memoryBarrierShared();
-    barrier();
-    int count = min(int(frame.splash_count), SPLASH_LIMIT);
-    if (tile_bounds[0] <= tile_bounds[2]) {
-        vec2 least = vec2(from_key(tile_bounds[0]), from_key(tile_bounds[1]));
-        vec2 most = vec2(from_key(tile_bounds[2]), from_key(tile_bounds[3]));
-        for (int i = int(index); i < count; i += 64) {
-            Splash splash = splashes[i];
-            if (splash.kind > 0.5) {
-                atomicOr(tile_splashes[i >> 5], 1u << uint(i & 31));
-                continue;
-            }
-            Ring ring = ring_of(splash);
-            vec2 offset = splash.position.xz - clamp(splash.position.xz, least, most);
-            if (length(offset) <= ring.radius + 2.0 * ring.width + 1.0) {
-                atomicOr(tile_kept[i >> 5], 1u << uint(i & 31));
-            }
-        }
-    }
-    memoryBarrierShared();
-    barrier();
-    // The kept rings packed in the buffer's order.
-    for (int i = int(index); i < count; i += 64) {
-        uint bit = 1u << uint(i & 31);
-        if ((tile_kept[i >> 5] & bit) == 0u) {
-            continue;
-        }
-        int slot = bitCount(tile_kept[i >> 5] & (bit - 1u));
-        for (int word = 0; word < (i >> 5); word++) {
-            slot += bitCount(tile_kept[word]);
-        }
-        Ring ring = ring_of(splashes[i]);
-        tile_ring_at[slot] = vec4(ring.position, 0.0);
-        tile_ring_shape[slot] = vec4(ring.radius, ring.width, ring.strength, ring.patch_radius);
-    }
-    if (index == 0u) {
-        tile_ring_count = uint(bitCount(tile_kept[0]) + bitCount(tile_kept[1])
-                               + bitCount(tile_kept[2]) + bitCount(tile_kept[3]));
-    }
-    memoryBarrierShared();
-    barrier();
-}
-
 void main() {
     ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
-    bool inside = all(lessThan(pixel, imageSize(result)));
-    cull_splashes(pixel, inside);
-    if (!inside) {
+    if (!all(lessThan(pixel, imageSize(result)))) {
         return;
     }
     vec4 colour = texelFetch(colour_image, pixel, 0);

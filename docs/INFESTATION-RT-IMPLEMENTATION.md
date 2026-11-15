@@ -290,7 +290,10 @@ Explosions and lamps now glint in the water from their
 deposited lights (2026-10-22), and splashes ring it. **Splashes done
 2026-10-22**: the feed reads retail's live splashes, and the water shows
 them as rings spreading where each fell and foam that fades, while the
-sprites stay retail's.
+sprites stay retail's. Since 2026-11-15 the rings, the craft's wake and
+the foam are the water's own memory, waves run out and left behind, and
+the craft throws spray off the lakes and comes out wet
+([water-memory.md](rt-plans/water-memory.md)).
 
 - **Reflections** that mirror sky, terrain, vehicles, and buildings at shallow
   angles and turn see-through looking straight down.

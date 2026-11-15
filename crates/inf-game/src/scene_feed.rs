@@ -384,11 +384,15 @@ pub struct SceneEmitter {
 }
 
 /// A place the player's craft stirs a puddle from: eye-relative, and how
-/// hard, 0 to 1.
+/// hard, 0 to 1 (negative: the water's, [`crate::scene_waves`]), whether it
+/// is the hull's rather than a wheel's, and the craft's velocity over the
+/// ground (X and Z, world units a second).
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct SceneWake {
     pub position: [f32; 3],
     pub strength: f32,
+    pub hull: bool,
+    pub velocity: [f32; 2],
 }
 
 /// A wheel model drawn by an object: the object (an index into
@@ -602,6 +606,13 @@ pub struct SceneFeed {
     /// frame block's water level where no ground mesh brings it (Vulkan's
     /// raster, its rain stopping there).
     pub water_level: Option<f32>,
+    /// The water round the eye for its memory (Vulkan's remaster,
+    /// [`crate::scene_waves`]), where the world has water.
+    pub waves: Option<crate::scene_waves::WaveGround>,
+    /// Where the water wet the craft the camera follows
+    /// ([`crate::craft_wet`]): its wet line (eye-relative height) and how
+    /// wet it is (0: dry).
+    pub craft_wet: [f32; 2],
     /// Port option, the remastered camera: the eye is under the water's
     /// live surface (the world draw's own decision,
     /// [`crate::world_scene::WorldDrawReceipt::under_water`]), where the
@@ -696,6 +707,8 @@ impl SceneFeed {
         self.water = false;
         self.water_reach = 0.0;
         self.water_level = None;
+        self.waves = None;
+        self.craft_wet = [0.0; 2];
         self.eye_under = false;
         self.water_texture = None;
         self.water_hue = None;

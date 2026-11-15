@@ -102,7 +102,11 @@ const FRAME_FLOATS: usize = 267
     + 4 * MAX_SPARKS
     + 4 * MAX_SPARKS * 2 * crate::crystal_flares::ARC_PAIRS
     + 9
-    + 4 * crate::cloud_wake::WAKE_POINTS;
+    + 4 * crate::cloud_wake::WAKE_POINTS
+    + 6;
+/// How far from the craft's middle its wet line wets what lies under it
+/// (`pt_wet.glsl`'s `craft_wetness`): past its far side.
+const CRAFT_WET_REACH: f32 = 220.0;
 /// The struck crystals' sparks the tracer takes at once.
 const MAX_SPARKS: usize = 4;
 /// How far past the craft's middle the clouds' near band reaches, in world
@@ -624,6 +628,8 @@ impl Tracer {
             // The modern sky's cube map and the clouds' shadow map.
             binding(23, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             binding(24, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            // The water's memory (wave_field.rs).
+            binding(38, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             // The variable-size array must take the highest binding.
             binding(
                 TEXTURE_BINDING,
@@ -1146,7 +1152,7 @@ impl Tracer {
             ),
             (
                 vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
-                TEXTURE_SLOTS + 8,
+                TEXTURE_SLOTS + 9,
             ),
         ]
         .map(|(ty, descriptor_count)| vk::DescriptorPoolSize {
@@ -1745,6 +1751,8 @@ pub(super) struct FrameShape<'a> {
     /// briefing's pane): the tracer's has its ground, the raster's sky is
     /// always one.
     pub world_view: bool,
+    /// The water shows its memory this frame (`wave_field.rs`).
+    pub waves: bool,
 }
 
 /// The frame block (`pt_frame.glsl`), and what its writing decided for the
@@ -2003,8 +2011,12 @@ pub(super) fn frame_block(
         shape.splash_count as f32,
         water_look.rings.max(0.0),
         water_look.foam.clamp(0.0, 1.0),
-        water_look.spread.max(0.0),
-        water_look.width.max(1.0),
+        crate::scene_waves::CELL,
+        if shape.waves {
+            crate::scene_waves::SIDE as f32
+        } else {
+            0.0
+        },
     ]);
     put(&[shape.cutout_first as f32]);
     put(&[sky.sun.radius.clamp(0.0, 10.0).to_radians().cos()]);
@@ -2328,6 +2340,15 @@ pub(super) fn frame_block(
     for slot in 0..crate::cloud_wake::WAKE_POINTS {
         put(&wake.get(slot).copied().unwrap_or_default());
     }
+    // The craft the camera follows, wet where the water reached it
+    // (none under thermal vision).
+    let wet = if feed.infrared {
+        0.0
+    } else {
+        feed.craft_wet[1]
+    };
+    put(&feed.craft.unwrap_or_default());
+    put(&[CRAFT_WET_REACH, feed.craft_wet[0], wet]);
     debug_assert_eq!(at, FRAME_FLOATS);
     FrameBlock {
         block,
@@ -3864,6 +3885,13 @@ impl State {
             .map(|terrain| terrain.plane)
             .filter(|plane| *plane > -4096.0);
         let (spray, splashes) = water_splashes(&mut tracer.eruptions, feed, water_plane);
+        // The water's memory, which the splashes and the craft stir; the
+        // splash buffer keeps the eruptions, which glow under the water.
+        let waves = self.step_waves(core, command, feed, &splashes)?;
+        let splashes: Vec<[f32; 7]> = splashes
+            .into_iter()
+            .filter(|splash| splash[5] > 0.5)
+            .collect();
         let spray_bytes = bytes_of(&spray.records);
         self.grown(
             core,
@@ -3889,12 +3917,27 @@ impl State {
         } else {
             lighting.trails.max(0.0)
         };
-        let puffs = tracer.trails.records(
+        let mut puffs = tracer.trails.records(
             feed.clock_micros,
             feed.camera.eye,
             trail_looks,
             trail_strength,
         );
+        // The blasts' eruptions' mist rides the same grid.
+        if let Some(plane) = water_plane.filter(|_| !feed.infrared) {
+            let look = crate::modern_tuning::current().water(feed.world);
+            if look.glow <= 0.0 {
+                puffs.extend(tracer.eruptions.mist(
+                    feed.clock_micros,
+                    feed.camera.eye,
+                    plane,
+                    crate::scene_spray::SprayLook {
+                        plume: look.plume,
+                        drops: look.drops,
+                    },
+                ));
+            }
+        }
         let mut low = [f32::MAX; 3];
         let mut high = [f32::MIN; 3];
         for puff in &puffs {
@@ -4224,6 +4267,7 @@ impl State {
                     .map_or([0.3, 0.5, 0.55], |texture| texture.mean_colour()),
                 grid,
                 world_view: feed.terrain.is_some(),
+                waves,
             },
             self.modern,
         );
@@ -4635,6 +4679,11 @@ impl State {
             .sampler(sky_views.cube_sampler)
             .image_view(sky_views.cube)
             .image_layout(vk::ImageLayout::GENERAL)];
+        // The water's memory, linear and wrapped with the world.
+        let wave_info = [vk::DescriptorImageInfo::default()
+            .sampler(core.samplers[1])
+            .image_view(self.wave_view().expect("stepped before the trace"))
+            .image_layout(vk::ImageLayout::GENERAL)];
         let mist_history_info = sampled(mist_cells[1], SMOOTH_SAMPLER);
         let [mist_cells_info, mist_gathered_info, heat_info] =
             [mist_cells[0], mist_gathered, heat].map(storage);
@@ -4773,6 +4822,7 @@ impl State {
             write(gain_set, 2, buffer).buffer_info(&gain_info),
             write(gain_set, 3, image).image_info(&depth_info),
             write(set, 23, vk::DescriptorType::COMBINED_IMAGE_SAMPLER).image_info(&sky_cube_info),
+            write(set, 38, vk::DescriptorType::COMBINED_IMAGE_SAMPLER).image_info(&wave_info),
             write(set, 24, vk::DescriptorType::COMBINED_IMAGE_SAMPLER).image_info(&sky_shadow_info),
             write(composite_set, 4, vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
                 .image_info(&sky_clouds_info),

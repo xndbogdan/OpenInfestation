@@ -270,7 +270,8 @@ impl FrameDevice {
         }
     }
 
-    /// The raster world's `light` again, with its lamps (Vulkan's water).
+    /// The raster world's `light` again once its draws are in, with its
+    /// lamps and the craft's wakes (Vulkan's water).
     pub(crate) fn raster_lamps(&mut self, light: &crate::scene_feed::SceneFeed) {
         if let Self::Vulkan(frame) = self {
             frame.raster_lamps(light);

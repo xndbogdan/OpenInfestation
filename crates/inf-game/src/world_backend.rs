@@ -166,6 +166,12 @@ pub struct WorldSession {
     /// The port's own: the spray the player's craft throws up driving
     /// through the rain's puddles, for Vulkan's picture.
     pub craft_spray: crate::craft_spray::CraftSpray,
+    /// The port's own: where the water wet the player's craft, for
+    /// Vulkan's picture.
+    pub craft_wet: crate::craft_wet::CraftWet,
+    /// The port's own: the blasts' eruptions Vulkan's raster draws (the
+    /// tracer keeps its own), kept from frame to frame.
+    pub raster_eruptions: crate::scene_spray::Eruptions,
 }
 
 /// Status of the consumed player/message/manager retirement, not a native field.

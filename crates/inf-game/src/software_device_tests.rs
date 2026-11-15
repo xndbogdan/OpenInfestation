@@ -1840,9 +1840,10 @@ fn vulkan_raster_metal_mirrors_the_sky() {
 /// (`vk_mirror.comp`, `pt_splash.glsl`). Looking straight down at deep water
 /// 100 units under the eye, the sky beside it: a dim lamp 40 over the
 /// middle of the water, aimed down, lights it in the water's colour and
-/// glints on its ripples; a splash there rings the water and foams it,
-/// moving the glints and taking the lamp's light; beside the water nothing
-/// changes.
+/// glints on its ripples; a splash there, stirring the water's memory over
+/// the 48 ms its clock steps (`vk_waves.comp`), rings the water and foams
+/// it, moving the glints and taking the lamp's light; beside the water
+/// nothing changes.
 #[test]
 #[ignore = "opens a Vulkan device; run explicitly"]
 fn vulkan_raster_water_takes_splashes_and_lamps() {
@@ -1880,6 +1881,14 @@ fn vulkan_raster_water_takes_splashes_and_lamps() {
         let mut light = SceneFeed::default();
         light.begin(camera);
         light.water_level = Some(-100.0);
+        // A thousand units deep all round; the splash's frame comes 0.2 s
+        // after the others, its memory stepping as far as a frame may.
+        light.waves = Some(crate::scene_waves::WaveGround::around(
+            [0, 0, 0],
+            -100.0,
+            |_| -1100.0,
+        ));
+        light.clock_micros = if splash { 200_000 } else { 0 };
         if splash {
             light.splashes.push(SceneSplash {
                 position: [0.0, -100.0, 0.0],

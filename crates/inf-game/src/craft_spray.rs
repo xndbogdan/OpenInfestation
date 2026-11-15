@@ -1,10 +1,12 @@
 //! Port option, Vulkan only, the remaster's picture: the spray the player's
 //! craft throws up driving through the rain's puddles (2026-10-29: at a high
-//! speed through puddles, for example the buggy with turbo on, they splash a little). A short
-//! fan of drops off each of the craft's ground points that stands in a
-//! puddle, nothing at a crawl, growing with speed and largest at a turbo's,
-//! back in the puddle within a second, where some of its drops ring the
-//! water.
+//! speed through puddles, for example the buggy with turbo on, they splash a little)
+//! and through the lakes, wading (2026-11-15, [the water's memory](../../../docs/rt-plans/water-memory.md)),
+//! and the hovercraft's cushion over the water, a mist of spray even at
+//! rest. A short fan of drops off each of the craft's ground points that
+//! stands in a puddle or in the lake's surface, nothing at a crawl, growing
+//! with speed and largest at a turbo's, back in the water within a second,
+//! where some of its drops ring the water.
 //!
 //! Only a picture, outside the game's particle system: the craft's
 //! position, hull and velocity are read, never written, and the drops are
@@ -41,6 +43,13 @@ const TYRE_FACE: f64 = 14.0;
 /// How far above the ground under it a hull point may ride and still touch
 /// it (its samples rest about 8 above it).
 const TOUCH: i32 = 30;
+/// How deep a lake may stand over a ground point and still be thrown up
+/// by it, about a wheel's height (deeper, the wheel turns under it).
+const WADE: i32 = 110;
+/// How high over a lake's surface the hovercraft's point may ride and still
+/// throw its cushion's spray, and the least it throws at rest.
+const CUSHION: i32 = 120;
+const CUSHION_LEAST: f32 = 0.35;
 /// How long a ring spreads on the water, and the most the puddles take at
 /// once, the nearest (`pt_frame.glsl`'s `spray_rings`).
 const RING_SECONDS: f32 = 0.9;
@@ -66,11 +75,13 @@ pub struct SprayPoint {
 }
 
 /// The craft as it throws spray now: its ground points (each in a puddle or
-/// not) and its velocity in units a second.
+/// a lake or not), its velocity in units a second, and the least strength
+/// it throws at (a hovercraft's cushion; 0: none at rest).
 #[derive(Clone, Debug, PartialEq)]
 pub struct SprayCraft {
     pub points: Vec<SprayPoint>,
     pub velocity: [f32; 3],
+    pub least: f32,
 }
 
 /// A drop thrown: its velocity at launch, size, whether it is fine mist,
@@ -150,14 +161,18 @@ fn flight(up: f32) -> f32 {
 
 impl SprayCraft {
     /// The player's craft on `world` as it throws spray, if it is a form
-    /// that rides the ground (the buggy, the truck and the skimmer): its
-    /// four hull points ([`crate::object_runtime::ObjectArena::vehicle_hull_points`]),
-    /// each that touches the ground with the standing water under it as
-    /// `water` gives it (the puddles' shading's, at world X/Z).
+    /// that rides the ground or the water (the buggy, the truck, the
+    /// hovercraft and the skimmer): its four hull points
+    /// ([`crate::object_runtime::ObjectArena::vehicle_hull_points`]), each
+    /// that touches the ground with the standing water under it as `water`
+    /// gives it (the puddles' shading's, at world X/Z), or over the lake
+    /// whose surface stands at `plane`, at that surface: wading, or the
+    /// hovercraft riding just over it.
     pub fn of_player(
         world: &crate::world_backend::WorldSession,
         executable: inf_formats::FrontendExecutable<'_>,
         water: impl Fn([f32; 2]) -> f32,
+        plane: Option<i16>,
     ) -> Option<Self> {
         let arena = &world.arena;
         let player = arena.first_player()?;
@@ -167,9 +182,10 @@ impl SprayCraft {
             .peek(state.handle_d8)
             .or_else(|| handles.peek(state.handle_d4))?;
         let form = arena.selector2_actor(unit).ok()?.dwords_1e8_1f4[0];
-        if !matches!(form, 1 | 2 | 5) {
+        if !matches!(form, 1 | 2 | 3 | 5) {
             return None;
         }
+        let hover = form == 3;
         let velocity = arena
             .actor(unit)
             .ok()?
@@ -181,16 +197,30 @@ impl SprayCraft {
             .iter()
             .map(|&[x, y, z]| {
                 let ground = world.terrain.height_at([x, z]);
-                let touches = i32::from(y as i16) - i32::from(ground) <= TOUCH;
+                let y = i32::from(y as i16);
+                let touches = y - i32::from(ground) <= TOUCH;
                 let across = [
                     wrapped(f64::from(x), f64::from(centre[0])) as f32,
                     wrapped(f64::from(z), f64::from(centre[2])) as f32,
                 ];
                 let length = across[0].hypot(across[1]).max(1.0);
+                let out = across.map(|axis| axis / length);
+                if let Some(plane) = plane.filter(|plane| *plane > ground) {
+                    let thrown = if hover {
+                        y - i32::from(plane) <= CUSHION
+                    } else {
+                        touches && i32::from(plane) - i32::from(ground) <= WADE
+                    };
+                    return SprayPoint {
+                        world: [f64::from(x), f64::from(plane), f64::from(z)],
+                        out,
+                        water: if thrown { 1.0 } else { 0.0 },
+                    };
+                }
                 SprayPoint {
                     world: [f64::from(x), f64::from(ground), f64::from(z)],
-                    out: across.map(|axis| axis / length),
-                    water: if touches {
+                    out,
+                    water: if touches && !hover {
                         water([f32::from(x), f32::from(z)])
                     } else {
                         0.0
@@ -198,7 +228,11 @@ impl SprayCraft {
                 }
             })
             .collect();
-        Some(Self { points, velocity })
+        Some(Self {
+            points,
+            velocity,
+            least: if hover { CUSHION_LEAST } else { 0.0 },
+        })
     }
 }
 
@@ -248,7 +282,7 @@ impl CraftSpray {
                 }
                 None => craft.velocity[axis],
             });
-            let strength = strength(velocity);
+            let strength = strength(velocity).max(craft.least);
             if strength <= 0.0 {
                 continue;
             }
@@ -492,6 +526,7 @@ mod tests {
                 },
             ],
             velocity: [speed, 0.0, 0.0],
+            least: 0.0,
         }
     }
 
@@ -573,5 +608,24 @@ mod tests {
         dry.update(0, Some(craft(0.0, 1700.0, 1.0)), |_| 0.0);
         dry.update(48_000, Some(craft(82.0, 1700.0, 1.0)), |_| 0.0);
         assert!(dry.rings(700_000, [0.0; 3]).is_empty());
+    }
+
+    /// A hovercraft's cushion throws its least spray at rest, where a
+    /// wheeled craft at rest throws none.
+    #[test]
+    fn a_cushion_sprays_at_rest() {
+        let at_rest = |least: f32| {
+            let mut spray = CraftSpray::default();
+            for frame in 0..=10 {
+                let still = SprayCraft {
+                    least,
+                    ..craft(0.0, 0.0, 1.0)
+                };
+                spray.update(frame * 16_000, Some(still), wet);
+            }
+            spray.drops(160_000, [0.0; 3]).len()
+        };
+        assert_eq!(at_rest(0.0), 0);
+        assert!(at_rest(CUSHION_LEAST) > 0);
     }
 }

@@ -56,6 +56,7 @@ mod thermal;
 mod thread;
 mod trace;
 mod upscale;
+mod wave_field;
 mod xess;
 
 use crate::{
@@ -290,6 +291,9 @@ struct State {
     sky: Option<Box<sky::Sky>>,
     /// The raster's own modern sky, made on first use.
     raster_sky: Option<Box<raster_sky::RasterSky>>,
+    /// The water's memory, the tracer's and the raster's, made on first
+    /// use.
+    waves: Option<Box<wave_field::WaveField>>,
     /// The lighting preset's grade, made on first use.
     grade: Option<Box<grade::Grade>>,
     /// The grade this frame's traced world waits for, once its last draw
@@ -700,6 +704,7 @@ impl VkDevice {
                 metal: None,
                 sky: None,
                 raster_sky: None,
+                waves: None,
                 grade: None,
                 graded: None,
                 traced_fog: false,
@@ -1002,6 +1007,9 @@ impl Drop for VkDevice {
             }
             if let Some(sky) = state.raster_sky.take() {
                 sky.destroy(core, &mut allocator);
+            }
+            if let Some(waves) = state.waves.take() {
+                waves.destroy(core, &mut allocator);
             }
             if let Some(sky) = state.sky.take() {
                 sky.destroy(core, &mut allocator);
@@ -3587,12 +3595,14 @@ impl VkFrame {
         begun.is_some_and(|begun| begun.follows)
     }
 
-    /// The raster world's `light` again, now with the vehicles' lamps the
-    /// light pass kept: where the device shades the water, its frame block
-    /// is written anew for the water's pass.
+    /// The raster world's `light` again once its draws are in, now with the
+    /// vehicles' lamps the light pass kept and the craft's wakes: where the
+    /// device shades the water, its frame block is written anew for the
+    /// water's pass and the water's memory stepped.
     pub(crate) fn raster_lamps(&mut self, light: &crate::scene_feed::SceneFeed) {
         if self.water_shaded {
-            self.with_state(|state, _, _| state.raster_lamps(light));
+            // SAFETY: the steps record on the device's own buffer.
+            self.with_state(|state, core, _| unsafe { state.raster_lamps(core, light) });
         }
     }
 

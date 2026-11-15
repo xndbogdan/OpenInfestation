@@ -37,9 +37,9 @@ const MIRROR_FLOATS: usize = 32;
 /// depth, the water's mask, the result, the depth's pyramid (which the
 /// pyramid's pass writes), the frame block, the clouds' shadow map, the
 /// water's own colour, as retail laid its texture, the wet ground's image,
-/// the ground's grid points and its cells' diagonals, the sky's cube, and
-/// the water's splashes.
-const KINDS: [vk::DescriptorType; 13] = [
+/// the ground's grid points and its cells' diagonals, the sky's cube, the
+/// blasts' eruptions and the water's memory.
+const KINDS: [vk::DescriptorType; 14] = [
     vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
     vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
     vk::DescriptorType::STORAGE_IMAGE,
@@ -53,6 +53,7 @@ const KINDS: [vk::DescriptorType; 13] = [
     vk::DescriptorType::STORAGE_BUFFER,
     vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
     vk::DescriptorType::STORAGE_BUFFER,
+    vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
 ];
 
 /// How the rain wets the ground this frame, as `vk_mirror.comp`'s
@@ -320,7 +321,7 @@ impl Mirror {
                 .descriptor_count(PASSES),
             vk::DescriptorPoolSize::default()
                 .ty(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
-                .descriptor_count(3 * PASSES),
+                .descriptor_count(4 * PASSES),
         ];
         for pool in &mut self.pool {
             *pool = device
@@ -722,6 +723,19 @@ impl State {
                 .dst_binding(12)
                 .descriptor_type(KINDS[12])
                 .buffer_info(&splash_info),
+        );
+        // The water's memory, linear and wrapped with the world (stepped
+        // with the frame block, so made by now).
+        let wave_info = [vk::DescriptorImageInfo::default()
+            .sampler(core.samplers[1])
+            .image_view(self.wave_view().unwrap_or(mask.view))
+            .image_layout(vk::ImageLayout::GENERAL)];
+        writes.push(
+            vk::WriteDescriptorSet::default()
+                .dst_set(set)
+                .dst_binding(13)
+                .descriptor_type(KINDS[13])
+                .image_info(&wave_info),
         );
         core.device.update_descriptor_sets(&writes, &[]);
         core.device.cmd_bind_descriptor_sets(

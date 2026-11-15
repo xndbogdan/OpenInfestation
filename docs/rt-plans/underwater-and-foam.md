@@ -1,6 +1,9 @@
 # Underwater blasts and foam: plan
 
-Status: plan for review (2026-10-23). Nothing here is built.
+Status: plan for review (2026-10-23). Nothing here is built. Since
+2026-11-15 the foam, the rings and the eruption's surface come from the
+water's memory ([water-memory.md](water-memory.md)), which built its
+"foam map" alternative.
 Code lines are as of `7686c4b2a`; another commit moved `pt_trace.comp` by
 one line while this was written, so expect small drifts.
 

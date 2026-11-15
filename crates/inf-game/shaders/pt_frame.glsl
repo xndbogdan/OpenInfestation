@@ -172,14 +172,14 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     float sky_disc;
     float sky_stars;
     float sky_horizon_glow;
-    // Retail's splashes in the splash buffer, and their look: how steeply
-    // their rings tilt the water, how white their foam is, how far a ring
-    // spreads over a splash's life and how wide it is.
+    // The blasts' eruptions in the splash buffer, and the water's look: how
+    // steeply its waves tilt it (1: as their heights make them) and how
+    // white its foam is; then the water's memory (pt_splash.glsl): a cell's
+    // side in world units and its cells a side (0: none).
     float splash_count;
     float splash_rings;
     float splash_foam;
-    float splash_spread;
-    float splash_width;
+    vec2 wave_field;
     // The masked sprites' triangles start after the opaque models'.
     float cutout_first;
     // The cosine of the angular radius of the sun's drawn disc (the modern
@@ -344,7 +344,8 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // many places, and each (eye-relative, at the ground) with how hard in
     // w (0: not moving). A wheeled form's wheels on the ground, else its
     // middle. Negative w: a wheel or the hull stirring the water, at its
-    // plane (pt_splash.glsl's splashed).
+    // plane, which the puddles skip (the water's memory takes them,
+    // scene_waves.rs).
     float wake_count;
     vec4 wakes[6];
     // Where the craft's spray falls back on the puddles (craft_spray.rs):
@@ -389,6 +390,12 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // eye-relative with its age in seconds in w, the craft now first.
     float cloud_wake_count;
     vec4 cloud_wake[WAKE_POINTS];
+    // The craft the camera follows, wet where the water reached it
+    // (craft_wet.rs): its middle (eye-relative) and how far from it its wet
+    // reaches, then its wet line (eye-relative height) and how wet it is
+    // (0: dry).
+    vec4 craft_wet_at;
+    vec2 craft_wet;
 } frame;
 
 // A lamp's light at eye-relative `position`, before the surface's facing

@@ -1281,18 +1281,44 @@ fn draw_world_pass<'r>(
             &water,
         );
         let terrain = &world.terrain;
+        // The lakes too (not lava): the craft wading, the hovercraft over
+        // them.
+        let lake = (plane > -4096 && water.glow <= 0.0).then_some(plane);
         let water_at = |xz: [f32; 2]| {
-            look.as_ref().map_or(0.0, |look| {
-                crate::scene_ground_detail::water_at(terrain, xz, look)
-            })
+            let in_lake = lake.is_some_and(|plane| {
+                let word = |axis: f32| axis.rem_euclid(65536.0) as u16;
+                terrain.height_at([word(xz[0]), word(xz[1])]) < plane
+            });
+            if in_lake {
+                1.0
+            } else {
+                look.as_ref().map_or(0.0, |look| {
+                    crate::scene_ground_detail::water_at(terrain, xz, look)
+                })
+            }
         };
-        let craft = look
-            .as_ref()
-            .and_then(|_| crate::craft_spray::SprayCraft::of_player(world, executable, water_at));
+        let craft = crate::craft_spray::SprayCraft::of_player(world, executable, water_at, lake);
         world.craft_spray.update(spray_now, craft, water_at);
+        // The craft the camera follows, wet where the water reached it.
+        let middle = inputs.craft.map(|craft| view.eye[1] as f32 + craft[1]);
+        let under = inputs.craft.and_then(|craft| {
+            let word = |axis: usize| (view.eye[axis] as f32 + craft[axis]).round() as i32 as u16;
+            lake.filter(|plane| terrain.height_at([word(0), word(2)]) < *plane)
+        });
+        world
+            .craft_wet
+            .update(spray_now, middle, under.map(f32::from));
         world.craft_spray.rings(spray_now, view.eye.map(f64::from))
     } else {
         Vec::new()
+    };
+    // The craft's wet line, eye-relative, and how wet it is.
+    let craft_wet = match (sprays, inputs.craft) {
+        (true, Some(craft)) => {
+            let [mark, wet] = world.craft_wet.look();
+            [craft[1] + mark, wet]
+        }
+        _ => [0.0; 2],
     };
     if raster {
         let tuning = crate::modern_tuning::current();
@@ -1317,6 +1343,7 @@ fn draw_world_pass<'r>(
             water_reflect.is_some() && murk.is_none() && host.backend.pixels.frame.shades_water();
         let mut light = raster_sky_feed(host.backend, &host.resources, &inputs, camera, wets);
         light.spray_rings = spray_rings.clone();
+        light.craft_wet = craft_wet;
         let sky = backdrop.is_none()
             && tuning.sky(inputs.world).style == crate::modern_tuning::SkyStyle::Modern;
         host.backend
@@ -1328,6 +1355,7 @@ fn draw_world_pass<'r>(
         feed_world(host.backend, host.resources, inputs);
         if let Some(builder) = host.backend.scene_feed_mut() {
             builder.feed.spray_rings = spray_rings;
+            builder.feed.craft_wet = craft_wet;
         }
     }
 
@@ -1488,11 +1516,16 @@ fn draw_world_pass<'r>(
         // The headlamps, before the furniture's crystals catch them.
         feed_lamps(host.backend, &lamps, view.eye);
         // The raster's water takes the same lamps, in the water's own colour
-        // as the tracer's (its ground keeps retail's pools).
-        if let Some(light) = raster_light.as_mut().filter(|_| !lamps.is_empty()) {
-            let tuning = crate::modern_tuning::current();
-            light.lamps = place_lamps(&lamps, view.eye, tuning.headlight());
-            light.water_hue = Some(host.backend.water_colour().unwrap_or(WATER_HUE));
+        // as the tracer's (its ground keeps retail's pools), and the craft's
+        // wakes, which stir its memory and its puddles.
+        if let Some(light) = raster_light.as_mut() {
+            if !lamps.is_empty() {
+                let tuning = crate::modern_tuning::current();
+                light.lamps = place_lamps(&lamps, view.eye, tuning.headlight());
+                light.water_hue = Some(host.backend.water_colour().unwrap_or(WATER_HUE));
+            }
+            let wake = player_wake(world, view.eye);
+            light.wakes = raster_wakes(light, wake, world, executable, view.eye);
             host.backend.pixels.frame.raster_lamps(light);
         }
         // The vehicles thrusting, whose exhausts leave trails, and their
@@ -1585,11 +1618,7 @@ fn draw_world_pass<'r>(
                 outcome.submitted_models += draw.common_models + draw.late_models;
                 outcome.skips.object_draw += draw.omissions.len();
                 for omission in draw.omissions {
-                    let key = format!(
-                        "draw {:?} {:?}",
-                        omission.object,
-                        omission.reason
-                    );
+                    let key = format!("draw {:?} {:?}", omission.object, omission.reason);
                     if world.draw_omissions_logged.insert(key) {
                         eprintln!(
                             "World object draw {:?} omitted after reached writes (clock {}): {:?}",
@@ -1792,10 +1821,7 @@ fn draw_world_pass<'r>(
             }
             Err(error) => {
                 outcome.terrain_omissions += 1;
-                let line = format!(
-                    "{} terrain: remaining terrain skipped ({error:?})",
-                    "world"
-                );
+                let line = format!("{} terrain: remaining terrain skipped ({error:?})", "world");
                 if world.draw_omissions_logged.insert(line.clone()) {
                     eprintln!("{line}");
                 }
@@ -1967,6 +1993,30 @@ fn draw_world_pass<'r>(
     let flush_scope = crate::cpu_profile::scope("world: flush batch (raster replay)");
     host.submit(SceneCommand::FlushBatch)?;
     drop(flush_scope);
+    // The blasts' eruptions over Vulkan's raster, which traces no spray:
+    // their mist and drops as soft fans, from the raster's own blasts.
+    if let Some((light, plane)) = raster_light
+        .as_ref()
+        .and_then(|light| light.water_level.map(|plane| (light, plane)))
+        .filter(|_| water.glow <= 0.0)
+    {
+        world.raster_eruptions.update(spray_now, &light.blasts);
+        let look = crate::scene_spray::SprayLook {
+            plume: water.plume,
+            drops: water.drops,
+        };
+        let eye = view.eye.map(f64::from);
+        let drops = eruption_drops(
+            &world.raster_eruptions.spray(spray_now, eye, plane, look),
+            &world.raster_eruptions.mist(spray_now, eye, plane, look),
+        );
+        if !drops.is_empty() {
+            // White water: the world's tint, halfway to white.
+            let white = spray_colour(&world.presentation).map(|channel| 0.5 + 0.5 * channel);
+            let fans = crate::craft_spray::fans(&camera, &drops, white);
+            host.backend.pixels.frame.add_spray_fans(&fans);
+        }
+    }
     // The craft's spray over the world drawn, traced or not.
     if sprays {
         let drops = world.craft_spray.drops(spray_now, view.eye.map(f64::from));
@@ -2240,6 +2290,12 @@ fn feed_splashes(feed: &mut crate::scene_feed::SceneFeed, inputs: &WorldFeedInpu
             }
         })
         .collect();
+    // The water round the eye for its memory (Vulkan's remaster).
+    feed.waves = (plane > -4096).then(|| {
+        crate::scene_waves::WaveGround::around(inputs.eye, f32::from(plane as i16), |at| {
+            f32::from(terrain.height_at(at))
+        })
+    });
 }
 
 /// Retail's colours a world's light and fog are made from: its sky's (H7
@@ -2420,6 +2476,39 @@ pub(crate) fn precip_share(
 
 /// The colour the craft's spray is drawn in (0 to 1): white water in the
 /// world's light, retail's tint (`005474E0`), a little under it.
+/// An eruption's `mist` (its puffs) and `spray`'s drops as the raster
+/// draws them, the mist first: soft discs, a puff the fainter the thinner,
+/// each drop drawn out along its motion as the tracer draws it out, white
+/// water near opaque and clear water less.
+fn eruption_drops(
+    spray: &crate::scene_spray::Spray,
+    mist: &[[f32; 8]],
+) -> Vec<crate::craft_spray::SprayDrop> {
+    let puffs =
+        mist.iter().map(
+            |&[x, y, z, radius, _, _, _, density]| crate::craft_spray::SprayDrop {
+                position: [x, y, z],
+                velocity: [0.0; 3],
+                radius: 0.8 * radius,
+                alpha: (0.12 * density).min(0.5),
+            },
+        );
+    let drops = spray.records[spray.sources..]
+        .iter()
+        .map(|&[x, y, z, radius, dx, dy, dz, kind]| {
+            // fans() streaks a drop back along its velocity for its
+            // STREAK_SECONDS (0.03 s): as far as the tracer draws it out.
+            let speed = radius / 0.03;
+            crate::craft_spray::SprayDrop {
+                position: [x, y, z],
+                velocity: [dx * speed, dy * speed, dz * speed],
+                radius,
+                alpha: if kind > 0.5 { 1.0 } else { 0.6 },
+            }
+        });
+    puffs.chain(drops).collect()
+}
+
 fn spray_colour(presentation: &crate::world_backend::WorldPresentationState) -> [f32; 3] {
     let [r, g, b, _] = presentation.tint_word.to_le_bytes();
     [r, g, b].map(|channel| 0.9 * f32::from(channel) / 255.0)
@@ -2432,6 +2521,8 @@ struct PlayerWake {
     unit: crate::object_runtime::ObjectId,
     centre: [f32; 3],
     strength: f32,
+    /// Its velocity over the ground (X and Z, world units a second).
+    velocity: [f32; 2],
 }
 
 /// How far above the ground a wheel's lowest point may ride and still
@@ -2475,6 +2566,8 @@ fn craft_wakes(
             .map(|plane| crate::scene_feed::SceneWake {
                 position: [at[0], plane, at[2]],
                 strength: -wake.strength,
+                hull: false,
+                velocity: wake.velocity,
             })
     };
     let drawn: Vec<u32> = feed
@@ -2494,11 +2587,14 @@ fn craft_wakes(
         plane.is_some_and(|plane| {
             (-HULL_UNDER_WATER..=HULL_OVER_WATER).contains(&(wake.centre[1] - plane))
         }),
-    );
+    )
+    .map(|wake| crate::scene_feed::SceneWake { hull: true, ..wake });
     if wheels.is_empty() {
         return std::iter::once(crate::scene_feed::SceneWake {
             position: wake.centre,
             strength: wake.strength,
+            hull: false,
+            velocity: wake.velocity,
         })
         .chain(hull)
         .collect();
@@ -2517,10 +2613,48 @@ fn craft_wakes(
             (low - ground <= WHEEL_TOUCH).then_some(crate::scene_feed::SceneWake {
                 position: [wheel.hub[0], ground, wheel.hub[2]],
                 strength: wake.strength,
+                hull: false,
+                velocity: wake.velocity,
             })
         })
         .chain(hull)
         .collect()
+}
+
+/// Where the player's craft stirs the water and the puddles from where its
+/// draws laid no wheels (Vulkan's raster): [`craft_wakes`]'s, and each of
+/// its hull points (`vehicle_hull_points`, a wheeled form's ground points,
+/// which rest a little above the ground) that the water's surface crosses,
+/// a wheel's height up, at the plane.
+fn raster_wakes(
+    feed: &crate::scene_feed::SceneFeed,
+    wake: Option<PlayerWake>,
+    world: &crate::world_backend::WorldSession,
+    executable: inf_formats::FrontendExecutable<'_>,
+    eye: [i32; 3],
+) -> Vec<crate::scene_feed::SceneWake> {
+    let mut wakes = craft_wakes(feed, wake, &world.terrain, eye);
+    let plane = world.terrain.plane_base() >> world.terrain.plane_shift();
+    let (Some(wake), true) = (wake, plane > -4096) else {
+        return wakes;
+    };
+    let Some(points) = world.arena.vehicle_hull_points(wake.unit, executable) else {
+        return wakes;
+    };
+    let from = |word: u16, axis: usize| f32::from(i32::from(word).wrapping_sub(eye[axis]) as i16);
+    let plane = f32::from(plane as i16) - eye[1] as f32;
+    for [x, y, z] in points {
+        let low = from(y, 1) - WHEEL_TOUCH;
+        if (low..=low + 2.0 * HULL_UNDER_WATER).contains(&plane) {
+            wakes.push(crate::scene_feed::SceneWake {
+                position: [from(x, 0), plane, from(z, 2)],
+                strength: -wake.strength,
+                hull: false,
+                velocity: wake.velocity,
+            });
+        }
+    }
+    wakes
 }
 
 /// Where the player's craft is (16-bit world words) while the camera
@@ -2547,13 +2681,8 @@ fn player_wake(world: &crate::world_backend::WorldSession, eye: [i32; 3]) -> Opt
         .peek(state.handle_d8)
         .or_else(|| handles.peek(state.handle_d4))?;
     let actor = world.arena.actor(unit).ok()?;
-    let speed = actor
-        .words_8e_92
-        .map(|word| f32::from(word as i16))
-        .iter()
-        .map(|axis| axis * axis)
-        .sum::<f32>()
-        .sqrt();
+    let velocity = actor.words_8e_92.map(|word| f32::from(word as i16));
+    let speed = velocity.iter().map(|axis| axis * axis).sum::<f32>().sqrt();
     // Faint at a crawl, full by a brisk drive (small
     // ripples also show when driving over a puddle).
     let strength = ((speed - 10.0) / 160.0).clamp(0.0, 1.0);
@@ -2569,6 +2698,7 @@ fn player_wake(world: &crate::world_backend::WorldSession, eye: [i32; 3]) -> Opt
         unit,
         centre: [from(x, 0), from(y, 1), from(z, 2)],
         strength,
+        velocity: [velocity[0], velocity[2]],
     })
 }
 

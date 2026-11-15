@@ -676,7 +676,8 @@ sources into the raster's frame block and a splash buffer beside it:
   water (128 splashes, culled per workgroup) and 1.6 to 3.2 ms with the
   lamps over the water at night (the night drive's 128 splashes, not its
   lamps). Cut down the same day: each workgroup makes its kept rings once
-  into shared memory (`cull_splashes`: radius, width, strength and foam's
+  into shared memory (`cull_splashes`, gone since 2026-11-15: the water's
+  memory, [water-memory.md](water-memory.md), replaced the splash loops: radius, width, strength and foam's
   radius, packed in the buffer's order) and every pixel walks that list
   (`pt_splash.glsl`'s `FOR_EACH_RING`), rather than finding each in a
   bit mask and reading and working it out of the buffer again. The frames

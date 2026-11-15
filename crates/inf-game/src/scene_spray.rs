@@ -38,8 +38,8 @@ const FALL_SECONDS: f32 = 1.2;
 /// The most clear drops an eruption throws, and how many fly in each of
 /// its jets, the large and the small.
 const DROPS: usize = 160;
-const LARGE_JET: usize = 96;
-const SMALL_JET: usize = 48;
+const LARGE_JET: usize = 56;
+const SMALL_JET: usize = 28;
 /// The clear drops are gathered by their bearing into this many sources.
 const SECTORS: usize = 8;
 /// The share of a jet's water that flies as fine spray round its column.
@@ -47,6 +47,14 @@ const FINE_SHARE: f32 = 0.35;
 /// What a drop is: clear water, which glints, or white water.
 const CLEAR: f32 = 0.0;
 const WHITE: f32 = 1.0;
+/// The mist an eruption leaves (2026-11-15: most of a blast's white water
+/// in other games' is mist, not drops): a column of puffs up its plume and
+/// a ring rolling out over the water (its base surge), white, as dense as
+/// [`MIST_DENSITY`] (per thousand units) at first and gone by its end,
+/// [`MIST_PUFFS`] in the ring.
+const MIST_DENSITY: f32 = 4.0;
+const MIST_PUFFS: usize = 8;
+const MIST_COLOR: [f32; 3] = [0.9, 0.92, 0.95];
 
 /// One blast in the water: where it rises, when it went off on the game's
 /// clock (microseconds), how strongly (1 just under the surface, less
@@ -480,6 +488,61 @@ impl Eruptions {
         &self.list
     }
 
+    /// This frame's mist at `now`, seen from `eye`, over water whose plane
+    /// stands at `water_level`: puffs as the thrusters' trails lay them
+    /// (eye-relative middle, radius, colour, density per thousand units),
+    /// up each plume and in a ring rolling out from it, thickening over its
+    /// first fifth of a second and thinning out by its end.
+    pub fn mist(
+        &self,
+        now: u64,
+        eye: [f64; 3],
+        water_level: f32,
+        look: SprayLook,
+    ) -> Vec<[f32; 8]> {
+        let mut puffs = Vec::new();
+        if look.plume <= 0.0 {
+            return puffs;
+        }
+        for eruption in &self.list {
+            let time = seconds(now.saturating_sub(eruption.born));
+            let left = (1.0 - time / ERUPTION_SECONDS).max(0.0);
+            let density = MIST_DENSITY * (time / 0.2).min(1.0) * left * left;
+            if density <= 0.0 {
+                continue;
+            }
+            let height = look.plume * eruption.strength.min(1.25);
+            let [x, y, z] = [
+                wrapped(f64::from(eruption.x), eye[0]) as f32,
+                (f64::from(water_level) - eye[1]) as f32,
+                wrapped(f64::from(eruption.z), eye[2]) as f32,
+            ];
+            let [r, g, b] = MIST_COLOR;
+            for share in [0.3, 0.6, 0.9] {
+                let rise = height * share * (time / 0.6).min(1.0);
+                let radius = height * (0.18 + 0.12 * share) * (0.6 + 0.4 * time.sqrt());
+                puffs.push([x, y + rise, z, radius, r, g, b, density]);
+            }
+            let out = height * (0.15 + 0.6 * time.sqrt());
+            for k in 0..MIST_PUFFS {
+                let turn = std::f32::consts::TAU * (k as f32 + 0.5 * (eruption.seed & 1) as f32)
+                    / MIST_PUFFS as f32;
+                let radius = height * (0.12 + 0.1 * time);
+                puffs.push([
+                    x + turn.cos() * out,
+                    y + 0.4 * radius,
+                    z + turn.sin() * out,
+                    radius,
+                    r,
+                    g,
+                    b,
+                    0.7 * density,
+                ]);
+            }
+        }
+        puffs
+    }
+
     /// This frame's spray at `now`, seen from `eye` (world units), over
     /// water whose plane stands at `water_level`.
     pub fn spray(&self, now: u64, eye: [f64; 3], water_level: f32, look: SprayLook) -> Spray {
@@ -728,5 +791,36 @@ mod tests {
             last = reach;
         }
         assert_eq!(spray.sources + counted, spray.records.len());
+    }
+
+    /// An eruption's mist thickens, rolls out and is gone by its end.
+    #[test]
+    fn the_mist_rolls_out_and_thins() {
+        let mut eruptions = Eruptions::default();
+        let blast = SceneBlast {
+            world: [1000, 0, 1000],
+            depth: Some(100.0),
+            large: false,
+        };
+        eruptions.update(1_000_000, &[blast]);
+        let look = SprayLook {
+            plume: 520.0,
+            drops: 0.7,
+        };
+        let at = |micros: u64| eruptions.mist(micros, [1000.0, 0.0, 1000.0], 0.0, look);
+        let early = at(1_100_000);
+        let later = at(2_000_000);
+        assert_eq!(early.len(), 3 + MIST_PUFFS);
+        assert!(
+            early[0][7] < later[0][7],
+            "thickens over its first fifth of a second"
+        );
+        let reach = |puffs: &[[f32; 8]]| puffs[3][0].hypot(puffs[3][2]);
+        assert!(reach(&early) < reach(&later));
+        assert!(at(5_600_000).is_empty());
+        let off = SprayLook { plume: 0.0, ..look };
+        assert!(eruptions
+            .mist(2_000_000, [1000.0, 0.0, 1000.0], 0.0, off)
+            .is_empty());
     }
 }

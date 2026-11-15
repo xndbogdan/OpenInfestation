@@ -818,8 +818,9 @@ impl SoftwareFrame {
         })
     }
 
-    /// The raster world's `light` again, now with the vehicles' lamps the
-    /// light pass kept, for the water a device shades.
+    /// The raster world's `light` again once its draws are in, now with the
+    /// vehicles' lamps the light pass kept and the craft's wakes, for the
+    /// water a device shades.
     pub(crate) fn raster_lamps(&mut self, light: &crate::scene_feed::SceneFeed) {
         if let Some(device) = &mut self.device {
             device.raster_lamps(light);

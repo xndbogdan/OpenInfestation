@@ -92,15 +92,18 @@ void main() {
                       0.02);
     vec3 normal = normalize(v_normal.xyz / rhw);
     vec3 view = native_direction(v_native - 0.5);
-    float soaked = 0.0;
-    if (frame.wet_models > 0.0) {
-        bool coat;
-        wet_model(normal.y, (v_material.y >> 16) != 0u, metal, rough, soaked, coat);
-    }
     // Where the pixel lies, from its depth (1 - near / z): under the water's
     // plane the sky does not reach it.
     float z = frame.near / max(1.0 - v_depth, 1.0e-7);
-    float height = frame.eye.y + view.y * z / max(dot(view, frame.forward), 1.0e-4);
+    vec3 point = view * (z / max(dot(view, frame.forward), 1.0e-4));
+    float height = frame.eye.y + point.y;
+    // The rain's wet, or the water's on the craft.
+    float soaked = 0.0;
+    float wet = max(frame.wet_models, craft_wetness(point));
+    if (wet > 0.0) {
+        bool coat;
+        wet_model(wet, normal.y, (v_material.y >> 16) != 0u, metal, rough, soaked, coat);
+    }
     if (metal > 0.0 && height >= frame.water_level) {
         // The rain darkens bare rubber as it soaks it, in retail's tones,
         // as the ground.
