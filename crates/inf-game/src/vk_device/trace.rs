@@ -122,7 +122,9 @@ const FRAME_FLOATS: usize = 267
     + 4 * MAX_SPARKS
     + 4 * MAX_SPARKS * 2 * crate::crystal_flares::ARC_PAIRS
     + 9
-    + 4 * crate::cloud_wake::WAKE_POINTS
+    + 8 * crate::cloud_wake::MOST_HOLES
+    + 1
+    + 8 * crate::cloud_wake::MOST_FLASHES
     + 6;
 /// How far from the craft's middle its wet line wets what lies under it
 /// (`pt_wet.glsl`'s `craft_wetness`): past its far side.
@@ -2496,15 +2498,21 @@ pub(super) fn frame_block(
             (craft.iter().map(|axis| axis * axis).sum::<f32>().sqrt() + CRAFT_REACH).min(4000.0)
         }),
     ]);
-    // The craft's wake through them, only under the modern sky's clouds.
-    let wake = if clouded {
-        &feed.cloud_wake[..feed.cloud_wake.len().min(crate::cloud_wake::WAKE_POINTS)]
-    } else {
-        &[][..]
-    };
-    put(&[wake.len() as f32]);
-    for slot in 0..crate::cloud_wake::WAKE_POINTS {
-        put(&wake.get(slot).copied().unwrap_or_default());
+    // The holes in them and the blasts' flashes in them, only under the
+    // modern sky's clouds.
+    for (list, most) in [
+        (&feed.cloud_holes, crate::cloud_wake::MOST_HOLES),
+        (&feed.cloud_flashes, crate::cloud_wake::MOST_FLASHES),
+    ] {
+        let taken = if clouded {
+            &list[..list.len().min(most)]
+        } else {
+            &[][..]
+        };
+        put(&[taken.len() as f32]);
+        for slot in 0..most {
+            put(&taken.get(slot).copied().unwrap_or_default());
+        }
     }
     // The craft the camera follows, wet where the water reached it
     // (none under thermal vision).

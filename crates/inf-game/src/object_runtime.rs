@@ -469,6 +469,16 @@ impl ObjectId {
     pub fn slot(self) -> usize {
         self.slot
     }
+
+    /// An id for a test that keys by objects without an arena.
+    #[cfg(test)]
+    pub(crate) fn for_test(slot: usize) -> Self {
+        Self {
+            arena: 0,
+            slot,
+            generation: 0,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Error)]

@@ -48,9 +48,10 @@ struct Lamp {
 #define MAX_LAMPS 16
 // A struck crystal's pairs of arc anchors (crystal_flares.rs's ARC_PAIRS).
 #define ARC_PAIRS 6
-// The points of the craft's wake through the clouds (cloud_wake.rs's
-// WAKE_POINTS).
-#define WAKE_POINTS 12
+// The holes in the clouds and the blasts' flashes in them (cloud_wake.rs's
+// MOST_HOLES and MOST_FLASHES).
+#define CLOUD_HOLES 32
+#define CLOUD_FLASHES 4
 
 #ifndef FRAME_SET
 #define FRAME_SET 0
@@ -386,10 +387,17 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // Implanter's missile and without a craft), which keep it in sight.
     float cloud_rise;
     float cloud_craft;
-    // The craft's wake through them (cloud_wake.rs): how many points, each
-    // eye-relative with its age in seconds in w, the craft now first.
-    float cloud_wake_count;
-    vec4 cloud_wake[WAKE_POINTS];
+    // The holes in them (cloud_wake.rs: the craft's wake, what flies fast
+    // through them, the blasts'), nearest first: how many, each two, one
+    // end (eye-relative) and its radius, the other and how much of the
+    // cloud it clears (0 to 1).
+    float cloud_hole_count;
+    vec4 cloud_holes[2 * CLOUD_HOLES];
+    // The blasts' flashes lighting them from inside: how many, each two,
+    // where (eye-relative) and how far its light carries into the cloud (to
+    // 1/e), its light and how much of its flash is left (0 to 1).
+    float cloud_flash_count;
+    vec4 cloud_flashes[2 * CLOUD_FLASHES];
     // The craft the camera follows, wet where the water reached it
     // (craft_wet.rs): its middle (eye-relative) and how far from it its wet
     // reaches, then its wet line (eye-relative height) and how wet it is

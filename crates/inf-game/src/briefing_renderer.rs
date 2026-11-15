@@ -541,7 +541,8 @@ impl SoftwareBriefingFrame<'_, '_, '_> {
                 clock_micros: frame.animation.accumulated_micros(),
                 // The pane's camera follows no craft.
                 craft: None,
-                cloud_wake: Vec::new(),
+                cloud_holes: Vec::new(),
+                cloud_flashes: Vec::new(),
                 particles: self.effects.particles,
                 executable: self.effects.executable,
             },

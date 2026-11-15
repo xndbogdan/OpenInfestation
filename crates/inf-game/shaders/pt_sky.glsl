@@ -244,12 +244,6 @@ const float CLOUD_CLEAR = 50.0;
 // follows take (frame.cloud_craft), eased toward it: the craft stays at
 // least 60% in sight inside a cloud, while all beyond it whites out.
 const float CLOUD_FLOOR = 0.5;
-// The craft's wake through the clouds (cloud_wake.rs): a tube this wide
-// about its way where it has just passed, widening by WAKE_GROWTH a second
-// as the cloud closes in, gone after WAKE_LIFE seconds.
-const float WAKE_RADIUS = 120.0;
-const float WAKE_GROWTH = 150.0;
-const float WAKE_LIFE = 3.0;
 
 float remap(float value, float low, float high, float to_low, float to_high) {
     return to_low + (clamp(value, low, high) - low) / max(high - low, 1.0e-5) * (to_high - to_low);
@@ -387,48 +381,46 @@ float cloud_vein(vec3 world) {
     return vein * smoothstep(0.3, 0.8, flicker);
 }
 
-// How much the craft's wake has thinned the clouds at eye-relative point
-// `p`, 0 to 1: the most of its runs between points, each a tube about its
-// way, widening with its age (`r`), fading as (1 - age / life)^2, softly
-// edged. `bound` (xyz and radius) holds them all.
-float cloud_wake(vec3 p, vec4 bound) {
-    vec3 off = p - bound.xyz;
-    if (dot(off, off) > bound.w * bound.w) {
-        return 0.0;
+// The holes in the clouds (cloud_wake.rs: the craft's wake, what flies
+// fast through them, the blasts'): which of them the ray along `direction`
+// from the eye passes near, as bits, each hole held by the sphere about
+// its middle.
+uint cloud_holes_near(vec3 direction) {
+    uint near = 0u;
+    for (int i = 0; i < int(frame.cloud_hole_count); i++) {
+        vec4 a = frame.cloud_holes[2 * i];
+        vec4 b = frame.cloud_holes[2 * i + 1];
+        vec3 middle = 0.5 * (a.xyz + b.xyz);
+        float reach = 0.5 * length(b.xyz - a.xyz) + a.w;
+        float along = max(dot(middle, direction), 0.0);
+        if (length(middle - direction * along) < reach) {
+            near |= 1u << uint(i);
+        }
     }
+    return near;
+}
+
+// How much the holes `near` clear the clouds at eye-relative point `p`, 0
+// to 1: the most of them, each a capsule from one end to the other, as
+// much as it clears in its middle, softly edged.
+float cloud_hole(vec3 p, uint near) {
     float hole = 0.0;
-    for (int i = 0; i + 1 < int(frame.cloud_wake_count); i++) {
-        vec4 a = frame.cloud_wake[i];
-        vec4 b = frame.cloud_wake[i + 1];
+    while (near != 0u) {
+        int i = findLSB(near);
+        near &= near - 1u;
+        vec4 a = frame.cloud_holes[2 * i];
+        vec4 b = frame.cloud_holes[2 * i + 1];
         vec3 ab = b.xyz - a.xyz;
         float s = clamp(dot(p - a.xyz, ab) / max(dot(ab, ab), 1.0e-3), 0.0, 1.0);
-        float age = mix(a.w, b.w, s);
-        float r = WAKE_RADIUS + WAKE_GROWTH * age;
-        float fade = max(1.0 - age / WAKE_LIFE, 0.0);
-        hole = max(hole, fade * fade * (1.0 - smoothstep(0.35 * r, r, length(p - a.xyz - ab * s))));
+        hole = max(hole, b.w * (1.0 - smoothstep(0.35 * a.w, a.w, length(p - a.xyz - ab * s))));
     }
     return hole;
 }
 
-// The sphere holding the craft's wake, or none (radius 0) where it has
-// none or the ray along `direction` from the eye passes outside it.
-vec4 cloud_wake_bound(vec3 direction) {
-    int count = int(frame.cloud_wake_count);
-    if (count < 2) {
-        return vec4(0.0);
-    }
-    vec3 middle = vec3(0.0);
-    for (int i = 0; i < count; i++) {
-        middle += frame.cloud_wake[i].xyz;
-    }
-    middle /= float(count);
-    float reach = 0.0;
-    for (int i = 0; i < count; i++) {
-        vec4 point = frame.cloud_wake[i];
-        reach = max(reach, length(point.xyz - middle) + WAKE_RADIUS + WAKE_GROWTH * point.w);
-    }
-    float along = max(dot(middle, direction), 0.0);
-    return length(middle - direction * along) < reach ? vec4(middle, reach) : vec4(0.0);
+// How much of the brightest blast's flash in the clouds is left, 0 to 1:
+// the clouds' history takes a flash quickly, as the lightning's.
+float cloud_flash_now() {
+    return frame.cloud_flash_count > 0.5 ? frame.cloud_flashes[1].w : 0.0;
 }
 
 // Henyey-Greenstein's phase for cosine `c`, with an average of one.
@@ -536,7 +528,8 @@ vec4 clouds_toward(vec3 direction, int steps, float jitter, float near_reach, ou
     vec3 near_light = vec3(0.0);
     float near_through = 1.0;
     float near_depth = 0.0;
-    vec4 wake = cloud_wake_bound(direction);
+    uint holes = cloud_holes_near(direction);
+    int flashes = int(frame.cloud_flash_count);
     float t = enter;
     // Far from the eye every step is the even one, as the march always
     // took; the short steps near it add at most about 60.
@@ -554,9 +547,9 @@ vec4 clouds_toward(vec3 direction, int steps, float jitter, float near_reach, ou
             continue;
         }
         density *= 1.0 - exp(-at / CLOUD_CLEAR);
-        if (wake.w > 0.0) {
+        if (holes != 0u) {
             // The thin of it goes first, so the hole takes the cloud's shape.
-            density = max(density - cloud_wake(direction * at, wake), 0.0);
+            density = max(density - cloud_hole(direction * at, holes), 0.0);
         }
         float optical = density * CLOUD_SIGMA * dt;
         bool near = at < near_reach;
@@ -575,11 +568,17 @@ vec4 clouds_toward(vec3 direction, int steps, float jitter, float near_reach, ou
             // Light from below (lava, Artoria's clarifiers) on the undersides,
             // fading up through the layer.
             + frame.cloud_under * (1.5 * (1.0 - h) * (1.0 - h));
-        // What glows inside: the storm's veins and a flash.
+        // What glows inside: the storm's veins, a flash and a blast's.
         vec3 glow = veins ? frame.cloud_veins * cloud_vein(world) : vec3(0.0);
         if (flash.w > 0.0) {
             glow += frame.lightning_color * (3.0 * flash.w)
                 * exp(-length(world - flash_point) / 3000.0);
+        }
+        // The blasts' flashes, from inside the cloud round them.
+        for (int f = 0; f < flashes; f++) {
+            vec4 from = frame.cloud_flashes[2 * f];
+            glow += frame.cloud_flashes[2 * f + 1].rgb
+                * exp(-length(direction * at - from.xyz) / from.w);
         }
         float absorbed = exp(-optical);
         float share = through * (1.0 - absorbed);

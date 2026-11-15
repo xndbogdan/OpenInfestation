@@ -674,9 +674,14 @@ pub struct SceneFeed {
     /// clouds keep in sight; none in first person, while the player steers
     /// the Cranial Implanter's missile, and without a world.
     pub craft: Option<[f32; 3]>,
-    /// Its wake through the clouds, newest first: eye-relative points and
-    /// their ages in seconds ([`crate::cloud_wake`]).
-    pub cloud_wake: Vec<[f32; 4]>,
+    /// The holes in the clouds, nearest first (its wake through them, what
+    /// flies fast through them, the blasts'): each from one end to the other,
+    /// eye-relative, its radius and how much of the cloud it clears; and
+    /// the blasts' flashes lighting them, the brightest first: where, how far
+    /// its light reaches, its light and how much of the flash is left
+    /// ([`crate::cloud_wake`]).
+    pub cloud_holes: Vec<[f32; 8]>,
+    pub cloud_flashes: Vec<[f32; 8]>,
     /// The native pixels the traced view fills, inclusive (left, top, right,
     /// bottom): a pane such as the briefing's camera; none for the whole
     /// frame.

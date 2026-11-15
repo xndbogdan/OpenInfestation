@@ -1222,10 +1222,32 @@ fn draw_world_pass<'r>(
     // An untraced world takes the player's anti-aliasing, except under
     // infrared vision, whose camera has a resolution of its own.
     let raster = !tracing && !frame.infrared;
-    // The craft the camera follows, and its wake through the clouds.
+    // The craft the camera follows, and the holes in the clouds: its wake,
+    // what flies fast through them, the blasts.
     let craft = followed_craft(world);
     let micros = animation.animation_micros();
-    world.cloud_wake.follow(craft, micros);
+    let layer = cloud_layer(world.mission.current_world_a0);
+    let blasts: Vec<([u16; 3], bool)> = particles
+        .blasts()
+        .into_iter()
+        .map(|blast| (blast.position, blast.large))
+        .collect();
+    let arena = &world.arena;
+    let objects = [
+        crate::object_runtime::ObjectList::Flag0Primary,
+        crate::object_runtime::ObjectList::Flag1Primary,
+    ]
+    .into_iter()
+    .flat_map(|list| arena.list(list))
+    .filter_map(|node| {
+        Some((
+            node.object,
+            arena.object(node.object).ok()?.base.position_words?,
+        ))
+    });
+    world
+        .cloud_wake
+        .follow(craft, objects, &blasts, layer, micros);
     let craft = craft.map(|words| {
         std::array::from_fn(|axis| {
             f32::from(i32::from(words[axis]).wrapping_sub(view.eye[axis]) as i16)
@@ -1260,7 +1282,8 @@ fn draw_world_pass<'r>(
         clock: animation_clock,
         clock_micros: micros,
         craft,
-        cloud_wake: world.cloud_wake.from_eye(view.eye, craft, micros),
+        cloud_holes: world.cloud_wake.holes(view.eye, craft, layer, micros),
+        cloud_flashes: world.cloud_wake.flashes(view.eye, micros),
         particles: &*particles,
         executable,
     };
@@ -2092,10 +2115,12 @@ pub(crate) struct WorldFeedInputs<'a> {
     pub clock: u32,
     /// The same clock in microseconds.
     pub clock_micros: u64,
-    /// The player's craft the camera follows, eye-relative, and its wake
-    /// ([`crate::scene_feed::SceneFeed::craft`]).
+    /// The player's craft the camera follows, eye-relative, and the holes in
+    /// the clouds and the blasts' flashes in them
+    /// ([`crate::scene_feed::SceneFeed::craft`], `cloud_holes`).
     pub craft: Option<[f32; 3]>,
-    pub cloud_wake: Vec<[f32; 4]>,
+    pub cloud_holes: Vec<[f32; 8]>,
+    pub cloud_flashes: Vec<[f32; 8]>,
     pub particles: &'a crate::process_particles::ProcessParticleRuntime,
     pub executable: inf_formats::FrontendExecutable<'a>,
 }
@@ -2394,7 +2419,8 @@ pub(crate) fn world_light(
         });
     feed.infrared = inputs.infrared;
     feed.craft = inputs.craft;
-    feed.cloud_wake.clone_from(&inputs.cloud_wake);
+    feed.cloud_holes.clone_from(&inputs.cloud_holes);
+    feed.cloud_flashes.clone_from(&inputs.cloud_flashes);
     let [r, g, b, _] = inputs.presentation.base_tint_word.to_le_bytes();
     feed.light_base = Some(shade([r, g, b]));
     if let Some(sky) = tones.sky {
@@ -2684,6 +2710,21 @@ fn raster_wakes(
         }
     }
     wakes
+}
+
+/// The modern sky's cloud layer on `world` as its holes take it, its
+/// clouds' rise either way (as the frame block's `cloud_rise`), or none
+/// where it shows no clouds.
+fn cloud_layer(world: u32) -> Option<crate::cloud_wake::CloudLayer> {
+    let sky = crate::modern_tuning::current().sky(world);
+    let clouds = sky.clouds;
+    (sky.style == crate::modern_tuning::SkyStyle::Modern && clouds.cover > 0.0).then(|| {
+        let rise = clouds.rise.clamp(0.0, 0.5) * (clouds.top - clouds.base).max(100.0);
+        crate::cloud_wake::CloudLayer {
+            low: clouds.base - rise,
+            high: clouds.top + rise,
+        }
+    })
 }
 
 /// Where the player's craft is (16-bit world words) while the camera

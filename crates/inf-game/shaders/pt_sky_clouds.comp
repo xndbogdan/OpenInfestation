@@ -100,7 +100,8 @@ void main() {
                 // stream past too quickly for the history; a flash is
                 // quicker still: it takes the most while it lasts.
                 float fresh = max(mix(0.5, 1.0 / 6.0, smoothstep(1000.0, 3000.0, placed.w)),
-                                  mix(1.0 / 6.0, 0.75, lightning_flash().w));
+                                  mix(1.0 / 6.0, 0.75,
+                                      max(lightning_flash().w, cloud_flash_now())));
                 clouds = mix(textureLod(view_history, then, 0.0), clouds, fresh);
                 kept = mix(textureLod(away_history, then, 0.0), kept, fresh);
             }

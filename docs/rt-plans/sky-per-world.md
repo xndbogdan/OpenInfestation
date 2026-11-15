@@ -782,6 +782,22 @@ when its recipe is approved.
       leaves a wake (a point each 0.25 s for 3 s) that carves a tube
       through the cloud, closing as it ages. Clouds are laid after the far
       fade, so they no longer end in a straight seam at the far skyline.
+    - **Holes and flashes** (2026-11-15, user: "if they fly at high speed
+      through clouds, how do real clouds act? ... If something
+      explodes?"; `cloud_wake.rs`): anything else flying faster than 600
+      a second through the layer (a missile, the Cranial Implanter, an
+      aircraft) leaves a narrower tunnel (70 wide, widening 90 a second,
+      gone in 4 s); a blast in the layer or near it clears a hole (240
+      wide, 520 a large one) that opens in a quarter second, rises 40 a
+      second with the hot air and fills in over 20 s; and its flash lights
+      the cloud round it from inside for half a second (the lightning's
+      glow, reaching 900 or 2,000), the clouds' history taking it as fast
+      as a lightning flash. Each hole goes to the frame block as a capsule
+      (at most 32, the nearest), each ray marking those it passes near
+      before it marches; at most 4 flashes. The sky stage went from 1.28
+      to about 1.35 ms (2560x1440, RTX 5080), holes or none. Seen with a
+      blast and a flier put into Stendahl Alpha's deck from the VTOL above
+      it, traced and raster.
   - Ash and embers (`precip.kind` ash and embers, built 2026-10-23): the
     snow's walk; ash grey and lit, embers glowing in their own colour,
     each flickering on its own beat, rising where `fall` is negative.
