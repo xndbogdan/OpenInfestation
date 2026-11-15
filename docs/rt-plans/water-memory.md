@@ -53,9 +53,12 @@ whose glow under the water still reads it.
 
 **Spray in the lakes** (`craft_spray.rs`): the puddles' spray now flies
 off a lake too, from each ground point the water stands over by no more
-than a wheel's height (wading), and from the hovercraft's points riding up
-to 120 units over the surface, whose cushion throws its least spray even
-at rest. Where it falls back on a lake it splashes the water's memory.
+than a wheel's height (wading), and from twelve points round the
+hovercraft's skirt riding up to 120 units over the surface, whose cushion
+throws its least spray even at rest (none straight ahead or behind while it
+moves: its four hull points, where the wheels touch, first left four
+trails, then the points in line laid one down the middle). The raster's
+hovercraft keeps only its hull's wake. Where it falls back on a lake it splashes the water's memory.
 
 **The wet hull** (`craft_wet.rs`, `pt_wet.glsl`'s `craft_wetness`): the
 craft the camera follows is wet up to a little over the highest water it
