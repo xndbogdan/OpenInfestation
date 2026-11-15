@@ -50,6 +50,14 @@ const WADE: i32 = 110;
 /// throw its cushion's spray, and the least it throws at rest.
 const CUSHION: i32 = 120;
 const CUSHION_LEAST: f32 = 0.35;
+/// The hovercraft's cushion throws from this many points round its skirt
+/// (its hull points are where a wheeled form's wheels touch, which threw
+/// four jets: 2026-11-15, "4 trails where the wheels used to be"), each a
+/// share of the four points' water so the whole throws as much.
+const SKIRT_POINTS: usize = 12;
+/// The cosine of the angle off the way a moving hovercraft goes within which
+/// its skirt throws nothing (25 degrees).
+const IN_LINE: f32 = 0.906;
 /// How long a ring spreads on the water, and the most the puddles take at
 /// once, the nearest (`pt_frame.glsl`'s `spray_rings`).
 const RING_SECONDS: f32 = 0.9;
@@ -147,6 +155,46 @@ fn wrapped(to: f64, from: f64) -> f64 {
     (to - from + 32768.0).rem_euclid(65536.0) - 32768.0
 }
 
+/// Whether a skirt point facing `out` lies ahead of or behind a hovercraft
+/// moving at `velocity` (within [`IN_LINE`]): its spray, thrown along the
+/// way it goes with no spread across it, laid a line down the wake's middle.
+fn in_line(out: [f32; 2], velocity: [f32; 3]) -> bool {
+    let speed = velocity[0].hypot(velocity[2]);
+    speed > CRAWL && (out[0] * velocity[0] + out[1] * velocity[2]).abs() > IN_LINE * speed
+}
+
+/// The hovercraft's skirt round its middle `centre` (world words):
+/// [`SKIRT_POINTS`] evenly round it, as far out as its hull points lie on
+/// average and at their average height.
+fn skirt(centre: [u16; 3], hull: &[[u16; 3]]) -> Vec<[u16; 3]> {
+    let count = hull.len().max(1) as f64;
+    let reach = hull
+        .iter()
+        .map(|&[x, _, z]| {
+            wrapped(f64::from(x), f64::from(centre[0]))
+                .hypot(wrapped(f64::from(z), f64::from(centre[2])))
+        })
+        .sum::<f64>()
+        / count;
+    let height = hull
+        .iter()
+        .map(|point| f64::from(point[1] as i16))
+        .sum::<f64>()
+        / count;
+    (0..SKIRT_POINTS)
+        .map(|k| {
+            let turn = std::f64::consts::TAU * k as f64 / SKIRT_POINTS as f64;
+            [
+                ((f64::from(centre[0]) + reach * turn.cos()).round() as i64).rem_euclid(65536)
+                    as u16,
+                height.round() as i16 as u16,
+                ((f64::from(centre[2]) + reach * turn.sin()).round() as i64).rem_euclid(65536)
+                    as u16,
+            ]
+        })
+        .collect()
+}
+
 /// How hard a craft moving at `velocity` throws spray: none at a crawl, 1
 /// at a full drive, up to `MOST` boosted.
 fn strength(velocity: [f32; 3]) -> f32 {
@@ -167,7 +215,8 @@ impl SprayCraft {
     /// that touches the ground with the standing water under it as `water`
     /// gives it (the puddles' shading's, at world X/Z), or over the lake
     /// whose surface stands at `plane`, at that surface: wading, or the
-    /// hovercraft riding just over it.
+    /// hovercraft riding just over it, whose points ring its skirt
+    /// ([`skirt`]).
     pub fn of_player(
         world: &crate::world_backend::WorldSession,
         executable: inf_formats::FrontendExecutable<'_>,
@@ -193,6 +242,13 @@ impl SprayCraft {
             .map(|word| f32::from(word as i16));
         let centre = arena.object(unit).ok()?.base.position_words?;
         let points = arena.vehicle_hull_points(unit, executable)?;
+        let points = if hover {
+            skirt(centre, &points)
+        } else {
+            points.to_vec()
+        };
+        // Each of the skirt's points throws its share of the four's water.
+        let share = 4.0 / points.len() as f32;
         let points = points
             .iter()
             .map(|&[x, y, z]| {
@@ -207,14 +263,14 @@ impl SprayCraft {
                 let out = across.map(|axis| axis / length);
                 if let Some(plane) = plane.filter(|plane| *plane > ground) {
                     let thrown = if hover {
-                        y - i32::from(plane) <= CUSHION
+                        y - i32::from(plane) <= CUSHION && !in_line(out, velocity)
                     } else {
                         touches && i32::from(plane) - i32::from(ground) <= WADE
                     };
                     return SprayPoint {
                         world: [f64::from(x), f64::from(plane), f64::from(z)],
                         out,
-                        water: if thrown { 1.0 } else { 0.0 },
+                        water: if thrown { share } else { 0.0 },
                     };
                 }
                 SprayPoint {
@@ -608,6 +664,42 @@ mod tests {
         dry.update(0, Some(craft(0.0, 1700.0, 1.0)), |_| 0.0);
         dry.update(48_000, Some(craft(82.0, 1700.0, 1.0)), |_| 0.0);
         assert!(dry.rings(700_000, [0.0; 3]).is_empty());
+    }
+
+    /// The hovercraft's skirt rings its middle at its hull points' reach
+    /// and height, across the wrap, with no point where a wheel was.
+    #[test]
+    fn the_skirt_rings_the_hovercraft() {
+        let hull = [
+            [65500, 40, 10],
+            [100, 40, 10],
+            [65500, 40, 65500],
+            [100, 40, 65500],
+        ];
+        let points = skirt([0, 0, 0], &hull);
+        assert_eq!(points.len(), SKIRT_POINTS);
+        let reach = hull
+            .iter()
+            .map(|&[x, _, z]| wrapped(f64::from(x), 0.0).hypot(wrapped(f64::from(z), 0.0)))
+            .sum::<f64>()
+            / 4.0;
+        for &[x, y, z] in &points {
+            let across = wrapped(f64::from(x), 0.0).hypot(wrapped(f64::from(z), 0.0));
+            assert!((across - reach).abs() < 1.0, "{across} {reach}");
+            assert_eq!(y, 40);
+        }
+        assert!(!points.iter().any(|point| hull.contains(point)));
+    }
+
+    /// A moving hovercraft's skirt throws nothing straight ahead or behind;
+    /// at rest, or across its way, it throws.
+    #[test]
+    fn the_skirt_throws_nothing_along_its_way() {
+        let moving = [850.0, 0.0, 0.0];
+        assert!(in_line([1.0, 0.0], moving) && in_line([-1.0, 0.0], moving));
+        assert!(!in_line([0.0, 1.0], moving));
+        assert!(!in_line([0.866, 0.5], moving));
+        assert!(!in_line([1.0, 0.0], [0.0; 3]));
     }
 
     /// A hovercraft's cushion throws its least spray at rest, where a

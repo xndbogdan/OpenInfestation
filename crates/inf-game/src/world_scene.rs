@@ -2638,7 +2638,16 @@ fn raster_wakes(
     let (Some(wake), true) = (wake, plane > -4096) else {
         return wakes;
     };
-    let Some(points) = world.arena.vehicle_hull_points(wake.unit, executable) else {
+    // The hovercraft (form 3) rides on no wheels: its hull's wake alone.
+    let hover = world
+        .arena
+        .selector2_actor(wake.unit)
+        .is_ok_and(|actor| actor.dwords_1e8_1f4[0] == 3);
+    let Some(points) = world
+        .arena
+        .vehicle_hull_points(wake.unit, executable)
+        .filter(|_| !hover)
+    else {
         return wakes;
     };
     let from = |word: u16, axis: usize| f32::from(i32::from(word).wrapping_sub(eye[axis]) as i16);
