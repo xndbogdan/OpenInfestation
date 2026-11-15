@@ -3,7 +3,8 @@
 //! speed through puddles, for example the buggy with turbo on, they splash a little)
 //! and through the lakes, wading (2026-11-15, [the water's memory](../../../docs/rt-plans/water-memory.md)),
 //! and the hovercraft's cushion over the water, a mist of spray even at
-//! rest. A short fan of drops off each of the craft's ground points that
+//! rest, and a crown of it round the hull going into a lake fast. A short
+//! fan of drops off each of the craft's ground points that
 //! stands in a puddle or in the lake's surface, nothing at a crawl, growing
 //! with speed and largest at a turbo's, back in the water within a second,
 //! where some of its drops ring the water.
@@ -58,6 +59,16 @@ const SKIRT_POINTS: usize = 12;
 /// The cosine of the angle off the way a moving hovercraft goes within which
 /// its skirt throws nothing (25 degrees).
 const IN_LINE: f32 = 0.906;
+/// Going into a lake (its surface between the hull's bottom and top, its
+/// middle `HULL_UNDER` over the surface to `HULL_OVER` under it) faster
+/// than `PLUNGE_SPRAY` units a second, the hull throws a crown of spray
+/// from its rim ([`skirt`]), a full one at `PLUNGE_HARD` and up to
+/// `CROWN_MOST` of it, thrown up and out the harder the faster.
+const HULL_UNDER: i32 = 64;
+const HULL_OVER: i32 = 48;
+const PLUNGE_SPRAY: f32 = 200.0;
+const PLUNGE_HARD: f32 = 600.0;
+const CROWN_MOST: f32 = 2.0;
 /// How long a ring spreads on the water, and the most the puddles take at
 /// once, the nearest (`pt_frame.glsl`'s `spray_rings`).
 const RING_SECONDS: f32 = 0.9;
@@ -83,13 +94,17 @@ pub struct SprayPoint {
 }
 
 /// The craft as it throws spray now: its ground points (each in a puddle or
-/// a lake or not), its velocity in units a second, and the least strength
-/// it throws at (a hovercraft's cushion; 0: none at rest).
-#[derive(Clone, Debug, PartialEq)]
+/// a lake or not), its velocity in units a second, the least strength it
+/// throws at (a hovercraft's cushion; 0: none at rest), and how fast the
+/// lake climbs its hull, with the rim it throws a crown from then (none
+/// unless it goes in faster than [`PLUNGE_SPRAY`]).
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct SprayCraft {
     pub points: Vec<SprayPoint>,
     pub velocity: [f32; 3],
     pub least: f32,
+    pub plunge: f32,
+    pub rim: Vec<SprayPoint>,
 }
 
 /// A drop thrown: its velocity at launch, size, whether it is fine mist,
@@ -241,11 +256,11 @@ impl SprayCraft {
             .words_8e_92
             .map(|word| f32::from(word as i16));
         let centre = arena.object(unit).ok()?.base.position_words?;
-        let points = arena.vehicle_hull_points(unit, executable)?;
+        let hull = arena.vehicle_hull_points(unit, executable)?;
         let points = if hover {
-            skirt(centre, &points)
+            skirt(centre, &hull)
         } else {
-            points.to_vec()
+            hull.to_vec()
         };
         // Each of the skirt's points throws its share of the four's water.
         let share = 4.0 / points.len() as f32;
@@ -284,12 +299,48 @@ impl SprayCraft {
                 }
             })
             .collect();
+        // The lake climbing the hull, its surface between its bottom and top.
+        let lake = plane.filter(|plane| world.terrain.height_at([centre[0], centre[2]]) < *plane);
+        let plunge = lake
+            .filter(|plane| {
+                let over = i32::from(centre[1] as i16) - i32::from(*plane);
+                (-HULL_OVER..=HULL_UNDER).contains(&over)
+            })
+            .map_or(0.0, |_| -velocity[1]);
+        let rim = match lake {
+            Some(plane) if plunge > PLUNGE_SPRAY => skirt(centre, &hull)
+                .into_iter()
+                .map(|[x, _, z]| {
+                    let across = [
+                        wrapped(f64::from(x), f64::from(centre[0])) as f32,
+                        wrapped(f64::from(z), f64::from(centre[2])) as f32,
+                    ];
+                    let length = across[0].hypot(across[1]).max(1.0);
+                    SprayPoint {
+                        world: [f64::from(x), f64::from(plane), f64::from(z)],
+                        out: across.map(|axis| axis / length),
+                        water: 4.0 / SKIRT_POINTS as f32,
+                    }
+                })
+                .collect(),
+            _ => Vec::new(),
+        };
         Some(Self {
             points,
             velocity,
             least: if hover { CUSHION_LEAST } else { 0.0 },
+            plunge,
+            rim,
         })
     }
+}
+
+/// How hard the crown of a hull going into a lake at `plunge` is: none
+/// under [`PLUNGE_SPRAY`], 1 at [`PLUNGE_HARD`], up to [`CROWN_MOST`]; and
+/// how much faster than a tyre's its drops fly.
+fn crown(plunge: f32) -> (f32, f32) {
+    let strength = ((plunge - PLUNGE_SPRAY) / (PLUNGE_HARD - PLUNGE_SPRAY)).clamp(0.0, CROWN_MOST);
+    (strength, 1.0 + strength)
 }
 
 impl CraftSpray {
@@ -338,6 +389,27 @@ impl CraftSpray {
                 }
                 None => craft.velocity[axis],
             });
+            let seed = |index: usize| {
+                (slot as u32)
+                    .wrapping_mul(0x9e37_79b9)
+                    .wrapping_add((index as u32).wrapping_mul(0x85eb_ca6b))
+            };
+            // Going into the lake hard, a crown all round the hull.
+            let (crowned, throw) = crown(craft.plunge);
+            if crowned > 0.0 {
+                for (index, point) in craft.rim.iter().enumerate() {
+                    self.bursts.push(burst(
+                        time,
+                        point.world,
+                        point.out,
+                        velocity,
+                        crowned * point.water,
+                        throw,
+                        seed(craft.points.len() + index),
+                        &water,
+                    ));
+                }
+            }
             let strength = strength(velocity).max(craft.least);
             if strength <= 0.0 {
                 continue;
@@ -356,16 +428,14 @@ impl CraftSpray {
                     };
                     from + step * share
                 });
-                let seed = (slot as u32)
-                    .wrapping_mul(0x9e37_79b9)
-                    .wrapping_add((index as u32).wrapping_mul(0x85eb_ca6b));
                 self.bursts.push(burst(
                     time,
                     at,
                     point.out,
                     velocity,
                     strength * point.water.min(earlier.water),
-                    seed,
+                    1.0,
+                    seed(index),
                     &water,
                 ));
             }
@@ -447,15 +517,18 @@ impl CraftSpray {
 
 /// The drops one ground point at `at` throws at `born`, out along `out`
 /// from a craft moving at `velocity`, `strength` hard (`strength`'s scale
-/// times the water there): a fan out to the side and up, the drops keeping
-/// part of the craft's motion so they trail behind the tyre, a third of
-/// them fine mist. Every other drop rings the water it falls back on.
+/// times the water there), `throw` times as fast as a tyre's: a fan out to
+/// the side and up, the drops keeping part of the craft's motion so they
+/// trail behind the tyre, a third of them fine mist. Every other drop rings
+/// the water it falls back on.
+#[allow(clippy::too_many_arguments)]
 fn burst(
     born: u64,
     at: [f64; 3],
     out: [f32; 2],
     velocity: [f32; 3],
     strength: f32,
+    throw: f32,
     seed: u32,
     water: &impl Fn([f32; 2]) -> f32,
 ) -> Burst {
@@ -468,13 +541,15 @@ fn burst(
         at[1],
         at[2] + f64::from(out[1]) * TYRE_FACE,
     ];
-    let lift_scale = 0.7 + 0.3 * strength;
+    let lift_scale = (0.7 + 0.3 * strength) * throw;
     let throws = (0..count)
         .map(|index| {
             let mist = index % 3 == 2;
             let up = random.between([120.0, 300.0]) * lift_scale * if mist { 0.7 } else { 1.0 };
-            let across =
-                random.between([80.0, 260.0]) * strength.sqrt() * if mist { 0.6 } else { 1.0 };
+            let across = random.between([80.0, 260.0])
+                * strength.sqrt()
+                * throw
+                * if mist { 0.6 } else { 1.0 };
             let carry = random.between([0.4, 0.75]);
             let fan = random.between([-0.35, 0.35]) * across;
             let radius = if mist {
@@ -582,7 +657,7 @@ mod tests {
                 },
             ],
             velocity: [speed, 0.0, 0.0],
-            least: 0.0,
+            ..SprayCraft::default()
         }
     }
 
@@ -719,5 +794,53 @@ mod tests {
         };
         assert_eq!(at_rest(0.0), 0);
         assert!(at_rest(CUSHION_LEAST) > 0);
+    }
+
+    /// A hull going into the lake hard throws a crown of spray from all
+    /// round its rim, higher the harder; slowly, none.
+    #[test]
+    fn a_hard_plunge_throws_a_crown() {
+        let rim: Vec<SprayPoint> = (0..SKIRT_POINTS)
+            .map(|k| {
+                let turn = std::f32::consts::TAU * k as f32 / SKIRT_POINTS as f32;
+                SprayPoint {
+                    world: [
+                        5000.0 + 60.0 * f64::from(turn.cos()),
+                        100.0,
+                        5000.0 + 60.0 * f64::from(turn.sin()),
+                    ],
+                    out: [turn.cos(), turn.sin()],
+                    water: 4.0 / SKIRT_POINTS as f32,
+                }
+            })
+            .collect();
+        let plunged = |plunge: f32| {
+            let mut spray = CraftSpray::default();
+            for frame in 0..=6 {
+                let falling = SprayCraft {
+                    velocity: [0.0, -plunge, 0.0],
+                    plunge,
+                    rim: rim.clone(),
+                    ..craft(5000.0, 0.0, 0.0)
+                };
+                spray.update(frame * 16_000, Some(falling), wet);
+            }
+            let drops = spray.drops(150_000, [5000.0, 0.0, 5000.0]);
+            let top = drops
+                .iter()
+                .map(|drop| drop.position[1])
+                .fold(0.0, f32::max);
+            (drops, top)
+        };
+        assert!(plunged(PLUNGE_SPRAY / 2.0).0.is_empty());
+        let (hard, high) = plunged(PLUNGE_HARD);
+        let (harder, higher) = plunged(2.0 * PLUNGE_HARD);
+        assert!(!hard.is_empty() && harder.len() > hard.len());
+        assert!(higher > high, "{higher} {high}");
+        // All round: drops on both sides of the hull.
+        assert!(hard.iter().any(|drop| drop.position[0] < -30.0));
+        assert!(hard.iter().any(|drop| drop.position[0] > 30.0));
+        assert_eq!(crown(PLUNGE_HARD), (1.0, 2.0));
+        assert_eq!(crown(1.0e6).0, CROWN_MOST);
     }
 }

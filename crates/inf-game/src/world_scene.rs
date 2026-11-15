@@ -2523,6 +2523,8 @@ struct PlayerWake {
     strength: f32,
     /// Its velocity over the ground (X and Z, world units a second).
     velocity: [f32; 2],
+    /// How fast it goes down (world units a second; below zero, up).
+    sink: f32,
 }
 
 /// How far above the ground a wheel's lowest point may ride and still
@@ -2534,6 +2536,10 @@ const WHEEL_TOUCH: f32 = 24.0;
 /// with its body through the surface).
 const HULL_OVER_WATER: f32 = 160.0;
 const HULL_UNDER_WATER: f32 = 64.0;
+/// How far the hull reaches under its middle and over it: while the water's
+/// surface stands between, the water climbs it as fast as it goes down.
+const HULL_UNDER_MIDDLE: f32 = 64.0;
+const HULL_OVER_MIDDLE: f32 = 48.0;
 
 /// Where the player's craft stirs the puddles and the water from, once its
 /// draws have laid its wheels in `feed`. Puddles: each wheel that touches
@@ -2568,6 +2574,7 @@ fn craft_wakes(
                 strength: -wake.strength,
                 hull: false,
                 velocity: wake.velocity,
+                sink: 0.0,
             })
     };
     let drawn: Vec<u32> = feed
@@ -2588,13 +2595,24 @@ fn craft_wakes(
             (-HULL_UNDER_WATER..=HULL_OVER_WATER).contains(&(wake.centre[1] - plane))
         }),
     )
-    .map(|wake| crate::scene_feed::SceneWake { hull: true, ..wake });
+    .map(|water| crate::scene_feed::SceneWake {
+        hull: true,
+        sink: if plane.is_some_and(|plane| {
+            (-HULL_OVER_MIDDLE..=HULL_UNDER_MIDDLE).contains(&(wake.centre[1] - plane))
+        }) {
+            wake.sink
+        } else {
+            0.0
+        },
+        ..water
+    });
     if wheels.is_empty() {
         return std::iter::once(crate::scene_feed::SceneWake {
             position: wake.centre,
             strength: wake.strength,
             hull: false,
             velocity: wake.velocity,
+            sink: 0.0,
         })
         .chain(hull)
         .collect();
@@ -2615,6 +2633,7 @@ fn craft_wakes(
                 strength: wake.strength,
                 hull: false,
                 velocity: wake.velocity,
+                sink: 0.0,
             })
         })
         .chain(hull)
@@ -2660,6 +2679,7 @@ fn raster_wakes(
                 strength: -wake.strength,
                 hull: false,
                 velocity: wake.velocity,
+                sink: 0.0,
             });
         }
     }
@@ -2708,6 +2728,7 @@ fn player_wake(world: &crate::world_backend::WorldSession, eye: [i32; 3]) -> Opt
         centre: [from(x, 0), from(y, 1), from(z, 2)],
         strength,
         velocity: [velocity[0], velocity[2]],
+        sink: -velocity[1],
     })
 }
 

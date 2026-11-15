@@ -3473,6 +3473,7 @@ fn a_wheeled_craft_stirs_from_its_grounded_wheels() {
         centre: [0.0, 50.0, 0.0],
         strength: 0.7,
         velocity: [0.0, 0.0],
+        sink: 0.0,
     });
     let wakes = super::craft_wakes(&feed, wake, &world.terrain, eye);
     assert_eq!(wakes.len(), 2, "{wakes:?}");
@@ -3488,6 +3489,7 @@ fn a_wheeled_craft_stirs_from_its_grounded_wheels() {
             strength: 0.7,
             hull: false,
             velocity: [0.0, 0.0],
+            sink: 0.0,
         }]
     );
     assert!(super::craft_wakes(&feed, None, &world.terrain, eye).is_empty());
@@ -3554,26 +3556,37 @@ fn a_craft_stirs_the_water_from_its_wheels_and_hull() {
             centre: [0.0, plane + height, 0.0],
             strength: 0.5,
             velocity: [0.0, 0.0],
+            sink: 300.0,
         })
     };
     let wakes = super::craft_wakes(&feed, wake(40.0), terrain, eye);
-    let water = |at: [f32; 2], hull: bool| crate::scene_feed::SceneWake {
+    let water = |at: [f32; 2], hull: bool, sink: f32| crate::scene_feed::SceneWake {
         position: [at[0], plane, at[1]],
         strength: -0.5,
         hull,
         velocity: [0.0, 0.0],
+        sink,
     };
     let puddle = crate::scene_feed::SceneWake {
         position: [dry_offset[0], dry_ground, dry_offset[1]],
         strength: 0.5,
         hull: false,
         velocity: [0.0, 0.0],
+        sink: 0.0,
     };
+    // Going down through the surface, the water climbs the hull.
     assert_eq!(
         wakes,
-        [water([0.0, 0.0], false), puddle, water([0.0, 0.0], true)]
+        [
+            water([0.0, 0.0], false, 0.0),
+            puddle,
+            water([0.0, 0.0], true, 300.0)
+        ]
     );
+    // Riding over it, the surface under the hull, it climbs nothing.
+    let wakes = super::craft_wakes(&feed, wake(100.0), terrain, eye);
+    assert_eq!(wakes[2], water([0.0, 0.0], true, 0.0));
     // The hull high over the water stirs nothing there.
     let wakes = super::craft_wakes(&feed, wake(400.0), terrain, eye);
-    assert_eq!(wakes, [water([0.0, 0.0], false), puddle]);
+    assert_eq!(wakes, [water([0.0, 0.0], false, 0.0), puddle]);
 }

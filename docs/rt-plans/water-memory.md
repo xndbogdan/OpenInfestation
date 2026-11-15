@@ -60,6 +60,21 @@ moves: its four hull points, where the wheels touch, first left four
 trails, then the points in line laid one down the middle). The raster's
 hovercraft keeps only its hull's wake. Where it falls back on a lake it splashes the water's memory.
 
+**The hull displacing the water** (2026-11-15, user: "shouldn't it
+displace some water?"): while the lake's surface stands between the hull's
+bottom and top (64 under its middle to 48 over), the water climbs it as
+fast as the craft goes down (the game's velocity `+8E..+92`, units a
+second). `scene_waves.rs` stamps that rate (`SceneWake::sink`): the water
+pressed down over 170 units and raised round (no water added), so a ring
+runs out and the water flows back in; coming out, the other way; on its
+springs (under 30 a second) nothing. Foam and churn grow with the speed
+squared, and past 200 a second `craft_spray.rs` throws a crown of spray
+from twelve points round the hull, higher and thicker the harder (full at
+600, at most twice that). A buggy dropped 600 units into Altair's deep water
+crosses the surface at about 900 a second over 8 frames; one driven off a
+ledge while wading, at up to 300. One stamp more a frame, and the crown's
+drops for under a second.
+
 **The wet hull** (`craft_wet.rs`, `pt_wet.glsl`'s `craft_wetness`): the
 craft the camera follows is wet up to a little over the highest water it
 stood in, drying over 20 s out of it; the rain's model wet takes that

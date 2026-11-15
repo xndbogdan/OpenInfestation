@@ -70,6 +70,21 @@ const HULL_FOAM: f32 = 5.0;
 const HULL_CHURN: f32 = 0.6;
 const BRISK: f32 = 850.0;
 const FASTEST: f32 = 1800.0;
+/// The craft going into the water (user, 2026-11-15: "shouldn't it
+/// displace some water?"): its hull pushes the water out from under it as
+/// fast as the water climbs it (`SceneWake::sink`), pressing it down over
+/// `PLUNGE_RADIUS` and raising it round (`vk_waves.comp` adds no water),
+/// `PLUNGE_PRESS` a unit a second up to `PLUNGE_FASTEST`; coming out, the
+/// water flows back in. Under `PLUNGE_STILL` it is the craft on its
+/// springs: nothing. It foams and churns the water by the share of a hard
+/// plunge's speed (`PLUNGE_HARD`) squared.
+const PLUNGE_RADIUS: f32 = 170.0;
+const PLUNGE_PRESS: f32 = 5.0;
+const PLUNGE_FASTEST: f32 = 1500.0;
+const PLUNGE_STILL: f32 = 30.0;
+const PLUNGE_HARD: f32 = 600.0;
+const PLUNGE_FOAM: f32 = 8.0;
+const PLUNGE_CHURN: f32 = 2.0;
 
 /// The water round the eye this frame, as the world gives it: the window's
 /// first cell (0 to 8191 on X and Z), the eye in the window and the water's
@@ -230,6 +245,17 @@ pub fn stamps(
                 ..Stamp::at(at, WHEEL_RADIUS, 0.0, WHEEL_FOAM * brisk * brisk, 0.0)
             }
         });
+        let sink = wake.sink.clamp(-PLUNGE_FASTEST, PLUNGE_FASTEST);
+        if wake.hull && sink.abs() > PLUNGE_STILL {
+            let hard = (sink / PLUNGE_HARD).powi(2);
+            stamps.push(Stamp::at(
+                at,
+                PLUNGE_RADIUS,
+                -PLUNGE_PRESS * sink,
+                PLUNGE_FOAM * hard,
+                PLUNGE_CHURN * hard,
+            ));
+        }
     }
     let away = |stamp: &Stamp| {
         let [x, z] = [stamp.to[0] - ground.eye[0], stamp.to[1] - ground.eye[1]];
@@ -389,12 +415,14 @@ mod tests {
                 strength: -0.5,
                 hull: false,
                 velocity: [0.0, 0.0],
+                sink: 0.0,
             },
             SceneWake {
                 position: [0.0, -100.0, 0.0],
                 strength: -1.0,
                 hull: true,
                 velocity: [850.0, 0.0],
+                sink: 0.0,
             },
             // A puddle's: none.
             SceneWake {
@@ -402,6 +430,7 @@ mod tests {
                 strength: 1.0,
                 hull: false,
                 velocity: [850.0, 0.0],
+                sink: 0.0,
             },
         ];
         let stamps = stamps(&ground, &[young, old, high, dome, patch, gone], &wakes, &[]);
@@ -432,6 +461,36 @@ mod tests {
         assert_eq!(later.len(), 1);
         assert_eq!(later[0].lift, 0.0);
         assert!(later[0].foam > 0.0);
+    }
+
+    /// The hull going down through the surface presses the water out from
+    /// under it (and white, going in hard); coming out the water flows back
+    /// in; on its springs, or riding level, nothing more than its wake.
+    #[test]
+    fn the_hull_displaces_the_water_it_goes_into() {
+        let ground = flat(300.0);
+        let hull = |sink: f32| SceneWake {
+            position: [0.0, -100.0, 0.0],
+            strength: -1.0,
+            hull: true,
+            velocity: [0.0, 0.0],
+            sink,
+        };
+        let plunge = |sink: f32| {
+            let stamps = stamps(&ground, &[], &[hull(sink)], &[]);
+            stamps.get(1).copied()
+        };
+        let hard = plunge(PLUNGE_HARD).expect("a plunge");
+        assert_eq!(hard.radius, PLUNGE_RADIUS);
+        assert_eq!(hard.lift, -PLUNGE_PRESS * PLUNGE_HARD);
+        assert_eq!((hard.foam, hard.churn), (PLUNGE_FOAM, PLUNGE_CHURN));
+        let out = plunge(-PLUNGE_HARD / 2.0).expect("water flowing back");
+        assert_eq!(out.lift, PLUNGE_PRESS * PLUNGE_HARD / 2.0);
+        assert!(out.foam < hard.foam);
+        assert_eq!(plunge(PLUNGE_STILL / 2.0), None);
+        assert_eq!(plunge(0.0), None);
+        // A fall faster than any drive presses no harder than the fastest.
+        assert_eq!(plunge(1.0e6).unwrap().lift, -PLUNGE_PRESS * PLUNGE_FASTEST);
     }
 
     #[test]

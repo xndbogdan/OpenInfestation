@@ -385,14 +385,17 @@ pub struct SceneEmitter {
 
 /// A place the player's craft stirs a puddle from: eye-relative, and how
 /// hard, 0 to 1 (negative: the water's, [`crate::scene_waves`]), whether it
-/// is the hull's rather than a wheel's, and the craft's velocity over the
-/// ground (X and Z, world units a second).
+/// is the hull's rather than a wheel's, the craft's velocity over the
+/// ground (X and Z, world units a second), and, the hull's, how fast the
+/// water climbs it while its surface crosses the hull (units a second;
+/// below zero the craft comes out).
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct SceneWake {
     pub position: [f32; 3],
     pub strength: f32,
     pub hull: bool,
     pub velocity: [f32; 2],
+    pub sink: f32,
 }
 
 /// A wheel model drawn by an object: the object (an index into
