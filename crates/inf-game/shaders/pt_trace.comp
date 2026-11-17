@@ -2103,8 +2103,10 @@ vec3 lava_glow(vec3 position, uint texture_slot) {
 // The additive sprites sunk under the water (a token on a lake's bed) seen
 // through its surface along the view from `start`, just under it: each
 // texel the view crosses added where nothing solid stands in front of it,
-// as retail's blend adds it over its see-through water, at retail's own
-// place on the screen rather than where the surface bends the view. A light
+// as retail's blend adds it over its see-through water. The caller bends
+// the view at the surface as it does for the bed: along the unbent view a
+// sunk lamp (a gate's foot panel) stood off its socket, further the
+// shallower the look (the user, 2026-11-17). A light
 // under murky water lights the water over it, so each fades with how deep
 // it lies, not how long the view's slant through the water is, over
 // SUNK_REACH clarities, taking the water's colour with depth.
@@ -2384,7 +2386,7 @@ vec3 water_color(Surface surface, vec3 position, vec3 direction) {
     vec3 color = mix(below, reflected, fresnel);
     if (from_above) {
         // What glows under it, as much as the surface lets through.
-        color += sunk_glow(position + direction * 0.5, direction, body) * (1.0 - fresnel);
+        color += sunk_glow(position + bent * 0.5, bent, body) * (1.0 - fresnel);
         float cover = foam_cover(position, max(frame.splash_foam * foam,
                                                 shore_line(position, depth)));
         color += water_surface_glints(position, direction, normal, surface.face, least, cover,
