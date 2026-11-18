@@ -332,20 +332,33 @@ impl WorldTickCarry {
     }
 
     /// The doomed planet's explosion-dice delta for a world tick of
-    /// `delta_micros`: the gathered world time once it reaches the pace,
-    /// `None` before (no dice this tick), or the tick's own delta without
-    /// pacing. The countdown itself keeps every tick's delta; only the
-    /// random explosions and the world flash are paced.
+    /// `delta_micros`: the whole paces gathered once one is reached, `None`
+    /// before (no dice this tick), or the tick's own delta without pacing.
+    /// The countdown itself keeps every tick's delta; only the random
+    /// explosions and the world flash are paced.
     pub fn doom_pace_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
-        Self::gather_pace(&mut self.doom_micros, pacing, delta_micros)
+        Self::gather_steps(&mut self.doom_micros, pacing, delta_micros)
     }
 
     /// The shake dust's delta for a world tick of `delta_micros`: the
-    /// gathered world time once it reaches the pace, `None` before (no
-    /// dust this tick), or the tick's own delta without pacing. The camera
-    /// shake itself keeps every tick; only the dust emission is paced.
+    /// whole paces gathered once one is reached, `None` before (no dust
+    /// this tick), or the tick's own delta without pacing. The camera shake
+    /// itself keeps every tick; only the dust emission is paced.
     pub fn dust_pace_delta(&mut self, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
-        Self::gather_pace(&mut self.dust_pace_micros, pacing, delta_micros)
+        Self::gather_steps(&mut self.dust_pace_micros, pacing, delta_micros)
+    }
+
+    /// [`Self::gather_pace`] for a step that only counts (the dice, the
+    /// dust): the part short of a pace carries to the next roll. Dropping it
+    /// cost a third of the rolls when exact ticks alternate one and two
+    /// quanta (about 40 fps). At most one roll a tick, as retail rolls.
+    fn gather_steps(carry: &mut u32, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {
+        let ActorPacing::Paced { micros } = pacing else {
+            return Some(delta_micros);
+        };
+        let total = carry.saturating_add(delta_micros);
+        *carry = total % micros;
+        (total >= micros).then_some(total - *carry)
     }
 
     fn gather_pace(carry: &mut u32, pacing: ActorPacing, delta_micros: u32) -> Option<u32> {

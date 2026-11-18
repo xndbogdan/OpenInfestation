@@ -134,7 +134,9 @@ fn the_paced_doom_dice_keep_their_rate_at_any_tick_step() {
 
     let paced = PortFixes::default().doom_pacing();
     assert_eq!(paced, ActorPacing::Paced { micros: 32768 });
-    for delta in [33_333u32, 16_384, 6_944] {
+    // 25 ms and 10 ms steps leave a remainder at every pace; dropping it
+    // rolled 100 and 125 times instead of about 152.
+    for delta in [33_333u32, 25_000, 16_384, 10_000, 6_944] {
         let (evaluations, hits) = dice_per_five_wall_seconds(delta, paced);
         // About 30.5 evaluations a second at any tick step.
         assert!((140..=160).contains(&evaluations), "{delta}: {evaluations}");

@@ -2103,7 +2103,8 @@ fn paced_actors_update_every_other_exact_tick_with_both_ticks_time() {
 
 /// Paced, the doomed planet rolls its explosion dice every other exact world
 /// tick, as retail's 30 fps game does; a long tick that reaches the pace
-/// alone rolls at once. Unpaced, every tick rolls, as retail does. The
+/// alone rolls at once, carrying what it holds past whole paces. Unpaced,
+/// every tick rolls, as retail does. The
 /// countdown itself is untouched: only the random explosions (and the world
 /// flash on the same chance) are paced.
 #[test]
@@ -2120,9 +2121,14 @@ fn paced_doom_rolls_every_other_exact_tick() {
         deltas,
         [None, Some(32768), None, Some(32768), None, Some(32768)]
     );
-    assert_eq!(carry.doom_pace_delta(paced, 49152), Some(49152));
+    // A tick of three quanta rolls once and carries the third, so the next
+    // single quantum rolls too: ticks alternating one and two quanta (about
+    // 40 fps) keep 30.5 rolls a second instead of dropping to 20.
+    assert_eq!(carry.doom_pace_delta(paced, 49152), Some(32768));
+    assert_eq!(carry.doom_pace_delta(paced, 16384), Some(32768));
     assert_eq!(carry.doom_pace_delta(paced, 16384), None);
-    assert_eq!(carry.doom_pace_delta(paced, 32768), Some(49152));
+    assert_eq!(carry.doom_pace_delta(paced, 32768), Some(32768));
+    assert_eq!(carry.doom_pace_delta(paced, 16384), Some(32768));
     assert_eq!(
         carry.doom_pace_delta(ActorPacing::Retail, 16384),
         Some(16384)
@@ -2136,7 +2142,8 @@ fn paced_doom_rolls_every_other_exact_tick() {
     // The shake dust keeps its own carry too, on the same step.
     assert_eq!(carry.dust_pace_delta(paced, 16384), None);
     assert_eq!(carry.dust_pace_delta(paced, 16384), Some(32768));
-    assert_eq!(carry.dust_pace_delta(paced, 49152), Some(49152));
+    assert_eq!(carry.dust_pace_delta(paced, 49152), Some(32768));
+    assert_eq!(carry.dust_pace_delta(paced, 16384), Some(32768));
     assert_eq!(
         carry.dust_pace_delta(ActorPacing::Retail, 16384),
         Some(16384)
