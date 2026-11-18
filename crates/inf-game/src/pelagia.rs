@@ -539,10 +539,13 @@ pub(crate) fn list_close_millis(selection: u32, on: bool, rework: bool) -> Optio
 /// 157, both authored initial models); the map pane opens at the Command
 /// Centre's scale. The texts are the port's ([`text`]).
 ///
-/// Each line stays up until the next, for about 5.8 s per 100 characters
-/// of its longest language, 4 s at least: retail's lines take a median of
-/// 5.9 s per 100 English characters and never under 3.6 s, where this
-/// program's first cut flashed four of them past in 2 to 2.5 s, far too quick.
+/// Each line stays up until the next, for about 6 s per 100 English
+/// characters (the opening pair quicker), 4 s at least: retail's pace, whose
+/// 217 lines take a median of 6.0 s per 100 English characters (5.2 to 7.5 s
+/// a world) and its long lines as little as 3.6 s. This program's
+/// first cut flashed four lines past in 2 to 2.5 s, far too quick; its
+/// second timed them to the longest language, about 1.3 times English, and
+/// ran 30% slower than every other world's briefing (2026-11-18).
 /// The briefing's views of the gate and the factories: each eye stands
 /// this far back from its subject against the record's heading, so it
 /// frames the gate or the factory instead of sitting inside it. Retail's cameras stand on their actor; its briefings aim
@@ -567,21 +570,23 @@ pub(crate) fn briefing_program(rework: bool) -> BriefingProgram {
         record(0, 0, 8, 3, camera(3, 180, 360, 50_000, 0, 0)),
         record(0, 10, 5, 0, BriefingPayload::Visibility { flags: 8 }),
         record(0, 10, 3, 0, BriefingPayload::Visibility { flags: 4 }),
-        record(0, 120, 0, 1, menu_text(875)),
-        record(0, 105, 0, 1, menu_text(876)),
+        // The opening pair sit about 3.5 s once typed, as the Command
+        // Centre's do (about 3 and 4 s); at 6 s per 100 they sat 5 to 7 s.
+        record(0, 80, 0, 1, menu_text(875)),
+        record(0, 70, 0, 1, menu_text(876)),
         record(0, 10, 0, 1, menu_text(877)),
         record(0, 10, 4, 0, BriefingPayload::Visibility { flags: 4 }),
-        record(0, 75, 10, 4, BriefingPayload::MapScale { word: 64 }),
+        record(0, 60, 10, 4, BriefingPayload::MapScale { word: 64 }),
         record(0, 10, 0, 1, menu_text(878)),
         record(0, 30, 1, 0, BriefingPayload::Visibility { flags: 4 }),
-        record(0, 75, 8, 3, camera(GATE_VIEW, 130, 200, VIEW_SPEED, 1, 1)),
+        record(0, 60, 8, 3, camera(GATE_VIEW, 130, 200, VIEW_SPEED, 1, 1)),
     ];
     if rework {
         records.extend([
             record(0, 10, 0, 1, menu_text(879)),
-            record(0, 50, 2, 2, model(62, [0, 0], 1000, [0, -50])),
+            record(0, 40, 2, 2, model(62, [0, 0], 1000, [0, -50])),
             // The gate stays in view while its line is up.
-            record(0, 65, 0, 1, menu_text(880)),
+            record(0, 30, 0, 1, menu_text(880)),
             record(
                 0,
                 15,
@@ -590,7 +595,7 @@ pub(crate) fn briefing_program(rework: bool) -> BriefingProgram {
                 camera(START_FACTORY_VIEW, 90, 200, VIEW_SPEED, 1, 1),
             ),
             record(0, 10, 2, 2, model(157, [0, 0], 1500, [0, -50])),
-            record(0, 85, 0, 1, menu_text(881)),
+            record(0, 65, 0, 1, menu_text(881)),
             record(
                 0,
                 15,
@@ -598,7 +603,7 @@ pub(crate) fn briefing_program(rework: bool) -> BriefingProgram {
                 3,
                 camera(GATE_FACTORY_VIEW, 270, 200, VIEW_SPEED, 1, 1),
             ),
-            record(0, 75, 0, 1, menu_text(882)),
+            record(0, 55, 0, 1, menu_text(882)),
             record(
                 0,
                 15,
@@ -610,8 +615,8 @@ pub(crate) fn briefing_program(rework: bool) -> BriefingProgram {
     } else {
         records.extend([
             record(0, 10, 0, 1, menu_text(879)),
-            record(0, 70, 2, 2, model(62, [0, 0], 1000, [0, -50])),
-            record(0, 75, 0, 1, menu_text(880)),
+            record(0, 65, 2, 2, model(62, [0, 0], 1000, [0, -50])),
+            record(0, 45, 0, 1, menu_text(880)),
             record(
                 0,
                 15,
@@ -619,12 +624,12 @@ pub(crate) fn briefing_program(rework: bool) -> BriefingProgram {
                 3,
                 camera(START_FACTORY_VIEW, 90, 200, VIEW_SPEED, 1, 1),
             ),
-            record(0, 85, 0, 1, menu_text(881)),
+            record(0, 70, 0, 1, menu_text(881)),
             record(0, 45, 0, 1, menu_text(882)),
         ]);
     }
     records.extend([
-        record(0, 40, 0, 1, menu_text(883)),
+        record(0, 20, 0, 1, menu_text(883)),
         record(0, 10, 1, 0, BriefingPayload::Visibility { flags: 1 }),
         record(0, 10, 4, 0, BriefingPayload::Visibility { flags: 1 }),
         record(0, 10, 10, 4, BriefingPayload::MapScale { word: 0 }),
@@ -1749,28 +1754,29 @@ mod tests {
         lines
     }
 
-    /// Each line stays up for at least 5.5 s per 100 characters of its
-    /// longest language, and 4 s however short (retail's lines: a median
-    /// of 5.9 s per 100 English characters, never under 3.6 s).
+    /// Retail's pace, timed to English: each line stays up at least 4.5 s
+    /// per 100 English characters and 4 s however short, and the whole
+    /// briefing takes no more than 6.5 s per 100 (retail's lines: a median
+    /// of 6.0 s, 5.2 to 7.5 s a world, long lines as quick as 3.6 s).
     #[test]
-    fn every_line_stays_up_long_enough_to_read() {
+    fn every_line_keeps_retails_reading_pace() {
         for rework in [true, false] {
             let program = briefing_program(rework);
+            let (mut total, mut characters) = (0, 0);
             for (slot, time) in line_times(&program) {
-                let longest = (0..6)
-                    .map(|language| {
-                        text(WORLD, language, i32::from(slot), rework)
-                            .unwrap()
-                            .len()
-                    })
-                    .max()
-                    .unwrap();
+                let english = text(WORLD, 0, i32::from(slot), rework).unwrap().len();
                 assert!(time >= 40, "slot {slot} up {time} (rework {rework})");
                 assert!(
-                    time as usize * 100 >= longest * 55,
-                    "slot {slot}: {longest} characters up {time} (rework {rework})"
+                    time as usize * 100 >= english * 45,
+                    "slot {slot}: {english} characters up {time} (rework {rework})"
                 );
+                total += time as usize;
+                characters += english;
             }
+            assert!(
+                total * 100 <= characters * 65,
+                "{characters} characters up {total} (rework {rework})"
+            );
         }
     }
 
