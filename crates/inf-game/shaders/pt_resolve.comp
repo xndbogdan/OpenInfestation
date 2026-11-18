@@ -70,7 +70,10 @@ void main() {
     if (geometry.w > 0.0 && albedo.a > 0.5) {
         vec4 bounce = imageLoad(bounce_image, pixel);
         vec4 sun = imageLoad(sun_image, pixel);
-        color = surface_albedo * (direct.rgb + sun.rgb * bounce.a + direct.a * bounce.rgb)
+        // The bounce is the preset's fill: the light the surroundings send
+        // back, at its tuned share.
+        color = surface_albedo * (direct.rgb + sun.rgb * bounce.a
+                                  + direct.a * bounce.rgb * frame.fill_gain)
             + imageLoad(specular_image, pixel).rgb * bounce.a;
     }
     // Retail's fog, mixed in retail's tones as retail mixed it.

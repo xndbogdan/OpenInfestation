@@ -108,7 +108,7 @@ pub(super) const TRACED_DEPTH: vk::Format = vk::Format::R32_SFLOAT;
 /// Motion: where each pixel's point was in the last frame, in render pixels.
 pub(super) const MOTION_IMAGE: vk::Format = vk::Format::R16G16_SFLOAT;
 /// The frame block's floats, in `pt_frame.glsl`'s scalar layout.
-const FRAME_FLOATS: usize = 267
+const FRAME_FLOATS: usize = 272
     + 1
     + 4 * MAX_SPARKS
     + MAX_SPARKS
@@ -2264,6 +2264,17 @@ pub(super) fn frame_block(
     } else {
         lighting.reflections.max(0.0)
     }]);
+    // The preset's direct light against its fill, and its tonemap: the sun
+    // and retail's lights shape the lit surfaces, the sky's light, the
+    // ambient floor and the bounce light what a shadow keeps; the tonemap's
+    // contrast turns about the pivot and its shoulder starts at the knee.
+    put(&[
+        lighting.direct.max(0.0),
+        lighting.fill.max(0.0),
+        lighting.contrast.clamp(0.0, 1.0),
+        lighting.pivot.max(0.01),
+        lighting.knee.clamp(0.05, 0.98),
+    ]);
     // What falls: only from the modern sky.
     let precip = sky.precip;
     // A fall that waits for the night (Pelagia's rain) comes over the

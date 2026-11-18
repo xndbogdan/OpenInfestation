@@ -75,9 +75,9 @@ vec3 sky_light(vec3 direction) {
         // finest, so bright cloud edges do not sparkle.
         vec3 shape = to_linear(textureLod(sky_cube, direction, 2.0).rgb)
             / max(sky_mean_light, vec3(1.0e-4));
-        return ambient * min(shape, vec3(16.0)) * frame.sky_light;
+        return ambient * min(shape, vec3(16.0)) * frame.sky_light * frame.fill_gain;
     }
-    return ambient * frame.sky_light;
+    return ambient * frame.sky_light * frame.fill_gain;
 }
 
 vec3 sky_along(vec3 direction) {
@@ -1205,6 +1205,10 @@ vec3 traced_light(Surface surface, vec3 position, bool primary, bool sampled, bo
             light += traced_sources(position, normal, surface.face, model, seed);
         }
     }
+    // The preset's direct share: what a surface takes from the lights that
+    // stand off it and from the sun's rays below, against the fill the
+    // bounce ray brings (frame.fill_gain).
+    light *= frame.direct_gain;
     // Retail lit the ground's sun and sky dimly (its baked shade) but laid
     // its local lights on the bare texture (the grid's bytes added to its
     // vertex colours): the ground keeps that balance, its reflectance
@@ -1219,7 +1223,7 @@ vec3 traced_light(Surface surface, vec3 position, bool primary, bool sampled, bo
     if (depth > 0.0) {
         vec3 reach = sun_under_water(position, depth, sun_toward);
         float facing = max(dot(normal, sun_toward), 0.0);
-        vec3 lit = sun_light() * reach * facing;
+        vec3 lit = sun_light() * reach * facing * frame.direct_gain;
         vec3 entry;
         if (primary) {
             sun = lit;
@@ -1229,7 +1233,7 @@ vec3 traced_light(Surface surface, vec3 position, bool primary, bool sampled, bo
         return light;
     }
     float facing = max(dot(normal, frame.sun_direction), 0.0);
-    vec3 lit = sun_light() * facing;
+    vec3 lit = sun_light() * facing * frame.direct_gain;
     if (primary) {
         sun = lit;
     } else if (facing > 0.0 && !occluded(origin, frame.sun_direction, 1.0e6)) {
@@ -1387,8 +1391,9 @@ vec3 shade_ray(vec3 origin, vec3 direction, float reach, vec3 miss, float lod, u
                               unused_sun, unused_toward);
     // The light from every bounce after this one: the radiance cache's at
     // the hit (pt_cache.glsl), retail's ambient until a path has reached
-    // its cell.
-    light += sky_share * cached_light(position, surface.normal, light_to_linear(frame.ambient));
+    // its cell; the preset's fill share of it.
+    light += frame.fill_gain * sky_share
+        * cached_light(position, surface.normal, light_to_linear(frame.ambient));
     last_hit = !surface.emissive
         && (rayQueryGetIntersectionInstanceCustomIndexEXT(query, true) & INSTANCE_OUTSIDE) == 0u;
 #ifdef PATHS_PASS
@@ -3335,7 +3340,7 @@ void main() {
     float pooled = puddle_water * puddle_sunk;
     vec3 wet_sheen = vec3(0.0);
     if (wet > 0.0 && pooled < 1.0 && max(sun.r, max(sun.g, sun.b)) > 0.0) {
-        wet_sheen = wet * (1.0 - pooled) * sun_light()
+        wet_sheen = wet * (1.0 - pooled) * sun_light() * frame.direct_gain
             * sun_specular(surface.normal, direction, sun_toward, WET_GROUND_ROUGHNESS,
                            vec3(WATER_F0));
     }
@@ -3381,8 +3386,9 @@ void main() {
     vec3 specular = vec3(0.0);
     if (!surface.ground && !surface.emissive && max(sun.r, max(sun.g, sun.b)) > 0.0) {
         vec3 f0 = mix(vec3(0.04), albedo, surface.metal);
-        specular = sun_light() * sun_specular(surface.normal, direction, sun_toward,
-                                              min(surface.rough, MODEL_SHEEN), f0);
+        specular = sun_light() * frame.direct_gain
+            * sun_specular(surface.normal, direction, sun_toward,
+                           min(surface.rough, MODEL_SHEEN), f0);
         if (sunk > 0.0) {
             vec3 unused_up;
             specular *= sun_under_water(position, sunk, unused_up);

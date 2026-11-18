@@ -1335,7 +1335,7 @@ any of it would change the game.
     GPU without it and does not move. One that still fails to start falls
     back to the tracer's own scaling, logged once.
 - **Lighting** (2026-10-23), Remaster or Eye candy, for a traced world
-  only. The tuning's `lighting` numbers scale five things:
+  only. The tuning's `lighting` numbers scale these things:
   - the water's least reflection;
   - each metal's share and sharpness (`reflect_gain`);
   - the mist's sun share;
@@ -1355,6 +1355,24 @@ any of it would change the game.
   (`vk_device/grade.rs`): the frame is copied aside and drawn back
   graded, the raster's effects over the world included. Thermal vision
   takes none of it.
+
+  The traced world's light balances direct against fill (`direct`,
+  `fill`, in `pt_frame.glsl`'s frame block). `direct` scales the sun's
+  diffuse light (above and under the water) and its specular, and the
+  lamps', the glows' and retail's deposited lights' light: what a
+  surface takes only where it faces it. `fill` scales the sky's diffuse
+  light (`sky_light`), the radiance cache's ambient floor (retail's tint
+  until a bounce reaches the cell) and the bounce light the resolve adds:
+  what a shadow keeps. Eye candy raises the first to 1.3 and lowers the
+  second to 0.9, so sunlit surfaces read brighter and true shadows darker
+  without a brighter frame.
+
+  Eye candy's tonemap (`pt_frame.glsl`'s `tonemap`) also bends the linear
+  tones about mid-grey (`contrast` 0.15 about `pivot` 0.18) before PBR
+  Neutral's shoulder, and starts that shoulder later (`knee` 0.9): a
+  deeper toe and more highlight headroom, the hue kept as the shoulder
+  keeps it. Remaster's contrast is 0, its gains 1 and its knee 0.8, which
+  is its tonemap exactly.
 - **Anti-aliasing** without an upscaler: FXAA (`pt_fxaa.comp`, after
   Lottes' FXAA 3.11), SMAA (`smaa_*.comp` over the reference
   `shaders/smaa/SMAA.hlsl`) or TAA (`pt_taa.comp`) over the resolved

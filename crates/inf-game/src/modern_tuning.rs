@@ -522,8 +522,9 @@ impl RoundTuning {
 }
 
 /// A lighting preset ([`crate::modern_settings::Lighting`]) under the
-/// tracer: the frame's grade before the HUD, and the strength of what
-/// catches the eye. Remaster's keep the look as tuned: 1, and 0 for `curve`.
+/// tracer: the frame's grade before the HUD, the balance of direct light
+/// against fill, and the strength of what catches the eye. Remaster's keep
+/// the look as tuned: 1, and 0 for `curve` and `contrast`.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct LightingTuning {
@@ -546,6 +547,26 @@ pub struct LightingTuning {
     pub effects: f32,
     /// The thrusters' trails' density, multiplied (0: none).
     pub trails: f32,
+    /// The direct light, multiplied: the sun's rays, the headlamps' beams
+    /// and retail's deposited lights and glows, the light a surface takes
+    /// only where it faces it (1: as tuned). Raising it against `fill` is
+    /// what deepens true shadows.
+    pub direct: f32,
+    /// The fill light, multiplied: the sky's diffuse light, the ambient
+    /// floor retail's tint stands for, and the bounce light the tracer
+    /// gathers (1: as tuned). A shadow keeps this much; less makes it read
+    /// darker against the sunlit surfaces.
+    pub fill: f32,
+    /// The tonemap's contrast, in linear light about `pivot`: the toe that
+    /// deepens the darks and the lift that brightens the lights (0: the
+    /// tonemap leaves the tones exactly as they were).
+    pub contrast: f32,
+    /// The linear light the contrast turns about (mid-grey, 0.18).
+    pub pivot: f32,
+    /// Where the tonemap's PBR Neutral shoulder starts: light below it is
+    /// shown as it is, so a higher knee keeps more highlight headroom
+    /// (0.8: as tuned).
+    pub knee: f32,
 }
 
 impl LightingTuning {
@@ -2005,15 +2026,97 @@ mod tests {
             [remaster.reflections, remaster.shafts, remaster.glows],
             [1.0; 3]
         );
+        // Remaster's direct-versus-fill balance and its tonemap are the
+        // tuned ones exactly: the shaders multiply by 1 and skip the curve.
+        assert_eq!([remaster.direct, remaster.fill], [1.0; 2]);
+        assert_eq!(remaster.contrast, 0.0);
+        assert_eq!(remaster.knee, 0.8);
+        assert!(remaster.pivot > 0.0);
         let candy = defaults.lighting(Lighting::EyeCandy);
         assert!(candy.grades());
         assert!(candy.exposure < 1.0 && candy.saturation > 1.0 && candy.curve > 0.0);
         assert!(candy.reflections > 1.0 && candy.shafts > 1.0 && candy.glows > 1.0);
+        assert!(candy.direct > 1.0 && candy.fill < 1.0);
+        assert!(candy.contrast > 0.0 && candy.knee > remaster.knee);
         let tuned = ModernTuning::read(Some(r#"{"lighting": {"eye_candy": {"saturation": 1.4}}}"#))
             .unwrap();
         assert_eq!(tuned.lighting(Lighting::EyeCandy).saturation, 1.4);
         assert_eq!(tuned.lighting(Lighting::EyeCandy).exposure, candy.exposure);
         assert!(ModernTuning::read(Some(r#"{"lighting": {"neon": {}}}"#)).is_err());
+    }
+
+    /// `pt_frame.glsl`'s `tonemap` for one channel's peak: the preset's
+    /// contrast curve about its pivot, then PBR Neutral's shoulder from its
+    /// knee. Mirrors the shader so the reduction can be checked here.
+    fn tonemap(peak: f32, look: &LightingTuning) -> f32 {
+        const PALING: f32 = 0.15;
+        // GLSL's mix(x, y, a): x (1 - a) + y a.
+        let mix = |x: f32, y: f32, a: f32| x * (1.0 - a) + y * a;
+        let mut peak = peak;
+        let mut color = peak;
+        if look.contrast > 0.0 && peak > 0.0 {
+            let shaped = peak + look.contrast * peak * (peak - look.pivot) / (peak + look.pivot);
+            color *= shaped / peak;
+            peak = shaped;
+        }
+        if peak <= look.knee {
+            return color;
+        }
+        let d = 1.0 - look.knee;
+        let shown = 1.0 - d * d / (peak + d - look.knee);
+        color *= shown / peak;
+        let pale = 1.0 - 1.0 / (PALING * (peak - shown) + 1.0);
+        mix(color, shown, pale)
+    }
+
+    /// The tonemap before this change: PBR Neutral from a knee of 0.8, no
+    /// contrast curve. Remaster must reduce to exactly this.
+    fn tonemap_before(peak: f32) -> f32 {
+        const KNEE: f32 = 0.8;
+        const PALING: f32 = 0.15;
+        // GLSL's mix(x, y, a): x (1 - a) + y a.
+        let mix = |x: f32, y: f32, a: f32| x * (1.0 - a) + y * a;
+        if peak <= KNEE {
+            return peak;
+        }
+        let d = 1.0 - KNEE;
+        let shown = 1.0 - d * d / (peak + d - KNEE);
+        let color = peak * (shown / peak);
+        let pale = 1.0 - 1.0 / (PALING * (peak - shown) + 1.0);
+        mix(color, shown, pale)
+    }
+
+    /// Remaster's tonemap is the one it had, bit for bit, and Eye candy's is
+    /// a small monotonic curve that darkens the toe and lifts the lights
+    /// without moving the pivot or any hue (one scale for every channel).
+    #[test]
+    fn remasters_tonemap_is_the_one_it_had_and_eye_candys_adds_contrast() {
+        use crate::modern_settings::Lighting;
+        let defaults = ModernTuning::defaults();
+        let remaster = defaults.lighting(Lighting::Remaster);
+        let candy = defaults.lighting(Lighting::EyeCandy);
+        for peak in [
+            0.0, 1.0e-6, 0.01, 0.05, 0.1, 0.18, 0.4, 0.8, 0.9, 1.0, 2.0, 8.0,
+        ] {
+            assert_eq!(
+                tonemap(peak, &remaster).to_bits(),
+                tonemap_before(peak).to_bits(),
+                "at {peak}"
+            );
+        }
+        // The contrast turns about the pivot, which it leaves where it was.
+        assert_eq!(tonemap(candy.pivot, &candy), candy.pivot);
+        // The toe is darker, the lights brighter, and the curve stays
+        // monotonic from black to white.
+        assert!(tonemap(0.01, &candy) < tonemap(0.01, &remaster));
+        assert!(tonemap(0.05, &candy) < tonemap(0.05, &remaster));
+        assert!(tonemap(0.6, &candy) > tonemap(0.6, &remaster));
+        let mut previous = 0.0;
+        for step in 0..=1000 {
+            let shown = tonemap(step as f32 / 100.0, &candy);
+            assert!(shown >= previous, "not monotonic at {step}");
+            previous = shown;
+        }
     }
 
     /// Misspelt names and values of the wrong kind are refused, not

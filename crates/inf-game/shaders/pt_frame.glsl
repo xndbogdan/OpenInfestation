@@ -221,6 +221,18 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // The lighting preset's reflections: how much more a metal mirrors its
     // surroundings, and how much more sharply (1: as tuned).
     float reflect_gain;
+    // The preset's direct light (the sun's, the lamps' and retail's
+    // deposited lights' and glows') and its fill (the sky's light, retail's
+    // ambient floor and the bounce light), multiplied (1: as tuned): the
+    // first shapes the lit surfaces, the second what a shadow keeps.
+    float direct_gain;
+    float fill_gain;
+    // The preset's tonemap: how far its linear tones bend about `tone_pivot`
+    // (0: not at all), the mid-grey it turns about, and where the PBR
+    // Neutral shoulder starts (0.8: as tuned).
+    float tone_contrast;
+    float tone_pivot;
+    float tone_knee;
     // The weather's fall (pt_weather.glsl): 0 none, 1 snow, 2 rain, 3
     // ash, 4 embers; the
     // share of its cells that hold a flake or a drop; how fast it falls
@@ -641,7 +653,7 @@ vec3 water_through(vec3 origin, vec3 direction, float len, bool sunlit, out vec3
     float depth = max(frame.water_level - frame.eye.y - origin.y, 0.0);
     vec3 sky_rate = sigma * SKY_SLANT;
     vec3 light = light_to_linear(max(frame.ambient, vec3(0.0))) * frame.sky_light
-        * exp(-sky_rate * depth) * water_span(sigma - sky_rate * direction.y, len);
+        * frame.fill_gain * exp(-sky_rate * depth) * water_span(sigma - sky_rate * direction.y, len);
     float enters;
     vec3 beam = water_beam(frame.sun_direction, enters);
     if (sunlit && enters > 0.0) {
@@ -652,19 +664,31 @@ vec3 water_through(vec3 origin, vec3 direction, float len, bool sunlit, out vec3
     return water_albedo() * sigma * light;
 }
 
-// The tonemap: the identity up to TONE_KNEE, then Khronos PBR Neutral's
-// shoulder to white, its hue kept and paling only late. PBR Neutral's toe
-// (taking 0.04 off every colour) is left out: retail's darks stay where
-// they were.
-const float TONE_KNEE = 0.8;
+// The tonemap: the identity up to the preset's knee (`tone_knee`, 0.8 as
+// tuned), then Khronos PBR Neutral's shoulder to white, its hue kept and
+// paling only late. PBR Neutral's toe (taking 0.04 off every colour) is left
+// out: retail's darks stay where they were. Before the shoulder the preset's
+// contrast bends the linear tones about `tone_pivot` (Eye candy: a toe that
+// deepens the darks and a lift that brightens the lights); Remaster's is 0,
+// which leaves every tone exactly as it was.
 const float TONE_PALING = 0.15;
 vec3 tonemap(vec3 c) {
     float peak = max(c.r, max(c.g, c.b));
-    if (peak <= TONE_KNEE) {
+    if (frame.tone_contrast > 0.0 && peak > 0.0) {
+        // The rational S-curve x + a x (x - p) / (x + p): the identity at the
+        // pivot, a toe of (1 - a) at black, a lift of (1 + a) at white, its
+        // slope between 1 - a and 1 + a, so smooth and monotonic for a < 1.
+        // It scales every channel alike, as the shoulder does: no hue shifts.
+        float shaped = peak + frame.tone_contrast * peak * (peak - frame.tone_pivot)
+            / (peak + frame.tone_pivot);
+        c *= shaped / peak;
+        peak = shaped;
+    }
+    if (peak <= frame.tone_knee) {
         return c;
     }
-    float d = 1.0 - TONE_KNEE;
-    float shown = 1.0 - d * d / (peak + d - TONE_KNEE);
+    float d = 1.0 - frame.tone_knee;
+    float shown = 1.0 - d * d / (peak + d - frame.tone_knee);
     c *= shown / peak;
     float pale = 1.0 - 1.0 / (TONE_PALING * (peak - shown) + 1.0);
     return mix(c, vec3(shown), pale);
