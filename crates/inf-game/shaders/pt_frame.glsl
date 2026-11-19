@@ -229,6 +229,13 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // and its roughness, multiplied (below 1: a polish).
     float metal_reflect_gain;
     float metal_rough_scale;
+    // The preset's shine: the sun's glint on the water and its puddles,
+    // multiplied, and how much sharper its lobe is (the exponent
+    // multiplied); then the sun's specular on a model, multiplied by its
+    // metalness (1: as tuned).
+    float water_glint_gain;
+    float water_glint_sharpness;
+    float metal_shine;
     // The preset's direct light (the sun's, the lamps' and retail's
     // deposited lights' and glows') and its fill (the sky's light, retail's
     // ambient floor and the bounce light), multiplied (1: as tuned): the

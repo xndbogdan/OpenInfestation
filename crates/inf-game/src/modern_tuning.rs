@@ -552,6 +552,17 @@ pub struct LightingTuning {
     /// A metal's roughness, multiplied: below 1 polishes its reflection,
     /// sharper and tighter (1: as tuned).
     pub metal_rough: f32,
+    /// The sun's glint on the water and in its puddles, multiplied: the
+    /// highlight brighter at its peak (1: as tuned). A look choice: a
+    /// tighter lobe puts its light in a smaller highlight, so the peak is
+    /// raised to read brighter, not dimmer.
+    pub water_glint: f32,
+    /// That glint's sharpness, the exponent multiplied: above 1, a tighter,
+    /// crisper highlight (1: as tuned).
+    pub water_glint_sharpness: f32,
+    /// The sun's specular on a model, multiplied by its metalness: a metal's
+    /// highlight brighter, matte paint's left as tuned (1: as tuned).
+    pub metal_shine: f32,
     /// The sun's share of the mist's light, its shafts, multiplied.
     pub shafts: f32,
     /// The glowing models' and retail's lights' strength, multiplied.
@@ -2057,6 +2068,16 @@ mod tests {
             ],
             [1.0; 4]
         );
+        // And its sun glints and a metal's highlight: the shaders multiply
+        // by 1 and leave every exponent and lobe where it was.
+        assert_eq!(
+            [
+                remaster.water_glint,
+                remaster.water_glint_sharpness,
+                remaster.metal_shine
+            ],
+            [1.0; 3]
+        );
         let candy = defaults.lighting(Lighting::EyeCandy);
         assert!(candy.grades());
         assert!(candy.exposure < 1.0 && candy.saturation > 1.0 && candy.curve > 0.0);
@@ -2065,6 +2086,8 @@ mod tests {
         assert!(candy.contrast > 0.0 && candy.knee > remaster.knee);
         assert!(candy.water_reflect > 1.0 && candy.water_reflect_cap < 1.0);
         assert!(candy.metal_reflect > 1.0 && candy.metal_rough < 1.0);
+        assert!(candy.water_glint > 1.0 && candy.water_glint_sharpness > 1.0);
+        assert!(candy.metal_shine > 1.0);
         let tuned = ModernTuning::read(Some(r#"{"lighting": {"eye_candy": {"saturation": 1.4}}}"#))
             .unwrap();
         assert_eq!(tuned.lighting(Lighting::EyeCandy).saturation, 1.4);
@@ -2164,7 +2187,7 @@ mod tests {
         }
         // The world's own default, and the murky worlds the tuning names,
         // all mirror more; no more than the cap (0.25).
-        for (world, lifted) in [(0.02, 0.05), (0.06, 0.15), (0.15, 0.25), (0.2, 0.25)] {
+        for (world, lifted) in [(0.02, 0.035), (0.06, 0.105), (0.15, 0.25), (0.2, 0.25)] {
             let least = water_least(world, &candy);
             assert!((least - lifted).abs() < 1.0e-6, "{world}: {least}");
         }
@@ -2186,6 +2209,47 @@ mod tests {
         let (metal, rough) = metal_look(&candy);
         assert!(metal > 0.6, "{metal}");
         assert!(rough < 0.35, "{rough}");
+    }
+
+    /// The shader's water glint (`pt_trace.comp`'s `water_surface_glints`)
+    /// and a metal's sun specular (`shade_surface`): Remaster's reduce to the
+    /// expressions they had, bit for bit; Eye candy's peak is brighter and
+    /// its glint narrower, and only a metal takes its shine.
+    #[test]
+    fn eye_candys_shine_is_brighter_and_crisper_while_remasters_is_exact() {
+        use crate::modern_settings::Lighting;
+        let defaults = ModernTuning::defaults();
+        let remaster = defaults.lighting(Lighting::Remaster);
+        let candy = defaults.lighting(Lighting::EyeCandy);
+        let glint = |cos: f32, look: &LightingTuning| {
+            (cos.max(0.0).powf(600.0 * look.water_glint_sharpness) * 4.0) * look.water_glint
+        };
+        let before = |cos: f32| cos.max(0.0).powf(600.0) * 4.0;
+        let shine = |metal: f32, look: &LightingTuning| 1.0 + (look.metal_shine - 1.0) * metal;
+        for cos in [0.0, 0.1, 0.5, 0.9, 0.99, 0.999, 1.0] {
+            assert_eq!(
+                glint(cos, &remaster).to_bits(),
+                before(cos).to_bits(),
+                "at {cos}"
+            );
+        }
+        for metal in [0.0, 0.25, 0.6, 1.0] {
+            assert_eq!(shine(metal, &remaster), 1.0, "at {metal}");
+        }
+        // Matte paint keeps exactly the tuned highlight; a metal takes the
+        // preset's shine in full.
+        assert_eq!(shine(0.0, &candy), 1.0);
+        assert!((shine(1.0, &candy) - candy.metal_shine).abs() < 1.0e-6);
+        // At the mirror's angle the glint is `water_glint` times as bright;
+        // a little off it the sharper exponent has already taken more away,
+        // so the lobe is tighter (a look choice: a tighter lobe concentrates
+        // the same light, and the peak is raised to read brighter, not
+        // dimmer).
+        assert_eq!(
+            glint(1.0, &candy),
+            glint(1.0, &remaster) * candy.water_glint
+        );
+        assert!(glint(0.99, &candy) < glint(0.99, &remaster));
     }
 
     /// Misspelt names and values of the wrong kind are refused, not

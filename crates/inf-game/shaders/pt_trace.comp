@@ -2242,7 +2242,12 @@ vec3 water_surface_glints(vec3 position, vec3 direction, vec3 normal, vec3 face,
                      vec3(1.0)) * (0.7 * fleck);
     }
     vec3 half_way = normalize(frame.sun_direction - direction);
-    float glint = pow(max(dot(normal, half_way), 0.0), 600.0) * 4.0 * (1.0 - cover) * edge;
+    // Eye candy's shine: the sun's glint's lobe tightened and its peak
+    // raised, a look choice over energy (a tighter lobe would otherwise
+    // read dimmer), and Remaster's 1s leave it exactly as tuned.
+    float glint = pow(max(dot(normal, half_way), 0.0),
+                      600.0 * frame.water_glint_sharpness)
+        * 4.0 * frame.water_glint_gain * (1.0 - cover) * edge;
     if (glint > 0.001 && !occluded(position + face * 0.5, frame.sun_direction, 1.0e6)) {
         color += frame.sun_color * glint * cloud_light(position);
     }
@@ -2272,9 +2277,10 @@ vec3 water_surface_glints(vec3 position, vec3 direction, vec3 normal, vec3 face,
         float d2 = dot(toward.xz, toward.xz);
         if (d2 < r2) {
             vec3 from = normalize(emitter - position);
-            float shine = pow(max(dot(normal, normalize(from - direction)), 0.0), 120.0);
-            color += max(source.color, 0.0) * (1.0 - d2 / r2) * shine * 2.0 * (1.0 - cover)
-                * edge;
+            float shine = pow(max(dot(normal, normalize(from - direction)), 0.0),
+                              120.0 * frame.water_glint_sharpness);
+            color += max(source.color, 0.0) * (1.0 - d2 / r2) * shine * 2.0
+                * frame.water_glint_gain * (1.0 - cover) * edge;
         }
     }
     float roughness = max(frame.lamp_water_gloss, 0.02);
@@ -3398,9 +3404,13 @@ void main() {
     vec3 specular = vec3(0.0);
     if (!surface.ground && !surface.emissive && max(sun.r, max(sun.g, sun.b)) > 0.0) {
         vec3 f0 = mix(vec3(0.04), albedo, surface.metal);
+        // Eye candy's shine: a metal's sun highlight brighter, matte paint
+        // left as tuned. The add, not a mix, leaves Remaster's 1 exactly 1
+        // (a mix's multiply and add not always, as pt_resolve.comp's fill).
+        float shine = 1.0 + (frame.metal_shine - 1.0) * surface.metal;
         specular = sun_light() * frame.direct_gain
             * sun_specular(surface.normal, direction, sun_toward,
-                           min(surface.rough, MODEL_SHEEN), f0);
+                           min(surface.rough, MODEL_SHEEN), f0) * shine;
         if (sunk > 0.0) {
             vec3 unused_up;
             specular *= sun_under_water(position, sunk, unused_up);

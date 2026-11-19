@@ -465,8 +465,11 @@ vec3 wet_ground(ivec2 pixel, vec3 colour, vec4 ground) {
                            vec3(WATER_F0))
         : vec3(0.0);
     vec3 half_way = normalize(frame.sun_direction - view);
+    // The preset's shine, as the tracer's water takes it.
     float glint = puddle_edge > 0.0
-        ? pow(max(dot(puddle_normal, half_way), 0.0), 600.0) * 4.0 * puddle_edge
+        ? pow(max(dot(puddle_normal, half_way), 0.0),
+              600.0 * frame.water_glint_sharpness) * 4.0 * frame.water_glint_gain
+            * puddle_edge
         : 0.0;
     glint = glint > 0.001 ? glint : 0.0;
     float fleck = puddle_edge > 0.0 ? rain_flecks(point) * puddle_edge : 0.0;
@@ -732,7 +735,9 @@ void main() {
     // fog.
     float cover = foam_cover(point, max(frame.splash_foam * foam, lap_line(point, shore)));
     vec3 half_way = normalize(frame.sun_direction - view);
-    float glint = pow(max(dot(normal, half_way), 0.0), 600.0) * 4.0 * (1.0 - cover) * edge;
+    float glint = pow(max(dot(normal, half_way), 0.0),
+                      600.0 * frame.water_glint_sharpness)
+        * 4.0 * frame.water_glint_gain * (1.0 - cover) * edge;
     float sunlit = 0.0;
     if ((glint > 0.001 || cover > 0.0) && frame.sun_direction.y > 0.0) {
         vec3 blocked;
