@@ -601,12 +601,13 @@ impl LightingTuning {
     }
 }
 
-/// The two lighting presets' numbers.
+/// The three lighting presets' numbers.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct LightingPresets {
     pub remaster: LightingTuning,
     pub eye_candy: LightingTuning,
+    pub eye_candy_extreme: LightingTuning,
 }
 
 /// Which sky a world shows under the tracer.
@@ -1713,6 +1714,7 @@ impl ModernTuning {
         match preset {
             crate::modern_settings::Lighting::Remaster => self.lighting.remaster,
             crate::modern_settings::Lighting::EyeCandy => self.lighting.eye_candy,
+            crate::modern_settings::Lighting::EyeCandyExtreme => self.lighting.eye_candy_extreme,
         }
     }
 }
@@ -1937,6 +1939,7 @@ mod tests {
         for preset in [
             crate::modern_settings::Lighting::Remaster,
             crate::modern_settings::Lighting::EyeCandy,
+            crate::modern_settings::Lighting::EyeCandyExtreme,
         ] {
             assert!(defaults.lighting(preset).trails > 0.0);
         }
@@ -2039,8 +2042,9 @@ mod tests {
     }
 
     /// Remaster keeps the look as tuned, so its frame takes no grade; Eye
-    /// candy grades it and strengthens reflections, shafts and glows. A
-    /// file changes either preset.
+    /// candy grades it as it always did and leaves every added extra
+    /// neutral; Eye candy Extreme is the strongest look. A file changes any
+    /// preset.
     #[test]
     fn the_lighting_presets_read_their_numbers() {
         use crate::modern_settings::Lighting;
@@ -2078,20 +2082,92 @@ mod tests {
             ],
             [1.0; 3]
         );
+        // Eye candy is the look it always had, number for number: its grade,
+        // its reflections, shafts, glows, effects and trails as tuned.
         let candy = defaults.lighting(Lighting::EyeCandy);
         assert!(candy.grades());
-        assert!(candy.exposure < 1.0 && candy.saturation > 1.0 && candy.curve > 0.0);
-        assert!(candy.reflections > 1.0 && candy.shafts > 1.0 && candy.glows > 1.0);
-        assert!(candy.direct > 1.0 && candy.fill < 1.0);
-        assert!(candy.contrast > 0.0 && candy.knee > remaster.knee);
-        assert!(candy.water_reflect > 1.0 && candy.water_reflect_cap < 1.0);
-        assert!(candy.metal_reflect > 1.0 && candy.metal_rough < 1.0);
-        assert!(candy.water_glint > 1.0 && candy.water_glint_sharpness > 1.0);
-        assert!(candy.metal_shine > 1.0);
+        assert_eq!(
+            [
+                candy.exposure,
+                candy.saturation,
+                candy.curve,
+                candy.reflections,
+                candy.shafts,
+                candy.glows,
+                candy.effects,
+                candy.trails,
+            ],
+            [0.9, 1.3, 0.3, 1.3, 1.9, 1.4, 0.95, 1.0]
+        );
+        // Everything the third preset added is neutral under it, so it
+        // renders exactly as it did.
+        assert_eq!(
+            [
+                candy.water_reflect,
+                candy.water_reflect_cap,
+                candy.metal_reflect,
+                candy.metal_rough,
+                candy.water_glint,
+                candy.water_glint_sharpness,
+                candy.metal_shine,
+                candy.direct,
+                candy.fill,
+            ],
+            [1.0; 9]
+        );
+        assert_eq!(candy.contrast, 0.0);
+        assert_eq!(candy.pivot, 0.18);
+        assert_eq!(candy.knee, 0.8);
+        // Eye candy Extreme is the strongest look, block for block.
+        let extreme = defaults.lighting(Lighting::EyeCandyExtreme);
+        assert!(extreme.grades());
+        assert_eq!(
+            [
+                extreme.exposure,
+                extreme.saturation,
+                extreme.curve,
+                extreme.reflections,
+                extreme.shafts,
+                extreme.glows,
+                extreme.effects,
+                extreme.trails,
+                extreme.direct,
+                extreme.fill,
+                extreme.contrast,
+                extreme.pivot,
+                extreme.knee,
+                extreme.water_reflect,
+                extreme.water_reflect_cap,
+                extreme.metal_reflect,
+                extreme.metal_rough,
+                extreme.water_glint,
+                extreme.water_glint_sharpness,
+                extreme.metal_shine,
+            ],
+            [
+                0.9, 1.15, 0.3, 1.45, 1.9, 1.4, 0.95, 1.0, 1.3, 0.8, 0.15, 0.18, 0.9, 4.0, 0.35,
+                2.0, 0.35, 1.6, 1.3, 1.8
+            ]
+        );
+        assert!(extreme.direct > 1.0 && extreme.fill < 1.0);
+        assert!(extreme.contrast > 0.0 && extreme.knee > remaster.knee);
+        assert!(extreme.water_reflect > 1.0 && extreme.water_reflect_cap < 1.0);
+        assert!(extreme.metal_reflect > 1.0 && extreme.metal_rough < 1.0);
+        assert!(extreme.water_glint > 1.0 && extreme.water_glint_sharpness > 1.0);
+        assert!(extreme.metal_shine > 1.0);
         let tuned = ModernTuning::read(Some(r#"{"lighting": {"eye_candy": {"saturation": 1.4}}}"#))
             .unwrap();
         assert_eq!(tuned.lighting(Lighting::EyeCandy).saturation, 1.4);
         assert_eq!(tuned.lighting(Lighting::EyeCandy).exposure, candy.exposure);
+        let tuned = ModernTuning::read(Some(
+            r#"{"lighting": {"eye_candy_extreme": {"knee": 0.7}}}"#,
+        ))
+        .unwrap();
+        assert_eq!(tuned.lighting(Lighting::EyeCandyExtreme).knee, 0.7);
+        assert_eq!(
+            tuned.lighting(Lighting::EyeCandyExtreme).exposure,
+            extreme.exposure
+        );
         assert!(ModernTuning::read(Some(r#"{"lighting": {"neon": {}}}"#)).is_err());
     }
 
@@ -2136,34 +2212,42 @@ mod tests {
         mix(color, shown, pale)
     }
 
-    /// Remaster's tonemap is the one it had, bit for bit, and Eye candy's is
-    /// a small monotonic curve that darkens the toe and lifts the lights
-    /// without moving the pivot or any hue (one scale for every channel).
+    /// Remaster's and Eye candy's tonemaps are the one they had, bit for
+    /// bit, and Eye candy Extreme's is a small monotonic curve that darkens
+    /// the toe and lifts the lights without moving the pivot or any hue
+    /// (one scale for every channel).
     #[test]
-    fn remasters_tonemap_is_the_one_it_had_and_eye_candys_adds_contrast() {
+    fn the_tuned_tonemaps_are_the_ones_they_had_and_extremes_adds_contrast() {
         use crate::modern_settings::Lighting;
         let defaults = ModernTuning::defaults();
         let remaster = defaults.lighting(Lighting::Remaster);
         let candy = defaults.lighting(Lighting::EyeCandy);
+        let extreme = defaults.lighting(Lighting::EyeCandyExtreme);
         for peak in [
             0.0, 1.0e-6, 0.01, 0.05, 0.1, 0.18, 0.4, 0.8, 0.9, 1.0, 2.0, 8.0,
         ] {
+            let before = tonemap_before(peak);
             assert_eq!(
                 tonemap(peak, &remaster).to_bits(),
-                tonemap_before(peak).to_bits(),
-                "at {peak}"
+                before.to_bits(),
+                "remaster at {peak}"
+            );
+            assert_eq!(
+                tonemap(peak, &candy).to_bits(),
+                before.to_bits(),
+                "eye candy at {peak}"
             );
         }
         // The contrast turns about the pivot, which it leaves where it was.
-        assert_eq!(tonemap(candy.pivot, &candy), candy.pivot);
+        assert_eq!(tonemap(extreme.pivot, &extreme), extreme.pivot);
         // The toe is darker, the lights brighter, and the curve stays
         // monotonic from black to white.
-        assert!(tonemap(0.01, &candy) < tonemap(0.01, &remaster));
-        assert!(tonemap(0.05, &candy) < tonemap(0.05, &remaster));
-        assert!(tonemap(0.6, &candy) > tonemap(0.6, &remaster));
+        assert!(tonemap(0.01, &extreme) < tonemap(0.01, &remaster));
+        assert!(tonemap(0.05, &extreme) < tonemap(0.05, &remaster));
+        assert!(tonemap(0.6, &extreme) > tonemap(0.6, &remaster));
         let mut previous = 0.0;
         for step in 0..=1000 {
-            let shown = tonemap(step as f32 / 100.0, &candy);
+            let shown = tonemap(step as f32 / 100.0, &extreme);
             assert!(shown >= previous, "not monotonic at {step}");
             previous = shown;
         }
@@ -2171,28 +2255,33 @@ mod tests {
 
     /// The shader's water least share (`pt_frame.glsl`'s `water_least`) and a
     /// metal's look after the preset (`pt_trace.comp`'s `model_surface`):
-    /// Remaster's are the ones it had, bit for bit; Eye candy lifts the
-    /// water's mirror at every angle and polishes and brightens a metal's.
+    /// Remaster's and Eye candy's are the ones they had, bit for bit; Eye
+    /// candy Extreme lifts the water's mirror at every angle and polishes
+    /// and brightens a metal's.
     #[test]
-    fn eye_candys_water_and_metal_lift_the_reflections_remasters_do_not() {
+    fn the_tuned_water_and_metal_are_exacts_and_extremes_lift_the_reflections() {
         use crate::modern_settings::Lighting;
         let defaults = ModernTuning::defaults();
         let remaster = defaults.lighting(Lighting::Remaster);
         let candy = defaults.lighting(Lighting::EyeCandy);
+        let extreme = defaults.lighting(Lighting::EyeCandyExtreme);
         let water_least = |world: f32, look: &LightingTuning| {
             (world.max(0.02) * look.water_reflect).min(look.water_reflect_cap)
         };
         for world in [0.02, 0.06, 0.15, 0.2] {
             assert_eq!(water_least(world, &remaster), world.max(0.02), "at {world}");
+            assert_eq!(water_least(world, &candy), world.max(0.02), "at {world}");
         }
         // The world's own default, and the murky worlds the tuning names,
         // all mirror more; no more than the cap (0.35).
         for (world, lifted) in [(0.02, 0.08), (0.06, 0.24), (0.15, 0.35), (0.2, 0.35)] {
-            let least = water_least(world, &candy);
+            let least = water_least(world, &extreme);
             assert!((least - lifted).abs() < 1.0e-6, "{world}: {least}");
         }
         // A metal's material: Remaster keeps the tuned metalness and
-        // roughness; Eye candy raises the one and sharpens the other.
+        // roughness, Eye candy's reflections raise its metalness as they
+        // always did with the polish neutral; Eye candy Extreme raises the
+        // one and sharpens the other.
         let metal_look = |look: &LightingTuning| {
             let metal = (0.6 * look.reflections).min(1.0);
             let rough = (0.35 / look.reflections).max(0.02);
@@ -2207,20 +2296,25 @@ mod tests {
         };
         assert_eq!(metal_look(&remaster), (0.6, 0.35));
         let (metal, rough) = metal_look(&candy);
-        assert!(metal > 0.6, "{metal}");
-        assert!(rough < 0.35, "{rough}");
+        assert_eq!(metal, (0.6 * 1.3_f32).min(1.0));
+        assert_eq!(rough, (0.35 / 1.3_f32).max(0.02));
+        let (extreme_metal, extreme_rough) = metal_look(&extreme);
+        assert!(extreme_metal > metal, "{extreme_metal}");
+        assert!(extreme_rough < rough, "{extreme_rough}");
     }
 
     /// The shader's water glint (`pt_trace.comp`'s `water_surface_glints`)
-    /// and a metal's sun specular (`shade_surface`): Remaster's reduce to the
-    /// expressions they had, bit for bit; Eye candy's peak is brighter and
-    /// its glint narrower, and only a metal takes its shine.
+    /// and a metal's sun specular (`shade_surface`): Remaster's and Eye
+    /// candy's reduce to the expressions they had, bit for bit; Eye candy
+    /// Extreme's peak is brighter and its glint narrower, and only a metal
+    /// takes its shine.
     #[test]
-    fn eye_candys_shine_is_brighter_and_crisper_while_remasters_is_exact() {
+    fn the_tuned_shine_is_exact_while_extremes_is_brighter_and_crisper() {
         use crate::modern_settings::Lighting;
         let defaults = ModernTuning::defaults();
         let remaster = defaults.lighting(Lighting::Remaster);
         let candy = defaults.lighting(Lighting::EyeCandy);
+        let extreme = defaults.lighting(Lighting::EyeCandyExtreme);
         let glint = |cos: f32, look: &LightingTuning| {
             (cos.max(0.0).powf(600.0 * look.water_glint_sharpness) * 4.0) * look.water_glint
         };
@@ -2230,26 +2324,32 @@ mod tests {
             assert_eq!(
                 glint(cos, &remaster).to_bits(),
                 before(cos).to_bits(),
-                "at {cos}"
+                "remaster at {cos}"
+            );
+            assert_eq!(
+                glint(cos, &candy).to_bits(),
+                before(cos).to_bits(),
+                "eye candy at {cos}"
             );
         }
         for metal in [0.0, 0.25, 0.6, 1.0] {
             assert_eq!(shine(metal, &remaster), 1.0, "at {metal}");
+            assert_eq!(shine(metal, &candy), 1.0, "at {metal}");
         }
         // Matte paint keeps exactly the tuned highlight; a metal takes the
         // preset's shine in full.
-        assert_eq!(shine(0.0, &candy), 1.0);
-        assert!((shine(1.0, &candy) - candy.metal_shine).abs() < 1.0e-6);
+        assert_eq!(shine(0.0, &extreme), 1.0);
+        assert!((shine(1.0, &extreme) - extreme.metal_shine).abs() < 1.0e-6);
         // At the mirror's angle the glint is `water_glint` times as bright;
         // a little off it the sharper exponent has already taken more away,
         // so the lobe is tighter (a look choice: a tighter lobe concentrates
         // the same light, and the peak is raised to read brighter, not
         // dimmer).
         assert_eq!(
-            glint(1.0, &candy),
-            glint(1.0, &remaster) * candy.water_glint
+            glint(1.0, &extreme),
+            glint(1.0, &remaster) * extreme.water_glint
         );
-        assert!(glint(0.99, &candy) < glint(0.99, &remaster));
+        assert!(glint(0.99, &extreme) < glint(0.99, &remaster));
     }
 
     /// Misspelt names and values of the wrong kind are refused, not

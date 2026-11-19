@@ -34,6 +34,7 @@ pub enum PortText {
     Lighting,
     Remaster,
     EyeCandy,
+    EyeCandyExtreme,
     /// The Camera Style row's third value, past retail's Normal and
     /// Cinematic: the remastered camera.
     Remastered,
@@ -219,6 +220,14 @@ impl PortText {
                 b"Espectacular",
                 b"Spectaculair",
             ],
+            Self::EyeCandyExtreme => [
+                b"Eye candy Extreme",
+                b"Spectaculaire extr\xeame",
+                b"Augenschmaus extrem",
+                b"Spettacolare estremo",
+                b"Espectacular extremo",
+                b"Spectaculair extreem",
+            ],
             Self::Ambience => [
                 b"Ambience",
                 b"Ambiance",
@@ -289,6 +298,7 @@ mod tests {
             PortText::Remaster,
             PortText::Remastered,
             PortText::EyeCandy,
+            PortText::EyeCandyExtreme,
             PortText::Off,
             PortText::Unavailable,
             PortText::PreparingGraphics,

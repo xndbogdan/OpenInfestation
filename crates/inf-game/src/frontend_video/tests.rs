@@ -676,7 +676,15 @@ fn the_lighting_row_moves_traced_or_not() {
         ModernRow::Lighting.value_text(&modern, support, 2),
         b"Augenschmaus"
     );
+    assert!(ModernRow::Lighting.adjust(&mut modern, support, MenuCommand::AdjustNext));
+    assert_eq!(modern.lighting, Lighting::EyeCandyExtreme);
+    assert_eq!(
+        ModernRow::Lighting.value_text(&modern, support, 2),
+        b"Augenschmaus extrem"
+    );
     modern.ray_tracing = false;
+    assert!(ModernRow::Lighting.adjust(&mut modern, support, MenuCommand::AdjustPrevious));
+    assert_eq!(modern.lighting, Lighting::EyeCandy);
     assert!(ModernRow::Lighting.adjust(&mut modern, support, MenuCommand::AdjustPrevious));
     assert_eq!(modern.lighting, Lighting::Remaster);
     // A GPU without ray tracing moves it too.

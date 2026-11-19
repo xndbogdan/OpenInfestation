@@ -3513,21 +3513,22 @@ impl VkFrame {
         }
         self.flush();
         self.raster_depth = true;
-        // As the tracer's water: the world's least share times the preset's
-        // share of it, at least water's own and no more than the preset's
-        // cap, and the preset's Fresnel gain.
+        // As the tracer's water: the world's own share times the preset's
+        // reflections, at least water's own and no more than the preset's
+        // cap, times the preset's share of it, and the preset's Fresnel
+        // gain. The preset's neutral reduces to main's expression exactly.
         let (reflections, water_gain, water_cap) = {
             let state = self.device.state.borrow();
             let lighting = crate::modern_tuning::current().lighting(state.modern.lighting);
             (
                 lighting.reflections.max(0.0),
                 lighting.water_reflect.max(0.0),
-                lighting.water_reflect_cap.max(0.02),
+                lighting.water_reflect_cap.clamp(0.02, 1.0),
             )
         };
         self.mirror_world = water_reflect.map(|reflect| {
             let look = mirror::WaterMirror {
-                least: (reflect * water_gain).max(0.02).min(water_cap),
+                least: water_mirror_least(reflect, reflections, water_gain, water_cap),
                 gain: reflections.max(1.0),
                 murk: None,
             };
@@ -4021,6 +4022,17 @@ fn holds_for_water(
     heights.any(|height| height.is_none_or(|y| if under { y < plane } else { y > plane }))
 }
 
+/// The least share of its surroundings the raster's water mirrors, looking
+/// straight down: the world's `reflect` times the preset's reflections, at
+/// least water's own 0.02, times the preset's share of it, and no more than
+/// its cap. The tracer's `water_least` (`pt_frame.glsl`) is the same
+/// expression on the same frame value, so the two waters agree; the
+/// preset's neutral (its 1s) is the expression it had before, exactly, in
+/// its order.
+fn water_mirror_least(reflect: f32, reflections: f32, gain: f32, cap: f32) -> f32 {
+    ((reflect * reflections).clamp(0.0, 1.0).max(0.02) * gain).min(cap)
+}
+
 /// A corner of retail's ground for the water's pass's ground image
 /// (`vk_ground.frag`): the colour its fog took and its share in its fog
 /// (`textured`: its own, `corner.fog`; else a colored quad's, which mixed
@@ -4081,9 +4093,41 @@ impl Drop for VkFrame {
 #[cfg(test)]
 mod tests {
     use super::{
-        depth_slope, downsampled, ground_corner, holds_for_water, supersampled, D3dTextureBlend,
-        D3dTlVertex, DeviceVertex, PipelineKey,
+        depth_slope, downsampled, ground_corner, holds_for_water, supersampled, water_mirror_least,
+        D3dTextureBlend, D3dTlVertex, DeviceVertex, PipelineKey,
     };
+
+    /// The raster's water mirrors the tuned share exactly at the presets'
+    /// neutral water (their 1s), and the tracer's share under Eye candy
+    /// Extreme: the world's reflect times the preset's reflections, floored
+    /// at water's 0.02, then the preset's share of it, no more than its cap.
+    #[test]
+    fn the_rasters_water_mirror_is_exact_at_the_neutral() {
+        // The expression the presets had, which Remaster and Eye candy must
+        // reduce to.
+        let before =
+            |reflect: f32, reflections: f32| (reflect * reflections).clamp(0.0, 1.0).max(0.02);
+        for reflections in [1.0_f32, 1.3, 1.45] {
+            for reflect in [0.0, 0.02, 0.03, 0.06, 0.15, 0.2, 0.5, 1.0] {
+                assert_eq!(
+                    water_mirror_least(reflect, reflections, 1.0, 1.0).to_bits(),
+                    before(reflect, reflections).to_bits(),
+                    "at {reflect} x {reflections}"
+                );
+            }
+        }
+        // Eye candy Extreme is the tracer's `water_least` of the same
+        // frame value (`(reflect * reflections).clamp(0, 1)`).
+        let tracer = |frame_reflect: f32| (frame_reflect.max(0.02) * 4.0).min(0.35);
+        for reflect in [0.02_f32, 0.06, 0.15, 0.2] {
+            let frame_reflect = (reflect * 1.45).clamp(0.0, 1.0);
+            assert_eq!(
+                water_mirror_least(reflect, 1.45, 4.0, 0.35).to_bits(),
+                tracer(frame_reflect).to_bits(),
+                "at {reflect}"
+            );
+        }
+    }
 
     /// A polygon's depth change over a pixel, across and down together:
     /// none for one facing the screen or standing in a line.

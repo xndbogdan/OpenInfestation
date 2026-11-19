@@ -550,7 +550,7 @@ Surface model_surface(int primitive, vec3 weights, Ray ray) {
     surface.rough = max(float((material >> 8) & 0xffu) / 255.0
                         / max(frame.reflect_gain, 1.0e-3), 0.02);
     // The preset's polish: only a metal's roughness, so matte paint keeps
-    // its broad sheen (Eye candy's reflections read sharp).
+    // its broad sheen (Eye candy Extreme's reflections read sharp).
     if (surface.metal > 0.0) {
         surface.rough = max(surface.rough * frame.metal_rough_scale, 0.02);
     }
@@ -2242,9 +2242,9 @@ vec3 water_surface_glints(vec3 position, vec3 direction, vec3 normal, vec3 face,
                      vec3(1.0)) * (0.7 * fleck);
     }
     vec3 half_way = normalize(frame.sun_direction - direction);
-    // Eye candy's shine: the sun's glint's lobe tightened and its peak
-    // raised, a look choice over energy (a tighter lobe would otherwise
-    // read dimmer), and Remaster's 1s leave it exactly as tuned.
+    // Eye candy Extreme's shine: the sun's glint's lobe tightened and its
+    // peak raised, a look choice over energy (a tighter lobe would otherwise
+    // read dimmer), and the tuned presets' 1s leave it exactly as tuned.
     float glint = pow(max(dot(normal, half_way), 0.0),
                       600.0 * frame.water_glint_sharpness)
         * 4.0 * frame.water_glint_gain * (1.0 - cover) * edge;
@@ -2387,7 +2387,7 @@ vec3 water_color(Surface surface, vec3 position, vec3 direction) {
     vec3 normal = normalize(mix(vec3(0.0, from_above ? 1.0 : -1.0, 0.0), rippled_normal, edge));
     float cos_i = clamp(dot(-direction, normal), 0.0, 1.0);
     // Total internal reflection, from below.
-    // Eye candy mirrors more: its share of the world's least, its
+    // The preset's water mirrors more: its share of the world's least, its
     // reflections gain on top (2026-10-26, more plasma bolts and more world
     // reflections; 2026-11-19, the least share itself).
     float fresnel = inside ? 1.0
@@ -2963,7 +2963,7 @@ void main() {
     vec3 bounce = weight > 0.0 ? bounce_light(origin, toward, glossy, seed, t) * weight
                                : vec3(0.0);
     // A metal's reflection of its surroundings, at the preset's weight: its
-    // albedo alone leaves the mirror too dark to read (Eye candy's
+    // albedo alone leaves the mirror too dark to read (Eye candy Extreme's
     // reflections are brighter).
     if (glossy) {
         bounce *= frame.metal_reflect_gain;
@@ -3404,9 +3404,10 @@ void main() {
     vec3 specular = vec3(0.0);
     if (!surface.ground && !surface.emissive && max(sun.r, max(sun.g, sun.b)) > 0.0) {
         vec3 f0 = mix(vec3(0.04), albedo, surface.metal);
-        // Eye candy's shine: a metal's sun highlight brighter, matte paint
-        // left as tuned. The add, not a mix, leaves Remaster's 1 exactly 1
-        // (a mix's multiply and add not always, as pt_resolve.comp's fill).
+        // Eye candy Extreme's shine: a metal's sun highlight brighter, matte
+        // paint left as tuned. The add, not a mix, leaves the tuned 1
+        // exactly 1 (a mix's multiply and add not always, as pt_resolve's
+        // fill).
         float shine = 1.0 + (frame.metal_shine - 1.0) * surface.metal;
         specular = sun_light() * frame.direct_gain
             * sun_specular(surface.normal, direction, sun_toward,

@@ -127,11 +127,12 @@ pub(super) const UPSCALE_QUALITIES: [(inf_game::modern_settings::UpscaleQuality,
         (UpscaleQuality::UltraPerformance, "Ultra Performance"),
     ]
 };
-pub(super) const LIGHTINGS: [(inf_game::modern_settings::Lighting, &str); 2] = {
+pub(super) const LIGHTINGS: [(inf_game::modern_settings::Lighting, &str); 3] = {
     use inf_game::modern_settings::Lighting;
     [
         (Lighting::Remaster, "Remaster"),
         (Lighting::EyeCandy, "Eye candy"),
+        (Lighting::EyeCandyExtreme, "Eye candy Extreme"),
     ]
 };
 pub(super) const ANTI_ALIASINGS: [(inf_game::modern_settings::AntiAliasing, &str); 6] = {

@@ -259,19 +259,22 @@ impl AntiAliasing {
 }
 
 /// How the traced world looks (2026-10-23): Remaster, the
-/// restrained look, or Eye candy, a little darker, more saturated and
-/// contrasty, with stronger reflections, light shafts and glows. Only a
-/// traced world takes it; the tuning file holds each preset's numbers.
+/// restrained look, Eye candy, a little darker, more saturated and
+/// contrasty, with stronger reflections, light shafts and glows, or Eye
+/// candy Extreme, which lifts the water's and the metals' mirrors, the
+/// direct light against the fill, and the tonemap's contrast further. Only
+/// a traced world takes it; the tuning file holds each preset's numbers.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum Lighting {
     #[default]
     Remaster,
     EyeCandy,
+    EyeCandyExtreme,
 }
 
 impl Lighting {
-    pub const ALL: [Self; 2] = [Self::Remaster, Self::EyeCandy];
+    pub const ALL: [Self; 3] = [Self::Remaster, Self::EyeCandy, Self::EyeCandyExtreme];
 }
 
 #[cfg(test)]
@@ -412,9 +415,20 @@ mod tests {
     #[test]
     fn lighting_presets_keep_their_names() {
         let names = Lighting::ALL.map(|preset| serde_json::to_string(&preset).unwrap());
-        assert_eq!(names, [r#""remaster""#, r#""eye-candy""#]);
+        assert_eq!(
+            names,
+            [r#""remaster""#, r#""eye-candy""#, r#""eye-candy-extreme""#]
+        );
         let saved: ModernSettings = serde_json::from_str(r#"{"lighting": "eye-candy"}"#).unwrap();
         assert_eq!(saved.lighting, Lighting::EyeCandy);
+        let saved: ModernSettings = serde_json::from_str(r#"{"lighting": "remaster"}"#).unwrap();
+        assert_eq!(saved.lighting, Lighting::Remaster);
+        // The third preset round-trips, name and value both.
+        let extreme: ModernSettings =
+            serde_json::from_str(r#"{"lighting": "eye-candy-extreme"}"#).unwrap();
+        assert_eq!(extreme.lighting, Lighting::EyeCandyExtreme);
+        let saved = serde_json::to_string(&extreme.lighting).unwrap();
+        assert_eq!(saved, r#""eye-candy-extreme""#);
         let bare: ModernSettings = serde_json::from_str("{}").unwrap();
         assert_eq!(bare.lighting, Lighting::Remaster);
     }

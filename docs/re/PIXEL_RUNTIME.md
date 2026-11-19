@@ -1334,8 +1334,8 @@ any of it would change the game.
     that run, and Ray Tracing reads "Unavailable" (in six languages) on a
     GPU without it and does not move. One that still fails to start falls
     back to the tracer's own scaling, logged once.
-- **Lighting** (2026-10-23), Remaster or Eye candy, for a traced world
-  only. The tuning's `lighting` numbers scale these things:
+- **Lighting** (2026-10-23), Remaster, Eye candy or Eye candy Extreme, for
+  a traced world only. The tuning's `lighting` numbers scale these things:
   - the water's least reflection (`water_reflect` on the world's own,
     capped at `water_reflect_cap`) and its sun glint (`water_glint`,
     `water_glint_sharpness`);
@@ -1344,14 +1344,14 @@ any of it would change the game.
     (`metal_shine`);
   - the mist's sun share;
   - the glows;
-  - the mirrored effects (`effects`: 0 under Remaster, 0.7 under Eye
-    candy). Every additive quad the raster draws (particles, the bolts'
-    ten-sprite streaks, models' effect billboards and edges) is kept as
-    it is submitted as an emitter, a disc from its native corners
-    (`scene_capture.rs`'s `capture_emitter`), except what lies at the
-    water's level, which mirrors into itself. The nearest 128 go to the
-    tracer (binding 26; its texture array is binding 27), which adds
-    those a ray passes, each its sprite facing the ray, to the water's
+  - the mirrored effects (`effects`: 0.7 under Remaster, 0.95 under Eye
+    candy and Eye candy Extreme). Every additive quad the raster draws
+    (particles, the bolts' ten-sprite streaks, models' effect billboards
+    and edges) is kept as it is submitted as an emitter, a disc from its
+    native corners (`scene_capture.rs`'s `capture_emitter`), except what
+    lies at the water's level, which mirrors into itself. The nearest 128
+    go to the tracer (binding 26; its texture array is binding 27), which
+    adds those a ray passes, each its sprite facing the ray, to the water's
     reflection and refraction and to metal's glossy bounce.
 
   A preset whose exposure, saturation or S-curve differ from 1, 1 and 0
@@ -1367,34 +1367,45 @@ any of it would change the game.
   surface takes only where it faces it. `fill` scales the sky's diffuse
   light (`sky_light`), the radiance cache's ambient floor (retail's tint
   until a bounce reaches the cell) and the bounce light the resolve adds:
-  what a shadow keeps. Eye candy raises the first to 1.3 and lowers the
-  second to 0.8, so sunlit surfaces read brighter and true shadows darker
-  without a brighter frame.
+  what a shadow keeps. Eye candy Extreme raises the first to 1.3 and lowers
+  the second to 0.8, so sunlit surfaces read brighter and true shadows
+  darker without a brighter frame. Remaster and Eye candy keep both at 1:
+  the shaders multiply by 1, exactly.
 
-  Eye candy's water and metals mirror more: `water_reflect` 1.75 multiplies
-  the world's least share (no more than `water_reflect_cap` 0.25, a look
-  choice, since water's real F0 is 0.02), so the water is more mirror-like
-  at moderate and steep angles; and `metal_rough` 0.75 sharpens a metal's
-  lobe while `metal_reflect` 1.3 weights its reflection, which the fill no
-  longer dims (the resolve keeps a glossy reflection out of the fill's
-  share).
+  Eye candy Extreme's water and metals mirror more: `water_reflect` 4.0
+  multiplies the world's least share (no more than `water_reflect_cap`
+  0.35, a look choice, since water's real F0 is 0.02), so the water is more
+  mirror-like at moderate and steep angles; and `metal_rough` 0.35 sharpens
+  a metal's lobe while `metal_reflect` 2.0 weights its reflection, which the
+  fill no longer dims (the resolve keeps a glossy reflection out of the
+  fill's share). The least share is the world's `reflect` times the preset's
+  reflections, floored at water's 0.02, then the preset's share of it and
+  its cap: the raster's water (`vk_device.rs`) and the tracer's
+  (`pt_frame.glsl`'s `water_least`) take the same expression on the same
+  value. At 1 and 1 the extra multiplies leave the expression it had exactly.
 
-  Eye candy's water also shines: `water_glint` 1.6 raises the sun's
+  Eye candy Extreme's water also shines: `water_glint` 1.6 raises the sun's
   highlight on open water and its puddles (and retail's lights' glints in
   them), and `water_glint_sharpness` 1.3 narrows its lobe. A tighter lobe
   puts the same light in a smaller highlight, so the peak is raised with
   it: a look choice, not energy. A metal's sun highlight takes
   `metal_shine` 1.8 by its metalness (`1 + (metal_shine - 1) * metal`), so
-  matte paint keeps its own. Remaster's three are 1, which leaves both
-  expressions exactly as tuned; the tonemap's shoulder rolls the brighter
-  highlight off to white without a hard edge.
+  matte paint keeps its own. Remaster's and Eye candy's three are 1, which
+  leaves both expressions exactly as tuned; the tonemap's shoulder rolls the
+  brighter highlight off to white without a hard edge.
 
-  Eye candy's tonemap (`pt_frame.glsl`'s `tonemap`) also bends the linear
-  tones about mid-grey (`contrast` 0.15 about `pivot` 0.18) before PBR
-  Neutral's shoulder, and starts that shoulder later (`knee` 0.9): a
+  Eye candy Extreme's tonemap (`pt_frame.glsl`'s `tonemap`) also bends the
+  linear tones about mid-grey (`contrast` 0.15 about `pivot` 0.18) before
+  PBR Neutral's shoulder, and starts that shoulder later (`knee` 0.9): a
   deeper toe and more highlight headroom, the hue kept as the shoulder
-  keeps it. Remaster's contrast is 0, its gains 1 and its knee 0.8, which
-  is its tonemap exactly.
+  keeps it. Remaster's and Eye candy's contrast is 0, their gains 1 and
+  their knee 0.8, which is its tonemap exactly.
+
+  Water's transmission keeps a neutral path too: the share of the sun a
+  plane lets in (`water_beam`) takes water's physical 0.02 straight down
+  unless the preset lifts its mirror (`water_reflect` above 1 or its cap
+  below 1); Eye candy Extreme then uses the same least share it reflects.
+  Remaster and Eye candy therefore let light in exactly as they did.
 - **Anti-aliasing** without an upscaler: FXAA (`pt_fxaa.comp`, after
   Lottes' FXAA 3.11), SMAA (`smaa_*.comp` over the reference
   `shaders/smaa/SMAA.hlsl`) or TAA (`pt_taa.comp`) over the resolved

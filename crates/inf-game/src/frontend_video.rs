@@ -429,6 +429,7 @@ impl ModernRow {
             Self::Lighting => match modern.lighting {
                 Lighting::Remaster => PortText::Remaster.text(language),
                 Lighting::EyeCandy => PortText::EyeCandy.text(language),
+                Lighting::EyeCandyExtreme => PortText::EyeCandyExtreme.text(language),
             },
             Self::RayTracing | Self::Upscaler => PortText::Off.text(language),
         };

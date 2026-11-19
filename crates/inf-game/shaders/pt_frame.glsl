@@ -281,7 +281,7 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // How much of its colour the bounce light keeps (its brightness kept).
     float bounce_colour;
     // How much of the blended sprites that add light the water and metal
-    // mirror (Eye candy's share; 0: none), and how many are in the emitter
+    // mirror (the preset's share; 0: none), and how many are in the emitter
     // buffer.
     float effect_mirrors;
     float emitter_count;
@@ -635,8 +635,9 @@ const float SKY_SLANT = 1.19;
 
 // The least share of its surroundings the water mirrors, looking straight
 // down: the world's own (water's 0.02 at least), the preset's share of it,
-// and no more than the preset's cap. Eye candy mirrors more at every angle
-// (a look choice: water's real F0 is about 0.02, so this is not physics).
+// and no more than the preset's cap. Eye candy Extreme mirrors more at
+// every angle (a look choice: water's real F0 is about 0.02, so this is
+// not physics).
 float water_least() {
     return min(max(frame.water_reflect, 0.02) * frame.water_reflect_gain,
                frame.water_reflect_cap);
@@ -644,11 +645,17 @@ float water_least() {
 
 // The way down through the water's plane (Snell, index 1.333) of a light
 // from above toward `toward`, and the share of it the plane lets in
-// (Schlick's Fresnel term, water_least() straight down); none from below the
-// horizon.
+// (Schlick's Fresnel term); none from below the horizon.
 vec3 water_beam(vec3 toward, out float enters) {
     float rise = toward.y;
-    float least = water_least();
+    // A plane lets in what it does not reflect. The tuned presets keep
+    // water's physical 0.02 straight down, as they always did: the world's
+    // own share mirrors in `water_color`, not in the light entering. Eye
+    // candy Extreme lifts the mirror itself, so its beam reflects that
+    // share and lets the rest in, as its water does above.
+    bool lifted = frame.water_reflect_gain != 1.0
+        || frame.water_reflect_cap != 1.0;
+    float least = lifted ? water_least() : 0.02;
     enters = rise > 0.0 ? 1.0 - (least + (1.0 - least) * pow(1.0 - rise, 5.0)) : 0.0;
     return rise > 0.0 ? refract(-toward, vec3(0.0, 1.0, 0.0), 1.0 / 1.333) : -toward;
 }
@@ -693,9 +700,9 @@ vec3 water_through(vec3 origin, vec3 direction, float len, bool sunlit, out vec3
 // tuned), then Khronos PBR Neutral's shoulder to white, its hue kept and
 // paling only late. PBR Neutral's toe (taking 0.04 off every colour) is left
 // out: retail's darks stay where they were. Before the shoulder the preset's
-// contrast bends the linear tones about `tone_pivot` (Eye candy: a toe that
-// deepens the darks and a lift that brightens the lights); Remaster's is 0,
-// which leaves every tone exactly as it was.
+// contrast bends the linear tones about `tone_pivot` (Eye candy Extreme: a
+// toe that deepens the darks and a lift that brightens the lights); Remaster
+// and Eye candy are 0, which leaves every tone exactly as it was.
 const float TONE_PALING = 0.15;
 vec3 tonemap(vec3 c) {
     float peak = max(c.r, max(c.g, c.b));
