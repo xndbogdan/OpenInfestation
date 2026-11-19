@@ -247,6 +247,11 @@ fn projectile_actor_wrapper_runs_real_damage_task_and_hit_matrix_in_place() {
         contacts: 0,
         impact_births: 0,
         ground_bursts: 0,
+        flash: &mut world.flash,
+        camera_settings: crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
     };
     let mut request = ParticleUpdateRequest {
         delta_microseconds: 0,

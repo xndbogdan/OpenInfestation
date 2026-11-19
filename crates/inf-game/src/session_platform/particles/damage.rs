@@ -703,8 +703,8 @@ impl ActorDamageReactionHost for ReactionHost<'_, '_, '_> {
                         }
                     }),
                     grant_text: self.core.grant_text,
-                    camera_settings: None,
-                    flash: None,
+                    camera_settings: self.core.camera_settings,
+                    flash: self.core.flash.as_deref_mut(),
                     map: self.core.map.as_deref_mut(),
                 };
                 arena

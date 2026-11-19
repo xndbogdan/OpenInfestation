@@ -39,6 +39,7 @@ impl<P: PortPlatform> PortSession<P> {
         //0048778D transfers pending before00487795 visits physical cells.
         self.particles.transfer_pending();
         let grant_text = super::world_owners::current_grant_text(&self.profile_name_classification);
+        let camera_settings = self.platform.world_tick_inputs().camera_settings;
         let mut host = combat::WorldProjectileHost {
             arena: &mut world.arena,
             mission: &mut world.mission,
@@ -62,6 +63,8 @@ impl<P: PortPlatform> PortSession<P> {
             ground_bursts: 0,
             grant_text: Some(&grant_text),
             furniture_hits: &mut world.crystal_flares.furniture_hits,
+            flash: &mut world.flash,
+            camera_settings,
         };
         let report = self.particles.tick_particles(
             ParticleUpdateRequest {

@@ -65,6 +65,10 @@ pub(in crate::session_platform) struct WorldProjectileHost<'a> {
     /// Non-native: the guns' bolts that met furniture this tick, for the
     /// crystals' flares.
     pub furniture_hits: &'a mut Vec<crate::crystal_flares::FurnitureHit>,
+    /// The world flash (00487D70) a hit on a viewed or steered missile starts.
+    pub flash: &'a mut crate::world_flash::WorldFlashState,
+    /// Settings +68/+6C for the flash's camera.
+    pub camera_settings: crate::object_runtime::CameraSettings,
 }
 
 impl ParticleUpdateHost for WorldProjectileHost<'_> {
@@ -349,8 +353,8 @@ impl ParticleProjectileHost for WorldProjectileHost<'_> {
             ActorHandle::from_raw(source),
             &mut super::damage::WorldDamageOwners {
                 grant_text: self.grant_text,
-                camera_settings: None,
-                flash: None,
+                camera_settings: Some(self.camera_settings),
+                flash: Some(&mut *self.flash),
                 mission: self.mission,
                 tasks: self.tasks,
                 terrain: context
@@ -504,8 +508,8 @@ impl ParticleProjectileHost for WorldProjectileHost<'_> {
             },
             &mut super::damage::WorldDamageOwners {
                 grant_text: self.grant_text,
-                camera_settings: None,
-                flash: None,
+                camera_settings: Some(self.camera_settings),
+                flash: Some(&mut *self.flash),
                 mission: self.mission,
                 tasks: self.tasks,
                 terrain: context
