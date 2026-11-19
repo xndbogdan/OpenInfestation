@@ -2186,8 +2186,8 @@ mod tests {
             assert_eq!(water_least(world, &remaster), world.max(0.02), "at {world}");
         }
         // The world's own default, and the murky worlds the tuning names,
-        // all mirror more; no more than the cap (0.25).
-        for (world, lifted) in [(0.02, 0.035), (0.06, 0.105), (0.15, 0.25), (0.2, 0.25)] {
+        // all mirror more; no more than the cap (0.35).
+        for (world, lifted) in [(0.02, 0.08), (0.06, 0.24), (0.15, 0.35), (0.2, 0.35)] {
             let least = water_least(world, &candy);
             assert!((least - lifted).abs() < 1.0e-6, "{world}: {least}");
         }
