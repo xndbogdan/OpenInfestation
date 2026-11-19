@@ -536,8 +536,22 @@ pub struct LightingTuning {
     /// brighter (0: not at all).
     pub curve: f32,
     /// Metal's and the water's reflections, multiplied: a metal mirrors
-    /// more and more sharply.
+    /// more and more sharply, and the water's Fresnel term is stronger.
     pub reflections: f32,
+    /// The least share of its surroundings the water mirrors, on the
+    /// world's own (`water.reflect`), multiplied: more of it at every angle
+    /// (1: as tuned). A look choice, not physics: water's real F0 is 0.02.
+    pub water_reflect: f32,
+    /// The most that least share may become under the preset, so a murky
+    /// world's dark water does not turn into a mercury pool (1: no cap).
+    pub water_reflect_cap: f32,
+    /// A metal's reflection of its surroundings, multiplied: what it
+    /// mirrors comes back brighter than its albedo alone gives it (1: as
+    /// tuned).
+    pub metal_reflect: f32,
+    /// A metal's roughness, multiplied: below 1 polishes its reflection,
+    /// sharper and tighter (1: as tuned).
+    pub metal_rough: f32,
     /// The sun's share of the mist's light, its shafts, multiplied.
     pub shafts: f32,
     /// The glowing models' and retail's lights' strength, multiplied.
@@ -2032,12 +2046,25 @@ mod tests {
         assert_eq!(remaster.contrast, 0.0);
         assert_eq!(remaster.knee, 0.8);
         assert!(remaster.pivot > 0.0);
+        // So are its water's least share and a metal's reflection: the
+        // shaders multiply by 1, cap nothing and polish nothing.
+        assert_eq!(
+            [
+                remaster.water_reflect,
+                remaster.water_reflect_cap,
+                remaster.metal_reflect,
+                remaster.metal_rough
+            ],
+            [1.0; 4]
+        );
         let candy = defaults.lighting(Lighting::EyeCandy);
         assert!(candy.grades());
         assert!(candy.exposure < 1.0 && candy.saturation > 1.0 && candy.curve > 0.0);
         assert!(candy.reflections > 1.0 && candy.shafts > 1.0 && candy.glows > 1.0);
         assert!(candy.direct > 1.0 && candy.fill < 1.0);
         assert!(candy.contrast > 0.0 && candy.knee > remaster.knee);
+        assert!(candy.water_reflect > 1.0 && candy.water_reflect_cap < 1.0);
+        assert!(candy.metal_reflect > 1.0 && candy.metal_rough < 1.0);
         let tuned = ModernTuning::read(Some(r#"{"lighting": {"eye_candy": {"saturation": 1.4}}}"#))
             .unwrap();
         assert_eq!(tuned.lighting(Lighting::EyeCandy).saturation, 1.4);
@@ -2117,6 +2144,48 @@ mod tests {
             assert!(shown >= previous, "not monotonic at {step}");
             previous = shown;
         }
+    }
+
+    /// The shader's water least share (`pt_frame.glsl`'s `water_least`) and a
+    /// metal's look after the preset (`pt_trace.comp`'s `model_surface`):
+    /// Remaster's are the ones it had, bit for bit; Eye candy lifts the
+    /// water's mirror at every angle and polishes and brightens a metal's.
+    #[test]
+    fn eye_candys_water_and_metal_lift_the_reflections_remasters_do_not() {
+        use crate::modern_settings::Lighting;
+        let defaults = ModernTuning::defaults();
+        let remaster = defaults.lighting(Lighting::Remaster);
+        let candy = defaults.lighting(Lighting::EyeCandy);
+        let water_least = |world: f32, look: &LightingTuning| {
+            (world.max(0.02) * look.water_reflect).min(look.water_reflect_cap)
+        };
+        for world in [0.02, 0.06, 0.15, 0.2] {
+            assert_eq!(water_least(world, &remaster), world.max(0.02), "at {world}");
+        }
+        // The world's own default, and the murky worlds the tuning names,
+        // all mirror more; no more than the cap (0.25).
+        for (world, lifted) in [(0.02, 0.05), (0.06, 0.15), (0.15, 0.25), (0.2, 0.25)] {
+            let least = water_least(world, &candy);
+            assert!((least - lifted).abs() < 1.0e-6, "{world}: {least}");
+        }
+        // A metal's material: Remaster keeps the tuned metalness and
+        // roughness; Eye candy raises the one and sharpens the other.
+        let metal_look = |look: &LightingTuning| {
+            let metal = (0.6 * look.reflections).min(1.0);
+            let rough = (0.35 / look.reflections).max(0.02);
+            (
+                metal,
+                if metal > 0.0 {
+                    (rough * look.metal_rough).max(0.02)
+                } else {
+                    rough
+                },
+            )
+        };
+        assert_eq!(metal_look(&remaster), (0.6, 0.35));
+        let (metal, rough) = metal_look(&candy);
+        assert!(metal > 0.6, "{metal}");
+        assert!(rough < 0.35, "{rough}");
     }
 
     /// Misspelt names and values of the wrong kind are refused, not

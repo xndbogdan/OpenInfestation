@@ -430,7 +430,7 @@ vec3 wet_ground(ivec2 pixel, vec3 colour, vec4 ground) {
     if (puddle > 0.0) {
         float lake_edge;
         float shore = puddle_shore(point, lake_edge);
-        float lake_least = max(frame.water_reflect, 0.02);
+        float lake_least = water_least();
         puddle_sunk = 1.0 - shore;
         // Round its shore the ground slopes down into the hollow.
         puddle_water = smoothstep(0.45, 0.7, puddle);

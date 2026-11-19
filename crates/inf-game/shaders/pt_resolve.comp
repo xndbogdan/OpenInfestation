@@ -71,9 +71,14 @@ void main() {
         vec4 bounce = imageLoad(bounce_image, pixel);
         vec4 sun = imageLoad(sun_image, pixel);
         // The bounce is the preset's fill: the light the surroundings send
-        // back, at its tuned share.
+        // back, at its tuned share. A metal's glossy reflection is not fill,
+        // so a lower fill does not dim what it mirrors (the filter mixed the
+        // diffuse and glossy lobes by metalness). The form leaves Remaster's
+        // fill of 1 bit-exact, the multiply and add of a mix not always.
+        float metal = imageLoad(path_surface, pixel).z;
+        float fill = 1.0 - (1.0 - metal) * (1.0 - frame.fill_gain);
         color = surface_albedo * (direct.rgb + sun.rgb * bounce.a
-                                  + direct.a * bounce.rgb * frame.fill_gain)
+                                  + direct.a * bounce.rgb * fill)
             + imageLoad(specular_image, pixel).rgb * bounce.a;
     }
     // Retail's fog, mixed in retail's tones as retail mixed it.

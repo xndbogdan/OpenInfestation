@@ -221,6 +221,14 @@ layout(set = FRAME_SET, binding = FRAME_BINDING, scalar) uniform Frame {
     // The lighting preset's reflections: how much more a metal mirrors its
     // surroundings, and how much more sharply (1: as tuned).
     float reflect_gain;
+    // The preset's water: the world's least share of its surroundings it
+    // mirrors, multiplied, and the most that share may become (1: no cap).
+    float water_reflect_gain;
+    float water_reflect_cap;
+    // The preset's metal: its reflection of its surroundings, multiplied,
+    // and its roughness, multiplied (below 1: a polish).
+    float metal_reflect_gain;
+    float metal_rough_scale;
     // The preset's direct light (the sun's, the lamps' and retail's
     // deposited lights' and glows') and its fill (the sky's light, retail's
     // ambient floor and the bounce light), multiplied (1: as tuned): the
@@ -618,13 +626,23 @@ const float WATER_FORWARD = 0.3;
 // down), whose cosine-weighted mean cosine is 0.84.
 const float SKY_SLANT = 1.19;
 
+// The least share of its surroundings the water mirrors, looking straight
+// down: the world's own (water's 0.02 at least), the preset's share of it,
+// and no more than the preset's cap. Eye candy mirrors more at every angle
+// (a look choice: water's real F0 is about 0.02, so this is not physics).
+float water_least() {
+    return min(max(frame.water_reflect, 0.02) * frame.water_reflect_gain,
+               frame.water_reflect_cap);
+}
+
 // The way down through the water's plane (Snell, index 1.333) of a light
 // from above toward `toward`, and the share of it the plane lets in
-// (Schlick's Fresnel term, 0.02 straight down); none from below the
+// (Schlick's Fresnel term, water_least() straight down); none from below the
 // horizon.
 vec3 water_beam(vec3 toward, out float enters) {
     float rise = toward.y;
-    enters = rise > 0.0 ? 1.0 - (0.02 + 0.98 * pow(1.0 - rise, 5.0)) : 0.0;
+    float least = water_least();
+    enters = rise > 0.0 ? 1.0 - (least + (1.0 - least) * pow(1.0 - rise, 5.0)) : 0.0;
     return rise > 0.0 ? refract(-toward, vec3(0.0, 1.0, 0.0), 1.0 / 1.333) : -toward;
 }
 

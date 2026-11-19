@@ -108,7 +108,7 @@ pub(super) const TRACED_DEPTH: vk::Format = vk::Format::R32_SFLOAT;
 /// Motion: where each pixel's point was in the last frame, in render pixels.
 pub(super) const MOTION_IMAGE: vk::Format = vk::Format::R16G16_SFLOAT;
 /// The frame block's floats, in `pt_frame.glsl`'s scalar layout.
-const FRAME_FLOATS: usize = 272
+const FRAME_FLOATS: usize = 276
     + 1
     + 4 * MAX_SPARKS
     + MAX_SPARKS
@@ -2264,6 +2264,21 @@ pub(super) fn frame_block(
     } else {
         lighting.reflections.max(0.0)
     }]);
+    // The preset's water and metal: the water's least share of its
+    // surroundings, multiplied and capped; a metal's reflection, multiplied,
+    // and its roughness, multiplied (below one: a polish). Infrared vision
+    // keeps the tuned ones, as it keeps the tuned reflections.
+    let [water_reflect, water_cap, metal_reflect, metal_rough] = if feed.infrared {
+        [1.0; 4]
+    } else {
+        [
+            lighting.water_reflect.max(0.0),
+            lighting.water_reflect_cap.clamp(0.02, 1.0),
+            lighting.metal_reflect.max(0.0),
+            lighting.metal_rough.clamp(0.02, 4.0),
+        ]
+    };
+    put(&[water_reflect, water_cap, metal_reflect, metal_rough]);
     // The preset's direct light against its fill, and its tonemap: the sun
     // and retail's lights shape the lit surfaces, the sky's light, the
     // ambient floor and the bounce light what a shadow keeps; the tonemap's

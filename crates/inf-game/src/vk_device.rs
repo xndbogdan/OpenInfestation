@@ -3513,18 +3513,21 @@ impl VkFrame {
         }
         self.flush();
         self.raster_depth = true;
-        // As the tracer's water: its tuned share times the preset's
-        // reflections, at least water's own, and the preset's gain.
-        let reflections = {
+        // As the tracer's water: the world's least share times the preset's
+        // share of it, at least water's own and no more than the preset's
+        // cap, and the preset's Fresnel gain.
+        let (reflections, water_gain, water_cap) = {
             let state = self.device.state.borrow();
-            crate::modern_tuning::current()
-                .lighting(state.modern.lighting)
-                .reflections
-                .max(0.0)
+            let lighting = crate::modern_tuning::current().lighting(state.modern.lighting);
+            (
+                lighting.reflections.max(0.0),
+                lighting.water_reflect.max(0.0),
+                lighting.water_reflect_cap.max(0.02),
+            )
         };
         self.mirror_world = water_reflect.map(|reflect| {
             let look = mirror::WaterMirror {
-                least: (reflect * reflections).clamp(0.0, 1.0).max(0.02),
+                least: (reflect * water_gain).max(0.02).min(water_cap),
                 gain: reflections.max(1.0),
                 murk: None,
             };

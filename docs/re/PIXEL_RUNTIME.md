@@ -1336,8 +1336,10 @@ any of it would change the game.
     back to the tracer's own scaling, logged once.
 - **Lighting** (2026-10-23), Remaster or Eye candy, for a traced world
   only. The tuning's `lighting` numbers scale these things:
-  - the water's least reflection;
-  - each metal's share and sharpness (`reflect_gain`);
+  - the water's least reflection (`water_reflect` on the world's own,
+    capped at `water_reflect_cap`);
+  - each metal's share and sharpness (`metal_reflect`, `metal_rough`), and
+    `reflect_gain`'s metalness with them;
   - the mist's sun share;
   - the glows;
   - the mirrored effects (`effects`: 0 under Remaster, 0.7 under Eye
@@ -1364,8 +1366,17 @@ any of it would change the game.
   light (`sky_light`), the radiance cache's ambient floor (retail's tint
   until a bounce reaches the cell) and the bounce light the resolve adds:
   what a shadow keeps. Eye candy raises the first to 1.3 and lowers the
-  second to 0.9, so sunlit surfaces read brighter and true shadows darker
+  second to 0.8, so sunlit surfaces read brighter and true shadows darker
   without a brighter frame.
+
+  Eye candy's water and metals mirror more: `water_reflect` 2.5 multiplies
+  the world's least share (no more than `water_reflect_cap` 0.25, a look
+  choice, since water's real F0 is 0.02), so the water is clearly more
+  mirror-like at moderate and steep angles; and `metal_rough` 0.5 sharpens
+  a metal's lobe while `metal_reflect` 1.6 weights its reflection, which
+  the fill no longer dims (the resolve keeps a glossy reflection out of
+  the fill's share). Remaster's four are 1, which leaves its water and
+  metal exactly as tuned.
 
   Eye candy's tonemap (`pt_frame.glsl`'s `tonemap`) also bends the linear
   tones about mid-grey (`contrast` 0.15 about `pivot` 0.18) before PBR

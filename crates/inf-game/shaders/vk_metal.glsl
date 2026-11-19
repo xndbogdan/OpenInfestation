@@ -88,7 +88,8 @@ void main() {
     uint word = split != 0u && v_albedo.a / rhw < float(split) / 65536.0 ? v_material.x >> 16
                                                                           : v_material.x;
     float metal = min(float(word & 0xffu) / 255.0 * frame.reflect_gain, 1.0);
-    float rough = max(float((word >> 8) & 0xffu) / 255.0 / max(frame.reflect_gain, 1.0e-3),
+    float rough = max(float((word >> 8) & 0xffu) / 255.0 / max(frame.reflect_gain, 1.0e-3)
+                          * frame.metal_rough_scale,
                       0.02);
     vec3 normal = normalize(v_normal.xyz / rhw);
     vec3 view = native_direction(v_native - 0.5);
@@ -128,7 +129,7 @@ void main() {
             }
         }
         known /= float(LOBE_SAMPLES);
-        seen /= float(LOBE_SAMPLES);
+        seen = seen / float(LOBE_SAMPLES) * frame.metal_reflect_gain;
         color.rgb = to_srgb(own * (1.0 - metal * known) + albedo * metal * seen);
     }
 #ifdef TEXTURED
