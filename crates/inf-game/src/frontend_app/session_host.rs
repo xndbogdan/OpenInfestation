@@ -571,6 +571,9 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                 // contexts now, not at the next screen.
                 if let Some(keyboard) = keyboard.as_mut() {
                     linked.bind_arrived_pad(keyboard, sensitivity);
+                    // A pad lost outside play is not Esc; the flag must not
+                    // outlive the frame. In gameplay poll_gameplay took it.
+                    keyboard.take_pad_removed();
                 }
             }
             result

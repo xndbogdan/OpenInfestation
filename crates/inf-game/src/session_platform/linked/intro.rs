@@ -51,7 +51,10 @@ impl PortLinked<'_> {
                 cheats_84,
                 clock,
             };
-            deliver(pass, input, &mut router)
+            if deliver(pass, input, &mut router)? {
+                router.pad_removed(input)?;
+            }
+            Ok(())
         });
         flatten_registry(result)
     }
@@ -83,6 +86,7 @@ impl PortLinked<'_> {
                     owner_byte,
                 },
             )
+            .map(|_| ())
         });
         flatten_registry(result)
     }
@@ -167,15 +171,18 @@ pub(super) fn flatten_registry<T>(
     }
 }
 
+/// Deliver this poll's notifications and run the selected-input poll. Reports
+/// whether the live pad was removed by them, for the gameplay screen's pause.
 pub(super) fn deliver(
     pass: PortInputPass<'_>,
     input: &mut InputRuntime,
     router: &mut impl InputHost<Error = GameplayLinkedError>,
-) -> Result<(), GameplayLinkedError> {
+) -> Result<bool, GameplayLinkedError> {
     let flatten = |error| match error {
         InputError::State(error) => GameplayLinkedError::Tick(error.to_string()),
         InputError::Host(error) => error,
     };
+    let mut pad_removed = false;
     if !pass.notifications.is_empty() {
         let keyboard = pass
             .keyboard
@@ -185,8 +192,10 @@ pub(super) fn deliver(
                 .update(notification, input, router)
                 .map_err(flatten)?;
         }
+        pad_removed = keyboard.take_pad_removed();
     }
-    input.poll(router).map_err(flatten)
+    input.poll(router).map_err(flatten)?;
+    Ok(pad_removed)
 }
 
 pub(super) fn system_callback(event: InputCallback, exit: &mut bool) -> bool {
@@ -481,6 +490,37 @@ impl InputHost for GameplayRouter<'_> {
 }
 
 impl GameplayRouter<'_> {
+    /// A pad lost this poll runs Esc's menu key (`00443700` -> `00443070`)
+    /// through the same callback, so the port pauses exactly where the key
+    /// would. Only the menu request does anything: a network game, attract,
+    /// a complete world, a shown player message and the phase-5 menu itself
+    /// (where the key would close the menu) are left alone.
+    fn pad_removed(&mut self, input: &mut InputRuntime) -> Result<(), GameplayLinkedError> {
+        let modal = self.world.arena.first_player().filter(|&player| {
+            self.world
+                .arena
+                .world_player(player)
+                .is_ok_and(|state| state.message_byte_00() != 0)
+        });
+        if !self.screen.pad_removal_requests_menu(
+            *self.attract,
+            self.factory_process.network_flag != 0,
+            self.world.mission.current_world_a0,
+            modal.is_some(),
+        ) {
+            return Ok(());
+        }
+        self.callback(
+            InputCallback {
+                address: 0x0044_3700,
+                context: self.screen.callback_context(),
+                value: 1,
+                timestamp_micros: self.now_micros,
+            },
+            input,
+        )
+    }
+
     /// A player-context key runs its callback on the player whose
     /// construction holds that context. A failed callback stops the player's
     /// keys for the rest of the world; omitted calls are logged once.

@@ -109,6 +109,9 @@ pub enum KeyboardUpdate {
 pub struct SdlInput {
     source: DeviceId,
     pad: Option<NativePad>,
+    /// A pad that was read and then failed: it was just removed. Taken once
+    /// by the gameplay input pass, which pauses as on the PlayStation release.
+    pad_removed: bool,
 }
 
 impl SdlInput {
@@ -119,6 +122,7 @@ impl SdlInput {
         Ok(Self {
             source: input.create_device(DeviceButtons::default())?,
             pad: None,
+            pad_removed: false,
         })
     }
 
@@ -217,7 +221,7 @@ impl SdlInput {
                     self.pad = Some(NativePad {
                         source: input.create_device(DeviceButtons::default())?,
                         native_type,
-                        absent: false,
+                        absent: sample == PadSample::Failed,
                         axes: axes.min(6),
                         stored: [0; 8],
                         adapter: false,
@@ -225,6 +229,12 @@ impl SdlInput {
                     });
                 }
                 let pad = self.pad.as_mut().expect("created above");
+                // A read that now fails is the pad's removal. A pad that was
+                // already failing is not removed again, and a focus-loss
+                // release is another reading, not a removal.
+                if !pad.absent && sample == PadSample::Failed {
+                    self.pad_removed = true;
+                }
                 pad.absent = sample == PadSample::Failed;
                 let mut buttons = DeviceButtons::default();
                 match sample {
@@ -282,6 +292,14 @@ impl SdlInput {
         } else {
             KeyboardUpdate::Changed
         })
+    }
+
+    /// The live pad's removal since the last call: a reading followed by a
+    /// failed one. A pad that was already failing does not report again, and
+    /// the focus-loss release (a reading) is not a removal. Taking it clears
+    /// the one-shot flag; a pad re-added and removed again reports again.
+    pub fn take_pad_removed(&mut self) -> bool {
+        std::mem::take(&mut self.pad_removed)
     }
 }
 

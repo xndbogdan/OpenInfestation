@@ -409,8 +409,14 @@ the bottom face button, Circle the right, Square the left, Triangle the
 top) and its triggers, past half, for L2 and R2. An unmapped joystick stays
 the PC joystick. Type 9 binds the status input, so an unplugged pad stops
 counting for `00439A20` and the input mode drops to Disabled. The console's
-vibration and its controller-removal pause are not ported: the PC has no
-vibration code, and its keyboard keeps a live adapter.
+vibration and its controller-removal pause are not ported as such: the PC has
+no vibration code, and its keyboard keeps a live adapter. The port does pause
+on a pad's removal as a convenience after the PlayStation release: losing the
+live pad mid-mission runs Esc's menu key (`00443700` -> `00443070`) once,
+which opens the in-world menu, unless a network game runs or that menu is
+already open. The removal is read from the pad notification stream (a read
+followed by a failed read), not from SDL, so a recorded session pauses on the
+same frame.
 
 ## Scope and integration
 

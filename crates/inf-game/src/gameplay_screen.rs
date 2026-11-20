@@ -22,6 +22,7 @@ use thiserror::Error;
 
 use crate::frontend_assets::FrontendAssets;
 use crate::frontend_bindings::{FrontendBindingError, FrontendBindings, FrontendDevice};
+use crate::gameplay_menu::{menu_key_effects, MenuKeyTerminal};
 use crate::input::{InputCallback, InputContextId, InputRuntime, InputStateError};
 use crate::scheduler::SchedulerTick;
 use crate::screen_input::{
@@ -613,6 +614,27 @@ impl GameplayScreen {
     /// Whether this screen carries the phase-5 screen's input.
     pub fn serves_in_world_menu(&self) -> bool {
         self.in_world_menu.is_some()
+    }
+
+    /// Port convenience after the PlayStation release (SLES-01870): a pad
+    /// lost mid-mission runs Esc's menu key, `00443700` -> `00443070`. True
+    /// only when that key would open the in-world menu
+    /// ([`MenuKeyTerminal::RequestMenu`]): not while this screen already
+    /// serves the phase-5 menu (there the key closes it), not in a network
+    /// game (retail's game only), not in attract, and not on the
+    /// world-complete or player-modal branches.
+    pub fn pad_removal_requests_menu(
+        &self,
+        attract: bool,
+        network_active: bool,
+        world_status: u32,
+        player_modal: bool,
+    ) -> bool {
+        !self.serves_in_world_menu()
+            && !network_active
+            && !attract
+            && menu_key_effects(attract, world_status, player_modal).terminal
+                == MenuKeyTerminal::RequestMenu
     }
 
     /// A phase-5 callback: a wrapper's press dispatches every held bit and
@@ -1516,6 +1538,114 @@ mod tests {
         key("P", false, &mut input, &mut screen);
         screen.leave_in_world_menu(&mut input).unwrap();
         assert!(!screen.serves_in_world_menu());
+        screen
+            .destroy::<_, std::convert::Infallible>(&mut registry, &mut input)
+            .unwrap();
+    }
+
+    /// Port convenience after the PlayStation release: a pad lost mid-mission
+    /// is Esc's menu key and opens the in-world menu; a loss while that menu
+    /// is already open leaves it open, where the phase-5 MenuKey would close
+    /// it.
+    #[test]
+    fn a_removed_pad_opens_the_in_world_menu_and_does_not_close_it() {
+        let assets = assets();
+        let mut registry = ScreenRegistry::new();
+        let attachment = ScreenAttachment {
+            session: registry.register_session(),
+            context_owner: registry.register_context(
+                crate::frontend_renderer::FrontendRenderContext {
+                    projection: crate::frontend_scene::SceneProjection {
+                        focal: [320, 240],
+                        viewport: [640, 480],
+                        fade: [0, 0],
+                    },
+                },
+            ),
+        };
+        let mut input = InputRuntime::new(0);
+        let mut screen = GameplayScreen::new(
+            GameplayScreenConfig {
+                attachment,
+                callback_context: GAMEPLAY_CALLBACK_CONTEXT,
+            },
+            &assets,
+        );
+        let mut state = SessionState::default();
+        state.request_phase(SessionPhase::Gameplay);
+        let mut host = TestHost {
+            keyboard: None,
+            joystick: true,
+        };
+        screen
+            .initialize(
+                &mut GameplayFactoryServices {
+                    terrain: crate::terrain_runtime::TerrainDetailContext {
+                        process: &mut crate::terrain_runtime::ProcessTerrainPolicy::supplied(
+                            crate::terrain_runtime::TerrainSpacing::Units256,
+                        ),
+                        world_flags: Some(0x20),
+                        terrain: Some(&mut crate::terrain_runtime::native_probe_fixture_terrain(
+                            &serde_json::json!({
+                                "spacing":256,"height_shift":5,"plane_base":0,"plane_shift":8,
+                                "xz":[0,0],"heights":[0,0,0,0],"alternate":false
+                            }),
+                        )),
+                    },
+                    registry: &mut registry,
+                    input: &mut input,
+                    assets: &assets,
+                    key_bindings: &crate::key_bindings::KeyBindings::retail_initial(),
+                    player_context: None,
+                },
+                &mut host,
+                &mut state,
+            )
+            .unwrap();
+        let failed = || crate::platform_input::InputNotification::Pad {
+            native_type: 2,
+            axes: 5,
+            sample: crate::platform_input::PadSample::Failed,
+        };
+        // Read, then failed: the pad's removal.
+        {
+            let keyboard = host.keyboard.as_mut().unwrap();
+            keyboard
+                .update(pad_with(0, [0x8000, 0x8000]), &mut input, &mut Discard)
+                .unwrap();
+            assert!(!keyboard.take_pad_removed());
+            keyboard.update(failed(), &mut input, &mut Discard).unwrap();
+            assert!(keyboard.take_pad_removed());
+        }
+        // 00443070's menu request: the same gate Esc takes in play. A network
+        // game, attract, a complete world and a shown player message are not
+        // the menu.
+        assert!(screen.pad_removal_requests_menu(false, false, 0, false));
+        assert!(!screen.pad_removal_requests_menu(false, true, 0, false));
+        assert!(!screen.pad_removal_requests_menu(true, false, 0, false));
+        assert!(!screen.pad_removal_requests_menu(false, false, 0x16, false));
+        assert!(!screen.pad_removal_requests_menu(false, false, 0, true));
+
+        // The session's phase-5 request shows the in-world menu.
+        let devices = host.enumerate_calibrated_devices(&mut input).unwrap();
+        screen
+            .enter_in_world_menu(&mut input, &assets, &devices)
+            .unwrap();
+        assert!(screen.serves_in_world_menu());
+
+        // The pad returns and goes again: the menu is already up, so the
+        // removal must not run the phase-5 MenuKey (which hides the message).
+        {
+            let keyboard = host.keyboard.as_mut().unwrap();
+            keyboard
+                .update(pad_with(0, [0x8000, 0x8000]), &mut input, &mut Discard)
+                .unwrap();
+            keyboard.update(failed(), &mut input, &mut Discard).unwrap();
+            assert!(keyboard.take_pad_removed());
+        }
+        assert!(!screen.pad_removal_requests_menu(false, false, 0, false));
+        assert!(screen.serves_in_world_menu());
+        screen.leave_in_world_menu(&mut input).unwrap();
         screen
             .destroy::<_, std::convert::Infallible>(&mut registry, &mut input)
             .unwrap();

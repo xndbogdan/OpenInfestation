@@ -671,3 +671,94 @@ fn a_re_added_pad_is_read_again_and_the_keyboard_is_untouched() {
     assert_ne!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
     assert!(devices.joystick_live());
 }
+
+/// The pad's removal is the notification stream's first failed read after a
+/// reading, reported once. A pad that was already failing, and the
+/// focus-loss release (another reading), are not removals.
+#[test]
+fn a_read_that_fails_reports_the_pads_removal_once() {
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = PadSample::Read {
+        buttons: 0,
+        axes: [0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+    };
+    devices
+        .update(reading(read), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.take_pad_removed());
+    devices
+        .update(reading(PadSample::Failed), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.take_pad_removed());
+    assert!(!devices.take_pad_removed());
+    // Failed to failed is the same absence, not another removal.
+    devices
+        .update(reading(PadSample::Failed), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.take_pad_removed());
+}
+
+/// A pad first read as failing was never read successfully here, and a focus
+/// loss sends a released reading, not a failed one.
+#[test]
+fn a_first_failed_read_and_a_focus_loss_release_are_not_removals() {
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = |buttons| PadSample::Read {
+        buttons,
+        axes: [0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+    };
+    devices
+        .update(reading(PadSample::Failed), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.take_pad_removed());
+    devices
+        .update(reading(read(1)), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.take_pad_removed());
+    // The focus-loss release: another reading with nothing held.
+    devices
+        .update(reading(read(0)), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.take_pad_removed());
+}
+
+/// A pad re-added and removed again is a second removal.
+#[test]
+fn a_re_added_pad_reports_its_removal_again() {
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = PadSample::Read {
+        buttons: 0,
+        axes: [0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+    };
+    for sample in [read, PadSample::Failed, read, PadSample::Failed] {
+        devices
+            .update(reading(sample), &mut input, &mut host)
+            .unwrap();
+        if sample == read {
+            assert!(!devices.take_pad_removed());
+        } else {
+            assert!(devices.take_pad_removed());
+        }
+    }
+}

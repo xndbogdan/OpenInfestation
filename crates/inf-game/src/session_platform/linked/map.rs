@@ -27,6 +27,7 @@ impl PortLinked<'_> {
                     exit_requested,
                 },
             )
+            .map(|_| ())
         });
         flatten_registry(result)
     }
