@@ -18,9 +18,9 @@ plays them with its own code.
 
 The whole single-player campaign plays, from the title video through the
 menus, briefings and every world. The software and OpenGL renderers play
-retail's game; Vulkan adds a remastered look. **Network play is not working
-yet**: the menus and protocol are there, but a network game does not play
-correctly ([network layer](docs/re/NETWORK_RUNTIME.md)).
+retail's game; Vulkan adds a remastered look. **Network play works over LAN
+only** and is not finished yet, so it may still have glitches
+([network layer](docs/re/NETWORK_RUNTIME.md)). Online play is planned.
 
 <!-- progress:start -->
 [![RE coverage](https://img.shields.io/badge/RE%20coverage-100.0%25%20code%20%2F%20100.0%25%20notes-orange)](docs/progress/README.md)

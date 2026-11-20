@@ -124,8 +124,8 @@ The renderers have fixed roles:
   where that costs functionality.
 - Network games play retail's game on every renderer (no Vulkan
   additions). Each machine simulates the actors it owns and sends their
-  state, so machines need not share a view. Network play does not work
-  yet.
+  state, so machines need not share a view. Network play works over LAN
+  only and is not finished.
 - Fixes for retail bugs are separate settings, on by default, and follow
   neither renderer. A remastered choice the player picks in a menu keeps
   retail's as its default.
