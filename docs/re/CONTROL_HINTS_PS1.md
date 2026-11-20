@@ -398,10 +398,164 @@ the hint mask/command IDs stay untouched.
   command-table comparison is a byte comparison at `0x10082C`.
 - `\x18` = Cross and `\x1a` = Circle are established by the parallel PC
   prompts (Enter/Space -> Cross, Esc -> Circle) and by `Select (\x18)`.
-  `\x17` = Start is inferred, not proven: it replaces `S`, `Esc` and `R`, and
-  the PS1's own menu tables accept with Cross or Start. `\x19` is unattested.
-  The exact PS1 glyph rendering was not disassembled; only the text bytes and
-  their PC counterparts were compared.
+  `\x17` is the save/retry glyph; it replaces `S`, `Esc` and `R`. Section 6
+  shows the PS1 font has four real glyphs there and argues that `\x17` is
+  more likely Select than Start, because the same shell bank spells Start as
+  a word. `\x19` is unattested. The exact PS1 glyph rendering was not
+  disassembled; only the text bytes and their PC counterparts were compared
+  before section 6.
 - The PS1 shell bank's local order differs from the PC's, so the shell-prompt
   mapping was established by global ID, not by record position. The Italian
   284 anomaly is noted but not explained.
+
+## 6. Button glyphs
+
+This section answers whether the four inline bytes really are button pictures in
+the two fonts, and what each one is. The short answer: the PC font has no
+button glyphs at all; the PS1 font does, but they are PS1-native sprite records,
+not PC sprites.
+
+### 6.1 The PC font 0 has no glyphs at `0x17..0x1A`
+
+The menu/hint font is Handler 4 global slot 0. It is the only font in the
+display-tier overlays `Overlay/0d0.ovl` .. `0d4.ovl` (one font per file, local
+0). `crates/inf-game/src/menu_text.rs` `walk_line`/`walk` maps each text byte
+straight to `font.sprite_words[byte]`; `inf-formats::parse_font_bank` decodes
+the header, the 8-byte metrics and the sprite-word table. A zero sprite word
+selects `font.fallback_byte`; a byte above `maximum_byte` becomes `!`.
+
+| Tier | `0d0` | `0d1` | `0d2` | `0d3` | `0d4` |
+| --- | --- | --- | --- | --- | --- |
+| Glyphs | 128 | 256 | 256 | 256 | 256 |
+| Divisor | 400 | 500 | 400 | 400 | 400 |
+| Max byte | `0x7F` | `0xFF` | `0xFF` | `0xFF` | `0xFF` |
+| Fallback | `0x7F` | `0x7F` | `0x7F` | `0x7F` | `0x7F` |
+
+In every tier, bytes `0x00..0x1A` share **one** sprite word, H3 global 112. It
+is a 57x65 indexed sprite (flags `0x0014`, six base colors, two variants,
+atlas offset `0x22D86`), drawn at the font's quarter scale, i.e. a 14x16 box.
+That is the font's undefined/control-character box, not a button: `0x20` is a
+1x1 blank (sprite 17) and `0x41` is a real 61x53 `A` (sprite 50), so the table
+is otherwise sound.
+
+`0x1B..0x1E` are the exception that proves the low range works: they are the
+Sound-slider cells (`crates/inf-game/src/settings_row.rs` `volume_slider`),
+H3 globals 12..15, each a 21x41 indexed sprite drawn as a 5x10 cell. They are
+the first codes below `0x1F` that have their own artwork. `0x17..0x1A` never
+do.
+
+The dumped PC glyphs (8x nearest-neighbour PNGs) are:
+
+- `.tmp/out/pc_0d0_17.png` .. `pc_0d0_1a.png`: the same 57x65 placeholder box.
+- `.tmp/out/pc_0d0_1b.png` .. `pc_0d0_1e.png`: the four slider cells.
+- `.tmp/out/pc_0d1_17.png` .. `pc_0d4_1e.png`: the same records in the other
+  display tiers.
+- `.tmp/out/pc_sprite_12_0.png` .. `pc_sprite_15_0.png`: the raw slider
+  sprites at native size.
+
+So the PC game has **no Start, Cross, Circle or Square glyph** anywhere in the
+menu font. A port that keeps the PS1 bytes would draw four identical boxes.
+
+### 6.2 The PS1 font does have four real glyphs
+
+`MAIN.OVL` contains one Handler-4 font, in the difficulty section of leaf 0:
+
+| Field | Value |
+| --- | --- |
+| Section | `MAIN.OVL 0x4938B`, size word `0xC40` (3136) |
+| Payload | `0x4938F..0x49FCF` |
+| Header | `[0000C6E4, 00000001, 00000100, 000000A0, 00000064, 00000320, 0000008C, 0000081B, 00000536, 0, 000000FF, 0000007F, 1, 1, 0x40, 0x840]` |
+| Mode | Direct (`+04 == 1`), 256 glyphs, divisor 100 |
+| Max / fallback | `0xFF` / `0x7F` |
+
+The 16-word header, the 8-byte metrics and the 4-byte sprite-word table are the
+**same format as the PC font**; `inf-formats::parse_font_bank` parses this
+section with no special case (section payload exactly consumed, no trailing
+bytes).
+
+The four hints bytes are not placeholders:
+
+| Code | Sprite word | H3 global | Advance / offset |
+| --- | --- | --- | --- |
+| `0x17` | 185 | 185 | 1600 / `[0, 1]` |
+| `0x18` | 186 | 186 | 1600 / `[0, 1]` |
+| `0x19` | 187 | 187 | 1600 / `[0, 1]` |
+| `0x1A` | 188 | 188 | 1600 / `[0, 1]` |
+| `0x1B..0x1E` | 12..15 | 12..15 | 500 / `[0, 0]` |
+
+The segment map explains the jump. Leaf 0's difficulty Handler-3 request is
+count 177 with segments `(local 0, delta 185)` and `(local 4, delta 8)`; so
+locals 0..3 are globals 185..188 (the four new glyphs) and locals 4..176 are
+globals 12..184 (the slider cells and the ordinary characters). The font's
+sprite words therefore point at **four extra glyphs appended above the font's
+ordinary 16..184 range**. `0x1B..0x1E` reusing the PC's 12..15 slots confirms
+that the low-code convention was inherited, and that 185..188 are new
+console-only artwork.
+
+The PS1 Handler-3 bank itself is not the PC sprite format. At `MAIN.OVL
+0x43ACB` (size word `0xF2C`, 3884) the 177-entry bank starts with **20-byte
+glyph records + a `21 00` terminator** (22 bytes each; one record is 32+2
+bytes, and 176 terminators fill the 3884-byte payload), starting with the four
+button records:
+
+```
+0x17: 00 01 f0 02 00 00 68 05 0f 09 01 00 f0 02 00 00 3c 05 0f 09 21 00
+0x18: 00 01 ec 02 00 00 38 05 0f 09 01 00 ec 02 00 00 34 05 0f 09 21 00
+0x19: 00 01 e8 02 00 00 f0 06 0f 09 01 00 e8 02 00 00 ec 06 0f 09 21 00
+0x1A: 00 01 e4 02 00 00 30 05 0f 09 01 00 e4 02 00 00 2c 05 0f 09 21 00
+```
+
+Each record is two 10-byte primitives (the same base/colour pair the PC font
+submits) with PS1 GPU-style fields; `0x090F` is constant in all four. The
+18,320 bytes after the record table (`0x449FB..0x4938B`) contain at least 236
+16x1 RGB555 strip uploads in three chains (104, 67 and 65 records), each with
+a `[width, height, vram_x, vram_y]` header and its colour words. That is
+palette/CLUT data, not glyph bitmaps. The glyph **pixels** are therefore not
+in this Handler-3 block. They must live in a VRAM texture page uploaded
+elsewhere (or be generated by the PS1 sprite list), and the exact page was not
+located. This is the one evidence bound of this section: the PS1 raster could
+not be dumped, so the identities below come from the text roles and the record
+layout, not from seeing the pixels.
+
+### 6.3 Which button is which
+
+- `0x18` = **Cross**. The PC confirm prompts (`<Enter>`, `<Space>`) map to it,
+  and `Select (\x18)` means the Select action is on Cross. PS1 Cross is the
+  bottom face button, confirm.
+- `0x1A` = **Circle**. The PC cancel prompts (`<Esc>`) map to it, the beam-up
+  hint says `R1-\x1a`, and Circle is cancel/back.
+- `0x17` = the save/retry button. It replaces PC `S` and `R`. The old note
+  inferred Start; the full six-language text now makes that doubtful. In the
+  **same** shell bank, the continue prompt spells Start as a word ("Start ou
+  `\x18`", "START (avvio) o `\x18`", "Starttoets of `\x18`") instead of using
+  `\x17`. If `\x17` were Start, the same author would have used the glyph
+  there. The consistent reading is the **menu/save button**, most likely
+  **Select**, with Start a separate button that has no glyph. Start is still
+  possible if the spelled Start is a localization choice.
+- `0x19` = the fourth menu glyph, not attested by any string. The four-glyph
+  set is the menu set (Select, Cross, Triangle, Circle), not the full face
+  set: the frontend accepts with Cross or Start, goes back with Triangle and
+  cancels with Circle, while Square appears in no menu table. That makes
+  `0x19` **Triangle** the most likely reading; Square is the alternative if
+  the set is the face buttons instead.
+
+Confidence: Cross and Circle are proven; `0x17` and `0x19` are inferences.
+The decisive check is the one not possible here: render or dump the four PS1
+H3 glyph records. The PS1 H3 record layout and the four record bytes are above
+so that check can be repeated when the PS1 sprite display list or its texture
+page is decoded.
+
+### 6.4 Can the port draw the PS1 glyphs?
+
+The font **container** is compatible: the same 16-word header, 8-byte metrics
+and 4-byte sprite words, and `inf-formats::parse_font_bank` accepts the PS1
+section unchanged. The font **renderer** is not: `parse_sprite_bank` expects
+PC sprite entries (`0x1c`-byte variants, a zero reserved word, PC atlas
+records) and rejects the PS1 H3 records; the PS1 bank has no PC atlas records
+at all, and its four button glyphs are display-list primitives pointing at a
+PS1 texture page/CLUT rather than PC sprite entries. So a port cannot simply
+load `MAIN.OVL`'s font 0 and expect `draw_line_text` to paint Cross/Circle:
+it would need a PS1 Handler-3 decoder (records, texture page and CLUT) or a
+small set of **redrawn** icons. The four PS1 glyphs advance 16 px; the record
+size is consistent with 16x16 cells but the raster was not decoded. Redrawing
+them as ordinary PC sprites fits the existing 256-glyph H4 layout.
