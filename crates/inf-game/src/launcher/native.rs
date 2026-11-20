@@ -119,6 +119,7 @@ const ID_EFFECTS: usize = 205;
 const ID_MUSIC: usize = 206;
 const ID_SKIP: usize = 207;
 const ID_CONTROLLER: usize = 208;
+const ID_CONTROLLER_HINTS: usize = 229;
 const ID_CAMERA: usize = 228;
 const ID_FILTERING: usize = 209;
 const ID_RAY_TRACING: usize = 220;
@@ -146,7 +147,7 @@ const VULKAN_GROUP_LIFT: i32 = 178;
 /// below it.
 const FIX_ROW_TOP: i32 = 528;
 const FIX_ROW_PITCH: i32 = 25;
-const FIX_BOX_TOP: i32 = 506;
+const FIX_BOX_TOP: i32 = 540;
 const FIX_BOX_CLEAR: i32 = 20;
 const FIXES_GROUP_HEIGHT: i32 =
     FIX_ROW_TOP + FIX_ROW_PITCH * (BUG_FIX_ROWS as i32 - 1) + FIX_BOX_CLEAR - FIX_BOX_TOP;
@@ -194,6 +195,7 @@ struct OptionControls {
     ambience: Handle,
     headphones: Handle,
     controller: Handle,
+    controller_hints: Handle,
     camera: Handle,
     fixes: [Handle; FIXES],
     skip: Handle,
@@ -220,6 +222,7 @@ struct OptionControls {
     music_label: Handle,
     headphones_label: Handle,
     controller_label: Handle,
+    controller_hints_label: Handle,
     ambience_label: Handle,
     camera_label: Handle,
     fixes_group: Handle,
@@ -1623,7 +1626,7 @@ impl WindowState {
         );
         // Words +00 and +04: the effects and music volumes, 0..15.
         let words = settings.words();
-        let sound_group = self.group(window, " Sound, controller and camera ", 12, 372, 536, 126);
+        let sound_group = self.group(window, " Sound, controller and camera ", 12, 372, 536, 160);
         let effects_label = self.label(window, "&Effects volume:", 24, 398, 106, 20);
         let effects = self.slider(window, words[0], 15, ID_EFFECTS, 130, 392, 84);
         let music_label = self.label(window, "&Music volume:", 222, 398, 92, 20);
@@ -1652,6 +1655,19 @@ impl WindowState {
             428,
             240,
         );
+        let controller_hints_label = self.label(window, "Controller &hints:", 24, 466, 106, 20);
+        let controller_hints = self.combo(
+            window,
+            &strings(&CONTROLLER_HINTS.map(|(_, label)| label)),
+            CONTROLLER_HINTS
+                .iter()
+                .position(|&(hints, _)| hints == settings.controller_hints())
+                .unwrap_or(0),
+            ID_CONTROLLER_HINTS,
+            136,
+            462,
+            240,
+        );
         // The sound the port adds, on Vulkan only.
         let ambience_label = self.label(window, "Am&bience:", 390, 432, 64, 20);
         let ambience = self.slider(
@@ -1666,7 +1682,7 @@ impl WindowState {
         // Retail's Normal and Cinematic, and the port's Remastered: the camera
         // that rises over what blocks it, swings round while reversing and
         // sees wider (on every renderer).
-        let camera_label = self.label(window, "Camera st&yle:", 24, 466, 106, 20);
+        let camera_label = self.label(window, "Camera st&yle:", 24, 496, 106, 20);
         let camera = self.combo(
             window,
             &strings(&CAMERA_STYLES),
@@ -1674,7 +1690,7 @@ impl WindowState {
                 .min(CAMERA_STYLES.len() - 1),
             ID_CAMERA,
             136,
-            462,
+            492,
             240,
         );
         let fixes_group = self.group(
@@ -1774,6 +1790,7 @@ impl WindowState {
             ambience,
             headphones,
             controller,
+            controller_hints,
             camera,
             fixes,
             skip,
@@ -1798,6 +1815,7 @@ impl WindowState {
             music_label,
             headphones_label,
             controller_label,
+            controller_hints_label,
             ambience_label,
             camera_label,
             fixes_group,
@@ -1949,6 +1967,11 @@ impl WindowState {
                 [combo_selection(controls.controller).min(CONTROLLER_LAYOUTS.len() - 1)]
             .0,
         );
+        settings.set_controller_hints(
+            CONTROLLER_HINTS
+                [combo_selection(controls.controller_hints).min(CONTROLLER_HINTS.len() - 1)]
+            .0,
+        );
         let words = settings.words_mut();
         words[0] = slider_position(controls.effects).min(15);
         words[1] = slider_position(controls.music).min(15);
@@ -2038,8 +2061,10 @@ unsafe fn layout_modern_rows(controls: &OptionControls, window: Handle, scale: f
         (controls.music, 314, 392),
         (controls.controller_label, 24, 432),
         (controls.controller, 136, 428),
-        (controls.camera_label, 24, 466),
-        (controls.camera, 136, 462),
+        (controls.controller_hints_label, 24, 466),
+        (controls.controller_hints, 136, 462),
+        (controls.camera_label, 24, 496),
+        (controls.camera, 136, 492),
         (controls.fixes_group, 12, FIX_BOX_TOP),
         (controls.cheats_group, 12, CHEATS_GROUP_TOP),
         (controls.skip, 16, SKIP_TOP),

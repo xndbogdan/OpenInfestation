@@ -159,6 +159,11 @@ pub struct TextEntryTick {
 pub struct TextEntryScreenDraw {
     pub animation: crate::frontend_camera::AnimationClock,
     pub selector_one: u16,
+    /// The port's Controller hints gate: the retry prompt (global 39) words
+    /// its controls as the pad does, outside a network game.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
 }
 
 #[derive(Debug)]
@@ -223,6 +228,8 @@ impl TextEntryScreen {
                 age_millis: self.input.age_millis(),
                 animation: draw.animation,
                 selector_one: draw.selector_one,
+                pad_hints: draw.pad_hints,
+                language: draw.language,
             },
             host,
         );

@@ -685,3 +685,117 @@ fn real_save_restore_message_and_checkpoint_operations_preserve_command_owner() 
     assert_eq!(arena.world_player(first).unwrap(), &first_before);
     assert_eq!(other_owners(&arena), owners);
 }
+
+/// The port's Controller hints gate at the hint message send: the injected
+/// table's wording replaces the H0 text only while the message environment's
+/// gate is on, and a message already sent keeps its text when the gate (the
+/// player's last input) flips.
+#[test]
+fn controller_wording_replaces_only_unsent_hints_in_its_language() {
+    fn fake(global: u32, language: u8) -> Option<&'static [u8]> {
+        match (global, language) {
+            (866, 0) => Some(b"Press LB to activate big wheeled mode"),
+            (867, 0) => Some(b"Press LB again to return to normal buggy mode"),
+            _ => None,
+        }
+    }
+    let assets = FrontendAssets::open(&data_root()).unwrap();
+    let environment = |pad_hints| crate::object_runtime::PlayerMessageEnvironment {
+        menus: crate::object_runtime::PlayerMessageMenus::parse(&assets).unwrap(),
+        math: crate::menu_basis::MenuBasisMath::new(assets.sine_table().values),
+        network: 0,
+        visibility: crate::menu::MenuVisibility::OwnerFlagSet,
+        pause_on_hints: false,
+        attract: false,
+        ui_state: 4,
+        cheats: Default::default(),
+        pad_hints,
+        language: 0,
+    };
+    let mut resident = boot();
+    resident
+        .apply(ResidencyRequest::Activate { level: 48 })
+        .unwrap();
+    let bytes = executable_bytes();
+    let process = ParticleFactoryProcessState::native_startup();
+    let context = PlayerCommandContext {
+        process: Some(&process),
+        executable: Some(FrontendExecutable::parse(&bytes).unwrap()),
+        resident: Some(&resident),
+    };
+    let pc = |index: u16| match capture_h0_text(H0TextCaptureRequest {
+        index_word: index,
+        resident: Some(&resident),
+    }) {
+        Ok(GrantTextSource::Record(Some(record))) => {
+            record.split(|&byte| byte == 0).next().unwrap().to_vec()
+        }
+        other => panic!("expected H0 {index:#x}, found {other:?}"),
+    };
+    let send = |arena: &mut ObjectArena, player: PlayerId, raw_id: u32| {
+        arena
+            .apply_player_command_with_pad_hints(
+                PlayerCommandRequest {
+                    player,
+                    operation: PlayerCommandOperation::Set { raw_id, silent: 0 },
+                },
+                &context,
+                fake,
+            )
+            .unwrap();
+    };
+    let hint = |arena: &ObjectArena, player: PlayerId| {
+        arena
+            .player_message_boxes(player)
+            .unwrap()
+            .hints
+            .as_ref()
+            .unwrap()
+            .ring
+            .iter()
+            .flatten()
+            .cloned()
+            .collect::<Vec<_>>()
+    };
+
+    // The gate off: the PC H0 bytes stand for the unhinted 866.
+    let mut arena_off = arena();
+    let player = arena_off.add_world_player([0; 6]);
+    arena_off.add_world_player([0; 6]);
+    enable(&mut arena_off, player);
+    arena_off.set_player_message_environment(environment(false));
+    send(&mut arena_off, player, 0x44);
+    assert!(hint(&arena_off, player).contains(&pc(866)));
+
+    // The gate on: the injected controller wording replaces it.
+    let mut arena_on = arena();
+    let player = arena_on.add_world_player([0; 6]);
+    arena_on.add_world_player([0; 6]);
+    enable(&mut arena_on, player);
+    arena_on.set_player_message_environment(environment(true));
+    send(&mut arena_on, player, 0x44);
+    let sent = hint(&arena_on, player);
+    assert!(sent.contains(&b"Press LB to activate big wheeled mode".to_vec()));
+    assert!(!sent.contains(&pc(866)));
+
+    // The last input flips to the keyboard: 867, sent after, takes the PC
+    // text, and 866's already-sent wording keeps its text.
+    arena_on.player_message_environment_mut().unwrap().pad_hints = false;
+    send(&mut arena_on, player, 0x45);
+    let sent = hint(&arena_on, player);
+    assert!(sent.contains(&b"Press LB to activate big wheeled mode".to_vec()));
+    assert!(sent.contains(&pc(867)));
+    assert!(!sent.contains(&b"Press LB again to return to normal buggy mode".to_vec()));
+
+    // The gate on but no entry for global 865 or for another language: the
+    // PC text stands byte for byte.
+    let mut arena_other = arena();
+    let player = arena_other.add_world_player([0; 6]);
+    arena_other.add_world_player([0; 6]);
+    enable(&mut arena_other, player);
+    let mut other_language = environment(true);
+    other_language.language = 1;
+    arena_other.set_player_message_environment(other_language);
+    send(&mut arena_other, player, 0x44);
+    assert!(hint(&arena_other, player).contains(&pc(866)));
+}

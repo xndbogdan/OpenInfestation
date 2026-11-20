@@ -85,19 +85,19 @@ fn a_file_the_game_loads_or_none_at_all_is_fine_and_left_alone() {
 }
 
 /// A player's file (2026-10-28): a build from the camera work wrote a
-/// `camera` field and schema 12.
+/// `camera` field and a schema newer than this build's.
 #[test]
 fn a_newer_builds_field_and_schema_are_repaired_and_the_rest_kept() {
     let saved = Saved::new();
     saved.edit(|value| {
         value["camera"] = json!("remastered");
-        value["schema"] = json!(12);
+        value["schema"] = json!(13);
     });
     let SettingsHealth::Repairable { problems } = saved.diagnose() else {
         panic!("{:?}", saved.diagnose());
     };
     assert!(mentions(&problems, "Removed `camera`"), "{problems:?}");
-    assert!(mentions(&problems, "Schema 12"), "{problems:?}");
+    assert!(mentions(&problems, "Schema 13"), "{problems:?}");
     let (settings, repaired) = saved.repaired();
     assert_eq!(repaired, problems);
     assert_eq!(settings.words()[0], 7);

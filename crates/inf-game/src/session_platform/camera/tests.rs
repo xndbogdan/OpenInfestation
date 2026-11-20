@@ -55,6 +55,8 @@ impl CameraOwners {
                     input_mode_08: 0,
                     vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
                     settings_84: 0,
+                    pad_hints: false,
+                    residency_language: 0,
                 },
                 microseconds: 40_000,
                 process: &self.process,

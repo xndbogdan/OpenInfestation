@@ -213,6 +213,8 @@ impl NameEntryFrameHost for SoftwareNameEntryFrame<'_, '_, '_, '_> {
                 context_origin_pixels: self.context_origin_pixels,
                 base_color: self.base_color,
                 sine_quarter: self.sine_quarter,
+                pad_hints: input.pad_hints,
+                language: input.language,
             },
             &self.resources,
             &mut host,

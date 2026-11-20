@@ -1404,6 +1404,29 @@ fn the_controller_layout_persists_and_older_sidecars_load_pc() {
 }
 
 #[test]
+fn the_controller_hints_persist_and_older_sidecars_load_retail() {
+    use crate::platform_pad::ControllerHints;
+    let fixture = Fixture::new();
+    let mut settings = fixture.load().unwrap();
+    assert_eq!(settings.controller_hints(), ControllerHints::Retail);
+    settings.set_controller_hints(ControllerHints::FollowLastInput);
+    settings.persist().unwrap();
+    assert_eq!(fixture.json()["controller_hints"], "follow-last-input");
+    assert_eq!(
+        fixture.load().unwrap().controller_hints(),
+        ControllerHints::FollowLastInput
+    );
+    let mut older = fixture.json();
+    older["schema"] = 11.into();
+    older.as_object_mut().unwrap().remove("controller_hints");
+    fixture.write_json(&older);
+    assert_eq!(
+        fixture.load().unwrap().controller_hints(),
+        ControllerHints::Retail
+    );
+}
+
+#[test]
 fn the_renderer_persists_and_older_sidecars_load_auto() {
     let fixture = Fixture::new();
     let mut settings = fixture.load().unwrap();

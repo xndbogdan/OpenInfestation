@@ -66,6 +66,37 @@ pub enum PadChange {
     Removed(String),
 }
 
+/// Whether hint messages word their controls as PC retail does, or follow
+/// the device the player used last.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
+#[serde(rename_all = "kebab-case")]
+pub enum ControllerHints {
+    /// Retail's PC keyboard wording, on every layout and every device.
+    #[default]
+    Retail,
+    /// The controller's wording after the player last used the pad.
+    FollowLastInput,
+}
+
+impl ControllerHints {
+    /// The controller wording applies only where it is true: the player chose
+    /// to follow the last input, the pad plays the PlayStation layout whose
+    /// texts the wording comes from, the player last used the pad, and the
+    /// game is offline (network games play retail's game on every renderer).
+    /// Every other case keeps the PC text byte for byte.
+    pub fn uses_pad_wording(
+        self,
+        layout: ControllerLayout,
+        last_input_is_pad: bool,
+        network_game: bool,
+    ) -> bool {
+        self == Self::FollowLastInput
+            && layout == ControllerLayout::Console
+            && last_input_is_pad
+            && !network_game
+    }
+}
+
 /// The PlayStation pad's bits 0 to 15 (codes 1 to 16), minus L2 and R2,
 /// which the triggers give.
 const CONSOLE_BUTTONS: [(u32, Button); 14] = [
@@ -423,3 +454,32 @@ impl SdlPads {
 #[cfg(test)]
 #[path = "platform_pad_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+mod control_hints_tests {
+    use super::*;
+
+    /// Controller wording needs all four conditions; any one missing keeps
+    /// the PC text.
+    #[test]
+    fn pad_wording_is_the_follow_setting_on_a_console_pad_offline() {
+        for setting in [ControllerHints::Retail, ControllerHints::FollowLastInput] {
+            for layout in [ControllerLayout::Pc, ControllerLayout::Console] {
+                for last_input_is_pad in [false, true] {
+                    for network_game in [false, true] {
+                        let expected = setting == ControllerHints::FollowLastInput
+                            && layout == ControllerLayout::Console
+                            && last_input_is_pad
+                            && !network_game;
+                        assert_eq!(
+                            setting.uses_pad_wording(layout, last_input_is_pad, network_game),
+                            expected,
+                            "{setting:?} {layout:?} pad={last_input_is_pad} network={network_game}"
+                        );
+                    }
+                }
+            }
+        }
+        assert_eq!(ControllerHints::default(), ControllerHints::Retail);
+    }
+}

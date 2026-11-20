@@ -499,6 +499,8 @@ fn no_controller_and_no_owned_class_still_visit_and_log_unknown_callbacks_once()
                     input_mode_08: 0,
                     vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
                     settings_84: 0,
+                    pad_hints: false,
+                    residency_language: 0,
                 },
                 microseconds: 40_000,
                 paced_microseconds: Some(40_000),

@@ -2,7 +2,7 @@
 //! the upscalers this machine's GPU runs.
 
 use inf_game::frontend_settings::PortFixes;
-use inf_game::platform_pad::ControllerLayout;
+use inf_game::platform_pad::{ControllerHints, ControllerLayout};
 use inf_game::presentation::{ClassicScaling, RendererChoice};
 
 /// The Display row's entries, in [`DisplayMode::ALL`]'s order.
@@ -19,6 +19,12 @@ pub(super) const CAMERA_STYLES: [&str; 3] = ["Normal", "Cinematic", "Remastered"
 pub(super) const CONTROLLER_LAYOUTS: [(ControllerLayout, &str); 2] = [
     (ControllerLayout::Pc, "PC original"),
     (ControllerLayout::Console, "Console original (PlayStation)"),
+];
+/// The Controller hints row's entries: retail's PC keyboard wording, or the
+/// controller's after the player last used the pad.
+pub(super) const CONTROLLER_HINTS: [(ControllerHints, &str); 2] = [
+    (ControllerHints::Retail, "Retail"),
+    (ControllerHints::FollowLastInput, "Follow last input"),
 ];
 pub(super) const SCALINGS: [(ClassicScaling, &str); 4] = [
     (ClassicScaling::Widescreen, "Widescreen"),

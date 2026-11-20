@@ -705,6 +705,15 @@ impl PortSessionServices for SdlPlatform {
     }
     fn world_tick_inputs(&self) -> crate::session_platform::WorldTickPlatformInputs {
         let words = self.frontend.settings.words();
+        let settings = &self.frontend.settings;
+        // The network exclusion is applied where the message is sent.
+        let pad_hints = settings.controller_hints().uses_pad_wording(
+            settings.controller_layout(),
+            self.keyboard
+                .as_ref()
+                .is_some_and(crate::platform_input::SdlInput::last_input_is_pad),
+            false,
+        );
         crate::session_platform::WorldTickPlatformInputs {
             camera_settings: crate::object_runtime::CameraSettings::from_words(words),
             settings_20: words[0x20 / 4],
@@ -712,12 +721,12 @@ impl PortSessionServices for SdlPlatform {
             settings_78: words[0x78 / 4],
             settings_7c: words[0x7c / 4],
             input_mode_08: words[0x8 / 4],
-            settings_84: self
-                .frontend
-                .settings
+            settings_84: settings
                 .fixes()
                 .respawn_cheat_word(words[0x84 / 4], self.profiles.completed_campaigns()),
-            vehicle_position_step: self.frontend.settings.fixes().vehicle_position_step(),
+            vehicle_position_step: settings.fixes().vehicle_position_step(),
+            pad_hints,
+            residency_language: settings.residency_language(),
         }
     }
     fn world_tick_quantum(&self) -> crate::session_platform::WorldTickQuantum {

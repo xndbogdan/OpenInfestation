@@ -192,7 +192,9 @@ pub(super) fn deliver(
                 .update(notification, input, router)
                 .map_err(flatten)?;
         }
-        pad_removed = keyboard.take_pad_removed();
+        // A pad lost while the player drives from the keyboard is no reason
+        // to stop the game (user, 2026-11-20).
+        pad_removed = keyboard.take_pad_removed() && keyboard.last_input_is_pad();
     }
     input.poll(router).map_err(flatten)?;
     Ok(pad_removed)

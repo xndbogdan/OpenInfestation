@@ -364,6 +364,8 @@ impl PortSessionServices for RecordingServices {
             input_mode_08: 0,
             settings_84: self.cheats_84,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
+            pad_hints: false,
+            residency_language: 0,
         }
     }
     fn loading_platform(&mut self) -> crate::loading_integration::LoadingPlatformLoans<'_> {

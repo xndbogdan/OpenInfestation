@@ -80,6 +80,14 @@ pub struct ComputerDraw<'a, 'r> {
     pub model_failures: &'a mut Vec<(i16, String)>,
     /// `0052F880`, the world the Cheats Menu's Skip to names.
     pub skip_world: u32,
+    /// Port setting: the List Hints rows word their controls as the pad
+    /// does. False keeps the PC text byte for byte.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
+    /// The controller wording lookup: [`crate::control_hints::pad_hint`] in
+    /// play, a fixture table in the tests that prove the swap.
+    pub pad_hint: fn(u32, u8) -> Option<&'static [u8]>,
 }
 
 /// `004141B0`'s sprite, vertex DWORD and descriptor.
@@ -124,6 +132,17 @@ pub struct ShownMenuDrawContext<'a, 'r> {
     /// The player commands the rows set (`0046C760(raw_id, 0)`), for the
     /// caller to apply before the message boxes draw.
     pub commands: &'a mut Vec<(PlayerId, u32)>,
+}
+
+/// A List Hints row's text: the PC bytes when the gate is off, the
+/// controller's wording lookup when it is on and answers, else the PC bytes
+/// byte for byte. Decided at draw time, as each frame draws the list.
+fn hint_wording(computer: &ComputerDraw<'_, '_>, global: u16, pc_text: Vec<u8>) -> Vec<u8> {
+    if computer.pad_hints {
+        (computer.pad_hint)(u32::from(global), computer.language).map_or(pc_text, <[u8]>::to_vec)
+    } else {
+        pc_text
+    }
 }
 
 /// `00453610` over the shown menu.
@@ -426,15 +445,16 @@ impl ShownMenuDrawHost<'_, '_, '_, '_> {
             .as_ref()
             .expect("checked by the caller");
         let hint = request.arguments[0] as usize;
-        let text = *computer.hint_texts.get(hint).ok_or_else(|| {
+        let global = *computer.hint_texts.get(hint).ok_or_else(|| {
             ShownMenuDrawError::Resource(format!("hint {hint} is past 0053A27C's table"))
         })?;
         let text = self
             .menu
             .resources()
-            .string(i32::from(text))
+            .string(i32::from(global))
             .map_err(resource_error)?
             .to_vec();
+        let text = hint_wording(computer, global, text);
         self.menu.draw_row_text(MenuRowTextRequest {
             descriptor: &mut request.descriptor,
             text: &text,

@@ -114,6 +114,8 @@ fn draw_input(fixture: &Fixture) -> TextEntryScreenDraw {
     TextEntryScreenDraw {
         animation: fixture.world.process.animation(),
         selector_one: 0xbeef,
+        pad_hints: false,
+        language: 0,
     }
 }
 

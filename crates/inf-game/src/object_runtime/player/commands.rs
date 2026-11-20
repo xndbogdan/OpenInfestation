@@ -109,12 +109,27 @@ impl ObjectArena {
         request: PlayerCommandRequest,
         context: &PlayerCommandContext<'_>,
     ) -> Result<PlayerCommandOutcome, PlayerCommandError> {
+        self.apply_player_command_with_pad_hints(request, context, crate::control_hints::pad_hint)
+    }
+
+    /// [`Self::apply_player_command`] with an explicit controller-wording
+    /// lookup: the shipped table in play, a fixture table in tests that prove
+    /// the swap without the real table.
+    pub(crate) fn apply_player_command_with_pad_hints<F>(
+        &mut self,
+        request: PlayerCommandRequest,
+        context: &PlayerCommandContext<'_>,
+        pad_hint: F,
+    ) -> Result<PlayerCommandOutcome, PlayerCommandError>
+    where
+        F: Fn(u32, u8) -> Option<&'static [u8]>,
+    {
         match request.operation {
             PlayerCommandOperation::Query { raw_id } => Ok(PlayerCommandOutcome::Owned(
                 self.player_command_owned(request.player, raw_id)?,
             )),
             PlayerCommandOperation::Set { raw_id, silent } => {
-                self.set_player_command(request.player, raw_id, silent, context)?;
+                self.set_player_command(request.player, raw_id, silent, context, &pad_hint)?;
                 Ok(PlayerCommandOutcome::Applied)
             }
         }
@@ -145,13 +160,17 @@ impl ObjectArena {
         Ok(self.player_command_word(player, raw_id)? & (1u32 << (raw_id & 31)) != 0)
     }
 
-    fn set_player_command(
+    fn set_player_command<F>(
         &mut self,
         player: PlayerId,
         raw_id: u32,
         silent: u32,
         context: &PlayerCommandContext<'_>,
-    ) -> Result<(), PlayerCommandError> {
+        pad_hint: &F,
+    ) -> Result<(), PlayerCommandError>
+    where
+        F: Fn(u32, u8) -> Option<&'static [u8]>,
+    {
         crate::event_log::hint(raw_id, silent as u8);
         // 0046C760 precedes all player, ID, mask and silent reads.
         let process = context
@@ -176,10 +195,22 @@ impl ObjectArena {
             return Ok(());
         }
         let index_word = command_text_word(context, raw_id)?;
-        let source = capture_h0_text(H0TextCaptureRequest {
-            index_word,
-            resident: context.resident,
-        })?;
+        // The port's hint wording, decided now: a message already on screen
+        // keeps the text it was sent with when the player switches devices.
+        let pad_language = self
+            .player_message_environment_mut()
+            .filter(|environment| environment.pad_hints && environment.network == 0)
+            .map(|environment| environment.language);
+        let source = match pad_language
+            .filter(|_| (index_word as i16) >= 0)
+            .and_then(|language| pad_hint(u32::from(index_word), language))
+        {
+            Some(text) => GrantTextSource::Record(Some(text)),
+            None => capture_h0_text(H0TextCaptureRequest {
+                index_word,
+                resident: context.resident,
+            })?,
+        };
         // 0046C7F4/0046C809 selects the original requested player's +88.
         // Unlike grants, this phase has no formatter or late +1C binding.
         let recipient = self.player_message(player)?.identity();

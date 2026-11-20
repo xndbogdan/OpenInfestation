@@ -34,6 +34,7 @@ pub mod briefing_sprites;
 pub mod briefing_terrain;
 pub mod camera_clearance;
 pub mod cloud_wake;
+pub mod control_hints;
 pub mod cpu_profile;
 pub mod craft_spray;
 pub mod craft_wet;

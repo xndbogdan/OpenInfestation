@@ -49,6 +49,11 @@ struct PlayerMessageProcess {
     attract: bool,
     ui_state: u32,
     cheats: crate::object_runtime::ComputerCheats,
+    /// The port setting's hint wording, with the network exclusion applied:
+    /// network games play retail's game.
+    pad_hints: bool,
+    /// Settings +64's residency language.
+    language: u8,
 }
 
 /// UI states the players' messages asked for (004391B0 -> 00438380): a hint
@@ -98,6 +103,8 @@ fn refresh_player_message_environment(
         environment.attract = process.attract;
         environment.ui_state = process.ui_state;
         environment.cheats = process.cheats;
+        environment.pad_hints = process.pad_hints;
+        environment.language = process.language;
         return;
     }
     let menus = match crate::object_runtime::PlayerMessageMenus::parse(assets) {
@@ -118,6 +125,8 @@ fn refresh_player_message_environment(
             attract: process.attract,
             ui_state: process.ui_state,
             cheats: process.cheats,
+            pad_hints: process.pad_hints,
+            language: process.language,
         });
 }
 
@@ -282,6 +291,8 @@ impl<P: PortPlatform> PortSession<P> {
                 attract: self.attract,
                 ui_state: u32::from(state.current_phase().id()),
                 cheats: self.computer_cheats,
+                pad_hints: inputs.pad_hints && self.factory_process.network_flag == 0,
+                language: inputs.residency_language,
             },
         );
         // The protocol's state is the world's while it updates.
