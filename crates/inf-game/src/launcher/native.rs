@@ -145,9 +145,10 @@ const VULKAN_GROUP_LIFT: i32 = 178;
 /// spare, the Cheats box keeps clear gaps above and below its title, and
 /// the window grows with them, so a new row never overlaps the boxes
 /// below it.
-const FIX_ROW_TOP: i32 = 528;
-const FIX_ROW_PITCH: i32 = 25;
 const FIX_BOX_TOP: i32 = 540;
+/// The first row clears the Fixes box's title, as the Cheats box's does.
+const FIX_ROW_TOP: i32 = FIX_BOX_TOP + 22;
+const FIX_ROW_PITCH: i32 = 25;
 const FIX_BOX_CLEAR: i32 = 20;
 const FIXES_GROUP_HEIGHT: i32 =
     FIX_ROW_TOP + FIX_ROW_PITCH * (BUG_FIX_ROWS as i32 - 1) + FIX_BOX_CLEAR - FIX_BOX_TOP;
@@ -2398,6 +2399,7 @@ mod layout_tests {
         // The Fixes box clears its last row's text with room to spare, and
         // the Cheats title clears the row above it.
         assert!(FIX_BOX_CLEAR >= 18);
+        assert!(bug_tops[0] - FIX_BOX_TOP >= 22);
         assert_eq!(fixes_bottom - bug_tops[BUG_FIX_ROWS - 1], FIX_BOX_CLEAR);
         assert_eq!(CHEATS_GROUP_TOP - fixes_bottom, GROUP_GAP);
         assert!(GROUP_GAP >= 12);
