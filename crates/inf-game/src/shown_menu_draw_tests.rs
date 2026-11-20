@@ -40,6 +40,59 @@ fn a_full_width_viewport_has_no_panel() {
     assert!(shown_menu_panel([0, 0, 0x400, 0x400], [1024, 768]).is_none());
 }
 
+/// The List Hints row keeps the PC text when the gate is off, and takes the
+/// controller wording only for the language the lookup answers.
+#[test]
+fn the_list_hints_row_follows_the_controller_hint_gate() {
+    fn fake(global: u32, language: u8) -> Option<&'static [u8]> {
+        (global == 866 && language == 1).then_some(&b"Press LB to activate big wheeled mode"[..])
+    }
+    fn computer<'a, 'r>(
+        rng: &'a mut u32,
+        failures: &'a mut Vec<(i16, String)>,
+        pad_hints: bool,
+        language: u8,
+    ) -> ComputerDraw<'a, 'r> {
+        ComputerDraw {
+            database: &[],
+            hint_texts: &[],
+            grants: &[],
+            rng,
+            models: None,
+            model_failures: failures,
+            skip_world: 0,
+            pad_hints,
+            language,
+            pad_hint: fake,
+        }
+    }
+    let mut rng = 0;
+    let mut failures = Vec::new();
+    let pc = b"Press mode 2 to activate big wheeled mode".to_vec();
+    assert_eq!(
+        hint_wording(
+            &computer(&mut rng, &mut failures, false, 1),
+            866,
+            pc.clone()
+        ),
+        pc
+    );
+    assert_eq!(
+        hint_wording(&computer(&mut rng, &mut failures, true, 1), 866, pc.clone()),
+        b"Press LB to activate big wheeled mode"
+    );
+    // The lookup has no entry for this language or global: the PC text
+    // stands byte for byte.
+    assert_eq!(
+        hint_wording(&computer(&mut rng, &mut failures, true, 0), 866, pc.clone()),
+        pc
+    );
+    assert_eq!(
+        hint_wording(&computer(&mut rng, &mut failures, true, 1), 865, pc.clone()),
+        pc
+    );
+}
+
 /// One database row drawn over `current`'s resources (and `models`'
 /// second residency) at 1024x768, every entry known.
 struct DatabaseDraw {
@@ -172,6 +225,9 @@ impl DatabaseFixture {
                     models,
                     model_failures: &mut failures,
                     skip_world: 2,
+                    pad_hints: false,
+                    language: 0,
+                    pad_hint: crate::control_hints::pad_hint,
                 }),
                 process: &process,
                 focal: startup.projection.focal,

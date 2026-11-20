@@ -284,11 +284,15 @@ fn original_profile_draw_receipts_match_descriptors_colors_positions_and_state()
                 store: &mut store,
                 owner_flag: flag(c, "owner"),
                 surface_pixels: pair(c, "surface"),
+                pad_hints: false,
+                language: 0,
             };
             if kind == "confirmation" {
                 ProfileDrawContext {
                     resources: &resources,
                     host: &mut host,
+                    pad_hints: false,
+                    language: 0,
                 }
                 .confirmation(&mut draw, pair(c, "position")[0] as i16, 0xce)
                 .unwrap();

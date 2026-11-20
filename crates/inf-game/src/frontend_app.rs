@@ -157,6 +157,10 @@ pub struct FrontendAppRequest {
     /// The pad's layout: PC retail's joystick or the PlayStation pad. None
     /// retains the saved layout, PC original by default.
     pub controller_layout: Option<crate::platform_pad::ControllerLayout>,
+    /// Hint wording: retail's PC keyboard text, or the controller's after
+    /// the player last used the pad. None retains the saved choice, retail
+    /// by default.
+    pub controller_hints: Option<crate::platform_pad::ControllerHints>,
     /// Explicit OVL display tier, selecting its original size; it must be
     /// the tier of explicit dimensions.
     pub variant: Option<u8>,
@@ -349,6 +353,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
     }
     if let Some(layout) = request.controller_layout {
         settings.set_controller_layout(layout);
+    }
+    if let Some(hints) = request.controller_hints {
+        settings.set_controller_hints(hints);
     }
     if let Some(carry) = request.vehicle_position_carry {
         let mut fixes = settings.fixes();
@@ -1803,6 +1810,7 @@ mod tests {
             pelagia_rework: None,
             renderer: Some(RendererChoice::Software),
             controller_layout: None,
+            controller_hints: None,
             variant: None,
             language: None,
             hidden: false,

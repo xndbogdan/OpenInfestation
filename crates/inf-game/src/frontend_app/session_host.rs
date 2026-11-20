@@ -45,8 +45,8 @@ use crate::{
             present_linked, present_linked_clear, SoftwareLinkedError, SoftwareLinkedFrame,
         },
         KeyConfigSessionEffects, LinkedActivityError, LinkedScreenError, PortLinked, PortScreen,
-        PortSession, PortSessionError, PortSessionErrorOf, PortSplit, SessionBoundary,
-        StartupSessionEffects,
+        PortSession, PortSessionError, PortSessionErrorOf, PortSessionServices, PortSplit,
+        SessionBoundary, StartupSessionEffects,
     },
     software_frame::SoftwareFrame,
     software_scene::SoftwareScene,
@@ -759,6 +759,8 @@ impl SessionFrameHost for AppFrame<'_, '_, '_, '_> {
             return Ok(());
         }
         let render = self.render.as_mut().ok_or(AppFrameError::MissingRenderer)?;
+        let inputs = self.session.platform().world_tick_inputs();
+        let pad_hints = inputs.pad_hints && !SessionHost::network_session_active(&*self.session);
         SoftwareLinkedFrame {
             scene: &mut *render.scene,
             resources: render.resources,
@@ -771,6 +773,8 @@ impl SessionFrameHost for AppFrame<'_, '_, '_, '_> {
             surface: render
                 .presentation
                 .surface(self.io.output.window(), render.dimensions),
+            pad_hints,
+            language: inputs.residency_language,
         }
         .draw(self.session, state)
         .map_err(AppFrameError::Draw)?;

@@ -298,6 +298,14 @@ struct Args {
     #[arg(long, value_enum)]
     controller_layout: Option<inf_game::platform_pad::ControllerLayout>,
 
+    /// How hint messages word their controls: retail (the PC keyboard
+    /// wording, always) or follow-last-input (the controller's wording after
+    /// the player last used the pad, under the console layout only, offline).
+    /// Replaces the saved choice (retail unless the launcher's Options chose
+    /// another).
+    #[arg(long, value_enum)]
+    controller_hints: Option<inf_game::platform_pad::ControllerHints>,
+
     /// Stop frontend presentation after this many rendered frames.
     #[arg(long)]
     frames: Option<u64>,
@@ -584,6 +592,9 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
     if args.mode != Mode::Frontend && args.controller_layout.is_some() {
         return Err("--controller-layout requires frontend mode".into());
     }
+    if args.mode != Mode::Frontend && args.controller_hints.is_some() {
+        return Err("--controller-hints requires frontend mode".into());
+    }
     if args.mode != Mode::Frontend && (args.session_log.is_some() || args.replay_session.is_some())
     {
         return Err("--session-log and --replay-session require frontend mode".into());
@@ -667,6 +678,7 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
             pelagia_rework: args.pelagia_rework,
             renderer: args.renderer,
             controller_layout: args.controller_layout,
+            controller_hints: args.controller_hints,
             variant: args.difficulty,
             language: args.language,
             hidden: args.hidden,

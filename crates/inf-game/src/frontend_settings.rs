@@ -74,7 +74,7 @@ pub const DETAIL_CELL: usize = 0x70 / 4;
 /// keeps whatever detail it holds, Low included.
 pub const DETAIL_DEFAULT: u32 = 1;
 const DEFAULTS_ADDRESS: u32 = 0x0053_8cd0;
-const SCHEMA_VERSION: u32 = 11;
+const SCHEMA_VERSION: u32 = 12;
 
 /// The settings words whose consumers bound them, and each one's highest
 /// value: the two volumes, the display tier, Filtering (`+3C`, to Vulkan's
@@ -198,6 +198,9 @@ struct SettingsFile {
     /// path tracing on and no upscaler.
     #[serde(default)]
     modern: crate::modern_settings::ModernSettings,
+    /// Schema 12: hint wording. Older sidecars load retail's PC wording.
+    #[serde(default)]
+    controller_hints: crate::platform_pad::ControllerHints,
 }
 
 impl SettingsFile {
@@ -547,6 +550,7 @@ pub struct FrontendSettings {
     fixes: PortFixes,
     renderer: RendererChoice,
     controller_layout: crate::platform_pad::ControllerLayout,
+    controller_hints: crate::platform_pad::ControllerHints,
     modern: crate::modern_settings::ModernSettings,
     /// The desktop of the display's monitor, which Borderless covers. The
     /// display host sets it whenever it reads the monitor; never saved.
@@ -643,6 +647,7 @@ impl FrontendSettings {
             fixes: PortFixes::default(),
             renderer: RendererChoice::default(),
             controller_layout: Default::default(),
+            controller_hints: Default::default(),
             modern: Default::default(),
             desktop: None,
             filtering_most: crate::frontend_video::FILTERING_RETAIL_MOST,
@@ -689,6 +694,7 @@ impl FrontendSettings {
         self.fixes = saved.fixes;
         self.renderer = saved.renderer;
         self.controller_layout = saved.controller_layout;
+        self.controller_hints = saved.controller_hints;
         self.modern = saved.modern;
         // The retail tier word follows the exact resolution.
         self.words[0x0c / 4] = tier_for([self.display.width, self.display.height]);
@@ -952,6 +958,16 @@ impl FrontendSettings {
 
     pub fn set_controller_layout(&mut self, layout: crate::platform_pad::ControllerLayout) {
         self.controller_layout = layout;
+    }
+
+    /// Whether hints word their controls as PC retail does, or follow the
+    /// device the player used last ([`crate::platform_pad::ControllerHints`]).
+    pub fn controller_hints(&self) -> crate::platform_pad::ControllerHints {
+        self.controller_hints
+    }
+
+    pub fn set_controller_hints(&mut self, hints: crate::platform_pad::ControllerHints) {
+        self.controller_hints = hints;
     }
 
     /// The camera the Camera Style row (`+6C`) draws: retail's, or the
@@ -1243,6 +1259,7 @@ impl FrontendSettings {
             renderer: self.renderer,
             controller_layout: self.controller_layout,
             modern: self.modern,
+            controller_hints: self.controller_hints,
         };
         self.write_file(&saved)
     }
@@ -1271,6 +1288,7 @@ impl FrontendSettings {
             renderer: RendererChoice::default(),
             controller_layout: Default::default(),
             modern: Default::default(),
+            controller_hints: Default::default(),
         }
     }
 

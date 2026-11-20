@@ -2,7 +2,8 @@
 
 This note answers how the PC game words its in-game control hints, what the
 PAL PlayStation release (SLES-01870) says instead, and how the two line up. It
-is research only: no game code changes.
+records the research behind the port's optional controller wording; the text
+table itself lives in `crates/inf-game/src/control_hints.rs`.
 
 **Summary.** PC hints are ordinary Handler-0 strings. They hard-code a mode
 number, a key name or an action name; they are never formatted from the live
@@ -345,6 +346,21 @@ environment carries the layout/pad flag), `session_platform`/`session_host.rs`
 to publish it, and `frontend_settings.rs` plus the launcher only if the
 behavior gets its own setting. No OVL or `PreLoad.dat` change is needed, and
 the hint mask/command IDs stay untouched.
+
+### Implemented hookup
+
+The port's **Controller hints** setting (`Retail`, the default, or `Follow
+last input`) applies the table only when all of the following hold: the
+setting is Follow last input; the layout is `ControllerLayout::Console`; the
+player's last input was the pad (`SdlInput::last_input_is_pad`, from the input
+notifications alone, so recordings replay it); and the game is not a network
+game. The wording is chosen when a hint message is sent (`0046C760`, through
+the player message environment), so a hint already on screen keeps the text
+it was sent with. The computer's List Hints row and the four shell prompts
+(globals 37..40) use the same gate at draw time. The controller bytes keep
+their own length, so the hint box's display time (3 s or 80 ms per byte) paces
+the player-visible message; nothing else reads them, and the event log still
+records the raw hint ID and silent byte unchanged.
 
 ### Fidelity questions for the user
 

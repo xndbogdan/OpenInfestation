@@ -141,6 +141,11 @@ pub struct ResultsPage<'a> {
     pub glyph_base_color: MenuColor,
     /// What the final world's page rolls.
     pub credits: Option<&'a FinalCredits>,
+    /// Port setting, resolved for this draw: the save and continue prompts
+    /// word their controls as the pad does, outside a network game.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
 }
 
 pub trait ResultsPageResources: MenuTextResources {
@@ -439,12 +444,25 @@ struct Lines<'a, 'r, R, H> {
     base: MenuColor,
     resources: &'r R,
     host: &'a mut H,
+    pad_hints: bool,
+    language: u8,
 }
 
 impl<'r, R: ResultsPageResources, H: ResultsPageHost> Lines<'_, 'r, R, H> {
     fn string(&self, id: i32) -> PageResult<&'r [u8], R, H> {
         let resources: &'r R = self.resources;
         resources.string(id).map_err(ResultsPageError::Resource)
+    }
+
+    /// A shell prompt (37..40) in the controller's wording where the gate
+    /// allows it, else the PC text byte for byte.
+    fn prompt(&self, id: i32) -> PageResult<Vec<u8>, R, H> {
+        if self.pad_hints {
+            if let Some(text) = crate::control_hints::pad_hint(id as u32, self.language) {
+                return Ok(text.to_vec());
+            }
+        }
+        Ok(self.string(id)?.to_vec())
     }
 
     /// 004A4240, narrowed to AX and sign-extended as the callers do.
@@ -507,6 +525,8 @@ fn text<R: ResultsPageResources, H: ResultsPageHost>(
         color,
         base: page.glyph_base_color,
         resources,
+        pad_hints: page.pad_hints,
+        language: page.language,
         host,
     };
     // 0042CA05: the descriptor's flags are 2 until the exit line clears them.
@@ -729,18 +749,18 @@ fn third_panel<R: ResultsPageResources, H: ResultsPageHost>(
         }
     };
     if let Some(id) = first {
-        let text = format(lines.string(id)?, &[])?;
+        let text = format(&lines.prompt(id)?, &[])?;
         let wrap = width.wrapping_shl(2) / 5;
         let measured = lines.measure(&text)?;
         let x = right.wrapping_sub(if wrap < measured { wrap } else { measured });
         lines.draw(&text, [x, y], wrap, reveal(age))?;
         if let Some(id) = second {
-            let text = format(lines.string(id)?, &[])?;
+            let text = format(&lines.prompt(id)?, &[])?;
             let x = right.wrapping_sub(lines.measure(&text)?);
             lines.draw(&text, [x, y.wrapping_sub(step)], wrap, reveal(age))?;
         }
     }
-    let text = format(lines.string(CONTINUE_TEXT)?, &[])?;
+    let text = format(&lines.prompt(CONTINUE_TEXT)?, &[])?;
     let wrap = width.wrapping_mul(5) / 10;
     let measured = lines.measure(&text)?;
     let x = right
@@ -855,6 +875,8 @@ fn final_text<R: ResultsPageResources, H: ResultsPageHost>(
         color,
         base: page.glyph_base_color,
         resources,
+        pad_hints: page.pad_hints,
+        language: page.language,
         host,
     };
     let (first, second) = save_texts(&state);
@@ -864,7 +886,7 @@ fn final_text<R: ResultsPageResources, H: ResultsPageHost>(
     };
     let wrap = width.wrapping_shl(2) / 5;
     if let Some(id) = first {
-        let text = format(lines.string(id)?, &[])?;
+        let text = format(&lines.prompt(id)?, &[])?;
         let measured = lines.measure(&text)?;
         let x = if measured < wrap {
             width.wrapping_sub(measured) / 2
@@ -873,7 +895,7 @@ fn final_text<R: ResultsPageResources, H: ResultsPageHost>(
         };
         lines.draw(&text, [x, y], wrap, reveal)?;
         if let Some(id) = second {
-            let text = format(lines.string(id)?, &[])?;
+            let text = format(&lines.prompt(id)?, &[])?;
             let x = width.wrapping_sub(lines.measure(&text)?) / 2;
             lines.draw(&text, [x, y.wrapping_sub(step)], wrap, reveal)?;
         }

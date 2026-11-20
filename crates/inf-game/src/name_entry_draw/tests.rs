@@ -147,6 +147,8 @@ fn frame() -> NameEntryDrawFrame<'static> {
         context_origin_pixels: [320, 240],
         base_color: MenuColor::from_word(0x0080_8080),
         sine_quarter: &SINE,
+        pad_hints: false,
+        language: 0,
     }
 }
 

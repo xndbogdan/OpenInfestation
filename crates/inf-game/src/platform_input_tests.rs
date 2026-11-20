@@ -435,6 +435,142 @@ fn the_pad_confirms_and_moves_the_frontend_menus() {
     );
 }
 
+/// The last input starts as the keyboard. A newly pressed button or a newly
+/// deflected axis makes the pad last; a key press takes it back. Repeated
+/// readings, releases, failed reads and key repeats leave it where the player
+/// left it.
+#[test]
+fn the_last_input_follows_new_presses_and_deflections_only() {
+    let (mut input, mut devices, _, mut host, _) = fixture();
+    let reading = |buttons, x| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample: PadSample::Read {
+            buttons,
+            axes: [x, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+        },
+    };
+    assert!(!devices.last_input_is_pad());
+
+    // The first read is a baseline, not a press.
+    devices
+        .update(reading(0, 0x8000), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+
+    key(&mut devices, &mut input, &mut host, Scancode::Space, true);
+    assert!(!devices.last_input_is_pad());
+
+    // A button's new press makes the pad last, and its repeats do not move it.
+    for buttons in [1, 1, 1] {
+        devices
+            .update(reading(buttons, 0x8000), &mut input, &mut host)
+            .unwrap();
+    }
+    assert!(devices.last_input_is_pad());
+    // The released reading does not count either.
+    devices
+        .update(reading(0, 0x8000), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.last_input_is_pad());
+
+    // A key press takes it back, and the still-held pad button's repeated
+    // readings do not take it again.
+    key(&mut devices, &mut input, &mut host, Scancode::Space, false);
+    key(&mut devices, &mut input, &mut host, Scancode::Space, true);
+    assert!(!devices.last_input_is_pad());
+    for _ in 0..3 {
+        devices
+            .update(reading(0, 0x8000), &mut input, &mut host)
+            .unwrap();
+    }
+    assert!(!devices.last_input_is_pad());
+
+    // An axis that newly leaves the quarter-range dead zone makes the pad
+    // last; holding it off centre does not retake it after a key press.
+    devices
+        .update(reading(0, 0xffff), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.last_input_is_pad());
+    key(&mut devices, &mut input, &mut host, Scancode::A, true);
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(reading(0, 0xffff), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    // Inside the dead zone (a quarter of the range from centre) is neutral,
+    // and a release alone never counts.
+    devices
+        .update(reading(0, 0x4000), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(reading(0, 0x3fff), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.last_input_is_pad());
+
+    // A failed read never counts, and the next good read is a new baseline.
+    key(&mut devices, &mut input, &mut host, Scancode::A, false);
+    key(&mut devices, &mut input, &mut host, Scancode::B, true);
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(
+            InputNotification::Pad {
+                native_type: 2,
+                axes: 5,
+                sample: PadSample::Failed,
+            },
+            &mut input,
+            &mut host,
+        )
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(reading(1, 0x8000), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(reading(1, 0x8000), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+}
+
+/// The PlayStation layout's dead zone is a quarter of its byte range around
+/// 0x80, and its buttons' bits count like the joystick's.
+#[test]
+fn the_playstation_layout_uses_its_own_axis_centre() {
+    let (mut input, mut devices, _, mut host, _) = fixture();
+    let reading = |buttons, x| InputNotification::Pad {
+        native_type: 9,
+        axes: 4,
+        sample: PadSample::Read {
+            buttons,
+            axes: [x, 0x80, 0x80, 0x80, 0, 0],
+        },
+    };
+    devices
+        .update(reading(0, 0x80), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    // Exactly a quarter of the range from centre is still neutral.
+    devices
+        .update(reading(0, 0xc0), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.last_input_is_pad());
+    devices
+        .update(reading(0, 0xc1), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.last_input_is_pad());
+
+    key(&mut devices, &mut input, &mut host, Scancode::Space, true);
+    assert!(!devices.last_input_is_pad());
+    // Cross is bit 14 in this layout's report.
+    devices
+        .update(reading(1 << 14, 0xc1), &mut input, &mut host)
+        .unwrap();
+    assert!(devices.last_input_is_pad());
+}
+
 /// The PlayStation pad (type 9) in the frontend: Cross (code 15, its bit
 /// 14) confirms through slot 9's table, as on the console.
 #[test]

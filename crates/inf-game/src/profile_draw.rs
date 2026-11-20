@@ -49,6 +49,11 @@ pub struct ProfileRowDraw<'a> {
     pub store: &'a mut ProfileStore,
     pub owner_flag: bool,
     pub surface_pixels: [i32; 2],
+    /// The port's Controller hints gate: the prompt in global 40 words its
+    /// controls as the pad does, outside a network game.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
 }
 
 pub fn draw_profile_row<R: MenuTextResources, H: ProfileTextHost>(
@@ -56,7 +61,12 @@ pub fn draw_profile_row<R: MenuTextResources, H: ProfileTextHost>(
     resources: &R,
     host: &mut H,
 ) -> Result<(), ProfileDrawError<R::Error, H::Error>> {
-    let mut context = ProfileDrawContext { resources, host };
+    let mut context = ProfileDrawContext {
+        resources,
+        host,
+        pad_hints: draw.pad_hints,
+        language: draw.language,
+    };
     match draw.request.callback_address {
         0x0044_8e60 => context.header(draw),
         0x0044_9320 => context.slot(draw),
@@ -123,6 +133,8 @@ pub fn draw_profile_status<R: MenuTextResources, H: ProfileTextHost>(
 struct ProfileDrawContext<'a, R, H> {
     resources: &'a R,
     host: &'a mut H,
+    pad_hints: bool,
+    language: u8,
 }
 
 impl<R: MenuTextResources, H: ProfileTextHost> ProfileDrawContext<'_, R, H> {
@@ -131,6 +143,21 @@ impl<R: MenuTextResources, H: ProfileTextHost> ProfileDrawContext<'_, R, H> {
             .style(style)
             .map(MenuColor::from_word)
             .map_err(ProfileDrawError::Resource)
+    }
+
+    /// A shell prompt (37..40) in the controller's wording where the gate
+    /// allows it, else the PC text byte for byte.
+    fn prompt(&self, id: i32) -> Result<Vec<u8>, ProfileDrawError<R::Error, H::Error>> {
+        if self.pad_hints {
+            if let Some(text) = crate::control_hints::pad_hint(id as u32, self.language) {
+                return Ok(text.to_vec());
+            }
+        }
+        Ok(self
+            .resources
+            .string(id)
+            .map_err(ProfileDrawError::Resource)?
+            .to_vec())
     }
 
     fn text(
@@ -264,12 +291,10 @@ impl<R: MenuTextResources, H: ProfileTextHost> ProfileDrawContext<'_, R, H> {
             self.host
                 .set_clip_rect([0, 0, width as i16, height as i16])
                 .map_err(ProfileDrawError::Host)?;
+            let prompt = self.prompt(0x28)?;
             self.host
                 .raw_text(&mut RawMenuTextRequest {
-                    text: self
-                        .resources
-                        .string(0x28)
-                        .map_err(ProfileDrawError::Resource)?,
+                    text: &prompt,
                     font: self.resources.font(0).map_err(ProfileDrawError::Resource)?,
                     // 00449260 divides width directly by ten; 00449283 wraps
                     // width*8 before dividing by ten. Equivalent percentages

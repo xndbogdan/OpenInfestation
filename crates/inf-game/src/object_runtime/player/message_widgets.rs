@@ -390,6 +390,11 @@ pub struct PlayerMessageEnvironment {
     pub ui_state: u32,
     /// The Cheats Menu's process bytes, which the session owns.
     pub cheats: ComputerCheats,
+    /// The port's Controller hints setting, resolved at the world tick: hints
+    /// word their controls as the pad does. Network games clear it.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
 }
 
 /// The process bytes the Cheats Menu's rows write and the computer reads.

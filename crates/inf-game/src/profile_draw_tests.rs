@@ -178,6 +178,8 @@ fn draw(
             store,
             owner_flag: owner,
             surface_pixels: [640, 480],
+            pad_hints: false,
+            language: 0,
         },
         resources,
         host,

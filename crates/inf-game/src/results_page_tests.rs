@@ -177,6 +177,8 @@ fn draw_with(state: ResultsPageState, credits: Option<&FinalCredits>) -> Recorde
         selector_one: 0,
         glyph_base_color: MenuColor::from_word(crate::menu_text::INITIAL_GLYPH_BASE_WORD),
         credits,
+        pad_hints: false,
+        language: 0,
     };
     let mut recorder = Recorder::default();
     draw_results_page(

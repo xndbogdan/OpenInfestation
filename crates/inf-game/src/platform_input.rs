@@ -77,6 +77,23 @@ pub fn pad_axis_transform(native_type: u8, sensitivity_54: u32) -> AxisTransform
     }
 }
 
+/// One successful `joyGetPosEx` read, for the player's input activity: a
+/// button that newly goes down or an axis that newly leaves the dead zone.
+#[derive(Clone, Copy, Debug)]
+struct PadRead {
+    buttons: u32,
+    axes: [u32; 6],
+}
+
+/// Which device the player used last. It comes from the notifications alone,
+/// so a recorded session and `--input-replay` replay it exactly.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+enum LastInput {
+    #[default]
+    Keyboard,
+    Pad,
+}
+
 /// The native pad: its device, type, axis count and last stored axes.
 #[derive(Debug)]
 struct NativePad {
@@ -87,8 +104,24 @@ struct NativePad {
     /// is held.
     absent: bool,
     stored: [i32; 8],
+    /// The last successful read's raw state. None until the first read and
+    /// after a failed one, so neither establishes a new press or deflection.
+    last_read: Option<PadRead>,
     /// A screen's sets have made its type-2 adapter (`005474B8`).
     adapter: bool,
+}
+
+/// A quarter of the axis range from the layout's centre: the joystick (type
+/// 2) spans 0..0xFFFF around 0x8000, the PlayStation pads (types 8 and 9)
+/// 0..255 around 0x80, as [`pad_axis_transform`] biases them. Inside the
+/// dead zone a resting stick is neutral.
+fn axis_off_centre(value: u32, native_type: u8) -> bool {
+    let (centre, dead_zone) = if native_type == 2 {
+        (0x8000, 0x4000)
+    } else {
+        (0x80, 0x40)
+    };
+    value.abs_diff(centre) > dead_zone
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -105,6 +138,7 @@ pub enum KeyboardUpdate {
 pub struct SdlInput {
     source: DeviceId,
     pad: Option<NativePad>,
+    last_input: LastInput,
 }
 
 impl SdlInput {
@@ -115,6 +149,7 @@ impl SdlInput {
         Ok(Self {
             source: input.create_device(DeviceButtons::default())?,
             pad: None,
+            last_input: LastInput::Keyboard,
         })
     }
 
@@ -158,6 +193,14 @@ impl SdlInput {
             .is_some_and(|pad| pad.adapter && !(pad.native_type == 9 && pad.absent))
     }
 
+    /// Whether the player's last input was the pad: a button newly went down
+    /// or an axis newly left its dead zone. A keyboard press takes it back.
+    /// Every-frame repeated pad readings, releases, failed reads and key
+    /// repeats do not count, so the last device stays as the player left it.
+    pub fn last_input_is_pad(&self) -> bool {
+        self.last_input == LastInput::Pad
+    }
+
     /// Eligible native type 0, proven by the physical keyboard constructor.
     /// Binding installation and input-context selection remain caller-owned.
     pub fn frontend_device(&self) -> FrontendDevice {
@@ -189,24 +232,44 @@ impl SdlInput {
                         absent: false,
                         axes: axes.min(6),
                         stored: [0; 8],
+                        last_read: None,
                         adapter: false,
                     });
                 }
                 let pad = self.pad.as_mut().expect("created above");
                 pad.absent = sample == PadSample::Failed;
                 let mut buttons = DeviceButtons::default();
+                let mut used_pad = false;
                 match sample {
                     PadSample::Read {
                         buttons: read,
                         axes,
                     } => {
+                        if let Some(previous) = pad.last_read {
+                            let newly_down = read & !previous.buttons != 0;
+                            let newly_off_centre = (0..usize::from(pad.axes)).any(|index| {
+                                axis_off_centre(axes[index], pad.native_type)
+                                    && !axis_off_centre(previous.axes[index], pad.native_type)
+                            });
+                            used_pad = newly_down || newly_off_centre;
+                        }
+                        pad.last_read = Some(PadRead {
+                            buttons: read,
+                            axes,
+                        });
                         buttons.0[0] = read.wrapping_mul(2);
                         for (stored, axis) in pad.stored.iter_mut().zip(axes) {
                             *stored = axis as i32;
                         }
                     }
                     // 004F548C: the axes keep their last read.
-                    PadSample::Failed => buttons.0[0] = 0x8000_0000,
+                    PadSample::Failed => {
+                        buttons.0[0] = 0x8000_0000;
+                        pad.last_read = None;
+                    }
+                }
+                if used_pad {
+                    self.last_input = LastInput::Pad;
                 }
                 let previous = input.device_buttons(pad.source)?;
                 input.update_device(
@@ -227,11 +290,14 @@ impl SdlInput {
         }
         let previous = input.device_buttons(self.source)?;
         let mut buttons = previous;
+        let mut key_pressed = false;
         match notification {
             InputNotification::Key { scancode, pressed } => {
                 let Some(code) = native_keyboard_code(scancode) else {
                     return Ok(KeyboardUpdate::UnsupportedScancode);
                 };
+                // A repeat is not a new press: the key was already held.
+                key_pressed = pressed && !previous.pressed(code);
                 buttons.set(code, pressed);
             }
             InputNotification::FocusLost => buttons = DeviceButtons::default(),
@@ -245,6 +311,9 @@ impl SdlInput {
             },
             host,
         )?;
+        if key_pressed {
+            self.last_input = LastInput::Keyboard;
+        }
         Ok(if buttons == previous {
             KeyboardUpdate::Unchanged
         } else {

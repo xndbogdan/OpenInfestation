@@ -133,6 +133,7 @@ struct Pending {
     headphones: usize,
     ambience: u32,
     controller: usize,
+    controller_hints: usize,
     camera: usize,
     fixes: [bool; FIXES],
     skip: bool,
@@ -518,6 +519,11 @@ impl Launcher {
                     .iter()
                     .position(|&(l, _)| l == settings.controller_layout()),
             ),
+            controller_hints: position(
+                CONTROLLER_HINTS
+                    .iter()
+                    .position(|&(h, _)| h == settings.controller_hints()),
+            ),
             camera: (words[inf_game::camera_clearance::CAMERA_STYLE_CELL] as usize)
                 .min(CAMERA_STYLES.len() - 1),
             fixes: fix_values(settings.fixes()),
@@ -560,6 +566,7 @@ impl Launcher {
         });
         settings.set_scaling(SCALINGS[pending.scaling].0);
         settings.set_controller_layout(CONTROLLER_LAYOUTS[pending.controller].0);
+        settings.set_controller_hints(CONTROLLER_HINTS[pending.controller_hints].0);
         let words = settings.words_mut();
         words[0] = pending.effects;
         words[1] = pending.music;
@@ -824,6 +831,9 @@ impl Launcher {
                     }
                     ui.label("Controller layout:");
                     combo(ui, "Controller layout", "controller", &mut p.controller, &CONTROLLER_LAYOUTS.map(|(_, l)| l));
+                    ui.end_row();
+                    ui.label("Controller hints:");
+                    combo(ui, "Controller hints", "controller_hints", &mut p.controller_hints, &CONTROLLER_HINTS.map(|(_, l)| l));
                     ui.end_row();
                     ui.label("Camera style:");
                     combo(ui, "Camera style", "camera", &mut p.camera, &CAMERA_STYLES);

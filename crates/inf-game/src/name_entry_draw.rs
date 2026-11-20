@@ -56,6 +56,11 @@ pub struct NameEntryDrawFrame<'a> {
     /// Shared glyph base word 0055F8F8; the draw leaves it untouched.
     pub base_color: MenuColor,
     pub sine_quarter: &'a [u16; 4096],
+    /// The port's Controller hints gate: the retry prompt (global 39) words
+    /// its controls as the pad does, outside a network game.
+    pub pad_hints: bool,
+    /// Settings +64's residency language, 0..5.
+    pub language: u8,
 }
 
 /// Direct renderer operations, distinct from deferred scene primitives.
@@ -229,10 +234,18 @@ impl<'a, R: MenuTextResources, H: NameEntryDrawHost> DrawContext<'a, R, H> {
             ],
             color,
         )?;
-        let text = self
-            .resources
-            .string(0x27)
-            .map_err(NameEntryDrawError::Resource)?;
+        let text = if self.frame.pad_hints {
+            crate::control_hints::pad_hint(0x27, self.frame.language)
+        } else {
+            None
+        };
+        let text = match text {
+            Some(text) => text,
+            None => self
+                .resources
+                .string(0x27)
+                .map_err(NameEntryDrawError::Resource)?,
+        };
         let color = self.color(2)?;
         self.line(
             text,

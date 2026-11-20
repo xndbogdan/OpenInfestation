@@ -157,6 +157,8 @@ fn message_boxes_follow_infest01_level1() {
         attract: false,
         ui_state: 4,
         cheats: Default::default(),
+        pad_hints: false,
+        language: 0,
     });
     let calls = fixture["calls"].as_array().unwrap();
     let mut failures = Vec::new();
@@ -247,6 +249,8 @@ fn paused_update_ages_only_the_hint_box_under_ui_state_6() {
         attract: false,
         ui_state: 4,
         cheats: Default::default(),
+        pad_hints: false,
+        language: 0,
     });
     for (text, flag) in [
         (&b"Collected Tokens\0"[..], 0),
@@ -313,6 +317,8 @@ fn computer_arena(
         attract: false,
         ui_state: if cheat_menus { 5 } else { 4 },
         cheats: Default::default(),
+        pad_hints: false,
+        language: 0,
     });
     (arena, player, assets)
 }
