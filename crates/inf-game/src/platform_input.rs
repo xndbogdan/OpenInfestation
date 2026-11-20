@@ -43,7 +43,8 @@ pub enum InputNotification {
     /// One poll of the pad (`004F54A0`, or the PlayStation's `800F4310`),
     /// sent every frame while one is open; the first creates the native
     /// device: the joystick (type 2) or the PlayStation pad (type 9), with
-    /// `axes` axes, which later ones keep.
+    /// `axes` axes, which later ones keep. A pad's unplug sends one fully
+    /// released reading first, then the failed ones.
     Pad {
         native_type: u8,
         axes: u8,
@@ -89,6 +90,9 @@ struct NativePad {
     stored: [i32; 8],
     /// A screen's sets have made its type-2 adapter (`005474B8`).
     adapter: bool,
+    /// A Pad notification created it after the live screen was built: its
+    /// bindings are not in that screen's context yet.
+    arrived: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -131,21 +135,48 @@ impl SdlInput {
         sensitivity_54: u32,
     ) -> Result<Vec<FrontendDevice>, InputStateError> {
         let mut devices = vec![self.frontend_device()];
-        if let Some(pad) = &mut self.pad {
-            for axis in 0..u32::from(pad.axes) {
-                input.set_axis_transform(
-                    pad.source,
-                    axis,
-                    pad_axis_transform(pad.native_type, sensitivity_54),
-                )?;
-            }
-            pad.adapter = true;
-            devices.push(FrontendDevice {
-                native_type: u32::from(pad.native_type),
-                source: pad.source,
-            });
+        if self.pad.is_some() {
+            devices.push(self.calibrate_pad(input, sensitivity_54)?);
         }
         Ok(devices)
+    }
+
+    /// The pad a notification first created after the live screen was built:
+    /// its axes calibrated for `sensitivity_54` and its adapter made, as a
+    /// screen's own enumeration does, so the screen's live bindings can take
+    /// it. Reported once; the next screen's enumeration binds it as usual.
+    pub fn take_arrived_pad(
+        &mut self,
+        input: &mut InputRuntime,
+        sensitivity_54: u32,
+    ) -> Result<Option<FrontendDevice>, InputStateError> {
+        match self.pad.as_ref() {
+            Some(pad) if pad.arrived => self.calibrate_pad(input, sensitivity_54).map(Some),
+            _ => Ok(None),
+        }
+    }
+
+    /// `00439AD0`'s calibration of the pad's axes, with the adapter a
+    /// screen's sets give it (`005474B8`).
+    fn calibrate_pad(
+        &mut self,
+        input: &mut InputRuntime,
+        sensitivity_54: u32,
+    ) -> Result<FrontendDevice, InputStateError> {
+        let pad = self.pad.as_mut().expect("an attached pad");
+        for axis in 0..u32::from(pad.axes) {
+            input.set_axis_transform(
+                pad.source,
+                axis,
+                pad_axis_transform(pad.native_type, sensitivity_54),
+            )?;
+        }
+        pad.adapter = true;
+        pad.arrived = false;
+        Ok(FrontendDevice {
+            native_type: u32::from(pad.native_type),
+            source: pad.source,
+        })
     }
 
     /// `00439A20`'s pad: its adapter exists and, for the PlayStation pad,
@@ -190,6 +221,7 @@ impl SdlInput {
                         axes: axes.min(6),
                         stored: [0; 8],
                         adapter: false,
+                        arrived: true,
                     });
                 }
                 let pad = self.pad.as_mut().expect("created above");

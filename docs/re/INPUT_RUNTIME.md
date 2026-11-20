@@ -370,6 +370,16 @@ the joystick with the live Sensitivity. A session log records each change
 of the pad's reading, and its replay repeats the last one each frame; a
 hidden run reads no pad. The mouse and the button device are not created.
 
+Port convenience, outside retail, which only ever sees the joysticks present
+at startup: a pad that goes away first sends one fully released reading (no
+button, every axis centred) before its failed reads, so nothing it held stays
+held, and the next attached pad — or the same one, reconnected — is opened in
+its place. A pad first plugged in while a screen is live joins that screen's
+own context with the live Sensitivity: the gameplay screen and its `+0xFC`
+player sub-object, the frontend menus, or the briefing. The pad's connect and
+removal names are reported for the port's notice. All of it follows the Pad
+notification stream, so a recorded session replays the pads it recorded.
+
 ### The PlayStation release
 
 The PAL PlayStation release (SLES-01870, `GAME.EXE`) binds the same tables

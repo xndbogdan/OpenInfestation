@@ -311,6 +311,51 @@ fn analog_first_record_policy_applies_to_all_cells_without_overwriting_device_ca
 }
 
 #[test]
+fn an_arriving_device_joins_the_installed_context_once() {
+    let mut input = InputRuntime::default();
+    let mut owner = initialized(&mut input);
+    let keyboard = device(&mut input, 0);
+    let mut tables = tables();
+    tables.digital[0] = Some(digital_table(0, &[digital(10)]));
+    tables.digital[2] = Some(digital_table(2, &[digital(20)]));
+    owner.install(&mut input, &tables, &[keyboard]).unwrap();
+    input.select_context(owner.context()).unwrap();
+    let pad = device(&mut input, 2);
+    let mut host = RecordingHost::default();
+    let mut reading = DeviceSnapshot::default();
+    reading.buttons.set(1, true);
+    // The screen was built without the pad: its button reaches nothing yet.
+    input.update_device(pad.source, reading, &mut host).unwrap();
+    input.poll(&mut host).unwrap();
+    assert!(host.callbacks.is_empty());
+    owner.install_device(&mut input, pad).unwrap();
+    input.update_device(pad.source, reading, &mut host).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_eq!(
+        host.callbacks
+            .iter()
+            .map(|event| event.address)
+            .collect::<Vec<_>>(),
+        [20]
+    );
+    // Its slot is taken: a repeated arrival neither re-creates nor detaches
+    // the set it already joined.
+    let consumers = owner.digital[2].consumers.len();
+    owner.install_device(&mut input, pad).unwrap();
+    assert_eq!(owner.digital[2].consumers.len(), consumers);
+    reading.buttons.set(1, false);
+    input.update_device(pad.source, reading, &mut host).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_eq!(
+        host.callbacks
+            .iter()
+            .map(|event| (event.address, event.value))
+            .collect::<Vec<_>>(),
+        [(20, 1), (20, 0)]
+    );
+}
+
+#[test]
 fn failed_creation_retains_enumeration_order_acquisitions_and_never_attaches_or_retries() {
     let mut input = InputRuntime::default();
     let mut owner = initialized(&mut input);

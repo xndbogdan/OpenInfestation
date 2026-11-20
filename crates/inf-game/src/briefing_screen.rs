@@ -335,6 +335,17 @@ impl BriefingScreen {
         Ok(())
     }
 
+    /// A pad first read after this screen was built: 00439B30's sets for it
+    /// join the live briefing context, as a screen built with the pad would
+    /// hold them.
+    pub fn install_arriving_device(
+        &mut self,
+        input: &mut InputRuntime,
+        device: FrontendDevice,
+    ) -> Result<(), FrontendBindingError> {
+        self.bindings.install_device(input, device)
+    }
+
     /// Teardown `0040AA40` (scalar deleting `0040AA20`): reset vtable, clear
     /// player word, release binding sets, destroy menu controller, destroy
     /// base. No video handle to close.

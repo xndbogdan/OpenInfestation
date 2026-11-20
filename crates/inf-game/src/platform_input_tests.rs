@@ -471,3 +471,134 @@ fn the_playstation_pad_confirms_with_cross() {
     input.poll(&mut host).unwrap();
     assert_eq!(host.actions, [ScreenInputAction::Confirm]);
 }
+
+/// A pad unplugged while it is held releases everything first: the pads send
+/// one reading with nothing pressed and every axis centred, so neither the
+/// button nor the stick survives the failed reads that follow (`004F548C`
+/// keeps only the released axes).
+#[test]
+fn an_unplugged_pad_releases_its_held_button_and_axes() {
+    let bytes = executable();
+    let source = FrontendExecutable::parse(&bytes).unwrap();
+    let tables = parse_frontend_input_tables(source).unwrap();
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |buttons, x| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample: PadSample::Read {
+            buttons,
+            axes: [x, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+        },
+    };
+    devices
+        .update(reading(0, 0x8000), &mut input, &mut host)
+        .unwrap();
+    let list = devices.frontend_devices(&mut input, 10).unwrap();
+    let pad = list[1].source;
+    let mut bindings = FrontendBindings::new(
+        CONTEXT,
+        ScreenAnalogDescriptors::from_executable(source).unwrap(),
+    );
+    bindings.initialize(&mut input).unwrap();
+    bindings.install(&mut input, &tables, &list).unwrap();
+    input.select_context(bindings.context()).unwrap();
+
+    // Held: button 1 and X at its right end.
+    devices
+        .update(reading(1, 0xffff), &mut input, &mut host)
+        .unwrap();
+    input.poll(&mut host).unwrap();
+    assert_ne!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+
+    // What an unplug sends before its failed reads.
+    devices
+        .update(
+            InputNotification::Pad {
+                native_type: 2,
+                axes: 5,
+                sample: PadSample::Read {
+                    buttons: 0,
+                    axes: [0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+                },
+            },
+            &mut input,
+            &mut host,
+        )
+        .unwrap();
+    input.poll(&mut host).unwrap();
+    assert_eq!(input.device_buttons(pad).unwrap(), DeviceButtons::default());
+    assert_eq!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+
+    devices
+        .update(
+            InputNotification::Pad {
+                native_type: 2,
+                axes: 5,
+                sample: PadSample::Failed,
+            },
+            &mut input,
+            &mut host,
+        )
+        .unwrap();
+    let mut failed = DeviceButtons::default();
+    failed.0[0] = 0x8000_0000;
+    assert_eq!(input.device_buttons(pad).unwrap(), failed);
+    input.poll(&mut host).unwrap();
+    assert_eq!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+}
+
+/// A pad the notification stream first creates after a screen was built is
+/// handed to that screen once: calibrated as `frontend_devices` calibrates,
+/// its adapter made, and only the first Pad notification reports it.
+#[test]
+fn a_pad_first_read_mid_screen_is_handed_out_calibrated_once() {
+    let bytes = executable();
+    let source = FrontendExecutable::parse(&bytes).unwrap();
+    let tables = parse_frontend_input_tables(source).unwrap();
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    assert_eq!(devices.take_arrived_pad(&mut input, 10).unwrap(), None);
+    let reading = |x| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample: PadSample::Read {
+            buttons: 0,
+            axes: [x, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+        },
+    };
+    devices
+        .update(reading(0x8000), &mut input, &mut host)
+        .unwrap();
+    let pad = devices
+        .take_arrived_pad(&mut input, 10)
+        .unwrap()
+        .expect("the notification made a pad");
+    assert_eq!(pad.native_type, 2);
+    assert!(devices.joystick_live());
+    assert_eq!(devices.take_arrived_pad(&mut input, 10).unwrap(), None);
+
+    // The live screen knows only the keyboard: the pad's device joins its
+    // installed sets, exactly as a screen built with it would hold them.
+    let mut bindings = FrontendBindings::new(
+        CONTEXT,
+        ScreenAnalogDescriptors::from_executable(source).unwrap(),
+    );
+    bindings.initialize(&mut input).unwrap();
+    bindings
+        .install(&mut input, &tables, &[devices.frontend_device()])
+        .unwrap();
+    bindings.install_device(&mut input, pad).unwrap();
+    input.select_context(bindings.context()).unwrap();
+    devices
+        .update(reading(0xffff), &mut input, &mut host)
+        .unwrap();
+    input.poll(&mut host).unwrap();
+    let calibrated = ((0xffff_i64 - 0x8000) * 2 * 0x57ff_ffff) >> 31;
+    assert_eq!(
+        bindings.analog_values(&input).unwrap().consumer_cc,
+        ((calibrated * 0x1000_0000) >> 31) as i32
+    );
+}

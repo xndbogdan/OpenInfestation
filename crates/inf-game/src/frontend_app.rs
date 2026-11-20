@@ -36,7 +36,7 @@ use crate::{
     name_entry::NameCompletion,
     name_entry_renderer::NameEntryRendererState,
     platform_audio::PlatformAudio,
-    platform_input::InputNotification,
+    platform_input::{InputNotification, PadSample},
     presentation::{
         ClassicScaling, NativeFrame, OutputPresentation, RendererBackend, RendererChoice,
     },
@@ -1490,6 +1490,7 @@ impl AppClock {
             return Vec::new();
         };
         let mut inputs = Vec::new();
+        let mut pads = Vec::new();
         while let Some(entry) = replay.entries.front() {
             let input = match entry {
                 crate::session_log::ReplayEntry::Sample(_) => break,
@@ -1499,12 +1500,15 @@ impl AppClock {
                         pressed: *pressed,
                     }),
                 crate::session_log::ReplayEntry::FocusLost => Some(InputNotification::FocusLost),
+                // A detach records its fully released reading, then its failed
+                // one: both replay in order, and the last is the state the
+                // live pad repeats until it changes again.
                 crate::session_log::ReplayEntry::Pad {
                     native_type,
                     axes,
                     sample,
                 } => {
-                    replay.pad = Some((*native_type, *axes, *sample));
+                    pads.push((*native_type, *axes, *sample));
                     replay.entries.pop_front();
                     continue;
                 }
@@ -1515,12 +1519,11 @@ impl AppClock {
             inputs.extend(input);
             replay.entries.pop_front();
         }
-        if let Some((native_type, axes, sample)) = replay.pad {
-            inputs.push(InputNotification::Pad {
-                native_type,
-                axes,
-                sample,
-            });
+        if pads.is_empty() {
+            inputs.extend(replay.pad.map(pad_notification));
+        } else {
+            replay.pad = pads.last().copied();
+            inputs.extend(pads.into_iter().map(pad_notification));
         }
         inputs
     }
@@ -1592,6 +1595,15 @@ impl AppClock {
                 self.fixed_micros
             }
         }
+    }
+}
+
+/// One recorded pad reading as the notification the pad's poll sends.
+fn pad_notification((native_type, axes, sample): (u8, u8, PadSample)) -> InputNotification {
+    InputNotification::Pad {
+        native_type,
+        axes,
+        sample,
     }
 }
 
@@ -1761,6 +1773,62 @@ mod tests {
         clock.replay = Some(replay(&[], false));
         clock.sample();
         assert!(clock.replay_exhausted() && !clock.resume_live());
+    }
+
+    /// A detach records its released reading and then its failed one; the
+    /// replay delivers both in the frame's order, and repeats the last as the
+    /// pad's state from then on.
+    #[test]
+    fn a_replay_delivers_every_pad_reading_recorded_in_a_frame() {
+        let released = PadSample::Read {
+            buttons: 0,
+            axes: [0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+        };
+        let mut clock = AppClock::new(FrontendAppClock::Realtime);
+        clock.replay = Some(ReplayCursor {
+            entries: [
+                crate::session_log::ReplayEntry::Pad {
+                    native_type: 2,
+                    axes: 5,
+                    sample: released,
+                },
+                crate::session_log::ReplayEntry::Pad {
+                    native_type: 2,
+                    axes: 5,
+                    sample: PadSample::Failed,
+                },
+                crate::session_log::ReplayEntry::Sample(1_000),
+            ]
+            .into_iter()
+            .collect(),
+            pad: None,
+            exhausted: false,
+            resume: false,
+        });
+        assert_eq!(
+            clock.replay_inputs(),
+            [
+                InputNotification::Pad {
+                    native_type: 2,
+                    axes: 5,
+                    sample: released,
+                },
+                InputNotification::Pad {
+                    native_type: 2,
+                    axes: 5,
+                    sample: PadSample::Failed,
+                },
+            ]
+        );
+        clock.sample();
+        assert_eq!(
+            clock.replay_inputs(),
+            [InputNotification::Pad {
+                native_type: 2,
+                axes: 5,
+                sample: PadSample::Failed,
+            }]
+        );
     }
 
     #[test]

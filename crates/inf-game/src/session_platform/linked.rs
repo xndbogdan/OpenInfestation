@@ -271,6 +271,36 @@ pub struct PortLinked<'a> {
 }
 
 impl PortLinked<'_> {
+    /// A pad first read while this screen is live: 00439B30's sets for it
+    /// enter the screen's own contexts, as a screen built with the pad would
+    /// hold them. The trigger is the Pad notification that created the device,
+    /// not SDL's hot-plug state, so a recorded session binds the pad it
+    /// recorded. A failure skips the pad and keeps the screen running.
+    pub fn bind_arrived_pad(&mut self, keyboard: &mut SdlInput, sensitivity_54: u32) {
+        let pad = match keyboard.take_arrived_pad(self.input, sensitivity_54) {
+            Ok(Some(pad)) => pad,
+            Ok(None) => return,
+            Err(error) => {
+                eprintln!("Pad hot-plug: its calibration failed: {error}");
+                return;
+            }
+        };
+        let install = |name: &str, result| {
+            if let Err(error) = result {
+                eprintln!("Pad hot-plug: {name} bindings skipped: {error}");
+            }
+        };
+        if let Some(screen) = self.gameplay.as_deref_mut() {
+            install("gameplay", screen.install_arriving_device(self.input, pad));
+        }
+        if let Some(screen) = self.frontend.as_deref_mut() {
+            install("frontend", screen.install_arriving_device(self.input, pad));
+        }
+        if let Some(screen) = self.briefing.as_deref_mut() {
+            install("briefing", screen.install_arriving_device(self.input, pad));
+        }
+    }
+
     /// Deliver physical notifications, then run the selected-input poll
     /// 004F0200. Notifications are delivered immediately before the poll, as
     /// the standalone frontend did; the native device-notification trigger

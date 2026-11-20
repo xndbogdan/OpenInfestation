@@ -118,6 +118,12 @@ pub struct FrontendBindings {
     consumer_d0: Option<AnalogConsumerId>,
     digital: [DigitalOwner; INPUT_DEVICE_SLOTS],
     analog: [AnalogOwner; INPUT_DEVICE_SLOTS],
+    /// The context the sets joined: this owner's own, or the gameplay
+    /// sub-object's screen context, which it never destroys.
+    attached_context: Option<InputContextId>,
+    /// The per-slot tables the screen installed with: a pad first enumerated
+    /// after that finds its sets here instead of waiting for a new screen.
+    tables: Option<ScreenInputTables>,
 }
 
 impl FrontendBindings {
@@ -132,6 +138,8 @@ impl FrontendBindings {
             consumer_d0: None,
             digital: std::array::from_fn(|_| DigitalOwner::default()),
             analog: std::array::from_fn(|_| AnalogOwner::default()),
+            attached_context: None,
+            tables: None,
         }
     }
 
@@ -208,6 +216,8 @@ impl FrontendBindings {
         self.analog_values(input)?;
         let context = self.context.expect("initialized context");
         self.create_and_attach(input, context, tables, devices)?;
+        self.attached_context = Some(context);
+        self.tables = Some(tables.clone());
         self.phase = FrontendBindingPhase::Installed;
         Ok(())
     }
@@ -226,7 +236,61 @@ impl FrontendBindings {
         self.require_phase(FrontendBindingPhase::Metadata)?;
         self.phase = FrontendBindingPhase::Stopped;
         self.create_and_attach(input, context, tables, devices)?;
+        self.attached_context = Some(context);
+        self.tables = Some(tables.clone());
         self.phase = FrontendBindingPhase::Installed;
+        Ok(())
+    }
+
+    /// 00439B30/00439D00 for one pad first enumerated after this screen's
+    /// sets were made: its slot's digital and analog sets are created and
+    /// attached to the screen's existing context, as a screen built with the
+    /// pad would hold them. A slot that already has a set keeps it.
+    pub fn install_device(
+        &mut self,
+        input: &mut InputRuntime,
+        device: FrontendDevice,
+    ) -> Result<(), FrontendBindingError> {
+        self.require_phase(FrontendBindingPhase::Installed)?;
+        let tables = self
+            .tables
+            .as_ref()
+            .expect("installed bindings keep their tables");
+        let slot = usize::try_from(device.native_type)
+            .ok()
+            .filter(|slot| *slot < INPUT_DEVICE_SLOTS)
+            .ok_or(FrontendBindingError::DeviceType(device.native_type))?;
+        let digital = tables.digital[slot].clone();
+        let analog = tables.analog[slot].clone();
+        input
+            .device_buttons(device.source)
+            .map_err(|source| FrontendBindingError::Device {
+                native_type: device.native_type,
+                source,
+            })?;
+        if let Some(table) = &digital {
+            validate_digital_table(device.native_type, table)?;
+        }
+        if let Some(table) = &analog {
+            validate_analog_table(device.native_type, table)?;
+        }
+        let context = self
+            .attached_context
+            .expect("installed bindings know their context");
+        if self.digital[slot].set.is_none() {
+            if let Some(table) = &digital {
+                self.create_digital(input, slot, device.source, table)?;
+                let set = self.digital[slot].set.expect("created digital set");
+                input.attach_binding_set(context, set)?;
+            }
+        }
+        if self.analog[slot].set.is_none() {
+            if let Some(table) = &analog {
+                self.create_analog(input, slot, device.source, table)?;
+                let set = self.analog[slot].set.expect("created analog set");
+                input.attach_analog_binding_set(context, set)?;
+            }
+        }
         Ok(())
     }
 

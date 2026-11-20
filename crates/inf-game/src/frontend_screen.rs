@@ -385,6 +385,16 @@ impl FrontendScreen {
         Ok(())
     }
 
+    /// A pad first read after this screen was built: its sets join the live
+    /// frontend context, as a screen built with the pad would hold them.
+    pub fn install_arriving_device(
+        &mut self,
+        input: &mut InputRuntime,
+        device: FrontendDevice,
+    ) -> Result<(), FrontendBindingError> {
+        self.bindings.install_device(input, device)
+    }
+
     /// Native ordered teardown, also usable for retained partial acquisitions.
     /// Failed-constructor cleanup is Rust containment, not retail SEH/longjmp
     /// reconstruction. It does not publish the fully constructed destructor's

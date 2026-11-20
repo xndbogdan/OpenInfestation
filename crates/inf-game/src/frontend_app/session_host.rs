@@ -216,9 +216,13 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                 frontend,
                 keyboard,
                 profiles,
+                title_video,
                 ..
             } = platform;
             let io = &mut self.io;
+            // 00438850 calibrates an arriving pad with the live Sensitivity
+            // (+54), as the screen factories do.
+            let sensitivity = frontend.settings.words()[0x54 / 4];
             if matches!(call, LinkedCall::Poll) {
                 // The network threads' bodies (00493C00, 00493CC0, 004934C0).
                 if let Err(error) = frontend
@@ -233,7 +237,7 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                 io.notifications
                     .retain(|notification| !matches!(notification, InputNotification::Pad { .. }));
             }
-            match screen {
+            let result = match screen {
                 PortScreen::Startup => {
                     // The startup screen borrows the keyboard for notifications
                     // and the settings words beside it; its accept reselects
@@ -361,12 +365,6 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                     // notifications, the exit flag beside it, and the player
                     // state plus the mixer disjointly: it never borrows the
                     // whole platform while the keyboard is out.
-                    let SdlPlatform {
-                        frontend,
-                        keyboard,
-                        title_video,
-                        ..
-                    } = &mut *platform;
                     let pass = PortInputPass {
                         keyboard: keyboard.as_mut(),
                         notifications: &mut *io.notifications,
@@ -564,7 +562,16 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                     .map_err(|error| AppFrameError::Gameplay(error.to_string()))?;
                     Ok(())
                 }
+            };
+            if matches!(call, LinkedCall::Poll) {
+                // The Pad notifications the poll just drained may have made a
+                // device the screen was built without: its sets join the live
+                // contexts now, not at the next screen.
+                if let Some(keyboard) = keyboard.as_mut() {
+                    linked.bind_arrived_pad(keyboard, sensitivity);
+                }
             }
+            result
         };
         let committed = self.commit_display(pending);
         result.map_err(AppFrameError::Linked)?;

@@ -456,6 +456,25 @@ impl GameplayScreen {
         Ok(())
     }
 
+    /// A pad first read after this screen was built: 00439B30's sets for it
+    /// join the screen's context, the +0xFC sub-object's, and the phase-5
+    /// context while the in-world menu is shown, as screens built with the
+    /// pad would hold them.
+    pub fn install_arriving_device(
+        &mut self,
+        input: &mut InputRuntime,
+        device: FrontendDevice,
+    ) -> Result<(), FrontendBindingError> {
+        self.bindings.install_device(input, device)?;
+        if let Some(player) = self.player_bindings.as_mut() {
+            player.install_device(input, device)?;
+        }
+        if let Some(menu) = self.in_world_menu.as_mut() {
+            menu.bindings.install_device(input, device)?;
+        }
+        Ok(())
+    }
+
     /// Destructor `00440BE0` (scalar deleting `00440B80`): the `+0x60` and
     /// `+0xFC` binding sets (`00439D50`), then the base `00438080`.
     pub fn destroy<D, H>(
@@ -1038,6 +1057,147 @@ mod tests {
             push([0x8000, 0x8000], &mut input);
             screen.tick(ms(8), &input, &mut TickHost).unwrap();
             assert_eq!(codes(&mut screen), Vec::<u32>::new());
+        }
+    }
+
+    /// A pad first plugged in mid-mission binds into the live screen and the
+    /// +0xFC sub-object at once, calibrated as the screen factories calibrate
+    /// it: its stick reaches the screen's menu axes and its buttons reach the
+    /// player's consumers without waiting for a new screen.
+    #[test]
+    fn a_pad_first_plugged_in_mid_screen_joins_the_live_contexts() {
+        const PLAYER: u32 = 0x8000_0000;
+        let assets = assets();
+        let mut registry = ScreenRegistry::new();
+        let attachment = ScreenAttachment {
+            session: registry.register_session(),
+            context_owner: registry.register_context(
+                crate::frontend_renderer::FrontendRenderContext {
+                    projection: crate::frontend_scene::SceneProjection {
+                        focal: [320, 240],
+                        viewport: [640, 480],
+                        fade: [0, 0],
+                    },
+                },
+            ),
+        };
+        let mut input = InputRuntime::new(0);
+        let mut screen = GameplayScreen::new(
+            GameplayScreenConfig {
+                attachment,
+                callback_context: GAMEPLAY_CALLBACK_CONTEXT,
+            },
+            &assets,
+        );
+        let mut state = SessionState::default();
+        state.request_phase(SessionPhase::Gameplay);
+        let mut host = TestHost {
+            keyboard: None,
+            joystick: false,
+        };
+        screen
+            .initialize(
+                &mut GameplayFactoryServices {
+                    terrain: crate::terrain_runtime::TerrainDetailContext {
+                        process: &mut crate::terrain_runtime::ProcessTerrainPolicy::supplied(
+                            crate::terrain_runtime::TerrainSpacing::Units256,
+                        ),
+                        world_flags: Some(0x20),
+                        terrain: Some(&mut crate::terrain_runtime::native_probe_fixture_terrain(
+                            &serde_json::json!({
+                                "spacing":256,"height_shift":5,"plane_base":0,"plane_shift":8,
+                                "xz":[0,0],"heights":[0,0,0,0],"alternate":false
+                            }),
+                        )),
+                    },
+                    registry: &mut registry,
+                    input: &mut input,
+                    assets: &assets,
+                    key_bindings: &crate::key_bindings::KeyBindings::retail_initial(),
+                    player_context: Some(PLAYER),
+                },
+                &mut host,
+                &mut state,
+            )
+            .unwrap();
+        // The screen was built keyboard-only: its menu axes rest at zero.
+        assert_eq!(
+            screen.bindings.analog_values(&input).unwrap().consumer_d0,
+            0
+        );
+        assert_eq!(
+            screen.bindings.analog_values(&input).unwrap().consumer_cc,
+            0
+        );
+
+        // The first Pad notification makes the device; the session gives it
+        // to the live screen's bindings.
+        let keyboard = host.keyboard.as_mut().unwrap();
+        keyboard
+            .update(pad_with(0, [0xffff, 0x8000]), &mut input, &mut Discard)
+            .unwrap();
+        let pad = keyboard
+            .take_arrived_pad(&mut input, 10)
+            .unwrap()
+            .expect("the pad the notification made");
+        assert_eq!(pad.native_type, 2);
+        assert!(keyboard.joystick_live());
+        screen.install_arriving_device(&mut input, pad).unwrap();
+
+        // Its stick moves the screen's own analog consumers: a fully
+        // deflected X is well past the menu's 2500 threshold.
+        let mut events = Collect(Vec::new());
+        keyboard
+            .update(pad_with(0, [0xffff, 0x8000]), &mut input, &mut events)
+            .unwrap();
+        input.poll(&mut events).unwrap();
+        let analog = screen.bindings.analog_values(&input).unwrap();
+        assert!(
+            analog.consumer_d0.abs() > 2500 || analog.consumer_cc.abs() > 2500,
+            "{analog:?}"
+        );
+
+        // The sub-object took the same pad: a button row of its own table
+        // reaches the first player's callback context.
+        let sub = assets.gameplay_sub_input_tables();
+        let row = sub.digital[2]
+            .as_ref()
+            .expect("the sub-object's joystick table")
+            .records
+            .iter()
+            .find(|row| {
+                let code = row.required[0][0];
+                row.descriptor.callback_address != 0 && (1..=32).contains(&code)
+            })
+            .expect("a pad row with a callback");
+        let code = row.required[0][0];
+        keyboard
+            .update(
+                pad_with(1u32 << (code - 1), [0x8000, 0x8000]),
+                &mut input,
+                &mut events,
+            )
+            .unwrap();
+        input.poll(&mut events).unwrap();
+        assert!(
+            events.0.iter().any(|event| {
+                event.context == PLAYER && event.address == row.descriptor.callback_address
+            }),
+            "{:?}",
+            events.0
+        );
+    }
+
+    /// A joystick reading with `buttons` (bit 0 is WinMM's button 1) and the
+    /// stick at X/Y, the other axes centred.
+    fn pad_with(buttons: u32, [x, y]: [u32; 2]) -> crate::platform_input::InputNotification {
+        crate::platform_input::InputNotification::Pad {
+            native_type: 2,
+            axes: 5,
+            sample: crate::platform_input::PadSample::Read {
+                buttons,
+                axes: [x, y, 0x8000, 0x8000, 0x8000, 0],
+            },
         }
     }
 
