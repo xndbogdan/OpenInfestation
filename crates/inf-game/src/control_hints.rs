@@ -12,26 +12,29 @@
 //! those names; they stand for buttons, not text, so none may survive into the
 //! table.
 //!
+//! Record 0x43 (global 865) is absent: it rewords the factory/scientist
+//! content (and names the R1-Triangle beam chord), so it is not a control
+//! hint. Record 0x49 (global 871) is absent: it changes the save-failure
+//! text to the memory card. All four shell prompts are present: the results
+//! save `0042AAA0` and the name-entry retry `0045AEA0` are Circle, the
+//! frontend/results/name-entry accepts are Cross or Start, and the frontend
+//! back `004451E0` is Triangle, exactly the buttons 37..40 name.
+//!
+//! The icon identities come from the type-9 pad rows the PC executable
+//! carries in each screen's unused slots 8/9; `ControllerLayout::Console`
+//! plays them as the PlayStation pad, whose codes 1..16 are Select, L3, R3,
+//! Start, Up, Right, Down, Left, L2, R2, L1, R1, Triangle, Circle, Cross and
+//! Square. `0x18` is Cross: the gameplay message-select row `004697F0` and
+//! the thrust consumer `0053A378` require code 15, and the frontend, results
+//! and name-entry accepts take 15 (or Start 4). `0x17` is Circle: the
+//! results save `0042AAA0` and the name-entry retry `0045AEA0` require code
+//! 14. `0x1A` is Triangle: the frontend back `004451E0` and the gameplay
+//! drop row `00469670` require code 13, and the beam-up chord `00469660`
+//! takes 13 with R1 (12), matching global 865's `R1-\x1a`. `0x19` appears in
+//! no string; Square is the only face button left, but nothing pins it.
+//!
 //! The level-1 banks put record 173 at global 865 and record 178 at 870, one
 //! record per language, so records 174..178 are globals 866..870.
-//!
-//! Record 0x43 (global 865) is absent: it rewords the factory/scientist
-//! content (and names the R1-Circle beam chord), so it is not a control hint.
-//! Record 0x49 (global 871) is absent: it changes the save-failure text to
-//! the memory card. Three shell prompts are absent because the PS1 button
-//! they name is not the one the port binds to that action: global 37 names
-//! Start to save, but the results page's save callback `0x0042AAA0` is on
-//! Circle (button 14) and Start continues; global 39 names Start to retry,
-//! but the name-entry retry callback `0x0045AEA0` is on Circle; global 40
-//! names Circle to cancel, but the frontend's back callback `0x004451E0` is
-//! on Triangle (button 13). Under the research note's reading of `0x17` as
-//! Start those prompts would be false, so the PC text stands.
-//!
-//! The pad rows point the other way for the icon bytes themselves: save and
-//! retry are Circle, and cancel is Triangle, so `0x17` reads as Circle and
-//! `0x1A` as Triangle rather than Start and Circle. If the font check
-//! confirms that, prompts 37, 39 and 40 become true as "B" and "Y" and
-//! belong here, and global 870's button becomes Y.
 
 /// One H0 global and its text in English, French, German, Italian, Spanish
 /// and Dutch (the `settings +64` order).
@@ -40,9 +43,67 @@ struct Hint {
     texts: [&'static [u8]; 6],
 }
 
-const HINTS: [Hint; 6] = [
+const HINTS: [Hint; 9] = [
+    // PS1 common bank global 37: "Press \x17 to save". \x17 is Circle, and
+    // the results table `00521648` puts save `0042AAA0` on code 14.
+    Hint {
+        global_id: 37,
+        texts: [
+            b"Press B to save",
+            b"B pour enregistrer",
+            b"Dr\xfccken Sie B zum Speichern",
+            b"Premi B per salvare",
+            b"Pulsa B para guardar",
+            b"Om op te slaan, druk je op B ",
+        ],
+    },
+    // PS1 common bank global 38: "Start or Cross to continue". The frontend
+    // and results pad rows both continue on Start (code 4) or Cross (code
+    // 15), so the whole prompt stands.
+    Hint {
+        global_id: 38,
+        texts: [
+            b"Start or A to continue",
+            b"Start ou A pour continuer",
+            b"Start oder A, um fortzufahren",
+            b"START (avvio) o A per continuare",
+            b"Start o A para continuar",
+            b"Om verder te gaan, druk je op de Starttoets of A",
+        ],
+    },
+    // PS1 common bank global 39: "Press \x18 to carry on, \x17 to retry".
+    // Cross (code 15) accepts and Circle (code 14) retries: name entry's
+    // `0045AE90` takes Start (4), `00445200` takes Cross (15), and the retry
+    // `0045AEA0` takes Circle (14).
+    Hint {
+        global_id: 39,
+        texts: [
+            b"Press A to carry on, B to retry",
+            b"A pour continuer, B pour recommencer",
+            b"Dr\xfccken Sie A, um fortzufahren, B f\xfcr einen Neustart",
+            b"Premi A per proseguire, B per riprovare",
+            b"Pulsa A para seguir, B para volverlo a intentar",
+            b"Om verder te spelen, druk je op A. Om het nogmaals te proberen druk je op B",
+        ],
+    },
+    // PS1 common bank global 40: "Press \x18 to continue, \x1a to cancel".
+    // Cross (code 15) accepts and Triangle (code 13) goes back in the
+    // frontend table `00528410` (`00445200` / `004451E0`).
+    Hint {
+        global_id: 40,
+        texts: [
+            b"Press A to continue, Y to cancel",
+            b"Appuyez sur A pour continuer, Y pour annuler",
+            b"Dr\xfccke A um fortzufahren, Y um abzubrechen",
+            b"Premi A per continuare, Y x cancellare",
+            b"Pulsa A para continuar, Y para cancelar",
+            b"Druk op A om door te gaan of op Y om te annuleren",
+        ],
+    },
     // PS1 `1l0..1l5.ovl` record 174 (global 866): "Press L1 to activate big
-    // wheeled mode". L1 is the Console layout's LB.
+    // wheeled mode". L1 is the Console layout's LB, and the gameplay sub
+    // table's Mode row `00469580` (Caps Lock on the PC keyboard) requires
+    // code 11 (L1); the type-9 tables have no direct buggy/truck rows.
     Hint {
         global_id: 866,
         texts: [
@@ -55,7 +116,7 @@ const HINTS: [Hint; 6] = [
         ],
     },
     // PS1 record 175 (global 867): "Press L1 again to return to normal buggy
-    // mode". The PS1's "again" makes the toggle explicit.
+    // mode". The PS1's "again" makes the L1 mode cycle explicit.
     Hint {
         global_id: 867,
         texts: [
@@ -68,7 +129,8 @@ const HINTS: [Hint; 6] = [
         ],
     },
     // PS1 record 176 (global 868): "To select an item use up and down and
-    // Select (Cross)". The action's button is A.
+    // Select (Cross)". The message-select row `004697F0` requires code 15
+    // (Cross), the Console layout's A.
     Hint {
         global_id: 868,
         texts: [
@@ -81,6 +143,7 @@ const HINTS: [Hint; 6] = [
         ],
     },
     // PS1 record 177 (global 869): "Use Cross to activate turbo booster".
+    // The thrust consumer `0053A378` requires code 15 (Cross).
     Hint {
         global_id: 869,
         texts: [
@@ -93,30 +156,17 @@ const HINTS: [Hint; 6] = [
         ],
     },
     // PS1 record 178 (global 870): "Drop scientists close to a factory
-    // (Circle) and they will go to work".
+    // (Triangle) and they will go to work". The drop row `00469670` (D on
+    // the PC keyboard, Beam Down) requires code 13 (Triangle).
     Hint {
         global_id: 870,
         texts: [
-            b"Drop scientists close to a factory (B) and they will go to work",
-            b"D\xe9posez les savants \xe0 proximit\xe9 d'une usine (touche B) pour qu'ils se mettent au travail.",
-            b"Setzen Sie Wissenschaftler bei einer Fabrik ab (B), und sie beginnen mit der Arbeit",
-            b"Scarica gli scienziati vicino a uno stabilimento (B) ed essi cominceranno a lavorare.",
-            b"Deja a los cient\xedficos cerca de la f\xe1brica (B) y ellos solos se ir\xe1n a trabajar",
-            b"Zet de wetenschappers vlakbij de fabriek af (B) en ze gaan aan het werk.",
-        ],
-    },
-    // PS1 common bank local 1 (global 38): "Start or Cross to continue". The
-    // frontend and results pad rows both continue on Start (button 4) or Cross
-    // (button 15), so the whole prompt stands.
-    Hint {
-        global_id: 38,
-        texts: [
-            b"Start or A to continue",
-            b"Start ou A pour continuer",
-            b"Start oder A, um fortzufahren",
-            b"START (avvio) o A per continuare",
-            b"Start o A para continuar",
-            b"Om verder te gaan, druk je op de Starttoets of A",
+            b"Drop scientists close to a factory (Y) and they will go to work",
+            b"D\xe9posez les savants \xe0 proximit\xe9 d'une usine (touche Y) pour qu'ils se mettent au travail.",
+            b"Setzen Sie Wissenschaftler bei einer Fabrik ab (Y), und sie beginnen mit der Arbeit",
+            b"Scarica gli scienziati vicino a uno stabilimento (Y) ed essi cominceranno a lavorare.",
+            b"Deja a los cient\xedficos cerca de la f\xe1brica (Y) y ellos solos se ir\xe1n a trabajar",
+            b"Zet de wetenschappers vlakbij de fabriek af (Y) en ze gaan aan het werk.",
         ],
     },
 ];
@@ -140,7 +190,7 @@ mod tests {
     use std::fs;
     use std::path::Path;
 
-    const CONTROL_IDS: [u32; 6] = [38, 866, 867, 868, 869, 870];
+    const CONTROL_IDS: [u32; 9] = [37, 38, 39, 40, 866, 867, 868, 869, 870];
 
     #[test]
     fn every_control_id_has_all_six_languages() {
@@ -156,7 +206,7 @@ mod tests {
 
     #[test]
     fn unknown_and_non_control_ids_keep_the_pc_text() {
-        for global_id in [0, 36, 37, 39, 40, 41, 692, 0x48, 865, 871, 0x3a5, u32::MAX] {
+        for global_id in [0, 36, 41, 692, 0x48, 865, 871, 0x3a5, u32::MAX] {
             for language in 0..=5 {
                 assert_eq!(
                     pad_hint(global_id, language),

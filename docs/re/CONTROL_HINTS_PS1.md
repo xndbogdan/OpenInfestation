@@ -9,10 +9,10 @@ number, a key name or an action name; they are never formatted from the live
 key configuration. The PlayStation release carries a byte-identical 73-word
 hint table and the same string IDs, but its level-1 language banks replace six
 hint records (IDs `0x43..0x48`, globals 865..870) with pad wording: `L1`,
-`Select`, Cross and Circle. The ID mapping is the PC's, so the console text is
-a per-ID content swap, not a different hint system. The same is true of the
-four system prompts at globals 37..40. All six languages follow the same
-pattern.
+`Select`, Cross, Circle and Triangle. The ID mapping is the PC's, so the
+console text is a per-ID content swap, not a different hint system. The same
+is true of the four system prompts at globals 37..40. All six languages follow
+the same pattern.
 
 ## 1. How the PC puts a hint on screen
 
@@ -105,15 +105,16 @@ the other side", `0x3D` "Drop a man to activate the orbital array beacon").
 
 | Command id | PC string ID (global) | PC `1l0.ovl` local | PC English | PS1 English | What differs |
 | --- | --- | --- | --- | --- | --- |
-| `0x43` | 865 | 173 | "Most factories require scientists to run them - beam them into the factory from your ship to staff it" | "Most factories contain scientists who will beam out when you get close. Beam them on to your ship with R1-\x1a." | Whole sentence reworded; PS1 adds the beam-up chord R1-Circle |
+| `0x43` | 865 | 173 | "Most factories require scientists to run them - beam them into the factory from your ship to staff it" | "Most factories contain scientists who will beam out when you get close. Beam them on to your ship with R1-\x1a." | Whole sentence reworded; PS1 adds the beam-up chord R1-Triangle |
 | `0x44` | 866 | 174 | "Press mode 2 to activate big wheeled mode" | "Press L1 to activate big wheeled mode" | Mode number vs pad button; PS1 is a toggle |
 | `0x45` | 867 | 175 | "Press mode 1 to return to normal buggy mode" | "Press L1 again to return to normal buggy mode" | Mode number vs pad button; "again" makes the toggle explicit |
 | `0x46` | 868 | 176 | "To select an item use up, down and Enter" | "To select an item use up and down and Select (\x18)" | Keyboard `Enter` vs pad Select/Cross; comma list reworded |
 | `0x47` | 869 | 177 | "Use the turbo key to activate turbo booster" | "Use \x18 to activate turbo booster" | Generic action name vs Cross button |
-| `0x48` | 870 | 178 | "Drop scientists close to a factory with the beam down key and they will go to work" | "Drop scientists close to a factory (\x1a) and they will go to work" | Generic action name vs Circle button |
+| `0x48` | 870 | 178 | "Drop scientists close to a factory with the beam down key and they will go to work" | "Drop scientists close to a factory (\x1a) and they will go to work" | Generic action name vs Triangle button |
 
-`\x18` is the PS1's Cross glyph and `\x1a` its Circle glyph; see
-[section 4](#4-how-each-layout-fits). The PS1's command table uses the same
+`\x18` is the PS1's Cross glyph, `\x17` its Circle glyph and `\x1a` its
+Triangle glyph; see [section 4](#4-how-each-layout-fits) and
+[section 6](#6-button-glyphs). The PS1's command table uses the same
 global IDs, so these are content replacements at 865..870.
 
 Bank record 179 / global 871 also differs, but it is **not** in the hint
@@ -128,10 +129,10 @@ prompts, not hint-list entries, and the PS1 rewords all four:
 
 | Global | PC English | PS1 English | What differs |
 | --- | --- | --- | --- |
-| 37 | "Press 'S' to save" | "Press \x17 to save" | `S` key vs Start glyph |
+| 37 | "Press 'S' to save" | "Press \x17 to save" | `S` key vs Circle glyph |
 | 38 | "Press <Esc> or <Space> to continue" | "Start or \x18 to continue" | `Esc`/`Space` vs Start/Cross; "Press" dropped |
-| 39 | "Press <Enter> to carry on, <R> to retry" | "Press \x18 to carry on, \x17 to retry" | `Enter`/`R` vs Cross/Start |
-| 40 | "Press <Enter> to continue, <Esc> to cancel" | "Press \x18 to continue, \x1a to cancel" | `Enter`/`Esc` vs Cross/Circle |
+| 39 | "Press <Enter> to carry on, <R> to retry" | "Press \x18 to carry on, \x17 to retry" | `Enter`/`R` vs Cross/Circle |
+| 40 | "Press <Enter> to continue, <Esc> to cancel" | "Press \x18 to continue, \x1a to cancel" | `Enter`/`Esc` vs Cross/Triangle |
 
 The PS1 shell bank has three extra IDs next to these: 46 "Press \x17 to
 retry", and 47/48 about inserting or changing a MEMORY CARD. Global 39 in the
@@ -154,10 +155,10 @@ The "mode 2" row shows the pattern:
 | Nederlands | "Druk je op stand 2 om de terreinwagen te activeren." | "Om de terreinwagen te activeren, druk je op de L1-toets." |
 
 The shell prompts 37..40 also follow the same pattern in all six languages
-(Start/Cross/Circle). One unrelated Italian shell difference exists at global
-284: PC "Configura controlli da tastiera" ("configure keyboard controls")
-becomes "Costruzioni principali" ("main constructions"), consistent with the
-PS1 having no keyboard configuration. It is not a control hint.
+(Start/Cross/Circle/Triangle). One unrelated Italian shell difference exists
+at global 284: PC "Configura controlli da tastiera" ("configure keyboard
+controls") becomes "Costruzioni principali" ("main constructions"), consistent
+with the PS1 having no keyboard configuration. It is not a control hint.
 
 ### 2.4 Other control-worded strings (not hint-list entries)
 
@@ -246,21 +247,22 @@ for this layout, provided the port renders the inline glyphs:
 - `\x18` is Cross (A): used for "carry on", "continue", "select an item" and
   "turbo". The PS1 text `Select (\x18)` means "the Select action, on Cross",
   so it must not be drawn as the word "Select" plus a literal byte.
-- `\x1a` is Circle (B): used for cancel and beam-down.
-- `\x17` is the save/retry glyph. The parallel PC prompts map it from `S`,
-  `Esc` and `R`; the PS1's menu tables accept with Cross or Start, so Start is
-  the most consistent reading. `\x19` is not attested in the hint or shell
-  banks and remains unidentified.
+- `\x1a` is Triangle (Y): used for cancel and beam-down, and for the beam-up
+  chord `R1-\x1a` in global 865.
+- `\x17` is Circle (B): the save/retry glyph. The results save `0042AAA0` and
+  the name-entry retry `0045AEA0` both sit on pad code 14 (Circle).
+  `\x19` is not attested in the hint or shell banks; Square is the only face
+  button left, but nothing pins it.
 
 The PS1 text uses these bytes where the PC has key names; they are not ASCII,
 and the PS1 renderer must draw them as button graphics (the parallel prompts
-identify Cross/Circle). The exact glyph routine was not disassembled. PC text
-(and the port's font path) has no such glyphs, so the bytes cannot be copied
-through unchanged; the port must substitute button names or its own icons.
-The PS1 `L1` toggle also matches the Console layout's PS1 gameplay tables, so
-"Press L1 again to return" is literally true there. The system prompts depend
-on the \x17 = Start reading; if that reading is wrong, those four need
-rechecking even under Console layout.
+identify Cross/Circle/Triangle). The exact glyph routine was not disassembled.
+PC text (and the port's font path) has no such glyphs, so the bytes cannot be
+copied through unchanged; the port must substitute button names or its own
+icons. The PS1 `L1` toggle also matches the Console layout's PS1 gameplay
+tables, so "Press L1 again to return" is literally true there. The system
+prompts are true under Console layout too: continue is Start or Cross, save
+and retry are Circle, and cancel is Triangle.
 
 ### PC layout (Xbox pad as retail's WinMM joystick)
 
@@ -354,15 +356,15 @@ the hint mask/command IDs stay untouched.
    setting, tie it to `ControllerLayout::Console`, or tie it to
    `joystick_live()`; the default must be chosen.
 2. **PC-layout wording has no retail source.** The PS1 sentences name
-   L1/Cross/Circle, which are not the PC-layout bindings. The PC-layout text
-   above is authored. Approve it, or keep PC keyboard wording for PC layout
-   and use PS1 text only under Console layout.
+   L1/Cross/Circle/Triangle, which are not the PC-layout bindings. The
+   PC-layout text above is authored. Approve it, or keep PC keyboard wording
+   for PC layout and use PS1 text only under Console layout.
 3. **Button glyphs or words?** The PS1 uses inline `\x17..\x1A` button graphics.
    The port's font has no such glyphs. Use names (`L1`, `Cross`, `Circle`,
-   `Start`) or draw icons; if names, choose `Cross/Circle` (PlayStation) or
-   `A/B` (Xbox) under Console layout.
+   `Start`) or draw icons; if names, choose `Cross/Circle/Triangle`
+   (PlayStation) or `A/B/Y` (Xbox) under Console layout.
 4. **Adopt the PS1's non-control rewordings?** `0x43` changes "beam them into
-   the factory" to "beam them on to your ship with R1-Circle"; global 871
+   the factory" to "beam them on to your ship with R1-Triangle"; global 871
    changes the save-failure text to a memory card. Only adopt these if the
    port's beam and save behavior matches; they are not control hints.
 5. **Localization and provenance.** The PS1 text exists in all six languages,
@@ -396,14 +398,17 @@ the hint mask/command IDs stay untouched.
   `docs/re/PLAYER_COMMAND_RUNTIME.md` and the current port owners. The PS1
   container and bank offsets are direct reads of the disc; the PS1
   command-table comparison is a byte comparison at `0x10082C`.
-- `\x18` = Cross and `\x1a` = Circle are established by the parallel PC
-  prompts (Enter/Space -> Cross, Esc -> Circle) and by `Select (\x18)`.
-  `\x17` is the save/retry glyph; it replaces `S`, `Esc` and `R`. Section 6
-  shows the PS1 font has four real glyphs there and argues that `\x17` is
-  more likely Select than Start, because the same shell bank spells Start as
-  a word. `\x19` is unattested. The exact PS1 glyph rendering was not
-  disassembled; only the text bytes and their PC counterparts were compared
-  before section 6.
+- The icon identities come from the type-9 pad rows, not the font: `\x18` =
+  Cross (gameplay message select `004697F0` and thrust `0053A378` at code 15;
+  frontend/results/name-entry accepts at 15 or Start 4), `\x17` = Circle
+  (results save `0042AAA0` and name-entry retry `0045AEA0` at code 14), and
+  `\x1a` = Triangle (frontend/results/name-entry back rows and gameplay drop
+  `00469670` at code 13; the beam-up chord `00469660` at 13 + R1). The
+  parallel PC prompts agree (Enter/Space -> Cross, Esc -> Triangle), and
+  `Select (\x18)` names the Select action on Cross. `\x19` is unattested;
+  Square is the remaining face button but is not proven. The exact PS1 glyph
+  rendering was not disassembled; only the text bytes and their PC
+  counterparts were compared before section 6.
 - The PS1 shell bank's local order differs from the PC's, so the shell-prompt
   mapping was established by global ID, not by record position. The Italian
   284 anomaly is noted but not explained.
@@ -514,36 +519,41 @@ palette/CLUT data, not glyph bitmaps. The glyph **pixels** are therefore not
 in this Handler-3 block. They must live in a VRAM texture page uploaded
 elsewhere (or be generated by the PS1 sprite list), and the exact page was not
 located. This is the one evidence bound of this section: the PS1 raster could
-not be dumped, so the identities below come from the text roles and the record
-layout, not from seeing the pixels.
+not be dumped, so the identities below come from the pad bindings and the text
+roles, not from seeing the pixels.
 
 ### 6.3 Which button is which
 
-- `0x18` = **Cross**. The PC confirm prompts (`<Enter>`, `<Space>`) map to it,
-  and `Select (\x18)` means the Select action is on Cross. PS1 Cross is the
-  bottom face button, confirm.
-- `0x1A` = **Circle**. The PC cancel prompts (`<Esc>`) map to it, the beam-up
-  hint says `R1-\x1a`, and Circle is cancel/back.
-- `0x17` = the save/retry button. It replaces PC `S` and `R`. The old note
-  inferred Start; the full six-language text now makes that doubtful. In the
-  **same** shell bank, the continue prompt spells Start as a word ("Start ou
-  `\x18`", "START (avvio) o `\x18`", "Starttoets of `\x18`") instead of using
-  `\x17`. If `\x17` were Start, the same author would have used the glyph
-  there. The consistent reading is the **menu/save button**, most likely
-  **Select**, with Start a separate button that has no glyph. Start is still
-  possible if the spelled Start is a localization choice.
-- `0x19` = the fourth menu glyph, not attested by any string. The four-glyph
-  set is the menu set (Select, Cross, Triangle, Circle), not the full face
-  set: the frontend accepts with Cross or Start, goes back with Triangle and
-  cancels with Circle, while Square appears in no menu table. That makes
-  `0x19` **Triangle** the most likely reading; Square is the alternative if
-  the set is the face buttons instead.
+The pixels were not decoded, but the bindings decide each byte. The PC
+executable carries the PlayStation pad tables unused in every screen's slots
+8/9, and `ControllerLayout::Console` plays them as native type 9 (codes 1..16
+Select, L3, R3, Start, Up, Right, Down, Left, L2, R2, L1, R1, Triangle,
+Circle, Cross, Square):
 
-Confidence: Cross and Circle are proven; `0x17` and `0x19` are inferences.
-The decisive check is the one not possible here: render or dump the four PS1
-H3 glyph records. The PS1 H3 record layout and the four record bytes are above
-so that check can be repeated when the PS1 sprite display list or its texture
-page is decoded.
+- `0x18` = **Cross** (code 15). In the gameplay sub table `00522FB8` the
+  message-select row `004697F0` and the thrust consumer `0053A378` require
+  code 15. The frontend `00528410` and results `00521648` accept rows
+  `00445200`/`0042AA60` take 15 (or Start, code 4), and the name-entry
+  `00525F40` accept `00445200` takes 15 with `0045AE90` on Start. That
+  matches every `\x18` string: continue, carry on, `Select (\x18)` and turbo.
+- `0x17` = **Circle** (code 14). The results `00521648` save row `0042AAA0`
+  and the name-entry `00525F40` retry row `0045AEA0` both require code 14.
+  Global 37 ("`\x17` to save") and global 39 ("`\x17` to retry") therefore
+  name Circle, not Start: Start is code 4, and global 38 spells it as a word.
+- `0x1A` = **Triangle** (code 13). The frontend `00528410` back row
+  `004451E0`, the results back row `0042AA30` and the name-entry back row
+  `004451E0` require 13. In gameplay the drop row `00469670` (PC `D`, Beam
+  Down) requires 13, and the beam-up row `00469660` (PC `C`) requires 13
+  with R1 (12), which is exactly global 865's `R1-\x1a`. Global 40's cancel
+  is therefore Triangle too.
+- `0x19` = the fourth glyph, not attested by any hint or prompt. With
+  Circle, Cross and Triangle placed, Square is the only remaining face
+  button, but neither a string nor a row pins it: it stays unidentified.
+
+Confidence: Cross, Circle and Triangle are proven by the pad rows; `0x19`
+remains an inference. The raster check is still open: the four PS1 H3 glyph
+records (above) can confirm the artwork when the sprite display list or its
+texture page is decoded, but the identities no longer depend on it.
 
 ### 6.4 Can the port draw the PS1 glyphs?
 
