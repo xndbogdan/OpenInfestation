@@ -358,26 +358,36 @@ those when `+4` is set
 ([the control block](VEHICLE_DRIVE_RUNTIME.md#the-control-block-seen-from-the-vehicle)).
 
 The port ([`platform_input`](../../crates/inf-game/src/platform_input.rs),
-[`platform_pad`](../../crates/inf-game/src/platform_pad.rs)) opens the
-first SDL game controller, or else the first joystick, and reads it once a
-frame instead of on the 20 ms timer. A mapped controller is numbered as
-Windows' legacy joystick API numbers an XInput pad, retail's own view of
-it: the left stick on X and Y, the triggers together on Z, the right
-stick's vertical on R and horizontal on U, and A, B, X, Y, the shoulders,
-Back, Start and the stick clicks as buttons 1 to 10; the d-pad is the
-point-of-view hat, which retail never reads. Every enumeration calibrates
-the joystick with the live Sensitivity. A session log records each change
-of the pad's reading, and its replay repeats the last one each frame; a
-hidden run reads no pad. The mouse and the button device are not created.
+[`platform_pad`](../../crates/inf-game/src/platform_pad.rs)) opens every pad
+SDL lists, as the game controller when SDL maps it and otherwise as a
+joystick, once each — an open handle's SDL instance id dedupes the opens —
+and reads them all once a frame instead of on the 20 ms timer. The native
+stream still follows one pad, the pad in use: the first listed pad at the
+first poll, then any pad that newly presses a button or newly takes an axis
+past the dead zone, the same quarter-range test the port uses for last-input
+tracking; a pad plugged in while no pad is in use takes the stream at once,
+as the startup pad did. The native type and axis count are latched from the
+first pad, as retail's first joystick fixes the adapter and its replay. A
+mapped controller is numbered as Windows' legacy joystick API numbers an
+XInput pad, retail's own view of it: the left stick on X and Y, the triggers
+together on Z, the right stick's vertical on R and horizontal on U, and A, B,
+X, Y, the shoulders, Back, Start and the stick clicks as buttons 1 to 10; the
+d-pad is the point-of-view hat, which retail never reads. Every enumeration
+calibrates the joystick with the live Sensitivity. A session log records each
+change of the pad's reading, and its replay repeats the last one each frame;
+a hidden run reads no pad. The mouse and the button device are not created.
 
 Port convenience, outside retail, which only ever sees the joysticks present
-at startup: a pad that goes away first sends one fully released reading (no
-button, every axis centred) before its failed reads, so nothing it held stays
-held, and the next attached pad — or the same one, reconnected — is opened in
-its place. A pad first plugged in while a screen is live joins that screen's
-own context with the live Sensitivity: the gameplay screen and its `+0xFC`
-player sub-object, the frontend menus, or the briefing. The pad's connect and
-removal names are reported for the port's notice. All of it follows the Pad
+at startup: the pad in use that goes away first sends one fully released
+reading (no button, every axis centred) and then failed reads, so nothing it
+held stays held and the gameplay removal pause sees it; another pad takes the
+stream when the player uses it, or when it is plugged in with no pad in use.
+An idle pad that goes away releases nothing and fails nothing: its removal is
+only a notice. A pad first plugged in while a screen is live joins that
+screen's own context with the live Sensitivity: the gameplay screen and its
+`+0xFC` player sub-object, the frontend menus, or the briefing. The pad's
+connect and removal names are reported for every pad that joins or leaves
+after the first poll, for the port's notice. All of it follows the Pad
 notification stream, so a recorded session replays the pads it recorded.
 
 ### The PlayStation release
@@ -412,11 +422,11 @@ counting for `00439A20` and the input mode drops to Disabled. The console's
 vibration and its controller-removal pause are not ported as such: the PC has
 no vibration code, and its keyboard keeps a live adapter. The port does pause
 on a pad's removal as a convenience after the PlayStation release: losing the
-live pad mid-mission runs Esc's menu key (`00443700` -> `00443070`) once,
+pad in use mid-mission runs Esc's menu key (`00443700` -> `00443070`) once,
 which opens the in-world menu, unless a network game runs or that menu is
-already open. The removal is read from the pad notification stream (a read
-followed by a failed read), not from SDL, so a recorded session pauses on the
-same frame.
+already open. An idle pad's removal is not a pause. The removal is read from
+the pad notification stream (a read followed by a failed read), not from SDL,
+so a recorded session pauses on the same frame.
 
 ## Scope and integration
 

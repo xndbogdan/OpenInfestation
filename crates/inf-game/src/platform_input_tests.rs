@@ -942,3 +942,65 @@ fn a_removal_leaves_the_last_input_as_the_player_left_it() {
     assert!(unplug(&mut devices, &mut input, &mut host));
     assert!(!devices.last_input_is_pad());
 }
+
+/// What the platform sends when the pad in use is unplugged with another pad
+/// still attached: its fully released reading, then failed reads. The failed
+/// read is the removal, and the pad was the last input, so the gameplay pause
+/// gate opens.
+#[test]
+fn the_pad_in_use_unplugged_reports_the_removal_that_pauses() {
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = |buttons| PadSample::Read {
+        buttons,
+        axes: [0x8000; 6],
+    };
+    for sample in [read(0), read(1), read(0), PadSample::Failed] {
+        devices
+            .update(reading(sample), &mut input, &mut host)
+            .unwrap();
+    }
+    assert!(devices.take_pad_removed() && devices.last_input_is_pad());
+}
+
+/// A second pad takes the stream, then the idle first pad is unplugged. The
+/// platform drops that idle pad without a notification: SdlInput sees only
+/// the pad in use's readings, so there is no removal and the pause gate stays
+/// closed while the second pad remains the last input.
+#[test]
+fn an_idle_pads_departure_never_reaches_the_stream() {
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = |buttons| PadSample::Read {
+        buttons,
+        axes: [0x8000; 6],
+    };
+    // A is the startup pad; B's press takes the stream; the idle A goes away.
+    for sample in [read(0), read(1), read(1)] {
+        devices
+            .update(reading(sample), &mut input, &mut host)
+            .unwrap();
+    }
+    let removed = devices.take_pad_removed();
+    assert!(!removed, "an idle pad's departure must not be a removal");
+    assert!(
+        devices.last_input_is_pad(),
+        "B in use remains the last input"
+    );
+    assert!(
+        !(removed && devices.last_input_is_pad()),
+        "the pause gate stays closed"
+    );
+}

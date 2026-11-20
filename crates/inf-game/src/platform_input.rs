@@ -13,10 +13,11 @@
 //! stores `joyGetPosEx`'s X, Y, Z, R, U and V (0 to 65535) and its buttons
 //! doubled (button 1 is bit 1), or bit 31 alone when the read fails. Only
 //! the first joystick drives input: `00439B30` makes one type-2 adapter, from
-//! the first, and a second joystick never reaches a binding. The port reads
-//! its pad once a frame. Retail binds no mouse table on any screen, so its
-//! mouse device (type 1) never gets an adapter and has no effect; the port
-//! creates none.
+//! the first, and a second joystick never reaches a binding. The port gives
+//! that one adapter the pad in use among the pads SDL lists
+//! ([`crate::platform_pad`]), read once a frame. Retail binds no mouse table
+//! on any screen, so its mouse device (type 1) never gets an adapter and has
+//! no effect; the port creates none.
 //!
 //! The application owns event-window filtering, polling, callback dispatch,
 //! screen repeat timing, and binding lifetimes. Text input and keyboard
@@ -43,8 +44,9 @@ pub enum InputNotification {
     /// One poll of the pad (`004F54A0`, or the PlayStation's `800F4310`),
     /// sent every frame while one is open; the first creates the native
     /// device: the joystick (type 2) or the PlayStation pad (type 9), with
-    /// `axes` axes, which later ones keep. A pad's unplug sends one fully
-    /// released reading first, then the failed ones.
+    /// `axes` axes, which later ones keep. The pad in use's unplug sends one
+    /// fully released reading first, then the failed ones; an idle pad's
+    /// unplug sends nothing.
     Pad {
         native_type: u8,
         axes: u8,
@@ -118,8 +120,10 @@ struct NativePad {
 /// A quarter of the axis range from the layout's centre: the joystick (type
 /// 2) spans 0..0xFFFF around 0x8000, the PlayStation pads (types 8 and 9)
 /// 0..255 around 0x80, as [`pad_axis_transform`] biases them. Inside the
-/// dead zone a resting stick is neutral.
-fn axis_off_centre(value: u32, native_type: u8) -> bool {
+/// dead zone a resting stick is neutral. The pad choice
+/// ([`crate::platform_pad`]) uses the same test to see which pad the player
+/// picked up.
+pub(crate) fn axis_off_centre(value: u32, native_type: u8) -> bool {
     let (centre, dead_zone) = if native_type == 2 {
         (0x8000, 0x4000)
     } else {

@@ -1,6 +1,8 @@
-//! The pad behind the native joystick ([`crate::platform_input`]): the first
-//! SDL game controller, or else the first joystick, read once a frame as
-//! WinMM's `joyGetPosEx` reports it to retail (`004F54A0`).
+//! The pad behind the native joystick ([`crate::platform_input`]): every
+//! attached SDL pad, opened as a game controller when SDL maps it and
+//! otherwise as a joystick, read once a frame, with one of them — the pad in
+//! use — giving the single reading the native stream sees, as WinMM's
+//! `joyGetPosEx` reports it to retail (`004F54A0`).
 //!
 //! Windows' legacy joystick API numbers an XInput pad this way, so a mapped
 //! controller gives retail's own view of it: the left stick on X and Y, the
@@ -21,12 +23,17 @@
 //! is the bottom face button (Xbox A), Circle the right (B), Square the left
 //! (X), Triangle the top (Y); the triggers, pushed past half, are L2 and R2.
 //!
-//! Port convenience, not retail: a pad plugged in after play starts is read
-//! on the screen that is live, and a pad that goes away first sends one fully
-//! released reading, so nothing it held stays held. Both follow the
-//! notification stream ([`crate::platform_input`]), never SDL's hot-plug
-//! events, so a recorded session replays identically. [`SdlPads::take_changes`]
-//! reports the connects and removals the port's notice shows.
+//! Port convenience, not retail: every attached pad is read, but the native
+//! stream follows the pad in use. At the first poll that is the first listed
+//! pad; any other pad takes the stream the moment it newly presses a button
+//! or newly takes an axis out of its dead zone, or when it is plugged in
+//! while no pad is in use. The pad in use that goes away first sends one
+//! fully released reading, so nothing it held stays held, and then failed
+//! reads until another pad takes the stream; an idle pad's departure is only
+//! a notice. All of it follows the notification stream
+//! ([`crate::platform_input`]), never SDL's hot-plug events, so a recorded
+//! session replays identically. [`SdlPads::take_changes`] reports the connects
+//! and removals the port's notice shows.
 
 use sdl2::controller::{Axis, Button, GameController};
 use sdl2::joystick::Joystick;
@@ -35,7 +42,7 @@ use sdl2::{GameControllerSubsystem, JoystickSubsystem};
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
-use crate::platform_input::{InputNotification, PadSample};
+use crate::platform_input::{axis_off_centre, InputNotification, PadSample};
 
 /// How the pad plays: as PC retail's joystick, or as the PlayStation
 /// release's pad.
@@ -147,6 +154,22 @@ impl Open {
         }
     }
 
+    /// SDL's id for this connection: one per physical device, shared by the
+    /// controller and joystick views of it, and new after a re-plug.
+    fn instance_id(&self) -> u32 {
+        match self {
+            Open::Controller(controller) => controller.instance_id(),
+            Open::Joystick(joystick) => joystick.instance_id(),
+        }
+    }
+
+    fn name(&self) -> String {
+        match self {
+            Open::Controller(controller) => controller.name(),
+            Open::Joystick(joystick) => joystick.name(),
+        }
+    }
+
     /// The native type this pad plays as: an unmapped joystick has no
     /// PlayStation layout, so it stays retail's joystick.
     fn native_type(&self, layout: ControllerLayout) -> u8 {
@@ -162,11 +185,6 @@ impl Open {
             Open::Controller(_) => XINPUT_AXES,
             Open::Joystick(joystick) => joystick.num_axes().min(6) as u8,
         }
-    }
-
-    /// A reading with nothing pressed and every stick centred.
-    fn released(&self, layout: ControllerLayout) -> PadSample {
-        released_sample(self.native_type(layout), self.axes(layout))
     }
 
     fn sample(&self, layout: ControllerLayout) -> PadSample {
@@ -242,76 +260,138 @@ fn released_sample(native_type: u8, axes: u8) -> PadSample {
     }
 }
 
-/// The open pad and the name SDL gave it at open, kept for the removal report
-/// after the device is gone.
+/// An open pad: SDL's handle, the name it gave the device at open (kept for
+/// the removal report after the device is gone), its device instance id, and
+/// the last reading for the new-activity test.
 struct OpenPad {
     handle: Open,
+    id: u32,
     name: String,
+    last: Option<PadSample>,
 }
 
-/// One poll's decision for [`SdlPads`], over SDL's device indices and names.
+impl OpenPad {
+    fn new(handle: Open) -> Self {
+        Self {
+            id: handle.instance_id(),
+            name: handle.name(),
+            handle,
+            last: None,
+        }
+    }
+}
+
+/// One listed pad as a poll sees it: SDL's device instance id, the name to
+/// report, and whether this reading newly pressed a button or newly left an
+/// axis's dead zone.
+#[derive(Clone, Copy, Debug)]
+struct PadSeen<'a> {
+    id: u32,
+    name: &'a str,
+    activity: bool,
+}
+
+/// One poll's decision for [`SdlPads`], over the pads SDL lists and each
+/// pad's activity.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum PadPoll {
-    /// The open pad still answers: a pad attached beside it changes nothing,
-    /// and it is read again as it is.
-    Keep,
-    /// The open pad is gone, or none was open: drop it and open the first
-    /// listed device index, falling back to the ones after it.
-    Replace {
-        /// The detached pad's fully released reading, sent before its failed
-        /// reads and before any replacement.
-        released: Option<PadSample>,
-        /// The first device index to try, when a pad is listed.
-        index: Option<u32>,
-        /// This is the startup poll: the pad it opens is the startup pad,
-        /// not a hot-plug, so its connect is not reported.
-        startup: bool,
-    },
+struct PadPoll {
+    /// The pad in use: its device instance id, whose reading this poll sends.
+    active: Option<u32>,
+    /// The pad in use just left: its fully released reading goes out before
+    /// this poll's failed one.
+    released: Option<PadSample>,
+    /// A pad was in use and none is now: every poll reads
+    /// [`PadSample::Failed`] until another pad is used or connected.
+    failed: bool,
 }
 
-/// The pad bookkeeping behind [`SdlPads`]: whether a connect is a hot-plug,
-/// and the changes the notice reads. [`SdlPads`] only opens, reads and
-/// pushes, so the decisions stay testable without SDL devices.
+/// The pad bookkeeping behind [`SdlPads`]: the pads the last poll saw, the
+/// pad in use, whether the stream is failing, and the changes the notice
+/// reads. [`SdlPads`] only opens, reads and pushes, so the decisions stay
+/// testable without SDL devices.
 #[derive(Debug, Default)]
 struct PadBook {
-    /// A poll has run: a pad a later poll opens is a hot-plug.
+    /// A poll has run: a pad a later poll finds is a hot-plug, and the pads
+    /// present at the first poll are silent.
     polled: bool,
+    /// The pad in use, by device instance id.
+    active: Option<u32>,
+    /// The pad in use is gone and no other has taken the stream: every poll
+    /// reads Failed until one does.
+    failed: bool,
+    /// The pads the last poll listed, with the names to report when they go.
+    known: Vec<(u32, String)>,
     changes: Vec<PadChange>,
 }
 
 impl PadBook {
-    /// What one poll does, from SDL's list of attached device indices and the
-    /// open pad's own attachment answer.
-    fn poll(
-        &mut self,
-        attached: bool,
-        open_name: Option<&str>,
-        native_type: u8,
-        axes: u8,
-        pads: &[u32],
-    ) -> PadPoll {
+    /// What one poll does, from the pads SDL lists, their activity, and the
+    /// native type and axis count the first pad latched.
+    fn poll(&mut self, pads: &[PadSeen<'_>], native_type: u8, axes: u8) -> PadPoll {
         let startup = !self.polled;
         self.polled = true;
-        if open_name.is_some() && attached {
-            return PadPoll::Keep;
+
+        // Every pad known last poll and no longer listed has left. Only the
+        // pad in use releases and fails; an idle pad is a notice alone.
+        let mut released = None;
+        for (id, name) in &self.known {
+            if pads.iter().any(|pad| pad.id == *id) {
+                continue;
+            }
+            self.changes.push(PadChange::Removed(name.clone()));
+            if self.active == Some(*id) {
+                released = Some(released_sample(native_type, axes));
+                self.active = None;
+                self.failed = true;
+            }
         }
-        let released = open_name.map(|name| {
-            self.changes.push(PadChange::Removed(name.to_owned()));
-            released_sample(native_type, axes)
-        });
-        PadPoll::Replace {
+
+        // A pad SDL lists for the first time joins. The startup pads are not
+        // connects, and a pad found at startup is not a hot-plug.
+        let mut connected = Vec::new();
+        for pad in pads {
+            if self.known.iter().any(|(id, _)| *id == pad.id) {
+                continue;
+            }
+            if !startup {
+                self.changes.push(PadChange::Connected(pad.name.to_owned()));
+            }
+            connected.push(pad.id);
+        }
+        self.known = pads
+            .iter()
+            .map(|pad| (pad.id, pad.name.to_owned()))
+            .collect();
+
+        if startup {
+            // The first listed pad is the startup pad, as a lone one always
+            // was; every later pad beside it starts idle.
+            self.active = pads.first().map(|pad| pad.id);
+            self.failed = false;
+        } else if let Some(pad) = pads.iter().find(|pad| pad.activity) {
+            // Any pad the player uses takes the stream, even from the one
+            // already read, and that same poll reads the new pad.
+            self.active = Some(pad.id);
+            self.failed = false;
+        } else if self.active.is_none() {
+            // Nothing is in use: a pad that just connected takes the stream
+            // without needing a press, as a lone startup pad does.
+            if let Some(id) = connected.first() {
+                self.active = Some(*id);
+                self.failed = false;
+            }
+        }
+
+        PadPoll {
+            active: self.active,
             released,
-            index: pads.first().copied(),
-            startup,
+            failed: self.failed,
         }
     }
 
-    /// The shell opened the pad named `name`: a hot-plug unless this is the
-    /// startup poll.
-    fn opened(&mut self, name: String, startup: bool) {
-        if !startup {
-            self.changes.push(PadChange::Connected(name));
-        }
+    /// The pad the native stream reads, if any.
+    fn active(&self) -> Option<u32> {
+        self.active
     }
 
     fn take_changes(&mut self) -> Vec<PadChange> {
@@ -319,13 +399,41 @@ impl PadBook {
     }
 }
 
-/// The open pad, if any, the native type and axis count its first reading
-/// reported, and the pad changes the notice reads.
+/// Whether a reading shows what [`SdlInput::last_input_is_pad`] counts as
+/// the pad being used: a button newly down, or an axis newly past the dead
+/// zone its native type's centre gives ([`axis_off_centre`]). A first reading
+/// has nothing to compare with, so it establishes the baseline instead.
+///
+/// [`SdlInput::last_input_is_pad`]: crate::platform_input::SdlInput::last_input_is_pad
+fn newly_used(previous: Option<PadSample>, now: PadSample, native_type: u8, axes: u8) -> bool {
+    let (
+        PadSample::Read {
+            buttons,
+            axes: now_axes,
+        },
+        Some(PadSample::Read {
+            buttons: previous_buttons,
+            axes: previous_axes,
+        }),
+    ) = (now, previous)
+    else {
+        return false;
+    };
+    let newly_down = buttons & !previous_buttons != 0;
+    let newly_off_centre = (0..usize::from(axes)).any(|index| {
+        axis_off_centre(now_axes[index], native_type)
+            && !axis_off_centre(previous_axes[index], native_type)
+    });
+    newly_down || newly_off_centre
+}
+
+/// Every open pad, the native type and axis count the first pad latched, and
+/// the pad changes the notice reads.
 pub struct SdlPads {
     controllers: GameControllerSubsystem,
     joysticks: JoystickSubsystem,
     layout: ControllerLayout,
-    open: Option<OpenPad>,
+    pads: Vec<OpenPad>,
     device: Option<(u8, u8)>,
     book: PadBook,
 }
@@ -336,113 +444,140 @@ impl SdlPads {
             controllers: sdl.game_controller()?,
             joysticks: sdl.joystick()?,
             layout,
-            open: None,
+            pads: Vec::new(),
             device: None,
             book: PadBook::default(),
         })
     }
 
-    /// SDL's device indices this poll, in the order a fresh open takes them.
-    /// SDL renumbers them as pads come and go, so the first listed one is the
-    /// next available pad. The app pumps SDL's events before every poll
-    /// (`events.poll_iter`), which is what updates this list; the pad's own
-    /// `attached()` answer is current for the same reason, so no device-event
-    /// handling is needed.
-    fn enumerate(&self) -> Vec<u32> {
-        self.joysticks
-            .num_joysticks()
-            .map(|count| (0..count).collect())
-            .unwrap_or_default()
+    /// How many pads SDL lists this poll. SDL renumbers its device indices as
+    /// pads come and go, so an index only serves to open a device; open pads
+    /// are tracked by the instance id SDL gives each connection. The app
+    /// pumps SDL's events before every poll (`events.poll_iter`), which is
+    /// what updates this list; the pad's own `attached()` answer is current
+    /// for the same reason, so no device-event handling is needed.
+    fn listed(&self) -> u32 {
+        self.joysticks.num_joysticks().unwrap_or(0)
     }
 
-    /// Opens the pad at a device index, as the game controller when SDL maps
-    /// it and otherwise as a raw joystick.
+    /// Opens a device index, as the game controller when SDL maps it and
+    /// otherwise as a raw joystick.
     fn open_at(&self, index: u32) -> Option<OpenPad> {
         if self.controllers.is_game_controller(index) {
-            self.controllers.open(index).ok().map(|controller| OpenPad {
-                name: controller.name(),
-                handle: Open::Controller(controller),
-            })
+            self.controllers
+                .open(index)
+                .ok()
+                .map(|controller| OpenPad::new(Open::Controller(controller)))
         } else {
-            self.joysticks.open(index).ok().map(|joystick| OpenPad {
-                name: joystick.name(),
-                handle: Open::Joystick(joystick),
-            })
+            self.joysticks
+                .open(index)
+                .ok()
+                .map(|joystick| OpenPad::new(Open::Joystick(joystick)))
         }
     }
 
-    /// The window lost focus: the pad lets go, one reading with nothing
-    /// held. It is not read again until focus returns.
+    /// Opens the listed devices not held yet, one per attached pad. A held
+    /// pad is never reopened: the count of open pads against SDL's list says
+    /// whether anything is missing, and an opened handle's instance id is the
+    /// dedupe key, so the second handle SDL can hand out for an already-open
+    /// device is dropped at once.
+    fn open_new(&mut self) {
+        let listed = self.listed();
+        let mut missing = listed.saturating_sub(self.pads.len() as u32);
+        for index in 0..listed {
+            if missing == 0 {
+                break;
+            }
+            let Some(pad) = self.open_at(index) else {
+                continue;
+            };
+            if self.pads.iter().any(|open| open.id == pad.id) {
+                continue;
+            }
+            self.pads.push(pad);
+            missing -= 1;
+        }
+    }
+
+    /// The window lost focus: the pad in use lets go, one reading with
+    /// nothing held. It is not read again until focus returns.
     pub fn release(&mut self, out: &mut Vec<InputNotification>) {
-        let (Some(open), Some((native_type, axes))) = (self.open.as_ref(), self.device) else {
+        let (Some((native_type, axes)), Some(_)) = (self.device, self.book.active()) else {
             return;
         };
         out.push(InputNotification::Pad {
             native_type,
             axes,
-            sample: open.handle.released(self.layout),
+            sample: released_sample(native_type, axes),
         });
     }
 
-    /// The pad changes since the last call, for the port's notice: a pad
-    /// plugged in after startup, and one that went away.
+    /// The pad changes since the last call, for the port's notice: every pad
+    /// that joined after the first poll, and one that went away.
     pub fn take_changes(&mut self) -> Vec<PadChange> {
         self.book.take_changes()
     }
 
-    /// The frame's reading, once a pad has been open: a failed read while
-    /// it is unplugged, as `joyGetPosEx` fails. An unplug first sends one
-    /// fully released reading, so no button or axis it held survives. A pad
-    /// plugged in later is read as the same native joystick.
+    /// The frame's reading, once a pad has been open: the pad in use's
+    /// reading, or a failed read while it is unplugged, as `joyGetPosEx`
+    /// fails. The pad in use's unplug first sends one fully released reading,
+    /// so no button or axis it held survives; an idle pad's unplug sends
+    /// nothing. A pad plugged in later is read as the same native joystick.
     pub fn poll(&mut self, out: &mut Vec<InputNotification>) {
-        let attached = self.open.as_ref().is_some_and(|pad| pad.handle.attached());
-        let pads = self.enumerate();
-        // Before the first open there is no device to release.
-        let (native_type, axes) = self.device.unwrap_or((0, 0));
-        let name = self.open.as_ref().map(|pad| pad.name.as_str());
-        match self.book.poll(attached, name, native_type, axes, &pads) {
-            PadPoll::Keep => {}
-            PadPoll::Replace {
-                released,
-                index,
-                startup,
-            } => {
-                if let (Some(sample), Some((native_type, axes))) = (released, self.device) {
-                    out.push(InputNotification::Pad {
-                        native_type,
-                        axes,
-                        sample,
-                    });
-                }
-                self.open = None;
-                if let Some(index) = index {
-                    let first = pads
-                        .iter()
-                        .position(|candidate| *candidate == index)
-                        .unwrap_or(0);
-                    let opened = pads[first..].iter().find_map(|&index| self.open_at(index));
-                    if let Some(pad) = opened {
-                        self.book.opened(pad.name.clone(), startup);
-                        self.open = Some(pad);
-                    }
-                }
-            }
-        }
+        // A handle answers for itself, so an unplugged pad is dropped before
+        // it is read. SDL's list still renumbers around it.
+        self.pads.retain(|pad| pad.handle.attached());
+        self.open_new();
+
+        // The native stream's shape comes from the first pad ever opened and
+        // never changes, so a recorded session replays the same device.
         if self.device.is_none() {
-            self.device = self.open.as_ref().map(|pad| {
+            self.device = self.pads.first().map(|pad| {
                 (
                     pad.handle.native_type(self.layout),
                     pad.handle.axes(self.layout),
                 )
             });
         }
+
+        let mut seen = Vec::with_capacity(self.pads.len());
+        let mut samples = Vec::with_capacity(self.pads.len());
+        for pad in &mut self.pads {
+            let sample = pad.handle.sample(self.layout);
+            let activity = self
+                .device
+                .is_some_and(|(native_type, axes)| newly_used(pad.last, sample, native_type, axes));
+            pad.last = matches!(sample, PadSample::Read { .. }).then_some(sample);
+            seen.push(PadSeen {
+                id: pad.id,
+                name: &pad.name,
+                activity,
+            });
+            samples.push((pad.id, sample));
+        }
+
+        let (native_type, axes) = self.device.unwrap_or((0, 0));
+        let pad_poll = self.book.poll(&seen, native_type, axes);
+        // Before the first open there is no native stream and no device to
+        // report; the book opened nothing, so nothing is pushed.
         let Some((native_type, axes)) = self.device else {
             return;
         };
-        let sample = self
-            .open
-            .as_ref()
-            .map_or(PadSample::Failed, |pad| pad.handle.sample(self.layout));
+        if let Some(sample) = pad_poll.released {
+            out.push(InputNotification::Pad {
+                native_type,
+                axes,
+                sample,
+            });
+        }
+        let sample = match pad_poll.active {
+            Some(id) => samples
+                .iter()
+                .find_map(|&(candidate, sample)| (candidate == id).then_some(sample))
+                .unwrap_or(PadSample::Failed),
+            None if pad_poll.failed => PadSample::Failed,
+            None => return,
+        };
         out.push(InputNotification::Pad {
             native_type,
             axes,
