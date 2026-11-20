@@ -959,6 +959,16 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 if let Some((kind, name)) = visual_notice.take() {
                     pad_notice.show(kind, &name, now_micros);
                 }
+                // Presentation only: the live pads' hot-plugs, never replayed.
+                for change in pads.iter_mut().flat_map(|pads| pads.take_changes()) {
+                    use crate::pad_notice::PadNoticeKind;
+                    use crate::platform_pad::PadChange;
+                    let (kind, name) = match change {
+                        PadChange::Connected(name) => (PadNoticeKind::Connected, name),
+                        PadChange::Removed(name) => (PadNoticeKind::Removed, name),
+                    };
+                    pad_notice.show(kind, &name, now_micros);
+                }
                 clock.flush_recording();
                 if clock.replay_exhausted() {
                     if !clock.resume_live() {

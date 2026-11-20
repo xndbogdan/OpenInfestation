@@ -602,3 +602,72 @@ fn a_pad_first_read_mid_screen_is_handed_out_calibrated_once() {
         ((calibrated * 0x1000_0000) >> 31) as i32
     );
 }
+
+/// A pad unplugged and plugged back in is read again from its first new
+/// reading, and the keyboard keeps working across both.
+#[test]
+fn a_re_added_pad_is_read_again_and_the_keyboard_is_untouched() {
+    let bytes = executable();
+    let source = FrontendExecutable::parse(&bytes).unwrap();
+    let tables = parse_frontend_input_tables(source).unwrap();
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let pad_reading = |sample| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample,
+    };
+    let read = |buttons, x| PadSample::Read {
+        buttons,
+        axes: [x, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+    };
+    devices
+        .update(pad_reading(read(0, 0x8000)), &mut input, &mut host)
+        .unwrap();
+    let list = devices.frontend_devices(&mut input, 10).unwrap();
+    let (keyboard, pad) = (list[0].source, list[1].source);
+    let mut bindings = FrontendBindings::new(
+        CONTEXT,
+        ScreenAnalogDescriptors::from_executable(source).unwrap(),
+    );
+    bindings.initialize(&mut input).unwrap();
+    bindings.install(&mut input, &tables, &list).unwrap();
+    input.select_context(bindings.context()).unwrap();
+
+    // Unplugged: the released reading, then failed reads.
+    for sample in [read(0, 0x8000), PadSample::Failed, PadSample::Failed] {
+        devices
+            .update(pad_reading(sample), &mut input, &mut host)
+            .unwrap();
+    }
+    input.poll(&mut host).unwrap();
+    assert_eq!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+
+    // The keyboard still lands while the pad is gone.
+    devices
+        .update(
+            InputNotification::Key {
+                scancode: Scancode::Return,
+                pressed: true,
+            },
+            &mut input,
+            &mut host,
+        )
+        .unwrap();
+    assert_ne!(
+        input.device_buttons(keyboard).unwrap(),
+        DeviceButtons::default()
+    );
+
+    // Back: the same device reads its button and stick again.
+    devices
+        .update(pad_reading(read(1, 0xffff)), &mut input, &mut host)
+        .unwrap();
+    input.poll(&mut host).unwrap();
+    let mut held = DeviceButtons::default();
+    held.0[0] = 2;
+    assert_eq!(input.device_buttons(pad).unwrap(), held);
+    assert_ne!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+    assert!(devices.joystick_live());
+}
