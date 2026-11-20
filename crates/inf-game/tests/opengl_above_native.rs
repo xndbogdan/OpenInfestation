@@ -166,6 +166,7 @@ fn request(screen: &Screen, tag: &str, size: [u32; 2]) -> (FrontendAppRequest, P
             pelagia_rework: None,
             renderer: Some(RendererChoice::Software),
             controller_layout: None,
+            controller_hints: None,
             variant: None,
             language: None,
             hidden: true,
