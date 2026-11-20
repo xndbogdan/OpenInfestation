@@ -135,6 +135,7 @@ pub mod network_hud;
 pub mod network_menu;
 pub mod object_runtime;
 pub mod offline_prepare;
+pub mod pad_notice;
 pub mod panel_animation;
 pub mod panel_frame;
 pub mod pelagia;

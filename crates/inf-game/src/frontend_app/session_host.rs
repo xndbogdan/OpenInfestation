@@ -113,6 +113,8 @@ pub struct AppIo<'a, 't> {
     pub successful_resets: &'a mut usize,
     pub staged: &'a mut Option<StagedDisplay<'t>>,
     pub notifications: &'a mut Vec<InputNotification>,
+    /// The port's pad hot-plug notice, presented with the frame.
+    pub pad_notice: &'a mut crate::pad_notice::PadNotice,
     pub now_micros: u64,
     pub(super) clock: &'a mut super::AppClock,
     pub(super) loading_stats: &'a mut super::loading::LoadingPresentationStats,
@@ -806,6 +808,26 @@ impl SessionFrameHost for AppFrame<'_, '_, '_, '_> {
             _ => None,
         };
         let render = self.render.as_mut().ok_or(AppFrameError::MissingRenderer)?;
+        // Port-only pad notice: drawn into the outgoing frame after whatever
+        // drew it and before it is presented, so every renderer shows it. Its
+        // near depth and packed-black box leave the world's projection, queue
+        // and depth policy as the frame drew them; presentation resets the
+        // depth surface afterwards. A failure skips the notice, not the frame.
+        let language = self
+            .session
+            .platform()
+            .frontend
+            .settings
+            .residency_language();
+        if let Err(error) = self.io.pad_notice.draw_current(
+            &mut *render.scene,
+            render.resources,
+            render.dimensions,
+            language,
+            self.io.now_micros,
+        ) {
+            eprintln!("Infestation: the pad notice failed: {error}");
+        }
         let output = &mut *self.io.output;
         let texture = render.texture.as_mut();
         let presentation = render.presentation;
