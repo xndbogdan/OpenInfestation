@@ -49,6 +49,9 @@ pub enum PortText {
     Unavailable,
     /// The line shown while the renderer is made before the title.
     PreparingGraphics,
+    /// The port's pad hot-plug notices.
+    ControllerConnected,
+    ControllerRemoved,
 }
 
 impl PortText {
@@ -263,6 +266,22 @@ impl PortText {
                 b"Preparando los gr\xe1ficos...",
                 b"Graphics worden voorbereid...",
             ],
+            Self::ControllerConnected => [
+                b"Controller connected",
+                b"Manette connect\xe9e",
+                b"Controller verbunden",
+                b"Controller connesso",
+                b"Mando conectado",
+                b"Controller verbonden",
+            ],
+            Self::ControllerRemoved => [
+                b"Controller removed",
+                b"Manette d\xe9connect\xe9e",
+                b"Controller entfernt",
+                b"Controller rimosso",
+                b"Mando desconectado",
+                b"Controller verwijderd",
+            ],
         };
         texts
             .get(usize::from(language))
@@ -302,6 +321,8 @@ mod tests {
             PortText::Off,
             PortText::Unavailable,
             PortText::PreparingGraphics,
+            PortText::ControllerConnected,
+            PortText::ControllerRemoved,
         ] {
             for language in 0..6 {
                 assert!(!text.text(language).is_empty());

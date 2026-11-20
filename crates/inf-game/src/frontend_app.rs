@@ -484,6 +484,12 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
             .map_err(|error| eprintln!("Pads unavailable: {error}"))
             .ok()
     };
+    // The port's own pad notice; `INF_PAD_NOTICE` is its visual check alone,
+    // shown once at the first frame and ignored by hidden runs.
+    let mut pad_notice = crate::pad_notice::PadNotice::default();
+    let mut visual_notice = (!request.hidden)
+        .then(crate::pad_notice::visual_check_request)
+        .flatten();
     let mut platform = SdlPlatform {
         frontend: FrontendPlatform::new(
             {
@@ -822,6 +828,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         // now, not in its first frame's draw; nothing once they are made.
         crate::crash_log::step(crate::crash_log::Step::PrepareRenderer);
         backend.prepare_trace();
+        // The frame's clock also reaches the present callback, which runs
+        // after the input pass; a rebind's re-present keeps the last frame's.
+        let mut frame_micros = 0u64;
         let stop = 'frames: loop {
             // The frame the [input] and [phase] lines number.
             crate::crash_log::heartbeat(frames + 1);
@@ -946,6 +955,10 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                 // The frame's keys precede its sample in the recording.
                 clock.record_inputs(&notifications[polled..]);
                 let now_micros = clock.sample();
+                frame_micros = now_micros;
+                if let Some((kind, name)) = visual_notice.take() {
+                    pad_notice.show(kind, &name, now_micros);
+                }
                 clock.flush_recording();
                 if clock.replay_exhausted() {
                     if !clock.resume_live() {
@@ -975,6 +988,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                                 successful_resets: &mut display_rebuilds,
                                 staged: &mut staged,
                                 notifications: &mut notifications,
+                                pad_notice: &mut pad_notice,
                                 now_micros,
                                 clock: &mut clock,
                                 loading_stats: &mut loading_stats,
@@ -1048,7 +1062,8 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                     successful_resets: &mut display_rebuilds,
                     staged: &mut staged,
                     notifications: &mut notifications,
-                    now_micros: 0,
+                    pad_notice: &mut pad_notice,
+                    now_micros: frame_micros,
                     clock: &mut clock,
                     loading_stats: &mut loading_stats,
                     completions: &mut completions,
