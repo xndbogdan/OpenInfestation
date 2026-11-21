@@ -333,7 +333,7 @@ impl RemasteredScreen {
                 let primary_step_down = self.action(retail, 0x0046_96e0)?;
                 let grenade_step_up = self.action(retail, 0x0046_9700)?;
                 // The detonator is a primary weapon slot the d-pad left steps
-                // to; d-pad up rotates the carried cargo instead (user,
+                // to; d-pad down rotates the carried cargo instead (user,
                 // 2026-11-21), its `+30 = 1` step `00469680`.
                 let cargo_rotate = self.action(retail, 0x0046_9680)?;
                 let lights = self.action(retail, 0x0046_9740)?;
@@ -352,8 +352,8 @@ impl RemasteredScreen {
                     // L2/R2 modifiers retail's PS1 gestures use.
                     row(primary_step_down, &[LEFT]),
                     row(grenade_step_up, &[RIGHT]),
-                    row(cargo_rotate, &[UP]),
-                    row(lights, &[DOWN]),
+                    row(cargo_rotate, &[DOWN]),
+                    row(lights, &[UP]),
                     row(computer, &[L3]),
                 ]
             }
