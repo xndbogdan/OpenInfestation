@@ -522,6 +522,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         profiles,
         data_root: request.data_root.clone(),
         title_video: crate::title_playback::TitleVideoState::default(),
+        pad_family: crate::control_hints::PadFamily::Xbox,
     };
     // 00438AD0 settles the display before the residency follows its tier.
     let device = platform.frontend.video.published_device();
@@ -730,6 +731,7 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         clock.replay = Some(ReplayCursor {
             entries: replay.entries.iter().cloned().collect(),
             pad: None,
+            family: replay.pad_family(),
             exhausted: false,
             resume: replay.resume,
         });
@@ -932,6 +934,17 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
                     let replayed = clock.replay_inputs();
                     notifications.extend(replayed);
                 }
+                // The pad's button family, for hint wording: the recording's
+                // while one replays, else the live pad's. It is SDL state
+                // outside the pad sample, so a recording stores it (before
+                // the frame's pad reading).
+                let live_family = pads.as_ref().map_or(
+                    crate::control_hints::PadFamily::Xbox,
+                    crate::platform_pad::SdlPads::family,
+                );
+                let family = clock.pad_family(live_family);
+                session.platform_mut().pad_family = family;
+                clock.record_family(family);
                 let scripted = notifications.len();
                 while let Some(key) = request
                     .input_replay
@@ -1470,6 +1483,9 @@ struct ReplayCursor {
     /// The pad's last recorded reading, repeated each frame as the live
     /// pad is read each frame.
     pad: Option<(u8, u8, crate::platform_input::PadSample)>,
+    /// The pad's button family as last recorded, Xbox until a `c` line says
+    /// otherwise (every recording made before the line existed).
+    family: crate::control_hints::PadFamily,
     exhausted: bool,
     /// `--resume`: hand the game to the host when the entries run out.
     resume: bool,
@@ -1532,6 +1548,13 @@ impl AppClock {
                         pressed: *pressed,
                     }),
                 crate::session_log::ReplayEntry::FocusLost => Some(InputNotification::FocusLost),
+                // The pad's button family is wording state, not an input:
+                // remember it for the frames that follow.
+                crate::session_log::ReplayEntry::PadFamily(family) => {
+                    replay.family = *family;
+                    replay.entries.pop_front();
+                    continue;
+                }
                 // A detach records its fully released reading, then its failed
                 // one: both replay in order, and the last is the state the
                 // live pad repeats until it changes again.
@@ -1562,6 +1585,20 @@ impl AppClock {
 
     fn replay_exhausted(&self) -> bool {
         self.replay.as_ref().is_some_and(|replay| replay.exhausted)
+    }
+
+    /// The pad family the wording uses: the recording's while one replays,
+    /// else the live pad's.
+    fn pad_family(&self, live: crate::control_hints::PadFamily) -> crate::control_hints::PadFamily {
+        self.replay.as_ref().map_or(live, |replay| replay.family)
+    }
+
+    /// Record the family the wording used. The recorder writes it when it
+    /// changes, before the frame's pad reading.
+    fn record_family(&mut self, family: crate::control_hints::PadFamily) {
+        if let Some(recorder) = self.recorder.as_mut() {
+            recorder.family(family);
+        }
     }
 
     /// `--resume`: an exhausted replay gives way to the host, whose clock
@@ -1779,6 +1816,7 @@ mod tests {
                 .map(|&value| crate::session_log::ReplayEntry::Sample(value))
                 .collect(),
             pad: None,
+            family: crate::control_hints::PadFamily::Xbox,
             exhausted: false,
             resume,
         };
@@ -1805,6 +1843,46 @@ mod tests {
         clock.replay = Some(replay(&[], false));
         clock.sample();
         assert!(clock.replay_exhausted() && !clock.resume_live());
+    }
+
+    /// The pad's family is not in the sample: a replay uses the `c` line it
+    /// recorded, not the live pad's, and defaults to Xbox.
+    #[test]
+    fn a_replay_uses_its_recorded_pad_family_over_the_live_one() {
+        use crate::control_hints::PadFamily;
+        let mut clock = AppClock::new(FrontendAppClock::Realtime);
+        assert_eq!(
+            clock.pad_family(PadFamily::PlayStation),
+            PadFamily::PlayStation
+        );
+        clock.replay = Some(ReplayCursor {
+            entries: [
+                crate::session_log::ReplayEntry::PadFamily(PadFamily::Xbox),
+                crate::session_log::ReplayEntry::PadFamily(PadFamily::PlayStation),
+                crate::session_log::ReplayEntry::Sample(1_000),
+            ]
+            .into_iter()
+            .collect(),
+            pad: None,
+            family: PadFamily::Xbox,
+            exhausted: false,
+            resume: false,
+        });
+        clock.replay_inputs();
+        assert_eq!(clock.pad_family(PadFamily::Xbox), PadFamily::PlayStation);
+        // A replay made before the line existed stays Xbox.
+        let mut clock = AppClock::new(FrontendAppClock::Realtime);
+        clock.replay = Some(ReplayCursor {
+            entries: [crate::session_log::ReplayEntry::Sample(1_000)]
+                .into_iter()
+                .collect(),
+            pad: None,
+            family: PadFamily::Xbox,
+            exhausted: false,
+            resume: false,
+        });
+        clock.replay_inputs();
+        assert_eq!(clock.pad_family(PadFamily::PlayStation), PadFamily::Xbox);
     }
 
     /// A detach records its released reading and then its failed one; the
@@ -1834,6 +1912,7 @@ mod tests {
             .into_iter()
             .collect(),
             pad: None,
+            family: crate::control_hints::PadFamily::Xbox,
             exhausted: false,
             resume: false,
         });

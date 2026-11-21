@@ -51,7 +51,7 @@ struct PlayerMessageProcess {
     cheats: crate::object_runtime::ComputerCheats,
     /// The port setting's hint wording, with the network exclusion applied:
     /// network games play retail's game.
-    pad_hints: bool,
+    pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language.
     language: u8,
 }
@@ -103,7 +103,7 @@ fn refresh_player_message_environment(
         environment.attract = process.attract;
         environment.ui_state = process.ui_state;
         environment.cheats = process.cheats;
-        environment.pad_hints = process.pad_hints;
+        environment.pad_wording = process.pad_wording;
         environment.language = process.language;
         return;
     }
@@ -125,7 +125,7 @@ fn refresh_player_message_environment(
             attract: process.attract,
             ui_state: process.ui_state,
             cheats: process.cheats,
-            pad_hints: process.pad_hints,
+            pad_wording: process.pad_wording,
             language: process.language,
         });
 }
@@ -291,7 +291,11 @@ impl<P: PortPlatform> PortSession<P> {
                 attract: self.attract,
                 ui_state: u32::from(state.current_phase().id()),
                 cheats: self.computer_cheats,
-                pad_hints: inputs.pad_hints && self.factory_process.network_flag == 0,
+                pad_wording: if self.factory_process.network_flag == 0 {
+                    inputs.pad_wording
+                } else {
+                    crate::control_hints::PadWording::Retail
+                },
                 language: inputs.residency_language,
             },
         );

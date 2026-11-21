@@ -353,16 +353,29 @@ the hint mask/command IDs stay untouched.
 
 The port's **Controller hints** setting (`Retail`, the default, or `Follow
 last input`) applies the table only when all of the following hold: the
-setting is Follow last input; the layout is `ControllerLayout::Console`; the
-player's last input was the pad (`SdlInput::last_input_is_pad`, from the input
-notifications alone, so recordings replay it); and the game is not a network
-game. The wording is chosen when a hint message is sent (`0046C760`, through
-the player message environment), so a hint already on screen keeps the text
-it was sent with. The computer's List Hints row and the four shell prompts
-(globals 37..40) use the same gate at draw time. The controller bytes keep
+setting is Follow last input; the layout is a pad layout (`Console` or
+`Remastered`, not `Pc`); the player's last input was the pad
+(`SdlInput::last_input_is_pad`, from the input notifications alone, so
+recordings replay it); and the game is not a network game. The gate produces
+a `control_hints::PadWording`: `Console(family)` or `Remastered(family)` with
+a `PadFamily` of Xbox or PlayStation, and `Retail` (the PC text) otherwise.
+The table stores each PS1 sentence as a template with button tokens, so the
+Console layout keeps its PS1 bindings (Cross, Circle, Triangle, L1, Start)
+while the Remastered layout names its own (A, B, Y, X), and the family only
+renames the buttons. The PS1's own names appear on a PlayStation pad under the
+Console layout; a modern pad under the Remastered layout says Options rather
+than Start.
+
+The wording is chosen when a hint message is sent (`0046C760`, through the
+player message environment), so a hint already on screen keeps the text it
+was sent with. The computer's List Hints row and the four shell prompts
+(globals 37..40) use the same wording at draw time. The controller bytes keep
 their own length, so the hint box's display time (3 s or 80 ms per byte) paces
 the player-visible message; nothing else reads them, and the event log still
-records the raw hint ID and silent byte unchanged.
+records the raw hint ID and silent byte unchanged. The pad family is live SDL
+state, so a session recording stores it as a `c xbox` / `c playstation` line
+(see [REMASTERED_PAD.md](REMASTERED_PAD.md#9-hint-wording)); a replay uses the
+recorded family and an older recording without the line reads as Xbox.
 
 ### Fidelity questions for the user
 

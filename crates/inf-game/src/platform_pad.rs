@@ -42,10 +42,11 @@ use sdl2::{GameControllerSubsystem, JoystickSubsystem};
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
+use crate::control_hints::{PadFamily, PadWording};
 use crate::platform_input::{axis_off_centre, InputNotification, PadSample};
 
-/// How the pad plays: as PC retail's joystick, or as the PlayStation
-/// release's pad.
+/// How the pad plays: as PC retail's joystick, as the PlayStation release's
+/// pad, or as the Remastered layout's modern pad.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 #[serde(rename_all = "kebab-case")]
 pub enum ControllerLayout {
@@ -54,6 +55,10 @@ pub enum ControllerLayout {
     Pc,
     /// The PlayStation pad, native type 9.
     Console,
+    /// The Remastered layout, native type 8. Its device sample, axes and
+    /// per-screen tables are the layout change's; this variant lets the hint
+    /// wording name the layout meanwhile.
+    Remastered,
 }
 
 impl ControllerLayout {
@@ -61,6 +66,7 @@ impl ControllerLayout {
         match self {
             ControllerLayout::Pc => 2,
             ControllerLayout::Console => 9,
+            ControllerLayout::Remastered => 8,
         }
     }
 }
@@ -86,21 +92,26 @@ pub enum ControllerHints {
 }
 
 impl ControllerHints {
-    /// The controller wording applies only where it is true: the player chose
-    /// to follow the last input, the pad plays the PlayStation layout whose
-    /// texts the wording comes from, the player last used the pad, and the
-    /// game is offline (network games play retail's game on every renderer).
-    /// Every other case keeps the PC text byte for byte.
-    pub fn uses_pad_wording(
+    /// The wording hints and shell prompts use. Retail's PC text stands
+    /// unless the player chose to follow the last input, the player last used
+    /// the pad, the game is offline (network games play retail's game on
+    /// every renderer), and the layout is a pad layout; then the layout picks
+    /// the Console or Remastered sentences and the family names the buttons.
+    pub fn wording(
         self,
         layout: ControllerLayout,
         last_input_is_pad: bool,
         network_game: bool,
-    ) -> bool {
-        self == Self::FollowLastInput
-            && layout == ControllerLayout::Console
-            && last_input_is_pad
-            && !network_game
+        family: PadFamily,
+    ) -> PadWording {
+        if self != Self::FollowLastInput || !last_input_is_pad || network_game {
+            return PadWording::Retail;
+        }
+        match layout {
+            ControllerLayout::Pc => PadWording::Retail,
+            ControllerLayout::Console => PadWording::Console(family),
+            ControllerLayout::Remastered => PadWording::Remastered(family),
+        }
     }
 }
 
@@ -261,24 +272,49 @@ fn released_sample(native_type: u8, axes: u8) -> PadSample {
 }
 
 /// An open pad: SDL's handle, the name it gave the device at open (kept for
-/// the removal report after the device is gone), its device instance id, and
-/// the last reading for the new-activity test.
+/// the removal report after the device is gone), its device instance id, its
+/// button family for hint wording, and the last reading for the new-activity
+/// test.
 struct OpenPad {
     handle: Open,
     id: u32,
     name: String,
+    family: PadFamily,
     last: Option<PadSample>,
 }
 
 impl OpenPad {
-    fn new(handle: Open) -> Self {
+    fn new(handle: Open, family: PadFamily) -> Self {
         Self {
             id: handle.instance_id(),
             name: handle.name(),
             handle,
+            family,
             last: None,
         }
     }
+}
+
+/// SDL's game-controller type for a device, as the hint wording's family:
+/// its PS3, PS4 and PS5 types are Sony pads, whose buttons are named Cross,
+/// Circle, Square and Triangle; every other type (Xbox, Switch, generic,
+/// unknown) names Microsoft's positional A, B, X and Y.
+fn pad_family(kind: sdl2::sys::SDL_GameControllerType) -> PadFamily {
+    use sdl2::sys::SDL_GameControllerType;
+    match kind {
+        SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS3
+        | SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS4
+        | SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS5 => PadFamily::PlayStation,
+        _ => PadFamily::Xbox,
+    }
+}
+
+/// [`pad_family`] for a device index SDL lists. The call needs SDL's joystick
+/// subsystem initialized, which [`SdlPads::new`] receives.
+fn controller_family(index: u32) -> PadFamily {
+    // SAFETY: `index` is a device SDL just listed, and SDL is initialized by
+    // the `Sdl` the caller holds for the whole lifetime of `SdlPads`.
+    pad_family(unsafe { sdl2::sys::SDL_GameControllerTypeForIndex(index as i32) })
 }
 
 /// One listed pad as a poll sees it: SDL's device instance id, the name to
@@ -461,18 +497,21 @@ impl SdlPads {
     }
 
     /// Opens a device index, as the game controller when SDL maps it and
-    /// otherwise as a raw joystick.
+    /// otherwise as a raw joystick. The family is SDL's game-controller type
+    /// for the same index, whether or not SDL maps the device: a generic
+    /// joystick still answers (or reports unknown, which is Xbox's names).
     fn open_at(&self, index: u32) -> Option<OpenPad> {
+        let family = controller_family(index);
         if self.controllers.is_game_controller(index) {
             self.controllers
                 .open(index)
                 .ok()
-                .map(|controller| OpenPad::new(Open::Controller(controller)))
+                .map(|controller| OpenPad::new(Open::Controller(controller), family))
         } else {
             self.joysticks
                 .open(index)
                 .ok()
-                .map(|joystick| OpenPad::new(Open::Joystick(joystick)))
+                .map(|joystick| OpenPad::new(Open::Joystick(joystick), family))
         }
     }
 
@@ -516,6 +555,15 @@ impl SdlPads {
     /// that joined after the first poll, and one that went away.
     pub fn take_changes(&mut self) -> Vec<PadChange> {
         self.book.take_changes()
+    }
+
+    /// The family of the pad in use, for the hint wording. No pad in use
+    /// reads as Xbox; the PC text stands then anyway.
+    pub fn family(&self) -> PadFamily {
+        self.book
+            .active()
+            .and_then(|id| self.pads.iter().find(|pad| pad.id == id))
+            .map_or(PadFamily::Xbox, |pad| pad.family)
     }
 
     /// The frame's reading, once a pad has been open: the pad in use's
@@ -594,27 +642,73 @@ mod tests;
 mod control_hints_tests {
     use super::*;
 
-    /// Controller wording needs all four conditions; any one missing keeps
-    /// the PC text.
+    /// The wording needs the follow setting, the pad's last use and offline
+    /// play; then only a pad layout changes the text, and its family names
+    /// the buttons. Any failed condition keeps retail's PC text.
     #[test]
-    fn pad_wording_is_the_follow_setting_on_a_console_pad_offline() {
+    fn pad_wording_is_the_follow_setting_on_a_pad_layout_offline() {
+        use crate::control_hints::{PadFamily, PadWording};
         for setting in [ControllerHints::Retail, ControllerHints::FollowLastInput] {
-            for layout in [ControllerLayout::Pc, ControllerLayout::Console] {
-                for last_input_is_pad in [false, true] {
-                    for network_game in [false, true] {
-                        let expected = setting == ControllerHints::FollowLastInput
-                            && layout == ControllerLayout::Console
-                            && last_input_is_pad
-                            && !network_game;
-                        assert_eq!(
-                            setting.uses_pad_wording(layout, last_input_is_pad, network_game),
-                            expected,
-                            "{setting:?} {layout:?} pad={last_input_is_pad} network={network_game}"
-                        );
+            for layout in [
+                ControllerLayout::Pc,
+                ControllerLayout::Console,
+                ControllerLayout::Remastered,
+            ] {
+                for family in [PadFamily::Xbox, PadFamily::PlayStation] {
+                    for last_input_is_pad in [false, true] {
+                        for network_game in [false, true] {
+                            let expected = if setting == ControllerHints::FollowLastInput
+                                && last_input_is_pad
+                                && !network_game
+                            {
+                                match layout {
+                                    ControllerLayout::Pc => PadWording::Retail,
+                                    ControllerLayout::Console => PadWording::Console(family),
+                                    ControllerLayout::Remastered => PadWording::Remastered(family),
+                                }
+                            } else {
+                                PadWording::Retail
+                            };
+                            assert_eq!(
+                                setting.wording(layout, last_input_is_pad, network_game, family),
+                                expected,
+                                "{setting:?} {layout:?} {family:?} pad={last_input_is_pad} \
+                                 network={network_game}"
+                            );
+                        }
                     }
                 }
             }
         }
         assert_eq!(ControllerHints::default(), ControllerHints::Retail);
+    }
+
+    /// SDL's three PlayStation controller types are Sony's; everything else,
+    /// including the Switch types and an unknown device, names Xbox buttons.
+    #[test]
+    fn only_sdls_playstation_types_are_the_playstation_family() {
+        use sdl2::sys::SDL_GameControllerType;
+        for kind in [
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_UNKNOWN,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_XBOX360,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_XBOXONE,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_PRO,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_VIRTUAL,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_AMAZON_LUNA,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_GOOGLE_STADIA,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_NVIDIA_SHIELD,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_LEFT,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_PAIR,
+        ] {
+            assert_eq!(pad_family(kind), PadFamily::Xbox, "{}", kind as u32);
+        }
+        for kind in [
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS3,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS4,
+            SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS5,
+        ] {
+            assert_eq!(pad_family(kind), PadFamily::PlayStation, "{}", kind as u32);
+        }
     }
 }

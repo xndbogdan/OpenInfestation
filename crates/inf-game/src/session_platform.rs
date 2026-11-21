@@ -412,11 +412,11 @@ pub struct WorldTickPlatformInputs {
     pub settings_84: u32,
     /// Port fix, not a retail setting: the vehicle drive's position step.
     pub vehicle_position_step: crate::object_runtime::VehiclePositionStep,
-    /// Port setting: hints word their controls as the pad does. This is the
-    /// setting, the Console layout and the player's last input; a network
-    /// game clears it where the hint is sent, as network games play
-    /// retail's game.
-    pub pad_hints: bool,
+    /// Port setting: hints and prompts word their controls as the pad does.
+    /// This is the setting, the pad layout and the player's last input, with
+    /// the pad family that names its buttons; a network game clears it to
+    /// retail where the message is sent, as network games play retail's game.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub residency_language: u8,
 }

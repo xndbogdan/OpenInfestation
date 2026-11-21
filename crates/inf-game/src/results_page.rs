@@ -142,8 +142,8 @@ pub struct ResultsPage<'a> {
     /// What the final world's page rolls.
     pub credits: Option<&'a FinalCredits>,
     /// Port setting, resolved for this draw: the save and continue prompts
-    /// word their controls as the pad does, outside a network game.
-    pub pad_hints: bool,
+    /// word their controls as the pad does; Retail keeps the PC text.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }
@@ -444,7 +444,7 @@ struct Lines<'a, 'r, R, H> {
     base: MenuColor,
     resources: &'r R,
     host: &'a mut H,
-    pad_hints: bool,
+    pad_wording: crate::control_hints::PadWording,
     language: u8,
 }
 
@@ -457,10 +457,10 @@ impl<'r, R: ResultsPageResources, H: ResultsPageHost> Lines<'_, 'r, R, H> {
     /// A shell prompt (37..40) in the controller's wording where the gate
     /// allows it, else the PC text byte for byte.
     fn prompt(&self, id: i32) -> PageResult<Vec<u8>, R, H> {
-        if self.pad_hints {
-            if let Some(text) = crate::control_hints::pad_hint(id as u32, self.language) {
-                return Ok(text.to_vec());
-            }
+        if let Some(text) =
+            crate::control_hints::pad_hint(self.pad_wording, id as u32, self.language)
+        {
+            return Ok(text.into_owned());
         }
         Ok(self.string(id)?.to_vec())
     }
@@ -525,7 +525,7 @@ fn text<R: ResultsPageResources, H: ResultsPageHost>(
         color,
         base: page.glyph_base_color,
         resources,
-        pad_hints: page.pad_hints,
+        pad_wording: page.pad_wording,
         language: page.language,
         host,
     };
@@ -875,7 +875,7 @@ fn final_text<R: ResultsPageResources, H: ResultsPageHost>(
         color,
         base: page.glyph_base_color,
         resources,
-        pad_hints: page.pad_hints,
+        pad_wording: page.pad_wording,
         language: page.language,
         host,
     };

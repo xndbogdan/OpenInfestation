@@ -265,7 +265,7 @@ impl NameEntryFrameHost for Recorder {
                 context_origin_pixels: [320, 240],
                 base_color: MenuColor::from_word(0x456789ab),
                 sine_quarter: &[0; 4096],
-                pad_hints: false,
+                pad_wording: crate::control_hints::PadWording::Retail,
                 language: 0,
             },
             &resources,
@@ -443,7 +443,7 @@ fn input() -> NameEntryFrameInput<'static> {
         age_millis: 9000,
         animation,
         selector_one: 7,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     }
 }

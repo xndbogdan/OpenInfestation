@@ -213,6 +213,8 @@ pub enum ReplayEntry {
         axes: u8,
         sample: crate::platform_input::PadSample,
     },
+    /// The pad's button family from this frame on, for the hint wording.
+    PadFamily(crate::control_hints::PadFamily),
 }
 
 const REPLAY_MAGIC: &str = "inf-game session replay 1";
@@ -232,10 +234,13 @@ const REPLAY_MAGIC: &str = "inf-game session replay 1";
 /// f                            the window lost focus
 /// p <type> <axes> <buttons> <six axes>   the pad's new reading
 /// p <type> <axes> failed       the pad's read failed
+/// c <xbox|playstation>         the pad's button family, for hint wording
 /// ```
 ///
 /// The pad is read every frame; only a reading that differs from the last
-/// one is written, and a replay repeats the last one each frame.
+/// one is written, and a replay repeats the last one each frame. The family
+/// is live SDL state, so it is written when it changes (and before the first
+/// pad reading); a replay without a `c` line reads as Xbox.
 ///
 /// Keys are written just before the clock sample of the frame that
 /// received them, so a replay feeds both back in the same order.
@@ -243,6 +248,7 @@ pub struct SessionRecorder {
     out: BufWriter<File>,
     pending: Option<(u64, u64)>,
     pad: Option<(u8, u8, crate::platform_input::PadSample)>,
+    family: Option<crate::control_hints::PadFamily>,
 }
 
 impl SessionRecorder {
@@ -258,6 +264,7 @@ impl SessionRecorder {
             out,
             pending: None,
             pad: None,
+            family: None,
         })
     }
 
@@ -287,6 +294,17 @@ impl SessionRecorder {
     pub fn focus_lost(&mut self) {
         self.flush_pending();
         let _ = writeln!(self.out, "f");
+    }
+
+    /// The pad in use's button family, written when it changes (the first
+    /// call writes it) and before that frame's pad reading.
+    pub fn family(&mut self, family: crate::control_hints::PadFamily) {
+        if self.family == Some(family) {
+            return;
+        }
+        self.family = Some(family);
+        self.flush_pending();
+        let _ = writeln!(self.out, "c {}", family.word());
     }
 
     pub fn pad(&mut self, native_type: u8, axes: u8, sample: crate::platform_input::PadSample) {
@@ -444,6 +462,21 @@ impl SessionReplay {
         Self::parse(&text)
     }
 
+    /// The pad family the recording last named, for a whole-file question;
+    /// the runtime follows the entries as it reaches them. A recording made
+    /// before the line existed reads as Xbox, the family whose names the
+    /// Console layout's wording already used.
+    pub fn pad_family(&self) -> crate::control_hints::PadFamily {
+        self.entries
+            .iter()
+            .rev()
+            .find_map(|entry| match entry {
+                ReplayEntry::PadFamily(family) => Some(*family),
+                _ => None,
+            })
+            .unwrap_or_default()
+    }
+
     pub fn parse(text: &str) -> io::Result<Self> {
         let invalid = |line: usize, why: &str| {
             io::Error::new(
@@ -500,6 +533,11 @@ impl SessionReplay {
                     });
                 }
                 "f" => entries.push(ReplayEntry::FocusLost),
+                "c" => {
+                    let family = crate::control_hints::PadFamily::from_word(rest)
+                        .ok_or_else(|| invalid(index, "bad pad family"))?;
+                    entries.push(ReplayEntry::PadFamily(family));
+                }
                 "p" => {
                     let bad = || invalid(index, "bad pad reading");
                     let mut fields = rest.split(' ');
@@ -807,6 +845,7 @@ mod tests {
             let mut recorder =
                 SessionRecorder::create(&path, &["inf-game".into(), "--hidden".into()]).unwrap();
             recorder.game(&traced_game());
+            recorder.family(crate::control_hints::PadFamily::Xbox);
             recorder.sample(0);
             recorder.sample(1000);
             recorder.sample(1000);
@@ -824,6 +863,9 @@ mod tests {
             recorder.pad(2, 5, read);
             recorder.sample(3000);
             recorder.pad(2, 5, crate::platform_input::PadSample::Failed);
+            // A family is written only when it changes.
+            recorder.family(crate::control_hints::PadFamily::PlayStation);
+            recorder.family(crate::control_hints::PadFamily::PlayStation);
         }
         let replay = SessionReplay::read(&path).unwrap();
         std::fs::remove_dir_all(&dir).unwrap();
@@ -832,6 +874,7 @@ mod tests {
         assert_eq!(
             replay.entries,
             [
+                ReplayEntry::PadFamily(crate::control_hints::PadFamily::Xbox),
                 ReplayEntry::Sample(0),
                 ReplayEntry::Sample(1000),
                 ReplayEntry::Sample(1000),
@@ -857,8 +900,31 @@ mod tests {
                     axes: 5,
                     sample: crate::platform_input::PadSample::Failed,
                 },
+                ReplayEntry::PadFamily(crate::control_hints::PadFamily::PlayStation),
             ]
         );
+        assert_eq!(
+            replay.pad_family(),
+            crate::control_hints::PadFamily::PlayStation
+        );
+    }
+
+    /// The `c` line names the family; a replay made before it reads as Xbox,
+    /// and a word this build does not know is refused.
+    #[test]
+    fn a_recording_carries_the_pad_family_and_older_ones_read_xbox() {
+        use crate::control_hints::PadFamily;
+        let parse = |body: &str| SessionReplay::parse(&format!("{REPLAY_MAGIC}\n{body}"));
+        assert_eq!(
+            parse("c playstation\ns 0").unwrap().pad_family(),
+            PadFamily::PlayStation
+        );
+        assert_eq!(parse("s 0").unwrap().pad_family(), PadFamily::Xbox);
+        assert_eq!(
+            parse("c xbox\ns 0").unwrap().entries[0],
+            ReplayEntry::PadFamily(PadFamily::Xbox)
+        );
+        assert!(parse("c generic\ns 0").is_err());
     }
 
     #[test]

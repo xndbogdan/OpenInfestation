@@ -72,8 +72,8 @@ pub struct PlayerHudInputs<'a, 'r> {
     /// The live settings the in-world menu's Options rows show.
     pub settings: Option<&'a crate::frontend_settings::FrontendSettings>,
     /// Port setting, resolved for this frame: the List Hints rows word their
-    /// controls as the pad does, outside a network game.
-    pub pad_hints: bool,
+    /// controls as the pad does; Retail keeps the PC text.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
     /// The selected video device's name, for the Options' device row.
@@ -906,7 +906,7 @@ fn draw_player_shown_menu<'r>(
             models: inputs.database_resources,
             model_failures: &mut model_failures,
             skip_world: *skip_world,
-            pad_hints: inputs.pad_hints,
+            pad_wording: inputs.pad_wording,
             language: inputs.language,
             pad_hint: crate::control_hints::pad_hint,
         }),

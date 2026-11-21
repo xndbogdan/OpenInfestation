@@ -1225,7 +1225,7 @@ fn disconnect_fades_out_and_undocks() {
             attract: false,
             ui_state: 4,
             cheats: Default::default(),
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         },
     );
@@ -1262,7 +1262,7 @@ fn message_environment(assets: &FrontendAssets) -> crate::object_runtime::Player
         attract: false,
         ui_state: 4,
         cheats: Default::default(),
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     }
 }

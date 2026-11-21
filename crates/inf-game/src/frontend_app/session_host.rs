@@ -772,7 +772,11 @@ impl SessionFrameHost for AppFrame<'_, '_, '_, '_> {
         }
         let render = self.render.as_mut().ok_or(AppFrameError::MissingRenderer)?;
         let inputs = self.session.platform().world_tick_inputs();
-        let pad_hints = inputs.pad_hints && !SessionHost::network_session_active(&*self.session);
+        let pad_wording = if SessionHost::network_session_active(&*self.session) {
+            crate::control_hints::PadWording::Retail
+        } else {
+            inputs.pad_wording
+        };
         SoftwareLinkedFrame {
             scene: &mut *render.scene,
             resources: render.resources,
@@ -785,7 +789,7 @@ impl SessionFrameHost for AppFrame<'_, '_, '_, '_> {
             surface: render
                 .presentation
                 .surface(self.io.output.window(), render.dimensions),
-            pad_hints,
+            pad_wording,
             language: inputs.residency_language,
         }
         .draw(self.session, state)

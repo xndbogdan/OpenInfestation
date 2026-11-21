@@ -260,10 +260,10 @@ pub struct SoftwareLinkedFrame<'a, 'f, 'r> {
     pub frontend_state: &'a mut FrontendRendererState,
     pub name_entry_state: &'a mut NameEntryRendererState,
     pub surface: SoftwareSurface<'a>,
-    /// The port's Controller hints gate for this draw: the setting, the
-    /// Console layout, the player's last input and offline play, decided by
-    /// the caller before the session borrow.
-    pub pad_hints: bool,
+    /// The port's Controller hints wording for this draw: the setting, the
+    /// pad layout, the player's last input, the pad family and offline play,
+    /// decided by the caller before the session borrow.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }
@@ -339,7 +339,7 @@ struct SoftwareResultsMenuDraw<'a, 'f, 'r> {
     state: &'a mut SoftwareMenuState,
     profiles: &'a mut ProfileStore,
     owner_flag: bool,
-    pad_hints: bool,
+    pad_wording: crate::control_hints::PadWording,
     language: u8,
 }
 
@@ -419,7 +419,7 @@ impl MenuDrawHost for SoftwareResultsMenuDraw<'_, '_, '_> {
                 store: self.profiles,
                 owner_flag,
                 surface_pixels,
-                pad_hints: self.pad_hints,
+                pad_wording: self.pad_wording,
                 language: self.language,
             },
             &resources,
@@ -599,7 +599,7 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                                 video: parts.video,
                                 owner_flag: draw.owner_byte,
                                 sine_quarter: self.sine_quarter,
-                                pad_hints: self.pad_hints,
+                                pad_wording: self.pad_wording,
                                 language: self.language,
                             },
                         )
@@ -619,7 +619,7 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                             TextEntryScreenDraw {
                                 animation: draw.animation,
                                 selector_one,
-                                pad_hints: self.pad_hints,
+                                pad_wording: self.pad_wording,
                                 language: self.language,
                             },
                             &mut SoftwareNameEntryFrame {
@@ -909,7 +909,7 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                         settings_7c: settings[0x7c / 4],
                         special_view: session.camera_globals.special_view_active,
                         settings: Some(parts.settings),
-                        pad_hints: self.pad_hints,
+                        pad_wording: self.pad_wording,
                         language: self.language,
                         database_resources: self.database_resources,
                         radar_jitter: session
@@ -1069,7 +1069,7 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                             crate::menu_text::INITIAL_GLYPH_BASE_WORD,
                         ),
                         credits: screen.credits(),
-                        pad_hints: self.pad_hints,
+                        pad_wording: self.pad_wording,
                         language: self.language,
                     };
                     crate::results_page::software::draw(
@@ -1110,7 +1110,7 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                                     state: &mut self.frontend_state.menu,
                                     profiles,
                                     owner_flag,
-                                    pad_hints: self.pad_hints,
+                                    pad_wording: self.pad_wording,
                                     language: self.language,
                                 },
                             )

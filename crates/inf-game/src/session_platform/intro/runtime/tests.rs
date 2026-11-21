@@ -118,7 +118,7 @@ fn production_intro_admission_moves_authored_helper_and_publishes_camera_pose() 
         input_mode_08: 0,
         vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
         settings_84: 0,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         residency_language: 0,
     };
     let mut first_helper_position = None;

@@ -24,9 +24,9 @@ pub struct NameEntryFrameInput<'a> {
     pub animation: AnimationClock,
     /// Live process word 00533760 for object callback 0043A270.
     pub selector_one: u16,
-    /// The port's Controller hints gate: the retry prompt (global 39) words
-    /// its controls as the pad does, outside a network game.
-    pub pad_hints: bool,
+    /// The port's Controller hints wording: the retry prompt (global 39)
+    /// words its controls as the pad does; Retail keeps the PC text.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }

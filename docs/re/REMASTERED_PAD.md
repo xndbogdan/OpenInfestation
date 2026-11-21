@@ -2,10 +2,11 @@
 
 A third controller layout for modern game pads: the same physical bindings on
 any SDL game controller (Xbox, PlayStation, 8BitDo), positional by SDL's
-button names. This document is research and design only: it records the retail
-actions each agreed binding means, the evidence for them, the recommended
-implementation in this port, the hint-wording plan, and what cannot be done as
-agreed. Nothing here is implemented yet.
+button names. This document records the retail actions each agreed binding
+means, the evidence for them, the recommended implementation in this port, the
+hint-wording plan, and what cannot be done as agreed. The hint wording of
+section 9 is implemented; the layout, its device and its tables are not yet
+(the branch that adds them follows this document).
 
 The agreed scheme:
 
@@ -713,69 +714,63 @@ It is out of scope here; the user may want it as a separate change.
 ## 9. Hint wording
 
 `control_hints.rs` holds the PS1 release's sentences for the nine control
-global IDs (37–40, 866–870), reworded with Xbox names for the Console layout.
-The Remastered layout needs its own sentences and its own names.
+global IDs (37–40, 866–870) as templates filled for the layout and pad family.
+Console + Xbox keeps the port's original bytes, Console + PlayStation uses the
+PS1's own names, and the Remastered layout names its own bindings in either
+family.
 
 ### 9.1 The wording selector
 
-Replace the `pad_hints: bool` threaded through the message environment and
-draw contexts with a small `Copy` enum:
+The message environment and every draw context carry a small `Copy` enum
+(`crates/inf-game/src/control_hints.rs`) instead of the old `pad_hints` bool:
 
 ```rust
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum PadWording {
-    #[default]
-    Retail,                    // PC text, byte for byte
-    Console,                   // existing PS1 sentences, Xbox names
-    Remastered(ButtonFamily),  // Remastered sentences, family names
+    Retail,                    // PC text, byte for byte (the default)
+    Console(PadFamily),        // PS1 sentences, named for the Console pad
+    Remastered(PadFamily),     // PS1 sentences, named for the Remastered pad
 }
+
+pub enum PadFamily { Xbox, PlayStation }
 
 pub fn pad_hint(wording: PadWording, global_id: u32, language: u8)
     -> Option<Cow<'static, [u8]>>;
 ```
 
-(The Retail and Console arms return `Cow::Borrowed`; Remastered formats the
-tokens. The existing draw contexts already hold the function as a plain
-`fn` pointer and are the only places that need the signature change.)
+`ControllerHints::wording(…)` keeps the existing gate's shape: `Retail` for
+the Retail setting, a missing pad, the PC layout or a network game
+(`0055F448`); `Console(family)` for the Console layout and
+`Remastered(family)` for the Remastered layout otherwise.
 
-`ControllerHints::uses_pad_wording` becomes `wording(…) -> PadWording`:
-`Retail` for the Retail setting, a missing pad, the PC layout or a network
-game (`0055F448`), `Console` for the Console layout, `Remastered(family)` for
-the Remastered layout. This keeps the existing gate's shape and the network
-exclusion exactly as they are.
+The table stores the PS1 sentence per language as a template with button
+tokens (`{MODE}`, `{TURBO}`, `{SELECT}`, `{DROP}`, `{CONFIRM}`, `{SAVE}`,
+`{BACK}`, `{START}`). Filling resolves each token to the layout's physical
+button, then names it for the family:
 
-The Remastered sentences use tokens resolved per family, e.g.:
+| Token | Console layout | Remastered layout |
+| --- | --- | --- |
+| confirm | Cross | A |
+| back | Triangle | B |
+| save / retry | Circle | X |
+| mode | L1 | Y |
+| turbo | Cross | A |
+| select | Cross | A |
+| drop / beam down | Triangle | Y |
+| start | Start | Start |
 
-| ID | Template |
-| --- | --- |
-| 37 | `Press {save} to save` |
-| 38 | `Start or {confirm} to continue` |
-| 39 | `Press {confirm} to carry on, {retry} to retry` |
-| 40 | `Press {confirm} to continue, {back} to cancel` |
-| 866 | `Press {mode} to activate big wheeled mode` |
-| 867 | `Press {mode} again to return to normal buggy mode` |
-| 868 | `To select an item use up and down and {confirm}` |
-| 869 | `Use {thrust} to activate turbo booster` |
-| 870 | `Drop scientists close to a factory ({beam_down}) and they will go to work` |
-
-| Token | Xbox | PlayStation | Nintendo | Generic |
-| --- | --- | --- | --- | --- |
-| confirm | A | Cross | B | A |
-| back | B | Circle | A | B |
-| save | X | Square | Y | X |
-| retry | X | Square | Y | X |
-| mode | Y | Triangle | X | Y |
-| thrust | LT | L2 | ZL | LT |
-| beam_down | A | Cross | B | A |
-
-The six non-English banks are the same sentences with the token substituted
-(retail's translations, with the button word replaced). Strings are Latin-1
-bytes; the tokens are ASCII, so substitution is a byte splice. The existing
-H4 glyph sweep must cover them.
+Console + Xbox reproduces the old table's bytes exactly
+(`the_console_xbox_table_keeps_its_bytes` pins them). Console + PlayStation
+names the PS1's own buttons: Cross, Circle, Square, Triangle, L1, R1, L2, R2,
+Start, Select. Remastered + Xbox names A, B, X, Y, LB, RB, LT, RT, View,
+Start; Remastered + PlayStation names Cross, Circle, Square, Triangle, L1,
+R1, L2, R2, Create, Options (Start is Options). The six non-English banks are
+retail's translations with the button word substituted; strings stay Latin-1
+and the H4 glyph sweep covers every layout and family.
 
 ID 865 stays the PC text (it is not a control hint and the port's factory
-beam behavior is not the PS1's). If the user wants the Remastered 866/867 to
-say "Y" rather than "mode", the table is one word.
+beam behavior is not the PS1's). The old table's wording choices stay: 866
+and 867 name the mode button (Y on Remastered; LB or L1 on Console), not the
+word "mode".
 
 ### 9.2 Deriving the pad family
 
@@ -790,40 +785,30 @@ let kind = unsafe { sdl2::sys::SDL_GameControllerTypeForIndex(index as i32) };
 ```
 
 `index` is the device index already passed to `ControllerSubsystem::open` in
-`SdlPads::open_at`. For an unmapped joystick,
-`SDL_JoystickGetDeviceType(index)` is the analogue. `SDL_GameControllerType`
-is available since SDL 2.0.12; the bundled SDL2 is newer. Map it in
-`platform_pad.rs`:
+`SdlPads::open_at`. `SDL_GameControllerType` is available since SDL 2.0.12;
+the bundled SDL2 is newer. The port has two families:
 
 | SDL type | Family | Names |
 | --- | --- | --- |
-| XBOX360, XBOXONE | Xbox | A, B, X, Y, LB, RB, LT, RT, View, Start, L3, R3 |
-| PS3 | PlayStation | Cross, Circle, Square, Triangle, L1, R1, L2, R2, Select, Start, L3, R3 |
-| PS4 | PlayStation | …, Share, Options |
-| PS5 | PlayStation | …, Create, Options |
-| SWITCH_PRO, JOYCON_* | Nintendo | B, A, Y, X, L, R, ZL, ZR, Minus, Plus |
-| everything else (8BitDo generic, Luna, Stadia, Shield, unknown) | Generic | positional A, B, X, Y, LB, RB, LT, RT, View, Start |
+| PS3, PS4, PS5 | PlayStation | Cross, Circle, Square, Triangle, L1, R1, L2, R2 |
+| everything else (XBOX360, XBOXONE, SWITCH_PRO, JOYCON_*, Luna, Stadia, Shield, unknown) | Xbox | A, B, X, Y, LB, RB, LT, RT |
 
-The Nintendo row names the printed buttons: SDL's positional A is the switch's
-bottom button, printed B. A generic pad keeps positional letters, which is
-what 8BitDo's generic mode reports.
-
-`SdlPads` stores the family with each `OpenPad` at open and exposes
+Everything but SDL's three PlayStation types names Microsoft's positional
+letters, which is what an 8BitDo in XInput mode and SDL's generic pads
+report. `SdlPads` stores the family with each `OpenPad` at open and exposes
 `family()` for the pad in use.
 
 ### 9.3 Replay determinism
 
 The family is live SDL state, not in the pad sample, so a replay must not read
-it live. Add a `c <family>` line to the session replay (`session_log.rs`):
-
-- `SessionRecorder::family(family)` writes it whenever the active pad's family
-  changes (before the first `p` line for that pad).
-- `SessionReplay` parses it into `family: Option<ButtonFamily>`; the replay
-  cursor's latest value is what the wording uses.
-- `frontend_app` passes the replay's family when replaying, else
-  `SdlPads::family()`, into `SessionPlatformInputs`/`WorldTickPlatformInputs`.
-- A replay without a `c` line (all existing files) falls back to `Generic`,
-  which the current Console layout never consults.
+it live. `SessionRecorder::family(family)` writes `c <family>` (`c xbox` or
+`c playstation`) whenever the active pad's family changes; the first call
+writes it too, before the first `p` line. `SessionReplay` parses it into
+`ReplayEntry::PadFamily`, and the replay cursor's latest value is what the
+wording uses. `frontend_app` passes the replay's family when replaying, else
+`SdlPads::family()`, into `SdlPlatform`'s `pad_family`, which
+`world_tick_inputs` reads. A replay without a `c` line (all older files) reads
+as Xbox.
 
 Hints are display text only: the family never reaches the simulation, and a
 mid-session pad swap only changes later hints. A recording that changes pads

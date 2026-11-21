@@ -178,7 +178,7 @@ fn draw(
             store,
             owner_flag: owner,
             surface_pixels: [640, 480],
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         },
         resources,

@@ -56,9 +56,9 @@ pub struct NameEntryDrawFrame<'a> {
     /// Shared glyph base word 0055F8F8; the draw leaves it untouched.
     pub base_color: MenuColor,
     pub sine_quarter: &'a [u16; 4096],
-    /// The port's Controller hints gate: the retry prompt (global 39) words
-    /// its controls as the pad does, outside a network game.
-    pub pad_hints: bool,
+    /// The port's Controller hints wording: the retry prompt (global 39)
+    /// words its controls as the pad does; Retail keeps the PC text.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }
@@ -147,10 +147,10 @@ struct DrawContext<'a, R, H> {
 
 /// 00459Fxx replaces descriptor +00 with the retry label. Later sprintf
 /// calls still fill the local buffer, but never restore that pointer.
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 enum NameTextSource<'a> {
     Formatted,
-    RetryLabel(&'a [u8]),
+    RetryLabel(std::borrow::Cow<'a, [u8]>),
 }
 
 impl NameTextSource<'_> {
@@ -214,7 +214,9 @@ impl<'a, R: MenuTextResources, H: NameEntryDrawHost> DrawContext<'a, R, H> {
             .map_err(NameEntryDrawError::Host)
     }
 
-    fn error_lines(&mut self) -> Result<&'a [u8], NameEntryDrawError<R::Error, H::Error>> {
+    fn error_lines(
+        &mut self,
+    ) -> Result<std::borrow::Cow<'a, [u8]>, NameEntryDrawError<R::Error, H::Error>> {
         let [width, height] = self.frame.surface_pixels;
         let blinking = if (self.frame.age_millis / 250) % 2 != 0 {
             3
@@ -234,23 +236,21 @@ impl<'a, R: MenuTextResources, H: NameEntryDrawHost> DrawContext<'a, R, H> {
             ],
             color,
         )?;
-        let text = if self.frame.pad_hints {
-            crate::control_hints::pad_hint(0x27, self.frame.language)
-        } else {
-            None
-        };
-        let text = match text {
-            Some(text) => text,
-            None => self
-                .resources
-                .string(0x27)
-                .map_err(NameEntryDrawError::Resource)?,
-        };
+        let text =
+            match crate::control_hints::pad_hint(self.frame.pad_wording, 0x27, self.frame.language)
+            {
+                Some(text) => text,
+                None => std::borrow::Cow::Borrowed(
+                    self.resources
+                        .string(0x27)
+                        .map_err(NameEntryDrawError::Resource)?,
+                ),
+            };
         let color = self.color(2)?;
         self.line(
-            text,
+            text.as_ref(),
             [
-                width.wrapping_sub(self.width(text)?) / 2,
+                width.wrapping_sub(self.width(text.as_ref())?) / 2,
                 height.wrapping_mul(14) / 20,
             ],
             color,
