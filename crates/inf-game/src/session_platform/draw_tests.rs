@@ -223,6 +223,7 @@ impl software::PortDrawPlatform for Factory {
             audio: None,
             video: None,
             network: None,
+            right_stick: None,
         }
     }
 

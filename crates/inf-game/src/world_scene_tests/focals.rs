@@ -123,6 +123,7 @@ fn intro_and_mission_draws_consume_current_special_view_state() {
             let outcome = draw_world_frame(
                 WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,

@@ -214,6 +214,10 @@ pub struct WorldDrawRequest<'a> {
     /// the drawn view over what blocks it ([`crate::camera_clearance`]);
     /// None draws retail's camera.
     pub camera_clearance: Option<crate::camera_clearance::CameraClearanceLoan<'a>>,
+    /// Port option, not retail: the Remastered pad's chase orbit when the
+    /// camera itself is retail's own (Normal or Cinematic); the remastered
+    /// camera applies it inside [`crate::camera_clearance::view`] instead.
+    pub camera_orbit: Option<[f32; 2]>,
 }
 
 /// World and process owners needed by the shared furniture phase. Birth phase
@@ -786,6 +790,7 @@ impl WorldDrawRequest<'_> {
             terrain_dust_enabled: self.terrain_dust_enabled,
             map: self.map.as_deref_mut(),
             camera_clearance: None,
+            camera_orbit: None,
         }
     }
 }
@@ -1071,6 +1076,20 @@ fn world_view<'r>(
             },
             native_camera,
         );
+    } else if let Some([yaw, pitch]) = request.camera_orbit {
+        shown_camera = crate::camera_clearance::orbit_view(
+            crate::camera_clearance::CameraOrbitWorld {
+                arena: &world.arena,
+                camera,
+                terrain: &world.terrain,
+                wave_clock: animation_clock,
+                world_flags: world.world_flags,
+                sine: &sine,
+            },
+            native_camera,
+            yaw,
+            pitch,
+        );
     }
     let view = SceneView {
         eye: shown_camera.eye,
@@ -1168,6 +1187,7 @@ fn draw_world_pass<'r>(
         terrain_dust_enabled,
         mut map,
         camera_clearance: _,
+        camera_orbit: _,
     } = request;
     let animation_clock = camera.animation_clock;
     let terrain_residency = camera.residency;

@@ -1046,3 +1046,52 @@ fn a_type_eight_pad_uses_the_playstation_byte_axes() {
         .unwrap();
     assert!(!devices.joystick_live());
 }
+
+/// The camera orbit reads the Remastered right stick (axes 2 and 3) from the
+/// stored Pad readings: the PC and Console layouts expose none, and a failed
+/// read (the pad removed) exposes none either, so the orbit resets.
+#[test]
+fn the_remastered_right_stick_comes_from_the_pad_reading_and_only_there() {
+    let mut input = InputRuntime::default();
+    let devices = SdlInput::attach(&mut input).unwrap();
+    assert_eq!(devices.right_stick(), None, "before the first reading");
+    let reading = |native_type, sample| InputNotification::Pad {
+        native_type,
+        axes: 6,
+        sample,
+    };
+    let read = |x, y| PadSample::Read {
+        buttons: 0,
+        axes: [0x80, 0x80, x, y, 0x80, 0x80],
+    };
+    for native_type in [2, 9] {
+        let mut input = InputRuntime::default();
+        let mut host = Host::default();
+        let mut devices = SdlInput::attach(&mut input).unwrap();
+        devices
+            .update(
+                reading(native_type, read(0x11, 0xee)),
+                &mut input,
+                &mut host,
+            )
+            .unwrap();
+        assert_eq!(devices.right_stick(), None, "native type {native_type}");
+    }
+    // A fresh input: the first Pad creates the device, as in a recording.
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    devices
+        .update(reading(8, read(0x11, 0xee)), &mut input, &mut host)
+        .unwrap();
+    assert_eq!(devices.right_stick(), Some([0x11, 0xee]));
+    // A later reading replaces it, and a failed read is the removal.
+    devices
+        .update(reading(8, read(0xc0, 0x3f)), &mut input, &mut host)
+        .unwrap();
+    assert_eq!(devices.right_stick(), Some([0xc0, 0x3f]));
+    devices
+        .update(reading(8, PadSample::Failed), &mut input, &mut host)
+        .unwrap();
+    assert_eq!(devices.right_stick(), None);
+}

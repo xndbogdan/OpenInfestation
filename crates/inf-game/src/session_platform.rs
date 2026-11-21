@@ -156,6 +156,13 @@ pub trait PortSessionServices {
     fn sound_voice_teardown(&mut self) -> crate::process_sound::ProcessSoundTeardownLoan<'_>;
     /// Live Settings_GetPtr fields consumed by intro and camera callbacks.
     fn world_tick_inputs(&self) -> WorldTickPlatformInputs;
+    /// The Remastered pad's right stick from the notification stream the
+    /// input runtime processed, never live SDL state: axes 2 and 3, bytes
+    /// centred on `0x80`. `None` for every other layout and while absent, so
+    /// a recording and `--input-replay` reproduce the orbit exactly.
+    fn controller_right_stick(&self) -> Option<[u8; 2]> {
+        None
+    }
     /// `00463AB0()+84 |= bits`: the settings' cheat word, which a world
     /// gate grants (0048C407). False when the platform lends no settings.
     fn grant_cheat_flag(&mut self, bits: u32) -> bool {

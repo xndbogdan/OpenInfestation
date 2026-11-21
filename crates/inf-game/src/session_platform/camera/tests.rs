@@ -10,6 +10,7 @@ struct CameraOwners {
     globals: CameraGlobalState,
     inverse_sine: [i16; 1024],
     clock: crate::frontend_camera::AnimationClock,
+    orbit: crate::camera_clearance::CameraClearance,
 }
 
 impl CameraOwners {
@@ -25,6 +26,7 @@ impl CameraOwners {
             .unwrap()
             .values,
             clock: Default::default(),
+            orbit: Default::default(),
         }
     }
 
@@ -64,6 +66,9 @@ impl CameraOwners {
                 inverse_sine: &self.inverse_sine,
                 up: [0.0, 1.0, 0.0],
                 shake_enabled: 0,
+                right_stick: None,
+                network_game: false,
+                orbit: &mut self.orbit,
             },
         );
     }
@@ -133,6 +138,20 @@ fn loaded(
     .unwrap();
     let world = crate::world_backend::WorldSession::from_loaded(load_owner, load_metadata);
     (runtime, assets, world, maps)
+}
+
+#[test]
+fn only_the_remastered_pad_in_a_solo_chase_may_orbit() {
+    let stick = Some([0xff, 0x00]);
+    assert_eq!(orbit_stick(3, false, stick), stick);
+    // First person (2), the death camera (0), the dock (1) and the special
+    // views (4) let the orbit go, as a network game does.
+    for mode in [0, 1, 2, 4] {
+        assert_eq!(orbit_stick(mode, false, stick), None, "mode {mode}");
+    }
+    assert_eq!(orbit_stick(3, true, stick), None);
+    // PC and Console have no right-stick reading at all.
+    assert_eq!(orbit_stick(3, false, None), None);
 }
 
 #[test]

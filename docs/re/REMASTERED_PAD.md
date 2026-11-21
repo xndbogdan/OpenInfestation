@@ -15,7 +15,7 @@ The agreed scheme:
   (next owned mode); LB/RB previous/next gun; d-pad left weapon ring, right
   grenade ring, up detonator, down lights; L3 CPU access; R3 map; View first
   person; Start pause; Y held + d-pad left/right cargo rotate. The right stick
-  is reserved and unbound.
+  has no binding: it orbits the gameplay chase camera (section 3.4).
 - **Menus** (frontend, briefing, results, name entry, in-world pause, map, key
   configuration): A confirm, B back, left stick and d-pad move, LB/RB page
   where a screen pages, Start closes the in-world menu, View opens the map
@@ -105,8 +105,8 @@ The only changes are the axis count and the last two axes:
 | --- | --- |
 | 0 | left stick X, `position(v) >> 8` (0..255) |
 | 1 | left stick Y, `position(v) >> 8` |
-| 2 | right stick X, `position(v) >> 8` (reserved, unbound) |
-| 3 | right stick Y, `position(v) >> 8` (reserved, unbound) |
+| 2 | right stick X, `position(v) >> 8` (the camera orbit, section 3.4; no binding reads it) |
+| 3 | right stick Y, `position(v) >> 8` (the camera orbit, section 3.4; no binding reads it) |
 | 4 | thrust: right trigger forward, left trigger reverse, `0x80 + (RT − LT) × 0x7F / 0xFFFF` |
 | 5 | `0x80` (unused) |
 
@@ -235,6 +235,41 @@ terrain detail (Alt+F3), next world (Alt+N), network restart (F10), direct
 modes 1..5 (mode 6 has no default key at all), and free look (V) beyond WinMM
 button 12. Map (M), lights (L) and first person (F12) exist on pads only
 through the unreachable WinMM buttons or the PS1 chords.
+
+### 3.4 The right stick orbits the chase camera (port option)
+
+Retail has no camera orbit, and no binding table reads axes 2 and 3. The port
+adds one under the Remastered layout alone: the right stick swings the
+gameplay chase camera round the craft like a modern third-person camera.
+
+- **Input.** Axis 2 is yaw, axis 3 pitch, bytes 0..255 centred on `0x80`.
+  A dead zone of `0x10` each side leaves the chase alone; past it the
+  deflection reaches the limit. Yaw reaches `±150°`; pitch raises the eye up
+  to `60°` and lowers it up to `35°`, and the eye is never left under the
+  ground or the water (retail's 80 units of clearance above the higher
+  surface under it), so the view cannot pass under the terrain or over the
+  top.
+- **Release.** Centred bytes ease the orbit back behind the craft: a
+  critically damped spring of about `0.15 s`, 97% of a full swing back
+  within half a second, then exactly the game's chase.
+- **Where it applies.** Chase (camera mode 3) only, with any Camera Style:
+  the Remastered camera applies the turn in its own view, and Normal and
+  Cinematic apply the same turn to retail's camera without any other
+  remastered camera behavior. First person, the death camera, the dock and
+  special views reset it at once, as do the map, the CPU panel and the
+  in-world menu (all shown menus), where no orbit is drawn. It is a
+  single-player feature: a network game stays retail's.
+- **Determinism.** The bytes come from `SdlInput`'s stored Pad notification
+  ([`SdlInput::right_stick`](../../crates/inf-game/src/platform_input.rs)),
+  never live SDL, and the offset advances in the world tick with the camera's
+  own tick delta, so `--replay-session` reproduces the view the game plays.
+  The offset lives in the port's camera state
+  ([`camera_clearance`](../../crates/inf-game/src/camera_clearance.rs)), not
+  in a retail structure, and resets on a world change, on entering first
+  person and when the pad is removed.
+- **Tuning.** The limits, dead zone, spring and clearance are port constants;
+  the feel (how far a full deflection travels, how quickly it follows) has
+  had unit and snapshot coverage but needs played passes on each craft.
 
 ## 4. The menu actions
 
@@ -836,11 +871,13 @@ writes one `c` line per family change, so the replay matches.
 - **Network games.** A Remastered pad sends only retail callbacks and retail
   control-block values; it adds no message, no actor state and no simulation
   branch. So it is compatible with the network game's "retail's game on every
-  renderer" rule, like the PC and Console pads. The hint wording stays PC in
-  network games through the existing `0055F448` gate. If the user prefers a
-  stricter reading ("network games play retail's input device too"), the
-  launcher can hide Remastered while a network session is active; that is a
-  policy choice, not a technical constraint.
+  renderer" rule, like the PC and Console pads. The right-stick camera orbit
+  is disabled in a network game (section 3.4), so the view there is retail's
+  on every renderer. The hint wording stays PC in network games through the
+  existing `0055F448` gate. If the user prefers a stricter reading ("network
+  games play retail's input device too"), the launcher can hide Remastered
+  while a network session is active; that is a policy choice, not a technical
+  constraint.
 - **No retail function changes status.** Every callback the Remastered tables
   bind is already ported; the new module only binds existing actions to new
   device codes, so `docs/progress/status.csv` needs no new rows.
