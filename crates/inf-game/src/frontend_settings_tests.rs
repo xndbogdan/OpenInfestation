@@ -1275,6 +1275,7 @@ fn port_fixes_default_on_and_older_sidecars_load_with_them_on() {
             "paced_doom": true,
             "splash_voice_cap": true,
             "mission_completion": true,
+            "factory_dock_releases_pad": true,
             "all_cheats": false,
             "prototype_world": true,
             "pelagia_rework": true
@@ -1297,6 +1298,7 @@ fn port_fixes_default_on_and_older_sidecars_load_with_them_on() {
             && fixes.paced_doom
             && fixes.splash_voice_cap
             && fixes.mission_completion
+            && fixes.factory_dock_releases_pad
             && fixes.prototype_world
             && fixes.pelagia_rework
     );
@@ -1324,6 +1326,7 @@ fn a_fix_switched_off_persists_and_selects_the_retail_step() {
         paced_doom: false,
         splash_voice_cap: false,
         mission_completion: false,
+        factory_dock_releases_pad: false,
         all_cheats: false,
         prototype_world: false,
         pelagia_rework: false,
@@ -1366,6 +1369,7 @@ fn a_fix_switched_off_persists_and_selects_the_retail_step() {
             "paced_doom": false,
             "splash_voice_cap": false,
             "mission_completion": false,
+            "factory_dock_releases_pad": false,
             "all_cheats": false,
             "prototype_world": false,
             "pelagia_rework": false

@@ -18,12 +18,13 @@ impl PortLinked<'_> {
     pub fn poll_gameplay(
         &mut self,
         state: &mut SessionState,
-        pass: PortInputPass<'_>,
+        mut pass: PortInputPass<'_>,
         world: &mut WorldSession,
         sounds: &mut crate::process_sound::ProcessSoundRuntime,
         exit_requested: &mut bool,
         settings: &mut [u32; crate::frontend_settings::SETTINGS_WORDS],
         cheats_84: u32,
+        factory_dock_releases_pad: bool,
     ) -> Result<(), GameplayLinkedError> {
         let owner = self.attachment.context_owner;
         let screen = self
@@ -31,6 +32,22 @@ impl PortLinked<'_> {
             .as_deref_mut()
             .ok_or(LinkedScreenError::Unlinked)?;
         let input = &mut *self.input;
+        if factory_dock_releases_pad {
+            // Port fix: the first frame the player's message shows (the
+            // factory's shop after it docks) releases the pad's held buttons
+            // and axes, as the same brake releases the keyboard's steering.
+            let shown = world.arena.first_player().is_some_and(|player| {
+                world
+                    .arena
+                    .world_player(player)
+                    .is_ok_and(|state| state.message_byte_00() != 0)
+            });
+            if let Some(keyboard) = pass.keyboard.as_deref_mut() {
+                keyboard
+                    .note_message_shown(shown, input)
+                    .map_err(|error| GameplayLinkedError::Tick(error.to_string()))?;
+            }
+        }
         let executable =
             inf_formats::FrontendExecutable::parse(self.catalog.assets().executable_bytes()).ok();
         let clock = crate::frontend_camera::AnimationClockSource::animation_value(self.process);

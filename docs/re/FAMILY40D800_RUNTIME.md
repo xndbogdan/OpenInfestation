@@ -766,7 +766,13 @@ just past it, the collision stops it below 700 and the next pad test docks
 it. The shop shows, and under it the controls brake (thrust -100 times the
 forward speed for the buggy and the truck, `0046A719`, which also zeroes
 turn and pitch, so a held Up no longer drives) while the pull below draws
-the ACAM onto the dock point. It stops short where the pull's
+the ACAM onto the dock point. The brake leaves the analog block
+`+04/+08/+0C/+10` alone (`0046A3B8`), so retail's own joystick keeps steering
+the docked vehicle while the keyboard does not; the port's
+`PortFixes::factory_dock_releases_pad` releases the pad's held buttons and
+off-centre axes until they are let go (see
+[the input runtime](INPUT_RUNTIME.md#the-joystick-the-mouse-and-the-input-mode)).
+It stops short where the pull's
 `(delta << 12) * offset >> 31` (`imul`, then `shl eax, 1` / `rcl edx, 1`:
 a floored shift) reaches 0 for a positive offset: below 5 at 125 ms ticks,
 below 32 at a 16384 µs tick, as retail's is at 60 fps.

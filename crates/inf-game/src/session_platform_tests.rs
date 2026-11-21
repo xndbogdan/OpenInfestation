@@ -363,6 +363,7 @@ impl PortSessionServices for RecordingServices {
             settings_7c: 0,
             input_mode_08: 0,
             settings_84: self.cheats_84,
+            factory_dock_releases_pad: true,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
             pad_wording: crate::control_hints::PadWording::Retail,
             residency_language: 0,

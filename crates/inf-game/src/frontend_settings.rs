@@ -354,6 +354,15 @@ pub struct PortFixes {
     /// [`crate::object_runtime::ObjectArena::selector35_grant_rescue`].
     #[serde(default = "fix_enabled")]
     pub mission_completion: bool,
+    /// Release the pad's held buttons and deflected axes when a player message
+    /// starts to show (a factory's shop after it docks the vehicle), and keep
+    /// each released until the player lets it go. Retail's message brake
+    /// (`0046A719`) zeroes the keyboard's turn and pitch but leaves the
+    /// joystick's analog block `+04/+08/+0C/+10` (`0046A3B8`), so a pad keeps
+    /// steering the docked vehicle. See
+    /// [`crate::input::InputRuntime::release_held_controls`].
+    #[serde(default = "fix_enabled")]
+    pub factory_dock_releases_pad: bool,
     /// Open every row of the computer's Cheats Menu, as if every name cheat
     /// that opens one had been entered, without changing the saved cheat
     /// word. Off by default: retail opens a row only for its name. See
@@ -419,6 +428,7 @@ impl Default for PortFixes {
             paced_doom: true,
             splash_voice_cap: true,
             mission_completion: true,
+            factory_dock_releases_pad: true,
             all_cheats: false,
             prototype_world: true,
             pelagia_rework: true,

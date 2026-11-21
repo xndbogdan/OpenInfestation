@@ -30,7 +30,8 @@ use sdl2::keyboard::Scancode;
 use crate::frontend_bindings::FrontendDevice;
 use crate::input::AxisTransform;
 use crate::input::{
-    DeviceButtons, DeviceId, DeviceSnapshot, InputError, InputHost, InputRuntime, InputStateError,
+    AxisRest, DeviceButtons, DeviceId, DeviceSnapshot, InputError, InputHost, InputRuntime,
+    InputStateError,
 };
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -126,12 +127,22 @@ struct NativePad {
 /// ([`crate::platform_pad`]) uses the same test to see which pad the player
 /// picked up.
 pub(crate) fn axis_off_centre(value: u32, native_type: u8) -> bool {
-    let (centre, dead_zone) = if native_type == 2 {
-        (0x8000, 0x4000)
+    pad_axis_rest(native_type).off_centre(value as i32)
+}
+
+/// [`axis_off_centre`]'s raw envelope, for the input owner's capture release.
+fn pad_axis_rest(native_type: u8) -> AxisRest {
+    if native_type == 2 {
+        AxisRest {
+            centre: 0x8000,
+            dead_zone: 0x4000,
+        }
     } else {
-        (0x80, 0x40)
-    };
-    value.abs_diff(centre) > dead_zone
+        AxisRest {
+            centre: 0x80,
+            dead_zone: 0x40,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -152,6 +163,11 @@ pub struct SdlInput {
     /// by the gameplay input pass, which pauses as on the PlayStation release.
     pad_removed: bool,
     last_input: LastInput,
+    /// Whether the first player's message was shown at the last gameplay poll
+    /// (the factory's shop, the computer, a hint). Its first frame releases
+    /// the pad's held controls
+    /// ([`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes::factory_dock_releases_pad)).
+    message_shown: bool,
 }
 
 impl SdlInput {
@@ -164,6 +180,7 @@ impl SdlInput {
             pad: None,
             pad_removed: false,
             last_input: LastInput::Keyboard,
+            message_shown: false,
         })
     }
 
@@ -234,6 +251,27 @@ impl SdlInput {
             .is_some_and(|pad| pad.adapter && !(matches!(pad.native_type, 8 | 9) && pad.absent))
     }
 
+    /// Port fix [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes):
+    /// the first frame a player message is shown (a factory's shop after it
+    /// docks the vehicle) releases the pad's held buttons and deflected axes,
+    /// as the message brake releases the keyboard's steering (`0046A719`).
+    /// Each stays released until the pad reports it up (or the stick back in
+    /// its dead zone). Every later frame while the message shows does
+    /// nothing, so a control pressed after the release counts normally.
+    pub fn note_message_shown(
+        &mut self,
+        shown: bool,
+        input: &mut InputRuntime,
+    ) -> Result<(), InputStateError> {
+        if shown && !self.message_shown {
+            if let Some(pad) = self.pad.as_ref() {
+                input.release_held_controls(pad.source)?;
+            }
+        }
+        self.message_shown = shown;
+        Ok(())
+    }
+
     /// Whether the player's last input was the pad: a button newly went down
     /// or an axis newly left its dead zone. A keyboard press takes it back.
     /// Every-frame repeated pad readings, releases, failed reads and key
@@ -267,8 +305,10 @@ impl SdlInput {
                 sample,
             } => {
                 if self.pad.is_none() {
+                    let source = input.create_device(DeviceButtons::default())?;
+                    input.set_axis_rest(source, pad_axis_rest(native_type))?;
                     self.pad = Some(NativePad {
-                        source: input.create_device(DeviceButtons::default())?,
+                        source,
                         native_type,
                         absent: sample == PadSample::Failed,
                         axes: axes.min(6),

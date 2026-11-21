@@ -140,6 +140,10 @@ pub struct FrontendAppRequest {
     /// None retains the saved setting, which is on by default.
     pub splash_voice_cap: Option<bool>,
     pub mission_completion: Option<bool>,
+    /// The port's release of the pad's held controls when a player message
+    /// shows ([`crate::frontend_settings::PortFixes`]). None retains the saved
+    /// setting, which is on by default.
+    pub factory_dock_releases_pad: Option<bool>,
     /// The port's open Cheats Menu ([`crate::frontend_settings::PortFixes`]).
     /// None retains the saved setting, which is off by default.
     pub all_cheats: Option<bool>,
@@ -431,6 +435,11 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
     if let Some(on) = request.mission_completion {
         let mut fixes = settings.fixes();
         fixes.mission_completion = on;
+        settings.set_fixes(fixes);
+    }
+    if let Some(on) = request.factory_dock_releases_pad {
+        let mut fixes = settings.fixes();
+        fixes.factory_dock_releases_pad = on;
         settings.set_fixes(fixes);
     }
     if let Some(all) = request.all_cheats {
@@ -1978,6 +1987,7 @@ mod tests {
             paced_doom: None,
             splash_voice_cap: None,
             mission_completion: None,
+            factory_dock_releases_pad: None,
             all_cheats: None,
             prototype_world: None,
             pelagia_rework: None,

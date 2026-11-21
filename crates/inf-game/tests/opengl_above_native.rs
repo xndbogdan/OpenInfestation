@@ -160,6 +160,7 @@ fn request(screen: &Screen, tag: &str, size: [u32; 2]) -> (FrontendAppRequest, P
             paced_actors: None,
             paced_doom: None,
             mission_completion: None,
+            factory_dock_releases_pad: None,
             splash_voice_cap: None,
             all_cheats: None,
             prototype_world: None,
