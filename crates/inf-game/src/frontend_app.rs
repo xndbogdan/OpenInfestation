@@ -841,6 +841,26 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
         // now, not in its first frame's draw; nothing once they are made.
         crate::crash_log::step(crate::crash_log::Step::PrepareRenderer);
         backend.prepare_trace();
+        // Port-only: the pad notice's lines are made with the renderer, so a
+        // pad's hot-plug mid-game costs an ordinary frame. Its first draw
+        // would otherwise decode every glyph's sprite and, under OpenGL,
+        // upload it on this thread. Hidden runs show no notice.
+        if !request.hidden {
+            let names = pads
+                .iter()
+                .flat_map(|pads| pads.names())
+                .collect::<Vec<_>>();
+            let notice_language = session.platform().frontend.settings.residency_language();
+            if let Err(error) = crate::pad_notice::warm(
+                &mut backend,
+                resources,
+                dimensions,
+                notice_language,
+                &names,
+            ) {
+                eprintln!("Infestation: the pad notice's warm-up failed: {error}");
+            }
+        }
         // The frame's clock also reaches the present callback, which runs
         // after the input pass; a rebind's re-present keeps the last frame's.
         let mut frame_micros = 0u64;

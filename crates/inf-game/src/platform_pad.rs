@@ -564,6 +564,36 @@ fn newly_used(previous: Option<PadSample>, now: PadSample, native_type: u8, axes
     newly_down || newly_off_centre
 }
 
+/// The devices a poll has already attempted and does not hold: a failed open,
+/// or a handle SDL handed out twice. Remembered by device instance id, which
+/// SDL never reuses, so an entry that leaves SDL's list is forgotten — a
+/// re-plug is a new connection to open.
+#[derive(Debug, Default)]
+struct OpenAttempts {
+    tried: Vec<u32>,
+}
+
+impl OpenAttempts {
+    /// The `(index, instance id)` of `devices` to open now: those `held` does
+    /// not name, which this connection has not tried. Each is remembered, so
+    /// an unopenable device costs one attempt, not one a frame. Ids SDL no
+    /// longer lists are forgotten whenever an open is considered; SDL never
+    /// reuses one, so a stale entry could only waste a few bytes.
+    fn open(&mut self, devices: &[(u32, u32)], held: &[u32]) -> Vec<(u32, u32)> {
+        self.tried
+            .retain(|id| devices.iter().any(|(_, listed)| listed == id));
+        let mut open = Vec::new();
+        for &(index, id) in devices {
+            if held.contains(&id) || self.tried.contains(&id) {
+                continue;
+            }
+            self.tried.push(id);
+            open.push((index, id));
+        }
+        open
+    }
+}
+
 /// Every open pad, the native type and axis count the first pad latched, and
 /// the pad changes the notice reads.
 pub struct SdlPads {
@@ -573,6 +603,7 @@ pub struct SdlPads {
     pads: Vec<OpenPad>,
     device: Option<(u8, u8)>,
     book: PadBook,
+    attempts: OpenAttempts,
 }
 
 impl SdlPads {
@@ -584,6 +615,7 @@ impl SdlPads {
             pads: Vec::new(),
             device: None,
             book: PadBook::default(),
+            attempts: OpenAttempts::default(),
         })
     }
 
@@ -621,22 +653,36 @@ impl SdlPads {
     /// whether anything is missing, and an opened handle's instance id is the
     /// dedupe key, so the second handle SDL can hand out for an already-open
     /// device is dropped at once.
+    ///
+    /// An SDL open is main-thread work (SDL requires the thread that
+    /// initialised it), so each listed device is attempted once per
+    /// connection ([`OpenAttempts`]): a hot-plug does not re-open the pads it
+    /// already holds, nor retry a device every frame while its open fails.
     fn open_new(&mut self) {
         let listed = self.listed();
-        let mut missing = listed.saturating_sub(self.pads.len() as u32);
-        for index in 0..listed {
-            if missing == 0 {
-                break;
-            }
+        if self.pads.len() as u32 >= listed {
+            return;
+        }
+        let devices = (0..listed)
+            .filter_map(|index| Some((index, self.device_instance_id(index)?)))
+            .collect::<Vec<_>>();
+        let held = self.pads.iter().map(|pad| pad.id).collect::<Vec<_>>();
+        for (index, _) in self.attempts.open(&devices, &held) {
             let Some(pad) = self.open_at(index) else {
                 continue;
             };
-            if self.pads.iter().any(|open| open.id == pad.id) {
-                continue;
+            if !self.pads.iter().any(|open| open.id == pad.id) {
+                self.pads.push(pad);
             }
-            self.pads.push(pad);
-            missing -= 1;
         }
+    }
+
+    /// The device instance id SDL gives the device at `index`: one per
+    /// connection, shared by every handle to it, and new after a re-plug.
+    fn device_instance_id(&self, index: u32) -> Option<u32> {
+        // SAFETY: `index` is a device SDL just listed, and SDL is initialized
+        // by the `Sdl` the holder keeps for the life of `SdlPads`.
+        u32::try_from(unsafe { sdl2::sys::SDL_JoystickGetDeviceInstanceID(index as i32) }).ok()
     }
 
     /// The window lost focus: the pad in use lets go, one reading with
@@ -665,6 +711,12 @@ impl SdlPads {
             .active()
             .and_then(|id| self.pads.iter().find(|pad| pad.id == id))
             .map_or(PadFamily::Xbox, |pad| pad.family)
+    }
+
+    /// The names SDL gave the pads open now: the notice's own lines, which a
+    /// hot-plug shows, so a renderer can make their glyphs before then.
+    pub fn names(&self) -> impl Iterator<Item = &str> {
+        self.pads.iter().map(|pad| pad.name.as_str())
     }
 
     /// The frame's reading, once a pad has been open: the pad in use's

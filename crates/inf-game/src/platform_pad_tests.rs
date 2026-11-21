@@ -501,3 +501,35 @@ fn each_layout_reports_its_native_type_and_axis_count() {
         assert_eq!(pad_native_type(false, layout), 2);
     }
 }
+
+/// One device SDL lists: its index and the device instance id SDL gives the
+/// connection. A held pad is never opened again, and a device whose open
+/// failed is not retried while SDL keeps listing it: an SDL open is
+/// main-thread work, so it must not repeat every frame.
+#[test]
+fn a_listed_device_is_opened_once_per_connection() {
+    let mut attempts = OpenAttempts::default();
+    // Nothing is listed yet: a poll opens nothing.
+    assert_eq!(attempts.open(&[], &[]), []);
+    // The pad appears and is opened; the next poll holds it and tries nothing.
+    assert_eq!(attempts.open(&[(0, 7)], &[]), [(0, 7)]);
+    assert_eq!(attempts.open(&[(0, 7)], &[7]), []);
+    // An idle second device fails to open: one attempt, then silence while
+    // SDL keeps listing it.
+    assert_eq!(attempts.open(&[(0, 7), (1, 8)], &[7]), [(1, 8)]);
+    assert_eq!(attempts.open(&[(0, 7), (1, 8)], &[7]), []);
+    // It leaves: the failure is forgotten with it.
+    assert_eq!(attempts.open(&[(0, 7)], &[7]), []);
+    // A re-plug is a new connection, with an id SDL never reuses.
+    assert_eq!(attempts.open(&[(0, 7), (1, 9)], &[7]), [(1, 9)]);
+}
+
+/// A handle SDL hands out twice for an already-open device is dropped, and
+/// its listed id is not retried: the pad in use keeps reading, and no open
+/// repeats each frame.
+#[test]
+fn a_second_handle_for_a_held_device_is_dropped_once() {
+    let mut attempts = OpenAttempts::default();
+    assert_eq!(attempts.open(&[(0, 4), (1, 4)], &[]), [(0, 4)]);
+    assert_eq!(attempts.open(&[(0, 4), (1, 4)], &[4]), []);
+}

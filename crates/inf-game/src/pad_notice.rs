@@ -16,7 +16,7 @@ use crate::{
     },
     pixel_backend::PixelBackend,
     port_text::PortText,
-    render_resources::RenderResources,
+    render_resources::{RenderResourceKind, RenderResourceRequest, RenderResources},
     scene_quad::DirectFlatQuad,
     software_menu::glyph_command,
     software_scene::SoftwareScene,
@@ -117,6 +117,51 @@ pub(crate) fn visual_check_request() -> Option<(PadNoticeKind, String)> {
         _ => return None,
     };
     Some((kind, name.to_owned()))
+}
+
+/// Make the glyph textures every line the notice can show now needs, without
+/// drawing: the two generic lines and one per open pad `name`, so a hot-plug
+/// mid-game costs an ordinary frame. A first draw would otherwise decode
+/// each glyph's sprite and, on a device that uploads on this thread, upload
+/// it there (OpenGL cost 7.6 ms on a fresh screen and 2.3 ms mid-game, the
+/// CPU raster 2.1 ms and 0.7 ms, against 0.02-0.4 ms a frame once the glyphs
+/// are made). Nothing is drawn: no pixel, depth or pipeline state changes.
+pub(crate) fn warm<'f, 'r>(
+    scene: &mut SoftwareScene<'f, 'r>,
+    resources: RenderResources<'r>,
+    dimensions: [u32; 2],
+    language: u8,
+    names: &[&str],
+) -> Result<(), String> {
+    let font = resources.font(0).map_err(|error| error.to_string())?;
+    let style = resources.style(STYLE).map_err(|error| error.to_string())?;
+    let width = dimensions[0] as i32;
+    let mut lines: Vec<Vec<u8>> = Vec::new();
+    for kind in [PadNoticeKind::Connected, PadNoticeKind::Removed] {
+        lines.push(line(font, width, kind, "", language));
+        for name in names {
+            let named = line(font, width, kind, name, language);
+            if !lines.contains(&named) {
+                lines.push(named);
+            }
+        }
+    }
+    for text in lines {
+        draw_line_text(
+            &mut LineTextRequest {
+                text: &text,
+                font,
+                position_pixels: [0, 0],
+                color: MenuColor::from_word(style),
+                base_color: MenuColor::from_word(INITIAL_GLYPH_BASE_WORD),
+                context_origin_pixels: [0, 0],
+            },
+            &resources,
+            &mut WarmGlyphs { scene, resources },
+        )
+        .map_err(|error| format!("{error:?}"))?;
+    }
+    Ok(())
 }
 
 /// Draw one notice for `kind` and `name` into `scene`'s frame.
@@ -232,6 +277,30 @@ impl MenuTextHost for Glyphs<'_, '_, '_> {
                 },
                 &mut command,
             )
+            .map_err(|error| error.to_string())
+    }
+}
+
+/// The line's glyphs, made ready for a later draw: their sprite textures are
+/// resolved and, on a device, made there, exactly as [`Glyphs`]' first draw
+/// would, but nothing is submitted.
+struct WarmGlyphs<'a, 'f, 'r> {
+    scene: &'a mut SoftwareScene<'f, 'r>,
+    resources: RenderResources<'r>,
+}
+
+impl MenuTextHost for WarmGlyphs<'_, '_, '_> {
+    type Error = String;
+    fn submit_glyph(&mut self, glyph: MenuGlyphQuad) -> Result<(), String> {
+        let resource = self
+            .resources
+            .resolve(RenderResourceRequest {
+                kind: RenderResourceKind::Sprite,
+                argument: glyph.sprite_argument,
+            })
+            .map_err(|error| error.to_string())?;
+        self.scene
+            .warm_sprite(resource, glyph.pass as u32)
             .map_err(|error| error.to_string())
     }
 }
@@ -363,6 +432,26 @@ mod tests {
             config: startup.scene,
         })
         .unwrap();
+        // The warm-up makes the notice's glyph textures without drawing: the
+        // frame it runs between keeps every pixel, and the draw after it is
+        // exactly the one below.
+        warm(
+            &mut scene,
+            resources,
+            [1024, 768],
+            0,
+            &["Xbox One For Windows"],
+        )
+        .unwrap();
+        for y in 0..768 {
+            for x in 0..1024 {
+                assert_eq!(
+                    scene.pixels.frame.pixel_rgba(x, y),
+                    Some(untouched),
+                    "pixel {x},{y}"
+                );
+            }
+        }
         scene.begin_frame().unwrap();
         let mut notice = PadNotice::default();
         notice.show(PadNoticeKind::Connected, "Xbox One For Windows", 1_000);

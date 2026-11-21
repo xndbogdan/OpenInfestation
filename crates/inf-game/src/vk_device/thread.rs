@@ -642,6 +642,13 @@ impl VkFrameHandle {
         );
     }
 
+    /// Send `texture` to the device's thread now, as the first draw sampling
+    /// it would: its image is made there, off this thread, before a panel's
+    /// first draw rather than during it.
+    pub(crate) fn warm_texture(&self, texture: &CpuTexture) {
+        self.device.send_texture(texture);
+    }
+
     pub(crate) fn clear_color(&mut self, rgba: [u8; 4]) {
         self.call(FrameCall::ClearColor(rgba));
     }
