@@ -608,6 +608,83 @@ fn the_playstation_pad_confirms_with_cross() {
     assert_eq!(host.actions, [ScreenInputAction::Confirm]);
 }
 
+/// Port fix [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes):
+/// the first frame a player message shows (a factory's shop after it docks)
+/// releases the pad's held button and deflected stick. Both stay released
+/// through later readings and the message's own hide until the pad reports
+/// them up and centred.
+#[test]
+fn a_shown_message_releases_the_pads_held_controls_until_they_are_let_go() {
+    let bytes = executable();
+    let source = FrontendExecutable::parse(&bytes).unwrap();
+    let tables = parse_frontend_input_tables(source).unwrap();
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |buttons, x| InputNotification::Pad {
+        native_type: 2,
+        axes: 5,
+        sample: PadSample::Read {
+            buttons,
+            axes: [x, 0x8000, 0x8000, 0x8000, 0x8000, 0],
+        },
+    };
+    devices
+        .update(reading(0, 0x8000), &mut input, &mut host)
+        .unwrap();
+    let list = devices.frontend_devices(&mut input, 10).unwrap();
+    let pad = list[1].source;
+    let mut bindings = FrontendBindings::new(
+        CONTEXT,
+        ScreenAnalogDescriptors::from_executable(source).unwrap(),
+    );
+    bindings.initialize(&mut input).unwrap();
+    bindings.install(&mut input, &tables, &list).unwrap();
+    input.select_context(bindings.context()).unwrap();
+    let held = |input: &mut InputRuntime| {
+        let mut buttons = DeviceButtons::default();
+        buttons.set(1, true);
+        input.update_device(
+            pad,
+            DeviceSnapshot {
+                buttons,
+                axes: [0xffff, 0x8000, 0x8000, 0x8000, 0x8000, 0, 0, 0],
+            },
+            &mut Host::default(),
+        )
+    };
+
+    // Held before the capture: the stick and button reach their bindings.
+    held(&mut input).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_ne!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+    assert_ne!(input.device_buttons(pad).unwrap(), DeviceButtons::default());
+
+    // The capture: the shown message releases them. Still holding the same
+    // stick and button, the pad publishes none of it.
+    devices.note_message_shown(true, &mut input).unwrap();
+    held(&mut input).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_eq!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+    assert_eq!(input.device_buttons(pad).unwrap(), DeviceButtons::default());
+
+    // The message hides; the pad was never let go, so it stays released.
+    devices.note_message_shown(false, &mut input).unwrap();
+    held(&mut input).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_eq!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+    assert_eq!(input.device_buttons(pad).unwrap(), DeviceButtons::default());
+
+    // Let go: the latch clears, and a fresh press reaches the bindings.
+    devices
+        .update(reading(0, 0x8000), &mut input, &mut host)
+        .unwrap();
+    held(&mut input).unwrap();
+    input.poll(&mut host).unwrap();
+    assert_ne!(bindings.analog_values(&input).unwrap().consumer_cc, 0);
+    assert_ne!(input.device_buttons(pad).unwrap(), DeviceButtons::default());
+}
+
 /// A pad unplugged while it is held releases everything first: the pads send
 /// one reading with nothing pressed and every axis centred, so neither the
 /// button nor the stick survives the failed reads that follow (`004F548C`

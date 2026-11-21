@@ -10,7 +10,7 @@ use thiserror::Error;
 #[path = "input_bindings.rs"]
 mod bindings;
 pub use bindings::{
-    BindingSetId, DeviceButtons, DeviceId, DeviceSnapshot, DigitalBinding, InputContextId,
+    AxisRest, BindingSetId, DeviceButtons, DeviceId, DeviceSnapshot, DigitalBinding, InputContextId,
 };
 #[path = "input_analog.rs"]
 mod analog;

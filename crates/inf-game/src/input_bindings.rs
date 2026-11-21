@@ -27,9 +27,94 @@ pub struct DeviceSnapshot {
     pub axes: [i32; 8],
 }
 
+/// The raw position at which a device's axes rest, and how far from it still
+/// counts as neutral. The keyboard has no axes and keeps the default; the pad
+/// sets it from its layout's centre and dead zone.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct AxisRest {
+    pub centre: i32,
+    pub dead_zone: u32,
+}
+
+impl AxisRest {
+    pub fn off_centre(self, value: i32) -> bool {
+        value.abs_diff(self.centre) > self.dead_zone
+    }
+}
+
+/// A release that outlives the notification which starts it: each control
+/// held when it began stays released until the device reports it up (or back
+/// in the dead zone). See [`InputRuntime::release_held_controls`].
+struct ReleasedHolds {
+    /// The first notification after the release latches what it holds; the
+    /// port arms the release between polls, so it is the pad's next reading.
+    latch_next: bool,
+    buttons: DeviceButtons,
+    axes: [bool; 8],
+}
+
+impl ReleasedHolds {
+    fn latch(&mut self, rest: AxisRest, snapshot: &DeviceSnapshot) {
+        self.latch_next = false;
+        for code in 0..=u8::MAX {
+            if snapshot.buttons.pressed(code) {
+                self.buttons.set(code, true);
+            }
+        }
+        for axis in 0..8 {
+            self.axes[axis] = rest.off_centre(snapshot.axes[axis]);
+        }
+    }
+
+    /// Clear each latched control the notification shows released, and mask
+    /// each one still held. Reports whether no latch remains.
+    fn finish(&mut self, rest: AxisRest, snapshot: &mut DeviceSnapshot) -> bool {
+        for code in 0..=u8::MAX {
+            if !self.buttons.pressed(code) {
+                continue;
+            }
+            if snapshot.buttons.pressed(code) {
+                snapshot.buttons.set(code, false);
+            } else {
+                self.buttons.set(code, false);
+            }
+        }
+        for axis in 0..8 {
+            if !self.axes[axis] {
+                continue;
+            }
+            if rest.off_centre(snapshot.axes[axis]) {
+                snapshot.axes[axis] = rest.centre;
+            } else {
+                self.axes[axis] = false;
+            }
+        }
+        !self.latch_next
+            && self.buttons == DeviceButtons::default()
+            && !self.axes.iter().any(|held| *held)
+    }
+}
+
 pub(super) struct Device {
     pub(super) buttons: DeviceButtons,
     pub(super) axes: [AxisTransform; 8],
+    axis_rest: AxisRest,
+    released: Option<ReleasedHolds>,
+}
+
+impl Device {
+    fn apply_released_holds(&mut self, mut snapshot: DeviceSnapshot) -> DeviceSnapshot {
+        let Some(released) = self.released.as_mut() else {
+            return snapshot;
+        };
+        if released.latch_next {
+            released.latch(self.axis_rest, &snapshot);
+        }
+        if released.finish(self.axis_rest, &mut snapshot) {
+            self.released = None;
+        }
+        snapshot
+    }
 }
 
 impl DeviceButtons {
@@ -102,7 +187,46 @@ impl InputRuntime {
         Ok(DeviceId(self.devices.insert(Device {
             buttons: initial_buttons,
             axes: [AxisTransform::NATIVE_DEFAULT; 8],
+            axis_rest: AxisRest::default(),
+            released: None,
         })))
+    }
+
+    /// The raw envelope this device's axes rest in. [`Self::release_held_controls`]
+    /// keeps a deflected axis released until it returns inside this zone.
+    pub fn set_axis_rest(
+        &mut self,
+        device: DeviceId,
+        rest: AxisRest,
+    ) -> Result<(), InputStateError> {
+        self.binding_mutation_allowed()?;
+        self.devices
+            .get_mut(device.0)
+            .ok_or(InputStateError::InvalidDevice)?
+            .axis_rest = rest;
+        Ok(())
+    }
+
+    /// Port fix [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes):
+    /// release every control this device holds now, and keep each one released
+    /// until the device reports it up (or its axis back inside
+    /// [`AxisRest::dead_zone`]). A factory's dock shows the shop, whose message
+    /// brake releases the keyboard's digital steering (`0046A719`) but leaves
+    /// the joystick's analog block `+04/+08/+0C/+10` (`0046A3B8`); the pad
+    /// would steer through the dock. The release takes effect at the device's
+    /// next notification, which latches the controls it still holds.
+    pub fn release_held_controls(&mut self, device: DeviceId) -> Result<(), InputStateError> {
+        self.binding_mutation_allowed()?;
+        let device = self
+            .devices
+            .get_mut(device.0)
+            .ok_or(InputStateError::InvalidDevice)?;
+        device.released = Some(ReleasedHolds {
+            latch_next: true,
+            buttons: DeviceButtons::default(),
+            axes: [false; 8],
+        });
+        Ok(())
     }
 
     pub fn device_buttons(&self, device: DeviceId) -> Result<DeviceButtons, InputStateError> {
@@ -293,10 +417,12 @@ impl InputRuntime {
         host: &mut H,
     ) -> Result<(), InputError<H::Error>> {
         self.binding_mutation_allowed()?;
-        self.devices
+        let device_state = self
+            .devices
             .get_mut(device.0)
-            .ok_or(InputStateError::InvalidDevice)?
-            .buttons = snapshot.buttons;
+            .ok_or(InputStateError::InvalidDevice)?;
+        let snapshot = device_state.apply_released_holds(snapshot);
+        device_state.buttons = snapshot.buttons;
         let Some(context) = self.selected_context else {
             return Ok(());
         };

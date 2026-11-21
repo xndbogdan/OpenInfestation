@@ -106,6 +106,10 @@ pub struct PlayerUpdateInputs {
     pub input_mode_08: u32,
     /// Process 0055F448.
     pub network: u32,
+    /// Port fix [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes):
+    /// a shown message's brake also releases the analog block, as it releases
+    /// the keyboard's turn and pitch.
+    pub factory_dock_releases_pad: bool,
 }
 
 /// What 0046A260's network branch reads and keeps beyond the player: the
@@ -314,7 +318,9 @@ impl ObjectArena {
         if shown {
             // 0046A719..0046A79C: the controls brake. Turn, pitch, Fire and
             // Grenade are zero; +3A, +42, the analog block and the +F4
-            // lockout keep their values.
+            // lockout keep their values. The port fix also releases the
+            // analog block: retail's brake leaves a held stick steering the
+            // docked vehicle, while the same brake stops the keyboard.
             let thrust = match unit {
                 Some(unit) => self.shown_message_brake(unit)?,
                 None => 0,
@@ -326,6 +332,10 @@ impl ObjectArena {
             controls.thrust_1c = thrust;
             controls.fire_20 = 0;
             controls.grenade_24 = 0;
+            if inputs.factory_dock_releases_pad {
+                controls.analog_04 = 0;
+                controls.axes_08 = [0; 3];
+            }
             return Ok(PlayerControlsUpdate {
                 call: vehicle_call(actor_flags_lifecycle),
                 omissions,

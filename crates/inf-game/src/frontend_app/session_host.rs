@@ -465,6 +465,8 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                                     .settings
                                     .fixes()
                                     .menu_cheat_word(frontend.settings.words()[0x84 / 4]);
+                                let factory_dock_releases_pad =
+                                    frontend.settings.fixes().factory_dock_releases_pad;
                                 linked
                                     .poll_gameplay(
                                         state,
@@ -478,6 +480,7 @@ impl<'t> AppFrame<'_, 't, '_, '_> {
                                         &mut frontend.exit_requested,
                                         frontend.settings.words_mut(),
                                         cheats_84,
+                                        factory_dock_releases_pad,
                                     )
                                     .map_err(|error| AppFrameError::Gameplay(error.to_string()))?;
                             } else {

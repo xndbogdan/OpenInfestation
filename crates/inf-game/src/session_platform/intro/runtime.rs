@@ -3975,6 +3975,7 @@ fn tick_world_player(
                     slow_input_5c5: context.camera_globals.special_view_active,
                     input_mode_08: context.inputs.input_mode_08,
                     network: context.factory_process.network_flag,
+                    factory_dock_releases_pad: context.inputs.factory_dock_releases_pad,
                 },
                 context.input,
                 &consumers,

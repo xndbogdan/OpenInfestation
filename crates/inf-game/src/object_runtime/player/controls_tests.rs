@@ -1,6 +1,8 @@
 use super::*;
 use crate::input::{
-    ActionDescriptor, ConsumerId, EventPacket, InputCallback, InputHost, InputRuntime,
+    ActionDescriptor, AnalogBinding, AnalogPolicy, AxisRest, AxisTransform, ConsumerId,
+    DeviceButtons, DeviceSnapshot, DigitalBinding, EventPacket, InputCallback, InputHost,
+    InputRuntime,
 };
 
 struct Clock(u64);
@@ -77,6 +79,7 @@ fn inputs(delta_micros: i32) -> PlayerUpdateInputs {
         slow_input_5c5: false,
         input_mode_08: 0,
         network: 0,
+        factory_dock_releases_pad: false,
     }
 }
 
@@ -621,4 +624,152 @@ fn a_shown_message_makes_fire_select_once() {
             .unwrap();
     }
     assert_eq!(arena.world_player(player).unwrap().byte_fc, 0);
+}
+
+/// Port fix [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes):
+/// a factory's dock shows the shop, and its message brake releases the
+/// keyboard's steering (`0046A719`) while retail leaves the joystick's analog
+/// block `+04/+08/+0C/+10` (`0046A3B8`). Here a held pad steers before the
+/// capture, reads neutral through it, and stays neutral after the shop hides
+/// until the stick returns to its dead zone and the button comes back up.
+#[test]
+fn a_factory_capture_releases_held_pad_controls_until_they_are_let_go() {
+    let (mut arena, player) = player();
+    let mut input = InputRuntime::new(0);
+    let mut clock = Clock(0);
+    let ids = consumers(&mut input);
+    let pad = input.create_device(DeviceButtons::default()).unwrap();
+    // 00439AD0's joystick calibration: the type-2 centre biases to zero.
+    input
+        .set_axis_transform(
+            pad,
+            0,
+            AxisTransform {
+                offset: -0x8000,
+                ..AxisTransform::NATIVE_DEFAULT
+            },
+        )
+        .unwrap();
+    input
+        .set_axis_rest(
+            pad,
+            AxisRest {
+                centre: 0x8000,
+                dead_zone: 0x4000,
+            },
+        )
+        .unwrap();
+    let context = input.create_context().unwrap();
+    let analog = input
+        .create_analog_binding_set(
+            pad,
+            AnalogPolicy::Replace,
+            &[AnalogBinding {
+                consumer: ids.analog_5c,
+                axis: 0,
+                transform: AxisTransform::NATIVE_DEFAULT,
+            }],
+        )
+        .unwrap();
+    input.attach_analog_binding_set(context, analog).unwrap();
+    let digital = input
+        .create_binding_set(
+            [Some(pad), None],
+            &[DigitalBinding {
+                consumer: ids.left_68,
+                required: [[1, 0, 0, 0], [0; 4]],
+                forbidden: [[0; 4], [0; 4]],
+            }],
+        )
+        .unwrap();
+    input.attach_binding_set(context, digital).unwrap();
+    input.select_context(Some(context)).unwrap();
+
+    let mut held = DeviceSnapshot {
+        axes: [0xffff, 0x8000, 0x8000, 0x8000, 0x8000, 0, 0, 0],
+        ..DeviceSnapshot::default()
+    };
+    held.buttons.set(1, true);
+    let released = DeviceSnapshot {
+        axes: [0x8000; 8],
+        ..DeviceSnapshot::default()
+    };
+    let controls_for = |arena: &mut ObjectArena, input: &mut InputRuntime, fix: bool| {
+        arena
+            .update_player_controls(
+                player,
+                PlayerUpdateInputs {
+                    input_mode_08: 1,
+                    factory_dock_releases_pad: fix,
+                    ..inputs(80_000)
+                },
+                input,
+                &ids,
+                DRIVING,
+                None,
+                None,
+            )
+            .unwrap();
+        arena.world_player(player).unwrap().controls
+    };
+
+    // Held: the left stick and the pad's button steer.
+    clock.0 = 100_000;
+    input.update_device(pad, held, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 180_000);
+    let controls = controls_for(&mut arena, &mut input, true);
+    assert_eq!(controls.axes_08, [0x7fff, 0, 0]);
+    assert_eq!(controls.turn_14, 80_000);
+
+    // The dock's capture shows the shop, and its release latches the held
+    // stick and button. The next pad reading keeps them released.
+    arena
+        .world_player_mut(player)
+        .unwrap()
+        .set_message_byte_00(1);
+    input.release_held_controls(pad).unwrap();
+    clock.0 = 200_000;
+    input.update_device(pad, held, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 280_000);
+    let controls = controls_for(&mut arena, &mut input, true);
+    assert_eq!(controls.byte(0x3e), 1);
+    assert_eq!((controls.turn_14, controls.pitch_18), (0, 0));
+    assert_eq!((controls.analog_04, controls.axes_08), (0, [0; 3]));
+
+    // The shop hides, but the pad was never let go: still released.
+    arena
+        .world_player_mut(player)
+        .unwrap()
+        .set_message_byte_00(0);
+    clock.0 = 300_000;
+    input.update_device(pad, held, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 380_000);
+    let controls = controls_for(&mut arena, &mut input, true);
+    assert_eq!((controls.turn_14, controls.axes_08), (0, [0; 3]));
+
+    // Let go, then press again: the pad steers once more.
+    clock.0 = 400_000;
+    input.update_device(pad, released, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 480_000);
+    let controls = controls_for(&mut arena, &mut input, true);
+    assert_eq!((controls.turn_14, controls.axes_08), (0, [0; 3]));
+    clock.0 = 500_000;
+    input.update_device(pad, held, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 580_000);
+    let controls = controls_for(&mut arena, &mut input, true);
+    assert_eq!(controls.axes_08, [0x7fff, 0, 0]);
+    assert_eq!(controls.turn_14, 80_000);
+
+    // Off, retail keeps the analog block through the shown message.
+    arena
+        .world_player_mut(player)
+        .unwrap()
+        .set_message_byte_00(1);
+    clock.0 = 600_000;
+    input.update_device(pad, held, &mut clock).unwrap();
+    poll(&mut input, &mut clock, 680_000);
+    let controls = controls_for(&mut arena, &mut input, false);
+    assert_eq!(controls.analog_04, 1);
+    assert_eq!(controls.axes_08, [0x7fff, 0, 0]);
+    assert_eq!(controls.turn_14, 0);
 }

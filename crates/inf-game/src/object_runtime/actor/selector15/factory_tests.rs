@@ -1568,6 +1568,7 @@ fn a_shown_message_brakes_the_vehicle() {
                     slow_input_5c5: false,
                     input_mode_08: 0,
                     network: 0,
+                    factory_dock_releases_pad: true,
                 },
                 &mut input,
                 &consumers,

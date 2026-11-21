@@ -199,6 +199,7 @@ impl PortSessionServices for TestPlatform {
             settings_7c: 0,
             input_mode_08: 0,
             settings_84: 0,
+            factory_dock_releases_pad: true,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
             pad_wording: crate::control_hints::PadWording::Retail,
             residency_language: 0,
@@ -613,6 +614,7 @@ impl CpuFrame<'_, '_, '_> {
                         exit_requested,
                         &mut [0; crate::frontend_settings::SETTINGS_WORDS],
                         0,
+                        true,
                     )
                     .map(|_| ())
                     .map_err(|error| TestError::Gameplay(error.to_string())),

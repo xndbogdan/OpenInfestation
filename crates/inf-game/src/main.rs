@@ -261,6 +261,15 @@ struct Args {
     #[arg(long, value_name = "BOOL", action = clap::ArgAction::Set)]
     mission_completion: Option<bool>,
 
+    /// Port fix, on unless saved off: a player message that starts to show
+    /// (a factory's shop after it docks the vehicle) releases the pad's held
+    /// buttons and deflected axes, and keeps each released until it is let
+    /// go, as the same brake releases the keyboard's steering. Retail leaves
+    /// a held joystick steering the docked vehicle. `false` keeps retail's;
+    /// either value replaces the saved setting.
+    #[arg(long, value_name = "BOOL", action = clap::ArgAction::Set)]
+    factory_dock_releases_pad: Option<bool>,
+
     /// Port option, off unless saved on: the computer's Cheats Menu (Tab,
     /// Cheats Menu) shows all its rows, as if each name cheat that opens one
     /// had been entered, without changing the saved cheat word. `false`
@@ -577,6 +586,9 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
     if args.mode != Mode::Frontend && args.mission_completion.is_some() {
         return Err("--mission-completion requires frontend mode".into());
     }
+    if args.mode != Mode::Frontend && args.factory_dock_releases_pad.is_some() {
+        return Err("--factory-dock-releases-pad requires frontend mode".into());
+    }
     if args.mode != Mode::Frontend && args.all_cheats.is_some() {
         return Err("--all-cheats requires frontend mode".into());
     }
@@ -673,6 +685,7 @@ fn run(args: Args, sessions: SessionRequests) -> Result<(), Box<dyn std::error::
             paced_doom: args.paced_doom,
             splash_voice_cap: args.splash_voice_cap,
             mission_completion: args.mission_completion,
+            factory_dock_releases_pad: args.factory_dock_releases_pad,
             all_cheats: args.all_cheats,
             prototype_world: args.prototype_world,
             pelagia_rework: args.pelagia_rework,

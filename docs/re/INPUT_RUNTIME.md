@@ -390,6 +390,17 @@ connect and removal names are reported for every pad that joins or leaves
 after the first poll, for the port's notice. All of it follows the Pad
 notification stream, so a recorded session replays the pads it recorded.
 
+The second port convenience, `PortFixes::factory_dock_releases_pad`, covers
+the message brake `0046A719`: it zeroes the keyboard's turn and pitch while a
+player message is shown, but leaves the joystick's analog block
+`+04/+08/+0C/+10` (`0046A3B8`), so a held stick would steer a vehicle docked
+at a factory (`0042F490` shows the shop through `004137D0`). The port
+releases the pad's held buttons and off-centre axes on the first frame a
+player message shows, and keeps each released until the pad reports it up or
+back inside its layout's dead zone. The release is latched from the pad's own
+notification stream and the world's shown-message state, never live SDL, so
+`--replay-session` repeats it.
+
 ### The PlayStation release
 
 The PAL PlayStation release (SLES-01870, `GAME.EXE`) binds the same tables

@@ -410,6 +410,10 @@ pub struct WorldTickPlatformInputs {
     /// bit 0x40 gives the Cranial Implanter. See
     /// [`PortFixes::respawn_cheat_word`](crate::frontend_settings::PortFixes::respawn_cheat_word).
     pub settings_84: u32,
+    /// Port fix, not a retail setting: a shown message's brake also releases
+    /// the pad's analog block, while the same brake stops the keyboard. See
+    /// [`PortFixes::factory_dock_releases_pad`](crate::frontend_settings::PortFixes).
+    pub factory_dock_releases_pad: bool,
     /// Port fix, not a retail setting: the vehicle drive's position step.
     pub vehicle_position_step: crate::object_runtime::VehiclePositionStep,
     /// Port setting: hints and prompts word their controls as the pad does.
