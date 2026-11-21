@@ -109,20 +109,20 @@ impl ObjectArena {
         request: PlayerCommandRequest,
         context: &PlayerCommandContext<'_>,
     ) -> Result<PlayerCommandOutcome, PlayerCommandError> {
-        self.apply_player_command_with_pad_hints(request, context, crate::control_hints::pad_hint)
+        self.apply_player_command_with_pad_wording(request, context, crate::control_hints::pad_hint)
     }
 
     /// [`Self::apply_player_command`] with an explicit controller-wording
     /// lookup: the shipped table in play, a fixture table in tests that prove
     /// the swap without the real table.
-    pub(crate) fn apply_player_command_with_pad_hints<F>(
+    pub(crate) fn apply_player_command_with_pad_wording<F>(
         &mut self,
         request: PlayerCommandRequest,
         context: &PlayerCommandContext<'_>,
         pad_hint: F,
     ) -> Result<PlayerCommandOutcome, PlayerCommandError>
     where
-        F: Fn(u32, u8) -> Option<&'static [u8]>,
+        F: Fn(crate::control_hints::PadWording, u32, u8) -> Option<std::borrow::Cow<'static, [u8]>>,
     {
         match request.operation {
             PlayerCommandOperation::Query { raw_id } => Ok(PlayerCommandOutcome::Owned(
@@ -169,7 +169,7 @@ impl ObjectArena {
         pad_hint: &F,
     ) -> Result<(), PlayerCommandError>
     where
-        F: Fn(u32, u8) -> Option<&'static [u8]>,
+        F: Fn(crate::control_hints::PadWording, u32, u8) -> Option<std::borrow::Cow<'static, [u8]>>,
     {
         crate::event_log::hint(raw_id, silent as u8);
         // 0046C760 precedes all player, ID, mask and silent reads.
@@ -197,15 +197,16 @@ impl ObjectArena {
         let index_word = command_text_word(context, raw_id)?;
         // The port's hint wording, decided now: a message already on screen
         // keeps the text it was sent with when the player switches devices.
-        let pad_language = self
+        // Network games play retail's game, so they keep the PC text.
+        let wording = self
             .player_message_environment_mut()
-            .filter(|environment| environment.pad_hints && environment.network == 0)
-            .map(|environment| environment.language);
-        let source = match pad_language
+            .filter(|environment| environment.network == 0)
+            .map(|environment| (environment.pad_wording, environment.language));
+        let pad_text = wording
             .filter(|_| (index_word as i16) >= 0)
-            .and_then(|language| pad_hint(u32::from(index_word), language))
-        {
-            Some(text) => GrantTextSource::Record(Some(text)),
+            .and_then(|(wording, language)| pad_hint(wording, u32::from(index_word), language));
+        let source = match &pad_text {
+            Some(text) => GrantTextSource::Record(Some(text.as_ref())),
             None => capture_h0_text(H0TextCaptureRequest {
                 index_word,
                 resident: context.resident,

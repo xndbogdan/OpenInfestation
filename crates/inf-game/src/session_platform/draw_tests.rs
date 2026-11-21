@@ -143,7 +143,7 @@ impl PortSessionServices for Factory {
             input_mode_08: 0,
             settings_84: 0,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             residency_language: 0,
         }
     }
@@ -435,7 +435,7 @@ fn render(
         TextEntryScreenDraw {
             animation: draw.animation,
             selector_one: 1,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         },
         &mut host,
@@ -676,7 +676,7 @@ fn results_linked_draw_prepares_the_actual_queue_and_publication_without_depth_o
             frontend_state: &mut frontend_state,
             name_entry_state: &mut name_state,
             surface: SoftwareSurface::Pixels,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         }
         .draw::<_, std::convert::Infallible>(&mut session, controller.state())
@@ -790,7 +790,7 @@ fn a_worlds_results_page_draws_with_the_sessions_residency() {
         frontend_state: &mut frontend_state,
         name_entry_state: &mut name_state,
         surface: SoftwareSurface::Pixels,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     }
     .draw::<_, std::convert::Infallible>(&mut session, controller.state())
@@ -825,7 +825,7 @@ fn a_worlds_results_page_draws_with_the_sessions_residency() {
         selector_one: session.process.object_selector_one(),
         glyph_base_color: MenuColor::from_word(INITIAL_GLYPH_BASE_WORD),
         credits: None,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     };
     let stats = scene.stats;
@@ -901,7 +901,7 @@ fn results_linked_attract_draw_preserves_the_existing_queue_and_publication() {
         frontend_state: &mut frontend_state,
         name_entry_state: &mut name_state,
         surface: SoftwareSurface::Pixels,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     }
     .draw::<_, std::convert::Infallible>(&mut session, controller.state())
@@ -1246,7 +1246,7 @@ fn gameplay_linked_draw_freshly_acquires_before_first_tick_without_advancing_pos
             frontend_state: &mut frontend_state,
             name_entry_state: &mut name_state,
             surface: SoftwareSurface::Pixels,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         }
         .draw::<_, std::convert::Infallible>(&mut session, controller.state())

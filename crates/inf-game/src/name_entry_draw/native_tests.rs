@@ -270,7 +270,7 @@ fn frame<'a>(
         context_origin_pixels: [12345, -54321],
         base_color: MenuColor::from_word(fixture.base_color),
         sine_quarter: sine,
-        pad_hints: false,
+        pad_wording: crate::control_hints::PadWording::Retail,
         language: 0,
     }
 }

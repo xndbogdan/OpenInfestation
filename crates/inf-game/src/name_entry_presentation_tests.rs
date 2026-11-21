@@ -170,7 +170,7 @@ fn resident_name_entry_overlay_reaches_concrete_pixels() {
                 context_origin_pixels: [320, 240],
                 base_color: MenuColor::from_word(INITIAL_GLYPH_BASE_WORD),
                 sine_quarter: &sine,
-                pad_hints: false,
+                pad_wording: crate::control_hints::PadWording::Retail,
                 language: 0,
             },
             &resources,

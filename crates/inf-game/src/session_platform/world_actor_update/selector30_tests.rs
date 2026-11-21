@@ -51,7 +51,7 @@ fn level1_exit_gate_ends_the_world_for_terra_nova() {
             attract: false,
             ui_state: 4,
             cheats: Default::default(),
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         });
     let recipient = world.arena.player_message(player).unwrap().identity();

@@ -692,15 +692,22 @@ fn real_save_restore_message_and_checkpoint_operations_preserve_command_owner() 
 /// player's last input) flips.
 #[test]
 fn controller_wording_replaces_only_unsent_hints_in_its_language() {
-    fn fake(global: u32, language: u8) -> Option<&'static [u8]> {
+    use crate::control_hints::{PadFamily, PadWording};
+    use std::borrow::Cow;
+    fn fake(wording: PadWording, global: u32, language: u8) -> Option<Cow<'static, [u8]>> {
+        if wording == PadWording::Retail {
+            return None;
+        }
         match (global, language) {
-            (866, 0) => Some(b"Press LB to activate big wheeled mode"),
-            (867, 0) => Some(b"Press LB again to return to normal buggy mode"),
+            (866, 0) => Some(Cow::Borrowed(b"Press LB to activate big wheeled mode")),
+            (867, 0) => Some(Cow::Borrowed(
+                b"Press LB again to return to normal buggy mode",
+            )),
             _ => None,
         }
     }
     let assets = FrontendAssets::open(&data_root()).unwrap();
-    let environment = |pad_hints| crate::object_runtime::PlayerMessageEnvironment {
+    let environment = |pad_wording| crate::object_runtime::PlayerMessageEnvironment {
         menus: crate::object_runtime::PlayerMessageMenus::parse(&assets).unwrap(),
         math: crate::menu_basis::MenuBasisMath::new(assets.sine_table().values),
         network: 0,
@@ -709,7 +716,7 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
         attract: false,
         ui_state: 4,
         cheats: Default::default(),
-        pad_hints,
+        pad_wording,
         language: 0,
     };
     let mut resident = boot();
@@ -734,7 +741,7 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
     };
     let send = |arena: &mut ObjectArena, player: PlayerId, raw_id: u32| {
         arena
-            .apply_player_command_with_pad_hints(
+            .apply_player_command_with_pad_wording(
                 PlayerCommandRequest {
                     player,
                     operation: PlayerCommandOperation::Set { raw_id, silent: 0 },
@@ -763,7 +770,7 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
     let player = arena_off.add_world_player([0; 6]);
     arena_off.add_world_player([0; 6]);
     enable(&mut arena_off, player);
-    arena_off.set_player_message_environment(environment(false));
+    arena_off.set_player_message_environment(environment(PadWording::Retail));
     send(&mut arena_off, player, 0x44);
     assert!(hint(&arena_off, player).contains(&pc(866)));
 
@@ -772,7 +779,7 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
     let player = arena_on.add_world_player([0; 6]);
     arena_on.add_world_player([0; 6]);
     enable(&mut arena_on, player);
-    arena_on.set_player_message_environment(environment(true));
+    arena_on.set_player_message_environment(environment(PadWording::Console(PadFamily::Xbox)));
     send(&mut arena_on, player, 0x44);
     let sent = hint(&arena_on, player);
     assert!(sent.contains(&b"Press LB to activate big wheeled mode".to_vec()));
@@ -780,7 +787,10 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
 
     // The last input flips to the keyboard: 867, sent after, takes the PC
     // text, and 866's already-sent wording keeps its text.
-    arena_on.player_message_environment_mut().unwrap().pad_hints = false;
+    arena_on
+        .player_message_environment_mut()
+        .unwrap()
+        .pad_wording = PadWording::Retail;
     send(&mut arena_on, player, 0x45);
     let sent = hint(&arena_on, player);
     assert!(sent.contains(&b"Press LB to activate big wheeled mode".to_vec()));
@@ -793,7 +803,7 @@ fn controller_wording_replaces_only_unsent_hints_in_its_language() {
     let player = arena_other.add_world_player([0; 6]);
     arena_other.add_world_player([0; 6]);
     enable(&mut arena_other, player);
-    let mut other_language = environment(true);
+    let mut other_language = environment(PadWording::Console(PadFamily::Xbox));
     other_language.language = 1;
     arena_other.set_player_message_environment(other_language);
     send(&mut arena_other, player, 0x44);

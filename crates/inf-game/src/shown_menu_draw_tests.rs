@@ -40,17 +40,20 @@ fn a_full_width_viewport_has_no_panel() {
     assert!(shown_menu_panel([0, 0, 0x400, 0x400], [1024, 768]).is_none());
 }
 
-/// The List Hints row keeps the PC text when the gate is off, and takes the
+/// The List Hints row keeps the PC text for the Retail wording, and takes the
 /// controller wording only for the language the lookup answers.
 #[test]
 fn the_list_hints_row_follows_the_controller_hint_gate() {
-    fn fake(global: u32, language: u8) -> Option<&'static [u8]> {
-        (global == 866 && language == 1).then_some(&b"Press LB to activate big wheeled mode"[..])
+    use crate::control_hints::{PadFamily, PadWording};
+    use std::borrow::Cow;
+    fn fake(wording: PadWording, global: u32, language: u8) -> Option<Cow<'static, [u8]>> {
+        (wording != PadWording::Retail && global == 866 && language == 1)
+            .then_some(Cow::Borrowed(&b"Press LB to activate big wheeled mode"[..]))
     }
     fn computer<'a, 'r>(
         rng: &'a mut u32,
         failures: &'a mut Vec<(i16, String)>,
-        pad_hints: bool,
+        pad_wording: PadWording,
         language: u8,
     ) -> ComputerDraw<'a, 'r> {
         ComputerDraw {
@@ -61,7 +64,7 @@ fn the_list_hints_row_follows_the_controller_hint_gate() {
             models: None,
             model_failures: failures,
             skip_world: 0,
-            pad_hints,
+            pad_wording,
             language,
             pad_hint: fake,
         }
@@ -71,24 +74,51 @@ fn the_list_hints_row_follows_the_controller_hint_gate() {
     let pc = b"Press mode 2 to activate big wheeled mode".to_vec();
     assert_eq!(
         hint_wording(
-            &computer(&mut rng, &mut failures, false, 1),
+            &computer(&mut rng, &mut failures, PadWording::Retail, 1),
             866,
             pc.clone()
         ),
         pc
     );
     assert_eq!(
-        hint_wording(&computer(&mut rng, &mut failures, true, 1), 866, pc.clone()),
+        hint_wording(
+            &computer(
+                &mut rng,
+                &mut failures,
+                PadWording::Console(PadFamily::Xbox),
+                1
+            ),
+            866,
+            pc.clone()
+        ),
         b"Press LB to activate big wheeled mode"
     );
     // The lookup has no entry for this language or global: the PC text
     // stands byte for byte.
     assert_eq!(
-        hint_wording(&computer(&mut rng, &mut failures, true, 0), 866, pc.clone()),
+        hint_wording(
+            &computer(
+                &mut rng,
+                &mut failures,
+                PadWording::Console(PadFamily::Xbox),
+                0
+            ),
+            866,
+            pc.clone()
+        ),
         pc
     );
     assert_eq!(
-        hint_wording(&computer(&mut rng, &mut failures, true, 1), 865, pc.clone()),
+        hint_wording(
+            &computer(
+                &mut rng,
+                &mut failures,
+                PadWording::Console(PadFamily::Xbox),
+                1
+            ),
+            865,
+            pc.clone()
+        ),
         pc
     );
 }
@@ -225,7 +255,7 @@ impl DatabaseFixture {
                     models,
                     model_failures: &mut failures,
                     skip_world: 2,
-                    pad_hints: false,
+                    pad_wording: crate::control_hints::PadWording::Retail,
                     language: 0,
                     pad_hint: crate::control_hints::pad_hint,
                 }),

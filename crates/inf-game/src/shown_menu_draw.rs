@@ -81,13 +81,14 @@ pub struct ComputerDraw<'a, 'r> {
     /// `0052F880`, the world the Cheats Menu's Skip to names.
     pub skip_world: u32,
     /// Port setting: the List Hints rows word their controls as the pad
-    /// does. False keeps the PC text byte for byte.
-    pub pad_hints: bool,
+    /// does. Retail keeps the PC text byte for byte.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
     /// The controller wording lookup: [`crate::control_hints::pad_hint`] in
     /// play, a fixture table in the tests that prove the swap.
-    pub pad_hint: fn(u32, u8) -> Option<&'static [u8]>,
+    pub pad_hint:
+        fn(crate::control_hints::PadWording, u32, u8) -> Option<std::borrow::Cow<'static, [u8]>>,
 }
 
 /// `004141B0`'s sprite, vertex DWORD and descriptor.
@@ -134,15 +135,15 @@ pub struct ShownMenuDrawContext<'a, 'r> {
     pub commands: &'a mut Vec<(PlayerId, u32)>,
 }
 
-/// A List Hints row's text: the PC bytes when the gate is off, the
-/// controller's wording lookup when it is on and answers, else the PC bytes
-/// byte for byte. Decided at draw time, as each frame draws the list.
+/// A List Hints row's text: the PC bytes when the wording is Retail, the
+/// controller's wording lookup when it answers, else the PC bytes byte for
+/// byte. Decided at draw time, as each frame draws the list.
 fn hint_wording(computer: &ComputerDraw<'_, '_>, global: u16, pc_text: Vec<u8>) -> Vec<u8> {
-    if computer.pad_hints {
-        (computer.pad_hint)(u32::from(global), computer.language).map_or(pc_text, <[u8]>::to_vec)
-    } else {
-        pc_text
+    if computer.pad_wording == crate::control_hints::PadWording::Retail {
+        return pc_text;
     }
+    (computer.pad_hint)(computer.pad_wording, u32::from(global), computer.language)
+        .map_or(pc_text, std::borrow::Cow::into_owned)
 }
 
 /// `00453610` over the shown menu.

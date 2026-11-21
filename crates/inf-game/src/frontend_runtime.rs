@@ -619,6 +619,10 @@ pub struct SdlPlatform {
     pub data_root: PathBuf,
     /// Title-video graph state behind `TitleVideoHost`.
     pub title_video: TitleVideoState,
+    /// The pad in use's button family, for the hint wording: live SDL state
+    /// (or the recording's while one replays), refreshed every frame by the
+    /// app. Xbox's names until the first pad is read.
+    pub pad_family: crate::control_hints::PadFamily,
 }
 
 impl SdlPlatform {
@@ -706,13 +710,15 @@ impl PortSessionServices for SdlPlatform {
     fn world_tick_inputs(&self) -> crate::session_platform::WorldTickPlatformInputs {
         let words = self.frontend.settings.words();
         let settings = &self.frontend.settings;
-        // The network exclusion is applied where the message is sent.
-        let pad_hints = settings.controller_hints().uses_pad_wording(
+        // The network exclusion is applied where the message is sent and
+        // where the linked frame's draw picks its wording.
+        let pad_wording = settings.controller_hints().wording(
             settings.controller_layout(),
             self.keyboard
                 .as_ref()
                 .is_some_and(crate::platform_input::SdlInput::last_input_is_pad),
             false,
+            self.pad_family,
         );
         crate::session_platform::WorldTickPlatformInputs {
             camera_settings: crate::object_runtime::CameraSettings::from_words(words),
@@ -725,7 +731,7 @@ impl PortSessionServices for SdlPlatform {
                 .fixes()
                 .respawn_cheat_word(words[0x84 / 4], self.profiles.completed_campaigns()),
             vehicle_position_step: settings.fixes().vehicle_position_step(),
-            pad_hints,
+            pad_wording,
             residency_language: settings.residency_language(),
         }
     }

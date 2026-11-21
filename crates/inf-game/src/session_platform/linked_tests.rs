@@ -199,7 +199,7 @@ impl PortSessionServices for TestPlatform {
             input_mode_08: 0,
             settings_84: 0,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             residency_language: 0,
         }
     }
@@ -753,7 +753,7 @@ impl SessionFrameHost for CpuFrame<'_, '_, '_> {
             frontend_state: &mut *render.frontend_state,
             name_entry_state: &mut *render.name_state,
             surface: SoftwareSurface::Pixels,
-            pad_hints: false,
+            pad_wording: crate::control_hints::PadWording::Retail,
             language: 0,
         }
         .draw(self.session, state)

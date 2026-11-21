@@ -142,8 +142,8 @@ pub struct SoftwareFrontendFrame<'a, 'f, 'r> {
     pub owner_flag: bool,
     /// `0053DF00`, the quarter-wave sine the arena previews' arc reads.
     pub sine_quarter: &'a [u16; 4096],
-    /// The port's Controller hints gate, resolved for this draw.
-    pub pad_hints: bool,
+    /// The port's Controller hints wording, resolved for this draw.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }
@@ -561,7 +561,7 @@ impl MenuDrawHost for SoftwareFrontendFrame<'_, '_, '_> {
                 store: self.profiles,
                 owner_flag: self.owner_flag,
                 surface_pixels: [width as i32, height as i32],
-                pad_hints: self.pad_hints,
+                pad_wording: self.pad_wording,
                 language: self.language,
             },
             &self.resources,

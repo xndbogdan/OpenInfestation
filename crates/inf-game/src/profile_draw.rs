@@ -49,9 +49,9 @@ pub struct ProfileRowDraw<'a> {
     pub store: &'a mut ProfileStore,
     pub owner_flag: bool,
     pub surface_pixels: [i32; 2],
-    /// The port's Controller hints gate: the prompt in global 40 words its
-    /// controls as the pad does, outside a network game.
-    pub pad_hints: bool,
+    /// The port's Controller hints wording: the prompt in global 40 words its
+    /// controls as the pad does; Retail keeps the PC text.
+    pub pad_wording: crate::control_hints::PadWording,
     /// Settings +64's residency language, 0..5.
     pub language: u8,
 }
@@ -64,7 +64,7 @@ pub fn draw_profile_row<R: MenuTextResources, H: ProfileTextHost>(
     let mut context = ProfileDrawContext {
         resources,
         host,
-        pad_hints: draw.pad_hints,
+        pad_wording: draw.pad_wording,
         language: draw.language,
     };
     match draw.request.callback_address {
@@ -133,7 +133,7 @@ pub fn draw_profile_status<R: MenuTextResources, H: ProfileTextHost>(
 struct ProfileDrawContext<'a, R, H> {
     resources: &'a R,
     host: &'a mut H,
-    pad_hints: bool,
+    pad_wording: crate::control_hints::PadWording,
     language: u8,
 }
 
@@ -148,10 +148,10 @@ impl<R: MenuTextResources, H: ProfileTextHost> ProfileDrawContext<'_, R, H> {
     /// A shell prompt (37..40) in the controller's wording where the gate
     /// allows it, else the PC text byte for byte.
     fn prompt(&self, id: i32) -> Result<Vec<u8>, ProfileDrawError<R::Error, H::Error>> {
-        if self.pad_hints {
-            if let Some(text) = crate::control_hints::pad_hint(id as u32, self.language) {
-                return Ok(text.to_vec());
-            }
+        if let Some(text) =
+            crate::control_hints::pad_hint(self.pad_wording, id as u32, self.language)
+        {
+            return Ok(text.into_owned());
         }
         Ok(self
             .resources
