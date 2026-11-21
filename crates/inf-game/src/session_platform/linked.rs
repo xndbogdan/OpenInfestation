@@ -293,6 +293,12 @@ impl PortLinked<'_> {
         if let Some(screen) = self.gameplay.as_deref_mut() {
             install("gameplay", screen.install_arriving_device(self.input, pad));
         }
+        // The title is built by `boot_title` before the first poll, so a pad
+        // connected at launch is always an arrived pad here: without this it
+        // would stay unbound for the whole title video.
+        if let Some(screen) = self.title.as_deref_mut() {
+            install("title", screen.install_arriving_device(self.input, pad));
+        }
         if let Some(screen) = self.frontend.as_deref_mut() {
             install("frontend", screen.install_arriving_device(self.input, pad));
         }

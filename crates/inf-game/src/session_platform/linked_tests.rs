@@ -15,6 +15,7 @@ use inf_formats::FrontendExecutable;
 use sdl2::keyboard::Scancode;
 
 use super::*;
+use crate::platform_input::PadSample;
 
 #[path = "linked_tests/required_miss_observer.rs"]
 mod required_miss_observer_tests;
@@ -1355,6 +1356,96 @@ fn boot_title_reaches_frontend_through_tick_and_transition() {
     // One keyboard adapter serves both screens; the title enumerated first.
     assert_eq!(ctx.session.platform().keyboard_attaches, 1);
     assert!(ctx.session.input_is_selected());
+}
+
+#[test]
+fn a_pad_connected_before_launch_binds_the_title_from_the_first_poll() {
+    let (mut ctx, _tables, _startup) = setup_title("title-pad");
+    let mut state = ctx.driver.state().clone();
+    let notifications = &mut ctx.notifications;
+    let PortSplit {
+        mut linked,
+        platform,
+        ..
+    } = ctx.session.split();
+    let TestPlatform {
+        keyboard,
+        exit_requested,
+        ..
+    } = platform;
+    let keyboard = keyboard.as_mut().expect("the title attached the keyboard");
+    let reading = |buttons| InputNotification::Pad {
+        native_type: 8,
+        axes: 6,
+        sample: PadSample::Read {
+            buttons,
+            axes: [0x80; 6],
+        },
+    };
+    let mut video = AbsentVideo { opens: 0 };
+
+    // A pad connected before launch is first read by the frame's poll, after
+    // `boot_title` built the title with the keyboard alone. The press lands
+    // on the device but no set owns it yet.
+    notifications.push(reading(0));
+    linked
+        .poll_title(
+            &mut state,
+            PortInputPass {
+                keyboard: Some(&mut *keyboard),
+                notifications,
+                now_micros: 0,
+            },
+            &mut video,
+            exit_requested,
+        )
+        .unwrap();
+    notifications.push(reading(1));
+    linked
+        .poll_title(
+            &mut state,
+            PortInputPass {
+                keyboard: Some(&mut *keyboard),
+                notifications,
+                now_micros: 0,
+            },
+            &mut video,
+            exit_requested,
+        )
+        .unwrap();
+    assert!(!linked.title.as_deref().unwrap().finished());
+
+    // The arrived-pad hook gives the slot-8 title table the live context.
+    linked.bind_arrived_pad(keyboard, 0);
+    notifications.push(reading(0));
+    linked
+        .poll_title(
+            &mut state,
+            PortInputPass {
+                keyboard: Some(&mut *keyboard),
+                notifications,
+                now_micros: 0,
+            },
+            &mut video,
+            exit_requested,
+        )
+        .unwrap();
+    // Code 1 is View: the Remastered title table's skip row.
+    notifications.push(reading(1));
+    linked
+        .poll_title(
+            &mut state,
+            PortInputPass {
+                keyboard: Some(&mut *keyboard),
+                notifications,
+                now_micros: 0,
+            },
+            &mut video,
+            exit_requested,
+        )
+        .unwrap();
+    assert!(linked.title.as_deref().unwrap().finished());
+    assert_eq!(state.requested_phase(), SessionPhase::Frontend);
 }
 
 #[test]

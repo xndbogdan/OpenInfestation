@@ -135,6 +135,19 @@ impl TitleScreen {
         self.video_present
     }
 
+    /// A pad first read after this screen was built (a pad connected before
+    /// launch is read by the first poll, after `boot_title`): 00439B30's sets
+    /// for it join the live title context, as a screen built with the pad
+    /// would hold them. The device comes from the Pad notification, never a
+    /// live SDL query, so a recording replays the same binding.
+    pub fn install_arriving_device(
+        &mut self,
+        input: &mut InputRuntime,
+        device: FrontendDevice,
+    ) -> Result<(), FrontendBindingError> {
+        self.bindings.install_device(input, device)
+    }
+
     /// Constructor `00404620` plus factory `00404A10` video selection, in
     /// native order: scheduler membership, base input, link, device
     /// enumeration, authored title tables, context selection, then the
