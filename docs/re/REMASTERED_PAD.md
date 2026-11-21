@@ -183,10 +183,10 @@ Digital thrust (`+78`, the turbo/jump request, `0046A260` step 2's
 | Secondary ring (held) | `+41` | `00469770` | `0053A430` f0 | Kp0 `52` | 6,16 | 10 R2 | d-pad right (6) |
 | Primary step +1 | `+28 = 1` | `004696C0` | `0053A3F0` f0 | Home `C7` | — | — | RB (12) |
 | Primary step −1 | `+28 = -1` | `004696E0` | `0053A3F8` f0 | End `CF` | — | — | LB (11) |
-| Detonator (row 6) | `+28 = 8` | `004698C0` | `0053A4A0` f0 | F7 `41` | — | — | d-pad up (5) |
+| Detonator (row 6) | `+28 = 8` | `004698C0` | `0053A4A0` f0 | F7 `41` | — | — | (d-pad left steps to it) |
 | Lights / infra-red | `+3D = 1` | `00469740` | `0053A418` f0 | L `26` | 13 | 16+12 | d-pad down (7) |
 | CPU access | computer toggle | `00469450` | `0053A438` f0 | Tab `0F` | 7 | 1 Select | L3 (2) |
-| Cargo rotate + | `+30 = 1` | `00469680` | `0053A3E0` f0 | A `1E` | — | 8+12 | Y+Left |
+| Cargo rotate + | `+30 = 1` | `00469680` | `0053A3E0` f0 | A `1E` | — | 8+12 | d-pad up (5) |
 | Cargo rotate − | `+30 = -1` | `004696A0` | `0053A3E8` f0 | — | 10,14 | 6+12 | Y+Right |
 | Message select | `+50` bit 1 | `004697F0` | `0053A468` f0 | Return `1C` | — | 15,2,3 | A (15), and RT through `0046A27D` |
 | Digital thrust | `+78` | — | `0053A378` f6 | Space `39` | 3 | 15 Cross | LT past half (question) |

@@ -3,7 +3,7 @@
 //! This module is port-authored binding data, not original bytes. Every row it
 //! installs is a retail row re-coded: the descriptor (callback, flags and
 //! original file span) is taken from the screen's own parsed tables, and only
-//! the device codes change. Rows retail's pad never had (the detonator, the
+//! the device codes change. Rows retail's pad never had (cargo rotation, the
 //! primary steps, the gameplay screen's map/first-person/pause keys) reuse the
 //! descriptor their keyboard row already binds. No action is invented.
 //!
@@ -332,7 +332,10 @@ impl RemasteredScreen {
                 let grenade = self.action(retail, 0x0046_94d0)?;
                 let primary_step_down = self.action(retail, 0x0046_96e0)?;
                 let grenade_step_up = self.action(retail, 0x0046_9700)?;
-                let detonator = self.action(retail, 0x0046_98c0)?;
+                // The detonator is a primary weapon slot the d-pad left steps
+                // to; d-pad up rotates the carried cargo instead (user,
+                // 2026-11-21), its `+30 = 1` step `00469680`.
+                let cargo_rotate = self.action(retail, 0x0046_9680)?;
                 let lights = self.action(retail, 0x0046_9740)?;
                 let computer = self.action(retail, 0x0046_9450)?;
                 vec![
@@ -349,7 +352,7 @@ impl RemasteredScreen {
                     // L2/R2 modifiers retail's PS1 gestures use.
                     row(primary_step_down, &[LEFT]),
                     row(grenade_step_up, &[RIGHT]),
-                    row(detonator, &[UP]),
+                    row(cargo_rotate, &[UP]),
                     row(lights, &[DOWN]),
                     row(computer, &[L3]),
                 ]

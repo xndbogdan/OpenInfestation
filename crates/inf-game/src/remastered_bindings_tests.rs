@@ -257,23 +257,25 @@ fn the_play_sub_binds_the_agreed_buttons() {
     assert_eq!(only_callback(&table, codes::RB), 0x0046_94d0);
     assert_eq!(only_callback(&table, codes::LEFT), 0x0046_96e0);
     assert_eq!(only_callback(&table, codes::RIGHT), 0x0046_9700);
-    assert_eq!(only_callback(&table, codes::UP), 0x0046_98c0);
+    assert_eq!(only_callback(&table, codes::UP), 0x0046_9680);
     assert_eq!(only_callback(&table, codes::DOWN), 0x0046_9740);
     assert_eq!(only_callback(&table, codes::L3), 0x0046_9450);
-    // The triggers are analog only; cargo rotation is deliberately unbound.
+    // The triggers are analog only.
     for code in [codes::LT, codes::RT, codes::VIEW, codes::R3, codes::START] {
         assert!(
             callbacks(&table, code).is_empty(),
             "play sub code {code} must stay unbound"
         );
     }
-    for callback in [0x0046_9680, 0x0046_96a0] {
+    // The detonator is stepped to with d-pad left, and the second cargo
+    // direction stays unbound.
+    for callback in [0x0046_98c0, 0x0046_96a0] {
         assert!(
             !table
                 .records
                 .iter()
                 .any(|record| record.descriptor.callback_address == callback),
-            "cargo rotation {callback:#010x} must stay unbound"
+            "{callback:#010x} must stay unbound"
         );
     }
 }
