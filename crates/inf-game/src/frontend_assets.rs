@@ -9,6 +9,7 @@ use std::{
 use crate::frontend_bindings::ScreenAnalogDescriptors;
 use crate::menu::MenuData;
 use crate::profile_menu::{ProfileMenuTemplates, ProfileTemplateError};
+use crate::remastered_bindings::{remastered_tables, RemasteredBindingError, RemasteredScreen};
 
 use inf_formats::{
     parse_frontend_attract_selection_table, parse_frontend_camera_presets,
@@ -38,6 +39,8 @@ pub enum FrontendAssetError {
     Table(#[from] FrontendError),
     #[error(transparent)]
     InputTable(#[from] InputTableError),
+    #[error(transparent)]
+    RemasteredBinding(#[from] RemasteredBindingError),
     #[error(transparent)]
     KeyName(#[from] KeyNameError),
     #[error(transparent)]
@@ -306,27 +309,56 @@ impl FrontendAssets {
         let sine_table = parse_frontend_sine_table(source, FRONTEND_SINE_TABLE_ADDRESS)?;
         let attract_selections =
             parse_frontend_attract_selection_table(source, FRONTEND_ATTRACT_SELECTION_ADDRESS)?;
-        let frontend_input_tables = parse_frontend_input_tables(mapped)?;
-        let text_entry_input_tables = parse_text_entry_input_tables(mapped)?;
-        let title_input_tables = parse_title_input_tables(mapped)?;
-        let startup_input_tables = parse_startup_input_tables(mapped)?;
-        let phase12_input_tables = parse_phase12_input_tables(mapped)?;
-        let phase3_input_tables = parse_phase3_input_tables(mapped)?;
-        let phase5_input_tables = parse_phase5_input_tables(mapped)?;
-        let phase7_input_tables = parse_phase7_input_tables(mapped)?;
-        let phase8_input_tables = parse_phase8_input_tables(mapped)?;
-        let gameplay_input_tables = inf_formats::parse_screen_input_tables(
-            mapped,
-            inf_formats::GAMEPLAY_DIGITAL_TABLE_ADDRESSES,
-            inf_formats::GAMEPLAY_ANALOG_TABLE_POINTERS,
+        let frontend_input_tables = remastered_tables(
+            RemasteredScreen::Frontend,
+            &parse_frontend_input_tables(mapped)?,
+        )?;
+        let text_entry_input_tables = remastered_tables(
+            RemasteredScreen::TextEntry,
+            &parse_text_entry_input_tables(mapped)?,
+        )?;
+        let title_input_tables =
+            remastered_tables(RemasteredScreen::Title, &parse_title_input_tables(mapped)?)?;
+        let startup_input_tables = remastered_tables(
+            RemasteredScreen::Startup,
+            &parse_startup_input_tables(mapped)?,
+        )?;
+        let phase12_input_tables = remastered_tables(
+            RemasteredScreen::KeyConfig,
+            &parse_phase12_input_tables(mapped)?,
+        )?;
+        let phase3_input_tables = remastered_tables(
+            RemasteredScreen::Briefing,
+            &parse_phase3_input_tables(mapped)?,
+        )?;
+        let phase5_input_tables = remastered_tables(
+            RemasteredScreen::InWorldPause,
+            &parse_phase5_input_tables(mapped)?,
+        )?;
+        let phase7_input_tables =
+            remastered_tables(RemasteredScreen::Map, &parse_phase7_input_tables(mapped)?)?;
+        let phase8_input_tables = remastered_tables(
+            RemasteredScreen::Results,
+            &parse_phase8_input_tables(mapped)?,
+        )?;
+        let gameplay_input_tables = remastered_tables(
+            RemasteredScreen::Gameplay,
+            &inf_formats::parse_screen_input_tables(
+                mapped,
+                inf_formats::GAMEPLAY_DIGITAL_TABLE_ADDRESSES,
+                inf_formats::GAMEPLAY_ANALOG_TABLE_POINTERS,
+            )?,
         )?;
         // The sub-object's analog descriptors lie in .data's zero fill.
         crate::player_input_source::validate_zero_tail(&bytes)?;
-        let gameplay_sub_input_tables = inf_formats::parse_screen_input_tables_direct(
-            mapped,
-            inf_formats::GAMEPLAY_SUB_DIGITAL_TABLE_ADDRESSES,
-            inf_formats::GAMEPLAY_SUB_ANALOG_TABLE_ADDRESSES,
-            &crate::player_input_source::ANALOG_IDENTITIES,
+        let gameplay_sub_input_tables = remastered_tables(
+            RemasteredScreen::GameplaySub,
+            &inf_formats::parse_screen_input_tables_direct(
+                mapped,
+                inf_formats::GAMEPLAY_SUB_DIGITAL_TABLE_ADDRESSES,
+                inf_formats::GAMEPLAY_SUB_ANALOG_TABLE_ADDRESSES,
+                &crate::player_input_source::ANALOG_IDENTITIES,
+            )?,
         )?;
         let key_names = parse_key_name_table(mapped)?;
         let screen_analog_descriptors = ScreenAnalogDescriptors::from_executable(mapped)?;

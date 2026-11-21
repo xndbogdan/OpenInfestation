@@ -162,6 +162,7 @@ pub mod profile_store;
 pub mod radar_blips;
 pub mod raster_metal;
 pub mod raster_motion;
+pub mod remastered_bindings;
 pub mod render_resources;
 pub mod replay_controls;
 mod residency;
