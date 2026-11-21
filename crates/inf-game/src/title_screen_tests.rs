@@ -4,7 +4,7 @@ use super::*;
 use crate::frontend_assets::FrontendAssets;
 use crate::frontend_renderer::FrontendRenderContext;
 use crate::frontend_scene::SceneProjection;
-use crate::input::DeviceButtons;
+use crate::input::{DeviceButtons, DeviceSnapshot, InputHost};
 
 #[derive(Debug, Default)]
 struct FakeHost {
@@ -327,6 +327,140 @@ fn draw_presents_only_with_a_handle_but_always_runs_the_preamble() {
     );
     assert_eq!(h.host.preambles, 1);
     assert_eq!(h.host.frames, 1);
+}
+
+/// Records the callbacks a device update emits, dispatching them into the
+/// title owner exactly as `TitleRouter` does in the session.
+struct SkipRecorder<'a> {
+    screen: &'a mut TitleScreen,
+    effects: &'a mut FakeHost,
+    callbacks: Vec<u32>,
+}
+
+impl InputHost for SkipRecorder<'_> {
+    type Error = TitleScreenError<&'static str>;
+
+    fn clock_micros(&mut self) -> Result<u64, Self::Error> {
+        Ok(0)
+    }
+
+    fn callback(
+        &mut self,
+        event: InputCallback,
+        _input: &mut InputRuntime,
+    ) -> Result<(), Self::Error> {
+        self.callbacks.push(event.address);
+        self.screen.digital_callback(event, self.effects)
+    }
+}
+
+/// A pad the notification stream first creates after the title was built, as
+/// a pad connected before launch is: the first poll reads it, and
+/// `bind_arrived_pad` must give its slot's table the live title context.
+fn arriving_pad_skips(native_type: u32, code: u8) {
+    let mut h = harness(FakeHost::default());
+    let mut screen = ready_screen(&mut h);
+    let source = h
+        .input
+        .create_device(DeviceButtons::default())
+        .expect("pad device");
+    screen
+        .install_arriving_device(
+            &mut h.input,
+            FrontendDevice {
+                native_type,
+                source,
+            },
+        )
+        .expect("slot table");
+    let mut buttons = DeviceButtons::default();
+    buttons.set(code, true);
+    let mut effects = FakeHost::default();
+    let callbacks = {
+        let mut recorder = SkipRecorder {
+            screen: &mut screen,
+            effects: &mut effects,
+            callbacks: Vec::new(),
+        };
+        h.input
+            .update_device(
+                source,
+                DeviceSnapshot {
+                    buttons,
+                    axes: [0; 8],
+                },
+                &mut recorder,
+            )
+            .unwrap();
+        h.input.poll(&mut recorder).unwrap();
+        assert_eq!(recorder.callbacks, [TITLE_SKIP_CALLBACK]);
+        assert!(recorder.screen.finished());
+        recorder.callbacks
+    };
+    assert_eq!(
+        effects.requests,
+        [(SessionPhase::Title, SessionPhase::Frontend)]
+    );
+    assert_eq!(callbacks, [TITLE_SKIP_CALLBACK]);
+}
+
+#[test]
+fn an_arriving_type_eight_pad_skips_on_every_code() {
+    // The Remastered slot-8 table binds every code 1..16 to 00404870.
+    for code in 1..=16 {
+        arriving_pad_skips(8, code);
+    }
+}
+
+#[test]
+fn an_arriving_type_nine_pad_skips_on_its_retail_start_row() {
+    // Console code 4 (Start), a code the retail 0051F4A8 table binds.
+    arriving_pad_skips(9, 4);
+}
+
+#[test]
+fn an_arriving_type_two_pad_has_no_title_rows() {
+    // Retail's title slot 2 is zero: the PC joystick has no row, so it
+    // cannot skip. The port must not invent one.
+    let mut h = harness(FakeHost::default());
+    let mut screen = ready_screen(&mut h);
+    let source = h
+        .input
+        .create_device(DeviceButtons::default())
+        .expect("pad device");
+    screen
+        .install_arriving_device(
+            &mut h.input,
+            FrontendDevice {
+                native_type: 2,
+                source,
+            },
+        )
+        .expect("no title rows");
+    let mut buttons = DeviceButtons::default();
+    buttons.set(1, true);
+    let mut effects = FakeHost::default();
+    let callbacks = {
+        let mut recorder = SkipRecorder {
+            screen: &mut screen,
+            effects: &mut effects,
+            callbacks: Vec::new(),
+        };
+        h.input
+            .update_device(
+                source,
+                DeviceSnapshot {
+                    buttons,
+                    axes: [0x8000; 8],
+                },
+                &mut recorder,
+            )
+            .unwrap();
+        h.input.poll(&mut recorder).unwrap();
+        recorder.callbacks
+    };
+    assert!(callbacks.is_empty());
+    assert!(!screen.finished());
 }
 
 #[test]
