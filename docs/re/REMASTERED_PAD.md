@@ -500,7 +500,7 @@ already installs `assets.<screen>_input_tables()`.
   Remastered type.
 
 **`launcher/choices.rs`** — add
-`(ControllerLayout::Remastered, "Remastered (modern pad)")` to
+`(ControllerLayout::Remastered, "Remastered")` to
 `CONTROLLER_LAYOUTS`; both launchers index the array by position and already
 use `.len()`.
 

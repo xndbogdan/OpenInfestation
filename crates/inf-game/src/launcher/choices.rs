@@ -19,7 +19,7 @@ pub(super) const CAMERA_STYLES: [&str; 3] = ["Normal", "Cinematic", "Remastered"
 pub(super) const CONTROLLER_LAYOUTS: [(ControllerLayout, &str); 3] = [
     (ControllerLayout::Pc, "PC original"),
     (ControllerLayout::Console, "Console original (PlayStation)"),
-    (ControllerLayout::Remastered, "Remastered (modern pad)"),
+    (ControllerLayout::Remastered, "Remastered"),
 ];
 /// The Controller hints row's entries: retail's PC keyboard wording, or the
 /// controller's after the player last used the pad.
@@ -310,7 +310,7 @@ mod tests {
         );
         assert_eq!(
             CONTROLLER_LAYOUTS[2],
-            (ControllerLayout::Remastered, "Remastered (modern pad)")
+            (ControllerLayout::Remastered, "Remastered")
         );
     }
 }
