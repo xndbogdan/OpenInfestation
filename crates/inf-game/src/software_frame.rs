@@ -33,7 +33,7 @@ use crate::{
         prepare_solid_quad, prepare_solid_triangle, read_solid_quad, read_solid_triangle,
     },
     d3d_terrain::{colored_terrain_fog, prepare_colored_terrain, read_colored_terrain},
-    d3d_texture::{CpuTextureStore, TextureUploadError},
+    d3d_texture::{CpuTexture, CpuTextureStore, TextureUploadError},
     d3d_textured::{
         prepare_textured_quad, read_textured_quad, sprite_mode, D3dTextureBlend, D3dTextureFog,
         D3dTexturedSubmission, TexturedPixelError,
@@ -883,6 +883,15 @@ impl SoftwareFrame {
         self.device.as_mut().map_or(1.0, FrameDevice::prepare_trace)
     }
 
+    /// Make `texture`'s device copy now, as the first draw that samples it
+    /// would, and draw nothing. The CPU raster's copy is already made by the
+    /// texture store; a frame without a device has nothing more to do.
+    pub(crate) fn warm_texture(&mut self, texture: &CpuTexture) {
+        if let Some(device) = self.device.as_mut() {
+            device.warm_texture(texture);
+        }
+    }
+
     /// Trace `feed` (the world in world space, its texture indices into
     /// `textures`) into a device frame that traces rays: true when it did,
     /// and the replay then leaves what the feed took. Other frames are left
@@ -1454,6 +1463,22 @@ impl<'f, 'r> SoftwarePixelBackend<'f, 'r> {
             &mut self.pipeline,
             self.texture_state.sampling,
         )
+    }
+
+    /// Make the texture a draw of `resource` under `mode` would, and draw
+    /// nothing ([`SoftwareScene::warm_sprite`]).
+    ///
+    /// [`SoftwareScene::warm_sprite`]: crate::software_scene::SoftwareScene::warm_sprite
+    pub(crate) fn warm_texture(
+        &mut self,
+        resource: RenderResource<'r>,
+        mode: u32,
+    ) -> Result<(), SoftwarePixelError> {
+        let upload = self.texture_state.upload;
+        if let Some(texture) = self.textures.resolve(resource, sprite_mode(mode), upload)? {
+            self.frame.warm_texture(texture);
+        }
+        Ok(())
     }
 }
 

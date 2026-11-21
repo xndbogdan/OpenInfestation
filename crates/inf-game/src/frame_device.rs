@@ -415,6 +415,18 @@ impl FrameDevice {
         }
     }
 
+    /// Make `texture`'s device copy now, as the first draw that samples it
+    /// would, and draw nothing: like [`SoftwareScene::warm_sprite`], one layer
+    /// down.
+    ///
+    /// [`SoftwareScene::warm_sprite`]: crate::software_scene::SoftwareScene::warm_sprite
+    pub(crate) fn warm_texture(&mut self, texture: &CpuTexture) {
+        match self {
+            Self::OpenGl(frame) => frame.warm_texture(texture),
+            Self::Vulkan(frame) => frame.warm_texture(texture),
+        }
+    }
+
     /// Trace `feed` into the frame, where the device traces rays: true when
     /// it did.
     pub(crate) fn trace_world(

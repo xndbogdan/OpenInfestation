@@ -758,6 +758,18 @@ impl<'f, 'r> SoftwareScene<'f, 'r> {
         self.pixels.frame.prepare_trace()
     }
 
+    /// Make a sprite's texture now, as the first draw naming it would, and
+    /// draw nothing: a panel drawn over a later frame (the pad notice) does
+    /// not pay for the sprite's decode and upload then. `mode` is the draw's
+    /// +20 word, as [`SoftwarePixelBackend::draw`] reads it.
+    pub fn warm_sprite(
+        &mut self,
+        resource: crate::render_resources::RenderResource<'r>,
+        mode: u32,
+    ) -> Result<(), crate::software_frame::SoftwarePixelError> {
+        self.pixels.warm_texture(resource, mode)
+    }
+
     /// The feed being collected, to add the world's light, fog and sky.
     pub fn scene_feed_mut(&mut self) -> Option<&mut crate::scene_feed::SceneFeedBuilder<'r>> {
         self.scene_feed.as_mut()

@@ -175,6 +175,9 @@ struct TextureCache {
 struct CachedTexture {
     name: GLuint,
     last_used: u64,
+    /// Made ahead of its first draw by [`GlDevice::pinned_texture`]: kept past
+    /// [`TEXTURE_IDLE_PRESENTS`], so that draw never pays for the upload.
+    pinned: bool,
 }
 
 /// One OpenGL context with its programs and device textures. Frames share it
@@ -367,9 +370,22 @@ impl GlDevice {
             CachedTexture {
                 name,
                 last_used: presents,
+                pinned: false,
             },
         );
         texture.device_name.set(Some((self.serial, presents, name)));
+        name
+    }
+
+    /// [`Self::texture`], kept until the device goes: made ahead of its first
+    /// draw (a panel's glyphs, [`GlFrame::warm_texture`]), so the draw itself
+    /// costs an ordinary frame.
+    fn pinned_texture(&self, texture: &CpuTexture) -> GLuint {
+        let name = self.texture(texture);
+        let key = texture.content_key();
+        if let Some(entry) = self.textures.borrow_mut().entries.get_mut(&key) {
+            entry.pinned = true;
+        }
         name
     }
 
@@ -378,7 +394,7 @@ impl GlDevice {
         cache.presents += 1;
         let presents = cache.presents;
         cache.entries.retain(|_, entry| {
-            let keep = entry.last_used + TEXTURE_IDLE_PRESENTS >= presents;
+            let keep = entry.pinned || entry.last_used + TEXTURE_IDLE_PRESENTS >= presents;
             if !keep {
                 // SAFETY: the device context is current, and every frame
                 // flushes its batch before presenting, so no pending draw
@@ -599,6 +615,13 @@ impl GlFrame {
             self.batch.extend([first, previous, next]);
             previous = next;
         }
+    }
+
+    /// Make `texture`'s GL name now, as the first draw sampling it would, and
+    /// keep it past [`TEXTURE_IDLE_PRESENTS`]: a panel's glyphs, so a hot-plug
+    /// showing them costs an ordinary frame.
+    pub(crate) fn warm_texture(&self, texture: &CpuTexture) {
+        self.device.pinned_texture(texture);
     }
 
     pub(crate) fn clear_color(&mut self, rgba: [u8; 4]) {
