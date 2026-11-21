@@ -1004,3 +1004,45 @@ fn an_idle_pads_departure_never_reaches_the_stream() {
         "the pause gate stays closed"
     );
 }
+
+/// The Remastered pad (native type 8) is the PlayStation pad's domain: the
+/// same `-0x80` calibration bias, the same byte dead zone around 0x80, and
+/// the same status input while its read fails.
+#[test]
+fn a_type_eight_pad_uses_the_playstation_byte_axes() {
+    assert_eq!(pad_axis_transform(8, 10), pad_axis_transform(9, 10));
+    assert!(!axis_off_centre(0x80, 8));
+    // Exactly a quarter of the byte range from centre is still neutral.
+    assert!(!axis_off_centre(0x80 + 0x40, 8));
+    assert!(!axis_off_centre(0x80 - 0x40, 8));
+    assert!(axis_off_centre(0x80 + 0x41, 8));
+    assert!(axis_off_centre(0x80 - 0x41, 8));
+
+    let mut input = InputRuntime::default();
+    let mut host = Host::default();
+    let mut devices = SdlInput::attach(&mut input).unwrap();
+    let reading = |sample| InputNotification::Pad {
+        native_type: 8,
+        axes: 6,
+        sample,
+    };
+    devices
+        .update(
+            reading(PadSample::Read {
+                buttons: 0,
+                axes: [0x80; 6],
+            }),
+            &mut input,
+            &mut host,
+        )
+        .unwrap();
+    devices
+        .take_arrived_pad(&mut input, 10)
+        .unwrap()
+        .expect("the type-8 pad is calibrated");
+    assert!(devices.joystick_live());
+    devices
+        .update(reading(PadSample::Failed), &mut input, &mut host)
+        .unwrap();
+    assert!(!devices.joystick_live());
+}

@@ -23,6 +23,17 @@
 //! is the bottom face button (Xbox A), Circle the right (B), Square the left
 //! (X), Triangle the top (Y); the triggers, pushed past half, are L2 and R2.
 //!
+//! [`ControllerLayout::Remastered`] plays a mapped controller with the
+//! Remastered bindings (`docs/re/REMASTERED_PAD.md`) on native type 8,
+//! retail's analog PlayStation type that does not answer the extended-mode
+//! query: the same codes and byte axes as [`ControllerLayout::Console`], six
+//! axes long. Its axes 2 and 3 are the right stick, reserved for a later
+//! camera, and its axis 4 is the thrust: the right trigger raises it
+//! (forward) and the left trigger lowers it (reverse), `0x80` at rest, so
+//! the play table's re-axised record with multiplier `+1024` reads a raised
+//! axis as forward power and a lowered one as reverse. Axis 5 stays at
+//! centre.
+//!
 //! Port convenience, not retail: every attached pad is read, but the native
 //! stream follows the pad in use. At the first poll that is the first listed
 //! pad; any other pad takes the stream the moment it newly presses a button
@@ -44,8 +55,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::platform_input::{axis_off_centre, InputNotification, PadSample};
 
-/// How the pad plays: as PC retail's joystick, or as the PlayStation
-/// release's pad.
+/// How the pad plays: as PC retail's joystick, as the PlayStation release's
+/// pad, or as a modern pad with the Remastered bindings.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 #[serde(rename_all = "kebab-case")]
 pub enum ControllerLayout {
@@ -54,13 +65,20 @@ pub enum ControllerLayout {
     Pc,
     /// The PlayStation pad, native type 9.
     Console,
+    /// The Remastered pad, native type 8: the analog PlayStation pad's codes
+    /// and byte axes, with a thrust axis from the two triggers.
+    Remastered,
 }
 
 impl ControllerLayout {
+    /// Every layout, in the order the launchers list them.
+    pub const ALL: [ControllerLayout; 3] = [Self::Pc, Self::Console, Self::Remastered];
+
     pub fn native_type(self) -> u8 {
         match self {
             ControllerLayout::Pc => 2,
             ControllerLayout::Console => 9,
+            ControllerLayout::Remastered => 8,
         }
     }
 }
@@ -124,6 +142,10 @@ const CONSOLE_BUTTONS: [(u32, Button); 14] = [
 ];
 /// A trigger past half is the PlayStation's digital L2 or R2.
 const TRIGGER_PRESSED: i16 = 0x4000;
+/// The analog PlayStation pad's four byte axes.
+const CONSOLE_AXES: u8 = 4;
+/// The Remastered pad's axes: the two sticks, the thrust and one idle axis.
+const REMASTERED_AXES: u8 = 6;
 
 /// Buttons 1 to 10 of an XInput pad under WinMM.
 const XINPUT_BUTTONS: [Button; 10] = [
@@ -173,63 +195,23 @@ impl Open {
     /// The native type this pad plays as: an unmapped joystick has no
     /// PlayStation layout, so it stays retail's joystick.
     fn native_type(&self, layout: ControllerLayout) -> u8 {
-        match self {
-            Open::Controller(_) => layout.native_type(),
-            Open::Joystick(_) => ControllerLayout::Pc.native_type(),
-        }
+        pad_native_type(matches!(self, Open::Controller(_)), layout)
     }
 
     fn axes(&self, layout: ControllerLayout) -> u8 {
         match self {
-            Open::Controller(_) if self.native_type(layout) == 9 => 4,
-            Open::Controller(_) => XINPUT_AXES,
+            Open::Controller(_) => controller_axes(self.native_type(layout)),
             Open::Joystick(joystick) => joystick.num_axes().min(6) as u8,
         }
     }
 
     fn sample(&self, layout: ControllerLayout) -> PadSample {
-        let position = |value: i16| (i32::from(value) + 0x8000) as u32;
-        if let (Open::Controller(controller), 9) = (self, self.native_type(layout)) {
-            let mut buttons = CONSOLE_BUTTONS.iter().fold(0, |mask, &(bit, button)| {
-                mask | (u32::from(controller.button(button)) << bit)
-            });
-            buttons |= u32::from(controller.axis(Axis::TriggerLeft) >= TRIGGER_PRESSED) << 8;
-            buttons |= u32::from(controller.axis(Axis::TriggerRight) >= TRIGGER_PRESSED) << 9;
-            let byte = |axis| position(controller.axis(axis)) >> 8;
-            return PadSample::Read {
-                buttons,
-                axes: [
-                    byte(Axis::LeftX),
-                    byte(Axis::LeftY),
-                    byte(Axis::RightX),
-                    byte(Axis::RightY),
-                    0,
-                    0,
-                ],
-            };
-        }
         match self {
-            Open::Controller(controller) => {
-                let buttons = XINPUT_BUTTONS
-                    .iter()
-                    .enumerate()
-                    .fold(0, |mask, (bit, &button)| {
-                        mask | (u32::from(controller.button(button)) << bit)
-                    });
-                let triggers = i32::from(controller.axis(Axis::TriggerLeft))
-                    - i32::from(controller.axis(Axis::TriggerRight));
-                PadSample::Read {
-                    buttons,
-                    axes: [
-                        position(controller.axis(Axis::LeftX)),
-                        position(controller.axis(Axis::LeftY)),
-                        (0x8000 + triggers).clamp(0, 0xffff) as u32,
-                        position(controller.axis(Axis::RightY)),
-                        position(controller.axis(Axis::RightX)),
-                        0,
-                    ],
-                }
-            }
+            Open::Controller(controller) => match self.native_type(layout) {
+                8 => remastered_sample(controller),
+                9 => console_sample(controller),
+                _ => xinput_sample(controller),
+            },
             Open::Joystick(joystick) => {
                 let buttons = (0..joystick.num_buttons().min(32)).fold(0, |mask, index| {
                     mask | (u32::from(joystick.button(index).unwrap_or(false)) << index)
@@ -248,10 +230,133 @@ impl Open {
     }
 }
 
+/// The native type a pad plays as: an unmapped joystick has no PlayStation
+/// layout, so it stays retail's joystick whatever the chosen layout.
+fn pad_native_type(is_controller: bool, layout: ControllerLayout) -> u8 {
+    if is_controller {
+        layout.native_type()
+    } else {
+        ControllerLayout::Pc.native_type()
+    }
+}
+
+/// The axis count a mapped controller reports for its native type: the
+/// PlayStation pads' sticks (and, for the Remastered pad, its thrust and idle
+/// axes), or retail's X, Y, Z, R and U for an XInput pad under WinMM.
+fn controller_axes(native_type: u8) -> u8 {
+    match native_type {
+        8 => REMASTERED_AXES,
+        9 => CONSOLE_AXES,
+        _ => XINPUT_AXES,
+    }
+}
+
+/// The controller queries a sample needs, so each layout's mapping is
+/// testable without an SDL device.
+trait ControllerRead {
+    fn button(&self, button: Button) -> bool;
+    fn axis(&self, axis: Axis) -> i16;
+}
+
+impl ControllerRead for GameController {
+    fn button(&self, button: Button) -> bool {
+        GameController::button(self, button)
+    }
+
+    fn axis(&self, axis: Axis) -> i16 {
+        GameController::axis(self, axis)
+    }
+}
+
+/// SDL's signed axis position (its triggers rest at `-0x8000`) as the
+/// unsigned word `joyGetPosEx` reports.
+fn position(value: i16) -> u32 {
+    (i32::from(value) + 0x8000) as u32
+}
+
+/// The PlayStation pad's sixteen codes, as active-high bits (code `n` is bit
+/// `n - 1`): the mapped buttons, and the triggers past half as L2 and R2.
+fn playstation_buttons(controller: &impl ControllerRead) -> u32 {
+    let mut buttons = CONSOLE_BUTTONS.iter().fold(0, |mask, &(bit, button)| {
+        mask | (u32::from(controller.button(button)) << bit)
+    });
+    buttons |= u32::from(controller.axis(Axis::TriggerLeft) >= TRIGGER_PRESSED) << 8;
+    buttons |= u32::from(controller.axis(Axis::TriggerRight) >= TRIGGER_PRESSED) << 9;
+    buttons
+}
+
+/// 004F54A0's view of a mapped XInput pad, as WinMM numbers it.
+fn xinput_sample(controller: &impl ControllerRead) -> PadSample {
+    let buttons = XINPUT_BUTTONS
+        .iter()
+        .enumerate()
+        .fold(0, |mask, (bit, &button)| {
+            mask | (u32::from(controller.button(button)) << bit)
+        });
+    let triggers = i32::from(controller.axis(Axis::TriggerLeft))
+        - i32::from(controller.axis(Axis::TriggerRight));
+    PadSample::Read {
+        buttons,
+        axes: [
+            position(controller.axis(Axis::LeftX)),
+            position(controller.axis(Axis::LeftY)),
+            (0x8000 + triggers).clamp(0, 0xffff) as u32,
+            position(controller.axis(Axis::RightY)),
+            position(controller.axis(Axis::RightX)),
+            0,
+        ],
+    }
+}
+
+/// The PlayStation release's analog pad: its sixteen codes and its four
+/// byte axes.
+fn console_sample(controller: &impl ControllerRead) -> PadSample {
+    let byte = |axis| position(controller.axis(axis)) >> 8;
+    PadSample::Read {
+        buttons: playstation_buttons(controller),
+        axes: [
+            byte(Axis::LeftX),
+            byte(Axis::LeftY),
+            byte(Axis::RightX),
+            byte(Axis::RightY),
+            0,
+            0,
+        ],
+    }
+}
+
+/// The Remastered pad: the PlayStation pad's codes and byte axes, its two
+/// triggers summed onto one thrust axis, and its sixth axis idle at centre.
+fn remastered_sample(controller: &impl ControllerRead) -> PadSample {
+    let byte = |axis| position(controller.axis(axis)) >> 8;
+    // The thrust, `0x80` at rest: the right trigger raises it and the left
+    // lowers it by up to `0x7F`, so the play table's record (axis 4,
+    // multiplier `+1024`) reads a raised axis as forward power and a lowered
+    // one as reverse.
+    let forward = position(controller.axis(Axis::TriggerRight)) as i32
+        - position(controller.axis(Axis::TriggerLeft)) as i32;
+    let thrust = (0x80 + forward * 0x7f / 0xffff).clamp(0, 0xff) as u32;
+    PadSample::Read {
+        buttons: playstation_buttons(controller),
+        axes: [
+            byte(Axis::LeftX),
+            byte(Axis::LeftY),
+            byte(Axis::RightX),
+            byte(Axis::RightY),
+            thrust,
+            0x80,
+        ],
+    }
+}
+
 /// A reading with nothing pressed and every stick centred, for a native type
-/// (the PlayStation pad's axes are bytes, retail's joystick's words).
+/// (the PlayStation pads' axes are bytes, retail's joystick's words).
 fn released_sample(native_type: u8, axes: u8) -> PadSample {
-    let centre = if native_type == 9 { 0x80 } else { 0x8000 };
+    let centre = if matches!(native_type, 8 | 9) {
+        0x80
+    } else {
+        0x8000
+    };
     let mut positions = [0; 6];
     positions[..usize::from(axes)].fill(centre);
     PadSample::Read {

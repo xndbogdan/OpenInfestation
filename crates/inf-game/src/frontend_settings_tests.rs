@@ -1386,13 +1386,15 @@ fn the_controller_layout_persists_and_older_sidecars_load_pc() {
     let fixture = Fixture::new();
     let mut settings = fixture.load().unwrap();
     assert_eq!(settings.controller_layout(), ControllerLayout::Pc);
-    settings.set_controller_layout(ControllerLayout::Console);
-    settings.persist().unwrap();
-    assert_eq!(fixture.json()["controller_layout"], "console");
-    assert_eq!(
-        fixture.load().unwrap().controller_layout(),
-        ControllerLayout::Console
-    );
+    for (layout, name) in [
+        (ControllerLayout::Console, "console"),
+        (ControllerLayout::Remastered, "remastered"),
+    ] {
+        settings.set_controller_layout(layout);
+        settings.persist().unwrap();
+        assert_eq!(fixture.json()["controller_layout"], name);
+        assert_eq!(fixture.load().unwrap().controller_layout(), layout);
+    }
     let mut older = fixture.json();
     older["schema"] = 9.into();
     older.as_object_mut().unwrap().remove("controller_layout");

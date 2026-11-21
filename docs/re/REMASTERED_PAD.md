@@ -87,7 +87,7 @@ future PS1-pad feature wants type 8. It gives up retail's bias, status and
 count for free. Section 11 asks the user to choose; the rest of this document
 assumes type 8, and every screen-side statement is the same for either.
 
-### 2.2 The sample is the Console sample plus two analog triggers
+### 2.2 The sample is the Console sample plus a thrust axis
 
 The Remastered sample is **byte-for-byte the Console sample's button bits**
 (`CONSOLE_BUTTONS`): SDL's positional face buttons stand for the PlayStation's
@@ -98,7 +98,7 @@ The Remastered sample is **byte-for-byte the Console sample's button bits**
 9/10. The d-pad is a real digital input (retail's type-2 joystick never reads
 its point-of-view hat; a mapped controller's d-pad here is four buttons).
 
-The only changes are the axis count and two axes:
+The only changes are the axis count and the last two axes:
 
 | Axis | Content |
 | --- | --- |
@@ -106,14 +106,17 @@ The only changes are the axis count and two axes:
 | 1 | left stick Y, `position(v) >> 8` |
 | 2 | right stick X, `position(v) >> 8` (reserved, unbound) |
 | 3 | right stick Y, `position(v) >> 8` (reserved, unbound) |
-| 4 | left trigger, `(position(v) >> 9) + 0x80`: `0x80` released, `0xFF` full |
-| 5 | right trigger, same (reserved) |
+| 4 | thrust: right trigger forward, left trigger reverse, `0x80 + (RT − LT) × 0x7F / 0xFFFF` |
+| 5 | `0x80` (unused) |
 
-`position(v) = (i32::from(v) + 0x8000) as u32`. SDL reports a trigger as
-`-32768 .. 32767` (released .. full), so a raw `position` byte would rest at
-`0x00`, not the `0x80` the retail bias expects; the half-range formula puts
-rest at `0x80` and full at `0xFF`. The right stick keeps axes 2/3 so a later
-camera feature can bind them without moving the triggers.
+`position(v) = (i32::from(v) + 0x8000) as u32`, and RT and LT are its value
+for the two triggers. SDL reports a trigger as `-32768 .. 32767` (released ..
+full), so a raw `position` byte would rest at `0x00`, not the `0x80` the retail
+bias expects; summing the two triggers around `0x80` puts rest at `0x80`, full
+right at `0xFF` and full left at `0x01`. Section 3.1's re-axised play record
+multiplies axis 4 by `+1024`, so a raised axis is forward power: the right
+trigger drives forward and the left reverses. The right stick keeps axes 2/3
+so a later camera feature can bind them without moving the thrust.
 
 Reported axis count: **6**. Retail's type 8 reports 4 (`8012D068`), but the
 port's device is its own; the count is latched from the first reading and only
@@ -149,16 +152,19 @@ analog consumers (`0054ED08`, `0054ECE8`, `0054ECF8` = player `+64`, `+60`,
 `0046A260` publishes X/Y to `+8/+C` (clamped to a unit) and Z to `+10`
 unclamped; `00418F60` reads `+10` as the forward throttle and `+C` as lift,
 dead-zoned at `0x1C20` and `0x2A30`. So **analog thrust is the `0054ED08`
-consumer on a trigger axis**: the Remastered play table clones `00523238` and
-changes that one record to axis 4 with multiplier `+1024` (positive: the
-trigger's value rises with pressure, while the PS1 stick's Y falls upward).
-The sign is the only edit; the Q31 half-scale is retail's.
+consumer on the thrust axis**: the Remastered play table clones `00523238`
+and changes that one record to axis 4 with multiplier `+1024` (positive: the
+right trigger raises the axis above `0x80` while the PS1 stick's Y falls
+upward, and the left trigger lowers it, so the same record reads the left
+trigger as reverse). The axis and the sign are the only edits; the Q31
+half-scale is retail's.
 
-With the trigger at rest (`0x80`) the stage-1 bias gives 0, so the record
-produces 0. At full trigger and Sensitivity 10 it produces about `89088`
-(the PS1's full right stick gives about `90112` at the same sensitivity),
-which `analog_throttle` clamps to full power. Sensitivity scales it, as it
-scales every pad axis in retail.
+With the triggers at rest (`0x80`) the stage-1 bias gives 0, so the record
+produces 0. At full right trigger and Sensitivity 10 it produces about
+`89088` (full left gives the same magnitude reversed; the PS1's full right
+stick gives about `90112` at the same sensitivity), which `analog_throttle`
+clamps to full power. Sensitivity scales it, as it scales every pad axis in
+retail.
 
 Digital thrust (`+78`, the turbo/jump request, `0046A260` step 2's
 `+3A`), is a separate consumer (`0053A378`). See section 8.3.

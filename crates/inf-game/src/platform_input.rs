@@ -43,9 +43,9 @@ pub enum InputNotification {
     FocusLost,
     /// One poll of the pad (`004F54A0`, or the PlayStation's `800F4310`),
     /// sent every frame while one is open; the first creates the native
-    /// device: the joystick (type 2) or the PlayStation pad (type 9), with
-    /// `axes` axes, which later ones keep. The pad in use's unplug sends one
-    /// fully released reading first, then the failed ones; an idle pad's
+    /// device: the joystick (type 2) or a PlayStation pad (types 8 and 9),
+    /// with `axes` axes, which later ones keep. The pad in use's unplug sends
+    /// one fully released reading first, then the failed ones; an idle pad's
     /// unplug sends nothing.
     Pad {
         native_type: u8,
@@ -55,8 +55,10 @@ pub enum InputNotification {
 }
 
 /// One `joyGetPosEx` read: its `dwButtons` (button 1 is bit 0) and its X, Y,
-/// Z, R, U and V positions, or a failed read. The PlayStation pad's buttons
-/// are its bits (code 1 is bit 0) and its four axes 0 to 255.
+/// Z, R, U and V positions, or a failed read. The PlayStation pads' buttons
+/// are their bits (code 1 is bit 0) and their axes 0 to 255: four for the
+/// Console layout, six for Remastered (the two sticks, its thrust axis and
+/// an idle axis).
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PadSample {
     Read { buttons: u32, axes: [u32; 6] },
@@ -222,14 +224,14 @@ impl SdlInput {
         })
     }
 
-    /// `00439A20`'s pad: its adapter exists and, for the PlayStation pad,
-    /// its status input (`005222B0` binds code 0x1F, the failed read, for
-    /// types 1 and 6 to 9) is not held. Type 2 binds none, so an unplugged
-    /// joystick still counts.
+    /// `00439A20`'s pad: its adapter exists and, for a PlayStation pad, its
+    /// status input (`005222B0` binds code 0x1F, the failed read, for types 1
+    /// and 6 to 9) is not held. Type 2 binds none, so an unplugged joystick
+    /// still counts.
     pub fn joystick_live(&self) -> bool {
         self.pad
             .as_ref()
-            .is_some_and(|pad| pad.adapter && !(pad.native_type == 9 && pad.absent))
+            .is_some_and(|pad| pad.adapter && !(matches!(pad.native_type, 8 | 9) && pad.absent))
     }
 
     /// Whether the player's last input was the pad: a button newly went down

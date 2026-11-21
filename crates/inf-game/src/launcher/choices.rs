@@ -16,9 +16,10 @@ pub(super) const RENDERERS: [(RendererChoice, &str); 4] = [
 /// The Camera style row's entries, settings `+6C`'s values: retail's two,
 /// then the port's remastered camera.
 pub(super) const CAMERA_STYLES: [&str; 3] = ["Normal", "Cinematic", "Remastered"];
-pub(super) const CONTROLLER_LAYOUTS: [(ControllerLayout, &str); 2] = [
+pub(super) const CONTROLLER_LAYOUTS: [(ControllerLayout, &str); 3] = [
     (ControllerLayout::Pc, "PC original"),
     (ControllerLayout::Console, "Console original (PlayStation)"),
+    (ControllerLayout::Remastered, "Remastered (modern pad)"),
 ];
 /// The Controller hints row's entries: retail's PC keyboard wording, or the
 /// controller's after the player last used the pad.
@@ -302,6 +303,14 @@ mod tests {
                 ClassicScaling::Stretched,
                 ClassicScaling::Integer
             ]
+        );
+        assert_eq!(
+            CONTROLLER_LAYOUTS.map(|(choice, _)| choice),
+            ControllerLayout::ALL
+        );
+        assert_eq!(
+            CONTROLLER_LAYOUTS[2],
+            (ControllerLayout::Remastered, "Remastered (modern pad)")
         );
     }
 }

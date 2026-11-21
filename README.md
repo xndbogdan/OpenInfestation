@@ -123,6 +123,11 @@ Joystick 1 to 16. The launcher's Controller layout, or
 `--controller-layout console`, switches to the PlayStation release's pad
 layout, whose tables the PC executable carries unused
 ([the PlayStation release](docs/re/INPUT_RUNTIME.md#the-playstation-release)).
+`--controller-layout remastered` plays a modern pad with the Remastered
+bindings: the left stick steers and pitches, the right trigger is analog
+thrust (the left trigger reverses), and the face buttons and shoulders take
+the play and menu actions
+([the Remastered pad](docs/re/REMASTERED_PAD.md)).
 The launcher's Controller hints row, or
 `--controller-hints follow-last-input`, words hints with the controller's
 buttons after the player last used the pad;

@@ -292,9 +292,9 @@ struct Args {
 
     /// How a game controller plays: pc (retail's joystick: the left stick
     /// steers, the triggers thrust, its buttons are the key configuration's
-    /// Joystick 1 to 16) or console (the PlayStation release's pad layout).
-    /// Replaces the saved layout (pc unless the launcher's Options chose
-    /// another).
+    /// Joystick 1 to 16), console (the PlayStation release's pad layout), or
+    /// remastered (a modern pad with the Remastered bindings). Replaces the
+    /// saved layout (pc unless the launcher's Options chose another).
     #[arg(long, value_enum)]
     controller_layout: Option<inf_game::platform_pad::ControllerLayout>,
 

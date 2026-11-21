@@ -154,8 +154,9 @@ pub struct FrontendAppRequest {
     /// of them explicitly. Software keeps frames deterministic. None retains
     /// the saved renderer, Auto by default.
     pub renderer: Option<RendererChoice>,
-    /// The pad's layout: PC retail's joystick or the PlayStation pad. None
-    /// retains the saved layout, PC original by default.
+    /// The pad's layout: PC retail's joystick, the PlayStation pad or the
+    /// Remastered modern pad. None retains the saved layout, PC original by
+    /// default.
     pub controller_layout: Option<crate::platform_pad::ControllerLayout>,
     /// Hint wording: retail's PC keyboard text, or the controller's after
     /// the player last used the pad. None retains the saved choice, retail
