@@ -104,6 +104,7 @@ impl Owners {
     ) -> Result<WorldDrawOutcome, WorldDrawError> {
         let request = WorldDrawRequest {
             camera_clearance: None,
+            camera_orbit: None,
             terrain_event_5483b0: 0,
             terrain_dust_enabled: false,
             map: Some(&mut self.map),

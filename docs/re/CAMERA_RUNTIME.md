@@ -639,6 +639,59 @@ the craft or beside the eye. Backed into three of them again (2026-10-28),
 two still rise; at the third a model only stood beside the eye. The tests
 cost no measurable CPU time a frame.
 
+### The right stick orbit (port option)
+
+The Remastered pad's right stick (native type 8, axes 2 and 3; [the pad's
+section 3.4](REMASTERED_PAD.md#34-the-right-stick-orbits-the-chase-camera-port-option))
+swings the drawn chase about the craft, as a modern third-person camera
+does. Retail has no orbit and no binding table reads those axes. This is a
+port option, not a retail behavior, and it keeps retail's game off by
+default (the Remastered layout is itself opt-in).
+
+- **Input and determinism.** `SdlInput::right_stick` returns the two bytes
+  from the last successful Pad notification, never a live SDL read, so a
+  recording and `--input-replay` reproduce them. The offset lives in
+  [`CameraClearance`](../../crates/inf-game/src/camera_clearance.rs), the
+  port's camera state, not in `selector16` or any retail structure.
+- **Tick timing.** It advances in the world tick
+  ([`session_platform/camera.rs`](../../crates/inf-game/src/session_platform/camera.rs)),
+  after the pose chose the tick's mode, with that tick's microseconds
+  clamped to 0.25 s: the same timing the remastered camera's easings take.
+  The draw only applies the settled offset, so a presented frame that is
+  not a world tick never moves it.
+- **Where it is applied.** In chase mode 3 only. With Camera Style
+  Remastered, `camera_clearance::view` applies it after the leash and the
+  underwater dive and before the obstruction lift and the framing turn;
+  with Normal or Cinematic, `camera_clearance::orbit_view` applies the same
+  turn to retail's camera and nothing else of the remastered camera. The
+  eye's offset from the craft's anchor (vehicle position plus 48) and the
+  basis turn together about that anchor, so the craft keeps the place in
+  the frame the game gave it and the existing lift tests the orbited
+  bearing. The eye is then kept retail's `EYE_CLEARANCE` (80) above the
+  higher of the terrain and the live water under it, so the orbit never
+  clips the ground; a top guard keeps a view the game already pitched up
+  from passing vertical. At zero offset the view is returned byte for
+  byte, so PC, Console and network frames are unchanged.
+- **Limits and release.** A dead zone of `0x10` around the byte centre
+  `0x80`; yaw reaches `±150°`; pitch raises the eye up to `60°` and lowers
+  it up to `35°`, and the clearance above keeps it from passing under the
+  terrain or flipping over the top. Centred bytes ease it back behind the
+  craft with a critically damped spring of about 0.15 s: 97% of a full
+  swing is back within half a second, then it is exactly the game's chase.
+- **What lets it go.** First person, the death camera, the dock and the
+  special views reset it at once; the map, the CPU panel and the in-world
+  menu (shown menus) draw no orbit; a network game, the PC and Console
+  layouts and an absent pad pass no bytes and reset it. A world load,
+  entering first person and a pad removal reset it explicitly.
+- **Tests.** `camera_clearance_tests` cover the follow and release, the
+  dead zone and both limits, the ground clearance with the orbit applied,
+  the rigid turn about the craft and the exact zero-offset view;
+  `session_platform/camera/tests.rs` covers the chase/solo gate;
+  `platform_input_tests` cover the bytes from type 8 alone and their
+  absence under types 2 and 9 and after a failed read. Snapshots exercise
+  the real view; the stick cannot be driven in a snapshot run, so the orbit
+  math is proven in unit tests rather than through a test-only draw hook.
+
 ## Acceptance and external boundaries
 
 Required-host failures preserve target/timer/parameter writes already reached.

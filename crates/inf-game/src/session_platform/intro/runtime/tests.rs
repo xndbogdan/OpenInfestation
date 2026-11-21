@@ -164,6 +164,7 @@ fn production_intro_admission_moves_authored_helper_and_publishes_camera_pose() 
         inf_formats::FrontendExecutable::parse(assets.executable_bytes()).unwrap(),
     )
     .unwrap();
+    let mut orbit = crate::camera_clearance::CameraClearance::default();
     for tick in 0..45 {
         clock.advance(40_000);
         tick_world_actor_callbacks(
@@ -222,6 +223,9 @@ fn production_intro_admission_moves_authored_helper_and_publishes_camera_pose() 
                 inverse_sine: &inverse.values,
                 up: [0.0, 1.0, 0.0],
                 shake_enabled: 0,
+                right_stick: None,
+                network_game: false,
+                orbit: &mut orbit,
             },
         );
         let attachment = world.intro_runtime.as_ref().unwrap();

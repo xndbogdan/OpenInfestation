@@ -45,6 +45,7 @@ pub(super) struct TickOwners {
     clock: crate::frontend_camera::AnimationClock,
     globals: CameraGlobalState,
     inverse_sine: [i16; 1024],
+    orbit: crate::camera_clearance::CameraClearance,
     surface_snap_53a128: u8,
     pub(super) state: SessionState,
     sounds: crate::process_sound::ProcessSoundRuntime,
@@ -106,6 +107,7 @@ impl TickOwners {
             clock: Default::default(),
             globals: CameraGlobalState::INITIAL,
             inverse_sine: inverse.values,
+            orbit: Default::default(),
             surface_snap_53a128: authored_surface_snap(assets),
             state: SessionState::default(),
             sounds: crate::process_sound::ProcessSoundRuntime::new(executable).unwrap(),
@@ -229,6 +231,9 @@ impl TickOwners {
                 inverse_sine: &self.inverse_sine,
                 up: [0.0, 1.0, 0.0],
                 shake_enabled: 0,
+                right_stick: None,
+                network_game: false,
+                orbit: &mut self.orbit,
             },
         );
     }

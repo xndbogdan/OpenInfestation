@@ -306,6 +306,7 @@ impl PortDrawPlatform for TestPlatform {
             audio: None,
             video: None,
             network: None,
+            right_stick: None,
         }
     }
 

@@ -27,8 +27,9 @@
 //! Remastered bindings (`docs/re/REMASTERED_PAD.md`) on native type 8,
 //! retail's analog PlayStation type that does not answer the extended-mode
 //! query: the same codes and byte axes as [`ControllerLayout::Console`], six
-//! axes long. Its axes 2 and 3 are the right stick, reserved for a later
-//! camera, and its axis 4 is the thrust: the right trigger raises it
+//! axes long. Its axes 2 and 3 are the right stick, which orbits the gameplay
+//! chase camera (`docs/re/REMASTERED_PAD.md` section 3.4; no binding reads
+//! it), and its axis 4 is the thrust: the right trigger raises it
 //! (forward) and the left trigger lowers it (reverse), `0x80` at rest, so
 //! the play table's re-axised record with multiplier `+1024` reads a raised
 //! axis as forward power and a lowered one as reverse. Axis 5 stays at

@@ -120,6 +120,8 @@ impl<P: PortPlatform> PortSession<P> {
             .take()
             .expect("successful borrowed load retains owner");
         self.world = Some(WorldSession::from_loaded(owner, metadata));
+        // A new world starts the pad's chase orbit behind its craft.
+        self.camera_clearance.reset_orbit();
         // Port option: Pelagia, the prototype world. The rework (world 1's
         // lagoon, crystals, return gate and factory stock) is its own flag;
         // off, world 1 keeps the briefing and the retail map.

@@ -28,6 +28,10 @@
 //!   hard at speed leaves its eye and look behind. The remaster holds them on
 //!   a leash to where the game wants them ([`leashed`]), and never lets the
 //!   craft stray far from the middle of the view ([`framed`]).
+//! - The Remastered pad's right stick orbits the chase about the craft,
+//!   outside a dead zone and within its yaw and pitch limits, easing back
+//!   within half a second ([`CameraClearance::tick_orbit`]); first person,
+//!   shown menus, a network game and another layout keep the game's view.
 //!
 //! The camera actor, its cached position and all the game reads of it stay
 //! retail's; only the view drawn changes. Retail runs some logic inside the
@@ -194,6 +198,31 @@ const EYE_CLEARANCE: i32 = 80;
 const FRAME_DEGREES: [f32; 2] = [28.0, 36.0];
 const FRAME_SECONDS: f32 = 0.15;
 const FRAME_RATE: f32 = 4.0;
+/// The Remastered pad's right-stick orbit (port option): the byte centre and
+/// its dead zone, the most it swings around the craft, and the pitch it
+/// raises and lowers (radians; a full stick reaches each). The camera looks
+/// where the game's view looked relative to the craft, so it never flips
+/// past the top; the eye is kept [`EYE_CLEARANCE`] above the ground and the
+/// water under it. How quickly the orbit follows the stick and eases back
+/// once released (seconds, a critically damped spring), never faster than
+/// [`ORBIT_RATE`] (radians a second): about a quarter of a second back to
+/// the chase, 97% of a full swing within half a second.
+const ORBIT_CENTRE: u8 = 0x80;
+const ORBIT_DEAD_ZONE: u8 = 0x10;
+pub const ORBIT_YAW: f32 = 150.0 * std::f32::consts::PI / 180.0;
+pub const ORBIT_PITCH_UP: f32 = 60.0 * std::f32::consts::PI / 180.0;
+pub const ORBIT_PITCH_DOWN: f32 = 35.0 * std::f32::consts::PI / 180.0;
+const ORBIT_FOLLOW_SECONDS: f32 = 0.08;
+const ORBIT_RETURN_SECONDS: f32 = 0.15;
+const ORBIT_RATE: f32 = 12.0;
+/// Below this the released orbit is the chase exactly (radians), so the
+/// drawn view becomes the game's byte for byte rather than easing forever.
+const ORBIT_REST: f32 = 1.0e-4;
+/// The highest the orbited view may pitch, from the horizontal: past this it
+/// would be looking over the top. The chase already looks down at its craft,
+/// so a full raise stays under it; this guards a view the game has pitched
+/// up itself.
+const ORBIT_TOP: f32 = 85.0 * std::f32::consts::PI / 180.0;
 
 /// What the remastered camera keeps between frames.
 #[derive(Debug, Default)]
@@ -233,6 +262,13 @@ pub struct CameraClearance {
     /// how fast it moves.
     frame_turn: f32,
     frame_turn_speed: f32,
+    /// The Remastered pad's orbit around the craft (radians: yaw about the
+    /// vertical, positive raising the eye) and how fast each moves. Advanced
+    /// in the world tick, never in the draw, so a replay reproduces it.
+    orbit_yaw: f32,
+    orbit_pitch: f32,
+    orbit_yaw_speed: f32,
+    orbit_pitch_speed: f32,
     /// The craft followed and the game's eye last frame: a new craft or a
     /// cut starts afresh.
     vehicle: Option<ObjectId>,
@@ -243,6 +279,101 @@ pub struct CameraClearance {
     logged: bool,
 }
 
+impl CameraClearance {
+    /// One world tick of the Remastered pad's orbit. `stick` is the right
+    /// stick's two bytes from the recorded Pad notification: `None` outside
+    /// the chase (first person, the death camera, the dock, a special view),
+    /// in a network game, under another layout or with the pad removed, and
+    /// then the orbit resets at once. Centred bytes ease the orbit back to
+    /// the chase; deflected ones follow, outside [`ORBIT_DEAD_ZONE`].
+    pub fn tick_orbit(&mut self, stick: Option<[u8; 2]>, seconds: f32) {
+        let Some([x, y]) = stick else {
+            self.reset_orbit();
+            return;
+        };
+        let [yaw, pitch] = orbit_targets(x, y);
+        let yaw_smooth = if yaw == 0.0 {
+            ORBIT_RETURN_SECONDS
+        } else {
+            ORBIT_FOLLOW_SECONDS
+        };
+        let pitch_smooth = if pitch == 0.0 {
+            ORBIT_RETURN_SECONDS
+        } else {
+            ORBIT_FOLLOW_SECONDS
+        };
+        self.orbit_yaw = smooth_damp(
+            self.orbit_yaw,
+            yaw,
+            &mut self.orbit_yaw_speed,
+            yaw_smooth,
+            ORBIT_RATE,
+            seconds,
+        );
+        self.orbit_pitch = smooth_damp(
+            self.orbit_pitch,
+            pitch,
+            &mut self.orbit_pitch_speed,
+            pitch_smooth,
+            ORBIT_RATE,
+            seconds,
+        );
+        if yaw == 0.0
+            && pitch == 0.0
+            && self.orbit_yaw.abs() < ORBIT_REST
+            && self.orbit_pitch.abs() < ORBIT_REST
+        {
+            self.reset_orbit();
+        }
+    }
+
+    /// The orbit's yaw and pitch (radians).
+    pub fn orbit_offsets(&self) -> [f32; 2] {
+        [self.orbit_yaw, self.orbit_pitch]
+    }
+
+    /// Whether the pad has left the view off the chase.
+    pub fn orbit_active(&self) -> bool {
+        self.orbit_yaw != 0.0 || self.orbit_pitch != 0.0
+    }
+
+    /// First person, a new world, or a pad that went away: the next view is
+    /// the game's own.
+    pub(crate) fn reset_orbit(&mut self) {
+        self.orbit_yaw = 0.0;
+        self.orbit_pitch = 0.0;
+        self.orbit_yaw_speed = 0.0;
+        self.orbit_pitch_speed = 0.0;
+    }
+}
+
+/// The orbit targets for a right-stick reading: yaw follows X, pitch follows
+/// Y with the stick's up raising the eye. A dead zone around the byte centre
+/// leaves the chase alone; past it the deflection reaches its limit.
+fn orbit_targets(x: u8, y: u8) -> [f32; 2] {
+    let amount = |byte: u8| {
+        let offset = i32::from(byte) - i32::from(ORBIT_CENTRE);
+        let magnitude = offset.unsigned_abs().min(0x7f);
+        if magnitude <= u32::from(ORBIT_DEAD_ZONE) {
+            0.0
+        } else {
+            let past = (magnitude - u32::from(ORBIT_DEAD_ZONE)) as f32;
+            let range = f32::from(0x7f - ORBIT_DEAD_ZONE);
+            (past / range).min(1.0).copysign(offset as f32)
+        }
+    };
+    let [yaw, pitch] = [amount(x), amount(y)];
+    // The byte falls as the stick goes up, and up raises the eye.
+    [
+        yaw * ORBIT_YAW,
+        if pitch < 0.0 {
+            -pitch * ORBIT_PITCH_UP
+        } else {
+            -pitch * ORBIT_PITCH_DOWN
+        },
+    ]
+}
+
 /// The owners the tests borrow beside the world: the model process, the
 /// borrowed models' residency, the camera's own furniture query state and
 /// what it keeps between frames.
@@ -251,6 +382,10 @@ pub struct CameraClearanceLoan<'a> {
     pub model_fallback: Option<&'a ResidentRuntime>,
     pub query: &'a mut ProcessFurnitureQueryState,
     pub state: &'a mut CameraClearance,
+    /// The Remastered pad is present and this frame shows the chase: a
+    /// shown menu, first person, a network game or another layout resets the
+    /// orbit and draws the game's view unchanged.
+    pub orbit: bool,
 }
 
 /// The world the tests read.
@@ -304,6 +439,9 @@ pub(crate) fn view(
     view: CameraDrawRequest,
 ) -> CameraDrawRequest {
     let state = loan.state;
+    if !loan.orbit {
+        state.reset_orbit();
+    }
     let now = world.animation.animation_micros();
     let seconds = state
         .clock
@@ -350,6 +488,7 @@ pub(crate) fn view(
     );
     let view = leashed(state, &world, view, vehicle, mode, seconds);
     let view = submerged(state, &world, view, anchor, following, seconds);
+    let view = orbited(state, &world, view, anchor, mode);
     let first_person = mode == 2;
     let eye = view.eye.map(|value| value as u16);
     let offset: [f32; 3] =
@@ -439,6 +578,125 @@ pub(crate) fn view(
         coordinate_shift: view.coordinate_shift,
     };
     shaken(framed(state, lifted, anchor, mode, seconds), trembling)
+}
+
+/// The Remastered pad's orbit: the chase view swung about the craft by
+/// `state`'s yaw and pitch. The eye's offset and the basis turn together, so
+/// the craft keeps the place in the frame the game gave it, and the pitch
+/// raises or lowers the eye about it. The eye then stays [`EYE_CLEARANCE`]
+/// above the higher of the terrain and the live water under it, where the
+/// game's own camera clamp only keeps its unorbited eye. At zero the view is
+/// returned exactly, so PC, Console and network frames stay byte-identical.
+fn orbited(
+    state: &CameraClearance,
+    world: &CameraClearanceWorld<'_>,
+    view: CameraDrawRequest,
+    anchor: [u16; 3],
+    mode: u32,
+) -> CameraDrawRequest {
+    let [yaw, pitch] = state.orbit_offsets();
+    if mode != 3 {
+        return view;
+    }
+    let floor = |xz: [u16; 2]| {
+        let ground = i32::from(world.terrain.height_at(xz));
+        water_surface(
+            world.terrain,
+            xz,
+            world.wave_clock,
+            world.world_flags,
+            world.sine,
+        )
+        .map_or(ground, |water| water.max(ground))
+    };
+    orbited_by(view, anchor, yaw, pitch, floor)
+}
+
+/// The world the pad's orbit reads when the camera is not the remastered one:
+/// the chase camera, the terrain and the live water under the eye.
+pub(crate) struct CameraOrbitWorld<'a> {
+    pub arena: &'a ObjectArena,
+    pub camera: ObjectId,
+    pub terrain: &'a TerrainRuntime,
+    pub wave_clock: u32,
+    pub world_flags: u32,
+    pub sine: &'a [u16; 4096],
+}
+
+/// The Remastered pad's orbit over retail's own camera (Camera Style Normal or
+/// Cinematic): the chase alone, swung about the craft and kept above the
+/// ground and water, with nothing else of the remastered camera. The
+/// Remastered style applies the same turn inside [`view`].
+pub(crate) fn orbit_view(
+    world: CameraOrbitWorld<'_>,
+    view: CameraDrawRequest,
+    yaw: f32,
+    pitch: f32,
+) -> CameraDrawRequest {
+    let mode = world
+        .arena
+        .selector16(world.camera)
+        .map_or(0, |camera| camera.mode_188);
+    if mode != 3 {
+        return view;
+    }
+    let Some((anchor, _)) = chase_anchor(world.arena, world.camera) else {
+        return view;
+    };
+    let floor = |xz: [u16; 2]| {
+        let ground = i32::from(world.terrain.height_at(xz));
+        water_surface(
+            world.terrain,
+            xz,
+            world.wave_clock,
+            world.world_flags,
+            world.sine,
+        )
+        .map_or(ground, |water| water.max(ground))
+    };
+    orbited_by(view, anchor, yaw, pitch, floor)
+}
+
+/// [`orbited`] over a floor query, so the rotation and clearance are testable
+/// without a world. At zero it returns the view exactly.
+fn orbited_by(
+    view: CameraDrawRequest,
+    anchor: [u16; 3],
+    yaw: f32,
+    pitch: f32,
+    floor: impl Fn([u16; 2]) -> i32,
+) -> CameraDrawRequest {
+    if yaw == 0.0 && pitch == 0.0 {
+        return view;
+    }
+    // Never look over the top, whatever pitch the game's own view had. A
+    // lower eye (negative pitch) raises the view; a raised eye tilts it down.
+    let native_pitch = row(view.basis, 2)[1].clamp(-1.0, 1.0).asin();
+    let pitch = pitch.max((native_pitch - ORBIT_TOP).min(0.0));
+    let eye = view.eye.map(|value| value as u16);
+    let offset: [f32; 3] =
+        std::array::from_fn(|axis| f32::from(eye[axis].wrapping_sub(anchor[axis]) as i16));
+    let yawed = |vector: [f32; 3]| rotate_about_axis(vector, [0.0, 1.0, 0.0], yaw);
+    let right = yawed(row(view.basis, 0));
+    let turn = |vector: [f32; 3]| rotate_about_axis(yawed(vector), right, pitch);
+    let mut basis = view.basis;
+    for index in 0..3 {
+        let turned = turn(row(view.basis, index));
+        for axis in 0..3 {
+            basis.words[1 + index * 3 + axis] = turned[axis].to_bits();
+        }
+    }
+    let moved = turn(offset);
+    let mut eye: [u16; 3] =
+        std::array::from_fn(|axis| anchor[axis].wrapping_add(moved[axis].round() as i32 as u16));
+    let height =
+        i32::from(eye[1] as i16).max(floor([eye[0], eye[2]]).saturating_add(EYE_CLEARANCE));
+    eye[1] = height as u16;
+    CameraDrawRequest {
+        eye: eye.map(|word| i32::from(word as i16)),
+        basis,
+        coordinate_shift: view.coordinate_shift,
+    }
 }
 
 /// The chase leash. Retail's slew (`0040F1C0`) moves the eye and the look
@@ -1130,6 +1388,20 @@ fn length(vector: [f32; 3]) -> f32 {
 fn normalized(vector: [f32; 3]) -> [f32; 3] {
     let length = length(vector).max(1.0e-6);
     vector.map(|value| value / length)
+}
+
+/// `vector` turned `angle` radians about the unit `axis` (Rodrigues).
+fn rotate_about_axis(vector: [f32; 3], axis: [f32; 3], angle: f32) -> [f32; 3] {
+    let (sin, cos) = angle.sin_cos();
+    let cross = [
+        axis[1] * vector[2] - axis[2] * vector[1],
+        axis[2] * vector[0] - axis[0] * vector[2],
+        axis[0] * vector[1] - axis[1] * vector[0],
+    ];
+    let along = dot(axis, vector) * (1.0 - cos);
+    std::array::from_fn(|axis_index| {
+        vector[axis_index] * cos + cross[axis_index] * sin + axis[axis_index] * along
+    })
 }
 
 #[cfg(test)]

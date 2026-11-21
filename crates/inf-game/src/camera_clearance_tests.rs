@@ -467,6 +467,128 @@ fn framing(state: &mut CameraClearance, anchor: [i16; 3], mode: u32, seconds: f3
 }
 
 #[test]
+fn the_orbit_follows_the_right_stick_and_eases_back_within_half_a_second() {
+    let tick = 0.016384;
+    let mut state = CameraClearance::default();
+    // Full right and up: past the dead zone, the limits.
+    for _ in 0..30 {
+        state.tick_orbit(Some([0xff, 0x00]), tick);
+    }
+    let [yaw, pitch] = state.orbit_offsets();
+    assert!((yaw - ORBIT_YAW).abs() < 0.01, "{yaw}");
+    assert!((pitch - ORBIT_PITCH_UP).abs() < 0.01, "{pitch}");
+    assert!(state.orbit_active());
+    // Released: it eases, rather than snapping to the chase on one frame.
+    state.tick_orbit(Some([0x80, 0x80]), tick);
+    assert!(state.orbit_offsets()[0] > ORBIT_YAW * 0.9);
+    // 97% of a full swing comes back within half a second.
+    for _ in 0..30 {
+        state.tick_orbit(Some([0x80, 0x80]), tick);
+    }
+    let [yaw, pitch] = state.orbit_offsets();
+    assert!(yaw.abs() < ORBIT_YAW * 0.03, "{yaw}");
+    assert!(pitch.abs() < ORBIT_PITCH_UP * 0.03, "{pitch}");
+    // And then the chase exactly.
+    for _ in 0..60 {
+        state.tick_orbit(Some([0x80, 0x80]), tick);
+    }
+    assert_eq!(state.orbit_offsets(), [0.0, 0.0]);
+    assert!(!state.orbit_active());
+}
+
+#[test]
+fn the_orbit_ignores_the_dead_zone_and_holds_its_yaw_and_pitch_limits() {
+    let tick = 0.016384;
+    let mut state = CameraClearance::default();
+    // The dead zone around 0x80 keeps the chase.
+    for _ in 0..10 {
+        state.tick_orbit(Some([0x90, 0x70]), tick);
+    }
+    assert_eq!(state.orbit_offsets(), [0.0, 0.0]);
+    // Just outside it moves, but not to the limit.
+    state.tick_orbit(Some([0x91, 0x6f]), tick);
+    let [yaw, pitch] = state.orbit_offsets();
+    assert!(yaw > 0.0 && yaw < ORBIT_YAW, "{yaw}");
+    assert!(pitch > 0.0 && pitch < ORBIT_PITCH_UP, "{pitch}");
+    // Full left and down: the other limits, never past them.
+    for _ in 0..60 {
+        state.tick_orbit(Some([0x00, 0xff]), tick);
+    }
+    let [yaw, pitch] = state.orbit_offsets();
+    assert!((yaw + ORBIT_YAW).abs() < 1.0e-4, "{yaw}");
+    assert!((pitch + ORBIT_PITCH_DOWN).abs() < 1.0e-4, "{pitch}");
+}
+
+#[test]
+fn the_orbit_keeps_its_eye_above_the_ground_under_it() {
+    let view = CameraDrawRequest {
+        eye: [0, 0, -400],
+        basis: posed(0.0, 0.0, 0.0),
+        coordinate_shift: 16,
+    };
+    // A full-low pitch drops the eye 229 below the craft, under a floor at
+    // 100: the orbit's clearance lifts it to retail's 80 above the floor.
+    let floor = |_: [u16; 2]| 100;
+    let drawn = orbited_by(view, [0, 0, 0], 0.0, -ORBIT_PITCH_DOWN, floor);
+    let height = i32::from(drawn.eye[1] as i16);
+    assert_eq!(height, 100 + EYE_CLEARANCE);
+    assert!(height > 100, "{height}");
+    // Zero offsets leave the game's view byte for byte, whatever the floor.
+    assert_eq!(orbited_by(view, [0, 0, 0], 0.0, 0.0, floor), view);
+}
+
+#[test]
+fn the_orbit_never_looks_over_the_top() {
+    // A view the game has already pitched 60 degrees up, with a full-low
+    // stick: the orbit stops at the top guard instead of passing vertical.
+    let view = CameraDrawRequest {
+        eye: [0, 0, -400],
+        basis: posed(0.0, 60f32.to_radians(), 0.0),
+        coordinate_shift: 16,
+    };
+    let drawn = orbited_by(view, [0, 0, 0], 0.0, -ORBIT_PITCH_DOWN, |_| -10_000);
+    let pitch = row(drawn.basis, 2)[1].clamp(-1.0, 1.0).asin();
+    assert!(pitch <= ORBIT_TOP + 1.0e-4, "{pitch}");
+    assert!(pitch > 60f32.to_radians(), "{pitch}");
+}
+
+#[test]
+fn the_orbit_turns_the_eye_and_the_look_together_about_the_craft() {
+    let anchor = [1000, 200, 3000];
+    let anchor_words = anchor.map(|word| word as u16);
+    let view = CameraDrawRequest {
+        eye: [1000, 350, 2600],
+        basis: posed(0.0, 0.0, 0.0),
+        coordinate_shift: 16,
+    };
+    let drawn = orbited_by(view, anchor_words, ORBIT_YAW, 0.0, |_| -10_000);
+    // The same distance about the craft, and the craft keeps its angle off
+    // the view: the whole rig turned.
+    let offset = |view: CameraDrawRequest| -> [f32; 3] {
+        let eye = view.eye.map(|word| word as u16);
+        std::array::from_fn(|axis| f32::from(eye[axis].wrapping_sub(anchor_words[axis]) as i16))
+    };
+    let before = offset(view);
+    let after = offset(drawn);
+    assert!((length(before) - length(after)).abs() < 1.5, "{after:?}");
+    let craft = |view: CameraDrawRequest| {
+        let eye = view.eye.map(|word| word as u16);
+        let from_eye =
+            std::array::from_fn(
+                |axis| f32::from(anchor_words[axis].wrapping_sub(eye[axis]) as i16),
+            );
+        let forward = row(view.basis, 2);
+        dot(forward, normalized(from_eye))
+    };
+    assert!(
+        (craft(view) - craft(drawn)).abs() < 1.0e-3,
+        "{} {}",
+        craft(view),
+        craft(drawn)
+    );
+}
+
+#[test]
 fn the_view_swings_onto_a_craft_it_lost_and_lets_go_gently() {
     let tick = 0.016384;
     let mut state = CameraClearance::default();

@@ -28,10 +28,20 @@ pub(super) struct WorldCameraTickContext<'a> {
     pub inverse_sine: &'a [i16; 1024],
     pub up: [f32; 3],
     pub shake_enabled: u32,
+    /// The Remastered pad's right stick from the recorded notification
+    /// stream, or `None` for the PC and Console layouts, an absent pad and a
+    /// network game.
+    pub right_stick: Option<[u8; 2]>,
+    pub network_game: bool,
+    /// The remastered camera's orbit; advanced here, in the world tick, so a
+    /// replay reproduces the view the game plays.
+    pub orbit: &'a mut crate::camera_clearance::CameraClearance,
 }
 
 impl<P: PortPlatform> PortSession<P> {
     pub(super) fn tick_world_camera(&mut self, microseconds: u32) {
+        let right_stick = self.platform.controller_right_stick();
+        let network_game = self.factory_process.network_flag != 0;
         let Some(world) = self.world.as_mut() else {
             return;
         };
@@ -48,8 +58,21 @@ impl<P: PortPlatform> PortSession<P> {
                 inverse_sine: &self.camera_inverse_sine,
                 up: self.process_up,
                 shake_enabled: self.camera_shake_enabled,
+                right_stick,
+                network_game,
+                orbit: &mut self.camera_clearance,
             },
         );
+    }
+}
+
+/// The right-stick reading the orbit may follow this tick: the chase alone,
+/// and never in a network game (retail's game on every renderer).
+fn orbit_stick(mode: u32, network_game: bool, right_stick: Option<[u8; 2]>) -> Option<[u8; 2]> {
+    if mode == 3 && !network_game {
+        right_stick
+    } else {
+        None
     }
 }
 
@@ -87,7 +110,7 @@ pub(super) fn tick_world_camera(world: &mut WorldSession, context: WorldCameraTi
             },
             &mut services,
         );
-        world.arena.tick_camera_pose(
+        let pose = world.arena.tick_camera_pose(
             camera,
             CameraPoseTickRequest {
                 microseconds: context.microseconds,
@@ -100,7 +123,22 @@ pub(super) fn tick_world_camera(world: &mut WorldSession, context: WorldCameraTi
                 math,
                 host: &mut host,
             },
-        )?;
+        );
+        // The Remastered pad's orbit advances with the same tick delta the
+        // camera's own smoothing takes, after the pose chose this tick's
+        // mode: first person, a lost craft, the dock and special views
+        // reset it, as do a network game and a pad that is not the
+        // Remastered one.
+        let mode = world
+            .arena
+            .selector16(camera)
+            .map_or(0, |camera| camera.mode_188);
+        let seconds = (context.microseconds as f32 / 1.0e6).min(0.25);
+        context.orbit.tick_orbit(
+            orbit_stick(mode, context.network_game, context.right_stick),
+            seconds,
+        );
+        pose?;
         Ok(())
     })();
     match result {

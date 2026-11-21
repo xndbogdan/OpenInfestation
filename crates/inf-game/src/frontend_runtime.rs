@@ -688,6 +688,13 @@ impl TextEntryFactoryHost for SdlPlatform {
 impl PortSessionServices for SdlPlatform {
     type Error = FrontendRuntimeError;
     type IdentityError = FrontendRuntimeError;
+    /// The pad's stored axes, never a live SDL read: a recording's Pad
+    /// notifications replay the Remastered right stick exactly.
+    fn controller_right_stick(&self) -> Option<[u8; 2]> {
+        self.keyboard
+            .as_ref()
+            .and_then(crate::platform_input::SdlInput::right_stick)
+    }
     fn network_platform(&mut self) -> Option<crate::network::frontend_host::NetworkPlatform<'_>> {
         Some(self.frontend.network_platform())
     }

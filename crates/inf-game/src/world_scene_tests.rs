@@ -544,6 +544,7 @@ fn missing_birth_source_preserves_world_view_models_particle_transfer_and_audio(
     let outcome = draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -1583,6 +1584,7 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
     let outcome = draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -1682,6 +1684,7 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
         draw_world_frame(
             WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -1833,6 +1836,7 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
     let outcome = draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -1917,6 +1921,7 @@ fn native_draw_submits_first_world_entities_to_real_pixels() {
     draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -2086,6 +2091,7 @@ fn level1_draw_uses_native_admission_and_keeps_common_resource_fixture() {
     let outcome = draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -2576,6 +2582,7 @@ fn predraw_acquisition_and_late_boundaries_preserve_reached_owners() {
         let result = draw_world_frame(
             WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -2836,6 +2843,7 @@ fn world_object_light_deposits_feed_the_retained_terrain_grid() {
     let outcome = draw_world_frame(
         WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,
@@ -2960,6 +2968,7 @@ fn infrared_vision_skips_the_sky_and_lights_the_vehicle_green() {
         let outcome = draw_world_frame(
             WorldDrawRequest {
                 camera_clearance: None,
+                camera_orbit: None,
                 terrain_event_5483b0: 0,
                 terrain_dust_enabled: false,
                 map: None,

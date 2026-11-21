@@ -416,6 +416,21 @@ impl SdlInput {
     pub fn take_pad_removed(&mut self) -> bool {
         std::mem::take(&mut self.pad_removed)
     }
+
+    /// The Remastered pad's right stick (axes 2 and 3), bytes centred on
+    /// `0x80`, from the last successful Pad notification. `None` for the PC
+    /// and Console layouts (types 2 and 9), before the first reading and
+    /// while the pad is absent, so the camera orbit never invents a
+    /// deflection. A recording's Pad lines replay it exactly; the live SDL
+    /// device is never read here.
+    pub fn right_stick(&self) -> Option<[u8; 2]> {
+        let pad = self.pad.as_ref()?;
+        if pad.native_type != 8 {
+            return None;
+        }
+        let read = pad.last_read?;
+        Some([read.axes[2], read.axes[3]].map(|axis| axis.min(0xff) as u8))
+    }
 }
 
 /// Standard PC keyboard physical keys to DirectInput DIK byte offsets.

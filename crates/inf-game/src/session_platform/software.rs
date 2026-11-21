@@ -73,6 +73,10 @@ pub struct WorldDrawParts<'a> {
     pub video: Option<&'a mut crate::frontend_video::FrontendVideoState>,
     /// The network session, whose game the network HUD shows.
     pub network: Option<&'a mut crate::network::link::NetworkLink>,
+    /// The Remastered pad's right stick from the notification stream, if a
+    /// type-8 pad is present: the chase orbit is offered only then, and never
+    /// in a network game or under a shown menu.
+    pub right_stick: Option<[u8; 2]>,
 }
 
 impl PortDrawPlatform for crate::frontend_runtime::SdlPlatform {
@@ -97,6 +101,10 @@ impl PortDrawPlatform for crate::frontend_runtime::SdlPlatform {
             audio: Some(&mut self.frontend.audio),
             video: Some(&mut self.frontend.video),
             network: Some(&mut self.frontend.network),
+            right_stick: self
+                .keyboard
+                .as_ref()
+                .and_then(crate::platform_input::SdlInput::right_stick),
         }
     }
 }
@@ -802,6 +810,17 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                             .as_ref()
                             .and_then(|bytes| bytes[b'-' as usize]),
                     };
+                    // The pad's orbit draws only the chase, with no shown
+                    // menu (the CPU panel, the in-world menu, a shop), no
+                    // map (another screen) and no network game.
+                    let orbit = parts.right_stick.is_some()
+                        && session.factory_process.network_flag == 0
+                        && !session.camera_globals.special_view_active
+                        && world
+                            .arena
+                            .first_player()
+                            .is_none_or(|player| world.arena.player_shown_menu(player).is_none());
+                    let orbit_offsets = orbit.then_some(session.camera_clearance.orbit_offsets());
                     match crate::world_scene::draw_world_frame(
                         crate::world_scene::WorldDrawRequest {
                             pickup_text_data: Some(pickup_text_data),
@@ -824,7 +843,9 @@ impl SoftwareLinkedFrame<'_, '_, '_> {
                                         .map(|models| &models.runtime),
                                     query: &mut session.camera_furniture_query,
                                     state: &mut session.camera_clearance,
+                                    orbit,
                                 }),
+                            camera_orbit: orbit_offsets,
                             world,
                             animation: &session.process,
                             object_draw_process: &mut session.object_draw_process,
