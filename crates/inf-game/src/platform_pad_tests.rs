@@ -426,11 +426,12 @@ fn the_right_trigger_is_forward_thrust_and_the_left_reverse() {
         };
         FakeController::sampled_axes(remastered_sample(&controller))[4]
     };
-    assert_eq!(thrust(-0x8000, -0x8000), 0x80, "neither trigger");
-    assert_eq!(thrust(-0x8000, 0x7fff), 0xff, "right at full");
-    assert_eq!(thrust(0x7fff, -0x8000), 0x01, "left at full");
+    // SDL's triggers rest at 0 and reach 0x7FFF fully pressed.
+    assert_eq!(thrust(0, 0), 0x80, "neither trigger");
+    assert_eq!(thrust(0, 0x7fff), 0xff, "right at full");
+    assert_eq!(thrust(0x7fff, 0), 0x01, "left at full");
     assert_eq!(thrust(0x7fff, 0x7fff), 0x80, "both at full");
-    assert_eq!(thrust(-0x8000, 0), 0xbf, "right at half");
+    assert_eq!(thrust(0, 0x4000), 0xbf, "right at half");
 }
 
 /// The Remastered pad's first four axes are the two sticks' bytes, axes 2

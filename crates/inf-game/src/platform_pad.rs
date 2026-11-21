@@ -338,10 +338,11 @@ fn remastered_sample(controller: &impl ControllerRead) -> PadSample {
     // The thrust, `0x80` at rest: the right trigger raises it and the left
     // lowers it by up to `0x7F`, so the play table's record (axis 4,
     // multiplier `+1024`) reads a raised axis as forward power and a lowered
-    // one as reverse.
-    let forward = position(controller.axis(Axis::TriggerRight)) as i32
-        - position(controller.axis(Axis::TriggerLeft)) as i32;
-    let thrust = (0x80 + forward * 0x7f / 0xffff).clamp(0, 0xff) as u32;
+    // one as reverse. SDL's triggers run 0 at rest to 0x7FFF fully pressed
+    // (not a stick's -0x8000..0x7FFF), so a full trigger is the full 0x7F.
+    let trigger = |axis| i32::from(controller.axis(axis)).max(0);
+    let forward = trigger(Axis::TriggerRight) - trigger(Axis::TriggerLeft);
+    let thrust = (0x80 + forward * 0x7f / 0x7fff).clamp(0, 0xff) as u32;
     PadSample::Read {
         buttons: playstation_buttons(controller),
         axes: [
