@@ -474,6 +474,9 @@ pub fn run_frontend(request: FrontendAppRequest) -> Result<FrontendAppReport, Fr
     let sine = assets.sine_table().values;
 
     display::declare_dpi_awareness();
+    // Windows: SDL's device detection and raw input run on its own thread, so
+    // a pad plugged in or out does not stall a frame (DirectInput rescans).
+    sdl2::hint::set("SDL_JOYSTICK_THREAD", "1");
     let sdl = sdl2::init().map_err(FrontendAppError::Sdl)?;
     let video = sdl.video().map_err(FrontendAppError::Sdl)?;
     let audio = sdl.audio().map_err(FrontendAppError::Sdl)?;
