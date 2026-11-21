@@ -428,6 +428,10 @@ already open. An idle pad's removal is not a pause. The removal is read from
 the pad notification stream (a read followed by a failed read), not from SDL,
 so a recorded session pauses on the same frame.
 
+A third layout, [Remastered](REMASTERED_PAD.md), plays a modern pad with
+port-authored per-screen tables in native type 8's free slot, so PC and
+Console keep their authored tables byte for byte.
+
 ## Scope and integration
 
 [`input`](../../crates/inf-game/src/input.rs) owns digital and untimed analog
