@@ -100,6 +100,9 @@ pub(super) struct Device {
     pub(super) axes: [AxisTransform; 8],
     axis_rest: AxisRest,
     released: Option<ReleasedHolds>,
+    /// The raw axes of the last notification, for the analog re-publication
+    /// on a context selection (port fix; see `InputRuntime::republish_analog`).
+    pub(super) last_axes: Option<[i32; 8]>,
 }
 
 impl Device {
@@ -189,6 +192,7 @@ impl InputRuntime {
             axes: [AxisTransform::NATIVE_DEFAULT; 8],
             axis_rest: AxisRest::default(),
             released: None,
+            last_axes: None,
         })))
     }
 
@@ -387,6 +391,9 @@ impl InputRuntime {
                 .state;
             state.published_value = u32::from(state.active_bindings != 0);
         }
+        if let (true, Some(id)) = (self.republish_analog, context) {
+            self.republish_analog_sets(id);
+        }
         self.selected_context = context;
         Ok(())
     }
@@ -423,6 +430,7 @@ impl InputRuntime {
             .ok_or(InputStateError::InvalidDevice)?;
         let snapshot = device_state.apply_released_holds(snapshot);
         device_state.buttons = snapshot.buttons;
+        device_state.last_axes = Some(snapshot.axes);
         let Some(context) = self.selected_context else {
             return Ok(());
         };

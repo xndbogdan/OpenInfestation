@@ -48,7 +48,7 @@ pub(super) const FIX_LABELS: [&str; FIXES] = [
     "A doomed planet's explosions keep their 30 fps rate",
     "Water splashes take at most 12 of the 24 sounds",
     "A rescue completes when its last scientist boards",
-    "A factory's dock releases the pad's held controls",
+    "A factory's dock or a new world releases the pad's controls",
     "The computer's Cheats Menu shows every cheat",
     "Pelagia: a scientist wakes the Command Centre's dead warpgate",
     "Pelagia rework: the lagoon, crystals, return gate and factories reshape world 1",

@@ -263,6 +263,47 @@ impl InputRuntime {
         Ok(())
     }
 
+    /// Port fix: give each replace-policy analog cell of `context` the value
+    /// its device's last axes produce, silently, as `select_context` does for
+    /// held digital states. Accumulating sets (relative motion) keep retail's.
+    pub(super) fn republish_analog_sets(&mut self, context: InputContextId) {
+        let Some(sets) = self.contexts.get(context.0).map(|c| c.analog_sets.clone()) else {
+            return;
+        };
+        for id in sets {
+            let Some(set) = self.analog_sets.get(id.0) else {
+                continue;
+            };
+            if set.policy != AnalogPolicy::Replace {
+                continue;
+            }
+            let Some(device) = self.devices.get(set.device.0) else {
+                continue;
+            };
+            let Some(raw) = device.last_axes else {
+                continue;
+            };
+            let transforms = device.axes;
+            let set = self.analog_sets.get_mut(id.0).expect("linked analog set");
+            let mut published = Vec::with_capacity(set.cells.len());
+            for cell in &mut set.cells {
+                let axis = cell.binding.axis as usize;
+                let value = cell
+                    .binding
+                    .transform
+                    .apply(transforms[axis].apply(raw[axis]));
+                cell.previous = value;
+                published.push((cell.binding.consumer, value));
+            }
+            for (consumer, value) in published {
+                if let Some(consumer) = self.analog_consumers.get_mut(consumer.0) {
+                    consumer.state.pending_value = value;
+                    consumer.state.published_value = value;
+                }
+            }
+        }
+    }
+
     /// 004F0F50 permits calibration changes independently of binding ownership.
     pub fn set_axis_transform(
         &mut self,

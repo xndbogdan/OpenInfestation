@@ -361,6 +361,11 @@ pub struct PortFixes {
     /// joystick's analog block `+04/+08/+0C/+10` (`0046A3B8`), so a pad keeps
     /// steering the docked vehicle. See
     /// [`crate::input::InputRuntime::release_held_controls`].
+    ///
+    /// It also makes each screen's input selection publish the pad's current
+    /// sticks and triggers: retail's `004F03B0` re-publishes only the held
+    /// digital states, so a trigger held into a gate and released during the
+    /// load left the next world's vehicle driving on the old value.
     #[serde(default = "fix_enabled")]
     pub factory_dock_releases_pad: bool,
     /// Open every row of the computer's Cheats Menu, as if every name cheat

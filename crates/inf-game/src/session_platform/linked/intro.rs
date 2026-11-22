@@ -32,6 +32,9 @@ impl PortLinked<'_> {
             .as_deref_mut()
             .ok_or(LinkedScreenError::Unlinked)?;
         let input = &mut *self.input;
+        // The same fix re-publishes the pad's sticks and triggers when the
+        // next screen selects its input, so a release during a load counts.
+        input.set_republish_analog(factory_dock_releases_pad);
         if factory_dock_releases_pad {
             // Port fix: the first frame the player's message shows (the
             // factory's shop after it docks) releases the pad's held buttons

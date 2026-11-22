@@ -441,3 +441,61 @@ fn queue_overflow_drops_publication_but_keeps_cell_change() {
     input.poll(&mut host).unwrap();
     assert_eq!(input.analog_value(consumer).unwrap(), 33);
 }
+
+/// A world change: the old screen's set goes, the axis moves while no context
+/// is selected (the load), and the next screen's new set is selected.
+fn next_screen(
+    input: &mut InputRuntime,
+    device: DeviceId,
+    consumer: AnalogConsumerId,
+    old: AnalogBindingSetId,
+) {
+    let context = input.create_context().unwrap();
+    let set = input
+        .create_analog_binding_set(
+            device,
+            AnalogPolicy::Replace,
+            &[AnalogBinding {
+                consumer,
+                axis: 0,
+                transform: AxisTransform::NATIVE_DEFAULT,
+            }],
+        )
+        .unwrap();
+    input.destroy_analog_binding_set(old).unwrap();
+    input.attach_analog_binding_set(context, set).unwrap();
+    input.select_context(Some(context)).unwrap();
+}
+
+#[test]
+fn a_new_screen_republishes_the_pads_current_axes_only_with_the_fix() {
+    for fix in [false, true] {
+        for held in [false, true] {
+            let (mut input, _, device, consumer, set) = setup(0, AnalogPolicy::Replace, &[0]);
+            input.set_republish_analog(fix);
+            let mut host = Host::default();
+            input
+                .update_device(device, snapshot(100, 0), &mut host)
+                .unwrap();
+            input.poll(&mut host).unwrap();
+            assert_eq!(input.analog_value(consumer).unwrap(), 100);
+            input.select_context(None).unwrap();
+            let now = if held { 100 } else { 0 };
+            input
+                .update_device(device, snapshot(now, 0), &mut host)
+                .unwrap();
+            next_screen(&mut input, device, consumer, set);
+            input
+                .update_device(device, snapshot(now, 0), &mut host)
+                .unwrap();
+            input.poll(&mut host).unwrap();
+            // Retail keeps the old screen's 100 after a release in the load.
+            let expected = if fix { now } else { 100 };
+            assert_eq!(
+                input.analog_value(consumer).unwrap(),
+                expected,
+                "fix={fix} held={held}"
+            );
+        }
+    }
+}

@@ -155,7 +155,7 @@ retail:
 | Scientists, alien ships and creatures move as at 30 fps | `--paced-actors` |
 | Water splashes take at most 12 of the 24 sound voices | `--splash-voice-cap` |
 | A rescue (Pillier Stren's) completes when its last scientist boards | `--mission-completion` |
-| A factory's dock releases the pad's held controls | `--factory-dock-releases-pad` |
+| A factory's dock or a new world releases the pad's controls | `--factory-dock-releases-pad` |
 
 The Cheats and extras group adds:
 

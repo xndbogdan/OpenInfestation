@@ -278,6 +278,12 @@ pub struct InputRuntime {
     /// Port fix (exact world ticks): a world tick's delta over the real time
     /// its held durations span, which scales them until the next poll.
     duration_scale: Option<(u32, u32)>,
+    /// Port fix (`PortFixes::factory_dock_releases_pad`): a context selection
+    /// also publishes each replace-policy analog binding from its device's
+    /// last axes, as retail's 004F03B0 publishes the held digital states.
+    /// Retail leaves an analog consumer at the value an older screen's set
+    /// gave it, so a trigger released while a world loads kept driving.
+    republish_analog: bool,
 }
 
 impl Default for InputRuntime {
@@ -312,6 +318,7 @@ impl InputRuntime {
             notifying_device: false,
             stopped: false,
             carry_durations: false,
+            republish_analog: false,
             duration_scale: None,
         }
     }
@@ -323,6 +330,11 @@ impl InputRuntime {
     /// Without this, a frame whose world update was skipped would drop its
     /// held time: at 120 frames a second Thrust would read half the delta.
     /// The next poll keeps the durations instead of resetting them.
+    /// See the `republish_analog` field.
+    pub fn set_republish_analog(&mut self, on: bool) {
+        self.republish_analog = on;
+    }
+
     pub fn carry_durations(&mut self) {
         self.carry_durations = true;
     }
