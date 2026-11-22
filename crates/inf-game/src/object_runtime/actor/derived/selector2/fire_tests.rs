@@ -325,6 +325,7 @@ fn the_vehicle_fires_as_retail_does() {
                 process_null: ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: None,
             },
             attract: false,

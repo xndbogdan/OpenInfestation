@@ -210,6 +210,7 @@ fn drive(delta: u32, seconds: u32, turn_every: Option<u32>, step: VehiclePositio
             process_null: ActorHandle::from_raw(0),
             position_step: step,
             view_zoom_5c0: &std::cell::Cell::new(0),
+            deliberate_pad_roll: false,
             network: None,
         };
         arena

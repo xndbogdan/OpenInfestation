@@ -739,6 +739,8 @@ impl PortSessionServices for SdlPlatform {
                 .respawn_cheat_word(words[0x84 / 4], self.profiles.completed_campaigns()),
             factory_dock_releases_pad: settings.fixes().factory_dock_releases_pad,
             vehicle_position_step: settings.fixes().vehicle_position_step(),
+            remastered_pad: settings.controller_layout()
+                == crate::platform_pad::ControllerLayout::Remastered,
             pad_wording,
             residency_language: settings.residency_language(),
         }

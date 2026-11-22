@@ -145,6 +145,7 @@ fn a_parked_vtol_runs_its_own_update_as_retail_did() {
                     process_null: null,
                     position_step: VehiclePositionStep::Retail,
                     view_zoom_5c0: &std::cell::Cell::new(0),
+                    deliberate_pad_roll: false,
                     network: None,
                 },
                 attract: false,

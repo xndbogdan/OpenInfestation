@@ -56,6 +56,7 @@ fn a_burn_that_outlasts_the_health_kills_the_vehicle() {
             process_null: null,
             position_step: VehiclePositionStep::Retail,
             view_zoom_5c0: &std::cell::Cell::new(0),
+            deliberate_pad_roll: false,
             network: None,
         },
         attract: false,

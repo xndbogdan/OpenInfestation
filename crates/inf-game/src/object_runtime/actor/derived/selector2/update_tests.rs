@@ -652,6 +652,7 @@ fn vehicle_update_matches_every_infest01_level1_tick() {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: None,
             },
             attract: false,
@@ -801,6 +802,7 @@ fn l_switches_the_headlights_or_infrared_vision() {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: None,
             },
             attract: false,
@@ -914,6 +916,7 @@ fn a_refused_mode_says_why() {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: network_mode
                     .get()
                     .map(|mode| super::super::drive::VehicleNetwork {
@@ -1150,6 +1153,7 @@ fn a_vehicle_left_for_a_held_unit_runs_its_update_on_the_braked_block() {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: super::super::drive::VehiclePositionStep::Retail,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: None,
             },
             attract: false,

@@ -117,6 +117,7 @@ fn production_intro_admission_moves_authored_helper_and_publishes_camera_pose() 
         settings_7c: 0,
         input_mode_08: 0,
         vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
+        remastered_pad: false,
         settings_84: 0,
         factory_dock_releases_pad: true,
         pad_wording: crate::control_hints::PadWording::Retail,

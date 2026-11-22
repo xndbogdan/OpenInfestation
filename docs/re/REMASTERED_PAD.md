@@ -170,6 +170,14 @@ retail.
 Digital thrust (`+78`, the turbo/jump request, `0046A260` step 2's
 `+3A`), is a separate consumer (`0053A378`). See section 8.3.
 
+The jump (`004196F5..00419890`) rolls instead of boosting when the stick is
+pulled back past `0x6000` (the PS1's back-and-jump gesture), and the stick
+past half sideways picks the roll's side. A round modern stick pushed hard
+sideways drifts that far back (a recording read 18% to 43% back at full
+side), so under the Remastered layout, offline, back must also outweigh the
+sideways push (`stick_rolls`). Other layouts and network games keep retail's
+test.
+
 ### 3.2 The digital play rows
 
 | Remastered role | Retail action | Callback | Descriptor | KB | T2 | T9 | Notes |

@@ -423,6 +423,9 @@ pub struct WorldTickPlatformInputs {
     pub factory_dock_releases_pad: bool,
     /// Port fix, not a retail setting: the vehicle drive's position step.
     pub vehicle_position_step: crate::object_runtime::VehiclePositionStep,
+    /// Port setting: the Remastered pad layout, whose jump rolls only on a
+    /// stick pulled back more than sideways (`VehicleDriveRequest`).
+    pub remastered_pad: bool,
     /// Port setting: hints and prompts word their controls as the pad does.
     /// This is the setting, the pad layout and the player's last input, with
     /// the pad family that names its buttons; a network game clears it to

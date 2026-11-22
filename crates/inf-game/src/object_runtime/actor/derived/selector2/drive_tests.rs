@@ -391,6 +391,7 @@ fn drive_receipt_failures(text: &str) -> (usize, Vec<String>) {
             process_null: ActorHandle::from_raw(0),
             position_step: VehiclePositionStep::Retail,
             view_zoom_5c0: &std::cell::Cell::new(0),
+            deliberate_pad_roll: false,
             network: None,
         };
         if let Err(error) =
@@ -531,4 +532,19 @@ fn an_analogue_stick_turns_the_buggy() {
         analog_turn(125_000, -60_000, 0, base).0
     );
     assert_eq!(state.dwords_220_224[0] as i32, base - 77_475);
+}
+
+/// The recorded case: RT held, the stick hard right and drifted back past a
+/// quarter. Retail rolls; the Remastered rule boosts, yet still rolls on a
+/// stick pulled back more than sideways.
+#[test]
+fn a_sideways_stick_drifted_back_rolls_only_under_retails_rule() {
+    let drift = [0x16000, -0x7000, 0x10000];
+    assert!(stick_rolls(drift, false));
+    assert!(!stick_rolls(drift, true));
+    for deliberate in [false, true] {
+        assert!(stick_rolls([0, -0x10000, 0], deliberate));
+        assert!(stick_rolls([-0x9000, -0xc000, 0], deliberate));
+        assert!(!stick_rolls([0, -0x5000, 0], deliberate));
+    }
 }

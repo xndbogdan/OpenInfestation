@@ -163,6 +163,7 @@ fn fall(delta: u32, step: VehiclePositionStep, height: u16) -> Fall {
                 process_null: crate::object_runtime::ActorHandle::from_raw(0),
                 position_step: step,
                 view_zoom_5c0: &std::cell::Cell::new(0),
+                deliberate_pad_roll: false,
                 network: None,
             };
             arena

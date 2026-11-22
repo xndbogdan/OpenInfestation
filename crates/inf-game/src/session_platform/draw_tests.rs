@@ -144,6 +144,7 @@ impl PortSessionServices for Factory {
             settings_84: 0,
             factory_dock_releases_pad: true,
             vehicle_position_step: crate::object_runtime::VehiclePositionStep::Retail,
+            remastered_pad: false,
             pad_wording: crate::control_hints::PadWording::Retail,
             residency_language: 0,
         }

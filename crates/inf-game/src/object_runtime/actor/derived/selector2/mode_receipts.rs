@@ -434,6 +434,7 @@ pub(super) fn mode_receipt_failures(
             process_null: ActorHandle::from_raw(0),
             position_step: VehiclePositionStep::Retail,
             view_zoom_5c0: &std::cell::Cell::new(0),
+            deliberate_pad_roll: false,
             network: None,
         };
         if let Err(error) = drive(

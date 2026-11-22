@@ -133,6 +133,9 @@ pub struct VehicleDriveRequest<'a> {
     pub view_zoom_5c0: &'a std::cell::Cell<u16>,
     /// The network game's words, None offline (`0055F448` clear).
     pub network: Option<VehicleNetwork>,
+    /// Port option (the Remastered pad layout): offline, the jump's roll
+    /// needs the stick pulled back more than sideways. See `vehicle_jump`.
+    pub deliberate_pad_roll: bool,
 }
 
 /// The process words a network game's vehicle reads: the mode (settings
@@ -735,7 +738,8 @@ impl ObjectArena {
         };
         let mut flip = flip;
         if !flip && controls.analog_04 != 0 {
-            if controls.axes_08[1] < -0x6000 {
+            let deliberate = request.deliberate_pad_roll && request.network.is_none();
+            if stick_rolls(controls.axes_08, deliberate) {
                 flip = true;
             }
             if controls.axes_08[0] > 0x8000 {
@@ -1547,6 +1551,14 @@ impl PlayerControlBlock {
     pub(crate) fn analog_forward(&self) -> bool {
         self.analog_04 != 0 && analog_throttle(self) > 0
     }
+}
+
+/// The jump's stick test for its roll (in 004196F5..00419890): retail rolls on any stick
+/// pulled a quarter back (the PS1's back-and-jump gesture). A round modern
+/// stick pushed hard sideways drifts that far back, so with `deliberate` (the
+/// Remastered layout, offline) back must also outweigh the sideways push.
+pub(super) fn stick_rolls([x, y, _]: [i32; 3], deliberate: bool) -> bool {
+    y < -0x6000 && (!deliberate || y.wrapping_abs() > x.wrapping_abs())
 }
 
 /// 00418F60: the analog axes +C and +8 (player +10/+0C) past their dead

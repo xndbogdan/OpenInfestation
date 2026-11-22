@@ -2727,6 +2727,7 @@ fn tick_world_actor_callbacks(world: &mut WorldSession, mut context: WorldActorT
                             process_null: null,
                             position_step: context.inputs.vehicle_position_step,
                             view_zoom_5c0: &globals.view_zoom_5c0,
+                            deliberate_pad_roll: false,
                             network: crate::object_runtime::vehicle_network(
                                 &context.factory_process,
                             ),
@@ -4747,6 +4748,7 @@ fn tick_world_player(
                         process_null: null,
                         position_step: context.inputs.vehicle_position_step,
                         view_zoom_5c0: &globals.view_zoom_5c0,
+                        deliberate_pad_roll: false,
                         network: crate::object_runtime::vehicle_network(&context.factory_process),
                     },
                     attract: false,
