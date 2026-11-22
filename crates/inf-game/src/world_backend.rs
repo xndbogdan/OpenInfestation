@@ -452,6 +452,9 @@ pub struct OfflineWorldLoadInputs<'a> {
     pub furniture: Option<OfflineFurnitureLoan<'a>>,
     /// Settings +84, the cheat word the load's respawn reads.
     pub settings_84: u32,
+    /// Settings +68 (First Person) and the Camera Style, which the world's
+    /// camera (00478E00) takes when the load constructs it.
+    pub camera_settings: CameraSettings,
     /// Port setting, not retail: Ultra ground detail's shape, which the
     /// terrain takes before anything is placed on it
     /// ([`crate::terrain_runtime::ultra`]).
@@ -522,17 +525,10 @@ pub struct OfflineWorldLoadRequest {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct IntroCampaignReloadApproximation {
     pub actor_clock: u32,
-    pub camera_settings: CameraSettings,
 }
 
 impl IntroCampaignReloadApproximation {
-    const FIRST_LOAD_INPUTS: Self = Self {
-        actor_clock: 245,
-        camera_settings: CameraSettings {
-            first_person: 0,
-            camera_style: 0,
-        },
-    };
+    const FIRST_LOAD_INPUTS: Self = Self { actor_clock: 245 };
 }
 
 /// 00487250's signed H14 WORD +14, converted to the native music request.
@@ -881,7 +877,7 @@ fn load_offline_world_inner(
                 .is_some_and(|process| process.network_flag != 0),
         },
         vehicle_table,
-        camera_settings: approximation.camera_settings,
+        camera_settings: context.camera_settings,
         settings_84: context.settings_84,
         inverse_sine: &inverse_sine,
         // 0055F2F4: 1 offline, the session's slot in a network game.
@@ -1109,6 +1105,10 @@ fn load_first_world_session_for_test(
             ),
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )?;
@@ -1235,6 +1235,10 @@ mod tests {
                 phase: None,
                 furniture: None,
                 settings_84: 0,
+                camera_settings: crate::object_runtime::CameraSettings {
+                    first_person: 0,
+                    camera_style: 0,
+                },
                 ultra: None,
             },
         )
@@ -1282,6 +1286,10 @@ mod tests {
                 phase: None,
                 furniture: None,
                 settings_84: 0,
+                camera_settings: crate::object_runtime::CameraSettings {
+                    first_person: 0,
+                    camera_style: 0,
+                },
                 ultra: None,
             },
         )
@@ -1343,6 +1351,10 @@ mod tests {
                 phase: None,
                 furniture: None,
                 settings_84: 0,
+                camera_settings: crate::object_runtime::CameraSettings {
+                    first_person: 0,
+                    camera_style: 0,
+                },
                 ultra: None,
             },
         )
@@ -1435,6 +1447,10 @@ mod tests {
                 phase: None,
                 furniture: None,
                 settings_84: 0,
+                camera_settings: crate::object_runtime::CameraSettings {
+                    first_person: 0,
+                    camera_style: 0,
+                },
                 ultra: None,
             },
         )
@@ -1512,6 +1528,10 @@ mod tests {
                 phase: None,
                 furniture: None,
                 settings_84: 0,
+                camera_settings: crate::object_runtime::CameraSettings {
+                    first_person: 0,
+                    camera_style: 0,
+                },
                 ultra: None,
             },
         )

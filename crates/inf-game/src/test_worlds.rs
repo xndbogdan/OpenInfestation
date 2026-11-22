@@ -91,6 +91,10 @@ pub(crate) fn offline_world_with_completion(
         None,
         Some(completion),
         0,
+        crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
         false,
         spacing,
         crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
@@ -111,6 +115,10 @@ pub(crate) fn offline_world_with_cheat_word(
         None,
         None,
         settings_84,
+        crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
         false,
         spacing,
         crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
@@ -126,7 +134,19 @@ fn load_from(
     policy: crate::world_backend::OfflineWorldLoadPolicy<'_>,
 ) -> (ResidentRuntime, FrontendAssets, WorldSession) {
     load_with(
-        selection, saved, tier, None, 0, false, spacing, policy, None,
+        selection,
+        saved,
+        tier,
+        None,
+        0,
+        crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
+        false,
+        spacing,
+        policy,
+        None,
     )
 }
 
@@ -143,6 +163,10 @@ pub(crate) fn network_world(
         None,
         None,
         0,
+        crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
         false,
         crate::terrain_runtime::TerrainSpacing::Units256,
         crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
@@ -164,8 +188,32 @@ pub(crate) fn offline_world_with_services(
         None,
         None,
         0,
+        crate::object_runtime::CameraSettings {
+            first_person: 0,
+            camera_style: 0,
+        },
         true,
         spacing,
+        crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
+        None,
+    )
+}
+
+/// [`offline_world_retained`] with the saved First Person and Camera Style
+/// the load gives the world's camera.
+pub(crate) fn offline_world_with_camera(
+    selection: u32,
+    camera_settings: crate::object_runtime::CameraSettings,
+) -> (ResidentRuntime, FrontendAssets, WorldSession) {
+    load_with(
+        selection,
+        None,
+        None,
+        None,
+        0,
+        camera_settings,
+        false,
+        crate::terrain_runtime::TerrainSpacing::Units256,
         crate::world_backend::OfflineWorldLoadPolicy::RetainedManager { text_data: None },
         None,
     )
@@ -178,6 +226,7 @@ fn load_with(
     tier: Option<u8>,
     completion: Option<[u32; 4]>,
     settings_84: u32,
+    camera_settings: crate::object_runtime::CameraSettings,
     services: bool,
     spacing: crate::terrain_runtime::TerrainSpacing,
     policy: crate::world_backend::OfflineWorldLoadPolicy<'_>,
@@ -266,9 +315,30 @@ fn load_with(
                 query: &mut furniture_query,
             }),
             settings_84,
+            camera_settings,
             ultra: None,
         },
     )
     .unwrap();
     (runtime, assets, WorldSession::from_loaded(owner, metadata))
+}
+
+/// The world's camera starts in the saved First Person view: the load hands
+/// it the settings, not the first load's chase-view placeholder.
+#[test]
+fn a_loaded_worlds_camera_takes_the_saved_first_person() {
+    for first_person in [0, 1] {
+        let (_, _, world) = offline_world_with_camera(
+            1,
+            crate::object_runtime::CameraSettings {
+                first_person,
+                camera_style: 0,
+            },
+        );
+        assert_eq!(
+            world.arena.camera_first_person_peek(),
+            first_person != 0,
+            "first person {first_person}"
+        );
+    }
 }

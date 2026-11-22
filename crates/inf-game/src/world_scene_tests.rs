@@ -178,6 +178,10 @@ fn load_campaign_world(
             rng: &mut rng,
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )
@@ -705,6 +709,10 @@ fn load_first_world_at_tier(
             rng: &mut rng,
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )
@@ -948,6 +956,10 @@ fn load_level1_session() -> (
             rng: &mut rng,
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )
@@ -1076,6 +1088,10 @@ fn offline_reload_preserves_mission_player_and_process_rng_custody() {
             rng: &mut rng,
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )
@@ -1206,6 +1222,10 @@ fn offline_reload_restores_12c_before_respawn_bit3_override() {
             rng: &mut rng,
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )

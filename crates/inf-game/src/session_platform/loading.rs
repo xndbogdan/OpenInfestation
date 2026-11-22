@@ -112,6 +112,7 @@ impl<P: PortPlatform> PortSession<P> {
                     query: &mut self.furniture_query,
                 }),
                 settings_84: settings.settings_84,
+                camera_settings: settings.camera_settings,
                 ultra,
             },
         )?;

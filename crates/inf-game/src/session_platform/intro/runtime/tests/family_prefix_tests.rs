@@ -1017,6 +1017,10 @@ fn loaded_ordinary_family_world() -> (
             process: Some(&process),
             furniture: None,
             settings_84: 0,
+            camera_settings: crate::object_runtime::CameraSettings {
+                first_person: 0,
+                camera_style: 0,
+            },
             ultra: None,
         },
     )
